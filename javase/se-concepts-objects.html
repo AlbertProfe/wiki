@@ -160,6 +160,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="dropdown-text">Linux: basic concepts</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../linux/linux-what-sudo.html">
+ <span class="dropdown-text">Linux: su and sudo</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-what-pipes.html">
+ <span class="dropdown-text">Linux: pipes</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../linux/linux-what-vm.html">
  <span class="dropdown-text">Linux: Virtual Machines</span></a>
   </li>  
@@ -176,6 +184,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li>
     <a class="dropdown-item" href="../linux/linux-distros-opensuse.html">
  <span class="dropdown-text">Linux Distros: openSuse</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Linux: laboratories</li>
+        <li>
+    <a class="dropdown-item" href="../linux/lilab01.html">
+ <span class="dropdown-text">Linux Lab#LI01-1: pipes</span></a>
   </li>  
     </ul>
   </li>
@@ -993,6 +1007,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#instantiating-a-class" id="toc-instantiating-a-class" class="nav-link" data-scroll-target="#instantiating-a-class">Instantiating a Class</a></li>
   <li><a href="#initializing-an-object" id="toc-initializing-an-object" class="nav-link" data-scroll-target="#initializing-an-object">Initializing an Object</a></li>
   <li><a href="#example-uml-class-and-object" id="toc-example-uml-class-and-object" class="nav-link" data-scroll-target="#example-uml-class-and-object">Example UML: class and object</a></li>
+  <li><a href="#ways-to-create-an-object" id="toc-ways-to-create-an-object" class="nav-link" data-scroll-target="#ways-to-create-an-object">Ways to create an object</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/se-concepts-objects.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1217,6 +1232,72 @@ Instantiating a class
 <p><img src="..\images/javase/UML_ClassInstance.png" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">The class body may contain member variables, constructors, public methods, private helper methods and others.</figcaption><p></p>
 </figure>
+</div>
+</section>
+<section id="ways-to-create-an-object" class="level2">
+<h2 class="anchored" data-anchor-id="ways-to-create-an-object">Ways to create an object</h2>
+<p>There are several ways to <strong>create</strong> objects in Java:</p>
+<ol type="1">
+<li>Using the <code>new</code> operator: this is the most common way to create an object in Java. It involves using the new operator followed by the class name and constructor arguments. For example:</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Person carla <span class="op">=</span> <span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"Carla"</span><span class="op">,</span> <span class="dv">30</span><span class="op">,</span> <span class="st">"123 Main St."</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Using the <code>clone()</code> method: if you want to create a copy of an existing object, you can use the clone() method.</li>
+</ol>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This method is defined in the <code>java.lang.Object class</code>, which is the superclass of all Java classes. To use the <code>clone()</code> method, you’ll need to implement the Cloneable interface in your class and override the <code>clone()</code> method.</p>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li><p>Using <code>factory</code> methods: A factory method is a <code>static</code> method that returns an instance of a class. <strong>Factory methods are often used to create objects</strong> when you need more flexibility or control over the object creation process.</p></li>
+<li><p>Using <code>reflection</code>: Reflection is a feature of the Java language that allows you to <strong>inspect and manipulate the structure of a class at runtime</strong>.</p></li>
+</ol>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You can use reflection to create objects by invoking the <code>newInstance()</code> method on the Constructor object for a particular class.</p>
+</div>
+</div>
+</div>
+<ol start="5" type="1">
+<li>Using object <code>deserialization</code>: You can use object deserialization to create an object from its serialized form, which is a stream of bytes that represents the object’s state.</li>
+</ol>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>To do this, you’ll need to implement the <code>Serializable interface</code> in your class and use the <code>ObjectInputStream</code> and <code>ObjectOutputStream</code> classes to serialize and deserialize the object.</p>
+</div>
+</div>
 </div>
 
 

@@ -714,6 +714,13 @@
     "text": "Example UML: class and object\n\n\n\nThe class body may contain member variables, constructors, public methods, private helper methods and others."
   },
   {
+    "objectID": "javase/se-concepts-objects.html#ways-to-create-an-object",
+    "href": "javase/se-concepts-objects.html#ways-to-create-an-object",
+    "title": "Java SE: Class and Objects",
+    "section": "Ways to create an object",
+    "text": "Ways to create an object\nThere are several ways to create objects in Java:\n\nUsing the new operator: this is the most common way to create an object in Java. It involves using the new operator followed by the class name and constructor arguments. For example:\n\nPerson carla = new Person(\"Carla\", 30, \"123 Main St.\");\n\nUsing the clone() method: if you want to create a copy of an existing object, you can use the clone() method.\n\n\n\n\n\n\n\nNote\n\n\n\n\n\nThis method is defined in the java.lang.Object class, which is the superclass of all Java classes. To use the clone() method, you’ll need to implement the Cloneable interface in your class and override the clone() method.\n\n\n\n\nUsing factory methods: A factory method is a static method that returns an instance of a class. Factory methods are often used to create objects when you need more flexibility or control over the object creation process.\nUsing reflection: Reflection is a feature of the Java language that allows you to inspect and manipulate the structure of a class at runtime.\n\n\n\n\n\n\n\nNote\n\n\n\n\n\nYou can use reflection to create objects by invoking the newInstance() method on the Constructor object for a particular class.\n\n\n\n\nUsing object deserialization: You can use object deserialization to create an object from its serialized form, which is a stream of bytes that represents the object’s state.\n\n\n\n\n\n\n\nNote\n\n\n\n\n\nTo do this, you’ll need to implement the Serializable interface in your class and use the ObjectInputStream and ObjectOutputStream classes to serialize and deserialize the object."
+  },
+  {
     "objectID": "javase/se-concepts-package.html",
     "href": "javase/se-concepts-package.html",
     "title": "Java SE: Packages",
@@ -1113,6 +1120,27 @@
     "text": "About this site"
   },
   {
+    "objectID": "linux/lilab01.html",
+    "href": "linux/lilab01.html",
+    "title": "Linux Lab#LI01-1: pipes",
+    "section": "",
+    "text": "Export the environment of a user account into the root account on OpenSUSE."
+  },
+  {
+    "objectID": "linux/lilab01.html#cli-tools",
+    "href": "linux/lilab01.html#cli-tools",
+    "title": "Linux Lab#LI01-1: pipes",
+    "section": "CLI tools",
+    "text": "CLI tools\nTo run a single command as the root user:\nsu - root -c 'command'\nsu - root -c 'apt update && apt upgrade -y'\nsu - root -c 'bash /path/to/script.sh'\nsu - root -c 'bash /usr/local/bin/install-web-server.sh'\nThe >> operator is used to redirect the output of a command to a file, and append the output to the end of the file.\ncommand >> file\nls >> alex.txt"
+  },
+  {
+    "objectID": "linux/lilab01.html#solving-discussion",
+    "href": "linux/lilab01.html#solving-discussion",
+    "title": "Linux Lab#LI01-1: pipes",
+    "section": "Solving discussion",
+    "text": "Solving discussion\nWe could do this:\nsu - root -c 'env | grep -v \"^USER_VARIABLE=\" >> /etc/environment'\nThis will run a subshell as the root user, source the current user’s .bashrc file to set up the environment, and then export the environment variables to /etc/environment.\nsu - root -c 'bash -c \"set -a; source ~/.bashrc; set +a; env | grep -v \\\"^USER:VARIABLE=\\\" >> /etc/environment\"'\n\nsu -: This will allow you to run a command as the root user while preserving the environment of the current user.\nYou will pipe the output to grep to filter out the USER_VARIABLE variable. The resulting output is then redirected to /etc/environment using >>.\nThis will add all of the environment variables from the current user’s environment to the /etc/environment file, which is used to set the environment for all users on the system.\n\nIf you want to preserve the entire environment, including aliases, functions, and shell options, you can use the bash -c command instead:\nsu - root -c 'bash -c \"set -a; source ~/.bashrc; set +a; env | grep -v \\\"^LS_COLORS=\\\" >> /etc/environment\"'"
+  },
+  {
     "objectID": "linux/linux-distros-mint.html",
     "href": "linux/linux-distros-mint.html",
     "title": "Linux Distros: Mint",
@@ -1174,6 +1202,62 @@
     "title": "Linux: basic concepts",
     "section": "CHMOD",
     "text": "CHMOD\n\n\n\nLinux CHMOD cheat-sheet"
+  },
+  {
+    "objectID": "linux/linux-what-pipes.html",
+    "href": "linux/linux-what-pipes.html",
+    "title": "Linux: pipes",
+    "section": "",
+    "text": "📘 Linux\nA pipe is a command that allows you to redirect the output of one command as the input to another command.\nIt is represented by the vertical bar symbol |."
+  },
+  {
+    "objectID": "linux/linux-what-pipes.html#introduction",
+    "href": "linux/linux-what-pipes.html#introduction",
+    "title": "Linux: pipes",
+    "section": "Introduction",
+    "text": "Introduction\nFor example, you can use the pipe command to list all the files in a directory, and then use the grep command to search for a specific string in those files:\nls | grep \"devtools\"\nThis will list all the files in the current directory and then search for the string “devtools” in the output of the ls command.\nYou can also use multiple pipes to chain together multiple commands. For example:\nls | grep \"devtools\" | sort\nThis will list all the files in the current directory, search for the string “devtools” in the output of the ls command, and then sort the output alphabetically.\n\n\n\npipe linux ls-grep-sort"
+  },
+  {
+    "objectID": "linux/linux-what-pipes.html#grep",
+    "href": "linux/linux-what-pipes.html#grep",
+    "title": "Linux: pipes",
+    "section": "grep",
+    "text": "grep\ngrep searches for patterns in text. It stands for global regular expression print, and it allows you to search for specific patterns of characters in one or more files.\nYou can use grep to search for a specific word or phrase in a file, or you can use it to search for more complex patterns using regular expressions.\nHere are a few examples of how grep can be used:\nTo search for a specific word in a file:\ngrep \"word\" file.txt\nTo search for a specific word in multiple files:\ngrep \"word\" file1.txt file2.txt file3.txt\nTo search for a word that starts with a specific letter:\ngrep \"^w\" file.txt\nTo search for a word that ends with a specific letter:\ngrep \"w$\" file.txt"
+  },
+  {
+    "objectID": "linux/linux-what-sudo.html",
+    "href": "linux/linux-what-sudo.html",
+    "title": "Linux: su and sudo",
+    "section": "",
+    "text": "📘 Linux\nsu and sudo are two different commands in Linux that are used to execute commands with the privileges of another user."
+  },
+  {
+    "objectID": "linux/linux-what-sudo.html#introduction",
+    "href": "linux/linux-what-sudo.html#introduction",
+    "title": "Linux: su and sudo",
+    "section": "Introduction",
+    "text": "Introduction\nBoth su and sudo are useful tools for managing and interacting with a Linux system, but they have different uses and implications. su allows you to switch to another user account and operate as that user, while sudo allows you to execute a single command with the privileges of another user without switching to that user’s account.\n\nsu stands for switch user, and it allows you to switch to another user account and execute commands with that user’s privileges. For example, if you are currently logged in as a normal user and you want to run a command as the root user, you can use the su command to switch to the root user and then run the command.\nsudo stands for superuser do, and it allows you to execute a single command with the privileges of another user, usually the root user. It is often used to execute commands that require administrative privileges, such as installing software or making system-wide configuration changes.\n\nBut in Linux Mint sudo is often considered to be a better alternative to su for several reasons, it allows you to execute a single command with administrative privileges, logs all command executions, allows for a more fine-grained control over who can execute which commands, prompts for the user’s password before execution, and is more widely used and supported in the Linux community."
+  },
+  {
+    "objectID": "linux/linux-what-sudo.html#sudo--i",
+    "href": "linux/linux-what-sudo.html#sudo--i",
+    "title": "Linux: su and sudo",
+    "section": "sudo -i",
+    "text": "sudo -i\nThe sudo -i, The -i flag stands for initialize. command is used to execute a command or start a shell session as another user, usually the root user, with that user’s environment and privileges.\n\nsudo -i causes the command or shell session to be executed as if the target user had logged in directly. This means that the target user’s environment variables, shell settings, and other configuration options will be applied to the command or shell session.\n\n\n\n\nsudo -i"
+  },
+  {
+    "objectID": "linux/linux-what-sudo.html#sudo-apt-get-update",
+    "href": "linux/linux-what-sudo.html#sudo-apt-get-update",
+    "title": "Linux: su and sudo",
+    "section": "sudo apt-get update",
+    "text": "sudo apt-get update\napt-get is a command line interface for retrieval of packages and information about them from authenticated sources and for installation, upgrade and removal of packages together with their dependencies.\n\n\n\nsudo apt-get update"
+  },
+  {
+    "objectID": "linux/linux-what-sudo.html#adduser",
+    "href": "linux/linux-what-sudo.html#adduser",
+    "title": "Linux: su and sudo",
+    "section": "adduser",
+    "text": "adduser\nadduser: This command is used to add a new user to the system.\n\nFor example, to add a new user with the username alex, you can use the command sudo adduser alex.\nsudo userdel alex, the userdel command is used to delete a user account and the user’s home directory from the system.\nsudo adduser alex --shell /bin/bash --gid 0, to add a new user named alex with root privileges using sudo adduser.\nTo list all users on a Linux system, you can use the cat command to display the contents of the /etc/passwd file. The /etc/passwd file contains information about all the users on the system, including their username, user ID (UID), and home directory: cat /etc/passwd\nAlternatively, you can use the cut command to extract the username from each line of the /etc/passwd file: cut -d: -f1 /etc/passwd.\n\n\n\n\nsudo adduser newuser && deluser 1/3\n\n\n\n\n\nsudo adduser newuser && deluser 2/3\n\n\n\n\n\nsudo adduser newuser && deluser 3/3"
   },
   {
     "objectID": "linux/linux-what-vm.html",
