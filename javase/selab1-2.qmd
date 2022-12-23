@@ -1,0 +1,247 @@
+---
+title: "Lab#SE01-2: Maven/Gradle Person and Account stored in JSON "
+---
+
+Create a Maven/Gradle Java SE Project with three classes and Junit to test objects and operations. From here you should add new features: factory pattern, JSON parser and save this JSON on local storage.
+
+<div class="labs">
+<h5>💻 Lab#SE01-2: Maven/Gradle Person and Account stored in JSON </h5>
+<hr>
+<!-- Tab links -->
+<div class="tabw3">
+  <button class="tablinks" onclick="openLab(event, 'Context')">Context</button>
+  <button class="tablinks" onclick="openLab(event, 'Goal')">Goal</button>
+  <button class="tablinks" onclick="openLab(event, 'Tasks')">Tasks</button>
+  <button class="tablinks" onclick="openLab(event, 'Optional')">Optional</button>
+</div>
+<hr>
+
+<!-- Tab content: CONTEXT -->
+<div id="Context" class="tabcontentw3">
+  <h3>Context</h3><p class="indent">
+  <p class="indent">This project is the Lab#SE#01-2 (<mark>[go Lab#SE01-1](/javase/selab1-1.qmd)</mark>), you will need to have a **basic understanding of the Java programming language**, as well as some familiarity with **Maven or Gradle for managing dependencies** and building the project.</p><p class="indent">
+  Overall, this project will provide an opportunity for you **to learn and apply the basics of Java programming**, as well as gain experience with Maven or Gradle, JUnit, user input via the console and data-storage.</p><p class="indent">
+  By completing this project, you will have a staring foundation in these technologies and be able to build more complex and sophisticated Java applications in the future: `singleton`, `factory`, `maven`, `JSON`</p>
+</div>
+
+<!-- Tab content: GOAL -->
+<div id="Goal" class="tabcontentw3">
+  <h3>Goal</h3><p class="indent">
+  <p class="indent">The goal of this project is to **create three classes in Java** (`Person`, `Account` and `Manager`) that implement different algorithms or data structures, and to test them using JUnit. </p><p class="indent">
+  Now, it this version v2.0 you will storage the data on local JSON and use the `factory` pattern. For that, your will need to create the ``Account`` ``interface`` and two subclasses: ``SavingsAccount`` and ``CheckingAccount``. </p><p class="indent">
+  Use de `Lombok` dependency to write getters and setters.</p>
+</div>
+
+<!-- Tab content: TASKS -->
+<div id="Tasks" class="tabcontentw3">
+  <h3>Tasks</h3><p class="indent">
+  The tasks involved in this project include:</P>
+  <ol type="1" class="indent"><li>The goal of this project is to **create three classes in Java** (`Person`, `Account` and `Manager`) that implement different algorithms or data structures, test them using JUnit.</li><li>
+  Implementing as well two basic pattern-designs: `singleton` and `factory`.</li><li>
+  Creating ``Account`` ``interface`` and two subclasses: ``SavingsAccount`` and ``CheckingAccount``.</li><li>
+  Writing **JUnit tests** to verify that the classes work as expected.</li><li>
+  Creating a `StorageManger` class o similar, Utilities package, to storage the data in local JSON.</li><li>
+  You should attach the **JUnit Test HTML** results to documentation.</li></ol><p class="indent">
+  You should control your versions with GitHub or similar.</p>
+</div>
+
+<!-- Tab content: OPTIONAL -->
+<div id="Optional" class="tabcontentw3">
+  <h3>Optional</h3><p class="indent">
+  As an optional task, you could also consider **allowing the user to input data via the console**, rather than using `hard-coded test data` in your **JUnit tests**.   This would add dynamism and be able to **interact** with the classes.</p><p class="indent">
+  Add `Credit Card` class and create the **new feature** `buy Credit Card` in `AccountManager`.</p><p class="indent"></p>
+</div>
+
+</div>
+
+<script>
+function openLab(evt, labStep) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontentw3");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(labStep).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+
+## Solving discussion
+
+### Base Classes: factory
+
+Here is an example of how you could create a Lombok Java class for a `Person` and `Account` using the **factory pattern**:
+
+``` java
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class Person {
+    private String firstName;
+    private String lastName;
+}
+```
+
+---
+
+``` java
+public interface Account {
+    void deposit(double amount);
+    void withdraw(double amount);
+}
+
+```
+
+---
+
+``` java
+
+public class SavingsAccount implements Account {
+    private double balance;
+
+    public SavingsAccount(double balance) {
+        this.balance = balance;
+    }
+
+    @Override
+    public void deposit(double amount) {
+        this.balance += amount;
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        this.balance -= amount;
+    }
+}
+
+```
+
+---
+
+``` java
+public class CheckingAccount implements Account {
+    private double balance;
+
+    public CheckingAccount(double balance) {
+        this.balance = balance;
+    }
+
+    @Override
+    public void deposit(double amount) {
+        this.balance += amount;
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        this.balance -= amount;
+    }
+}
+
+```
+
+---
+
+``` java
+public class AccountManager {
+    public static Account createAccount(String accountType, double balance) {
+        if (accountType.equalsIgnoreCase("savings")) {
+            return new SavingsAccount(balance);
+        } else if (accountType.equalsIgnoreCase("checking")) {
+            return new CheckingAccount(balance);
+        }
+        return null;
+    }
+}
+
+```
+
+You can then use these classes as follows:
+
+``` java
+Person john = new Person("John", "Doe");
+Account savingsAccount = AccountManager.createAccount("savings", 100.00);
+Account checkingAccount = AccountManager.createAccount("checking", 50.00);
+
+```
+
+The `AccountManager` class uses the **factory pattern** to create ``Account`` objects based on the specified accountType. This allows you to create different types of accounts **without having to specify the exact class to use**, and makes it easier to add new types of accounts in the future.
+
+### Base Classes: local storage-JSON
+
+Here is an example of what a Lombok-based Person class and Account class might look like in Java:
+
+``` java
+import lombok.Data;
+
+@Data
+public class Person {
+  private String name;
+  private int age;
+  private String address;
+}
+
+@Data
+public class Account {
+  private int accountNumber;
+  private double balance;
+  private Person owner;
+}
+
+```
+
+The @Data annotation is a **Lombok* annotation that automatically generates getters and setters for all non-static fields, as well as ``equals()``, ``hashCode()``, and ``toString()`` methods. This can help reduce boilerplate code and make your classes more concise and readable.
+
+To save data to a local JSON file, you could use a JSON library like ``Jackson`` to convert the objects to JSON strings, and then write those strings to a file. Here is an example of how you might do that:
+
+
+``` java
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class AccountManager {
+  private ObjectMapper objectMapper = new ObjectMapper();
+
+  public void saveAccount(Account account) throws JsonProcessingException {
+    String json = objectMapper.writeValueAsString(account);
+    // write the JSON string to a file
+  }
+}
+
+```
+How to save an object as a JSON string to a file on your local storage (in this case, c:/data/accounts.json) using Java SE:
+
+```java
+import java.io.FileWriter;
+import java.io.IOException;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class AccountManager {
+  private ObjectMapper objectMapper = new ObjectMapper();
+
+  public void saveAccount(Account account) throws JsonProcessingException, IOException {
+    String json = objectMapper.writeValueAsString(account);
+
+    FileWriter fileWriter = new FileWriter("c:/data/accounts.json");
+    fileWriter.write(json);
+    fileWriter.close();
+  }
+}
+
+```
+
+## Step-by-step
+
+1. Create ``interface`` Account
+2. Create subclasses ``SavingsAccount`` and ``CheckingAccount`` 
+3. Create ``AccountManger``
+4. Check factory
+5. **Parse** ``Account`` objects to *String-JSON*
+6. Save ``String`` on **local .json file** 
