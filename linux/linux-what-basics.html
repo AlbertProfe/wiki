@@ -2,10 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="albertprofe">
+<meta name="description" content="What is Linux, free and Unix-like open-source operating system based on the Linux kernel">
 
 <title>albertprofe wiki - Linux: basic concepts</title>
 <style>
@@ -41,6 +43,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -60,6 +65,7 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -95,6 +101,10 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="../linux/linux-what-basics.html">
  <span class="dropdown-text">Linux: basic concepts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-what-bash.html">
+ <span class="dropdown-text">Linux: Bash</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../linux/linux-what-sudo.html">
@@ -729,20 +739,28 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">About this site</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../about/aboutlearning.html">
- <span class="dropdown-text">About learning</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="../about/aboutimagescredit.html">
  <span class="dropdown-text">About images credit</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Learning</li>
+        <li>
+    <a class="dropdown-item" href="../about/aboutlearning.html">
+ <span class="dropdown-text">About learning</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../about/aboutquestions.html">
  <span class="dropdown-text">About the Useful Questions</span></a>
   </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Listings</li>
         <li>
     <a class="dropdown-item" href="../about/aboutlisting.html">
- <span class="dropdown-text">Articles Listing</span></a>
+ <span class="dropdown-text">Articles Table-Listing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../about/aboutlisting-card.html">
+ <span class="dropdown-text">Articles Card-Listing</span></a>
   </li>  
     </ul>
   </li>
@@ -784,6 +802,11 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../linux/linux-what-basics.html" class="sidebar-item-text sidebar-link active">Linux: basic concepts</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../linux/linux-what-bash.html" class="sidebar-item-text sidebar-link">Linux: Bash</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -925,11 +948,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#bash" id="toc-bash" class="nav-link active" data-scroll-target="#bash">Bash</a></li>
-  <li><a href="#basic-commands" id="toc-basic-commands" class="nav-link" data-scroll-target="#basic-commands">Basic commands</a></li>
-  <li><a href="#getting-software-wget-apt-get-etc" id="toc-getting-software-wget-apt-get-etc" class="nav-link" data-scroll-target="#getting-software-wget-apt-get-etc">Getting software: wget, apt-get, etc</a></li>
-  <li><a href="#chmod" id="toc-chmod" class="nav-link" data-scroll-target="#chmod">CHMOD</a></li>
-  <li><a href="#cheat-sheet-linux-commands" id="toc-cheat-sheet-linux-commands" class="nav-link" data-scroll-target="#cheat-sheet-linux-commands">Cheat-sheet Linux Commands</a></li>
+  <li><a href="#bash" id="toc-bash" class="nav-link active" data-scroll-target="#bash"><span class="toc-section-number">1</span>  Bash</a></li>
+  <li><a href="#basic-commands" id="toc-basic-commands" class="nav-link" data-scroll-target="#basic-commands"><span class="toc-section-number">2</span>  Basic commands</a></li>
+  <li><a href="#getting-software-wget-apt-get-etc" id="toc-getting-software-wget-apt-get-etc" class="nav-link" data-scroll-target="#getting-software-wget-apt-get-etc"><span class="toc-section-number">3</span>  Getting software: wget, apt-get, etc</a></li>
+  <li><a href="#chmod" id="toc-chmod" class="nav-link" data-scroll-target="#chmod"><span class="toc-section-number">4</span>  CHMOD</a></li>
+  <li><a href="#cheat-sheet-linux-commands" id="toc-cheat-sheet-linux-commands" class="nav-link" data-scroll-target="#cheat-sheet-linux-commands"><span class="toc-section-number">5</span>  Cheat-sheet Linux Commands</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/linux/linux-what-basics.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -939,13 +962,33 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title d-none d-lg-block">Linux: basic concepts</h1>
-</div>
+  <div class="quarto-categories">
+    <div class="quarto-category">linux</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    What is Linux, free and Unix-like open-source operating system based on the Linux kernel
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>albertprofe </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Tuesday, June 1, 2021</p>
+    </div>
+  </div>
   
     
   </div>
@@ -958,38 +1001,13 @@ ul.task-list li input[type="checkbox"] {
 <p>Linux is a <strong>free and open-source operating system</strong>. It is a <strong>Unix-like operating system that is based on the Linux kernel</strong>, an operating system kernel first released on September 17, 1991, by Linus Torvalds. Linux is commonly used in web servers, smartphones, and other devices where reliability, security, and performance are important.</p>
 </div>
 <hr>
-<section id="bash" class="level2">
-<h2 class="anchored" data-anchor-id="bash">Bash</h2>
-<p><strong>Bash (short for “Bourne again shell”)</strong> is a Unix shell and command language which was the default shell on Unix systems at the time. <mark>Bash is a command-line interface (CLI) that allows users to enter commands and execute programs, as well as perform various other tasks such as managing files, manipulating text, and interacting with other programs.</mark></p>
-<p>Bash is <strong>the default shell on many Linux systems</strong>, as well as on <strong>macOS</strong> and other <strong>Unix-like</strong> operating systems.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="..\images/linux/bash.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">bash</figcaption><p></p>
-</figure>
-</div>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-More on bash
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Bash is a powerful and flexible tool that is widely used by developers</strong>, system administrators, and other users to automate tasks, write scripts, and perform other types of command-line operations.</p>
-<p>It is particularly <strong>useful</strong> for managing and interacting with large numbers of files and directories, as well as for automating repetitive tasks.</p>
-<p>Bash scripts can be used to <strong>automate a wide variety of tasks, such as setting up and configuring systems, performing backups, and managing network resources.</strong> Bash is also widely used as a programming language, with a syntax and structure that is similar to other programming languages.</p>
-<p>In addition to its many features and capabilities, Bash is also highly customizable, with a variety of options and settings that allow users to customize its behavior and appearance. Users can customize their Bash environment by modifying the <strong>Bash configuration file</strong>, known as the <code>bashrc file</code>, which contains a set of commands and settings that are executed every time Bash is launched.</p>
-</div>
-</div>
-</div>
+<section id="bash" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="bash"><span class="header-section-number">1</span> Bash</h2>
+<p>Bash is a <strong>Unix shell and command language written by Brian Fox for the GNU Project as a free software</strong> replacement for the Bourne shell. First released in 1989, it has been used as the <strong>default login shell for most Linux distributions</strong>.</p>
+<p><a href="../linux/linux-what-bash.html">More on Bass, next article</a></p>
 </section>
-<section id="basic-commands" class="level2">
-<h2 class="anchored" data-anchor-id="basic-commands">Basic commands</h2>
+<section id="basic-commands" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="basic-commands"><span class="header-section-number">2</span> Basic commands</h2>
 <p>Here are some basic terminal commands that can be used in Linux Mint:</p>
 <ul>
 <li><code>pwd</code>: Print the name of the current working directory (i.e., show the full path to the current directory)</li>
@@ -1008,8 +1026,8 @@ More on bash
 <p>These are just a few examples of the many commands that are available in Linux. To learn more about a specific command, you can use the <code>man</code> command to view its manual page.</p>
 <p>For example, to learn more about the <code>ls</code> command, you could type <code>man ls</code> in the terminal.</p>
 </section>
-<section id="getting-software-wget-apt-get-etc" class="level2">
-<h2 class="anchored" data-anchor-id="getting-software-wget-apt-get-etc">Getting software: wget, apt-get, etc</h2>
+<section id="getting-software-wget-apt-get-etc" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="getting-software-wget-apt-get-etc"><span class="header-section-number">3</span> Getting software: wget, apt-get, etc</h2>
 <ul>
 <li>In Linux, <code>wget</code> is a command-line utility that allows you to download files from the internet. It can be used to download files from HTTP, HTTPS, and FTP servers.</li>
 <li><code>apt-get</code> is a package manager for the Debian and Ubuntu Linux distributions. It allows you to install, update, and remove software packages from your system.</li>
@@ -1017,17 +1035,17 @@ More on bash
 <li>There are other similar package managers in Linux, such as <code>yum</code> for Red Hat and CentOS, and <code>dnf</code> for Fedora. These package managers allow you to easily install, update, and remove software packages on your system.</li>
 </ul>
 </section>
-<section id="chmod" class="level2">
-<h2 class="anchored" data-anchor-id="chmod">CHMOD</h2>
+<section id="chmod" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="chmod"><span class="header-section-number">4</span> CHMOD</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="..\images/linux/chmod-cheatsheet.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p><a href="../images/linux/chmod-cheatsheet.png" class="lightbox" title="Linux CHMOD cheat-sheet" data-gallery="quarto-lightbox-gallery-1"><img src="..\images/linux/chmod-cheatsheet.png" class="img-fluid figure-img" style="width:90.0%"></a></p>
 <p></p><figcaption class="figure-caption">Linux CHMOD cheat-sheet</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="cheat-sheet-linux-commands" class="level2">
-<h2 class="anchored" data-anchor-id="cheat-sheet-linux-commands">Cheat-sheet Linux Commands</h2>
+<section id="cheat-sheet-linux-commands" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="cheat-sheet-linux-commands"><span class="header-section-number">5</span> Cheat-sheet Linux Commands</h2>
 <p>This cheat sheet presents a list of <strong>command-line executables that are frequently used by developers</strong> working on a computer running the Linux operating system. The commands are organized by <strong>category</strong>.</p>
 <p><a href="../images/linux/Linux-Commands-cheat-sheet-Red-Hat-Developer.pdf" class="external">Linux-Commands-cheat-sheet-Red-Hat-Developer</a></p>
 <p>The <code>$</code> symbol that proceeds commands in the examples represents the <strong>command line prompt</strong></p>
@@ -1308,7 +1326,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","openEffect":"zoom"});</script>
 
 
 
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

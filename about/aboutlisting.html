@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>albertprofe wiki - Articles Listing</title>
+<title>albertprofe wiki - Articles Table-Listing</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,21 +65,21 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    const listingTargetEl = window.document.querySelector('#listing-articles .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-image','listing-title','listing-reading-time','listing-filename','listing-file-modified',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-image','listing-categories','listing-title','listing-reading-time','listing-file-modified',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       page: 30,
     pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
-      searchColumns: ["listing-title","listing-author"],
+      searchColumns: ["listing-date","listing-title","listing-author"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+    window['quarto-listings']['listing-articles'] = new List('listing-articles', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -92,6 +92,7 @@ ul.task-list li input[type="checkbox"] {
     }
   })
   </script>
+<style>html{ scroll-behavior: smooth; }</style>
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
@@ -128,6 +129,10 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="../linux/linux-what-basics.html">
  <span class="dropdown-text">Linux: basic concepts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-what-bash.html">
+ <span class="dropdown-text">Linux: Bash</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../linux/linux-what-sudo.html">
@@ -762,20 +767,28 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">About this site</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../about/aboutlearning.html">
- <span class="dropdown-text">About learning</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="../about/aboutimagescredit.html">
  <span class="dropdown-text">About images credit</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Learning</li>
+        <li>
+    <a class="dropdown-item" href="../about/aboutlearning.html">
+ <span class="dropdown-text">About learning</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../about/aboutquestions.html">
  <span class="dropdown-text">About the Useful Questions</span></a>
   </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Listings</li>
         <li>
     <a class="dropdown-item" href="../about/aboutlisting.html">
- <span class="dropdown-text">Articles Listing</span></a>
+ <span class="dropdown-text">Articles Table-Listing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../about/aboutlisting-card.html">
+ <span class="dropdown-text">Articles Card-Listing</span></a>
   </li>  
     </ul>
   </li>
@@ -789,7 +802,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Articles Listing</h1>
+      <h1 class="quarto-secondary-nav-title">Articles Table-Listing</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -808,12 +821,12 @@ ul.task-list li input[type="checkbox"] {
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">About</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">About</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../about/aboutme.html" class="sidebar-item-text sidebar-link">About me</a>
@@ -826,12 +839,23 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/aboutlearning.html" class="sidebar-item-text sidebar-link">About learning</a>
+  <a href="../about/aboutimagescredit.html" class="sidebar-item-text sidebar-link">About images credit</a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Learning</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/aboutimagescredit.html" class="sidebar-item-text sidebar-link">About images credit</a>
+  <a href="../about/aboutlearning.html" class="sidebar-item-text sidebar-link">About learning</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -839,9 +863,25 @@ ul.task-list li input[type="checkbox"] {
   <a href="../about/aboutquestions.html" class="sidebar-item-text sidebar-link">About the Useful Questions</a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Listings</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/aboutlisting.html" class="sidebar-item-text sidebar-link active">Articles Listing</a>
+  <a href="../about/aboutlisting.html" class="sidebar-item-text sidebar-link active">Articles Table-Listing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about/aboutlisting-card.html" class="sidebar-item-text sidebar-link">Articles Card-Listing</a>
   </div>
 </li>
       </ul>
@@ -852,13 +892,13 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    </div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(90)</span></div><div class="category" data-category="bash">bash <span class="quarto-category-count">(1)</span></div><div class="category" data-category="linux">linux <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Articles Listing</h1>
+<h1 class="title d-none d-lg-block">Articles Table-Listing</h1>
 </div>
 
 
@@ -873,15 +913,16 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>You can look up the following documents for additional information:</p>
 
 
 
 
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
+<div class="quarto-listing quarto-listing-container-table" id="listing-articles">
 <div class="listing-actions-group">
    <div class="input-group input-group-sm quarto-listing-sort">
      <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+     <select id="listing-articles-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-articles'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
        <option value="" disabled="" selected="" hidden="">Order By</option>
        <option value="index" data-direction="asc">Default</option>
          <option value="listing-title-sort" data-direction="asc">
@@ -901,13 +942,13 @@ ul.task-list li input[type="checkbox"] {
 <th>
 </th>
 <th>
+Categories
+</th>
+<th>
 <a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
 </th>
 <th>
 Reading Time
-</th>
-<th>
-File Name
 </th>
 <th>
 Modified
@@ -915,286 +956,12 @@ Modified
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-listing-file-modified-sort="1671821594187" data-listing-reading-time-sort="0.155" data-listing-title-sort="Page Not Found" data-listing-filename-sort="404.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../404.html" class="title">Page Not Found</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../404.html" class="filename">404.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="1" data-listing-file-modified-sort="1671821570999" data-listing-reading-time-sort="4.955" data-listing-title-sort="Home" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="0" data-listing-file-modified-sort="1671884965611" data-listing-reading-time-sort="0.645" data-listing-title-sort="Linux Readings" data-listing-filename-sort="resources.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td class="listing-image">
 <img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
 </td>
-<td class="listing-title">
-<a href="../index.html" class="title">Home</a>
-</td>
-<td class="listing-reading-time">
-4 min
-</td>
-<td class="listing-filename">
-<a href="../index.html" class="filename">index.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="2" data-listing-file-modified-sort="1671820610408" data-listing-reading-time-sort="3.32" data-listing-title-sort="Quarto Markdown: cheat-sheet" data-listing-filename-sort="markup-quarto-cheatsheet.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../images/javase/singleton-pattern-edited.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../markup/markup-quarto-cheatsheet.html" class="title">Quarto Markdown: cheat-sheet</a>
-</td>
-<td class="listing-reading-time">
-3 min
-</td>
-<td class="listing-filename">
-<a href="../markup/markup-quarto-cheatsheet.html" class="filename">markup-quarto-cheatsheet.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="3" data-listing-file-modified-sort="1671820082381" data-listing-reading-time-sort="0.22" data-listing-title-sort="MarkUp Languages Resources" data-listing-filename-sort="resources.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../markup/resources.html" class="title">MarkUp Languages Resources</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../markup/resources.html" class="filename">resources.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="4" data-listing-file-modified-sort="1671790846992" data-listing-reading-time-sort="6.255" data-listing-title-sort="Markdown and HTML working together, good idea?" data-listing-filename-sort="markup-lang-htmlmd.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../markup/markup-lang-htmlmd.html" class="title">Markdown and HTML working together, good idea?</a>
-</td>
-<td class="listing-reading-time">
-6 min
-</td>
-<td class="listing-filename">
-<a href="../markup/markup-lang-htmlmd.html" class="filename">markup-lang-htmlmd.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="5" data-listing-file-modified-sort="1671787623522" data-listing-reading-time-sort="0.4" data-listing-title-sort="Linux Lab#LI03-4: Manage hardware" data-listing-filename-sort="lilab03-4.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../linux/lilab03-4.html" class="title">Linux Lab#LI03-4: Manage hardware</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../linux/lilab03-4.html" class="filename">lilab03-4.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="6" data-listing-file-modified-sort="1671787607803" data-listing-reading-time-sort="0.755" data-listing-title-sort="Linux Lab#LI03-3: Manage software" data-listing-filename-sort="lilab03-3.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../linux/lilab03-3.html" class="title">Linux Lab#LI03-3: Manage software</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../linux/lilab03-3.html" class="filename">lilab03-3.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="7" data-listing-file-modified-sort="1671787554135" data-listing-reading-time-sort="0.645" data-listing-title-sort="Linux Lab#LI03-1: Manage users and groups" data-listing-filename-sort="lilab03-1.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../linux/lilab03-1.html" class="title">Linux Lab#LI03-1: Manage users and groups</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../linux/lilab03-1.html" class="filename">lilab03-1.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="8" data-listing-file-modified-sort="1671786994977" data-listing-reading-time-sort="2.435" data-listing-title-sort="Linux Lab#LI03-2: Manage files" data-listing-filename-sort="lilab03-2.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../linux/lilab03-2.html" class="title">Linux Lab#LI03-2: Manage files</a>
-</td>
-<td class="listing-reading-time">
-2 min
-</td>
-<td class="listing-filename">
-<a href="../linux/lilab03-2.html" class="filename">lilab03-2.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="9" data-listing-file-modified-sort="1671786237533" data-listing-reading-time-sort="0.315" data-listing-title-sort="Linux Lab#LI01-3: Adjust user permissions" data-listing-filename-sort="lilab01-3.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../linux/lilab01-3.html" class="title">Linux Lab#LI01-3: Adjust user permissions</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../linux/lilab01-3.html" class="filename">lilab01-3.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="10" data-listing-file-modified-sort="1671786176904" data-listing-reading-time-sort="1.305" data-listing-title-sort="Linux Lab#LI01-2: Install at least three distributions" data-listing-filename-sort="lilab01-2.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../linux/lilab01-2.html" class="title">Linux Lab#LI01-2: Install at least three distributions</a>
-</td>
-<td class="listing-reading-time">
-1 min
-</td>
-<td class="listing-filename">
-<a href="../linux/lilab01-2.html" class="filename">lilab01-2.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="11" data-listing-file-modified-sort="1671785734868" data-listing-reading-time-sort="0.59" data-listing-title-sort="Linux Lab#LI01-1: Choose Linux" data-listing-filename-sort="lilab01-1.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../linux/lilab01-1.html" class="title">Linux Lab#LI01-1: Choose Linux</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../linux/lilab01-1.html" class="filename">lilab01-1.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="12" data-listing-file-modified-sort="1671785344871" data-listing-reading-time-sort="2.97" data-listing-title-sort="Linux Lab#LI02-1: Export env user with grep and pipe" data-listing-filename-sort="lilab02-1.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../images/linux/redirect.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../linux/lilab02-1.html" class="title">Linux Lab#LI02-1: Export env user with grep and pipe</a>
-</td>
-<td class="listing-reading-time">
-2 min
-</td>
-<td class="listing-filename">
-<a href="../linux/lilab02-1.html" class="filename">lilab02-1.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="13" data-listing-file-modified-sort="1671785048994" data-listing-reading-time-sort="1.04" data-listing-title-sort="Linux Distros: Red Hat Enterprise Linux" data-listing-filename-sort="linux-distros-redhat.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../linux/linux-distros-redhat.html" class="title">Linux Distros: Red Hat Enterprise Linux</a>
-</td>
-<td class="listing-reading-time">
-1 min
-</td>
-<td class="listing-filename">
-<a href="../linux/linux-distros-redhat.html" class="filename">linux-distros-redhat.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="14" data-listing-file-modified-sort="1671783789194" data-listing-reading-time-sort="0.005" data-listing-title-sort="Linux Readings" data-listing-filename-sort="resources.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
+<td class="listing-categories">
 </td>
 <td class="listing-title">
 <a href="../linux/resources.html" class="title">Linux Readings</a>
@@ -1202,477 +969,85 @@ Friday, December 23, 2022
 <td class="listing-reading-time">
 0 min
 </td>
-<td class="listing-filename">
-<a href="../linux/resources.html" class="filename">resources.qmd</a>
-</td>
 <td class="listing-file-modified">
-Friday, December 23, 2022
+Saturday, December 24, 2022
 </td>
 </tr>
-<tr data-index="15" data-listing-file-modified-sort="1671780632327" data-listing-reading-time-sort="3.375" data-listing-title-sort="Linux: basic concepts" data-listing-filename-sort="linux-what-basics.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="1" data-listing-file-modified-sort="1671884630465" data-listing-reading-time-sort="5.055" data-listing-title-sort="Home" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../index.html" class="title">Home</a>
+</td>
+<td class="listing-reading-time">
+5 min
+</td>
+<td class="listing-file-modified">
+Saturday, December 24, 2022
+</td>
+</tr>
+<tr data-index="2" data-listing-file-modified-sort="1671883485311" data-listing-reading-time-sort="3.7" data-listing-title-sort="Quarto Markdown: cheat-sheet" data-listing-filename-sort="markup-quarto-cheatsheet.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/javase/singleton-pattern-edited.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../markup/markup-quarto-cheatsheet.html" class="title">Quarto Markdown: cheat-sheet</a>
+</td>
+<td class="listing-reading-time">
+3 min
+</td>
+<td class="listing-file-modified">
+Saturday, December 24, 2022
+</td>
+</tr>
+<tr data-index="3" data-listing-file-modified-sort="1671883390107" data-listing-reading-time-sort="1.335" data-listing-title-sort="MarkUp Languages Resources" data-listing-filename-sort="resources.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../markup/resources.html" class="title">MarkUp Languages Resources</a>
+</td>
+<td class="listing-reading-time">
+1 min
+</td>
+<td class="listing-file-modified">
+Saturday, December 24, 2022
+</td>
+</tr>
+<tr data-index="4" data-categories="linux,bash" data-listing-date-sort="1622498400000" data-listing-file-modified-sort="1671881543391" data-listing-reading-time-sort="1.355" data-listing-title-sort="Linux: Bash" data-listing-filename-sort="linux-what-bash.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td class="listing-image">
 <img src="../images/linux/bash.png" style="height: 40px;">
 </td>
-<td class="listing-title">
-<a href="../linux/linux-what-basics.html" class="title">Linux: basic concepts</a>
-</td>
-<td class="listing-reading-time">
-3 min
-</td>
-<td class="listing-filename">
-<a href="../linux/linux-what-basics.html" class="filename">linux-what-basics.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="16" data-listing-file-modified-sort="1671779358119" data-listing-reading-time-sort="0.005" data-listing-title-sort="Linux Distros: Manjaro" data-listing-filename-sort="linux-distros-manjaro.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
+<td class="listing-categories">
+linux,bash
 </td>
 <td class="listing-title">
-<a href="../linux/linux-distros-manjaro.html" class="title">Linux Distros: Manjaro</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../linux/linux-distros-manjaro.html" class="filename">linux-distros-manjaro.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="17" data-listing-file-modified-sort="1671779343105" data-listing-reading-time-sort="0.005" data-listing-title-sort="Linux Distros: Ubuntu" data-listing-filename-sort="linux-distros-ubuntu.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../linux/linux-distros-ubuntu.html" class="title">Linux Distros: Ubuntu</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../linux/linux-distros-ubuntu.html" class="filename">linux-distros-ubuntu.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="18" data-listing-file-modified-sort="1671779017404" data-listing-reading-time-sort="7.58" data-listing-title-sort="Java SE: Class and Objects" data-listing-filename-sort="se-concepts-objects.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../images/javase/pointToObject-1.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../javase/se-concepts-objects.html" class="title">Java SE: Class and Objects</a>
-</td>
-<td class="listing-reading-time">
-7 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-concepts-objects.html" class="filename">se-concepts-objects.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 23, 2022
-</td>
-</tr>
-<tr data-index="19" data-listing-file-modified-sort="1671647132077" data-listing-reading-time-sort="0.56" data-listing-title-sort="Linux: File System" data-listing-filename-sort="linux-what-filesys.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../images/linux/filesys.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../linux/linux-what-filesys.html" class="title">Linux: File System</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../linux/linux-what-filesys.html" class="filename">linux-what-filesys.qmd</a>
-</td>
-<td class="listing-file-modified">
-Wednesday, December 21, 2022
-</td>
-</tr>
-<tr data-index="20" data-listing-file-modified-sort="1671643204317" data-listing-reading-time-sort="1.27" data-listing-title-sort="Linux: pipes" data-listing-filename-sort="linux-what-pipes.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../images/linux/linux-mint-pipe-01.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../linux/linux-what-pipes.html" class="title">Linux: pipes</a>
+<a href="../linux/linux-what-bash.html" class="title">Linux: Bash</a>
 </td>
 <td class="listing-reading-time">
 1 min
 </td>
-<td class="listing-filename">
-<a href="../linux/linux-what-pipes.html" class="filename">linux-what-pipes.qmd</a>
-</td>
 <td class="listing-file-modified">
-Wednesday, December 21, 2022
+Saturday, December 24, 2022
 </td>
 </tr>
-<tr data-index="21" data-listing-file-modified-sort="1671642346393" data-listing-reading-time-sort="2.57" data-listing-title-sort="Linux: su and sudo" data-listing-filename-sort="linux-what-sudo.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="5" data-listing-file-modified-sort="1671880257269" data-listing-reading-time-sort="0.375" data-listing-title-sort="About images credit" data-listing-filename-sort="aboutimagescredit.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td class="listing-image">
-<img src="../images/linux/linux-mint-sudo-01.png" style="height: 40px;">
+<img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
 </td>
-<td class="listing-title">
-<a href="../linux/linux-what-sudo.html" class="title">Linux: su and sudo</a>
-</td>
-<td class="listing-reading-time">
-2 min
-</td>
-<td class="listing-filename">
-<a href="../linux/linux-what-sudo.html" class="filename">linux-what-sudo.qmd</a>
-</td>
-<td class="listing-file-modified">
-Wednesday, December 21, 2022
-</td>
-</tr>
-<tr data-index="22" data-listing-file-modified-sort="1671463460004" data-listing-reading-time-sort="0.41" data-listing-title-sort="Spring MVC" data-listing-filename-sort="springmvc.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../images/springmvc/mvc.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../spring/springmvc.html" class="title">Spring MVC</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../spring/springmvc.html" class="filename">springmvc.qmd</a>
-</td>
-<td class="listing-file-modified">
-Monday, December 19, 2022
-</td>
-</tr>
-<tr data-index="23" data-listing-file-modified-sort="1671462521902" data-listing-reading-time-sort="5.385" data-listing-title-sort="Lab#MD01-1: Create and publish by Quarto" data-listing-filename-sort="mulab1.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../images/about/quarto_website.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../markup/mulab1.html" class="title">Lab#MD01-1: Create and publish by Quarto</a>
-</td>
-<td class="listing-reading-time">
-5 min
-</td>
-<td class="listing-filename">
-<a href="../markup/mulab1.html" class="filename">mulab1.qmd</a>
-</td>
-<td class="listing-file-modified">
-Monday, December 19, 2022
-</td>
-</tr>
-<tr data-index="24" data-listing-file-modified-sort="1671459549099" data-listing-reading-time-sort="1.975" data-listing-title-sort="Java SE: Project push GitHub" data-listing-filename-sort="se-concepts-projectgit.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../images/javase/se-projectgit/login_cli_gh_createrepo.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../javase/se-concepts-projectgit.html" class="title">Java SE: Project push GitHub</a>
-</td>
-<td class="listing-reading-time">
-1 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-concepts-projectgit.html" class="filename">se-concepts-projectgit.qmd</a>
-</td>
-<td class="listing-file-modified">
-Monday, December 19, 2022
-</td>
-</tr>
-<tr data-index="25" data-listing-file-modified-sort="1671391717911" data-listing-reading-time-sort="1.26" data-listing-title-sort="Java SE: Create Maven Project" data-listing-filename-sort="se-concepts-createproject.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/se-concepts-createproject.html" class="title">Java SE: Create Maven Project</a>
-</td>
-<td class="listing-reading-time">
-1 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-concepts-createproject.html" class="filename">se-concepts-createproject.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 18, 2022
-</td>
-</tr>
-<tr data-index="26" data-listing-file-modified-sort="1671390110482" data-listing-reading-time-sort="0.21" data-listing-title-sort="Lab#SE02-1: Movie/Review" data-listing-filename-sort="selab3.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/selab3.html" class="title">Lab#SE02-1: Movie/Review</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../javase/selab3.html" class="filename">selab3.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 18, 2022
-</td>
-</tr>
-<tr data-index="27" data-listing-file-modified-sort="1671389203507" data-listing-reading-time-sort="5.855" data-listing-title-sort="Lab#SE01-2: Maven/Gradle Person and Account stored in JSON" data-listing-filename-sort="selab1-2.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/selab1-2.html" class="title">Lab#SE01-2: Maven/Gradle Person and Account stored in JSON</a>
-</td>
-<td class="listing-reading-time">
-5 min
-</td>
-<td class="listing-filename">
-<a href="../javase/selab1-2.html" class="filename">selab1-2.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 18, 2022
-</td>
-</tr>
-<tr data-index="28" data-listing-file-modified-sort="1671218719933" data-listing-reading-time-sort="11.2" data-listing-title-sort="Lab#SE01-1: Maven/Gradle Person and Account" data-listing-filename-sort="selab1-1.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/selab1-1.html" class="title">Lab#SE01-1: Maven/Gradle Person and Account</a>
-</td>
-<td class="listing-reading-time">
-11 min
-</td>
-<td class="listing-filename">
-<a href="../javase/selab1-1.html" class="filename">selab1-1.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 16, 2022
-</td>
-</tr>
-<tr data-index="29" data-listing-file-modified-sort="1671210651587" data-listing-reading-time-sort="1.225" data-listing-title-sort="Linux Distros: Mint" data-listing-filename-sort="linux-distros-mint.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../images/linux/mint.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../linux/linux-distros-mint.html" class="title">Linux Distros: Mint</a>
-</td>
-<td class="listing-reading-time">
-1 min
-</td>
-<td class="listing-filename">
-<a href="../linux/linux-distros-mint.html" class="filename">linux-distros-mint.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 16, 2022
-</td>
-</tr>
-<tr data-index="30" data-listing-file-modified-sort="1671207124307" data-listing-reading-time-sort="2.085" data-listing-title-sort="Java Patterns: UML" data-listing-filename-sort="se-pattern-uml.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../images/javase/uml_example.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../javase/se-pattern-uml.html" class="title">Java Patterns: UML</a>
-</td>
-<td class="listing-reading-time">
-2 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-pattern-uml.html" class="filename">se-pattern-uml.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 16, 2022
-</td>
-</tr>
-<tr data-index="31" data-listing-file-modified-sort="1671207124306" data-listing-reading-time-sort="0.545" data-listing-title-sort="Java SE Resources" data-listing-filename-sort="resources.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/resources.html" class="title">Java SE Resources</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../javase/resources.html" class="filename">resources.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 16, 2022
-</td>
-</tr>
-<tr data-index="32" data-listing-file-modified-sort="1671034230286" data-listing-reading-time-sort="2.1" data-listing-title-sort="Quarto Markdown: publishing" data-listing-filename-sort="markup-quarto-publish.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../images/markup/gh-pages_build.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../markup/markup-quarto-publish.html" class="title">Quarto Markdown: publishing</a>
-</td>
-<td class="listing-reading-time">
-2 min
-</td>
-<td class="listing-filename">
-<a href="../markup/markup-quarto-publish.html" class="filename">markup-quarto-publish.qmd</a>
-</td>
-<td class="listing-file-modified">
-Wednesday, December 14, 2022
-</td>
-</tr>
-<tr data-index="33" data-listing-file-modified-sort="1671033175978" data-listing-reading-time-sort="2.745" data-listing-title-sort="Java SE: Maven" data-listing-filename-sort="se-concepts-maven.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/se-concepts-maven.html" class="title">Java SE: Maven</a>
-</td>
-<td class="listing-reading-time">
-2 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-concepts-maven.html" class="filename">se-concepts-maven.qmd</a>
-</td>
-<td class="listing-file-modified">
-Wednesday, December 14, 2022
-</td>
-</tr>
-<tr data-index="34" data-listing-file-modified-sort="1671033005645" data-listing-reading-time-sort="1.215" data-listing-title-sort="Java SE Vocabulay" data-listing-filename-sort="vocabjava.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../vocabulary/vocabjava.html" class="title">Java SE Vocabulay</a>
-</td>
-<td class="listing-reading-time">
-1 min
-</td>
-<td class="listing-filename">
-<a href="../vocabulary/vocabjava.html" class="filename">vocabjava.qmd</a>
-</td>
-<td class="listing-file-modified">
-Wednesday, December 14, 2022
-</td>
-</tr>
-<tr data-index="35" data-listing-file-modified-sort="1671033005644" data-listing-reading-time-sort="2.26" data-listing-title-sort="Linux: Virtual Machines" data-listing-filename-sort="linux-what-vm.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../linux/linux-what-vm.html" class="title">Linux: Virtual Machines</a>
-</td>
-<td class="listing-reading-time">
-2 min
-</td>
-<td class="listing-filename">
-<a href="../linux/linux-what-vm.html" class="filename">linux-what-vm.qmd</a>
-</td>
-<td class="listing-file-modified">
-Wednesday, December 14, 2022
-</td>
-</tr>
-<tr data-index="36" data-listing-file-modified-sort="1671033005643" data-listing-reading-time-sort="0.005" data-listing-title-sort="Linux Distros: Debian" data-listing-filename-sort="linux-distros-debian.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../linux/linux-distros-debian.html" class="title">Linux Distros: Debian</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../linux/linux-distros-debian.html" class="filename">linux-distros-debian.qmd</a>
-</td>
-<td class="listing-file-modified">
-Wednesday, December 14, 2022
-</td>
-</tr>
-<tr data-index="37" data-listing-file-modified-sort="1671033005643" data-listing-reading-time-sort="0.005" data-listing-title-sort="Linux Distros: openSuse" data-listing-filename-sort="linux-distros-opensuse.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../linux/linux-distros-opensuse.html" class="title">Linux Distros: openSuse</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../linux/linux-distros-opensuse.html" class="filename">linux-distros-opensuse.qmd</a>
-</td>
-<td class="listing-file-modified">
-Wednesday, December 14, 2022
-</td>
-</tr>
-<tr data-index="38" data-listing-file-modified-sort="1671033005642" data-listing-reading-time-sort="3.815" data-listing-title-sort="Java SE: JUnit and TDD" data-listing-filename-sort="se-concepts-tdd.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/se-concepts-tdd.html" class="title">Java SE: JUnit and TDD</a>
-</td>
-<td class="listing-reading-time">
-3 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-concepts-tdd.html" class="filename">se-concepts-tdd.qmd</a>
-</td>
-<td class="listing-file-modified">
-Wednesday, December 14, 2022
-</td>
-</tr>
-<tr data-index="39" data-listing-file-modified-sort="1671033005640" data-listing-reading-time-sort="0.345" data-listing-title-sort="About images credit" data-listing-filename-sort="aboutimagescredit.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
+<td class="listing-categories">
 </td>
 <td class="listing-title">
 <a href="../about/aboutimagescredit.html" class="title">About images credit</a>
@@ -1680,899 +1055,51 @@ Wednesday, December 14, 2022
 <td class="listing-reading-time">
 0 min
 </td>
-<td class="listing-filename">
-<a href="../about/aboutimagescredit.html" class="filename">aboutimagescredit.qmd</a>
-</td>
 <td class="listing-file-modified">
-Wednesday, December 14, 2022
+Saturday, December 24, 2022
 </td>
 </tr>
-<tr data-index="40" data-listing-file-modified-sort="1670786194795" data-listing-reading-time-sort="2.445" data-listing-title-sort="Java SE: Packages" data-listing-filename-sort="se-concepts-package.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="6" data-categories="linux" data-listing-date-sort="1622498400000" data-listing-file-modified-sort="1671879715306" data-listing-reading-time-sort="2.415" data-listing-title-sort="Linux: basic concepts" data-listing-filename-sort="linux-what-basics.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
+<img src="../images/linux/chmod-cheatsheet.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+linux
 </td>
 <td class="listing-title">
-<a href="../javase/se-concepts-package.html" class="title">Java SE: Packages</a>
+<a href="../linux/linux-what-basics.html" class="title">Linux: basic concepts</a>
 </td>
 <td class="listing-reading-time">
 2 min
 </td>
-<td class="listing-filename">
-<a href="../javase/se-concepts-package.html" class="filename">se-concepts-package.qmd</a>
-</td>
 <td class="listing-file-modified">
-Sunday, December 11, 2022
+Saturday, December 24, 2022
 </td>
 </tr>
-<tr data-index="41" data-listing-file-modified-sort="1670785382025" data-listing-reading-time-sort="2.715" data-listing-title-sort="Spring" data-listing-filename-sort="spring.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="7" data-listing-file-modified-sort="1671878906685" data-listing-reading-time-sort="0.05" data-listing-title-sort="Articles Card-Listing" data-listing-filename-sort="aboutlisting-card.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td class="listing-image">
-<img data-src="../images/springmvc/spring-history.png" style="height: 40px;">
+<img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
 </td>
 <td class="listing-title">
-<a href="../spring/spring.html" class="title">Spring</a>
-</td>
-<td class="listing-reading-time">
-2 min
-</td>
-<td class="listing-filename">
-<a href="../spring/spring.html" class="filename">spring.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 11, 2022
-</td>
-</tr>
-<tr data-index="42" data-listing-file-modified-sort="1670783277226" data-listing-reading-time-sort="4.665" data-listing-title-sort="Java SE: Abstraction" data-listing-filename-sort="se-principles-abstraction.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/se-principles-abstraction.html" class="title">Java SE: Abstraction</a>
-</td>
-<td class="listing-reading-time">
-4 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-principles-abstraction.html" class="filename">se-principles-abstraction.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 11, 2022
-</td>
-</tr>
-<tr data-index="43" data-listing-file-modified-sort="1670783146629" data-listing-reading-time-sort="1.265" data-listing-title-sort="Java SE: Encapsulation" data-listing-filename-sort="se-principles-encapsulation.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/se-principles-encapsulation.html" class="title">Java SE: Encapsulation</a>
-</td>
-<td class="listing-reading-time">
-1 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-principles-encapsulation.html" class="filename">se-principles-encapsulation.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 11, 2022
-</td>
-</tr>
-<tr data-index="44" data-listing-file-modified-sort="1670783088291" data-listing-reading-time-sort="3.385" data-listing-title-sort="Java SE: Inherence" data-listing-filename-sort="se-principles-inheritance.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/se-principles-inheritance.html" class="title">Java SE: Inherence</a>
-</td>
-<td class="listing-reading-time">
-3 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-principles-inheritance.html" class="filename">se-principles-inheritance.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 11, 2022
-</td>
-</tr>
-<tr data-index="45" data-listing-file-modified-sort="1670783001496" data-listing-reading-time-sort="2.055" data-listing-title-sort="Java SE: Polymorphism" data-listing-filename-sort="se-principles-polymorphism.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/se-principles-polymorphism.html" class="title">Java SE: Polymorphism</a>
-</td>
-<td class="listing-reading-time">
-2 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-principles-polymorphism.html" class="filename">se-principles-polymorphism.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 11, 2022
-</td>
-</tr>
-<tr data-index="46" data-listing-file-modified-sort="1670782879179" data-listing-reading-time-sort="3.2" data-listing-title-sort="Java Standard Edition: Principles" data-listing-filename-sort="se-what-principles.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../images/javase/javaseprinciples.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../javase/se-what-principles.html" class="title">Java Standard Edition: Principles</a>
-</td>
-<td class="listing-reading-time">
-3 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-what-principles.html" class="filename">se-what-principles.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 11, 2022
-</td>
-</tr>
-<tr data-index="47" data-listing-file-modified-sort="1670782731009" data-listing-reading-time-sort="2.385" data-listing-title-sort="Java Standard Edition: Basics" data-listing-filename-sort="se-what-basics.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Java_Platforms.PNG" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../javase/se-what-basics.html" class="title">Java Standard Edition: Basics</a>
-</td>
-<td class="listing-reading-time">
-2 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-what-basics.html" class="filename">se-what-basics.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 11, 2022
-</td>
-</tr>
-<tr data-index="48" data-listing-file-modified-sort="1670782645054" data-listing-reading-time-sort="3.735" data-listing-title-sort="Java SE: Coupling/Cohesion" data-listing-filename-sort="se-concepts-coupling.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="https://commons.wikimedia.org/wiki/File:CouplingVsCohesion.svg" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../javase/se-concepts-coupling.html" class="title">Java SE: Coupling/Cohesion</a>
-</td>
-<td class="listing-reading-time">
-3 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-concepts-coupling.html" class="filename">se-concepts-coupling.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 11, 2022
-</td>
-</tr>
-<tr data-index="49" data-listing-file-modified-sort="1670782394118" data-listing-reading-time-sort="4.365" data-listing-title-sort="Java SE: Scope" data-listing-filename-sort="se-concepts-scope.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/se-concepts-scope.html" class="title">Java SE: Scope</a>
-</td>
-<td class="listing-reading-time">
-4 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-concepts-scope.html" class="filename">se-concepts-scope.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 11, 2022
-</td>
-</tr>
-<tr data-index="50" data-listing-file-modified-sort="1670782378504" data-listing-reading-time-sort="6.275" data-listing-title-sort="Java SE: static modifier" data-listing-filename-sort="se-concepts-static.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/se-concepts-static.html" class="title">Java SE: static modifier</a>
-</td>
-<td class="listing-reading-time">
-6 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-concepts-static.html" class="filename">se-concepts-static.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 11, 2022
-</td>
-</tr>
-<tr data-index="51" data-listing-file-modified-sort="1670782275236" data-listing-reading-time-sort="0.685" data-listing-title-sort="Java SE Design-Patterns" data-listing-filename-sort="se-pattern-intro.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../images/javase/design-patterns.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../javase/se-pattern-intro.html" class="title">Java SE Design-Patterns</a>
+<a href="../about/aboutlisting-card.html" class="title">Articles Card-Listing</a>
 </td>
 <td class="listing-reading-time">
 0 min
 </td>
-<td class="listing-filename">
-<a href="../javase/se-pattern-intro.html" class="filename">se-pattern-intro.qmd</a>
-</td>
 <td class="listing-file-modified">
-Sunday, December 11, 2022
+Saturday, December 24, 2022
 </td>
 </tr>
-<tr data-index="52" data-listing-file-modified-sort="1670782218312" data-listing-reading-time-sort="0.015" data-listing-title-sort="Java Patterns: Abstract Factory" data-listing-filename-sort="se-pattern-abstractfactory.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="8" data-listing-file-modified-sort="1671875950426" data-listing-reading-time-sort="5.78" data-listing-title-sort="About this site" data-listing-filename-sort="aboutthissite.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
+<img src="../images/about/quarto_website.png" style="height: 40px;">
 </td>
-<td class="listing-title">
-<a href="../javase/se-pattern-abstractfactory.html" class="title">Java Patterns: Abstract Factory</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-pattern-abstractfactory.html" class="filename">se-pattern-abstractfactory.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 11, 2022
-</td>
-</tr>
-<tr data-index="53" data-listing-file-modified-sort="1670780787391" data-listing-reading-time-sort="4.89" data-listing-title-sort="Java Patterns: Singleton" data-listing-filename-sort="se-pattern-singleton.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../images/javase/singleton-pattern-edited.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../javase/se-pattern-singleton.html" class="title">Java Patterns: Singleton</a>
-</td>
-<td class="listing-reading-time">
-4 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-pattern-singleton.html" class="filename">se-pattern-singleton.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 11, 2022
-</td>
-</tr>
-<tr data-index="54" data-listing-file-modified-sort="1670756585918" data-listing-reading-time-sort="0.015" data-listing-title-sort="Java Patterns: Builder" data-listing-filename-sort="se-pattern-builder.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/se-pattern-builder.html" class="title">Java Patterns: Builder</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-pattern-builder.html" class="filename">se-pattern-builder.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 11, 2022
-</td>
-</tr>
-<tr data-index="55" data-listing-file-modified-sort="1670756550359" data-listing-reading-time-sort="0.015" data-listing-title-sort="Java Patterns: Observer" data-listing-filename-sort="se-pattern-observer.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/se-pattern-observer.html" class="title">Java Patterns: Observer</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-pattern-observer.html" class="filename">se-pattern-observer.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 11, 2022
-</td>
-</tr>
-<tr data-index="56" data-listing-file-modified-sort="1670756538704" data-listing-reading-time-sort="4.385" data-listing-title-sort="Java Patterns: Factory" data-listing-filename-sort="se-pattern-factory.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/se-pattern-factory.html" class="title">Java Patterns: Factory</a>
-</td>
-<td class="listing-reading-time">
-4 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-pattern-factory.html" class="filename">se-pattern-factory.qmd</a>
-</td>
-<td class="listing-file-modified">
-Sunday, December 11, 2022
-</td>
-</tr>
-<tr data-index="57" data-listing-file-modified-sort="1670585396583" data-listing-reading-time-sort="1.125" data-listing-title-sort="Java MOOC Helsinki" data-listing-filename-sort="se-what-moochelsinki.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../images/javase/moochelsinki.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../javase/se-what-moochelsinki.html" class="title">Java MOOC Helsinki</a>
-</td>
-<td class="listing-reading-time">
-1 min
-</td>
-<td class="listing-filename">
-<a href="../javase/se-what-moochelsinki.html" class="filename">se-what-moochelsinki.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 9, 2022
-</td>
-</tr>
-<tr data-index="58" data-listing-file-modified-sort="1670576511832" data-listing-reading-time-sort="0.775" data-listing-title-sort="CSS: W3.css" data-listing-filename-sort="markup-css-w3css.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../markup/markup-css-w3css.html" class="title">CSS: W3.css</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../markup/markup-css-w3css.html" class="filename">markup-css-w3css.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 9, 2022
-</td>
-</tr>
-<tr data-index="59" data-listing-file-modified-sort="1670576135764" data-listing-reading-time-sort="2.35" data-listing-title-sort="Cascade Style Sheet" data-listing-filename-sort="markup-css-basics.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../markup/markup-css-basics.html" class="title">Cascade Style Sheet</a>
-</td>
-<td class="listing-reading-time">
-2 min
-</td>
-<td class="listing-filename">
-<a href="../markup/markup-css-basics.html" class="filename">markup-css-basics.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 9, 2022
-</td>
-</tr>
-<tr data-index="60" data-listing-file-modified-sort="1670575652584" data-listing-reading-time-sort="1.37" data-listing-title-sort="HTML Markup" data-listing-filename-sort="markup-lang-html.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../markup/markup-lang-html.html" class="title">HTML Markup</a>
-</td>
-<td class="listing-reading-time">
-1 min
-</td>
-<td class="listing-filename">
-<a href="../markup/markup-lang-html.html" class="filename">markup-lang-html.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 9, 2022
-</td>
-</tr>
-<tr data-index="61" data-listing-file-modified-sort="1670574213396" data-listing-reading-time-sort="3.065" data-listing-title-sort="Markdown Markup" data-listing-filename-sort="markup-lang-md.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../images/markup/markdown-flowchart.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../markup/markup-lang-md.html" class="title">Markdown Markup</a>
-</td>
-<td class="listing-reading-time">
-3 min
-</td>
-<td class="listing-filename">
-<a href="../markup/markup-lang-md.html" class="filename">markup-lang-md.qmd</a>
-</td>
-<td class="listing-file-modified">
-Friday, December 9, 2022
-</td>
-</tr>
-<tr data-index="62" data-listing-file-modified-sort="1670502066575" data-listing-reading-time-sort="0.01" data-listing-title-sort="Web Vocabulary" data-listing-filename-sort="vocabweb.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../vocabulary/vocabweb.html" class="title">Web Vocabulary</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../vocabulary/vocabweb.html" class="filename">vocabweb.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="63" data-listing-file-modified-sort="1670502066574" data-listing-reading-time-sort="0.01" data-listing-title-sort="ReactJS Vocabulary" data-listing-filename-sort="vocabreactjs.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../vocabulary/vocabreactjs.html" class="title">ReactJS Vocabulary</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../vocabulary/vocabreactjs.html" class="filename">vocabreactjs.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="64" data-listing-file-modified-sort="1670502066574" data-listing-reading-time-sort="0.005" data-listing-title-sort="SCRUM Vocabulay" data-listing-filename-sort="vocabscrum.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../vocabulary/vocabscrum.html" class="title">SCRUM Vocabulay</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../vocabulary/vocabscrum.html" class="filename">vocabscrum.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="65" data-listing-file-modified-sort="1670502066574" data-listing-reading-time-sort="0.005" data-listing-title-sort="Spring Boot Vocabulay" data-listing-filename-sort="vocabspringboot.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../vocabulary/vocabspringboot.html" class="title">Spring Boot Vocabulay</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../vocabulary/vocabspringboot.html" class="filename">vocabspringboot.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="66" data-listing-file-modified-sort="1670502066573" data-listing-reading-time-sort="0.01" data-listing-title-sort="DevOps Vocabulary" data-listing-filename-sort="vocabdevops.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../vocabulary/vocabdevops.html" class="title">DevOps Vocabulary</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../vocabulary/vocabdevops.html" class="filename">vocabdevops.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="67" data-listing-file-modified-sort="1670502066573" data-listing-reading-time-sort="0.21" data-listing-title-sort="General Vocabulary" data-listing-filename-sort="vocabgeneral.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../vocabulary/vocabgeneral.html" class="title">General Vocabulary</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../vocabulary/vocabgeneral.html" class="filename">vocabgeneral.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="68" data-listing-file-modified-sort="1670502066572" data-listing-reading-time-sort="0.01" data-listing-title-sort="DataBase Vocabulary" data-listing-filename-sort="vocabdatabase.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../vocabulary/vocabdatabase.html" class="title">DataBase Vocabulary</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../vocabulary/vocabdatabase.html" class="filename">vocabdatabase.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="69" data-listing-file-modified-sort="1670502066567" data-listing-reading-time-sort="0.015" data-listing-title-sort="Week 3: Communication and value" data-listing-filename-sort="week3.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../scrum/week3.html" class="title">Week 3: Communication and value</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../scrum/week3.html" class="filename">week3.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="70" data-listing-file-modified-sort="1670502066567" data-listing-reading-time-sort="0.015" data-listing-title-sort="Week 4: ScrumMaster, how it works" data-listing-filename-sort="week4.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../scrum/week4.html" class="title">Week 4: ScrumMaster, how it works</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../scrum/week4.html" class="filename">week4.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="71" data-listing-file-modified-sort="1670502066567" data-listing-reading-time-sort="0.015" data-listing-title-sort="Week 5: Mindset, the key to everythng" data-listing-filename-sort="week5.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../scrum/week5.html" class="title">Week 5: Mindset, the key to everythng</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../scrum/week5.html" class="filename">week5.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="72" data-listing-file-modified-sort="1670502066566" data-listing-reading-time-sort="0.42" data-listing-title-sort="SCRUM" data-listing-filename-sort="scrum.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../scrum/scrum.html" class="title">SCRUM</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../scrum/scrum.html" class="filename">scrum.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="73" data-listing-file-modified-sort="1670502066566" data-listing-reading-time-sort="0.025" data-listing-title-sort="SCRUM Guide" data-listing-filename-sort="scrumguide.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../scrum/scrumguide.html" class="title">SCRUM Guide</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../scrum/scrumguide.html" class="filename">scrumguide.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="74" data-listing-file-modified-sort="1670502066566" data-listing-reading-time-sort="0.015" data-listing-title-sort="Week 1: Meetings and impediments" data-listing-filename-sort="week1.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../scrum/week1.html" class="title">Week 1: Meetings and impediments</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../scrum/week1.html" class="filename">week1.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="75" data-listing-file-modified-sort="1670502066566" data-listing-reading-time-sort="0.015" data-listing-title-sort="Week 2: User stories, tasks and habits" data-listing-filename-sort="week2.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../scrum/week2.html" class="title">Week 2: User stories, tasks and habits</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../scrum/week2.html" class="filename">week2.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="76" data-listing-file-modified-sort="1670502066565" data-listing-reading-time-sort="0.015" data-listing-title-sort="Agile Manifesto" data-listing-filename-sort="agilemanifesto.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../scrum/agilemanifesto.html" class="title">Agile Manifesto</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../scrum/agilemanifesto.html" class="filename">agilemanifesto.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="77" data-listing-file-modified-sort="1670502066565" data-listing-reading-time-sort="0.015" data-listing-title-sort="Digital Tools SCRUM" data-listing-filename-sort="digitaltoolsscrum.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../scrum/digitaltoolsscrum.html" class="title">Digital Tools SCRUM</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../scrum/digitaltoolsscrum.html" class="filename">digitaltoolsscrum.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="78" data-listing-file-modified-sort="1670502066561" data-listing-reading-time-sort="1.745" data-listing-title-sort="Quarto Markdown: data sources" data-listing-filename-sort="markup-quarto-code.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../markup/markup-quarto-code.html" class="title">Quarto Markdown: data sources</a>
-</td>
-<td class="listing-reading-time">
-1 min
-</td>
-<td class="listing-filename">
-<a href="../markup/markup-quarto-code.html" class="filename">markup-quarto-code.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="79" data-listing-file-modified-sort="1670502066560" data-listing-reading-time-sort="2.43" data-listing-title-sort="Introduction Markup" data-listing-filename-sort="markup-lang-intro.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../markup/markup-lang-intro.html" class="title">Introduction Markup</a>
-</td>
-<td class="listing-reading-time">
-2 min
-</td>
-<td class="listing-filename">
-<a href="../markup/markup-lang-intro.html" class="filename">markup-lang-intro.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="80" data-listing-file-modified-sort="1670502066560" data-listing-reading-time-sort="1.085" data-listing-title-sort="Quarto Markdown: basics" data-listing-filename-sort="markup-quarto-basics.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../markup/markup-quarto-basics.html" class="title">Quarto Markdown: basics</a>
-</td>
-<td class="listing-reading-time">
-1 min
-</td>
-<td class="listing-filename">
-<a href="../markup/markup-quarto-basics.html" class="filename">markup-quarto-basics.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="81" data-listing-file-modified-sort="1670502066560" data-listing-reading-time-sort="1.02" data-listing-title-sort="Quarto Markdown: creating" data-listing-filename-sort="markup-quarto-create.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../images/markup/quartoextension.png" style="height: 40px;">
-</td>
-<td class="listing-title">
-<a href="../markup/markup-quarto-create.html" class="title">Quarto Markdown: creating</a>
-</td>
-<td class="listing-reading-time">
-1 min
-</td>
-<td class="listing-filename">
-<a href="../markup/markup-quarto-create.html" class="filename">markup-quarto-create.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="82" data-listing-file-modified-sort="1670502066557" data-listing-reading-time-sort="0.015" data-listing-title-sort="Lab 4: subject" data-listing-filename-sort="selab4.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/selab4.html" class="title">Lab 4: subject</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../javase/selab4.html" class="filename">selab4.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="83" data-listing-file-modified-sort="1670502066557" data-listing-reading-time-sort="0.015" data-listing-title-sort="Lab 5: subject" data-listing-filename-sort="selab5.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../javase/selab5.html" class="title">Lab 5: subject</a>
-</td>
-<td class="listing-reading-time">
-0 min
-</td>
-<td class="listing-filename">
-<a href="../javase/selab5.html" class="filename">selab5.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="84" data-listing-file-modified-sort="1670502066515" data-listing-reading-time-sort="1.145" data-listing-title-sort="About the Useful Questions" data-listing-filename-sort="aboutquestions.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
-</td>
-<td class="listing-title">
-<a href="../about/aboutquestions.html" class="title">About the Useful Questions</a>
-</td>
-<td class="listing-reading-time">
-1 min
-</td>
-<td class="listing-filename">
-<a href="../about/aboutquestions.html" class="filename">aboutquestions.qmd</a>
-</td>
-<td class="listing-file-modified">
-Thursday, December 8, 2022
-</td>
-</tr>
-<tr data-index="85" data-listing-file-modified-sort="1670502066515" data-listing-reading-time-sort="5.755" data-listing-title-sort="About this site" data-listing-filename-sort="aboutthissite.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../images/about/quarto_website.png" style="height: 40px;">
+<td class="listing-categories">
 </td>
 <td class="listing-title">
 <a href="../about/aboutthissite.html" class="title">About this site</a>
@@ -2580,19 +1107,1359 @@ Thursday, December 8, 2022
 <td class="listing-reading-time">
 5 min
 </td>
-<td class="listing-filename">
-<a href="../about/aboutthissite.html" class="filename">aboutthissite.qmd</a>
+<td class="listing-file-modified">
+Saturday, December 24, 2022
+</td>
+</tr>
+<tr data-index="9" data-listing-file-modified-sort="1671867430811" data-listing-reading-time-sort="3.065" data-listing-title-sort="Markdown Markup" data-listing-filename-sort="markup-lang-md.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/markup/markdown-flowchart.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../markup/markup-lang-md.html" class="title">Markdown Markup</a>
+</td>
+<td class="listing-reading-time">
+3 min
+</td>
+<td class="listing-file-modified">
+Saturday, December 24, 2022
+</td>
+</tr>
+<tr data-index="10" data-listing-file-modified-sort="1671867376023" data-listing-reading-time-sort="3.735" data-listing-title-sort="Java SE: Coupling/Cohesion" data-listing-filename-sort="se-concepts-coupling.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/javase/coupling.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-concepts-coupling.html" class="title">Java SE: Coupling/Cohesion</a>
+</td>
+<td class="listing-reading-time">
+3 min
+</td>
+<td class="listing-file-modified">
+Saturday, December 24, 2022
+</td>
+</tr>
+<tr data-index="11" data-listing-file-modified-sort="1671823472502" data-listing-reading-time-sort="6.255" data-listing-title-sort="Markdown and HTML working together, good idea?" data-listing-filename-sort="markup-lang-htmlmd.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../markup/markup-lang-htmlmd.html" class="title">Markdown and HTML working together, good idea?</a>
+</td>
+<td class="listing-reading-time">
+6 min
+</td>
+<td class="listing-file-modified">
+Friday, December 23, 2022
+</td>
+</tr>
+<tr data-index="12" data-listing-file-modified-sort="1671821594187" data-listing-reading-time-sort="0.155" data-listing-title-sort="Page Not Found" data-listing-filename-sort="404.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../404.html" class="title">Page Not Found</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Friday, December 23, 2022
+</td>
+</tr>
+<tr data-index="13" data-listing-file-modified-sort="1671787623522" data-listing-reading-time-sort="0.4" data-listing-title-sort="Linux Lab#LI03-4: Manage hardware" data-listing-filename-sort="lilab03-4.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/lilab03-4.html" class="title">Linux Lab#LI03-4: Manage hardware</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Friday, December 23, 2022
+</td>
+</tr>
+<tr data-index="14" data-listing-file-modified-sort="1671787607803" data-listing-reading-time-sort="0.755" data-listing-title-sort="Linux Lab#LI03-3: Manage software" data-listing-filename-sort="lilab03-3.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/lilab03-3.html" class="title">Linux Lab#LI03-3: Manage software</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Friday, December 23, 2022
+</td>
+</tr>
+<tr data-index="15" data-listing-file-modified-sort="1671787554135" data-listing-reading-time-sort="0.645" data-listing-title-sort="Linux Lab#LI03-1: Manage users and groups" data-listing-filename-sort="lilab03-1.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/lilab03-1.html" class="title">Linux Lab#LI03-1: Manage users and groups</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Friday, December 23, 2022
+</td>
+</tr>
+<tr data-index="16" data-listing-file-modified-sort="1671786994977" data-listing-reading-time-sort="2.435" data-listing-title-sort="Linux Lab#LI03-2: Manage files" data-listing-filename-sort="lilab03-2.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/lilab03-2.html" class="title">Linux Lab#LI03-2: Manage files</a>
+</td>
+<td class="listing-reading-time">
+2 min
+</td>
+<td class="listing-file-modified">
+Friday, December 23, 2022
+</td>
+</tr>
+<tr data-index="17" data-listing-file-modified-sort="1671786237533" data-listing-reading-time-sort="0.315" data-listing-title-sort="Linux Lab#LI01-3: Adjust user permissions" data-listing-filename-sort="lilab01-3.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/lilab01-3.html" class="title">Linux Lab#LI01-3: Adjust user permissions</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Friday, December 23, 2022
+</td>
+</tr>
+<tr data-index="18" data-listing-file-modified-sort="1671786176904" data-listing-reading-time-sort="1.305" data-listing-title-sort="Linux Lab#LI01-2: Install at least three distributions" data-listing-filename-sort="lilab01-2.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/lilab01-2.html" class="title">Linux Lab#LI01-2: Install at least three distributions</a>
+</td>
+<td class="listing-reading-time">
+1 min
+</td>
+<td class="listing-file-modified">
+Friday, December 23, 2022
+</td>
+</tr>
+<tr data-index="19" data-listing-file-modified-sort="1671785734868" data-listing-reading-time-sort="0.59" data-listing-title-sort="Linux Lab#LI01-1: Choose Linux" data-listing-filename-sort="lilab01-1.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/lilab01-1.html" class="title">Linux Lab#LI01-1: Choose Linux</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Friday, December 23, 2022
+</td>
+</tr>
+<tr data-index="20" data-listing-file-modified-sort="1671785344871" data-listing-reading-time-sort="2.97" data-listing-title-sort="Linux Lab#LI02-1: Export env user with grep and pipe" data-listing-filename-sort="lilab02-1.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/linux/redirect.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/lilab02-1.html" class="title">Linux Lab#LI02-1: Export env user with grep and pipe</a>
+</td>
+<td class="listing-reading-time">
+2 min
+</td>
+<td class="listing-file-modified">
+Friday, December 23, 2022
+</td>
+</tr>
+<tr data-index="21" data-listing-file-modified-sort="1671785048994" data-listing-reading-time-sort="1.04" data-listing-title-sort="Linux Distros: Red Hat Enterprise Linux" data-listing-filename-sort="linux-distros-redhat.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/linux-distros-redhat.html" class="title">Linux Distros: Red Hat Enterprise Linux</a>
+</td>
+<td class="listing-reading-time">
+1 min
+</td>
+<td class="listing-file-modified">
+Friday, December 23, 2022
+</td>
+</tr>
+<tr data-index="22" data-listing-file-modified-sort="1671779358119" data-listing-reading-time-sort="0.005" data-listing-title-sort="Linux Distros: Manjaro" data-listing-filename-sort="linux-distros-manjaro.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/linux-distros-manjaro.html" class="title">Linux Distros: Manjaro</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Friday, December 23, 2022
+</td>
+</tr>
+<tr data-index="23" data-listing-file-modified-sort="1671779343105" data-listing-reading-time-sort="0.005" data-listing-title-sort="Linux Distros: Ubuntu" data-listing-filename-sort="linux-distros-ubuntu.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/linux-distros-ubuntu.html" class="title">Linux Distros: Ubuntu</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Friday, December 23, 2022
+</td>
+</tr>
+<tr data-index="24" data-listing-file-modified-sort="1671779017404" data-listing-reading-time-sort="7.58" data-listing-title-sort="Java SE: Class and Objects" data-listing-filename-sort="se-concepts-objects.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/javase/pointToObject-1.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-concepts-objects.html" class="title">Java SE: Class and Objects</a>
+</td>
+<td class="listing-reading-time">
+7 min
+</td>
+<td class="listing-file-modified">
+Friday, December 23, 2022
+</td>
+</tr>
+<tr data-index="25" data-listing-file-modified-sort="1671647132077" data-listing-reading-time-sort="0.56" data-listing-title-sort="Linux: File System" data-listing-filename-sort="linux-what-filesys.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/linux/filesys.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/linux-what-filesys.html" class="title">Linux: File System</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Wednesday, December 21, 2022
+</td>
+</tr>
+<tr data-index="26" data-listing-file-modified-sort="1671643204317" data-listing-reading-time-sort="1.27" data-listing-title-sort="Linux: pipes" data-listing-filename-sort="linux-what-pipes.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/linux/linux-mint-pipe-01.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/linux-what-pipes.html" class="title">Linux: pipes</a>
+</td>
+<td class="listing-reading-time">
+1 min
+</td>
+<td class="listing-file-modified">
+Wednesday, December 21, 2022
+</td>
+</tr>
+<tr data-index="27" data-listing-file-modified-sort="1671642346393" data-listing-reading-time-sort="2.57" data-listing-title-sort="Linux: su and sudo" data-listing-filename-sort="linux-what-sudo.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/linux/linux-mint-sudo-01.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/linux-what-sudo.html" class="title">Linux: su and sudo</a>
+</td>
+<td class="listing-reading-time">
+2 min
+</td>
+<td class="listing-file-modified">
+Wednesday, December 21, 2022
+</td>
+</tr>
+<tr data-index="28" data-listing-file-modified-sort="1671463460004" data-listing-reading-time-sort="0.41" data-listing-title-sort="Spring MVC" data-listing-filename-sort="springmvc.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/springmvc/mvc.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../spring/springmvc.html" class="title">Spring MVC</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Monday, December 19, 2022
+</td>
+</tr>
+<tr data-index="29" data-listing-file-modified-sort="1671462521902" data-listing-reading-time-sort="5.385" data-listing-title-sort="Lab#MD01-1: Create and publish by Quarto" data-listing-filename-sort="mulab1.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img src="../images/about/quarto_website.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../markup/mulab1.html" class="title">Lab#MD01-1: Create and publish by Quarto</a>
+</td>
+<td class="listing-reading-time">
+5 min
+</td>
+<td class="listing-file-modified">
+Monday, December 19, 2022
+</td>
+</tr>
+<tr data-index="30" data-listing-file-modified-sort="1671459549099" data-listing-reading-time-sort="1.975" data-listing-title-sort="Java SE: Project push GitHub" data-listing-filename-sort="se-concepts-projectgit.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/javase/se-projectgit/login_cli_gh_createrepo.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-concepts-projectgit.html" class="title">Java SE: Project push GitHub</a>
+</td>
+<td class="listing-reading-time">
+1 min
+</td>
+<td class="listing-file-modified">
+Monday, December 19, 2022
+</td>
+</tr>
+<tr data-index="31" data-listing-file-modified-sort="1671391717911" data-listing-reading-time-sort="1.26" data-listing-title-sort="Java SE: Create Maven Project" data-listing-filename-sort="se-concepts-createproject.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-concepts-createproject.html" class="title">Java SE: Create Maven Project</a>
+</td>
+<td class="listing-reading-time">
+1 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 18, 2022
+</td>
+</tr>
+<tr data-index="32" data-listing-file-modified-sort="1671390110482" data-listing-reading-time-sort="0.21" data-listing-title-sort="Lab#SE02-1: Movie/Review" data-listing-filename-sort="selab3.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/selab3.html" class="title">Lab#SE02-1: Movie/Review</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 18, 2022
+</td>
+</tr>
+<tr data-index="33" data-listing-file-modified-sort="1671389203507" data-listing-reading-time-sort="5.855" data-listing-title-sort="Lab#SE01-2: Maven/Gradle Person and Account stored in JSON" data-listing-filename-sort="selab1-2.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/selab1-2.html" class="title">Lab#SE01-2: Maven/Gradle Person and Account stored in JSON</a>
+</td>
+<td class="listing-reading-time">
+5 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 18, 2022
+</td>
+</tr>
+<tr data-index="34" data-listing-file-modified-sort="1671218719933" data-listing-reading-time-sort="11.2" data-listing-title-sort="Lab#SE01-1: Maven/Gradle Person and Account" data-listing-filename-sort="selab1-1.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/selab1-1.html" class="title">Lab#SE01-1: Maven/Gradle Person and Account</a>
+</td>
+<td class="listing-reading-time">
+11 min
+</td>
+<td class="listing-file-modified">
+Friday, December 16, 2022
+</td>
+</tr>
+<tr data-index="35" data-listing-file-modified-sort="1671210651587" data-listing-reading-time-sort="1.225" data-listing-title-sort="Linux Distros: Mint" data-listing-filename-sort="linux-distros-mint.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/linux/mint.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/linux-distros-mint.html" class="title">Linux Distros: Mint</a>
+</td>
+<td class="listing-reading-time">
+1 min
+</td>
+<td class="listing-file-modified">
+Friday, December 16, 2022
+</td>
+</tr>
+<tr data-index="36" data-listing-file-modified-sort="1671207124307" data-listing-reading-time-sort="2.085" data-listing-title-sort="Java Patterns: UML" data-listing-filename-sort="se-pattern-uml.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/javase/uml_example.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-pattern-uml.html" class="title">Java Patterns: UML</a>
+</td>
+<td class="listing-reading-time">
+2 min
+</td>
+<td class="listing-file-modified">
+Friday, December 16, 2022
+</td>
+</tr>
+<tr data-index="37" data-listing-file-modified-sort="1671207124306" data-listing-reading-time-sort="0.545" data-listing-title-sort="Java SE Resources" data-listing-filename-sort="resources.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/resources.html" class="title">Java SE Resources</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Friday, December 16, 2022
+</td>
+</tr>
+<tr data-index="38" data-listing-file-modified-sort="1671034230286" data-listing-reading-time-sort="2.1" data-listing-title-sort="Quarto Markdown: publishing" data-listing-filename-sort="markup-quarto-publish.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/markup/gh-pages_build.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../markup/markup-quarto-publish.html" class="title">Quarto Markdown: publishing</a>
+</td>
+<td class="listing-reading-time">
+2 min
+</td>
+<td class="listing-file-modified">
+Wednesday, December 14, 2022
+</td>
+</tr>
+<tr data-index="39" data-listing-file-modified-sort="1671033175978" data-listing-reading-time-sort="2.745" data-listing-title-sort="Java SE: Maven" data-listing-filename-sort="se-concepts-maven.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-concepts-maven.html" class="title">Java SE: Maven</a>
+</td>
+<td class="listing-reading-time">
+2 min
+</td>
+<td class="listing-file-modified">
+Wednesday, December 14, 2022
+</td>
+</tr>
+<tr data-index="40" data-listing-file-modified-sort="1671033005645" data-listing-reading-time-sort="1.215" data-listing-title-sort="Java SE Vocabulay" data-listing-filename-sort="vocabjava.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../vocabulary/vocabjava.html" class="title">Java SE Vocabulay</a>
+</td>
+<td class="listing-reading-time">
+1 min
+</td>
+<td class="listing-file-modified">
+Wednesday, December 14, 2022
+</td>
+</tr>
+<tr data-index="41" data-listing-file-modified-sort="1671033005644" data-listing-reading-time-sort="2.26" data-listing-title-sort="Linux: Virtual Machines" data-listing-filename-sort="linux-what-vm.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/linux-what-vm.html" class="title">Linux: Virtual Machines</a>
+</td>
+<td class="listing-reading-time">
+2 min
+</td>
+<td class="listing-file-modified">
+Wednesday, December 14, 2022
+</td>
+</tr>
+<tr data-index="42" data-listing-file-modified-sort="1671033005643" data-listing-reading-time-sort="0.005" data-listing-title-sort="Linux Distros: Debian" data-listing-filename-sort="linux-distros-debian.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/linux-distros-debian.html" class="title">Linux Distros: Debian</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Wednesday, December 14, 2022
+</td>
+</tr>
+<tr data-index="43" data-listing-file-modified-sort="1671033005643" data-listing-reading-time-sort="0.005" data-listing-title-sort="Linux Distros: openSuse" data-listing-filename-sort="linux-distros-opensuse.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../linux/linux-distros-opensuse.html" class="title">Linux Distros: openSuse</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Wednesday, December 14, 2022
+</td>
+</tr>
+<tr data-index="44" data-listing-file-modified-sort="1671033005642" data-listing-reading-time-sort="3.815" data-listing-title-sort="Java SE: JUnit and TDD" data-listing-filename-sort="se-concepts-tdd.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-concepts-tdd.html" class="title">Java SE: JUnit and TDD</a>
+</td>
+<td class="listing-reading-time">
+3 min
+</td>
+<td class="listing-file-modified">
+Wednesday, December 14, 2022
+</td>
+</tr>
+<tr data-index="45" data-listing-file-modified-sort="1670786194795" data-listing-reading-time-sort="2.445" data-listing-title-sort="Java SE: Packages" data-listing-filename-sort="se-concepts-package.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-concepts-package.html" class="title">Java SE: Packages</a>
+</td>
+<td class="listing-reading-time">
+2 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 11, 2022
+</td>
+</tr>
+<tr data-index="46" data-listing-file-modified-sort="1670785382025" data-listing-reading-time-sort="2.715" data-listing-title-sort="Spring" data-listing-filename-sort="spring.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/springmvc/spring-history.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../spring/spring.html" class="title">Spring</a>
+</td>
+<td class="listing-reading-time">
+2 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 11, 2022
+</td>
+</tr>
+<tr data-index="47" data-listing-file-modified-sort="1670783277226" data-listing-reading-time-sort="4.665" data-listing-title-sort="Java SE: Abstraction" data-listing-filename-sort="se-principles-abstraction.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-principles-abstraction.html" class="title">Java SE: Abstraction</a>
+</td>
+<td class="listing-reading-time">
+4 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 11, 2022
+</td>
+</tr>
+<tr data-index="48" data-listing-file-modified-sort="1670783146629" data-listing-reading-time-sort="1.265" data-listing-title-sort="Java SE: Encapsulation" data-listing-filename-sort="se-principles-encapsulation.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-principles-encapsulation.html" class="title">Java SE: Encapsulation</a>
+</td>
+<td class="listing-reading-time">
+1 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 11, 2022
+</td>
+</tr>
+<tr data-index="49" data-listing-file-modified-sort="1670783088291" data-listing-reading-time-sort="3.385" data-listing-title-sort="Java SE: Inherence" data-listing-filename-sort="se-principles-inheritance.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-principles-inheritance.html" class="title">Java SE: Inherence</a>
+</td>
+<td class="listing-reading-time">
+3 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 11, 2022
+</td>
+</tr>
+<tr data-index="50" data-listing-file-modified-sort="1670783001496" data-listing-reading-time-sort="2.055" data-listing-title-sort="Java SE: Polymorphism" data-listing-filename-sort="se-principles-polymorphism.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-principles-polymorphism.html" class="title">Java SE: Polymorphism</a>
+</td>
+<td class="listing-reading-time">
+2 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 11, 2022
+</td>
+</tr>
+<tr data-index="51" data-listing-file-modified-sort="1670782879179" data-listing-reading-time-sort="3.2" data-listing-title-sort="Java Standard Edition: Principles" data-listing-filename-sort="se-what-principles.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/javase/javaseprinciples.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-what-principles.html" class="title">Java Standard Edition: Principles</a>
+</td>
+<td class="listing-reading-time">
+3 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 11, 2022
+</td>
+</tr>
+<tr data-index="52" data-listing-file-modified-sort="1670782731009" data-listing-reading-time-sort="2.385" data-listing-title-sort="Java Standard Edition: Basics" data-listing-filename-sort="se-what-basics.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Java_Platforms.PNG" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-what-basics.html" class="title">Java Standard Edition: Basics</a>
+</td>
+<td class="listing-reading-time">
+2 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 11, 2022
+</td>
+</tr>
+<tr data-index="53" data-listing-file-modified-sort="1670782394118" data-listing-reading-time-sort="4.365" data-listing-title-sort="Java SE: Scope" data-listing-filename-sort="se-concepts-scope.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-concepts-scope.html" class="title">Java SE: Scope</a>
+</td>
+<td class="listing-reading-time">
+4 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 11, 2022
+</td>
+</tr>
+<tr data-index="54" data-listing-file-modified-sort="1670782378504" data-listing-reading-time-sort="6.275" data-listing-title-sort="Java SE: static modifier" data-listing-filename-sort="se-concepts-static.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-concepts-static.html" class="title">Java SE: static modifier</a>
+</td>
+<td class="listing-reading-time">
+6 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 11, 2022
+</td>
+</tr>
+<tr data-index="55" data-listing-file-modified-sort="1670782275236" data-listing-reading-time-sort="0.685" data-listing-title-sort="Java SE Design-Patterns" data-listing-filename-sort="se-pattern-intro.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/javase/design-patterns.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-pattern-intro.html" class="title">Java SE Design-Patterns</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 11, 2022
+</td>
+</tr>
+<tr data-index="56" data-listing-file-modified-sort="1670782218312" data-listing-reading-time-sort="0.015" data-listing-title-sort="Java Patterns: Abstract Factory" data-listing-filename-sort="se-pattern-abstractfactory.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-pattern-abstractfactory.html" class="title">Java Patterns: Abstract Factory</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 11, 2022
+</td>
+</tr>
+<tr data-index="57" data-listing-file-modified-sort="1670780787391" data-listing-reading-time-sort="4.89" data-listing-title-sort="Java Patterns: Singleton" data-listing-filename-sort="se-pattern-singleton.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/javase/singleton-pattern-edited.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-pattern-singleton.html" class="title">Java Patterns: Singleton</a>
+</td>
+<td class="listing-reading-time">
+4 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 11, 2022
+</td>
+</tr>
+<tr data-index="58" data-listing-file-modified-sort="1670756585918" data-listing-reading-time-sort="0.015" data-listing-title-sort="Java Patterns: Builder" data-listing-filename-sort="se-pattern-builder.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-pattern-builder.html" class="title">Java Patterns: Builder</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 11, 2022
+</td>
+</tr>
+<tr data-index="59" data-listing-file-modified-sort="1670756550359" data-listing-reading-time-sort="0.015" data-listing-title-sort="Java Patterns: Observer" data-listing-filename-sort="se-pattern-observer.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-pattern-observer.html" class="title">Java Patterns: Observer</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 11, 2022
+</td>
+</tr>
+<tr data-index="60" data-listing-file-modified-sort="1670756538704" data-listing-reading-time-sort="4.385" data-listing-title-sort="Java Patterns: Factory" data-listing-filename-sort="se-pattern-factory.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-pattern-factory.html" class="title">Java Patterns: Factory</a>
+</td>
+<td class="listing-reading-time">
+4 min
+</td>
+<td class="listing-file-modified">
+Sunday, December 11, 2022
+</td>
+</tr>
+<tr data-index="61" data-listing-file-modified-sort="1670585396583" data-listing-reading-time-sort="1.125" data-listing-title-sort="Java MOOC Helsinki" data-listing-filename-sort="se-what-moochelsinki.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/javase/moochelsinki.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/se-what-moochelsinki.html" class="title">Java MOOC Helsinki</a>
+</td>
+<td class="listing-reading-time">
+1 min
+</td>
+<td class="listing-file-modified">
+Friday, December 9, 2022
+</td>
+</tr>
+<tr data-index="62" data-listing-file-modified-sort="1670576511832" data-listing-reading-time-sort="0.775" data-listing-title-sort="CSS: W3.css" data-listing-filename-sort="markup-css-w3css.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../markup/markup-css-w3css.html" class="title">CSS: W3.css</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Friday, December 9, 2022
+</td>
+</tr>
+<tr data-index="63" data-listing-file-modified-sort="1670576135764" data-listing-reading-time-sort="2.35" data-listing-title-sort="Cascade Style Sheet" data-listing-filename-sort="markup-css-basics.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../markup/markup-css-basics.html" class="title">Cascade Style Sheet</a>
+</td>
+<td class="listing-reading-time">
+2 min
+</td>
+<td class="listing-file-modified">
+Friday, December 9, 2022
+</td>
+</tr>
+<tr data-index="64" data-listing-file-modified-sort="1670575652584" data-listing-reading-time-sort="1.37" data-listing-title-sort="HTML Markup" data-listing-filename-sort="markup-lang-html.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../markup/markup-lang-html.html" class="title">HTML Markup</a>
+</td>
+<td class="listing-reading-time">
+1 min
+</td>
+<td class="listing-file-modified">
+Friday, December 9, 2022
+</td>
+</tr>
+<tr data-index="65" data-listing-file-modified-sort="1670502066575" data-listing-reading-time-sort="0.01" data-listing-title-sort="Web Vocabulary" data-listing-filename-sort="vocabweb.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../vocabulary/vocabweb.html" class="title">Web Vocabulary</a>
+</td>
+<td class="listing-reading-time">
+0 min
 </td>
 <td class="listing-file-modified">
 Thursday, December 8, 2022
 </td>
 </tr>
-<tr data-index="86" data-listing-file-modified-sort="1670502066514" data-listing-reading-time-sort="2.645" data-listing-title-sort="About learning" data-listing-filename-sort="aboutlearning.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="66" data-listing-file-modified-sort="1670502066574" data-listing-reading-time-sort="0.01" data-listing-title-sort="ReactJS Vocabulary" data-listing-filename-sort="vocabreactjs.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../vocabulary/vocabreactjs.html" class="title">ReactJS Vocabulary</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="67" data-listing-file-modified-sort="1670502066574" data-listing-reading-time-sort="0.005" data-listing-title-sort="SCRUM Vocabulay" data-listing-filename-sort="vocabscrum.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../vocabulary/vocabscrum.html" class="title">SCRUM Vocabulay</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="68" data-listing-file-modified-sort="1670502066574" data-listing-reading-time-sort="0.005" data-listing-title-sort="Spring Boot Vocabulay" data-listing-filename-sort="vocabspringboot.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../vocabulary/vocabspringboot.html" class="title">Spring Boot Vocabulay</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="69" data-listing-file-modified-sort="1670502066573" data-listing-reading-time-sort="0.01" data-listing-title-sort="DevOps Vocabulary" data-listing-filename-sort="vocabdevops.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../vocabulary/vocabdevops.html" class="title">DevOps Vocabulary</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="70" data-listing-file-modified-sort="1670502066573" data-listing-reading-time-sort="0.21" data-listing-title-sort="General Vocabulary" data-listing-filename-sort="vocabgeneral.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../vocabulary/vocabgeneral.html" class="title">General Vocabulary</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="71" data-listing-file-modified-sort="1670502066572" data-listing-reading-time-sort="0.01" data-listing-title-sort="DataBase Vocabulary" data-listing-filename-sort="vocabdatabase.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../vocabulary/vocabdatabase.html" class="title">DataBase Vocabulary</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="72" data-listing-file-modified-sort="1670502066567" data-listing-reading-time-sort="0.015" data-listing-title-sort="Week 3: Communication and value" data-listing-filename-sort="week3.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../scrum/week3.html" class="title">Week 3: Communication and value</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="73" data-listing-file-modified-sort="1670502066567" data-listing-reading-time-sort="0.015" data-listing-title-sort="Week 4: ScrumMaster, how it works" data-listing-filename-sort="week4.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../scrum/week4.html" class="title">Week 4: ScrumMaster, how it works</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="74" data-listing-file-modified-sort="1670502066567" data-listing-reading-time-sort="0.015" data-listing-title-sort="Week 5: Mindset, the key to everythng" data-listing-filename-sort="week5.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../scrum/week5.html" class="title">Week 5: Mindset, the key to everythng</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="75" data-listing-file-modified-sort="1670502066566" data-listing-reading-time-sort="0.42" data-listing-title-sort="SCRUM" data-listing-filename-sort="scrum.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../scrum/scrum.html" class="title">SCRUM</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="76" data-listing-file-modified-sort="1670502066566" data-listing-reading-time-sort="0.025" data-listing-title-sort="SCRUM Guide" data-listing-filename-sort="scrumguide.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../scrum/scrumguide.html" class="title">SCRUM Guide</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="77" data-listing-file-modified-sort="1670502066566" data-listing-reading-time-sort="0.015" data-listing-title-sort="Week 1: Meetings and impediments" data-listing-filename-sort="week1.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../scrum/week1.html" class="title">Week 1: Meetings and impediments</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="78" data-listing-file-modified-sort="1670502066566" data-listing-reading-time-sort="0.015" data-listing-title-sort="Week 2: User stories, tasks and habits" data-listing-filename-sort="week2.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../scrum/week2.html" class="title">Week 2: User stories, tasks and habits</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="79" data-listing-file-modified-sort="1670502066565" data-listing-reading-time-sort="0.015" data-listing-title-sort="Agile Manifesto" data-listing-filename-sort="agilemanifesto.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../scrum/agilemanifesto.html" class="title">Agile Manifesto</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="80" data-listing-file-modified-sort="1670502066565" data-listing-reading-time-sort="0.015" data-listing-title-sort="Digital Tools SCRUM" data-listing-filename-sort="digitaltoolsscrum.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../scrum/digitaltoolsscrum.html" class="title">Digital Tools SCRUM</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="81" data-listing-file-modified-sort="1670502066561" data-listing-reading-time-sort="1.745" data-listing-title-sort="Quarto Markdown: data sources" data-listing-filename-sort="markup-quarto-code.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../markup/markup-quarto-code.html" class="title">Quarto Markdown: data sources</a>
+</td>
+<td class="listing-reading-time">
+1 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="82" data-listing-file-modified-sort="1670502066560" data-listing-reading-time-sort="2.43" data-listing-title-sort="Introduction Markup" data-listing-filename-sort="markup-lang-intro.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../markup/markup-lang-intro.html" class="title">Introduction Markup</a>
+</td>
+<td class="listing-reading-time">
+2 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="83" data-listing-file-modified-sort="1670502066560" data-listing-reading-time-sort="1.085" data-listing-title-sort="Quarto Markdown: basics" data-listing-filename-sort="markup-quarto-basics.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../markup/markup-quarto-basics.html" class="title">Quarto Markdown: basics</a>
+</td>
+<td class="listing-reading-time">
+1 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="84" data-listing-file-modified-sort="1670502066560" data-listing-reading-time-sort="1.02" data-listing-title-sort="Quarto Markdown: creating" data-listing-filename-sort="markup-quarto-create.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/markup/quartoextension.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../markup/markup-quarto-create.html" class="title">Quarto Markdown: creating</a>
+</td>
+<td class="listing-reading-time">
+1 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="85" data-listing-file-modified-sort="1670502066557" data-listing-reading-time-sort="0.015" data-listing-title-sort="Lab 4: subject" data-listing-filename-sort="selab4.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/selab4.html" class="title">Lab 4: subject</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="86" data-listing-file-modified-sort="1670502066557" data-listing-reading-time-sort="0.015" data-listing-title-sort="Lab 5: subject" data-listing-filename-sort="selab5.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../javase/selab5.html" class="title">Lab 5: subject</a>
+</td>
+<td class="listing-reading-time">
+0 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="87" data-listing-file-modified-sort="1670502066515" data-listing-reading-time-sort="1.145" data-listing-title-sort="About the Useful Questions" data-listing-filename-sort="aboutquestions.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
+</td>
+<td class="listing-title">
+<a href="../about/aboutquestions.html" class="title">About the Useful Questions</a>
+</td>
+<td class="listing-reading-time">
+1 min
+</td>
+<td class="listing-file-modified">
+Thursday, December 8, 2022
+</td>
+</tr>
+<tr data-index="88" data-listing-file-modified-sort="1670502066514" data-listing-reading-time-sort="2.645" data-listing-title-sort="About learning" data-listing-filename-sort="aboutlearning.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td class="listing-image">
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
 </td>
 <td class="listing-title">
 <a href="../about/aboutlearning.html" class="title">About learning</a>
@@ -2600,28 +2467,22 @@ Thursday, December 8, 2022
 <td class="listing-reading-time">
 2 min
 </td>
-<td class="listing-filename">
-<a href="../about/aboutlearning.html" class="filename">aboutlearning.qmd</a>
-</td>
 <td class="listing-file-modified">
 Thursday, December 8, 2022
 </td>
 </tr>
-<tr data-index="87" data-listing-file-modified-sort="1670502066514" data-listing-reading-time-sort="1.535" data-listing-title-sort="About me" data-listing-filename-sort="aboutme.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="89" data-listing-file-modified-sort="1670502066514" data-listing-reading-time-sort="1.535" data-listing-title-sort="About me" data-listing-filename-sort="aboutme.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td class="listing-image">
-<div class="table-img" style="height: 40px;">
-&nbsp;
-</div>
+<img data-src="../images/home/frontimagealbertprofeweb.png" style="height: 40px;">
+</td>
+<td class="listing-categories">
 </td>
 <td class="listing-title">
 <a href="../about/aboutme.html" class="title">About me</a>
 </td>
 <td class="listing-reading-time">
 1 min
-</td>
-<td class="listing-filename">
-<a href="../about/aboutme.html" class="filename">aboutme.qmd</a>
 </td>
 <td class="listing-file-modified">
 Thursday, December 8, 2022
@@ -2633,7 +2494,7 @@ Thursday, December 8, 2022
 <div class="listing-no-matching d-none">
 No matching items
 </div>
-<nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
+<nav id="articles-pagination" class="listing-pagination" aria-label="Page Navigation">
   <ul class="pagination"></ul>
 </nav>
 </div></main> <!-- /main -->
@@ -2911,4 +2772,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
