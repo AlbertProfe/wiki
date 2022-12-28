@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>albertprofe wiki - Week 4: ScrumMaster, how it works</title>
+<title>albertprofe wiki - Linux: File System</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -41,6 +41,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -787,7 +790,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Week 4: ScrumMaster, how it works</h1>
+      <h1 class="quarto-secondary-nav-title">Linux: File System</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -801,35 +804,45 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
-  SCRUM
+  Linux OS
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">What is SCRUM</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Linux: concepts</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../scrum/scrum.html" class="sidebar-item-text sidebar-link">SCRUM</a>
+  <a href="../linux/linux-what-basics.html" class="sidebar-item-text sidebar-link">Linux: basic concepts</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../scrum/agilemanifesto.html" class="sidebar-item-text sidebar-link">Agile Manifesto</a>
+  <a href="../linux/linux-what-bash.html" class="sidebar-item-text sidebar-link">Linux: Bash</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../scrum/scrumguide.html" class="sidebar-item-text sidebar-link">SCRUM Guide</a>
+  <a href="../linux/linux-what-sudo.html" class="sidebar-item-text sidebar-link">Linux: su and sudo</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../scrum/digitaltoolsscrum.html" class="sidebar-item-text sidebar-link">Digital Tools SCRUM</a>
+  <a href="../linux/linux-what-pipes.html" class="sidebar-item-text sidebar-link">Linux: pipes</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../linux/linux-what-fsys.html" class="sidebar-item-text sidebar-link active">Linux: File System</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../linux/linux-what-vm.html" class="sidebar-item-text sidebar-link">Linux: Virtual Machines</a>
   </div>
 </li>
       </ul>
@@ -837,35 +850,122 @@ ul.task-list li input[type="checkbox"] {
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Weeks</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Linux: distros</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../scrum/week1.html" class="sidebar-item-text sidebar-link">Week 1: Meetings and impediments</a>
+  <a href="../linux/linux-distros-ubuntu.html" class="sidebar-item-text sidebar-link">Linux Distros: Ubuntu</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../scrum/week2.html" class="sidebar-item-text sidebar-link">Week 2: User stories, tasks and habits</a>
+  <a href="../linux/linux-distros-mint.html" class="sidebar-item-text sidebar-link">Linux Distros: Mint</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../scrum/week3.html" class="sidebar-item-text sidebar-link">Week 3: Communication and value</a>
+  <a href="../linux/linux-distros-debian.html" class="sidebar-item-text sidebar-link">Linux Distros: Debian</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../scrum/week4.html" class="sidebar-item-text sidebar-link active">Week 4: ScrumMaster, how it works</a>
+  <a href="../linux/linux-distros-opensuse.html" class="sidebar-item-text sidebar-link">Linux Distros: openSuse</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../scrum/week5.html" class="sidebar-item-text sidebar-link">Week 5: Mindset, the key to everythng</a>
+  <a href="../linux/linux-distros-manjaro.html" class="sidebar-item-text sidebar-link">Linux Distros: Manjaro</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../linux/linux-distros-redhat.html" class="sidebar-item-text sidebar-link">Linux Distros: Red Hat Enterprise Linux</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Linux: laboratories</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../linux/lilab01-1.html" class="sidebar-item-text sidebar-link">Linux Lab#LI01-1: Choose Linux</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../linux/lilab01-2.html" class="sidebar-item-text sidebar-link">Linux Lab#LI01-2: Install at least three distributions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../linux/lilab01-3.html" class="sidebar-item-text sidebar-link">Linux Lab#LI01-3: Adjust user permissions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../linux/lilab02-1.html" class="sidebar-item-text sidebar-link">Linux Lab#LI02-1: Export env user with grep and pipe</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../linux/lilab03-1.html" class="sidebar-item-text sidebar-link">Linux Lab#LI03-1: Manage users and groups</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../linux/lilab03-2.html" class="sidebar-item-text sidebar-link">Linux Lab#LI03-2: Manage files</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../linux/lilab03-3.html" class="sidebar-item-text sidebar-link">Linux Lab#LI03-3: Manage software</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../linux/lilab03-4.html" class="sidebar-item-text sidebar-link">Linux Lab#LI03-4: Manage hardware</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../linux/lilab04-1.html" class="sidebar-item-text sidebar-link">Linux Lab#LI04-1: Bash scripting, qtool</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../linux/lilab04-2.html" class="sidebar-item-text sidebar-link">Linux Lab#LI04-2: Bash scripts as terminal tool</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../linux/lilab04-3.html" class="sidebar-item-text sidebar-link">Linux Lab#LI04-3: Distribute the terminal app</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Linux readings</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../linux/resources.html" class="sidebar-item-text sidebar-link">Linux Readings</a>
   </div>
 </li>
       </ul>
@@ -882,7 +982,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Week 4: ScrumMaster, how it works</h1>
+<h1 class="title d-none d-lg-block">Linux: File System</h1>
 </div>
 
 
@@ -897,12 +997,24 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>About this site</p>
-https://sites.google.com/view/gestioprojectes/llegir/setmana4<!--- navLinks --> <br><br>
+<div class="summary">
+<p>📘 <strong>System</strong></p>
+<p>In a Linux system, <strong>the file system is organized into a hierarchical structure, starting with the root directory</strong> (represented by a forward slash <code>/</code>). The root directory contains several subdirectories, including <code>/bin</code>, <code>/etc</code>, <code>/home</code>, <code>/lib</code>, <code>/media</code>, <code>/mnt</code>, <code>/opt</code>, <code>/sbin</code>, <code>/tmp</code>, and <code>/usr</code>.</p>
+</div>
+<hr>
+<p>These <a href="https://documentation.suse.com/fr-fr/sles/15-GA/html/SLES-all/cha-filesystems.html" class="external">directories</a> contain system executables, configuration files, user home directories, libraries, removable media, mount points, optional software, system executables, temporary files, and shared software, respectively.</p>
+<p>Other directories, such as <code>/dev</code>, <code>/proc</code>, and <code>/sys</code>, contain special files that provide access to hardware devices and kernel information.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/linux/filesys.png" class="lightbox" title="Linux File System" data-gallery="quarto-lightbox-gallery-1"><img src="../images/linux/filesys.png" class="img-fluid figure-img" style="width:90.0%"></a></p>
+<p></p><figcaption class="figure-caption">Linux File System</figcaption><p></p>
+</figure>
+</div>
+<a href="../images/linux/filesys-2.jpg" class="lightbox" title="Linux File System, image from Introduction to Linux, A Hands on Guide, Machtelt Garrels and Original webpage by Petersen Gross, modified by William Albritton" data-gallery="quarto-lightbox-gallery-2"><img src="../images/linux/filesys-2.jpg" class="img-fluid" style="width:100.0%" alt="Linux File System, image from Introduction to Linux, A Hands on Guide, Machtelt Garrels and Original webpage by Petersen Gross, modified by William Albritton"></a><!--- navLinks --> <br><br>
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../scrum/week3.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> Week 3: Communication and value</a> <br></p>
+<p><br> <a href="../linux/linux-what-pipes.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> Linux: pipes</a> <br></p>
 </div>
 <br>
 <div class="column center">
@@ -910,7 +1022,7 @@ https://sites.google.com/view/gestioprojectes/llegir/setmana4<!--- navLinks --> 
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../scrum/week5.html">Week 5: Mindset, the key to everythng <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
+<p><br> <a href="../linux/linux-what-vm.html">Linux: Virtual Machines <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
 </div>
@@ -1189,6 +1301,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":true,"selector":".lightbox","openEffect":"zoom","descPosition":"bottom"});</script>
 
 
 
