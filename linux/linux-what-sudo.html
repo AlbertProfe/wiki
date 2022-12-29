@@ -2,10 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="albertprofe">
+<meta name="description" content="su and sudo are two different commands in Linux that are used to execute commands with the privileges of another user">
 
 <title>albertprofe wiki - Linux: su and sudo</title>
 <style>
@@ -606,7 +608,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="dropdown-header">IDEs</li>
         <li>
     <a class="dropdown-item" href="../devops/devops-ide-visualcode.html">
- <span class="dropdown-text">Visual Code</span></a>
+ <span class="dropdown-text">IDE: Visual Code</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../devops/devops-ide-intelljidea.html">
@@ -979,10 +981,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#sudo--i" id="toc-sudo--i" class="nav-link" data-scroll-target="#sudo--i"><code>sudo -i</code></a></li>
-  <li><a href="#sudo-apt-get-update" id="toc-sudo-apt-get-update" class="nav-link" data-scroll-target="#sudo-apt-get-update"><code>sudo apt-get update</code></a></li>
-  <li><a href="#adduser" id="toc-adduser" class="nav-link" data-scroll-target="#adduser"><code>adduser</code></a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="toc-section-number">1</span>  Introduction</a></li>
+  <li><a href="#sudo--i" id="toc-sudo--i" class="nav-link" data-scroll-target="#sudo--i"><span class="toc-section-number">2</span>  <code>sudo -i</code></a></li>
+  <li><a href="#sudo-apt-get-update" id="toc-sudo-apt-get-update" class="nav-link" data-scroll-target="#sudo-apt-get-update"><span class="toc-section-number">3</span>  <code>sudo apt-get update</code></a></li>
+  <li><a href="#adduser" id="toc-adduser" class="nav-link" data-scroll-target="#adduser"><span class="toc-section-number">4</span>  <code>adduser</code></a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/linux/linux-what-sudo.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -992,14 +994,44 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title d-none d-lg-block">Linux: su and sudo</h1>
-</div>
+<p class="subtitle lead">Bash su and sudo</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">linux</div>
+    <div class="quarto-category">bash</div>
+    <div class="quarto-category">su</div>
+    <div class="quarto-category">sudo</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    su and sudo are two different commands in Linux that are used to execute commands with the privileges of another user
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>albertprofe </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Tuesday, June 1, 2021</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">Thursday, December 29, 2022</p>
+    </div>
+  </div>
     
   </div>
   
@@ -1011,8 +1043,8 @@ ul.task-list li input[type="checkbox"] {
 <p><code>su</code> and <code>sudo</code> are two different commands in Linux that are used to execute commands with the privileges of another user.</p>
 </div>
 <hr>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<section id="introduction" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1</span> Introduction</h2>
 <p>Both <code>su</code> and <code>sudo</code> are useful tools for managing and interacting with a <strong>Linux system</strong>, but they have different uses and implications. <code>su</code> allows you to <strong>switch</strong> to another user account and operate as that user, while <code>sudo</code> allows you to execute a single command with the <strong>privileges of another user</strong> without switching to that user’s account.</p>
 <ul>
 <li><code>su</code> stands for <strong>switch user</strong>, and it allows you to switch to another user account and execute commands with that user’s privileges. For example, if you are currently logged in as a normal user and you want to run a command as the root user, you can use the <code>su</code> command to switch to the root user and then run the command.</li>
@@ -1020,31 +1052,31 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>But in Linux Mint <code>sudo</code> is <a href="https://forums.linuxmint.com/viewtopic.php?t=378039" class="external">often considered to be a better</a> alternative to <code>su</code> for several reasons, it allows you to execute a <strong>single command with administrative privileges</strong>, logs all command executions, allows for a more fine-grained control over who can execute which commands, prompts for the user’s password before execution, and is more widely used and supported in the Linux community.</p>
 </section>
-<section id="sudo--i" class="level2">
-<h2 class="anchored" data-anchor-id="sudo--i"><code>sudo -i</code></h2>
+<section id="sudo--i" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="sudo--i"><span class="header-section-number">2</span> <code>sudo -i</code></h2>
 <p>The <code>sudo -i</code>, The <code>-i</code> flag stands for <strong>initialize</strong>. command is used to <strong>execute a command or start a shell session as another user</strong>, usually the root user, with <strong>that user’s environment and privileges</strong>.</p>
 <div class="callout.note" data-collapse="false">
 <p><code>sudo -i</code> causes the command or shell session to be executed as if the target user had logged in directly. This means that the target user’s environment variables, shell settings, and other configuration options will be applied to the command or shell session.</p>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/linux/linux-mint-sudo-01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="sudo -i"><img src="../images/linux/linux-mint-sudo-01.png" class="img-fluid figure-img"></a></p>
+<p><a href="../images/linux/linux-mint-sudo-01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="sudo -i"><img src="..\images/linux/linux-mint-sudo-01.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">sudo -i</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="sudo-apt-get-update" class="level2">
-<h2 class="anchored" data-anchor-id="sudo-apt-get-update"><code>sudo apt-get update</code></h2>
+<section id="sudo-apt-get-update" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="sudo-apt-get-update"><span class="header-section-number">3</span> <code>sudo apt-get update</code></h2>
 <p><code>apt-get</code> is a command line interface for <strong>retrieval of packages and information about them from authenticated sources</strong> and for installation, upgrade and removal of packages together with their dependencies.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/linux/linux-mint-sudo-02.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="sudo apt-get update"><img src="../images/linux/linux-mint-sudo-02.png" class="img-fluid figure-img"></a></p>
+<p><a href="../images/linux/linux-mint-sudo-02.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="sudo apt-get update"><img src="..\images/linux/linux-mint-sudo-02.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">sudo apt-get update</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="adduser" class="level2">
-<h2 class="anchored" data-anchor-id="adduser"><code>adduser</code></h2>
+<section id="adduser" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="adduser"><span class="header-section-number">4</span> <code>adduser</code></h2>
 <p><code>adduser</code>: This command is used to add a <strong>new user</strong> to the system.</p>
 <ul>
 <li>For example, to <strong>add a new user</strong> with the username <strong>alex</strong>, you can use the command <code>sudo adduser alex</code>.</li>
@@ -1055,17 +1087,17 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/linux/linux-mint-sudo-03.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="sudo adduser newuser &amp;&amp; deluser 1/3"><img src="../images/linux/linux-mint-sudo-03.png" class="img-fluid figure-img"></a></p>
+<p><a href="../images/linux/linux-mint-sudo-03.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="sudo adduser newuser &amp;&amp; deluser 1/3"><img src="..\images/linux/linux-mint-sudo-03.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">sudo adduser newuser &amp;&amp; deluser 1/3</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/linux/linux-mint-sudo-04.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="sudo adduser newuser &amp;&amp; deluser 2/3"><img src="../images/linux/linux-mint-sudo-04.png" class="img-fluid figure-img"></a></p>
+<p><a href="../images/linux/linux-mint-sudo-04.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="sudo adduser newuser &amp;&amp; deluser 2/3"><img src="..\images/linux/linux-mint-sudo-04.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">sudo adduser newuser &amp;&amp; deluser 2/3</figcaption><p></p>
 </figure>
 </div>
-<a href="../images/linux/linux-mint-sudo-05.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="sudo adduser newuser &amp;&amp; deluser 3/3"><img src="../images/linux/linux-mint-sudo-05.png" class="img-fluid" alt="sudo adduser newuser &amp;&amp; deluser 3/3"></a> <!--- navLinks --> <br><br>
+<a href="../images/linux/linux-mint-sudo-05.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="sudo adduser newuser &amp;&amp; deluser 3/3"><img src="..\images/linux/linux-mint-sudo-05.png" class="img-fluid" alt="sudo adduser newuser &amp;&amp; deluser 3/3"></a> <!--- navLinks --> <br><br>
 <div class="row">
 <br>
 <div class="column left previous">
@@ -1357,7 +1389,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":true,"closeEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":true,"selector":".lightbox"});</script>
 
 
 

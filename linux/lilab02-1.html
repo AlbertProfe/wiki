@@ -2,10 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="albertprofe">
+<meta name="description" content="lab">
 
 <title>albertprofe wiki - Linux Lab#LI02-1: Export env user with grep and pipe</title>
 <style>
@@ -669,7 +671,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="dropdown-header">IDEs</li>
         <li>
     <a class="dropdown-item" href="../devops/devops-ide-visualcode.html">
- <span class="dropdown-text">Visual Code</span></a>
+ <span class="dropdown-text">IDE: Visual Code</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../devops/devops-ide-intelljidea.html">
@@ -1042,15 +1044,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#cli-tools" id="toc-cli-tools" class="nav-link active" data-scroll-target="#cli-tools">CLI tools</a>
+  <li><a href="#cli-tools" id="toc-cli-tools" class="nav-link active" data-scroll-target="#cli-tools"><span class="toc-section-number">1</span>  CLI tools</a>
   <ul>
-  <li><a href="#sudo-su---root--c" id="toc-sudo-su---root--c" class="nav-link" data-scroll-target="#sudo-su---root--c">sudo: <code>su - root -c</code></a></li>
-  <li><a href="#redirect" id="toc-redirect" class="nav-link" data-scroll-target="#redirect">redirect: <code>&gt;&gt;</code></a></li>
-  <li><a href="#grep-grep--v" id="toc-grep-grep--v" class="nav-link" data-scroll-target="#grep-grep--v">grep: <code>grep -v</code></a></li>
-  <li><a href="#environment-env" id="toc-environment-env" class="nav-link" data-scroll-target="#environment-env">environment: <code>env</code></a></li>
-  <li><a href="#set-set-a" id="toc-set-set-a" class="nav-link" data-scroll-target="#set-set-a">set: <code>set +a</code></a></li>
+  <li><a href="#sudo-su---root--c" id="toc-sudo-su---root--c" class="nav-link" data-scroll-target="#sudo-su---root--c"><span class="toc-section-number">1.0.1</span>  sudo: <code>su - root -c</code></a></li>
+  <li><a href="#redirect" id="toc-redirect" class="nav-link" data-scroll-target="#redirect"><span class="toc-section-number">1.0.2</span>  redirect: <code>&gt;&gt;</code></a></li>
+  <li><a href="#grep-grep--v" id="toc-grep-grep--v" class="nav-link" data-scroll-target="#grep-grep--v"><span class="toc-section-number">1.0.3</span>  grep: <code>grep -v</code></a></li>
+  <li><a href="#environment-env" id="toc-environment-env" class="nav-link" data-scroll-target="#environment-env"><span class="toc-section-number">1.1</span>  environment: <code>env</code></a></li>
+  <li><a href="#set-set-a" id="toc-set-set-a" class="nav-link" data-scroll-target="#set-set-a"><span class="toc-section-number">1.2</span>  set: <code>set +a</code></a></li>
   </ul></li>
-  <li><a href="#solving-discussion" id="toc-solving-discussion" class="nav-link" data-scroll-target="#solving-discussion">Solving discussion</a></li>
+  <li><a href="#solving-discussion" id="toc-solving-discussion" class="nav-link" data-scroll-target="#solving-discussion"><span class="toc-section-number">2</span>  Solving discussion</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/linux/lilab02-1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1060,14 +1062,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title d-none d-lg-block">Linux Lab#LI02-1: Export env user with grep and pipe</h1>
-</div>
+<p class="subtitle lead">Lab</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">linux</div>
+    <div class="quarto-category">lab</div>
+    <div class="quarto-category">bash</div>
+    <div class="quarto-category">pipe</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    lab
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>albertprofe </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Tuesday, June 1, 2021</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">Thursday, December 29, 2022</p>
+    </div>
+  </div>
     
   </div>
   
@@ -1078,40 +1110,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>📘 <strong>Linux Lab#LI02-1: Export env user with grep and pipe</strong></p>
 <p>Export the environment of a <strong>user linux account</strong> from user’s account with root privileges on <code>OpenSUSE</code> bash (or Linux Mint).</p>
 </div>
-<section id="cli-tools" class="level2">
-<h2 class="anchored" data-anchor-id="cli-tools">CLI tools</h2>
-<section id="sudo-su---root--c" class="level4">
-<h4 class="anchored" data-anchor-id="sudo-su---root--c">sudo: <code>su - root -c</code></h4>
+<section id="cli-tools" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="cli-tools"><span class="header-section-number">1</span> CLI tools</h2>
+<section id="sudo-su---root--c" class="level4" data-number="1.0.1">
+<h4 data-number="1.0.1" class="anchored" data-anchor-id="sudo-su---root--c"><span class="header-section-number">1.0.1</span> sudo: <code>su - root -c</code></h4>
 <p>To run a <strong>single command as the root user</strong>. The <code>-c</code> option is used with the su command to specify a command that should be <strong>run as the target user</strong>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">su</span> <span class="at">-</span> root <span class="at">-c</span> <span class="st">'command'</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">su</span> <span class="at">-</span> root <span class="at">-c</span> <span class="st">'apt update &amp;&amp; apt upgrade -y'</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">su</span> <span class="at">-</span> root <span class="at">-c</span> <span class="st">'bash /path/to/script.sh'</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">su</span> <span class="at">-</span> root <span class="at">-c</span> <span class="st">'bash /usr/local/bin/install-web-server.sh'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="redirect" class="level4">
-<h4 class="anchored" data-anchor-id="redirect">redirect: <code>&gt;&gt;</code></h4>
+<section id="redirect" class="level4" data-number="1.0.2">
+<h4 data-number="1.0.2" class="anchored" data-anchor-id="redirect"><span class="header-section-number">1.0.2</span> redirect: <code>&gt;&gt;</code></h4>
 <p>The <code>&gt;</code> symbol is used for output <strong>redirection</strong>. Here the output of command ls -al is re-directed to file <code>listings</code> instead of your screen.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> <span class="op">&gt;</span> listings</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>&gt;&gt;</code> operator is used to <strong>redirect the output of a command to a file</strong>, and <strong>append the output</strong> to the end of the file.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">command</span> <span class="op">&gt;&gt;</span> file</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="op">&gt;&gt;</span> alex.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>iconfig /all &gt; networksettings.txt</code> <a href="../images/linux/redirect.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="iconfig /all > networksettings.txt"><img src="../images/linux/redirect.png" class="img-fluid" alt="iconfig /all > networksettings.txt"></a></p>
-<p><code>ping 8.8.8.8 &gt; 'C:\Users\devops\Desktop\PingResults.txt'</code> <a href="../images/linux/redirect2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="“ping 8.8.8.8 > ‘C:.txt’”"><img src="../images/linux/redirect2.png" class="img-fluid" alt="“ping 8.8.8.8 > ‘C:.txt’”"></a></p>
+<p><code>iconfig /all &gt; networksettings.txt</code> <a href="../images/linux/redirect.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="iconfig /all > networksettings.txt"><img src="..\images/linux/redirect.png" class="img-fluid" alt="iconfig /all > networksettings.txt"></a></p>
+<p><code>ping 8.8.8.8 &gt; 'C:\Users\devops\Desktop\PingResults.txt'</code> <a href="../images/linux/redirect2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="“ping 8.8.8.8 > ‘C:.txt’”"><img src="..\images/linux/redirect2.png" class="img-fluid" alt="“ping 8.8.8.8 > ‘C:.txt’”"></a></p>
 </section>
-<section id="grep-grep--v" class="level4">
-<h4 class="anchored" data-anchor-id="grep-grep--v">grep: <code>grep -v</code></h4>
+<section id="grep-grep--v" class="level4" data-number="1.0.3">
+<h4 data-number="1.0.3" class="anchored" data-anchor-id="grep-grep--v"><span class="header-section-number">1.0.3</span> grep: <code>grep -v</code></h4>
 <p>The <code>-v</code> option is used with the <code>grep</code> command to <strong>invert the sense of matching</strong>. When used, grep will display lines that do not match the given pattern.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-v</span> pipe_jenkins devops.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="environment-env" class="level3">
-<h3 class="anchored" data-anchor-id="environment-env">environment: <code>env</code></h3>
+<section id="environment-env" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="environment-env"><span class="header-section-number">1.1</span> environment: <code>env</code></h3>
 <p>The <code>env</code> command is a <strong>built-in command in Linux and Unix-like operating systems</strong> that is used to <strong>display or set environment variables</strong>.</p>
 <p>Environment variables are <strong>named values that can be used to store information about the system or the user</strong>. They are used to configure the shell and to set options that affect the behavior of the system and programs.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">envexport</span> VARIABLE_NAME=value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>env</code> <a href="../images/linux/env.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="env"><img src="../images/linux/env.png" class="img-fluid" alt="env"></a></p>
+<p><code>env</code> <a href="../images/linux/env.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="env"><img src="..\images/linux/env.png" class="img-fluid" alt="env"></a></p>
 </section>
-<section id="set-set-a" class="level3">
-<h3 class="anchored" data-anchor-id="set-set-a">set: <code>set +a</code></h3>
+<section id="set-set-a" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="set-set-a"><span class="header-section-number">1.2</span> set: <code>set +a</code></h3>
 <p>The <code>set</code> builtin command is used to <strong>set options and/or positional parameters</strong>. The -a option is used to enable the <code>export</code> attribute for each name, which means that the corresponding variable will be exported with the export command to the environment of subsequently executed commands.</p>
 <p>The <code>+ sign</code> before the a option toggles the attribute off. This means that <code>set +a</code> disables the <code>export</code> attribute for the specified variables, and <code>set -a</code> enables it.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="va">VARIABLE_NAME</span><span class="op">=</span>value</span>
@@ -1119,8 +1151,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">VARIABLE_NAME</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="solving-discussion" class="level2">
-<h2 class="anchored" data-anchor-id="solving-discussion">Solving discussion</h2>
+<section id="solving-discussion" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="solving-discussion"><span class="header-section-number">2</span> Solving discussion</h2>
 <p>We could do this:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">su</span> <span class="at">-</span> root <span class="at">-c</span> <span class="st">'env | grep -v "^USER_VARIABLE=" &gt;&gt; /etc/environment'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This will run a <strong>subshell</strong> as the <strong>root user</strong>, source the current user’s <code>.bashrc</code> file to set up the environment, and then export the environment variables to <code>/etc/environment</code>. In Bash, the set builtin command is used to set options and/or positional parameters. The -a option is used to enable the “export” attribute for each name, which means that the corresponding variable will be exported with the export command to the environment of subsequently executed commands.</p>
@@ -1424,7 +1456,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":true,"openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":true});</script>
 
 
 

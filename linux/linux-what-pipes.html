@@ -2,10 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="albertprofe">
+<meta name="description" content="A pipe is a command that allows you to redirect the output of one command as the input to another command">
 
 <title>albertprofe wiki - Linux: pipes</title>
 <style>
@@ -669,7 +671,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="dropdown-header">IDEs</li>
         <li>
     <a class="dropdown-item" href="../devops/devops-ide-visualcode.html">
- <span class="dropdown-text">Visual Code</span></a>
+ <span class="dropdown-text">IDE: Visual Code</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../devops/devops-ide-intelljidea.html">
@@ -1042,8 +1044,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#grep" id="toc-grep" class="nav-link" data-scroll-target="#grep"><code>grep</code></a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="toc-section-number">1</span>  Introduction</a></li>
+  <li><a href="#grep" id="toc-grep" class="nav-link" data-scroll-target="#grep"><span class="toc-section-number">2</span>  <code>grep</code></a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/linux/linux-what-pipes.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1053,14 +1055,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title d-none d-lg-block">Linux: pipes</h1>
-</div>
+<p class="subtitle lead">Programming pipes</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">linux</div>
+    <div class="quarto-category">bash</div>
+    <div class="quarto-category">pipe</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    A pipe is a command that allows you to redirect the output of one command as the input to another command
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>albertprofe </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Tuesday, June 1, 2021</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">Thursday, December 29, 2022</p>
+    </div>
+  </div>
     
   </div>
   
@@ -1073,8 +1104,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>It is represented by the vertical bar symbol <code>|</code>.</p>
 </div>
 <hr>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<section id="introduction" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1</span> Introduction</h2>
 <p>For example, you can use the <strong>pipe command to list all the files in a directory</strong>, and then use the <code>grep</code> command to search for a <strong>specific string in those files</strong>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"devtools"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This will list all the files in the current directory and then search for the string <strong>“devtools”</strong> in the output of the <code>ls</code> command.</p>
@@ -1083,13 +1114,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This will list <strong>all the files in the current directory, search for the string “devtools”</strong> in the output of the <code>ls</code> command, and then <strong>sort the output alphabetically</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/linux/linux-mint-pipe-01.png" class="lightbox" title="pipe linux ls-grep-sort" data-gallery="quarto-lightbox-gallery-1"><img src="../images/linux/linux-mint-pipe-01.png" class="img-fluid figure-img"></a></p>
+<p><a href="../images/linux/linux-mint-pipe-01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="pipe linux ls-grep-sort"><img src="..\images/linux/linux-mint-pipe-01.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">pipe linux ls-grep-sort</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="grep" class="level2">
-<h2 class="anchored" data-anchor-id="grep"><code>grep</code></h2>
+<section id="grep" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="grep"><span class="header-section-number">2</span> <code>grep</code></h2>
 <p><code>grep</code> searches for patterns in text. It stands for <strong>global regular expression print</strong>, and it allows you to <strong>search for specific patterns of characters in one or more files.</strong></p>
 <p>You can use <code>grep</code> to search for a specific word or phrase in a file, or you can use it to search for more complex patterns using <strong>regular expressions.</strong></p>
 <p>Here are a few examples of how <code>grep</code> can be used:</p>
@@ -1100,7 +1131,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To search for a <strong>word that starts with a specific letter</strong>:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"^w"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To search for a <strong>word that ends with a specific letter</strong>:</p>
-<code>bash grep "w$" file.txt</code><!--- navLinks --> <br><br>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"w$"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!--- navLinks -->
+<br><br>
 <div class="row">
 <br>
 <div class="column left previous">
@@ -1392,7 +1425,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":true,"descPosition":"bottom","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":true,"descPosition":"bottom"});</script>
 
 
 
