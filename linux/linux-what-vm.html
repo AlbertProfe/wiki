@@ -43,6 +43,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -979,8 +982,10 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#what-is-a-virtual-machine" id="toc-what-is-a-virtual-machine" class="nav-link active" data-scroll-target="#what-is-a-virtual-machine"><span class="toc-section-number">1</span>  What is a virtual machine</a></li>
-  <li><a href="#what-is-virtualbox" id="toc-what-is-virtualbox" class="nav-link" data-scroll-target="#what-is-virtualbox"><span class="toc-section-number">2</span>  What is Virtualbox</a></li>
-  <li><a href="#step-by-step-linux-mint" id="toc-step-by-step-linux-mint" class="nav-link" data-scroll-target="#step-by-step-linux-mint"><span class="toc-section-number">3</span>  Step-by-step: Linux Mint</a></li>
+  <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works"><span class="toc-section-number">2</span>  How it works</a></li>
+  <li><a href="#benefits-of-hypervisors" id="toc-benefits-of-hypervisors" class="nav-link" data-scroll-target="#benefits-of-hypervisors"><span class="toc-section-number">3</span>  Benefits of hypervisors</a></li>
+  <li><a href="#what-is-virtualbox" id="toc-what-is-virtualbox" class="nav-link" data-scroll-target="#what-is-virtualbox"><span class="toc-section-number">4</span>  What is Virtualbox</a></li>
+  <li><a href="#step-by-step-linux-mint" id="toc-step-by-step-linux-mint" class="nav-link" data-scroll-target="#step-by-step-linux-mint"><span class="toc-section-number">5</span>  Step-by-step: Linux Mint</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/linux/linux-what-vm.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -994,7 +999,7 @@ ul.task-list li input[type="checkbox"] {
   <div class="quarto-categories">
     <div class="quarto-category">linux</div>
     <div class="quarto-category">virtual-machines</div>
-    <div class="quarto-category">mvware</div>
+    <div class="quarto-category">vmware</div>
     <div class="quarto-category">virtualbox</div>
   </div>
   </div>
@@ -1042,14 +1047,37 @@ ul.task-list li input[type="checkbox"] {
 <p>This allows users to run <strong>different operating systems and applications on the same physical computer</strong>, providing a level of flexibility and convenience that is not possible with a physical computer.</p>
 </div>
 </section>
-<section id="what-is-virtualbox" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="what-is-virtualbox"><span class="header-section-number">2</span> What is Virtualbox</h2>
+<section id="how-it-works" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="how-it-works"><span class="header-section-number">2</span> How it works</h2>
+<blockquote class="blockquote">
+<p>Virtual Machine (VM) is the virtualization/emulation of a computer system. Virtual machines are based on computer architectures and provide functionality of a physical computer. Their implementations may involve specialized hardware, software, or a combination.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/linux/vm.png" class="lightbox" title="What is server virtualization" data-gallery="quarto-lightbox-gallery-1"><img src="..\images/linux/vm.png" class="img-fluid figure-img" style="width:75.0%"></a></p>
+<p></p><figcaption class="figure-caption">What is server virtualization</figcaption><p></p>
+</figure>
+</div>
+<p>A <strong>hypervisor</strong>, also known as a <a href="https://www.vmware.com/topics/glossary/content/hypervisor.html">virtual machine monitor or VMM</a>, is software that creates and runs virtual machines (VMs). A hypervisor allows one host computer to support multiple guest VMs by virtually sharing its resources, such as memory and processing.</p>
+</section>
+<section id="benefits-of-hypervisors" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="benefits-of-hypervisors"><span class="header-section-number">3</span> Benefits of hypervisors</h2>
+<p>There are several benefits to using a <strong>hypervisor that hosts multiple virtual machines</strong>:</p>
+<ul>
+<li><code>Speed</code>: Hypervisors allow virtual machines to be created instantly, unlike bare-metal servers. This makes it easier to provision resources as needed for dynamic workloads.</li>
+<li><code>Efficiency</code>: Hypervisors that run several virtual machines on one physical machine’s resources also allow for more efficient utilization of one physical server. It is more cost- and energy-efficient to run several virtual machines on one physical machine than to run multiple underutilized physical machines for the same task.</li>
+<li><code>Flexibility</code>: Bare-metal hypervisors allow operating systems and their associated applications to run on a variety of hardware types because the hypervisor separates the OS from the underlying hardware, so the software no longer relies on specific hardware devices or drivers.</li>
+<li><code>Portability</code>: Hypervisors allow multiple operating systems to reside on the same physical server (host machine). Because the virtual machines that the hypervisor runs are independent from the physical machine, they are portable. IT teams can shift workloads and allocate networking, memory, storage and processing resources across multiple servers as needed, moving from machine to machine or platform to platform. When an application needs more processing power, the virtualization software allows it to seamlessly access additional machines.</li>
+</ul>
+</section>
+<section id="what-is-virtualbox" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="what-is-virtualbox"><span class="header-section-number">4</span> What is Virtualbox</h2>
 <p><a href="https://www.virtualbox.org/">VirtualBox</a> is a <strong>free and open-source virtualization platform</strong> that allows users to run multiple operating systems on a single physical computer.</p>
 <p>It is a type of <strong>hypervisor</strong>, which means it sits between the physical hardware and the operating system, allowing multiple operating systems to run on the same hardware.</p>
 <p>VirtualBox allows users to <strong>create and manage</strong> virtual machines, each of which can run a different operating system and be configured with its own virtual hardware. This allows users to run multiple operating systems and applications on the same computer, providing a level of flexibility and convenience that is not possible with a physical computer.</p>
 </section>
-<section id="step-by-step-linux-mint" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="step-by-step-linux-mint"><span class="header-section-number">3</span> Step-by-step: Linux Mint</h2>
+<section id="step-by-step-linux-mint" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="step-by-step-linux-mint"><span class="header-section-number">5</span> Step-by-step: Linux Mint</h2>
 <p>Here are the steps to create a <strong>Linux Mint virtual machine using VirtualBox</strong> on <mark>Windows</mark>:</p>
 <ol type="1">
 <li><p>Download and <strong>install</strong> VirtualBox on your computer.</p></li>
@@ -1360,6 +1388,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":true,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom"});</script>
 
 
 
