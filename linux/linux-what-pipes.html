@@ -1044,8 +1044,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="toc-section-number">1</span>  Introduction</a></li>
-  <li><a href="#grep" id="toc-grep" class="nav-link" data-scroll-target="#grep"><span class="toc-section-number">2</span>  <code>grep</code></a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="toc-section-number">1</span>  Introduction</a>
+  <ul>
+  <li><a href="#grep" id="toc-grep" class="nav-link" data-scroll-target="#grep"><span class="toc-section-number">1.1</span>  <code>grep</code></a></li>
+  </ul></li>
+  <li><a href="#using-a-pipe" id="toc-using-a-pipe" class="nav-link" data-scroll-target="#using-a-pipe"><span class="toc-section-number">2</span>  Using a pipe</a>
+  <ul>
+  <li><a href="#wc-cat-head-and-sort" id="toc-wc-cat-head-and-sort" class="nav-link" data-scroll-target="#wc-cat-head-and-sort"><span class="toc-section-number">2.1</span>  <code>wc</code>, <code>cat</code>, <code>head</code> and <code>sort</code></a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/linux/linux-what-pipes.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1089,7 +1095,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, December 29, 2022</p>
+      <p class="date-modified">Friday, December 30, 2022</p>
     </div>
   </div>
     
@@ -1118,13 +1124,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p></p><figcaption class="figure-caption">pipe linux ls-grep-sort</figcaption><p></p>
 </figure>
 </div>
-</section>
-<section id="grep" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="grep"><span class="header-section-number">2</span> <code>grep</code></h2>
+<section id="grep" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="grep"><span class="header-section-number">1.1</span> <code>grep</code></h3>
 <p><code>grep</code> searches for patterns in text. It stands for <strong>global regular expression print</strong>, and it allows you to <strong>search for specific patterns of characters in one or more files.</strong></p>
 <p>You can use <code>grep</code> to search for a specific word or phrase in a file, or you can use it to search for more complex patterns using <strong>regular expressions.</strong></p>
-<p>Here are a few examples of how <code>grep</code> can be used:</p>
-<p>To search for a <strong>specific word in a file</strong>:</p>
+<details>
+<summary>
+Here are a few examples of how <code>grep</code> can be used:
+</summary>
+<p><br> To search for a <strong>specific word in a file</strong>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"word"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To search for a <strong>specific word in multiple files</strong>:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"word"</span> file1.txt file2.txt file3.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1132,6 +1140,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"^w"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To search for a <strong>word that ends with a specific letter</strong>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"w$"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</section>
+</section>
+<section id="using-a-pipe" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="using-a-pipe"><span class="header-section-number">2</span> Using a pipe</h2>
+<p>Exmaple from: <a href="https://swcarpentry.github.io/shell-novice/04-pipefilter/index.html#combining-multiple-commands">Combining multiple commands</a></p>
+<p>As we know, we may chaining pipes consecutively. We can for example send the output of <code>wc</code> directly to <code>sort</code>, and then the resulting output to <code>head</code>. This removes the need for any intermediate files.</p>
+<p>We’ll start by using a pipe to send the output of <code>wc</code> to <code>sort</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>wc and sort</strong></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> wc <span class="at">-l</span> <span class="pp">*</span>.pdb <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-n</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>output</strong></pre>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>   <span class="ex">9</span> methane.pdb</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">12</span> ethane.pdb</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">15</span> propane.pdb</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">20</span> cubane.pdb</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">21</span> pentane.pdb</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">30</span> octane.pdb</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">107</span> total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can then send that output through another pipe, to <code>head</code>, so that the full <code>pipeline</code> becomes:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>wc and sort and head</strong></pre>
+</div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> wc <span class="at">-l</span> <span class="pp">*</span>.pdb <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-n</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>output</strong></pre>
+</div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a> <span class="ex">methane.pdb</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The calculation is <strong>head of sort of line count of <code>.pdb</code></strong>. The redirection and pipes used in the last few commands are illustrated below:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/linux/pipe.png" class="lightbox" title="$ wc -l *.pdb | sort -n | head -n 1" data-gallery="quarto-lightbox-gallery-2"><img src="..\images/linux/pipe.png" class="img-fluid figure-img"></a></p>
+<p></p><figcaption class="figure-caption">$ wc -l *.pdb | sort -n | head -n 1</figcaption><p></p>
+</figure>
+</div>
+<section id="wc-cat-head-and-sort" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="wc-cat-head-and-sort"><span class="header-section-number">2.1</span> <code>wc</code>, <code>cat</code>, <code>head</code> and <code>sort</code></h3>
+<ul>
+<li><code>wc</code> counts lines, words, and characters in its inputs.</li>
+<li><code>cat</code> displays the contents of its inputs.</li>
+<li><code>sort</code> sorts its inputs.</li>
+<li><code>head</code> displays the first 10 lines of its input.</li>
+<li><code>tail</code> displays the last 10 lines of its input.</li>
+<li><code>command &gt; [file]</code> redirects a command’s output to a file (overwriting any existing content).</li>
+<li><code>command &gt;&gt; [file]</code> appends a command’s output to a file.</li>
+<li><code>[first] | [second]</code> is a pipeline: the output of the first command is used as the input to the second.</li>
+<li>The best way to use the shell is to use pipes to combine simple single-purpose programs (filters).</li>
+</ul>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1151,6 +1218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1425,7 +1493,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","loop":true,"closeEffect":"zoom","descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":true,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});</script>
 
 
 
