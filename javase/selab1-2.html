@@ -6,6 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="albertprofe">
+<meta name="description" content="Java SE Lab 01">
 
 <title>albertprofe wiki - Lab#SE01-2: Maven/Gradle Person and Account stored in JSON</title>
 <style>
@@ -1086,12 +1088,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#solving-discussion" id="toc-solving-discussion" class="nav-link active" data-scroll-target="#solving-discussion">Solving discussion</a>
+  <li><a href="#solving-discussion" id="toc-solving-discussion" class="nav-link active" data-scroll-target="#solving-discussion"><span class="toc-section-number">1</span>  Solving discussion</a>
   <ul>
-  <li><a href="#base-classes-factory" id="toc-base-classes-factory" class="nav-link" data-scroll-target="#base-classes-factory">Base Classes: factory</a></li>
-  <li><a href="#base-classes-local-storage-json" id="toc-base-classes-local-storage-json" class="nav-link" data-scroll-target="#base-classes-local-storage-json">Base Classes: local storage-JSON</a></li>
+  <li><a href="#base-classes-factory" id="toc-base-classes-factory" class="nav-link" data-scroll-target="#base-classes-factory"><span class="toc-section-number">1.1</span>  Base Classes: factory</a></li>
+  <li><a href="#base-classes-local-storage-json" id="toc-base-classes-local-storage-json" class="nav-link" data-scroll-target="#base-classes-local-storage-json"><span class="toc-section-number">1.2</span>  Base Classes: local storage-JSON</a></li>
   </ul></li>
-  <li><a href="#step-by-step" id="toc-step-by-step" class="nav-link" data-scroll-target="#step-by-step">Step-by-step</a></li>
+  <li><a href="#step-by-step" id="toc-step-by-step" class="nav-link" data-scroll-target="#step-by-step"><span class="toc-section-number">2</span>  Step-by-step</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/selab1-2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1101,14 +1103,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title d-none d-lg-block">Lab#SE01-2: Maven/Gradle Person and Account stored in JSON</h1>
-</div>
+<p class="subtitle lead">Java SE Lab</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">javase</div>
+    <div class="quarto-category">lab</div>
+    <div class="quarto-category">class</div>
+    <div class="quarto-category">object</div>
+    <div class="quarto-category">composition</div>
+    <div class="quarto-category">factory</div>
+    <div class="quarto-category">JSON</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    Java SE Lab 01
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>albertprofe </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Tuesday, June 1, 2021</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">Saturday, December 31, 2022</p>
+    </div>
+  </div>
     
   </div>
   
@@ -1220,10 +1255,10 @@ function openLab(evt, labStep) {
   evt.currentTarget.className += " active";
 }
 </script>
-<section id="solving-discussion" class="level2">
-<h2 class="anchored" data-anchor-id="solving-discussion">Solving discussion</h2>
-<section id="base-classes-factory" class="level3">
-<h3 class="anchored" data-anchor-id="base-classes-factory">Base Classes: factory</h3>
+<section id="solving-discussion" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="solving-discussion"><span class="header-section-number">1</span> Solving discussion</h2>
+<section id="base-classes-factory" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="base-classes-factory"><span class="header-section-number">1.1</span> Base Classes: factory</h3>
 <p>Here is an example of how you could create a Lombok Java class for a <code>Person</code> and <code>Account</code> using the <strong>factory pattern</strong>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">AllArgsConstructor</span><span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">Data</span><span class="op">;</span></span>
@@ -1293,8 +1328,8 @@ function openLab(evt, labStep) {
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Account checkingAccount <span class="op">=</span> AccountManager<span class="op">.</span><span class="fu">createAccount</span><span class="op">(</span><span class="st">"checking"</span><span class="op">,</span> <span class="fl">50.00</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>AccountManager</code> class uses the <strong>factory pattern</strong> to create <code>Account</code> objects based on the specified accountType. This allows you to create different types of accounts <strong>without having to specify the exact class to use</strong>, and makes it easier to add new types of accounts in the future.</p>
 </section>
-<section id="base-classes-local-storage-json" class="level3">
-<h3 class="anchored" data-anchor-id="base-classes-local-storage-json">Base Classes: local storage-JSON</h3>
+<section id="base-classes-local-storage-json" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="base-classes-local-storage-json"><span class="header-section-number">1.2</span> Base Classes: local storage-JSON</h3>
 <p>Here is an example of what a Lombok-based Person class and Account class might look like in Java:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">Data</span><span class="op">;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1344,15 +1379,18 @@ function openLab(evt, labStep) {
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="step-by-step" class="level2">
-<h2 class="anchored" data-anchor-id="step-by-step">Step-by-step</h2>
+<section id="step-by-step" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="step-by-step"><span class="header-section-number">2</span> Step-by-step</h2>
 <ol type="1">
 <li>Create <code>interface</code> Account</li>
 <li>Create subclasses <code>SavingsAccount</code> and <code>CheckingAccount</code></li>
 <li>Create <code>AccountManger</code></li>
 <li>Check factory</li>
 <li><strong>Parse</strong> <code>Account</code> objects to <em>String-JSON</em></li>
-<li>Save <code>String</code> on <strong>local .json file</strong> <!--- navLinks --> <br><br>
+<li>Save <code>String</code> on <strong>local .json file</strong></li>
+</ol>
+<!--- navLinks -->
+<br><br>
 <div class="row">
 <br>
 <div class="column left previous">
@@ -1367,8 +1405,7 @@ function openLab(evt, labStep) {
 <p><br> <a href="../javase/selab3.html">Lab#SE02-1: Movie/Review <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
-</div></li>
-</ol>
+</div>
 
 
 </section>

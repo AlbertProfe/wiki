@@ -6,6 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="albertprofe">
+<meta name="description" content="What is the Abstract Facotory">
 
 <title>albertprofe wiki - Java Patterns: Factory</title>
 <style>
@@ -1086,9 +1088,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#example-carfactory" id="toc-example-carfactory" class="nav-link" data-scroll-target="#example-carfactory">Example <code>CarFactory</code></a></li>
-  <li><a href="#carfactory-decoupling" id="toc-carfactory-decoupling" class="nav-link" data-scroll-target="#carfactory-decoupling"><code>CarFactory</code> decoupling</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">1</span>  Overview</a></li>
+  <li><a href="#example-carfactory" id="toc-example-carfactory" class="nav-link" data-scroll-target="#example-carfactory"><span class="toc-section-number">2</span>  Example <code>CarFactory</code></a></li>
+  <li><a href="#carfactory-decoupling" id="toc-carfactory-decoupling" class="nav-link" data-scroll-target="#carfactory-decoupling"><span class="toc-section-number">3</span>  <code>CarFactory</code> decoupling</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/se-pattern-factory.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1098,30 +1100,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title d-none d-lg-block">Java Patterns: Factory</h1>
-</div>
+<p class="subtitle lead">Java Fundamentals and Patterns</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">javase</div>
+    <div class="quarto-category">factory</div>
+    <div class="quarto-category">design-patterns</div>
+    <div class="quarto-category">concepts</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    What is the Abstract Facotory
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>albertprofe </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Tuesday, June 1, 2021</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">Saturday, December 31, 2022</p>
+    </div>
+  </div>
     
   </div>
   
 
 </header>
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<section id="overview" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
 <div class="summary">
 <p>The <strong>factory pattern</strong> is a design pattern that is used to create objects in a structured and standardized way. The factory pattern defines a <strong>factory method</strong>, which is a method that is responsible for creating objects of a specific type.</p>
 </div>
 <p>The factory pattern is useful when you want to centralize the logic for creating objects, and to provide a consistent and standard way of creating objects of different types. This can help to <strong>reduce duplication of code</strong>, and to make the code more <strong>maintainable</strong> and <strong>extensible</strong>.</p>
 <p>In the context of the factory pattern, <mark>decoupling</mark> refers to the idea of <strong>separating the logic for creating objects from the code that uses those objects</strong>. By decoupling these two aspects of the system, you can make the code that uses the objects more flexible and reusable, and you can make the logic for creating the objects more modular and maintainable.</p>
 </section>
-<section id="example-carfactory" class="level2">
-<h2 class="anchored" data-anchor-id="example-carfactory">Example <code>CarFactory</code></h2>
+<section id="example-carfactory" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="example-carfactory"><span class="header-section-number">2</span> Example <code>CarFactory</code></h2>
 <p>Here is an example of how to implement the factory pattern in Java, using a <code>CarFactory</code> class to create different types of cars:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> CarFactory <span class="op">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Private constructor to prevent instantiation</span></span>
@@ -1173,8 +1205,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb5"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Car sedan <span class="op">=</span> CarFactory<span class="op">.</span><span class="fu">createCar</span><span class="op">(</span><span class="st">"sedan"</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This code would create and return an instance of the <code>Sedan</code> class, with the specified make, model, and year.</p>
 </section>
-<section id="carfactory-decoupling" class="level2">
-<h2 class="anchored" data-anchor-id="carfactory-decoupling"><code>CarFactory</code> decoupling</h2>
+<section id="carfactory-decoupling" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="carfactory-decoupling"><span class="header-section-number">3</span> <code>CarFactory</code> decoupling</h2>
 <p>The <strong>factory</strong> pattern is <mark>often used in conjunction with the concept of decoupling, which is the idea of separating different components or aspects of a system in order to make the system more modular, flexible, and maintainable.</mark></p>
 By decoupling the <code>CarFactory</code> class from the code that uses the cars, you can make the code that uses the cars more flexible and reusable. For example, you could define a <code>CarDriver</code> class that takes a <code>Car</code> object as a parameter, and uses the ` <!--- navLinks --> <br><br>
 <div class="row">

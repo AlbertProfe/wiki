@@ -6,6 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="albertprofe">
+<meta name="description" content="What is the TDD and JUnit in Java">
 
 <title>albertprofe wiki - Java SE: JUnit and TDD</title>
 <style>
@@ -104,6 +106,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -1086,10 +1091,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#junit-unit-test" id="toc-junit-unit-test" class="nav-link active" data-scroll-target="#junit-unit-test">JUnit: unit test</a></li>
-  <li><a href="#tdd" id="toc-tdd" class="nav-link" data-scroll-target="#tdd">TDD</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
-  <li><a href="#naming-the-test-class" id="toc-naming-the-test-class" class="nav-link" data-scroll-target="#naming-the-test-class">Naming the test class</a></li>
+  <li><a href="#junit-unit-test" id="toc-junit-unit-test" class="nav-link active" data-scroll-target="#junit-unit-test"><span class="toc-section-number">1</span>  JUnit: unit test</a></li>
+  <li><a href="#tdd" id="toc-tdd" class="nav-link" data-scroll-target="#tdd"><span class="toc-section-number">2</span>  TDD</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="toc-section-number">3</span>  Example</a></li>
+  <li><a href="#naming-the-test-class" id="toc-naming-the-test-class" class="nav-link" data-scroll-target="#naming-the-test-class"><span class="toc-section-number">4</span>  Naming the test class</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/se-concepts-tdd.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1099,14 +1104,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title d-none d-lg-block">Java SE: JUnit and TDD</h1>
-</div>
+<p class="subtitle lead">Java Fundamentals</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">javase</div>
+    <div class="quarto-category">TDD</div>
+    <div class="quarto-category">JUnit</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    What is the TDD and JUnit in Java
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>albertprofe </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Tuesday, June 1, 2021</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">Saturday, December 31, 2022</p>
+    </div>
+  </div>
     
   </div>
   
@@ -1125,10 +1159,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>TDD is often used in <strong>agile software development</strong>, as it allows for the rapid development of <strong>high-quality code</strong>*.</p>
 </div>
 <hr>
-<section id="junit-unit-test" class="level2">
-<h2 class="anchored" data-anchor-id="junit-unit-test">JUnit: unit test</h2>
+<section id="junit-unit-test" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="junit-unit-test"><span class="header-section-number">1</span> JUnit: unit test</h2>
 <p>Link: <a href="https://junit.org/junit5/">Junit</a> and <a href="https://junit.org/junit5/docs/current/user-guide/">User guide</a></p>
 <p>Unit tests are the smallest elements in the test automation process. With the help of unit tests, the developer can check the business logic of any class. So JUnit plays a vital role in the development of a test-driven development framework.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/javase/junit5.jpeg" class="lightbox" title="JUnit 5" data-gallery="quarto-lightbox-gallery-1"><img src="..\images/javase/junit5.jpeg" class="img-fluid figure-img" style="width:30.0%"></a></p>
+<p></p><figcaption class="figure-caption">JUnit 5</figcaption><p></p>
+</figure>
+</div>
 <p>The following example provides a glimpse at the minimum requirements for writing a test in JUnit Jupiter. Subsequent sections of this chapter will provide further details on all available features.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.</span><span class="im">assertEquals</span><span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">example</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Calculator</span><span class="op">;</span></span>
@@ -1145,8 +1185,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="tdd" class="level2">
-<h2 class="anchored" data-anchor-id="tdd">TDD</h2>
+<section id="tdd" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="tdd"><span class="header-section-number">2</span> TDD</h2>
 <p><mark>Test-driven development is a development technique where the developer must first write a test that fails before writing a new functional code&lt;</mark>. It ensures a proven way to ensure effective unit testing; however, it does not replace traditional testing. We believe that TDD is an excellent practice that all software developers should consider during the development process.</p>
 <p>Steps for the same are given below:</p>
 <ol type="1">
@@ -1156,8 +1196,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Rerun the test and if they fail, then refactor again and repeat.</li>
 </ol>
 </section>
-<section id="example" class="level2">
-<h2 class="anchored" data-anchor-id="example">Example</h2>
+<section id="example" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="example"><span class="header-section-number">3</span> Example</h2>
 <p>Here is an example of how TDD could be applied in a Java project using JUnit. Let’s say we are building a class that represents a simple calculator. We want the calculator to have methods for adding, subtracting, multiplying, and dividing two numbers.</p>
 <p>First, we would write a test for the add method, which should take two numbers as arguments and return their sum. Here is an example of how this test might look using JUnit:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> CalculatorTest <span class="op">{</span></span>
@@ -1182,8 +1222,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Finally, we would run the test again to ensure that it passes. If the test passes, we know that the add method is working correctly and we can move on to the next feature. We would repeat this process for each of the calculator’s methods, writing a test for each one, implementing the code, and then running the test to ensure it passes.</p>
 <p>This is just one example of how TDD can be applied in a Java project using JUnit. There are many other ways to approach TDD, and the specific steps and details will vary depending on the project and the requirements.</p>
 </section>
-<section id="naming-the-test-class" class="level2">
-<h2 class="anchored" data-anchor-id="naming-the-test-class">Naming the test class</h2>
+<section id="naming-the-test-class" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="naming-the-test-class"><span class="header-section-number">4</span> Naming the test class</h2>
 <p>We use common conventions in naming the test class. Let’s start with the name of the class which is being tested and assume the name of that class is <code>Student</code>. In that case, the name of the test class should be <code>StudentTest</code>. We have to append <code>Test</code> to it. The same naming convention is used in the case of methods. If there is a method <code>DisplayStudentAddress()</code>, then the name of the method in testing should be <code>testDisplayStudentAddress()</code>.</p>
 <table class="table">
 <thead>
@@ -1496,6 +1536,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":true,"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox"});</script>
 
 
 

@@ -6,6 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="albertprofe">
+<meta name="description" content="Java SE Lab 01">
 
 <title>albertprofe wiki - Lab#SE01-1: Maven/Gradle Person and Account</title>
 <style>
@@ -1089,17 +1091,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#solving-discussion" id="toc-solving-discussion" class="nav-link" data-scroll-target="#solving-discussion">Solving discussion</a>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">1</span>  Overview</a></li>
+  <li><a href="#solving-discussion" id="toc-solving-discussion" class="nav-link" data-scroll-target="#solving-discussion"><span class="toc-section-number">2</span>  Solving discussion</a>
   <ul>
-  <li><a href="#base-classes" id="toc-base-classes" class="nav-link" data-scroll-target="#base-classes">Base Classes</a></li>
-  <li><a href="#person-has-account" id="toc-person-has-account" class="nav-link" data-scroll-target="#person-has-account">Person has Account</a></li>
-  <li><a href="#approach-1-singleton" id="toc-approach-1-singleton" class="nav-link" data-scroll-target="#approach-1-singleton">Approach #1: Singleton</a></li>
-  <li><a href="#approach-2-all-static-methods-accountmanager" id="toc-approach-2-all-static-methods-accountmanager" class="nav-link" data-scroll-target="#approach-2-all-static-methods-accountmanager">Approach #2: all static-methods AccountManager</a></li>
-  <li><a href="#approach-3-singleton-any-static-method" id="toc-approach-3-singleton-any-static-method" class="nav-link" data-scroll-target="#approach-3-singleton-any-static-method">Approach 3: Singleton, any static-method</a></li>
-  <li><a href="#test-accountmanagertest" id="toc-test-accountmanagertest" class="nav-link" data-scroll-target="#test-accountmanagertest">Test: <code>AccountManagerTest</code></a></li>
+  <li><a href="#base-classes" id="toc-base-classes" class="nav-link" data-scroll-target="#base-classes"><span class="toc-section-number">2.1</span>  Base Classes</a></li>
+  <li><a href="#person-has-account" id="toc-person-has-account" class="nav-link" data-scroll-target="#person-has-account"><span class="toc-section-number">2.2</span>  Person has Account</a></li>
+  <li><a href="#approach-1-singleton" id="toc-approach-1-singleton" class="nav-link" data-scroll-target="#approach-1-singleton"><span class="toc-section-number">2.3</span>  Approach #1: Singleton</a></li>
+  <li><a href="#approach-2-all-static-methods-accountmanager" id="toc-approach-2-all-static-methods-accountmanager" class="nav-link" data-scroll-target="#approach-2-all-static-methods-accountmanager"><span class="toc-section-number">2.4</span>  Approach #2: all static-methods AccountManager</a></li>
+  <li><a href="#approach-3-singleton-any-static-method" id="toc-approach-3-singleton-any-static-method" class="nav-link" data-scroll-target="#approach-3-singleton-any-static-method"><span class="toc-section-number">2.5</span>  Approach 3: Singleton, any static-method</a></li>
+  <li><a href="#test-accountmanagertest" id="toc-test-accountmanagertest" class="nav-link" data-scroll-target="#test-accountmanagertest"><span class="toc-section-number">2.6</span>  Test: <code>AccountManagerTest</code></a></li>
   </ul></li>
-  <li><a href="#step-by-step" id="toc-step-by-step" class="nav-link" data-scroll-target="#step-by-step">Step-by-step</a></li>
+  <li><a href="#step-by-step" id="toc-step-by-step" class="nav-link" data-scroll-target="#step-by-step"><span class="toc-section-number">3</span>  Step-by-step</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/selab1-1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1109,22 +1111,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title d-none d-lg-block">Lab#SE01-1: Maven/Gradle Person and Account</h1>
-</div>
+<p class="subtitle lead">Java SE Lab</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">javase</div>
+    <div class="quarto-category">lab</div>
+    <div class="quarto-category">class</div>
+    <div class="quarto-category">object</div>
+    <div class="quarto-category">composition</div>
+    <div class="quarto-category">singleton</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    Java SE Lab 01
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>albertprofe </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Tuesday, June 1, 2021</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">Saturday, December 31, 2022</p>
+    </div>
+  </div>
     
   </div>
   
 
 </header>
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<section id="overview" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
 <p>Create a Maven/Gradle Java SE Project with three classes and Junit to test objects and operations.</p>
 <hr>
 <div class="labs">
@@ -1226,10 +1260,10 @@ function openLab(evt, labStep) {
 }
 </script>
 </section>
-<section id="solving-discussion" class="level2">
-<h2 class="anchored" data-anchor-id="solving-discussion">Solving discussion</h2>
-<section id="base-classes" class="level3">
-<h3 class="anchored" data-anchor-id="base-classes">Base Classes</h3>
+<section id="solving-discussion" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="solving-discussion"><span class="header-section-number">2</span> Solving discussion</h2>
+<section id="base-classes" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="base-classes"><span class="header-section-number">2.1</span> Base Classes</h3>
 <p>Here, the <code>Person</code> class represents a <strong>person</strong> with a name, address and others. In the same way, <code>Account</code> class is a <strong>bank account</strong>. The <code>AccountManager</code> class contains <code>static</code> methods to perform <code>withdrawal</code>, <code>transfer</code>, and <code>change pin</code> operations on a <code>Person</code> and <code>Account</code> object.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> Person <span class="op">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
@@ -1287,8 +1321,8 @@ function openLab(evt, labStep) {
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="person-has-account" class="level3">
-<h3 class="anchored" data-anchor-id="person-has-account">Person has Account</h3>
+<section id="person-has-account" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="person-has-account"><span class="header-section-number">2.2</span> Person has Account</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> Person <span class="op">{</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">String</span> surname<span class="op">;</span></span>
@@ -1371,8 +1405,8 @@ Person--&gt;&gt;AccountManager: transferDone(receipt)
   mermaid.initialize({ sequence: { showSequenceNumbers: true } });
 </script>
 </section>
-<section id="approach-1-singleton" class="level3">
-<h3 class="anchored" data-anchor-id="approach-1-singleton">Approach #1: Singleton</h3>
+<section id="approach-1-singleton" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="approach-1-singleton"><span class="header-section-number">2.3</span> Approach #1: Singleton</h3>
 <p>To use the Singleton design pattern with a Person and Account class, you could create a <strong>singleton</strong> <code>AccountManager class</code> that manages the creation and operations of the <code>Person</code> and <code>Account</code> <strong>objects</strong>.</p>
 <p>The <code>AccountManager class</code> would have a <code>private constructor</code>, to <strong>prevent multiple instances from being created</strong>, and a <code>static getInstance</code> method that returns the singleton instance of the class.</p>
 <p>The <code>AccountManager class</code> would then have methods for performing various operations on the <code>Person</code> and <code>Account</code> objects, such as transferring money between accounts, withdrawing money from an account, or changing the PIN for an account.</p>
@@ -1418,8 +1452,8 @@ Person--&gt;&gt;AccountManager: transferDone(receipt)
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>manager<span class="op">.</span><span class="fu">person</span> <span class="op">=</span> <span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"Pau Vila"</span><span class="op">,</span> <span class="st">"63 Sesamo St."</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>But maybe, this is not the best approach for several reasons …</p>
 </section>
-<section id="approach-2-all-static-methods-accountmanager" class="level3">
-<h3 class="anchored" data-anchor-id="approach-2-all-static-methods-accountmanager">Approach #2: all static-methods AccountManager</h3>
+<section id="approach-2-all-static-methods-accountmanager" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="approach-2-all-static-methods-accountmanager"><span class="header-section-number">2.4</span> Approach #2: all static-methods AccountManager</h3>
 <p>It may work as follows. In fact, if we want to manage accounts (<strong>as a banking-centered problem, not a person-centered one</strong>), it could be better that <code>Account</code> has <code>Person</code>:</p>
 <div class="mermaidContent">
 <div class="cell">
@@ -1504,8 +1538,8 @@ Account *-- Person
 <span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="approach-3-singleton-any-static-method" class="level3">
-<h3 class="anchored" data-anchor-id="approach-3-singleton-any-static-method">Approach 3: Singleton, any static-method</h3>
+<section id="approach-3-singleton-any-static-method" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="approach-3-singleton-any-static-method"><span class="header-section-number">2.5</span> Approach 3: Singleton, any static-method</h3>
 <p>In this approach:</p>
 <ul>
 <li><code>Account</code> has <code>Person</code></li>
@@ -1550,8 +1584,8 @@ Account *-- Person
 <span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="test-accountmanagertest" class="level3">
-<h3 class="anchored" data-anchor-id="test-accountmanagertest">Test: <code>AccountManagerTest</code></h3>
+<section id="test-accountmanagertest" class="level3" data-number="2.6">
+<h3 data-number="2.6" class="anchored" data-anchor-id="test-accountmanagertest"><span class="header-section-number">2.6</span> Test: <code>AccountManagerTest</code></h3>
 <p><code>AccountManagerTest</code> could be like this:</p>
 <ul>
 <li>with <code>AccountManager</code> all static-methods no-singleton</li>
@@ -1616,8 +1650,8 @@ Account *-- Person
 <span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="step-by-step" class="level2">
-<h2 class="anchored" data-anchor-id="step-by-step">Step-by-step</h2>
+<section id="step-by-step" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="step-by-step"><span class="header-section-number">3</span> Step-by-step</h2>
 <ol type="1">
 <li>Create <code>Maven</code> Project with <strong>JUnit</strong></li>
 <li>Create <code>Person</code> class</li>
@@ -1626,7 +1660,10 @@ Account *-- Person
 <li>Write operations (<code>withdrawal</code>, <code>transfer</code>,<code>change pin</code>) as a <code>static</code> methods in <code>AccountManager</code></li>
 <li>Test <code>Person</code> and <code>Account</code> objects and <strong>features</strong></li>
 <li>Add <code>singleton</code> pattern to <code>AccountManager</code> class</li>
-<li>Test <code>AccountManager</code> class <!--- navLinks --> <br><br>
+<li>Test <code>AccountManager</code> class</li>
+</ol>
+<!--- navLinks -->
+<br><br>
 <div class="row">
 <br>
 <div class="column left previous">
@@ -1641,8 +1678,7 @@ Account *-- Person
 <p><br> <a href="../javase/selab1-2.html">Lab#SE01-2: Maven/Gradle Person and Account stored in JSON <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
-</div></li>
-</ol>
+</div>
 
 
 </section>

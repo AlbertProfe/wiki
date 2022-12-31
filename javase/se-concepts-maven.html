@@ -6,6 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="albertprofe">
+<meta name="description" content="What is Maven and how it works">
 
 <title>albertprofe wiki - Java SE: Maven</title>
 <style>
@@ -41,6 +43,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -1023,10 +1028,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#maven" id="toc-maven" class="nav-link active" data-scroll-target="#maven">Maven</a></li>
-  <li><a href="#maven-central-repository" id="toc-maven-central-repository" class="nav-link" data-scroll-target="#maven-central-repository">Maven Central Repository</a></li>
-  <li><a href="#maven-lifecycle" id="toc-maven-lifecycle" class="nav-link" data-scroll-target="#maven-lifecycle">Maven Lifecycle</a></li>
-  <li><a href="#archetype-groupid-artifactid" id="toc-archetype-groupid-artifactid" class="nav-link" data-scroll-target="#archetype-groupid-artifactid">Archetype, GroupId, ArtifactId</a></li>
+  <li><a href="#maven" id="toc-maven" class="nav-link active" data-scroll-target="#maven"><span class="toc-section-number">1</span>  Maven</a></li>
+  <li><a href="#maven-central-repository" id="toc-maven-central-repository" class="nav-link" data-scroll-target="#maven-central-repository"><span class="toc-section-number">2</span>  Maven Central Repository</a></li>
+  <li><a href="#maven-lifecycle" id="toc-maven-lifecycle" class="nav-link" data-scroll-target="#maven-lifecycle"><span class="toc-section-number">3</span>  Maven Lifecycle</a></li>
+  <li><a href="#archetype-groupid-artifactid" id="toc-archetype-groupid-artifactid" class="nav-link" data-scroll-target="#archetype-groupid-artifactid"><span class="toc-section-number">4</span>  Archetype, GroupId, ArtifactId</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/se-concepts-maven.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1036,14 +1041,43 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title d-none d-lg-block">Java SE: Maven</h1>
-</div>
+<p class="subtitle lead">Maven and Java</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">javase</div>
+    <div class="quarto-category">maven</div>
+    <div class="quarto-category">concepts</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    What is Maven and how it works
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>albertprofe </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Tuesday, June 1, 2021</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">Saturday, December 31, 2022</p>
+    </div>
+  </div>
     
   </div>
   
@@ -1056,22 +1090,28 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <hr>
 <p>These tools allow developers to specify the dependencies for their project in a file, and then automatically handle the process of downloading and installing those dependencies. This can save a lot of time and effort for developers, and helps ensure that all of the necessary dependencies are present and up-to-date in a project.</p>
-<section id="maven" class="level2">
-<h2 class="anchored" data-anchor-id="maven">Maven</h2>
+<section id="maven" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="maven"><span class="header-section-number">1</span> Maven</h2>
 <p>Maven is a <strong>build automation tool</strong> used primarily for Java projects.</p>
 <p><a href="https://maven.apache.org/">Maven</a> can also be used to build and manage projects written in C#, Ruby, Scala, and other languages. The Maven project is hosted by the <strong>Apache Software Foundation</strong>, where it was formerly part of the Jakarta Project.</p>
 <p>Maven addresses two aspects of building software: - how software is built and - its dependencies</p>
 </section>
-<section id="maven-central-repository" class="level2">
-<h2 class="anchored" data-anchor-id="maven-central-repository">Maven Central Repository</h2>
+<section id="maven-central-repository" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="maven-central-repository"><span class="header-section-number">2</span> Maven Central Repository</h2>
 <p>Link: <a href="https://mvnrepository.com/">Maven Central Repository</a></p>
 <p><mark>Maven repository is a directory where all the dependencies such as jars, library files, plugins, or other artifacts that will be required by the projects are stored</mark>.</p>
 <p>These repositories help us to store and maintain useful resources so that they can be used in our maven projects while building and deploying the artifacts.</p>
 <p>All the layout and structure of the underlying repositories of maven of any type are <strong>completely hidden for maven users</strong>.</p>
 </section>
-<section id="maven-lifecycle" class="level2">
-<h2 class="anchored" data-anchor-id="maven-lifecycle">Maven Lifecycle</h2>
+<section id="maven-lifecycle" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="maven-lifecycle"><span class="header-section-number">3</span> Maven Lifecycle</h2>
 <p>Maven is a <strong>build automation tool for Java projects</strong>. It is used to manage the build, reporting, and documentation of a project. Maven has a defined lifecycle that outlines the steps required to build and distribute a project.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/javase/maven-lifecycle.png" class="lightbox" title="Maven lifecycle" data-gallery="quarto-lightbox-gallery-1"><img src="..\images/javase/maven-lifecycle.png" class="img-fluid figure-img"></a></p>
+<p></p><figcaption class="figure-caption">Maven lifecycle</figcaption><p></p>
+</figure>
+</div>
 <p>The <strong>Maven lifecycle</strong> has three main phases:</p>
 <ul>
 <li><code>clean</code>: This phase is used to clean up any previous build artifacts.</li>
@@ -1090,13 +1130,15 @@ ul.task-list li input[type="checkbox"] {
 <p>Each build phase consists of a set of build goals, which are the specific tasks that are executed to accomplish the phase’s objectives. For example, the compile phase has a build goal called compiler:compile that is responsible for compiling the project’s source code.</p>
 <p>By following the defined Maven lifecycle, developers can <strong>easily build, test, and distribute their Java projects in a consistent and repeatable manner</strong>.</p>
 </section>
-<section id="archetype-groupid-artifactid" class="level2">
-<h2 class="anchored" data-anchor-id="archetype-groupid-artifactid">Archetype, GroupId, ArtifactId</h2>
+<section id="archetype-groupid-artifactid" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="archetype-groupid-artifactid"><span class="header-section-number">4</span> Archetype, GroupId, ArtifactId</h2>
 <p>An <strong>archetype is a template for a project</strong>. It provides a predefined <strong>structure and files</strong> for a project, so that you don’t have to create them manually.</p>
 <p>GroupId and artifactId are two important elements of a Maven project.</p>
 <p>The <strong>groupId</strong> is a unique identifier for a project, and is typically used to group related projects together.</p>
 <p>The <strong>artifactId</strong> is the unique identifier for a specific project, and is used to identify the project within the group.</p>
-Together, the groupId and artifactId help to uniquely identify a project within the Maven ecosystem.<!--- navLinks --> <br><br>
+<p>Together, the groupId and artifactId help to uniquely identify a project within the Maven ecosystem.</p>
+<!--- navLinks -->
+<br><br>
 <div class="row">
 <br>
 <div class="column left previous">
@@ -1388,6 +1430,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":true,"openEffect":"zoom"});</script>
 
 
 
