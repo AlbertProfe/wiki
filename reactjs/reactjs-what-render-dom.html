@@ -43,6 +43,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -70,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 
 <div id="quarto-search-results"></div>
@@ -1079,11 +1082,12 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">1</span>  Overview</a></li>
+  <li><a href="#how-virtual-dom-and-diffing-works-in-react" id="toc-how-virtual-dom-and-diffing-works-in-react" class="nav-link" data-scroll-target="#how-virtual-dom-and-diffing-works-in-react"><span class="toc-section-number">2</span>  How Virtual-DOM and diffing works in React</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/reactjs-what-render-dom.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -1122,7 +1126,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Monday, January 2, 2023</p>
+      <p class="date-modified">Tuesday, January 3, 2023</p>
     </div>
   </div>
     
@@ -1135,8 +1139,42 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
 <div class="summary">
 <p>📘 <strong>Virtual DOM</strong></p>
+<p>The virtual DOM <code>VDOM</code> is a <mark>programming concept where an ideal, or <code>virtual</code>, representation of a UI is kept in memory and synced with the <code>real</code> DOM<mark> by a library such as <strong>ReactDOM</strong>.</mark></mark></p>
+<p>This process is called <a href="https://reactjs.org/docs/reconciliation.html" class="external">reconciliation</a>.</p>
 </div>
 <hr>
+<p>Instead of manipulating the browser’s DOM directly, <code>React</code> creates a <code>virtual DOM</code> <a href="https://reactjs.org/docs/faq-internals.html" class="external">in memory</a>, where it does all the necessary manipulating, before making the changes in the real <code>browser DOM</code>.</p>
+<p>This approach enables the <strong>declarative API of React</strong>: you tell <code>React</code> <strong>what state you want the UI to be in</strong>, and it makes sure the DOM matches that state</p>
+<p>This abstracts out the attribute manipulation, event handling, and manual DOM updating that you would otherwise have to use to build your app.</p>
+</section>
+<section id="how-virtual-dom-and-diffing-works-in-react" class="level2 page-columns page-full" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="how-virtual-dom-and-diffing-works-in-react"><span class="header-section-number">2</span> How Virtual-DOM and diffing works in React</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/virtual-dom.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="The virtual DOM VDOM is a lightweight in-memory representation of the actual DOM: How Virtual-DOM and diffing works in React"><img src="..\images/reactjs/virtual-dom.png" class="img-fluid figure-img" style="width:70.0%"></a></p>
+<p></p><figcaption class="figure-caption">The virtual DOM <code>VDOM</code> is a lightweight in-memory representation of the actual DOM: <a href="https://medium.com/@gethylgeorge/how-virtual-dom-and-diffing-works-in-react-6fc805f9f84e">How Virtual-DOM and diffing works in React</a></figcaption><p></p>
+</figure>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>When the state of a React component changes, the component re-renders and creates a new <code>VDOM</code> tree. React then compares this new tree to the previous <code>VDOM</code> tree, using a process called “diffing.”</p>
+</div></div><p>In React, the virtual DOM <code>VDOM</code> is a <mark>lightweight in-memory representation of the actual DOM</mark>. It is a tree-like structure with a hierarchy of node objects that corresponds to the structure of the DOM. Each node in the <code>VDOM</code> tree represents an element in the actual DOM, and has properties that correspond to the attributes and content of that element.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>During the <code>diffing process</code>, React compares the two <code>VDOM</code> trees, <strong>node by node</strong>, and determines which nodes have changed, added, or removed. React then updates the actual <code>DOM</code> with the minimum number of changes necessary to reflect the changes in the <code>VDOM</code>.</p>
+</div>
+</div>
+<p>This process helps to improve the performance of React applications, because it reduces the number of <code>DOM</code> manipulations that are required to keep the <code>DOM</code> up-to-date with the component’s state.</p>
+<p>The diffing algorithm used by React is based on a concept called <code>reconciliation</code>. During <code>reconciliation</code>, React compares the <code>VDOM</code> nodes and their children, and determines the minimum number of steps that are needed to transform the old tree into the new tree.</p>
+<p>This process helps to minimize the number of <code>DOM</code> manipulations that are required, and makes React updates faster and more efficient.</p>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1430,6 +1468,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","loop":true,"openEffect":"zoom","closeEffect":"zoom"});</script>
 
 
 
