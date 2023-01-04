@@ -22,6 +22,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -70,7 +133,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 
 <div id="quarto-search-results"></div>
@@ -598,6 +661,10 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">React JS ES6: import modules</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-es6-data.html">
+ <span class="dropdown-text">React JS ES6: array, data and key</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../reactjs/reactjs-es6-destructuring.html">
  <span class="dropdown-text">React JS ES6: destructuring</span></a>
   </li>  
@@ -935,6 +1002,11 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-es6-data.html" class="sidebar-item-text sidebar-link">React JS ES6: array, data and key</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../reactjs/reactjs-es6-destructuring.html" class="sidebar-item-text sidebar-link active">React JS ES6: destructuring</a>
   </div>
 </li>
@@ -1079,11 +1151,21 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">1</span>  Overview</a></li>
+  <li><a href="#why-do-we-need-it" id="toc-why-do-we-need-it" class="nav-link" data-scroll-target="#why-do-we-need-it"><span class="toc-section-number">2</span>  Why do we need it</a></li>
+  <li><a href="#how-to-use-destructuring" id="toc-how-to-use-destructuring" class="nav-link" data-scroll-target="#how-to-use-destructuring"><span class="toc-section-number">3</span>  How to use <code>destructuring</code></a></li>
+  <li><a href="#more-examples" id="toc-more-examples" class="nav-link" data-scroll-target="#more-examples"><span class="toc-section-number">4</span>  More examples</a>
+  <ul>
+  <li><a href="#nested-arrays" id="toc-nested-arrays" class="nav-link" data-scroll-target="#nested-arrays"><span class="toc-section-number">4.1</span>  Nested arrays</a></li>
+  <li><a href="#rest-syntax" id="toc-rest-syntax" class="nav-link" data-scroll-target="#rest-syntax"><span class="toc-section-number">4.2</span>  Rest syntax</a></li>
+  <li><a href="#swapping-variables" id="toc-swapping-variables" class="nav-link" data-scroll-target="#swapping-variables"><span class="toc-section-number">4.3</span>  Swapping variables</a></li>
+  <li><a href="#function-arguments" id="toc-function-arguments" class="nav-link" data-scroll-target="#function-arguments"><span class="toc-section-number">4.4</span>  Function arguments</a></li>
+  <li><a href="#object-destructuring" id="toc-object-destructuring" class="nav-link" data-scroll-target="#object-destructuring"><span class="toc-section-number">4.5</span>  Object destructuring</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/reactjs-es6-destructuring.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -1122,7 +1204,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Monday, January 2, 2023</p>
+      <p class="date-modified">Wednesday, January 4, 2023</p>
     </div>
   </div>
     
@@ -1135,14 +1217,181 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
 <div class="summary">
 <p>📘 <strong>Destructuring arrays</strong></p>
+<p>Array <code>destructuring</code> is a way to extract values from an array and assign them to separate variables.</p>
+<p>It allows you to <strong>unpack</strong> the values of an array into separate variables.</p>
 </div>
 <hr>
+</section>
+<section id="why-do-we-need-it" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="why-do-we-need-it"><span class="header-section-number">2</span> Why do we need it</h2>
+<blockquote class="blockquote">
+<p>Array destructuring can be a useful tool for extracting values from arrays and assigning them to separate variables. It can make your code more concise and easier to read, especially when working with large or complex arrays.</p>
+</blockquote>
+<p>Here is the <strong>old way of assigning array items</strong> to a variable:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode jsx code-overflow-wrap code-with-copy"><code class="sourceCode javascriptreact"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> vehicles <span class="op">=</span> [<span class="st">'mustang'</span><span class="op">,</span> <span class="st">'f-150'</span><span class="op">,</span> <span class="st">'expedition'</span>]<span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">// old way</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> car <span class="op">=</span> vehicles[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> truck <span class="op">=</span> vehicles[<span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> suv <span class="op">=</span> vehicles[<span class="dv">2</span>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here is the new way of assigning array items to a variable <strong>With destructuring</strong>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode jsx code-overflow-wrap code-with-copy"><code class="sourceCode javascriptreact"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> vehicles <span class="op">=</span> [<span class="st">'mustang'</span><span class="op">,</span> <span class="st">'f-150'</span><span class="op">,</span> <span class="st">'expedition'</span>]<span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> [car<span class="op">,</span> truck<span class="op">,</span> suv] <span class="op">=</span> vehicles<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="how-to-use-destructuring" class="level2 page-columns page-full" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="how-to-use-destructuring"><span class="header-section-number">3</span> How to use <code>destructuring</code></h2>
+<p>Here’s an example of array destructuring:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode jsx code-overflow-wrap code-with-copy"><code class="sourceCode javascriptreact"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> arr <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> [a<span class="op">,</span> b<span class="op">,</span> c] <span class="op">=</span> arr<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(a)<span class="op">;</span> <span class="co">// 1</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(b)<span class="op">;</span> <span class="co">// 2</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(c)<span class="op">;</span> <span class="co">// 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can also use destructuring to skip elements or assign default values:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode jsx code-overflow-wrap code-with-copy"><code class="sourceCode javascriptreact"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> arr <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> [a<span class="op">,</span> <span class="op">,</span> c] <span class="op">=</span> arr<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(a)<span class="op">;</span> <span class="co">// 1</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(c)<span class="op">;</span> <span class="co">// 3</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> arr2 <span class="op">=</span> [<span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> [a2<span class="op">,</span> b2 <span class="op">=</span> <span class="dv">2</span><span class="op">,</span> c2 <span class="op">=</span> <span class="dv">3</span>] <span class="op">=</span> arr2<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(a2)<span class="op">;</span> <span class="co">// 1</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(b2)<span class="op">;</span> <span class="co">// 2</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(c2)<span class="op">;</span> <span class="co">// 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the first example, the second element of the arr array is skipped, and in the second example, default values are assigned to the b2 and c2 variables if the corresponding elements of the arr2 array are not present.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Array destructuring can be a convenient way to extract values from arrays and assign them to separate variables. It can make your code more concise and easier to read.</p>
+</div></div><p>You can also use destructuring to skip elements or assign default values:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode jsx code-overflow-wrap code-with-copy"><code class="sourceCode javascriptreact"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> arr <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> [a<span class="op">,</span> <span class="op">,</span> c<span class="op">,</span> d] <span class="op">=</span> arr<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(a)<span class="op">;</span> <span class="co">// 1</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(c)<span class="op">;</span> <span class="co">// 3</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(d)<span class="op">;</span> <span class="co">// 4</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> arr2 <span class="op">=</span> [<span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> [a2<span class="op">,</span> b2 <span class="op">=</span> <span class="dv">2</span><span class="op">,</span> c2 <span class="op">=</span> <span class="dv">3</span><span class="op">,</span> d2 <span class="op">=</span> <span class="dv">4</span>] <span class="op">=</span> arr2<span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(a2)<span class="op">;</span> <span class="co">// 1</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(b2)<span class="op">;</span> <span class="co">// 2</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(c2)<span class="op">;</span> <span class="co">// 3</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(d2)<span class="op">;</span> <span class="co">// 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="more-examples" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="more-examples"><span class="header-section-number">4</span> More examples</h2>
+<section id="nested-arrays" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="nested-arrays"><span class="header-section-number">4.1</span> Nested arrays</h3>
+<p>You can use destructuring to extract values from nested arrays:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode jsx code-overflow-wrap code-with-copy"><code class="sourceCode javascriptreact"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> arr <span class="op">=</span> [[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> [<span class="dv">3</span><span class="op">,</span> <span class="dv">4</span>]]<span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> [[a<span class="op">,</span> b]<span class="op">,</span> [c<span class="op">,</span> d]] <span class="op">=</span> arr<span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(a)<span class="op">;</span> <span class="co">// 1</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(b)<span class="op">;</span> <span class="co">// 2</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(c)<span class="op">;</span> <span class="co">// 3</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(d)<span class="op">;</span> <span class="co">// 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="rest-syntax" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="rest-syntax"><span class="header-section-number">4.2</span> Rest syntax</h3>
+<p>The rest syntax allows you to capture the remaining elements of an array in a separate variable:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode jsx code-overflow-wrap code-with-copy"><code class="sourceCode javascriptreact"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> arr <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>]<span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> [a<span class="op">,</span> b<span class="op">,</span> <span class="op">...</span>rest] <span class="op">=</span> arr<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(a)<span class="op">;</span> <span class="co">// 1</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(b)<span class="op">;</span> <span class="co">// 2</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(rest)<span class="op">;</span> <span class="co">// [3, 4, 5]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="swapping-variables" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="swapping-variables"><span class="header-section-number">4.3</span> Swapping variables</h3>
+<p>You can use destructuring to easily swap the values of two variables:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode jsx code-overflow-wrap code-with-copy"><code class="sourceCode javascriptreact"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> a <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> b <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>[a<span class="op">,</span> b] <span class="op">=</span> [b<span class="op">,</span> a]<span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(a)<span class="op">;</span> <span class="co">// 2</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(b)<span class="op">;</span> <span class="co">// 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="function-arguments" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="function-arguments"><span class="header-section-number">4.4</span> Function arguments</h3>
+<p>You can use destructuring to specify function arguments:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode jsx code-overflow-wrap code-with-copy"><code class="sourceCode javascriptreact"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">add</span>([a<span class="op">,</span> b]) {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="fu">add</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>]))<span class="op">;</span> <span class="co">// 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="object-destructuring" class="level3" data-number="4.5">
+<h3 data-number="4.5" class="anchored" data-anchor-id="object-destructuring"><span class="header-section-number">4.5</span> Object destructuring</h3>
+<p>You can also use destructuring with objects. Here’s an example:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode jsx code-overflow-wrap code-with-copy"><code class="sourceCode javascriptreact"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> obj <span class="op">=</span> {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">foo</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">bar</span><span class="op">:</span> <span class="dv">2</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { foo<span class="op">,</span> bar } <span class="op">=</span> obj<span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(foo)<span class="op">;</span> <span class="co">// 1</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(bar)<span class="op">;</span> <span class="co">// 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <!--- navLinks -->
 <br><br>
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../reactjs/reactjs-es6-import.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> React JS ES6: import modules</a> <br></p>
+<p><br> <a href="../reactjs/reactjs-es6-data.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> React JS ES6: data</a> <br></p>
 </div>
 <br>
 <div class="column center">
@@ -1156,6 +1405,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
