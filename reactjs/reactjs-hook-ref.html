@@ -22,6 +22,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -43,6 +106,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -70,7 +136,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 
 <div id="quarto-search-results"></div>
@@ -625,7 +691,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="../reactjs/reactjs-hook-effect.html">
- <span class="dropdown-text">React JS: useEfect</span></a>
+ <span class="dropdown-text">React JS: useEffect</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../reactjs/reactjs-hook-custom.html">
@@ -984,7 +1050,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reactjs/reactjs-hook-effect.html" class="sidebar-item-text sidebar-link">React JS: useEfect</a>
+  <a href="../reactjs/reactjs-hook-effect.html" class="sidebar-item-text sidebar-link">React JS: useEffect</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1096,12 +1162,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introuduction" id="toc-introuduction" class="nav-link active" data-scroll-target="#introuduction"><span class="toc-section-number">1</span>  Introuduction</a></li>
+  <li><a href="#userefinitialvalue" id="toc-userefinitialvalue" class="nav-link active" data-scroll-target="#userefinitialvalue"><span class="toc-section-number">1</span>  <code>useRef(initialValue)</code></a>
+  <ul>
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters"><span class="toc-section-number">1.1</span>  Parameters</a></li>
+  <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns"><span class="toc-section-number">1.2</span>  Returns</a></li>
+  </ul></li>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1"><span class="toc-section-number">2</span>  Example 1</a></li>
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2"><span class="toc-section-number">3</span>  Example 2</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/reactjs-hook-ref.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -1140,7 +1212,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, January 5, 2023</p>
+      <p class="date-modified">Friday, January 6, 2023</p>
     </div>
   </div>
     
@@ -1151,17 +1223,145 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="summary">
 <p>📘 <strong>hookRef</strong></p>
+<p><code>useRef</code> is a React Hook that lets you reference a value that’s not needed for rendering: allows you <strong>to persist values between renders</strong>.</p>
+<p><code>const ref = useRef(initialValue)</code></p>
 </div>
 <hr>
-<section id="introuduction" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="introuduction"><span class="header-section-number">1</span> Introuduction</h2>
-<p>About this site</p>
+<section id="userefinitialvalue" class="level2 page-columns page-full" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="userefinitialvalue"><span class="header-section-number">1</span> <code>useRef(initialValue)</code></h2>
+<p>Call <code>useRef</code> at the top level of your component <strong>to declare a <code>ref</code></strong>.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode jsx code-overflow-wrap code-with-copy"><code class="sourceCode javascriptreact"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { useRef } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">MyComponent</span>() {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> intervalRef <span class="op">=</span> <span class="fu">useRef</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> inputRef <span class="op">=</span> <span class="fu">useRef</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>It can be used to store a <strong>mutable value that does not cause a re-render</strong> when updated. It can be used to access a <strong>DOM element directly.</strong></p>
+</div></div><section id="parameters" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="parameters"><span class="header-section-number">1.1</span> Parameters</h3>
+<ul>
+<li><code>initialValue</code>: The value you want the ref object’s <code>current</code> property to be initially. It can be a value of any type. This argument is ignored after the initial render.</li>
+</ul>
+</section>
+<section id="returns" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="returns"><span class="header-section-number">1.2</span> Returns</h3>
+<p><code>useRef</code> returns an object with a single property:</p>
+<ul>
+<li><code>current</code>: Initially, it’s set to the <code>initialValue</code> you have passed. You can later set it to something else. If you pass the ref object to React as a ref attribute to a JSX node, React will set its <code>current</code> property.</li>
+</ul>
+</section>
+</section>
+<section id="example-1" class="level2 page-columns page-full" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="example-1"><span class="header-section-number">2</span> Example 1</h2>
+<p>If you show <code>{ref.current}</code> in the JSX,** the number won’t update on click**. This is because setting ref.current does not trigger a re-render. Information that’s used for <em>rendering should be state instead.</em></p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode jsx code-overflow-wrap code-with-copy"><code class="sourceCode javascriptreact"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { useRef } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Counter</span>() {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> ref <span class="op">=</span> <span class="fu">useRef</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">function</span> <span class="fu">handleClick</span>() {</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    ref<span class="op">.</span><span class="at">current</span> <span class="op">=</span> ref<span class="op">.</span><span class="at">current</span> <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">alert</span>(<span class="st">'You clicked '</span> <span class="op">+</span> ref<span class="op">.</span><span class="at">current</span> <span class="op">+</span> <span class="st">' times!'</span>)<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>handleClick<span class="va">}</span><span class="kw">&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        Click me!</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/button&gt;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>      // Do not write or read ref.current during rendering.</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      // React expects that the body of your component behaves like a pure function</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      // We do now just for this example</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>      // If you need use: useState</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;p&gt;</span>You have pressed the button <span class="va">{</span>ref<span class="op">.</span><span class="at">current</span><span class="va">}</span> times<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/&gt;</span> </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex23.png" class="lightbox" title="inital render" data-gallery="quarto-lightbox-gallery-1"><img src="..\images/reactjs/ex23.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">inital render</figcaption><p></p>
+</figure>
+</div>
+</div><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex24.png" class="lightbox" title="Clicking button and no-renders" data-gallery="quarto-lightbox-gallery-2"><img src="..\images/reactjs/ex24.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">Clicking button and no-renders</figcaption><p></p>
+</figure>
+</div>
+</div></div>
+<p><a href="https://beta.reactjs.org/reference/react/useRef#examples-dom" class="external">Examples of manipulating the DOM with useRef</a></p>
+</section>
+<section id="example-2" class="level2 page-columns page-full" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="example-2"><span class="header-section-number">3</span> Example 2</h2>
+<p>The <code>useRef</code> Hook can also be used to keep track of previous state values.</p>
+<p>This is because we are able to persist <code>useRef</code> values between renders.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode jsx code-overflow-wrap code-with-copy"><code class="sourceCode javascriptreact"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { useState<span class="op">,</span> useEffect<span class="op">,</span> useRef } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Counter</span>() {</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">const</span> [inputValue<span class="op">,</span> setInputValue] <span class="op">=</span> <span class="fu">useState</span>(<span class="st">""</span>)<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> previousInputValue <span class="op">=</span> <span class="fu">useRef</span>(<span class="st">""</span>)<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    previousInputValue<span class="op">.</span><span class="at">current</span> <span class="op">=</span> inputValue<span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span> [inputValue])<span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;&gt;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;input</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="ot">type</span><span class="op">=</span><span class="st">"text"</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="ot">value</span><span class="op">=</span><span class="va">{</span>inputValue<span class="va">}</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="ot">onChange</span><span class="op">=</span><span class="va">{</span>(e) <span class="kw">=&gt;</span> <span class="fu">setInputValue</span>(e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>)<span class="va">}</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>      <span class="kw">/&gt;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;h2&gt;</span>Current Value: <span class="va">{</span>inputValue<span class="va">}</span><span class="kw">&lt;/h2&gt;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;h2&gt;</span>Previous Value: <span class="va">{</span>previousInputValue<span class="op">.</span><span class="at">current</span><span class="va">}</span><span class="kw">&lt;/h2&gt;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/&gt;</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex25.png" class="lightbox" title="inital render" data-gallery="quarto-lightbox-gallery-3"><img src="..\images/reactjs/ex25.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">inital render</figcaption><p></p>
+</figure>
+</div>
+</div><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex26.png" class="lightbox" title="Input and not rendering when onChange={} gets the new inputs, but we see input by using useEffect" data-gallery="quarto-lightbox-gallery-4"><img src="..\images/reactjs/ex26.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">Input and not rendering when <code>onChange={}</code> gets the new inputs, but we see input by using <code>useEffect</code></figcaption><p></p>
+</figure>
+</div>
+</div></div>
+<p>This time we use a combination of <code>useState</code>, <code>useEffect</code>, and <code>useRef</code> to keep track of the previous state.</p>
+<p>In the <code>useEffect</code>, we are updating the <code>useRef</code> current value each time the <code>inputValue</code> <strong>is updated by entering text into the input field.</strong></p>
 <!--- navLinks -->
 <br><br>
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../reactjs/reactjs-hook-reducer.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> React JS: iseReducer</a> <br></p>
+<p><br> <a href="../reactjs/reactjs-hook-reducer.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> React JS: useReducer</a> <br></p>
 </div>
 <br>
 <div class="column center">
@@ -1169,7 +1369,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../reactjs/reactjs-hook-effect.html">React JS: useEfect <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
+<p><br> <a href="../reactjs/reactjs-hook-effect.html">React JS: useEffect <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
 </div>
@@ -1449,6 +1649,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"loop":true,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","selector":".lightbox"});</script>
 
 
 
