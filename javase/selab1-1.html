@@ -1341,86 +1341,86 @@ function openLab(evt, labStep) {
 <section id="base-classes" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="base-classes"><span class="header-section-number">2.1</span> Base Classes</h3>
 <p>Here, the <code>Person</code> class represents a <strong>person</strong> with a name, address and others. In the same way, <code>Account</code> class is a <strong>bank account</strong>. The <code>AccountManager</code> class contains <code>static</code> methods to perform <code>withdrawal</code>, <code>transfer</code>, and <code>change pin</code> operations on a <code>Person</code> and <code>Account</code> object.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> Person <span class="op">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">String</span> address<span class="op">;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Other properties for a Person...</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="fu">Person</span><span class="op">(</span><span class="bu">String</span> name<span class="op">,</span> <span class="bu">String</span> address<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">name</span> <span class="op">=</span> name<span class="op">;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">address</span> <span class="op">=</span> address<span class="op">;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Getters and setters for Person properties...</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">public</span> <span class="kw">class</span> Person <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="kw">private</span> <span class="bu">String</span> address<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="co">// Other properties for a Person...</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="kw">public</span> <span class="fu">Person</span><span class="op">(</span><span class="bu">String</span> name<span class="op">,</span> <span class="bu">String</span> address<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">name</span> <span class="op">=</span> name<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">address</span> <span class="op">=</span> address<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="op">}</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="co">// Getters and setters for Person properties...</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
-<div class="sourceCode" id="cb2"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> Account <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">String</span> accountNumber<span class="op">;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">String</span> pin<span class="op">;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">double</span> balance<span class="op">;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Other properties for an Account...</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="fu">Account</span><span class="op">(</span><span class="bu">String</span> accountNumber<span class="op">,</span> <span class="bu">String</span> pin<span class="op">,</span> <span class="dt">double</span> balance<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">accountNumber</span> <span class="op">=</span> accountNumber<span class="op">;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">pin</span> <span class="op">=</span> pin<span class="op">;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">balance</span> <span class="op">=</span> balance<span class="op">;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Getters and setters for Account properties...</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">public</span> <span class="kw">class</span> Account <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="kw">private</span> <span class="bu">String</span> accountNumber<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="kw">private</span> <span class="bu">String</span> pin<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="kw">private</span> <span class="dt">double</span> balance<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="co">// Other properties for an Account...</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a>  <span class="kw">public</span> <span class="fu">Account</span><span class="op">(</span><span class="bu">String</span> accountNumber<span class="op">,</span> <span class="bu">String</span> pin<span class="op">,</span> <span class="dt">double</span> balance<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">accountNumber</span> <span class="op">=</span> accountNumber<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">pin</span> <span class="op">=</span> pin<span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">balance</span> <span class="op">=</span> balance<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>  <span class="op">}</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a></span>
+<span id="cb2-14"><a href="#cb2-14"></a>  <span class="co">// Getters and setters for Account properties...</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
-<div class="sourceCode" id="cb3"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> AccountManager <span class="op">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">withdrawal</span><span class="op">(</span>Person person<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>amount <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> amount <span class="op">&lt;=</span> person<span class="op">.</span><span class="fu">getBalance</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            person<span class="op">.</span><span class="fu">setBalance</span><span class="op">(</span>person<span class="op">.</span><span class="fu">getBalance</span><span class="op">()</span> <span class="op">-</span> amount<span class="op">);</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">transfer</span><span class="op">(</span>Person sender<span class="op">,</span> Person receiver<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>amount <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> amount <span class="op">&lt;=</span> sender<span class="op">.</span><span class="fu">getBalance</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>            sender<span class="op">.</span><span class="fu">setBalance</span><span class="op">(</span>sender<span class="op">.</span><span class="fu">getBalance</span><span class="op">()</span> <span class="op">-</span> amount<span class="op">);</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            receiver<span class="op">.</span><span class="fu">setBalance</span><span class="op">(</span>receiver<span class="op">.</span><span class="fu">getBalance</span><span class="op">()</span> <span class="op">+</span> amount<span class="op">);</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">changePin</span><span class="op">(</span>Person person<span class="op">,</span> <span class="bu">String</span> oldPin<span class="op">,</span> <span class="bu">String</span> newPin<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>person<span class="op">.</span><span class="fu">getPin</span><span class="op">().</span><span class="fu">equals</span><span class="op">(</span>oldPin<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>            person<span class="op">.</span><span class="fu">setPin</span><span class="op">(</span>newPin<span class="op">);</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">public</span> <span class="kw">class</span> AccountManager <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">withdrawal</span><span class="op">(</span>Person person<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>        <span class="cf">if</span> <span class="op">(</span>amount <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> amount <span class="op">&lt;=</span> person<span class="op">.</span><span class="fu">getBalance</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>            person<span class="op">.</span><span class="fu">setBalance</span><span class="op">(</span>person<span class="op">.</span><span class="fu">getBalance</span><span class="op">()</span> <span class="op">-</span> amount<span class="op">);</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>            <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>        <span class="op">}</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>        <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="op">}</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">transfer</span><span class="op">(</span>Person sender<span class="op">,</span> Person receiver<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>        <span class="cf">if</span> <span class="op">(</span>amount <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> amount <span class="op">&lt;=</span> sender<span class="op">.</span><span class="fu">getBalance</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>            sender<span class="op">.</span><span class="fu">setBalance</span><span class="op">(</span>sender<span class="op">.</span><span class="fu">getBalance</span><span class="op">()</span> <span class="op">-</span> amount<span class="op">);</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>            receiver<span class="op">.</span><span class="fu">setBalance</span><span class="op">(</span>receiver<span class="op">.</span><span class="fu">getBalance</span><span class="op">()</span> <span class="op">+</span> amount<span class="op">);</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>            <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a>        <span class="op">}</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>        <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>    <span class="op">}</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a></span>
+<span id="cb3-19"><a href="#cb3-19"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">changePin</span><span class="op">(</span>Person person<span class="op">,</span> <span class="bu">String</span> oldPin<span class="op">,</span> <span class="bu">String</span> newPin<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a>        <span class="cf">if</span> <span class="op">(</span>person<span class="op">.</span><span class="fu">getPin</span><span class="op">().</span><span class="fu">equals</span><span class="op">(</span>oldPin<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a>            person<span class="op">.</span><span class="fu">setPin</span><span class="op">(</span>newPin<span class="op">);</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a>            <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a>        <span class="op">}</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a>        <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a>    <span class="op">}</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="person-has-account" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="person-has-account"><span class="header-section-number">2.2</span> Person has Account</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> Person <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">String</span> surname<span class="op">;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">int</span> age<span class="op">;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> Account account<span class="op">;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="fu">Person</span><span class="op">(</span><span class="bu">String</span> name<span class="op">,</span> <span class="bu">String</span> surname<span class="op">,</span> <span class="dt">int</span> age<span class="op">,</span> Account account<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">name</span> <span class="op">=</span> name<span class="op">;</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">surname</span> <span class="op">=</span> surname<span class="op">;</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">age</span> <span class="op">=</span> age<span class="op">;</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">account</span> <span class="op">=</span> account<span class="op">;</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> Account <span class="fu">getAccount</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="fu">account</span><span class="op">;</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setAccount</span><span class="op">(</span>Account account<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">account</span> <span class="op">=</span> account<span class="op">;</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>   <span class="co">// Getters and setters for Account properties...</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">public</span> <span class="kw">class</span> Person <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="kw">private</span> <span class="bu">String</span> surname<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="kw">private</span> <span class="dt">int</span> age<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="kw">private</span> Account account<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a>  <span class="kw">public</span> <span class="fu">Person</span><span class="op">(</span><span class="bu">String</span> name<span class="op">,</span> <span class="bu">String</span> surname<span class="op">,</span> <span class="dt">int</span> age<span class="op">,</span> Account account<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">name</span> <span class="op">=</span> name<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">surname</span> <span class="op">=</span> surname<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">age</span> <span class="op">=</span> age<span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">account</span> <span class="op">=</span> account<span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>  <span class="op">}</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a></span>
+<span id="cb4-14"><a href="#cb4-14"></a>  <span class="kw">public</span> Account <span class="fu">getAccount</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>    <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="fu">account</span><span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>  <span class="op">}</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a></span>
+<span id="cb4-18"><a href="#cb4-18"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setAccount</span><span class="op">(</span>Account account<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">account</span> <span class="op">=</span> account<span class="op">;</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a>  <span class="op">}</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a>   <span class="co">// Getters and setters for Account properties...</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="mermaidContent">
 <div class="cell">
 <div class="cell-output-display">
@@ -1488,44 +1488,44 @@ Person--&gt;&gt;AccountManager: transferDone(receipt)
 <p>The <code>AccountManager class</code> would then have methods for performing various operations on the <code>Person</code> and <code>Account</code> objects, such as transferring money between accounts, withdrawing money from an account, or changing the PIN for an account.</p>
 <p>These methods would be implemented using the <code>Person</code> and <code>Account</code> classes, and would be accessible to other classes through the singleton <code>AccountManager</code> instance.</p>
 <p>For example, you could define the AccountManager, Person, and Account classes as follows:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> AccountManager <span class="op">{</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">static</span> AccountManager instance<span class="op">;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> Person person<span class="op">;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> Account account<span class="op">;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="fu">AccountManager</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Private constructor to prevent multiple instances</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">static</span> AccountManager <span class="fu">getInstance</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>instance <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>      instance <span class="op">=</span> <span class="kw">new</span> <span class="fu">AccountManager</span><span class="op">();</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> instance<span class="op">;</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">transfer</span><span class="op">(</span>Account from<span class="op">,</span> Account to<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Transfer money from one account to another</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">withdraw</span><span class="op">(</span>Account account<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Withdraw money from an account</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">changePin</span><span class="op">(</span>Account account<span class="op">,</span> <span class="bu">String</span> newPin<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Change the PIN for an account</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Other methods for managing Person and Account objects...</span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">public</span> <span class="kw">class</span> AccountManager <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="kw">private</span> <span class="dt">static</span> AccountManager instance<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="kw">private</span> Person person<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="kw">private</span> Account account<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="kw">private</span> <span class="fu">AccountManager</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="co">// Private constructor to prevent multiple instances</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="op">}</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a>  <span class="kw">public</span> <span class="dt">static</span> AccountManager <span class="fu">getInstance</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>    <span class="cf">if</span> <span class="op">(</span>instance <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>      instance <span class="op">=</span> <span class="kw">new</span> <span class="fu">AccountManager</span><span class="op">();</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>    <span class="op">}</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>    <span class="cf">return</span> instance<span class="op">;</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>  <span class="op">}</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a></span>
+<span id="cb5-17"><a href="#cb5-17"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">transfer</span><span class="op">(</span>Account from<span class="op">,</span> Account to<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>    <span class="co">// Transfer money from one account to another</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>  <span class="op">}</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a></span>
+<span id="cb5-21"><a href="#cb5-21"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">withdraw</span><span class="op">(</span>Account account<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>    <span class="co">// Withdraw money from an account</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>  <span class="op">}</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a></span>
+<span id="cb5-25"><a href="#cb5-25"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">changePin</span><span class="op">(</span>Account account<span class="op">,</span> <span class="bu">String</span> newPin<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a>    <span class="co">// Change the PIN for an account</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a>  <span class="op">}</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a></span>
+<span id="cb5-29"><a href="#cb5-29"></a>  <span class="co">// Other methods for managing Person and Account objects...</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To use the <code>AccountManager</code> class, other classes would simply need to call the <code>getInstance</code> method to obtain the singleton instance of the class, and then use the instance’s methods to perform operations on the <code>Person</code> and <code>Account</code> objects. For example:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Create a new Person and Account</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">// be careful: where will these four Person objects go? </span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>AccountManager manager <span class="op">=</span> AccountManager<span class="op">.</span><span class="fu">getInstance</span><span class="op">();</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>manager<span class="op">.</span><span class="fu">person</span> <span class="op">=</span> <span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"John Doe"</span><span class="op">,</span> <span class="st">"123 Main St."</span><span class="op">);</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>manager<span class="op">.</span><span class="fu">person</span> <span class="op">=</span> <span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"Carla Jameson"</span><span class="op">,</span> <span class="st">"323 Main St."</span><span class="op">);</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>manager<span class="op">.</span><span class="fu">person</span> <span class="op">=</span> <span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"Rafael Martin"</span><span class="op">,</span> <span class="st">"3 Glorious St."</span><span class="op">);</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>manager<span class="op">.</span><span class="fu">person</span> <span class="op">=</span> <span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"Pau Vila"</span><span class="op">,</span> <span class="st">"63 Sesamo St."</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">// Create a new Person and Account</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">// be careful: where will these four Person objects go? </span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>AccountManager manager <span class="op">=</span> AccountManager<span class="op">.</span><span class="fu">getInstance</span><span class="op">();</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>manager<span class="op">.</span><span class="fu">person</span> <span class="op">=</span> <span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"John Doe"</span><span class="op">,</span> <span class="st">"123 Main St."</span><span class="op">);</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>manager<span class="op">.</span><span class="fu">person</span> <span class="op">=</span> <span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"Carla Jameson"</span><span class="op">,</span> <span class="st">"323 Main St."</span><span class="op">);</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>manager<span class="op">.</span><span class="fu">person</span> <span class="op">=</span> <span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"Rafael Martin"</span><span class="op">,</span> <span class="st">"3 Glorious St."</span><span class="op">);</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>manager<span class="op">.</span><span class="fu">person</span> <span class="op">=</span> <span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"Pau Vila"</span><span class="op">,</span> <span class="st">"63 Sesamo St."</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>But maybe, this is not the best approach for several reasons …</p>
 </section>
 <section id="approach-2-all-static-methods-accountmanager" class="level3" data-number="2.4">
@@ -1562,57 +1562,57 @@ Account *-- Person
 </div>
 </div>
 </div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> Account <span class="op">{</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> Person person<span class="op">;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">//other fields</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="fu">Account</span><span class="op">(</span>Person person<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">person</span> <span class="op">=</span> person<span class="op">;</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> Person <span class="fu">getPerson</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="fu">person</span><span class="op">;</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setPerson</span><span class="op">(</span>Person person<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">person</span> <span class="op">=</span> person<span class="op">;</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">//constructor, getters, setters and methods</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">public</span> <span class="kw">class</span> Account <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="kw">private</span> Person person<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="co">//other fields</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="kw">public</span> <span class="fu">Account</span><span class="op">(</span>Person person<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">person</span> <span class="op">=</span> person<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="op">}</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a></span>
+<span id="cb7-9"><a href="#cb7-9"></a>  <span class="kw">public</span> Person <span class="fu">getPerson</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>    <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="fu">person</span><span class="op">;</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>  <span class="op">}</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setPerson</span><span class="op">(</span>Person person<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">person</span> <span class="op">=</span> person<span class="op">;</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>    </span>
+<span id="cb7-16"><a href="#cb7-16"></a>    <span class="co">//constructor, getters, setters and methods</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>  <span class="op">}</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>So, in this case, we could use a <code>List</code> object to save all the <code>Account</code> objects with the list:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">List</span><span class="op">;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">ArrayList</span><span class="op">;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> AccountManager <span class="op">{</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span>Account<span class="op">&gt;</span> accounts<span class="op">;</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="fu">AccountManager</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">accounts</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">ArrayList</span><span class="op">&lt;&gt;();</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Account<span class="op">&gt;</span> <span class="fu">getAccounts</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="fu">accounts</span><span class="op">;</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// we should manage how to add/remove accounts to/from accounts list</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">deposit</span><span class="op">(</span>Account account<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Code to deposit the specified amount to the account</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">changePin</span><span class="op">(</span>Account account<span class="op">,</span> <span class="dt">int</span> newPin<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Code to change the PIN of the specified account</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">transfer</span><span class="op">(</span>Account fromAccount<span class="op">,</span> Account toAccount<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Code to transfer the specified amount from the fromAccount to the toAccount</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">withdrawal</span><span class="op">(</span>Account account<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Code to withdraw the specified amount from the given account</span></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">List</span><span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">ArrayList</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">public</span> <span class="kw">class</span> AccountManager <span class="op">{</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span>Account<span class="op">&gt;</span> accounts<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a>  <span class="kw">private</span> <span class="fu">AccountManager</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">accounts</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">ArrayList</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>  <span class="op">}</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a></span>
+<span id="cb8-11"><a href="#cb8-11"></a>  <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Account<span class="op">&gt;</span> <span class="fu">getAccounts</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>    <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="fu">accounts</span><span class="op">;</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>  <span class="op">}</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a></span>
+<span id="cb8-15"><a href="#cb8-15"></a>  <span class="co">// we should manage how to add/remove accounts to/from accounts list</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a></span>
+<span id="cb8-17"><a href="#cb8-17"></a>  <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">deposit</span><span class="op">(</span>Account account<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a>    <span class="co">// Code to deposit the specified amount to the account</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a>  <span class="op">}</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a></span>
+<span id="cb8-21"><a href="#cb8-21"></a>  <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">changePin</span><span class="op">(</span>Account account<span class="op">,</span> <span class="dt">int</span> newPin<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a>    <span class="co">// Code to change the PIN of the specified account</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a>  <span class="op">}</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a></span>
+<span id="cb8-25"><a href="#cb8-25"></a>  <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">transfer</span><span class="op">(</span>Account fromAccount<span class="op">,</span> Account toAccount<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-26"><a href="#cb8-26"></a>    <span class="co">// Code to transfer the specified amount from the fromAccount to the toAccount</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a>  <span class="op">}</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a>  </span>
+<span id="cb8-29"><a href="#cb8-29"></a>  <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">withdrawal</span><span class="op">(</span>Account account<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-30"><a href="#cb8-30"></a>    <span class="co">// Code to withdraw the specified amount from the given account</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a>  <span class="op">}</span></span>
+<span id="cb8-32"><a href="#cb8-32"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="approach-3-singleton-any-static-method" class="level3" data-number="2.5">
 <h3 data-number="2.5" class="anchored" data-anchor-id="approach-3-singleton-any-static-method"><span class="header-section-number">2.5</span> Approach 3: Singleton, any static-method</h3>
@@ -1622,43 +1622,43 @@ Account *-- Person
 <li><code>AccountManager</code> is <code>Singleton</code> and there is no static-methods anywhere</li>
 <li>and we create just <strong>one</strong> object form <code>AccountManager</code> to manage <code>accounts</code></li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">List</span><span class="op">;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">ArrayList</span><span class="op">;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> AccountManager <span class="op">{</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">static</span> AccountManager manager <span class="op">=</span> <span class="kw">new</span> <span class="fu">AccountManager</span><span class="op">();</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span>Account<span class="op">&gt;</span> accounts<span class="op">;</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// we should manage how to add/remove accounts to/from accounts list</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="fu">AccountManager</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">accounts</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">ArrayList</span><span class="op">&lt;&gt;();</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">static</span> AccountManager <span class="fu">getInstance</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> manager<span class="op">;</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Account<span class="op">&gt;</span> <span class="fu">getAccounts</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="fu">accounts</span><span class="op">;</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span>  <span class="dt">void</span> <span class="fu">deposit</span><span class="op">(</span>Account account<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Code to deposit the specified amount to the account</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span>  <span class="dt">void</span> <span class="fu">changePin</span><span class="op">(</span>Account account<span class="op">,</span> <span class="dt">int</span> newPin<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Code to change the PIN of the specified account</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span>  <span class="dt">void</span> <span class="fu">transfer</span><span class="op">(</span>Account fromAccount<span class="op">,</span> Account toAccount<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Code to transfer the specified amount from the fromAccount to the toAccount</span></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span>  <span class="dt">void</span> <span class="fu">withdrawal</span><span class="op">(</span>Account account<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Code to withdraw the specified amount from the given account</span></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">List</span><span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">ArrayList</span><span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="kw">public</span> <span class="kw">class</span> AccountManager <span class="op">{</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="kw">private</span> <span class="dt">static</span> AccountManager manager <span class="op">=</span> <span class="kw">new</span> <span class="fu">AccountManager</span><span class="op">();</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span>Account<span class="op">&gt;</span> accounts<span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a></span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="co">// we should manage how to add/remove accounts to/from accounts list</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a></span>
+<span id="cb9-10"><a href="#cb9-10"></a>  <span class="kw">private</span> <span class="fu">AccountManager</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">accounts</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">ArrayList</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>  <span class="op">}</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a></span>
+<span id="cb9-14"><a href="#cb9-14"></a>  <span class="kw">public</span> <span class="dt">static</span> AccountManager <span class="fu">getInstance</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="cf">return</span> manager<span class="op">;</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>  <span class="op">}</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a></span>
+<span id="cb9-18"><a href="#cb9-18"></a>  <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Account<span class="op">&gt;</span> <span class="fu">getAccounts</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a>    <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="fu">accounts</span><span class="op">;</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a>  <span class="op">}</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a></span>
+<span id="cb9-22"><a href="#cb9-22"></a>  <span class="kw">public</span>  <span class="dt">void</span> <span class="fu">deposit</span><span class="op">(</span>Account account<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a>    <span class="co">// Code to deposit the specified amount to the account</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a>  <span class="op">}</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a></span>
+<span id="cb9-26"><a href="#cb9-26"></a>  <span class="kw">public</span>  <span class="dt">void</span> <span class="fu">changePin</span><span class="op">(</span>Account account<span class="op">,</span> <span class="dt">int</span> newPin<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a>    <span class="co">// Code to change the PIN of the specified account</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a>  <span class="op">}</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a></span>
+<span id="cb9-30"><a href="#cb9-30"></a>  <span class="kw">public</span>  <span class="dt">void</span> <span class="fu">transfer</span><span class="op">(</span>Account fromAccount<span class="op">,</span> Account toAccount<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a>    <span class="co">// Code to transfer the specified amount from the fromAccount to the toAccount</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a>  <span class="op">}</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a>  </span>
+<span id="cb9-34"><a href="#cb9-34"></a>  <span class="kw">public</span>  <span class="dt">void</span> <span class="fu">withdrawal</span><span class="op">(</span>Account account<span class="op">,</span> <span class="dt">double</span> amount<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a>    <span class="co">// Code to withdraw the specified amount from the given account</span></span>
+<span id="cb9-36"><a href="#cb9-36"></a>  <span class="op">}</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="test-accountmanagertest" class="level3" data-number="2.6">
 <h3 data-number="2.6" class="anchored" data-anchor-id="test-accountmanagertest"><span class="header-section-number">2.6</span> Test: <code>AccountManagerTest</code></h3>
@@ -1667,63 +1667,63 @@ Account *-- Person
 <li>with <code>AccountManager</code> all static-methods no-singleton</li>
 <li><code>Account</code> has <code>Person</code></li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.*;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> AccountManagerTest <span class="op">{</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testDeposit</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    Account account <span class="op">=</span> <span class="kw">new</span> <span class="fu">Account</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"John Doe"</span><span class="op">));</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> initialBalance <span class="op">=</span> account<span class="op">.</span><span class="fu">getBalance</span><span class="op">();</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> depositAmount <span class="op">=</span> <span class="fl">100.00</span><span class="op">;</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    AccountManager<span class="op">.</span><span class="fu">deposit</span><span class="op">(</span>account<span class="op">,</span> depositAmount<span class="op">);</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> finalBalance <span class="op">=</span> account<span class="op">.</span><span class="fu">getBalance</span><span class="op">();</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span>initialBalance <span class="op">+</span> depositAmount<span class="op">,</span> finalBalance<span class="op">);</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testChangePin</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    Account account <span class="op">=</span> <span class="kw">new</span> <span class="fu">Account</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"John Doe"</span><span class="op">));</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> initialPin <span class="op">=</span> account<span class="op">.</span><span class="fu">getPin</span><span class="op">();</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> newPin <span class="op">=</span> <span class="dv">1234</span><span class="op">;</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    AccountManager<span class="op">.</span><span class="fu">changePin</span><span class="op">(</span>account<span class="op">,</span> newPin<span class="op">);</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> finalPin <span class="op">=</span> account<span class="op">.</span><span class="fu">getPin</span><span class="op">();</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span>newPin<span class="op">,</span> finalPin<span class="op">);</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testTransfer</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    Account fromAccount <span class="op">=</span> <span class="kw">new</span> <span class="fu">Account</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"John Doe"</span><span class="op">));</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    Account toAccount <span class="op">=</span> <span class="kw">new</span> <span class="fu">Account</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"Jane Doe"</span><span class="op">));</span></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> initialFromAccountBalance <span class="op">=</span> fromAccount<span class="op">.</span><span class="fu">getBalance</span><span class="op">();</span></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> initialToAccountBalance <span class="op">=</span> toAccount<span class="op">.</span><span class="fu">getBalance</span><span class="op">();</span></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> transferAmount <span class="op">=</span> <span class="fl">100.00</span><span class="op">;</span></span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>    AccountManager<span class="op">.</span><span class="fu">transfer</span><span class="op">(</span>fromAccount<span class="op">,</span> toAccount<span class="op">,</span> transferAmount<span class="op">);</span></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> finalFromAccountBalance <span class="op">=</span> fromAccount<span class="op">.</span><span class="fu">getBalance</span><span class="op">();</span></span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> finalToAccountBalance <span class="op">=</span> toAccount<span class="op">.</span><span class="fu">getBalance</span><span class="op">();</span></span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span>initialFromAccountBalance <span class="op">-</span> transferAmount<span class="op">,</span> finalFromAccountBalance<span class="op">);</span></span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span>initialToAccountBalance <span class="op">+</span> transferAmount<span class="op">,</span> finalToAccountBalance<span class="op">);</span></span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>  <span class="at">@Test</span></span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testWithdrawal</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>    Account fromAccount <span class="op">=</span> <span class="kw">new</span> <span class="fu">Account</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"John Doe"</span><span class="op">));</span></span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>    Account toAccount <span class="op">=</span> <span class="kw">new</span> <span class="fu">Account</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"Jane Doe"</span><span class="op">));</span></span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> initialFromAccountBalance <span class="op">=</span> fromAccount<span class="op">.</span><span class="fu">getBalance</span><span class="op">();</span></span>
-<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> withdrawalAmount <span class="op">=</span> <span class="fl">100.00</span><span class="op">;</span></span>
-<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>    AccountManager<span class="op">.</span><span class="fu">withdrawal</span><span class="op">(</span>fromAccount<span class="op">,</span> withdrawalAmount<span class="op">);</span></span>
-<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> finalFromAccountBalance <span class="op">=</span> fromAccount<span class="op">.</span><span class="fu">getBalance</span><span class="op">();</span></span>
-<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assertEquals</span><span class="op">(</span>initialFromAccountBalance <span class="op">-</span> withdrawalAmount<span class="op">,</span> finalFromAccountBalance<span class="op">);</span></span>
-<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.*;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="kw">public</span> <span class="kw">class</span> AccountManagerTest <span class="op">{</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="at">@Test</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testDeposit</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>    Account account <span class="op">=</span> <span class="kw">new</span> <span class="fu">Account</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"John Doe"</span><span class="op">));</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>    <span class="dt">double</span> initialBalance <span class="op">=</span> account<span class="op">.</span><span class="fu">getBalance</span><span class="op">();</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>    <span class="dt">double</span> depositAmount <span class="op">=</span> <span class="fl">100.00</span><span class="op">;</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a></span>
+<span id="cb10-11"><a href="#cb10-11"></a>    AccountManager<span class="op">.</span><span class="fu">deposit</span><span class="op">(</span>account<span class="op">,</span> depositAmount<span class="op">);</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>    <span class="dt">double</span> finalBalance <span class="op">=</span> account<span class="op">.</span><span class="fu">getBalance</span><span class="op">();</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a></span>
+<span id="cb10-14"><a href="#cb10-14"></a>    <span class="fu">assertEquals</span><span class="op">(</span>initialBalance <span class="op">+</span> depositAmount<span class="op">,</span> finalBalance<span class="op">);</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a>  <span class="op">}</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a></span>
+<span id="cb10-17"><a href="#cb10-17"></a>  <span class="at">@Test</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testChangePin</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a>    Account account <span class="op">=</span> <span class="kw">new</span> <span class="fu">Account</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"John Doe"</span><span class="op">));</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a>    <span class="dt">int</span> initialPin <span class="op">=</span> account<span class="op">.</span><span class="fu">getPin</span><span class="op">();</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a>    <span class="dt">int</span> newPin <span class="op">=</span> <span class="dv">1234</span><span class="op">;</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a></span>
+<span id="cb10-23"><a href="#cb10-23"></a>    AccountManager<span class="op">.</span><span class="fu">changePin</span><span class="op">(</span>account<span class="op">,</span> newPin<span class="op">);</span></span>
+<span id="cb10-24"><a href="#cb10-24"></a>    <span class="dt">int</span> finalPin <span class="op">=</span> account<span class="op">.</span><span class="fu">getPin</span><span class="op">();</span></span>
+<span id="cb10-25"><a href="#cb10-25"></a></span>
+<span id="cb10-26"><a href="#cb10-26"></a>    <span class="fu">assertEquals</span><span class="op">(</span>newPin<span class="op">,</span> finalPin<span class="op">);</span></span>
+<span id="cb10-27"><a href="#cb10-27"></a>  <span class="op">}</span></span>
+<span id="cb10-28"><a href="#cb10-28"></a></span>
+<span id="cb10-29"><a href="#cb10-29"></a>  <span class="at">@Test</span></span>
+<span id="cb10-30"><a href="#cb10-30"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testTransfer</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-31"><a href="#cb10-31"></a>    Account fromAccount <span class="op">=</span> <span class="kw">new</span> <span class="fu">Account</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"John Doe"</span><span class="op">));</span></span>
+<span id="cb10-32"><a href="#cb10-32"></a>    Account toAccount <span class="op">=</span> <span class="kw">new</span> <span class="fu">Account</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"Jane Doe"</span><span class="op">));</span></span>
+<span id="cb10-33"><a href="#cb10-33"></a>    <span class="dt">double</span> initialFromAccountBalance <span class="op">=</span> fromAccount<span class="op">.</span><span class="fu">getBalance</span><span class="op">();</span></span>
+<span id="cb10-34"><a href="#cb10-34"></a>    <span class="dt">double</span> initialToAccountBalance <span class="op">=</span> toAccount<span class="op">.</span><span class="fu">getBalance</span><span class="op">();</span></span>
+<span id="cb10-35"><a href="#cb10-35"></a>    <span class="dt">double</span> transferAmount <span class="op">=</span> <span class="fl">100.00</span><span class="op">;</span></span>
+<span id="cb10-36"><a href="#cb10-36"></a></span>
+<span id="cb10-37"><a href="#cb10-37"></a>    AccountManager<span class="op">.</span><span class="fu">transfer</span><span class="op">(</span>fromAccount<span class="op">,</span> toAccount<span class="op">,</span> transferAmount<span class="op">);</span></span>
+<span id="cb10-38"><a href="#cb10-38"></a>    <span class="dt">double</span> finalFromAccountBalance <span class="op">=</span> fromAccount<span class="op">.</span><span class="fu">getBalance</span><span class="op">();</span></span>
+<span id="cb10-39"><a href="#cb10-39"></a>    <span class="dt">double</span> finalToAccountBalance <span class="op">=</span> toAccount<span class="op">.</span><span class="fu">getBalance</span><span class="op">();</span></span>
+<span id="cb10-40"><a href="#cb10-40"></a></span>
+<span id="cb10-41"><a href="#cb10-41"></a>    <span class="fu">assertEquals</span><span class="op">(</span>initialFromAccountBalance <span class="op">-</span> transferAmount<span class="op">,</span> finalFromAccountBalance<span class="op">);</span></span>
+<span id="cb10-42"><a href="#cb10-42"></a>    <span class="fu">assertEquals</span><span class="op">(</span>initialToAccountBalance <span class="op">+</span> transferAmount<span class="op">,</span> finalToAccountBalance<span class="op">);</span></span>
+<span id="cb10-43"><a href="#cb10-43"></a>  <span class="op">}</span></span>
+<span id="cb10-44"><a href="#cb10-44"></a>  </span>
+<span id="cb10-45"><a href="#cb10-45"></a>  <span class="at">@Test</span></span>
+<span id="cb10-46"><a href="#cb10-46"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testWithdrawal</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-47"><a href="#cb10-47"></a>    Account fromAccount <span class="op">=</span> <span class="kw">new</span> <span class="fu">Account</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"John Doe"</span><span class="op">));</span></span>
+<span id="cb10-48"><a href="#cb10-48"></a>    Account toAccount <span class="op">=</span> <span class="kw">new</span> <span class="fu">Account</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"Jane Doe"</span><span class="op">));</span></span>
+<span id="cb10-49"><a href="#cb10-49"></a>    <span class="dt">double</span> initialFromAccountBalance <span class="op">=</span> fromAccount<span class="op">.</span><span class="fu">getBalance</span><span class="op">();</span></span>
+<span id="cb10-50"><a href="#cb10-50"></a>    <span class="dt">double</span> withdrawalAmount <span class="op">=</span> <span class="fl">100.00</span><span class="op">;</span></span>
+<span id="cb10-51"><a href="#cb10-51"></a></span>
+<span id="cb10-52"><a href="#cb10-52"></a>    AccountManager<span class="op">.</span><span class="fu">withdrawal</span><span class="op">(</span>fromAccount<span class="op">,</span> withdrawalAmount<span class="op">);</span></span>
+<span id="cb10-53"><a href="#cb10-53"></a>    <span class="dt">double</span> finalFromAccountBalance <span class="op">=</span> fromAccount<span class="op">.</span><span class="fu">getBalance</span><span class="op">();</span></span>
+<span id="cb10-54"><a href="#cb10-54"></a></span>
+<span id="cb10-55"><a href="#cb10-55"></a>    <span class="fu">assertEquals</span><span class="op">(</span>initialFromAccountBalance <span class="op">-</span> withdrawalAmount<span class="op">,</span> finalFromAccountBalance<span class="op">);</span></span>
+<span id="cb10-56"><a href="#cb10-56"></a>  <span class="op">}</span></span>
+<span id="cb10-57"><a href="#cb10-57"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="step-by-step" class="level2" data-number="3">

@@ -1162,14 +1162,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#passing-props-to-a-component" id="toc-passing-props-to-a-component" class="nav-link active" data-scroll-target="#passing-props-to-a-component"><span class="toc-section-number">1</span>  Passing Props to a Component</a>
+  <li><a href="#passing-props-to-a-component" id="toc-passing-props-to-a-component" class="nav-link active" data-scroll-target="#passing-props-to-a-component"><span class="toc-section-number">1</span>  Passing Props to a Component</a></li>
+  <li><a href="#stateful-and-sateless" id="toc-stateful-and-sateless" class="nav-link" data-scroll-target="#stateful-and-sateless"><span class="toc-section-number">2</span>  Stateful and Sateless</a>
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="toc-section-number">1.1</span>  Overview</a></li>
-  <li><a href="#stateful-and-sateless" id="toc-stateful-and-sateless" class="nav-link" data-scroll-target="#stateful-and-sateless"><span class="toc-section-number">1.2</span>  Stateful and Sateless</a>
-  <ul>
-  <li><a href="#sateful-components" id="toc-sateful-components" class="nav-link" data-scroll-target="#sateful-components"><span class="toc-section-number">1.2.1</span>  Sateful Components</a></li>
-  <li><a href="#sateless-components" id="toc-sateless-components" class="nav-link" data-scroll-target="#sateless-components"><span class="toc-section-number">1.2.2</span>  Sateless Components</a></li>
+  <li><a href="#sateful-components" id="toc-sateful-components" class="nav-link" data-scroll-target="#sateful-components"><span class="toc-section-number">2.1</span>  Sateful Components</a></li>
+  <li><a href="#sateless-components" id="toc-sateless-components" class="nav-link" data-scroll-target="#sateless-components"><span class="toc-section-number">2.2</span>  Sateless Components</a></li>
   </ul></li>
+  <li><a href="#what-is-state-and-rendering-updaterender-cycle" id="toc-what-is-state-and-rendering-updaterender-cycle" class="nav-link" data-scroll-target="#what-is-state-and-rendering-updaterender-cycle"><span class="toc-section-number">3</span>  What is state and rendering: update/render cycle</a></li>
+  <li><a href="#so-is-react-immutable" id="toc-so-is-react-immutable" class="nav-link" data-scroll-target="#so-is-react-immutable"><span class="toc-section-number">4</span>  So, Is React immutable?</a></li>
+  <li><a href="#and-then-what-is-a-mutation" id="toc-and-then-what-is-a-mutation" class="nav-link" data-scroll-target="#and-then-what-is-a-mutation"><span class="toc-section-number">5</span>  And then, what is a mutation?</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="toc-section-number">6</span>  Examples</a>
+  <ul>
+  <li><a href="#example-1-setting-state-only-changes-it-for-the-next-render" id="toc-example-1-setting-state-only-changes-it-for-the-next-render" class="nav-link" data-scroll-target="#example-1-setting-state-only-changes-it-for-the-next-render"><span class="toc-section-number">6.1</span>  Example 1: setting state only changes it for the next render</a></li>
+  <li><a href="#example-2-state-over-time" id="toc-example-2-state-over-time" class="nav-link" data-scroll-target="#example-2-state-over-time"><span class="toc-section-number">6.2</span>  Example 2: State over time</a></li>
+  <li><a href="#example-3-email" id="toc-example-3-email" class="nav-link" data-scroll-target="#example-3-email"><span class="toc-section-number">6.3</span>  Example 3: email</a></li>
+  <li><a href="#example-4-state-updater-function" id="toc-example-4-state-updater-function" class="nav-link" data-scroll-target="#example-4-state-updater-function"><span class="toc-section-number">6.4</span>  Example 4: state updater function</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/reactjs-what-props.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -1213,7 +1220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Wednesday, January 4, 2023</p>
+      <p class="date-modified">Saturday, January 7, 2023</p>
     </div>
   </div>
     
@@ -1222,10 +1229,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="passing-props-to-a-component" class="level1 page-columns page-full" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Passing Props to a Component</h1>
-<section id="overview" class="level2 page-columns page-full" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1.1</span> Overview</h2>
+<section id="passing-props-to-a-component" class="level2 page-columns page-full" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="passing-props-to-a-component"><span class="header-section-number">1</span> Passing Props to a Component</h2>
 <div class="summary">
 <p>📘 <strong>Props</strong></p>
 <p><strong>React components</strong> use <strong>props</strong> (<code>props</code> stands for <strong>properties</strong>) to communicate with each other.</p>
@@ -1249,68 +1254,378 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="code-with-filename-file">
 <pre><strong>profile.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode js code-overflow-wrap code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Avatar</span>({ person<span class="op">,</span> size }) {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// person and size are available here</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">function</span> <span class="fu">Avatar</span>({ person<span class="op">,</span> size }) {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="co">// person and size are available here</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>lin.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode js code-overflow-wrap code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Lin</span>() {</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>Avatar</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      person<span class="op">=</span>{{ <span class="dt">name</span><span class="op">:</span> <span class="st">'Lin Lanying'</span><span class="op">,</span> <span class="dt">imageId</span><span class="op">:</span> <span class="st">'1bX5QH6'</span> }}</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      size<span class="op">=</span>{<span class="dv">100</span>}</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">/&gt;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Lin</span>() {</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="cf">return</span> (</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="op">&lt;</span>Avatar</span>
+<span id="cb2-4"><a href="#cb2-4"></a>      person<span class="op">=</span>{{ <span class="dt">name</span><span class="op">:</span> <span class="st">'Lin Lanying'</span><span class="op">,</span> <span class="dt">imageId</span><span class="op">:</span> <span class="st">'1bX5QH6'</span> }}</span>
+<span id="cb2-5"><a href="#cb2-5"></a>      size<span class="op">=</span>{<span class="dv">100</span>}</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="op">/&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>  )<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>carla.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode js code-overflow-wrap code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Carla</span>() {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>Avatar</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      person<span class="op">=</span>{{ <span class="dt">name</span><span class="op">:</span> <span class="st">'Carla Lan'</span><span class="op">,</span> <span class="dt">imageId</span><span class="op">:</span> <span class="st">'KIU3QH1'</span> }}</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      size<span class="op">=</span>{<span class="dv">60</span>}</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">/&gt;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Carla</span>() {</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="cf">return</span> (</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    <span class="op">&lt;</span>Avatar</span>
+<span id="cb3-4"><a href="#cb3-4"></a>      person<span class="op">=</span>{{ <span class="dt">name</span><span class="op">:</span> <span class="st">'Carla Lan'</span><span class="op">,</span> <span class="dt">imageId</span><span class="op">:</span> <span class="st">'KIU3QH1'</span> }}</span>
+<span id="cb3-5"><a href="#cb3-5"></a>      size<span class="op">=</span>{<span class="dv">60</span>}</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="op">/&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  )<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="stateful-and-sateless" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="stateful-and-sateless"><span class="header-section-number">1.2</span> Stateful and Sateless</h2>
-<section id="sateful-components" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="sateful-components"><span class="header-section-number">1.2.1</span> Sateful Components</h3>
+<section id="stateful-and-sateless" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="stateful-and-sateless"><span class="header-section-number">2</span> Stateful and Sateless</h2>
+<section id="sateful-components" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="sateful-components"><span class="header-section-number">2.1</span> Sateful Components</h3>
 <p>Functions that internally modify the underlying data (props).</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>profile.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode js code-overflow-wrap code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> Hello <span class="op">=</span> ({name}) <span class="kw">=&gt;</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello {name <span class="op">+</span> <span class="st">' - '</span> <span class="op">+</span> (<span class="kw">new</span> <span class="bu">Date</span>())<span class="op">.</span><span class="fu">toLocaleString</span>()}<span class="op">!!!&lt;/</span>h1<span class="op">&gt;;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>ReactDOM<span class="op">.</span><span class="fu">render</span>(</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>Hello name<span class="op">=</span><span class="st">"World"</span> <span class="op">/&gt;,</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">'container'</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">function</span> <span class="fu">Hello</span>({ name }) {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="co">//...</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="cf">return</span> (</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="kw">&lt;&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>     <span class="kw">&lt;h1&gt;</span>Hello <span class="va">{</span>name <span class="op">+</span> <span class="st">' - '</span> <span class="op">+</span> (<span class="kw">new</span> <span class="bu">Date</span>())<span class="op">.</span><span class="fu">toLocaleString</span>()<span class="va">}</span>!!!<span class="kw">&lt;/h1&gt;</span>;</span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="kw">&lt;/&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>  )</span>
+<span id="cb4-8"><a href="#cb4-8"></a>}</span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Hello</span>() {</span>
+<span id="cb4-11"><a href="#cb4-11"></a>  <span class="co">//...</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>  <span class="cf">return</span> (</span>
+<span id="cb4-13"><a href="#cb4-13"></a>   <span class="fu">&lt;Hello</span> <span class="ot">name</span><span class="op">=</span><span class="st">"World"</span> <span class="fu">/&gt;</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>  )</span>
+<span id="cb4-15"><a href="#cb4-15"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="sateless-components" class="level3" data-number="1.2.2">
-<h3 data-number="1.2.2" class="anchored" data-anchor-id="sateless-components"><span class="header-section-number">1.2.2</span> Sateless Components</h3>
+<section id="sateless-components" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="sateless-components"><span class="header-section-number">2.2</span> Sateless Components</h3>
 <p>Pure components that respond to the underlying data received (props), without modifying it. A pure function is a function where the return value is only determined by its input values, without observable side effects.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>profile.jsx</strong></pre>
+<pre><strong>Hello.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode js code-overflow-wrap code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> Hello <span class="op">=</span> ({name}) <span class="kw">=&gt;</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello {name}<span class="op">!!!&lt;/</span>h1<span class="op">&gt;;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ReactDOM<span class="op">.</span><span class="fu">render</span>(</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>Hello name<span class="op">=</span><span class="st">"World"</span> <span class="op">/&gt;,</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">'container'</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">function</span> <span class="fu">Hello</span>({ name }) {</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="co">//...</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="cf">return</span> (</span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="kw">&lt;&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>     <span class="kw">&lt;h1&gt;</span>Hello <span class="va">{</span>name<span class="va">}</span>!!!<span class="kw">&lt;/h1&gt;</span>;</span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="kw">&lt;/&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>  )</span>
+<span id="cb5-8"><a href="#cb5-8"></a>}</span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Hello</span>() {</span>
+<span id="cb5-11"><a href="#cb5-11"></a>  <span class="co">//...</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>  <span class="cf">return</span> (</span>
+<span id="cb5-13"><a href="#cb5-13"></a>   <span class="fu">&lt;Hello</span> <span class="ot">name</span><span class="op">=</span><span class="st">"World"</span> <span class="fu">/&gt;</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>  )</span>
+<span id="cb5-15"><a href="#cb5-15"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+</section>
+<section id="what-is-state-and-rendering-updaterender-cycle" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="what-is-state-and-rendering-updaterender-cycle"><span class="header-section-number">3</span> What is state and rendering: update/render cycle</h2>
+<p><a href="https://beta.reactjs.org/learn/state-as-a-snapshot#setting-state-triggers-renders" class="external">State variables</a> might look like regular JavaScript variables that you can read and write to.</p>
+<blockquote class="blockquote">
+<p><strong>However, state behaves more like a snapshot</strong>.</p>
+</blockquote>
+<p>Setting it <strong>does not change</strong> the state variable you already have, <a href="https://beta.reactjs.org/learn/render-and-commit#step-1-trigger-a-render" class="external">but instead triggers a re-render</a> that will print a state variable copy with the new value.</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>State can hold any kind of JavaScript value, including objects.</p>
+<p>But you shouldn’t change objects that you hold in the React state directly.</p>
+<p>Instead, when you want to update an object, you need to create a new one (or make a copy of an existing one), and then set the state to use that copy.</p>
+</div>
+</div>
+<p><a href="../reactjs/reactjs-es6-spread.html#copying-objects-with-the-spread-syntax">How it works in combination with spread opearator</a></p>
+<blockquote class="blockquote">
+<p><strong>Treat state as read-only</strong>: in other words, you should treat any JavaScript object that you put into state as read-only.</p>
+</blockquote>
+</section>
+<section id="so-is-react-immutable" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="so-is-react-immutable"><span class="header-section-number">4</span> So, Is React immutable?</h2>
+<p>The term <strong>immutable</strong> refers <strong>to the idea that the state of a component should not be changed directly.</strong> Instead, when the state of a component needs to be updated, a new copy of the state should be created with the desired changes applied.</p>
+<p>This approach to state management can help <mark>to ensure that the state of a React application is predictable and easy to understand, as it makes it clear how the state is changing over time.</mark></p>
+<p>It can also make it easier to debug issues in your application, as you can more easily trace the history of the state and see how it has changed.</p>
+</section>
+<section id="and-then-what-is-a-mutation" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="and-then-what-is-a-mutation"><span class="header-section-number">5</span> And then, what is a mutation?</h2>
+<p>You can store any kind of JavaScript value in state.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Hello.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">const</span> [x<span class="op">,</span> setX] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>So far you’ve been working with numbers, strings, and booleans. These kinds of JavaScript values are “immutable”, meaning unchangeable or “read-only”. You can trigger a re-render to replace a value:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Hello.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">setX</span>(<span class="dv">5</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The x state changed from 0 to 5, but the number 0 itself did not change. It’s not possible to make any changes to the built-in primitive values like numbers, strings, and booleans in JavaScript.</p>
+<p>Now consider an object in state:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Hello.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">const</span> [position<span class="op">,</span> setPosition] <span class="op">=</span> <span class="fu">useState</span>({ <span class="dt">x</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">0</span> })<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Technically, it is possible to change the contents of the object itself. This is called a mutation:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Hello.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb9-1"><a href="#cb9-1"></a>position<span class="op">.</span><span class="at">x</span> <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>However, although objects in React state are technically mutable, you should treat them as if they were immutable—like numbers, booleans, and strings. Instead of mutating them, you should always replace them.</p>
+</section>
+<section id="examples" class="level2 page-columns page-full" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="examples"><span class="header-section-number">6</span> Examples</h2>
+<section id="example-1-setting-state-only-changes-it-for-the-next-render" class="level3 page-columns page-full" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="example-1-setting-state-only-changes-it-for-the-next-render"><span class="header-section-number">6.1</span> Example 1: setting state only changes it for the next render</h3>
+<p><a href="https://beta.reactjs.org/learn/queueing-a-series-of-state-updates#react-batches-state-updates" class="external">In this example</a>, you might expect that clicking the <code>+3</code> button would increment the counter three times because it calls <code>setNumber(number + 1)</code> three times.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb10-1"><a href="#cb10-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Counter</span>() {</span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="kw">const</span> [number<span class="op">,</span> setNumber] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a></span>
+<span id="cb10-6"><a href="#cb10-6"></a>  <span class="cf">return</span> (</span>
+<span id="cb10-7"><a href="#cb10-7"></a>    <span class="kw">&lt;&gt;</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>      <span class="kw">&lt;h1&gt;</span><span class="va">{</span>number<span class="va">}</span><span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> {</span>
+<span id="cb10-10"><a href="#cb10-10"></a>        <span class="fu">setNumber</span>(number <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>        <span class="fu">setNumber</span>(number <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>        <span class="fu">setNumber</span>(number <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a>      }<span class="va">}</span><span class="kw">&gt;</span>+3<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>    <span class="kw">&lt;/&gt;</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a>  )</span>
+<span id="cb10-16"><a href="#cb10-16"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex36.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Initial render"><img src="..\images/reactjs/ex36.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">Initial render</figcaption><p></p>
+</figure>
+</div>
+</div><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex37.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Next render"><img src="..\images/reactjs/ex37.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">Next render</figcaption><p></p>
+</figure>
+</div>
+</div><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex38.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="3 Next render"><img src="..\images/reactjs/ex38.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">3 Next render</figcaption><p></p>
+</figure>
+</div>
+</div></div>
+
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Number is a state variable, not a regular variable
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Setting state only changes it for the next render</strong>. During the first render, <code>number</code> was <code>0</code>.</p>
+<p>And this is like this because number is … <strong>a state.</strong></p>
+<p>So, during execution lines #10, #11 and #12, <strong><code>number</code> value is …0!</strong></p>
+</div>
+</div>
+<p><a href="https://beta.reactjs.org/learn/queueing-a-series-of-state-updates#react-batches-state-updates" class="external">This is why</a>, in that render’s <code>onClick handler</code>, the value of <code>number</code> is still <code>0</code> even after <code>setNumber(number + 1)</code> was called .. <strong>three times!!!</strong></p>
+</section>
+<section id="example-2-state-over-time" class="level3 page-columns page-full" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="example-2-state-over-time"><span class="header-section-number">6.2</span> Example 2: State over time</h3>
+<p><a href="https://beta.reactjs.org/learn/state-as-a-snapshot#state-over-time" class="external">State over time</a>, step by step how setting and render do not happen at same moment.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb11-1"><a href="#cb11-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Counter</span>() {</span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="kw">const</span> [number<span class="op">,</span> setNumber] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="cf">return</span> (</span>
+<span id="cb11-7"><a href="#cb11-7"></a>    <span class="kw">&lt;&gt;</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>      <span class="kw">&lt;h1&gt;</span><span class="va">{</span>number<span class="va">}</span><span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> {</span>
+<span id="cb11-10"><a href="#cb11-10"></a>        <span class="fu">setNumber</span>(number <span class="op">+</span> <span class="dv">5</span>)<span class="op">;</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>        <span class="fu">alert</span>(number)<span class="op">;</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a>      }<span class="va">}</span><span class="kw">&gt;</span>+5<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a>    <span class="kw">&lt;/&gt;</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a>  )</span>
+<span id="cb11-15"><a href="#cb11-15"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex39.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Initial render, number state is 0"><img src="..\images/reactjs/ex39.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">Initial render, <code>number</code> state is 0</figcaption><p></p>
+</figure>
+</div>
+</div><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex40.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="setting number state to 5, but first React will execute line #11, alert, and number state still is 0"><img src="..\images/reactjs/ex40.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">setting <code>number</code> state to 5, but first React will execute line #11, alert, and <code>number</code> state <strong>still</strong> is 0</figcaption><p></p>
+</figure>
+</div>
+</div><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex41.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Next render, number state now is now 5"><img src="..\images/reactjs/ex41.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">Next render, <code>number</code> state now is now 5</figcaption><p></p>
+</figure>
+</div>
+</div></div>
+
+<blockquote class="blockquote">
+<p>Alert is helping us to understand why <strong>setting and render are two different moments</strong></p>
+</blockquote>
+<p>Setting <code>number</code> state to 5, but first React will execute line #11, alert, and <code>number</code> state <strong>still</strong> is 0</p>
+</section>
+<section id="example-3-email" class="level3 page-columns page-full" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="example-3-email"><span class="header-section-number">6.3</span> Example 3: email</h3>
+<p>Here is an example of <strong>how that makes your event handlers less prone to timing mistakes</strong>. Below is a form that sends a message with a <strong>five-second delay</strong>. Imagine this scenario:</p>
+<ol type="1">
+<li>You press the <code>Send</code> button, sending <em>Hello</em> to <strong>Alice</strong>.</li>
+<li>Before the <strong>five-second delay ends</strong>, you change the value of the <code>To</code> field to <strong>Bob</strong>.</li>
+</ol>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb12-1"><a href="#cb12-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Form</span>() {</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="kw">const</span> [to<span class="op">,</span> setTo] <span class="op">=</span> <span class="fu">useState</span>(<span class="st">'Alice'</span>)<span class="op">;</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="kw">const</span> [message<span class="op">,</span> setMessage] <span class="op">=</span> <span class="fu">useState</span>(<span class="st">'Hello'</span>)<span class="op">;</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="kw">function</span> <span class="fu">handleSubmit</span>(e) {</span>
+<span id="cb12-8"><a href="#cb12-8"></a>    e<span class="op">.</span><span class="fu">preventDefault</span>()<span class="op">;</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>    <span class="pp">setTimeout</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb12-10"><a href="#cb12-10"></a>      <span class="fu">alert</span>(<span class="vs">`You said </span><span class="sc">${</span>message<span class="sc">}</span><span class="vs"> to </span><span class="sc">${</span>to<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>    }<span class="op">,</span> <span class="dv">5000</span>)<span class="op">;</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>  }</span>
+<span id="cb12-13"><a href="#cb12-13"></a></span>
+<span id="cb12-14"><a href="#cb12-14"></a>  <span class="cf">return</span> (</span>
+<span id="cb12-15"><a href="#cb12-15"></a>    <span class="kw">&lt;form</span> <span class="ot">onSubmit</span><span class="op">=</span><span class="va">{</span>handleSubmit<span class="va">}</span><span class="kw">&gt;</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a>      <span class="kw">&lt;label&gt;</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a>        To:<span class="va">{</span><span class="st">' '</span><span class="va">}</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a>        <span class="kw">&lt;select</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a>          <span class="ot">value</span><span class="op">=</span><span class="va">{</span>to<span class="va">}</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a>          <span class="ot">onChange</span><span class="op">=</span><span class="va">{</span>e <span class="kw">=&gt;</span> <span class="fu">setTo</span>(e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>)<span class="va">}</span><span class="kw">&gt;</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a>          <span class="kw">&lt;option</span> <span class="ot">value</span><span class="op">=</span><span class="st">"Alice"</span><span class="kw">&gt;</span>Alice<span class="kw">&lt;/option&gt;</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a>          <span class="kw">&lt;option</span> <span class="ot">value</span><span class="op">=</span><span class="st">"Bob"</span><span class="kw">&gt;</span>Bob<span class="kw">&lt;/option&gt;</span></span>
+<span id="cb12-23"><a href="#cb12-23"></a>        <span class="kw">&lt;/select&gt;</span></span>
+<span id="cb12-24"><a href="#cb12-24"></a>      <span class="kw">&lt;/label&gt;</span></span>
+<span id="cb12-25"><a href="#cb12-25"></a>      <span class="kw">&lt;textarea</span></span>
+<span id="cb12-26"><a href="#cb12-26"></a>        <span class="ot">placeholder</span><span class="op">=</span><span class="st">"Message"</span></span>
+<span id="cb12-27"><a href="#cb12-27"></a>        <span class="ot">value</span><span class="op">=</span><span class="va">{</span>message<span class="va">}</span></span>
+<span id="cb12-28"><a href="#cb12-28"></a>        <span class="ot">onChange</span><span class="op">=</span><span class="va">{</span>e <span class="kw">=&gt;</span> <span class="fu">setMessage</span>(e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>)<span class="va">}</span></span>
+<span id="cb12-29"><a href="#cb12-29"></a>      <span class="kw">/&gt;</span></span>
+<span id="cb12-30"><a href="#cb12-30"></a>      <span class="kw">&lt;button</span> <span class="ot">type</span><span class="op">=</span><span class="st">"submit"</span><span class="kw">&gt;</span>Send<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb12-31"><a href="#cb12-31"></a>    <span class="kw">&lt;/form&gt;</span></span>
+<span id="cb12-32"><a href="#cb12-32"></a>  )<span class="op">;</span></span>
+<span id="cb12-33"><a href="#cb12-33"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex47.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Initial render"><img src="..\images/reactjs/ex47.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">Initial render</figcaption><p></p>
+</figure>
+</div>
+</div><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex48.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Next render"><img src="..\images/reactjs/ex48.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">Next render</figcaption><p></p>
+</figure>
+</div>
+</div></div>
+<p>React keeps the state values <em>fixed</em> within <strong>one render’s event handlers</strong>.</p>
+<p>You don’t need to worry whether the state has changed while the code is running.</p>
+</section>
+<section id="example-4-state-updater-function" class="level3 page-columns page-full" data-number="6.4">
+<h3 data-number="6.4" class="anchored" data-anchor-id="example-4-state-updater-function"><span class="header-section-number">6.4</span> Example 4: state updater function</h3>
+<p>It is an uncommon use case, but if you would like to update the same state variable multiple times before the next render, instead of passing the next state value like <code>setNumber(number + 1)</code>, you can pass a function that calculates the next state based on the previous one in the queue, like <code>setNumber(n =&gt; n + 1)</code>.</p>
+<p>It is a way to tell React to <strong>do something with the state value instead of just replacing it.</strong></p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb13-1"><a href="#cb13-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Counter</span>() {</span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="kw">const</span> [number<span class="op">,</span> setNumber] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="cf">return</span> (</span>
+<span id="cb13-7"><a href="#cb13-7"></a>    <span class="kw">&lt;&gt;</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>      <span class="kw">&lt;h1&gt;</span><span class="va">{</span>number<span class="va">}</span><span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> {</span>
+<span id="cb13-10"><a href="#cb13-10"></a>        <span class="fu">setNumber</span>(n <span class="kw">=&gt;</span> n <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a>        <span class="fu">setNumber</span>(n <span class="kw">=&gt;</span> n <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a>        <span class="fu">setNumber</span>(n <span class="kw">=&gt;</span> n <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a>      }<span class="va">}</span><span class="kw">&gt;</span>+3<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a>    <span class="kw">&lt;/&gt;</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a>  )</span>
+<span id="cb13-16"><a href="#cb13-16"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex49.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Initial render"><img src="..\images/reactjs/ex49.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">Initial render</figcaption><p></p>
+</figure>
+</div>
+</div><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex50.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Next render"><img src="..\images/reactjs/ex50.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">Next render</figcaption><p></p>
+</figure>
+</div>
+</div></div>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1330,7 +1645,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
-</section>
 </section>
 </section>
 
@@ -1606,7 +1920,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":true});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom"});</script>
 
 
 
