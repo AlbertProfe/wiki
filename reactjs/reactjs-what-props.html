@@ -1220,7 +1220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Saturday, January 7, 2023</p>
+      <p class="date-modified">Sunday, January 8, 2023</p>
     </div>
   </div>
     
@@ -1336,7 +1336,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 </section>
-<section id="what-is-state-and-rendering-updaterender-cycle" class="level2" data-number="3">
+<section id="what-is-state-and-rendering-updaterender-cycle" class="level2 page-columns page-full" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="what-is-state-and-rendering-updaterender-cycle"><span class="header-section-number">3</span> What is state and rendering: update/render cycle</h2>
 <p><a href="https://beta.reactjs.org/learn/state-as-a-snapshot#setting-state-triggers-renders" class="external">State variables</a> might look like regular JavaScript variables that you can read and write to.</p>
 <blockquote class="blockquote">
@@ -1358,10 +1358,55 @@ Important
 <p>Instead, when you want to update an object, you need to create a new one (or make a copy of an existing one), and then set the state to use that copy.</p>
 </div>
 </div>
-<p><a href="../reactjs/reactjs-es6-spread.html#copying-objects-with-the-spread-syntax">How it works in combination with spread opearator</a></p>
+<p><a href="../reactjs/reactjs-es6-spread.html#copying-objects-with-the-spread-syntax">How it works in combination with spread opearator</a><br>
+<a href="../reactjs/reactjs-hook-state.html">And what is a hook: useState</a></p>
 <blockquote class="blockquote">
 <p><strong>Treat state as read-only</strong>: in other words, you should treat any JavaScript object that you put into state as read-only.</p>
 </blockquote>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb6-1"><a href="#cb6-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Counter</span>() {</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="kw">const</span> [number<span class="op">,</span> setNumber] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="cf">return</span> (</span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="kw">&lt;&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> {</span>
+<span id="cb6-9"><a href="#cb6-9"></a>        <span class="fu">setNumber</span>(number<span class="op">++</span>)<span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>      }<span class="va">}</span><span class="kw">&gt;</span>+1<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a></span>
+<span id="cb6-12"><a href="#cb6-12"></a>      <span class="kw">&lt;h1&gt;</span><span class="va">{</span>number<span class="va">}</span><span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>    <span class="kw">&lt;/&gt;</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>  )</span>
+<span id="cb6-15"><a href="#cb6-15"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex53.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Initial render"><img src="..\images/reactjs/ex53.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">Initial render</figcaption><p></p>
+</figure>
+</div>
+</div><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex54.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Next render: setting-update/render cycle"><img src="..\images/reactjs/ex54.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">Next render: setting-update/render cycle</figcaption><p></p>
+</figure>
+</div>
+</div><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ex55.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Next render"><img src="..\images/reactjs/ex55.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">Next render</figcaption><p></p>
+</figure>
+</div>
+</div></div>
+
 </section>
 <section id="so-is-react-immutable" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="so-is-react-immutable"><span class="header-section-number">4</span> So, Is React immutable?</h2>
@@ -1376,31 +1421,31 @@ Important
 <div class="code-with-filename-file">
 <pre><strong>Hello.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">const</span> [x<span class="op">,</span> setX] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">const</span> [x<span class="op">,</span> setX] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>So far you’ve been working with numbers, strings, and booleans. These kinds of JavaScript values are “immutable”, meaning unchangeable or “read-only”. You can trigger a re-render to replace a value:</p>
+<p>So far you’ve been working with numbers, strings, and booleans. These kinds of JavaScript values are <em>immutable</em>, meaning unchangeable or <em>read-only</em>. <strong>You can trigger a re-render to replace a value:</strong></p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Hello.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">setX</span>(<span class="dv">5</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">setX</span>(<span class="dv">5</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The x state changed from 0 to 5, but the number 0 itself did not change. It’s not possible to make any changes to the built-in primitive values like numbers, strings, and booleans in JavaScript.</p>
+<p>The <code>x</code> <em>state changed from 0 to 5</em>, but the number <code>0</code> itself did not change. It’s not possible to make <strong>any changes to the built-in primitive values</strong> like numbers, strings, and booleans in JavaScript.</p>
 <p>Now consider an object in state:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Hello.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">const</span> [position<span class="op">,</span> setPosition] <span class="op">=</span> <span class="fu">useState</span>({ <span class="dt">x</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">0</span> })<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">const</span> [position<span class="op">,</span> setPosition] <span class="op">=</span> <span class="fu">useState</span>({ <span class="dt">x</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">0</span> })<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Technically, it is possible to change the contents of the object itself. This is called a mutation:</p>
+<p>Technically, it is possible to change the contents of the object itself. This is called a <strong>mutation</strong>:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Hello.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb9-1"><a href="#cb9-1"></a>position<span class="op">.</span><span class="at">x</span> <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb10-1"><a href="#cb10-1"></a>position<span class="op">.</span><span class="at">x</span> <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>However, although objects in React state are technically mutable, you should treat them as if they were immutable—like numbers, booleans, and strings. Instead of mutating them, you should always replace them.</p>
+<p><mark>However, although objects in React state are technically mutable, you should treat them as if they were immutable—like numbers, booleans, and strings. Instead of mutating them, you should always <strong>replace</strong> them.<mark></mark></mark></p>
 </section>
 <section id="examples" class="level2 page-columns page-full" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="examples"><span class="header-section-number">6</span> Examples</h2>
@@ -1411,42 +1456,42 @@ Important
 <div class="code-with-filename-file">
 <pre><strong>App.js</strong></pre>
 </div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb10-1"><a href="#cb10-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Counter</span>() {</span>
-<span id="cb10-4"><a href="#cb10-4"></a>  <span class="kw">const</span> [number<span class="op">,</span> setNumber] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a></span>
-<span id="cb10-6"><a href="#cb10-6"></a>  <span class="cf">return</span> (</span>
-<span id="cb10-7"><a href="#cb10-7"></a>    <span class="kw">&lt;&gt;</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a>      <span class="kw">&lt;h1&gt;</span><span class="va">{</span>number<span class="va">}</span><span class="kw">&lt;/h1&gt;</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> {</span>
-<span id="cb10-10"><a href="#cb10-10"></a>        <span class="fu">setNumber</span>(number <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a>        <span class="fu">setNumber</span>(number <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a>        <span class="fu">setNumber</span>(number <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a>      }<span class="va">}</span><span class="kw">&gt;</span>+3<span class="kw">&lt;/button&gt;</span></span>
-<span id="cb10-14"><a href="#cb10-14"></a>    <span class="kw">&lt;/&gt;</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a>  )</span>
-<span id="cb10-16"><a href="#cb10-16"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb11-1"><a href="#cb11-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Counter</span>() {</span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="kw">const</span> [number<span class="op">,</span> setNumber] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="cf">return</span> (</span>
+<span id="cb11-7"><a href="#cb11-7"></a>    <span class="kw">&lt;&gt;</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>      <span class="kw">&lt;h1&gt;</span><span class="va">{</span>number<span class="va">}</span><span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> {</span>
+<span id="cb11-10"><a href="#cb11-10"></a>        <span class="fu">setNumber</span>(number <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>        <span class="fu">setNumber</span>(number <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a>        <span class="fu">setNumber</span>(number <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a>      }<span class="va">}</span><span class="kw">&gt;</span>+3<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a>    <span class="kw">&lt;/&gt;</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a>  )</span>
+<span id="cb11-16"><a href="#cb11-16"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ex36.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Initial render"><img src="..\images/reactjs/ex36.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="../images/reactjs/ex36.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Initial render"><img src="..\images/reactjs/ex36.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption">Initial render</figcaption><p></p>
 </figure>
 </div>
 </div><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ex37.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Next render"><img src="..\images/reactjs/ex37.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="../images/reactjs/ex37.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Next render"><img src="..\images/reactjs/ex37.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption">Next render</figcaption><p></p>
 </figure>
 </div>
 </div><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ex38.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="3 Next render"><img src="..\images/reactjs/ex38.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="../images/reactjs/ex38.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="3 Next render"><img src="..\images/reactjs/ex38.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption">3 Next render</figcaption><p></p>
 </figure>
 </div>
@@ -1476,41 +1521,41 @@ Number is a state variable, not a regular variable
 <div class="code-with-filename-file">
 <pre><strong>App.js</strong></pre>
 </div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb11-1"><a href="#cb11-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Counter</span>() {</span>
-<span id="cb11-4"><a href="#cb11-4"></a>  <span class="kw">const</span> [number<span class="op">,</span> setNumber] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a></span>
-<span id="cb11-6"><a href="#cb11-6"></a>  <span class="cf">return</span> (</span>
-<span id="cb11-7"><a href="#cb11-7"></a>    <span class="kw">&lt;&gt;</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a>      <span class="kw">&lt;h1&gt;</span><span class="va">{</span>number<span class="va">}</span><span class="kw">&lt;/h1&gt;</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> {</span>
-<span id="cb11-10"><a href="#cb11-10"></a>        <span class="fu">setNumber</span>(number <span class="op">+</span> <span class="dv">5</span>)<span class="op">;</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a>        <span class="fu">alert</span>(number)<span class="op">;</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a>      }<span class="va">}</span><span class="kw">&gt;</span>+5<span class="kw">&lt;/button&gt;</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a>    <span class="kw">&lt;/&gt;</span></span>
-<span id="cb11-14"><a href="#cb11-14"></a>  )</span>
-<span id="cb11-15"><a href="#cb11-15"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb12-1"><a href="#cb12-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Counter</span>() {</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="kw">const</span> [number<span class="op">,</span> setNumber] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="cf">return</span> (</span>
+<span id="cb12-7"><a href="#cb12-7"></a>    <span class="kw">&lt;&gt;</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>      <span class="kw">&lt;h1&gt;</span><span class="va">{</span>number<span class="va">}</span><span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> {</span>
+<span id="cb12-10"><a href="#cb12-10"></a>        <span class="fu">setNumber</span>(number <span class="op">+</span> <span class="dv">5</span>)<span class="op">;</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>        <span class="fu">alert</span>(number)<span class="op">;</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>      }<span class="va">}</span><span class="kw">&gt;</span>+5<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a>    <span class="kw">&lt;/&gt;</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a>  )</span>
+<span id="cb12-15"><a href="#cb12-15"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ex39.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Initial render, number state is 0"><img src="..\images/reactjs/ex39.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="../images/reactjs/ex39.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Initial render, number state is 0"><img src="..\images/reactjs/ex39.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption">Initial render, <code>number</code> state is 0</figcaption><p></p>
 </figure>
 </div>
 </div><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ex40.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="setting number state to 5, but first React will execute line #11, alert, and number state still is 0"><img src="..\images/reactjs/ex40.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="../images/reactjs/ex40.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="setting number state to 5, but first React will execute line #11, alert, and number state still is 0"><img src="..\images/reactjs/ex40.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption">setting <code>number</code> state to 5, but first React will execute line #11, alert, and <code>number</code> state <strong>still</strong> is 0</figcaption><p></p>
 </figure>
 </div>
 </div><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ex41.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Next render, number state now is now 5"><img src="..\images/reactjs/ex41.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="../images/reactjs/ex41.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Next render, number state now is now 5"><img src="..\images/reactjs/ex41.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption">Next render, <code>number</code> state now is now 5</figcaption><p></p>
 </figure>
 </div>
@@ -1532,52 +1577,52 @@ Number is a state variable, not a regular variable
 <div class="code-with-filename-file">
 <pre><strong>App.js</strong></pre>
 </div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb12-1"><a href="#cb12-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Form</span>() {</span>
-<span id="cb12-4"><a href="#cb12-4"></a>  <span class="kw">const</span> [to<span class="op">,</span> setTo] <span class="op">=</span> <span class="fu">useState</span>(<span class="st">'Alice'</span>)<span class="op">;</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>  <span class="kw">const</span> [message<span class="op">,</span> setMessage] <span class="op">=</span> <span class="fu">useState</span>(<span class="st">'Hello'</span>)<span class="op">;</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a></span>
-<span id="cb12-7"><a href="#cb12-7"></a>  <span class="kw">function</span> <span class="fu">handleSubmit</span>(e) {</span>
-<span id="cb12-8"><a href="#cb12-8"></a>    e<span class="op">.</span><span class="fu">preventDefault</span>()<span class="op">;</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a>    <span class="pp">setTimeout</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb12-10"><a href="#cb12-10"></a>      <span class="fu">alert</span>(<span class="vs">`You said </span><span class="sc">${</span>message<span class="sc">}</span><span class="vs"> to </span><span class="sc">${</span>to<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
-<span id="cb12-11"><a href="#cb12-11"></a>    }<span class="op">,</span> <span class="dv">5000</span>)<span class="op">;</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a>  }</span>
-<span id="cb12-13"><a href="#cb12-13"></a></span>
-<span id="cb12-14"><a href="#cb12-14"></a>  <span class="cf">return</span> (</span>
-<span id="cb12-15"><a href="#cb12-15"></a>    <span class="kw">&lt;form</span> <span class="ot">onSubmit</span><span class="op">=</span><span class="va">{</span>handleSubmit<span class="va">}</span><span class="kw">&gt;</span></span>
-<span id="cb12-16"><a href="#cb12-16"></a>      <span class="kw">&lt;label&gt;</span></span>
-<span id="cb12-17"><a href="#cb12-17"></a>        To:<span class="va">{</span><span class="st">' '</span><span class="va">}</span></span>
-<span id="cb12-18"><a href="#cb12-18"></a>        <span class="kw">&lt;select</span></span>
-<span id="cb12-19"><a href="#cb12-19"></a>          <span class="ot">value</span><span class="op">=</span><span class="va">{</span>to<span class="va">}</span></span>
-<span id="cb12-20"><a href="#cb12-20"></a>          <span class="ot">onChange</span><span class="op">=</span><span class="va">{</span>e <span class="kw">=&gt;</span> <span class="fu">setTo</span>(e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>)<span class="va">}</span><span class="kw">&gt;</span></span>
-<span id="cb12-21"><a href="#cb12-21"></a>          <span class="kw">&lt;option</span> <span class="ot">value</span><span class="op">=</span><span class="st">"Alice"</span><span class="kw">&gt;</span>Alice<span class="kw">&lt;/option&gt;</span></span>
-<span id="cb12-22"><a href="#cb12-22"></a>          <span class="kw">&lt;option</span> <span class="ot">value</span><span class="op">=</span><span class="st">"Bob"</span><span class="kw">&gt;</span>Bob<span class="kw">&lt;/option&gt;</span></span>
-<span id="cb12-23"><a href="#cb12-23"></a>        <span class="kw">&lt;/select&gt;</span></span>
-<span id="cb12-24"><a href="#cb12-24"></a>      <span class="kw">&lt;/label&gt;</span></span>
-<span id="cb12-25"><a href="#cb12-25"></a>      <span class="kw">&lt;textarea</span></span>
-<span id="cb12-26"><a href="#cb12-26"></a>        <span class="ot">placeholder</span><span class="op">=</span><span class="st">"Message"</span></span>
-<span id="cb12-27"><a href="#cb12-27"></a>        <span class="ot">value</span><span class="op">=</span><span class="va">{</span>message<span class="va">}</span></span>
-<span id="cb12-28"><a href="#cb12-28"></a>        <span class="ot">onChange</span><span class="op">=</span><span class="va">{</span>e <span class="kw">=&gt;</span> <span class="fu">setMessage</span>(e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>)<span class="va">}</span></span>
-<span id="cb12-29"><a href="#cb12-29"></a>      <span class="kw">/&gt;</span></span>
-<span id="cb12-30"><a href="#cb12-30"></a>      <span class="kw">&lt;button</span> <span class="ot">type</span><span class="op">=</span><span class="st">"submit"</span><span class="kw">&gt;</span>Send<span class="kw">&lt;/button&gt;</span></span>
-<span id="cb12-31"><a href="#cb12-31"></a>    <span class="kw">&lt;/form&gt;</span></span>
-<span id="cb12-32"><a href="#cb12-32"></a>  )<span class="op">;</span></span>
-<span id="cb12-33"><a href="#cb12-33"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb13-1"><a href="#cb13-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Form</span>() {</span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="kw">const</span> [to<span class="op">,</span> setTo] <span class="op">=</span> <span class="fu">useState</span>(<span class="st">'Alice'</span>)<span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="kw">const</span> [message<span class="op">,</span> setMessage] <span class="op">=</span> <span class="fu">useState</span>(<span class="st">'Hello'</span>)<span class="op">;</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a></span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="kw">function</span> <span class="fu">handleSubmit</span>(e) {</span>
+<span id="cb13-8"><a href="#cb13-8"></a>    e<span class="op">.</span><span class="fu">preventDefault</span>()<span class="op">;</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>    <span class="pp">setTimeout</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb13-10"><a href="#cb13-10"></a>      <span class="fu">alert</span>(<span class="vs">`You said </span><span class="sc">${</span>message<span class="sc">}</span><span class="vs"> to </span><span class="sc">${</span>to<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a>    }<span class="op">,</span> <span class="dv">5000</span>)<span class="op">;</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a>  }</span>
+<span id="cb13-13"><a href="#cb13-13"></a></span>
+<span id="cb13-14"><a href="#cb13-14"></a>  <span class="cf">return</span> (</span>
+<span id="cb13-15"><a href="#cb13-15"></a>    <span class="kw">&lt;form</span> <span class="ot">onSubmit</span><span class="op">=</span><span class="va">{</span>handleSubmit<span class="va">}</span><span class="kw">&gt;</span></span>
+<span id="cb13-16"><a href="#cb13-16"></a>      <span class="kw">&lt;label&gt;</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a>        To:<span class="va">{</span><span class="st">' '</span><span class="va">}</span></span>
+<span id="cb13-18"><a href="#cb13-18"></a>        <span class="kw">&lt;select</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a>          <span class="ot">value</span><span class="op">=</span><span class="va">{</span>to<span class="va">}</span></span>
+<span id="cb13-20"><a href="#cb13-20"></a>          <span class="ot">onChange</span><span class="op">=</span><span class="va">{</span>e <span class="kw">=&gt;</span> <span class="fu">setTo</span>(e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>)<span class="va">}</span><span class="kw">&gt;</span></span>
+<span id="cb13-21"><a href="#cb13-21"></a>          <span class="kw">&lt;option</span> <span class="ot">value</span><span class="op">=</span><span class="st">"Alice"</span><span class="kw">&gt;</span>Alice<span class="kw">&lt;/option&gt;</span></span>
+<span id="cb13-22"><a href="#cb13-22"></a>          <span class="kw">&lt;option</span> <span class="ot">value</span><span class="op">=</span><span class="st">"Bob"</span><span class="kw">&gt;</span>Bob<span class="kw">&lt;/option&gt;</span></span>
+<span id="cb13-23"><a href="#cb13-23"></a>        <span class="kw">&lt;/select&gt;</span></span>
+<span id="cb13-24"><a href="#cb13-24"></a>      <span class="kw">&lt;/label&gt;</span></span>
+<span id="cb13-25"><a href="#cb13-25"></a>      <span class="kw">&lt;textarea</span></span>
+<span id="cb13-26"><a href="#cb13-26"></a>        <span class="ot">placeholder</span><span class="op">=</span><span class="st">"Message"</span></span>
+<span id="cb13-27"><a href="#cb13-27"></a>        <span class="ot">value</span><span class="op">=</span><span class="va">{</span>message<span class="va">}</span></span>
+<span id="cb13-28"><a href="#cb13-28"></a>        <span class="ot">onChange</span><span class="op">=</span><span class="va">{</span>e <span class="kw">=&gt;</span> <span class="fu">setMessage</span>(e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>)<span class="va">}</span></span>
+<span id="cb13-29"><a href="#cb13-29"></a>      <span class="kw">/&gt;</span></span>
+<span id="cb13-30"><a href="#cb13-30"></a>      <span class="kw">&lt;button</span> <span class="ot">type</span><span class="op">=</span><span class="st">"submit"</span><span class="kw">&gt;</span>Send<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb13-31"><a href="#cb13-31"></a>    <span class="kw">&lt;/form&gt;</span></span>
+<span id="cb13-32"><a href="#cb13-32"></a>  )<span class="op">;</span></span>
+<span id="cb13-33"><a href="#cb13-33"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ex47.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Initial render"><img src="..\images/reactjs/ex47.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="../images/reactjs/ex47.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Initial render"><img src="..\images/reactjs/ex47.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption">Initial render</figcaption><p></p>
 </figure>
 </div>
 </div><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ex48.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Next render"><img src="..\images/reactjs/ex48.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="../images/reactjs/ex48.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Next render"><img src="..\images/reactjs/ex48.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption">Next render</figcaption><p></p>
 </figure>
 </div>
@@ -1593,35 +1638,35 @@ Number is a state variable, not a regular variable
 <div class="code-with-filename-file">
 <pre><strong>App.js</strong></pre>
 </div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb13-1"><a href="#cb13-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Counter</span>() {</span>
-<span id="cb13-4"><a href="#cb13-4"></a>  <span class="kw">const</span> [number<span class="op">,</span> setNumber] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a></span>
-<span id="cb13-6"><a href="#cb13-6"></a>  <span class="cf">return</span> (</span>
-<span id="cb13-7"><a href="#cb13-7"></a>    <span class="kw">&lt;&gt;</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a>      <span class="kw">&lt;h1&gt;</span><span class="va">{</span>number<span class="va">}</span><span class="kw">&lt;/h1&gt;</span></span>
-<span id="cb13-9"><a href="#cb13-9"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> {</span>
-<span id="cb13-10"><a href="#cb13-10"></a>        <span class="fu">setNumber</span>(n <span class="kw">=&gt;</span> n <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
-<span id="cb13-11"><a href="#cb13-11"></a>        <span class="fu">setNumber</span>(n <span class="kw">=&gt;</span> n <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
-<span id="cb13-12"><a href="#cb13-12"></a>        <span class="fu">setNumber</span>(n <span class="kw">=&gt;</span> n <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
-<span id="cb13-13"><a href="#cb13-13"></a>      }<span class="va">}</span><span class="kw">&gt;</span>+3<span class="kw">&lt;/button&gt;</span></span>
-<span id="cb13-14"><a href="#cb13-14"></a>    <span class="kw">&lt;/&gt;</span></span>
-<span id="cb13-15"><a href="#cb13-15"></a>  )</span>
-<span id="cb13-16"><a href="#cb13-16"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb14-1"><a href="#cb14-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Counter</span>() {</span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="kw">const</span> [number<span class="op">,</span> setNumber] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a></span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="cf">return</span> (</span>
+<span id="cb14-7"><a href="#cb14-7"></a>    <span class="kw">&lt;&gt;</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>      <span class="kw">&lt;h1&gt;</span><span class="va">{</span>number<span class="va">}</span><span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> {</span>
+<span id="cb14-10"><a href="#cb14-10"></a>        <span class="fu">setNumber</span>(n <span class="kw">=&gt;</span> n <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a>        <span class="fu">setNumber</span>(n <span class="kw">=&gt;</span> n <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a>        <span class="fu">setNumber</span>(n <span class="kw">=&gt;</span> n <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a>      }<span class="va">}</span><span class="kw">&gt;</span>+3<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a>    <span class="kw">&lt;/&gt;</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a>  )</span>
+<span id="cb14-16"><a href="#cb14-16"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ex49.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Initial render"><img src="..\images/reactjs/ex49.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="../images/reactjs/ex49.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Initial render"><img src="..\images/reactjs/ex49.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption">Initial render</figcaption><p></p>
 </figure>
 </div>
 </div><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ex50.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Next render"><img src="..\images/reactjs/ex50.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="../images/reactjs/ex50.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Next render"><img src="..\images/reactjs/ex50.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption">Next render</figcaption><p></p>
 </figure>
 </div>
@@ -1920,7 +1965,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":true,"openEffect":"zoom","selector":".lightbox"});</script>
 
 
 
