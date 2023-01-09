@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Basics on how to learn, four basic rules">
+<meta name="author" content="albertprofe">
+<meta name="description" content="Java SE Lab 02, part 1">
 
-<title>albertprofe wiki - About learning</title>
+<title>albertprofe wiki - Lab#SE02-1: Movie/Review, model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +22,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -42,9 +106,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -67,6 +128,9 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -867,7 +931,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">About learning</h1>
+      <h1 class="quarto-secondary-nav-title">Lab#SE02-1: Movie/Review, model</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -881,12 +945,12 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
-  About
+  Java Standard Edition
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">About me and this site</a>
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">What is Java SE</a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -894,17 +958,17 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/about-this-me.html" class="sidebar-item-text sidebar-link">About me</a>
+  <a href="../javase/se-what-basics.html" class="sidebar-item-text sidebar-link">Java Standard Edition: Basics</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/about-this-site.html" class="sidebar-item-text sidebar-link">About this site</a>
+  <a href="../javase/se-what-principles.html" class="sidebar-item-text sidebar-link">Java Standard Edition: Principles</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/about-this-images-credit.html" class="sidebar-item-text sidebar-link">About images credit</a>
+  <a href="../javase/se-what-moochelsinki.html" class="sidebar-item-text sidebar-link">Java MOOC Helsinki</a>
   </div>
 </li>
       </ul>
@@ -912,20 +976,55 @@ ul.task-list li input[type="checkbox"] {
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Learning</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Java Concepts</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/about-learning-intro.html" class="sidebar-item-text sidebar-link active">About learning</a>
+  <a href="../javase/se-concepts-maven.html" class="sidebar-item-text sidebar-link">Java SE: Maven</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/about-learning-questions.html" class="sidebar-item-text sidebar-link">About the Useful Questions</a>
+  <a href="../javase/se-concepts-createproject.html" class="sidebar-item-text sidebar-link">Java SE: Create Maven Project</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/se-concepts-projectgit.html" class="sidebar-item-text sidebar-link">Java SE: Project push GitHub</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/se-concepts-tdd.html" class="sidebar-item-text sidebar-link">Java SE: JUnit and TDD</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/se-concepts-objects.html" class="sidebar-item-text sidebar-link">Java SE: Class and Objects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/se-concepts-scope.html" class="sidebar-item-text sidebar-link">Java SE: Scope</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/se-concepts-static.html" class="sidebar-item-text sidebar-link">Java SE: static modifier</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/se-concepts-coupling.html" class="sidebar-item-text sidebar-link">Java SE: Coupling/Cohesion</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/se-concepts-package.html" class="sidebar-item-text sidebar-link">Java SE: Packages</a>
   </div>
 </li>
       </ul>
@@ -933,7 +1032,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Listings</a>
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Java Principles</a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -941,12 +1040,120 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/about-listing-table.html" class="sidebar-item-text sidebar-link">Articles Table-Listing</a>
+  <a href="../javase/se-principles-encapsulation.html" class="sidebar-item-text sidebar-link">Java SE: Encapsulation</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about/about-listing-card.html" class="sidebar-item-text sidebar-link">Articles Card-Listing</a>
+  <a href="../javase/se-principles-abstraction.html" class="sidebar-item-text sidebar-link">Java SE: Abstraction</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/se-principles-inheritance.html" class="sidebar-item-text sidebar-link">Java SE: Inherence</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/se-principles-polymorphism.html" class="sidebar-item-text sidebar-link">Java SE: Polymorphism</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Java Design Patterns</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/se-pattern-intro.html" class="sidebar-item-text sidebar-link">Java SE Design-Patterns</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/se-pattern-uml.html" class="sidebar-item-text sidebar-link">Java Patterns: UML</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/se-pattern-singleton.html" class="sidebar-item-text sidebar-link">Java Patterns: Singleton</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/se-pattern-factory.html" class="sidebar-item-text sidebar-link">Java Patterns: Factory</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/se-pattern-abstractfactory.html" class="sidebar-item-text sidebar-link">Java Patterns: Abstract Factory</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/se-pattern-observer.html" class="sidebar-item-text sidebar-link">Java Patterns: Observer</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/se-pattern-builder.html" class="sidebar-item-text sidebar-link">Java Patterns: Builder</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Java SE Laboratories</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab1-1.html" class="sidebar-item-text sidebar-link">Lab#SE01-1: Maven/Gradle Person and Account</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab1-2.html" class="sidebar-item-text sidebar-link">Lab#SE01-2: Maven/Gradle Person and Account stored in JSON</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab2-1.html" class="sidebar-item-text sidebar-link active">Lab#SE02-1: Movie/Review, model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab2-2.html" class="sidebar-item-text sidebar-link">Lab#SE02-1: Movie/Review, operations</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab2-3.html" class="sidebar-item-text sidebar-link">Lab#SE02-3: Movie/Review, factory</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Java SE readings</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/resources.html" class="sidebar-item-text sidebar-link">Java SE Resources</a>
   </div>
 </li>
       </ul>
@@ -960,46 +1167,43 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#four-strategies-to-effective-and-permanent-learning" id="toc-four-strategies-to-effective-and-permanent-learning" class="nav-link active" data-scroll-target="#four-strategies-to-effective-and-permanent-learning"><span class="toc-section-number">1</span>  Four strategies to effective and permanent learning</a>
+  <li><a href="#solving-discussion" id="toc-solving-discussion" class="nav-link active" data-scroll-target="#solving-discussion"><span class="toc-section-number">1</span>  Solving discussion</a>
   <ul>
-  <li><a href="#not-getting-notes-is-bad" id="toc-not-getting-notes-is-bad" class="nav-link" data-scroll-target="#not-getting-notes-is-bad"><span class="toc-section-number">1.1</span>  Not getting notes is bad</a></li>
-  <li><a href="#put-your-soul-now" id="toc-put-your-soul-now" class="nav-link" data-scroll-target="#put-your-soul-now"><span class="toc-section-number">1.2</span>  Put your soul, now</a></li>
-  <li><a href="#confusion-is-good" id="toc-confusion-is-good" class="nav-link" data-scroll-target="#confusion-is-good"><span class="toc-section-number">1.3</span>  Confusion is good</a></li>
-  <li><a href="#teach-is-best" id="toc-teach-is-best" class="nav-link" data-scroll-target="#teach-is-best"><span class="toc-section-number">1.4</span>  Teach is best</a></li>
-  </ul></li>
-  <li><a href="#jim-kwik-learn-anything-faster" id="toc-jim-kwik-learn-anything-faster" class="nav-link" data-scroll-target="#jim-kwik-learn-anything-faster"><span class="toc-section-number">2</span>  Jim Kwik: learn anything faster</a>
-  <ul>
-  <li><a href="#the-f-in-fast-stands-for-forget" id="toc-the-f-in-fast-stands-for-forget" class="nav-link" data-scroll-target="#the-f-in-fast-stands-for-forget"><span class="toc-section-number">2.1</span>  The F in Fast stands for Forget</a></li>
-  <li><a href="#the-a-in-fast-stands-for-active" id="toc-the-a-in-fast-stands-for-active" class="nav-link" data-scroll-target="#the-a-in-fast-stands-for-active"><span class="toc-section-number">2.2</span>  The A in FAST stands for Active</a></li>
-  <li><a href="#the-s-in-fast-stands-for-state" id="toc-the-s-in-fast-stands-for-state" class="nav-link" data-scroll-target="#the-s-in-fast-stands-for-state"><span class="toc-section-number">2.3</span>  The S in FAST stands for State</a></li>
-  <li><a href="#the-t-in-fast-stands-for-teach" id="toc-the-t-in-fast-stands-for-teach" class="nav-link" data-scroll-target="#the-t-in-fast-stands-for-teach"><span class="toc-section-number">2.4</span>  The T in FAST stands for Teach</a></li>
-  <li><a href="#references-learning-how-to-learn" id="toc-references-learning-how-to-learn" class="nav-link" data-scroll-target="#references-learning-how-to-learn"><span class="toc-section-number">2.5</span>  References: Learning How to Learn</a></li>
+  <li><a href="#umls" id="toc-umls" class="nav-link" data-scroll-target="#umls"><span class="toc-section-number">1.1</span>  UMLs</a></li>
+  <li><a href="#basic-tests" id="toc-basic-tests" class="nav-link" data-scroll-target="#basic-tests"><span class="toc-section-number">1.2</span>  Basic tests</a></li>
+  <li><a href="#create-a-superclass-person" id="toc-create-a-superclass-person" class="nav-link" data-scroll-target="#create-a-superclass-person"><span class="toc-section-number">1.3</span>  Create a superclass Person</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/about/about-learning-intro.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/selab2-1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">About learning</h1>
-<p class="subtitle lead">Basics on how to learn</p>
+<h1 class="title d-none d-lg-block">Lab#SE02-1: Movie/Review, model</h1>
+<p class="subtitle lead">Java SE Lab</p>
   <div class="quarto-categories">
-    <div class="quarto-category">about</div>
-    <div class="quarto-category">learning</div>
+    <div class="quarto-category">javase</div>
+    <div class="quarto-category">lab</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Basics on how to learn, four basic rules
+    Java SE Lab 02, part 1
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>albertprofe </p>
+          </div>
+  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -1011,7 +1215,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, December 30, 2022</p>
+      <p class="date-modified">Monday, January 9, 2023</p>
     </div>
   </div>
     
@@ -1020,103 +1224,316 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/home/learntolearn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="About learning: learn to learn"><img src="..\images/home/learntolearn.png" class="img-fluid figure-img" style="width:50.0%"></a></p>
-<p></p><figcaption class="figure-caption">About learning: learn to learn</figcaption><p></p>
-</figure>
+<div class="labs">
+<p>📘 <strong>Linux Lab#SE02-1: Movie Review and Rating</strong></p>
+<p>Create a Maven/Gradle Java SE Project with three classes and Junit to test objects and operations.</p>
+<p>Add the needed dependencies:</p>
+<ul>
+<li>Lombok</li>
+<li>Junit</li>
+<li>Java Faker</li>
+</ul>
+<p>Java SE Classes:</p>
+<ul>
+<li><p><code>Movie</code>: The <code>Movie</code> class represents a movie that is being reviewed. It has the following attributes:</p>
+<ul>
+<li><p><code>title</code>: a <strong>String</strong> representing the title of the movie</p></li>
+<li><p><code>reviews</code>: a <strong>Set</strong> of <code>Review</code> <strong>objects</strong> representing the reviews that have been written for this movie</p></li>
+<li><p><code>Critic</code>: The <code>Critic</code> <strong>class</strong> represents a critic who writes reviews. It has the following attributes:</p>
+<ul>
+<li><p><code>name</code>: a <strong>String</strong> representing the name of the critic</p></li>
+<li><p><code>Review</code>: The <code>Review</code> <strong>class</strong> represents a review of a movie written by a critic. It has the following attributes:</p>
+<ul>
+<li><code>movie</code>: a <code>Movie</code> <strong>object</strong> representing the movie being reviewed</li>
+<li><code>critic</code>: a <code>Critic</code> <strong>object</strong> representing the critic who wrote the review</li>
+<li><code>rating</code>: an <strong>int</strong> representing the <code>rating</code> given by the critic (on a scale of 1 to 5)</li>
+<li><code>comment</code>: a <strong>String</strong> representing the <code>comment</code> written by the critic about the movie</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>From here you should add new features <strong>once all the test are passed.</strong></p>
+<ul>
+<li>operations</li>
+<li>new fields/attributes and new classes</li>
+<li>new compositions and inherence</li>
+<li>factory to create new objects</li>
+</ul>
 </div>
-<section id="four-strategies-to-effective-and-permanent-learning" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="four-strategies-to-effective-and-permanent-learning"><span class="header-section-number">1</span> Four strategies to effective and permanent learning</h2>
-<section id="not-getting-notes-is-bad" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="not-getting-notes-is-bad"><span class="header-section-number">1.1</span> Not getting notes is bad</h3>
-<blockquote class="blockquote">
-<p>Take notes with pen and paper and have effective note-taking skills</p>
-</blockquote>
+<hr>
+<p>You can then use these classes as follows:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="at">@Data</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">class</span> Movie <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="kw">private</span> <span class="bu">String</span> title<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="kw">private</span> <span class="dt">int</span> year<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="kw">private</span> Filmmaker filmaker<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Actor<span class="op">&gt;</span> crew<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Review<span class="op">&gt;</span> reviews<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="op">}</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="at">@Data</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="kw">class</span> Critic <span class="op">{</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="op">}</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="at">@Data</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="kw">class</span> Actor <span class="op">{</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="op">}</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="at">@Data</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="kw">class</span> Filmmaker <span class="op">{</span></span>
+<span id="cb1-29"><a href="#cb1-29"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb1-30"><a href="#cb1-30"></a><span class="op">}</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a></span>
+<span id="cb1-32"><a href="#cb1-32"></a><span class="at">@Data</span></span>
+<span id="cb1-33"><a href="#cb1-33"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb1-35"><a href="#cb1-35"></a><span class="kw">class</span> Review <span class="op">{</span></span>
+<span id="cb1-36"><a href="#cb1-36"></a>  <span class="kw">private</span> Movie movie<span class="op">;</span></span>
+<span id="cb1-37"><a href="#cb1-37"></a>  <span class="kw">private</span> Critic critic<span class="op">;</span></span>
+<span id="cb1-38"><a href="#cb1-38"></a>  <span class="kw">private</span> <span class="dt">int</span> rating<span class="op">;</span></span>
+<span id="cb1-39"><a href="#cb1-39"></a>  <span class="kw">private</span> <span class="bu">String</span> comment<span class="op">;</span></span>
+<span id="cb1-40"><a href="#cb1-40"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Use <code>Lombok</code>:</p>
+<p>The <strong><span class="citation" data-cites="Data">@Data</span></strong> annotation is a <code>Lombok</code> annotation that generates getters and setters for the fields of a class, as well as equals, hashCode, and toString methods based on the fields.</p>
+<p>The <strong><span class="citation" data-cites="AllArgsConstructor">@AllArgsConstructor</span></strong> annotation is a <code>Lombok</code> annotation that generates a constructor with all of the class’s fields as arguments.</p>
+<p>The <strong><span class="citation" data-cites="NoArgsConstructor">@NoArgsConstructor</span></strong> annotation is a <code>Lombok</code> annotation that generates a no-argument constructor for a class.</p>
+<hr>
+<section id="solving-discussion" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="solving-discussion"><span class="header-section-number">1</span> Solving discussion</h2>
+<section id="umls" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="umls"><span class="header-section-number">1.1</span> UMLs</h3>
+<p>This first UML diagram for the <code>Movie</code> class represents a design <mark>where a movie has many critics, and a critic has many reviews of movies.</mark></p>
+<p>This is reflected in the multiplicity of the associations between the classes: the Movie class has a <code>many</code> multiplicity with the <code>Critic</code> class, indicating that a movie can have zero or more critics, and the <code>Critic</code> class has a <code>many</code> multiplicity with the <code>Review</code> class, <strong>indicating that a critic can have zero or more reviews.</strong></p>
+<div class="mermaidContent">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-1">classDiagram
+  class Movie {
+    -title: String
+    -critics: Set&lt;Critic&gt;
+  }
+  class Critic {
+    -name: String
+    -reviews: Set&lt;Review&gt;
+  }
+  class Review {
+    -movie: Movie
+    -critic: Critic
+    -rating: int
+    -comment: String
+  }
+  Movie *-- Critic
+  Critic *-- Review
+  Review o-- Movie
+</pre>
+<div id="mermaid-tooltip-1" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p>This second UML diagram for the <code>Movie</code> class represents a design <mark>where a movie has <code>many</code> reviews, and each review is written by a critic.</mark></p>
+<p>This is reflected in the multiplicity of the associations between the classes: the <code>Movie</code> class has a <code>many</code> multiplicity with the <code>Review</code> class, indicating that a movie can have zero or more reviews, and the <code>Review</code> class has a <strong>1 multiplicity</strong> with the <code>Critic</code> class, indicating that a review is written <strong>by exactly one critic.</strong></p>
+<div class="mermaidContent">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-2">classDiagram
+  class Movie {
+    -title: String
+    -reviews: Set&lt;Review&gt;
+  }
+  class Critic {
+    -name: String
+  }
+  class Review {
+    -movie: Movie
+    -critic: Critic
+    -rating: int
+    -comment: String
+  }
+  Movie *-- Review
+  Review o-- Critic
+
+</pre>
+<div id="mermaid-tooltip-2" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
+</div>
+</div>
+<hr>
 </section>
-<section id="put-your-soul-now" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="put-your-soul-now"><span class="header-section-number">1.2</span> Put your soul, now</h3>
-<blockquote class="blockquote">
-<p>Speak, debate, create emotions, remember, memorize. Engage the learning, show it is important for you</p>
-</blockquote>
+<section id="basic-tests" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="basic-tests"><span class="header-section-number">1.2</span> Basic tests</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="at">@Test</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">testCreateMovie</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="co">// create a movie</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  Movie movie <span class="op">=</span> <span class="kw">new</span> <span class="fu">Movie</span><span class="op">(</span><span class="st">"The Shawshank Redemption"</span><span class="op">);</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>  </span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="co">// check that the movie was created correctly</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>  <span class="fu">assertEquals</span><span class="op">(</span><span class="st">"The Shawshank Redemption"</span><span class="op">,</span> movie<span class="op">.</span><span class="fu">getTitle</span><span class="op">());</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>  <span class="fu">assertNotNull</span><span class="op">(</span>movie<span class="op">.</span><span class="fu">getReviews</span><span class="op">());</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>  <span class="fu">assertTrue</span><span class="op">(</span>movie<span class="op">.</span><span class="fu">getReviews</span><span class="op">().</span><span class="fu">isEmpty</span><span class="op">());</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="op">}</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="at">@Test</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">testCreateCritic</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>  <span class="co">// create a critic</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>  Critic critic <span class="op">=</span> <span class="kw">new</span> <span class="fu">Critic</span><span class="op">(</span><span class="st">"Roger Ebert"</span><span class="op">);</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>  </span>
+<span id="cb2-17"><a href="#cb2-17"></a>  <span class="co">// check that the critic was created correctly</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>  <span class="fu">assertEquals</span><span class="op">(</span><span class="st">"Roger Ebert"</span><span class="op">,</span> critic<span class="op">.</span><span class="fu">getName</span><span class="op">());</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="op">}</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="at">@Test</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">testCreateReview</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a>  <span class="co">// create a movie and a critic</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a>  Movie movie <span class="op">=</span> <span class="kw">new</span> <span class="fu">Movie</span><span class="op">(</span><span class="st">"The Shawshank Redemption"</span><span class="op">);</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a>  Critic critic <span class="op">=</span> <span class="kw">new</span> <span class="fu">Critic</span><span class="op">(</span><span class="st">"Roger Ebert"</span><span class="op">);</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a>  </span>
+<span id="cb2-27"><a href="#cb2-27"></a>  <span class="co">// create a review</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a>  Review review <span class="op">=</span> <span class="kw">new</span> <span class="fu">Review</span><span class="op">(</span>movie<span class="op">,</span> critic<span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="st">"One of the greatest films ever made"</span><span class="op">);</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a>  </span>
+<span id="cb2-30"><a href="#cb2-30"></a>  <span class="co">// check that the review was created correctly</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a>  <span class="fu">assertEquals</span><span class="op">(</span>movie<span class="op">,</span> review<span class="op">.</span><span class="fu">getMovie</span><span class="op">());</span></span>
+<span id="cb2-32"><a href="#cb2-32"></a>  <span class="fu">assertEquals</span><span class="op">(</span>critic<span class="op">,</span> review<span class="op">.</span><span class="fu">getCritic</span><span class="op">());</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a>  <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">5</span><span class="op">,</span> review<span class="op">.</span><span class="fu">getRating</span><span class="op">());</span></span>
+<span id="cb2-34"><a href="#cb2-34"></a>  <span class="fu">assertEquals</span><span class="op">(</span><span class="st">"One of the greatest films ever made"</span><span class="op">,</span> review<span class="op">.</span><span class="fu">getComment</span><span class="op">());</span></span>
+<span id="cb2-35"><a href="#cb2-35"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="confusion-is-good" class="level3" data-number="1.3">
-<h3 data-number="1.3" class="anchored" data-anchor-id="confusion-is-good"><span class="header-section-number">1.3</span> Confusion is good</h3>
-<blockquote class="blockquote">
-<p>Embrace discomfort to make connections: study some topics at once upon a distributed practice (use the time space among stages) with minor changes everytime</p>
-</blockquote>
-</section>
-<section id="teach-is-best" class="level3" data-number="1.4">
-<h3 data-number="1.4" class="anchored" data-anchor-id="teach-is-best"><span class="header-section-number">1.4</span> Teach is best</h3>
-<blockquote class="blockquote">
-<p>Teach what you learn to others. Do it, now.</p>
-</blockquote>
-</section>
-</section>
-<section id="jim-kwik-learn-anything-faster" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="jim-kwik-learn-anything-faster"><span class="header-section-number">2</span> Jim Kwik: learn anything faster</h2>
-<p><a href="https://www.jimkwik.com/podcasts/kwik-brain-001-learning-anything-faster/">To learn anything faster</a>, just remember <strong>FAST</strong></p>
-<section id="the-f-in-fast-stands-for-forget" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="the-f-in-fast-stands-for-forget"><span class="header-section-number">2.1</span> The F in Fast stands for Forget</h3>
+<section id="create-a-superclass-person" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="create-a-superclass-person"><span class="header-section-number">1.3</span> Create a superclass Person</h3>
+<p>The <code>Critic</code>, <code>Filmmaker</code>, and <code>Actor</code> classes <strong>all extend</strong> the <code>Person</code> class, meaning <strong>they inherit its fields and methods.</strong> In addition, they each have their own field:</p>
 <ul>
-<li>If you want to speed up ‘kwik brain,’ you must temporarily forget three things.</li>
-<li>Forget what you already know about the subject. A lot of people don’t learn faster because they feel like they already know the information. But your mind is like a parachute—it only works when it’s open.</li>
-<li>Forget about anything that’s not urgent and important. You can’t multitask. If your brain is thinking about 4 different things, you’re not fully present and you won’t learn ’kwik’ly.</li>
-<li>Forget your limitations. These are beliefs like your memory isn’t good, or you’re a slow reader, or you don’t have the right education to learn. But if you fight for your limitations, you get to keep them. Your memory isn’t fixed, and it is possible to remember hundreds of words and numbers the way I do onstage.</li>
+<li>The <code>Critic</code> class has a reviews field, a <strong>Set</strong> of Review objects representing the reviews written by the critic.</li>
+<li>The <code>Filmmaker</code> class has a movies field, a <strong>Set</strong> of Movie objects representing the movies made by the filmmaker.</li>
+<li>The <code>Actor</code> class has a movies field, a <strong>Set</strong> of Movie objects representing the movies in which the actor has appeared.</li>
 </ul>
-</section>
-<section id="the-a-in-fast-stands-for-active" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="the-a-in-fast-stands-for-active"><span class="header-section-number">2.2</span> The A in FAST stands for Active</h3>
-<ul>
-<li>In school, we were taught to learn by consuming information quietly. But you don’t learn by being lectured to. You learn by creating information and being active in the process.</li>
-<li>Learning is NOT a spectator sport.</li>
-<li>How can you be more active in your learning?</li>
-<li>Ask questions.</li>
-<li>Take notes.</li>
-<li>The more active you are, the more you will learn.</li>
-</ul>
-</section>
-<section id="the-s-in-fast-stands-for-state" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="the-s-in-fast-stands-for-state"><span class="header-section-number">2.3</span> The S in FAST stands for State</h3>
-<ul>
-<li>Your state is a snapshot of your mood – the mood of your mind and your body. It’s the emotional well-being that you feel in that exact moment.</li>
-<li>Information combined with emotion becomes a long-term memory.</li>
-<li>Many of us don’t remember what we learned in school because the umbrella emotion for most people in school was boredom.</li>
-<li>You are the only person in control of your state.</li>
-<li>How can you improve your state?</li>
-<li>Change your posture or your body or breathing.</li>
-<li>Sit or stand the way you would if you were totally energized.</li>
-<li>Think about how you’ll benefit from the information.</li>
-<li>All learning is state-dependent. Choose states of joy, fascination, and curiosity.</li>
-<li>Sell your cleverness for bewilderment – Rumi.</li>
-</ul>
-</section>
-<section id="the-t-in-fast-stands-for-teach" class="level3" data-number="2.4">
-<h3 data-number="2.4" class="anchored" data-anchor-id="the-t-in-fast-stands-for-teach"><span class="header-section-number">2.4</span> The T in FAST stands for Teach</h3>
-<ul>
-<li>If you want to cut your learning curve in half, learn with the intention of teaching it to somebody else.</li>
-<li>If you had to give a presentation on what you’re learning today, you would learn it differently. You would pay closer attention. You would take more detailed notes. You would ask better questions.</li>
-<li>When I teach something, I get to learn it twice.</li>
-<li>People often say that those who can’t do teach. But I never saw that as a negative. I always thought, wow, if I can’t do something, I can teach it, and then I can do it.</li>
-</ul>
-</section>
-<section id="references-learning-how-to-learn" class="level3" data-number="2.5">
-<h3 data-number="2.5" class="anchored" data-anchor-id="references-learning-how-to-learn"><span class="header-section-number">2.5</span> References: Learning How to Learn</h3>
-<blockquote class="blockquote">
-<p>This course gives you easy access to the invaluable learning techniques used by experts in art, music, literature, math, science, sports, and many other disciplines.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>We’ll learn about how the brain uses <mark>two very different learning modes and how it encapsulates <strong>chunks</strong> information.</mark></p>
-</blockquote>
-<blockquote class="blockquote">
-<p>We’ll also cover illusions of learning, memory techniques, dealing with procrastination, and best practices shown by research to be most effective in helping you master tough subjects.</p>
-</blockquote>
-<ul>
-<li><strong>Learning How to Learn</strong>: Powerful mental tools to help you master tough subjects: <a href="https://www.coursera.org/learn/learning-how-to-learn">Learning How to Learn</a> <!--- navLinks --> <br><br>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="at">@Data</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">class</span> Person <span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="kw">private</span> <span class="bu">Date</span> birthDate<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="op">}</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="at">@Data</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="kw">class</span> Critic <span class="kw">extends</span> Person <span class="op">{</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>  <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Review<span class="op">&gt;</span> reviews<span class="op">;</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="op">}</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="at">@Data</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="kw">class</span> Filmmaker <span class="kw">extends</span> Person <span class="op">{</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a>  <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Movie<span class="op">&gt;</span> movies<span class="op">;</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="op">}</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="at">@Data</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="kw">class</span> Actor <span class="kw">extends</span> Person <span class="op">{</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a>  <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Movie<span class="op">&gt;</span> movies<span class="op">;</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="op">}</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="mermaidContent">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-3">classDiagram
+  class Person {
+    -name: String
+    -birthDate: Date
+  }
+</pre>
+<div id="mermaid-tooltip-3" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<div class="mermaidContent">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-4">classDiagram
+  class Critic extends Person {
+    -reviews: Set&lt;Review&gt;
+  }
+
+  class Filmmaker extends Person {
+    -movies: Set&lt;Movie&gt;
+  }
+
+  class Actor extends Person {
+    -movies: Set&lt;Movie&gt;
+  }
+
+</pre>
+<div id="mermaid-tooltip-4" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<div class="mermaidContent">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-5">classDiagram
+  class Person {
+    -name: String
+    -birthDate: Date
+  }
+
+  Person &lt;|-- Critic
+  Person &lt;|-- Filmmaker
+  Person &lt;|-- Actor
+
+</pre>
+<div id="mermaid-tooltip-5" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
+</div>
+</div>
+<!--- navLinks -->
+<br><br>
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../about/about-this-images-credit.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> About images credit</a> <br></p>
+<p><br> <a href="../javase/selab1-2.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> Lab#SE01-2: Maven/Gradle Person and Account stored in JSON</a> <br></p>
 </div>
 <br>
 <div class="column center">
@@ -1124,11 +1541,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../about/about-learning-questions.html">About the Useful Questions <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
+<p><br> <a href="../javase/selab2-2.html">Lab#SE02-2: Movie/Review. operations <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
-</div></li>
-</ul>
+</div>
 
 
 </section>
@@ -1406,7 +1822,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","loop":true,"descPosition":"bottom","closeEffect":"zoom"});</script>
 
 
 
