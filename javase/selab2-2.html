@@ -128,6 +128,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -1169,7 +1172,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#solving-discussion" id="toc-solving-discussion" class="nav-link active" data-scroll-target="#solving-discussion"><span class="toc-section-number">1</span>  Solving discussion</a>
+  <ul>
+  <li><a href="#moviemanager-uses-movie" id="toc-moviemanager-uses-movie" class="nav-link" data-scroll-target="#moviemanager-uses-movie"><span class="toc-section-number">1.1</span>  MovieManager uses Movie</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/selab2-2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1236,7 +1248,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ol>
 </div>
-<p>You could then use theseimport java.nio.file.Files; import java.nio.file.Path; import java.nio.file.Paths; classes as follows:</p>
+<p>You could then use these:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>movie.java</strong></pre>
@@ -1245,20 +1257,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">Data</span><span class="op">;</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">NoArgsConstructor</span><span class="op">;</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">class</span> Movie<span class="op">{</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>    <span class="kw">private</span> <span class="bu">String</span> title<span class="op">;</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>    <span class="kw">private</span> <span class="bu">String</span> director<span class="op">;</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>    <span class="kw">private</span> <span class="bu">String</span> genre<span class="op">;</span><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">nio</span><span class="op">.</span><span class="im">file</span><span class="op">.</span><span class="im">Files</span><span class="op">;</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">nio</span><span class="op">.</span><span class="im">file</span><span class="op">.</span><span class="im">Path</span><span class="op">;</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">nio</span><span class="op">.</span><span class="im">file</span><span class="op">.</span><span class="im">Paths</span><span class="op">;</span><span class="co">// movie size</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a>    <span class="co">//constructor , getters and setters</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>    <span class="co">//lombok</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>    <span class="at">@Override</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>    <span class="kw">public</span> <span class="dt">double</span> <span class="fu">getSize</span><span class="op">(){</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>        <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="fu">size</span><span class="op">;</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>    <span class="op">}</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">nio</span><span class="op">.</span><span class="im">file</span><span class="op">.</span><span class="im">Files</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">nio</span><span class="op">.</span><span class="im">file</span><span class="op">.</span><span class="im">Path</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">nio</span><span class="op">.</span><span class="im">file</span><span class="op">.</span><span class="im">Paths</span><span class="op">;</span> classes as follows<span class="op">:</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">class</span> Movie<span class="op">{</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="kw">private</span> <span class="bu">String</span> title<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>    <span class="kw">private</span> <span class="bu">String</span> director<span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>    <span class="kw">private</span> <span class="bu">String</span> genre<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="kw">private</span> <span class="dt">double</span> size<span class="co">// movie size</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="co">//constructor , getters and setters</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="co">//lombok</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>    <span class="at">@Override</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>    <span class="kw">public</span> <span class="dt">double</span> <span class="fu">getSize</span><span class="op">(){</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>        <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="fu">size</span><span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>    <span class="op">}</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -1334,17 +1349,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-68"><a href="#cb2-68"></a>        <span class="op">}</span></span>
 <span id="cb2-69"><a href="#cb2-69"></a>    <span class="op">}</span></span>
 <span id="cb2-70"><a href="#cb2-70"></a></span>
-<span id="cb2-71"><a href="#cb2-71"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">deleteCSV</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-72"><a href="#cb2-72"></a>    <span class="bu">File</span> file <span class="op">=</span> <span class="kw">new</span> <span class="bu">File</span><span class="op">(</span><span class="st">"/home/devops/MyProjects/JavaSEProjects/MovieManager/resources/movies.csv"</span><span class="op">);</span></span>
-<span id="cb2-73"><a href="#cb2-73"></a></span>
-<span id="cb2-74"><a href="#cb2-74"></a>    <span class="cf">if</span><span class="op">(</span>file<span class="op">.</span><span class="fu">delete</span><span class="op">()){</span></span>
-<span id="cb2-75"><a href="#cb2-75"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"File deleted successfully"</span><span class="op">);</span></span>
-<span id="cb2-76"><a href="#cb2-76"></a>    <span class="op">}</span><span class="cf">else</span><span class="op">{</span></span>
-<span id="cb2-77"><a href="#cb2-77"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Failed to delete the file"</span><span class="op">);</span></span>
-<span id="cb2-78"><a href="#cb2-78"></a>    <span class="op">}</span></span>
-<span id="cb2-79"><a href="#cb2-79"></a><span class="op">}</span></span>
-<span id="cb2-80"><a href="#cb2-80"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-71"><a href="#cb2-71"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> master</span>
+<span id="cb2-72"><a href="#cb2-72"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Failed to delete the file"</span><span class="op">);</span></span>
+<span id="cb2-73"><a href="#cb2-73"></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<section id="solving-discussion" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="solving-discussion"><span class="header-section-number">1</span> Solving discussion</h2>
+<section id="moviemanager-uses-movie" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="moviemanager-uses-movie"><span class="header-section-number">1.1</span> MovieManager uses Movie</h3>
+<div class="mermaidContent">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+</p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-1">classDiagram
+class MovieManager {
+  -int qty
+  -double size
+  -HashMap&lt;String, Movie&gt; movies
+  -Date lastModified
+  +addMovie(Movie movie)
+  +updateMovie(String title, Movie movie)
+  +deleteMovie(String title)
+  +getMovie(String title)
+  +saveToCSV()
+}
+class Movie{
+  +String title
+  +String director
+  +String genre
+  +double size
+  +getSize()
+}
+
+MovieManager --&gt; Movie
+</pre>
+<div id="mermaid-tooltip-1" class="mermaidTooltip">
+
+</div>
+<p></p>
+</div>
+</div>
+</div>
+</div>
+<p>This diagram shows that the <code>MovieManager</code> class uses the <code>Movie</code> class, and the arrow points <strong>from MovieManager to Movie</strong>.</p>
+<p>This indicates that <strong>MovieManager class is dependent on Movie class</strong> and it uses it as a <strong>data structure.</strong></p>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1364,6 +1413,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
