@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -136,7 +136,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 
 <div id="quarto-search-results"></div>
@@ -1176,15 +1176,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#solving-discussion" id="toc-solving-discussion" class="nav-link active" data-scroll-target="#solving-discussion"><span class="toc-section-number">1</span>  Solving discussion</a>
+  <li><a href="#core-classes" id="toc-core-classes" class="nav-link active" data-scroll-target="#core-classes"><span class="toc-section-number">1</span>  Core classes</a></li>
+  <li><a href="#solving-discussion" id="toc-solving-discussion" class="nav-link" data-scroll-target="#solving-discussion"><span class="toc-section-number">2</span>  Solving discussion</a>
   <ul>
-  <li><a href="#moviemanager-uses-movie" id="toc-moviemanager-uses-movie" class="nav-link" data-scroll-target="#moviemanager-uses-movie"><span class="toc-section-number">1.1</span>  MovieManager uses Movie</a></li>
+  <li><a href="#moviemanager-uses-movie" id="toc-moviemanager-uses-movie" class="nav-link" data-scroll-target="#moviemanager-uses-movie"><span class="toc-section-number">2.1</span>  MovieManager uses Movie</a></li>
+  <li><a href="#moviemanager-static-methods" id="toc-moviemanager-static-methods" class="nav-link" data-scroll-target="#moviemanager-static-methods"><span class="toc-section-number">2.2</span>  MovieManager <code>static</code> methods</a></li>
+  </ul></li>
+  <li><a href="#static-vs.-non-static" id="toc-static-vs.-non-static" class="nav-link" data-scroll-target="#static-vs.-non-static"><span class="toc-section-number">3</span>  <code>static</code> vs.&nbsp;<code>non-static</code></a>
+  <ul>
+  <li><a href="#pros-cons-usage-static-methods" id="toc-pros-cons-usage-static-methods" class="nav-link" data-scroll-target="#pros-cons-usage-static-methods"><span class="toc-section-number">3.1</span>  Pros &amp; cons usage <code>static</code> methods</a></li>
+  <li><a href="#pros-cons-usage-non-static-methods" id="toc-pros-cons-usage-non-static-methods" class="nav-link" data-scroll-target="#pros-cons-usage-non-static-methods"><span class="toc-section-number">3.2</span>  Pros &amp; cons usage <code>non-static</code> methods</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/selab2-2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -1239,19 +1246,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Every time a movie object is created, it could be saved within a data structure:
 <ul>
-<li>ArrayList or List</li>
-<li>Set or similar</li>
-<li>HashMap or Map</li>
+<li><code>ArrayList</code> or <code>List</code></li>
+<li><code>Set</code> or similar</li>
+<li><code>HashMap</code> or <code>Map</code></li>
 </ul></li>
 <li>The <code>Java Class MovieManager</code> could perfom all CRUD operations.</li>
-<li>Besides, it colud save data as String to JSON or CSV as local.</li>
+<li>Besides, it colud save data as String to JSON or CSV as local file.</li>
 </ul></li>
 </ol>
 </div>
+<section id="core-classes" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="core-classes"><span class="header-section-number">1</span> Core classes</h2>
 <p>You could then use these:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>movie.java</strong></pre>
+<pre><strong>Movie.java</strong></pre>
 </div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">AllArgsConstructor</span><span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">Data</span><span class="op">;</span></span>
@@ -1261,7 +1270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-6"><a href="#cb1-6"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">nio</span><span class="op">.</span><span class="im">file</span><span class="op">.</span><span class="im">Path</span><span class="op">;</span></span>
 <span id="cb1-7"><a href="#cb1-7"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">nio</span><span class="op">.</span><span class="im">file</span><span class="op">.</span><span class="im">Paths</span><span class="op">;</span> classes as follows<span class="op">:</span></span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">class</span> Movie<span class="op">{</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">public</span> <span class="kw">class</span> Movie<span class="op">{</span></span>
 <span id="cb1-10"><a href="#cb1-10"></a>    <span class="kw">private</span> <span class="bu">String</span> title<span class="op">;</span></span>
 <span id="cb1-11"><a href="#cb1-11"></a>    <span class="kw">private</span> <span class="bu">String</span> director<span class="op">;</span></span>
 <span id="cb1-12"><a href="#cb1-12"></a>    <span class="kw">private</span> <span class="bu">String</span> genre<span class="op">;</span></span>
@@ -1277,7 +1286,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>moviemodel.java</strong></pre>
+<pre><strong>MovieManager.java</strong></pre>
 </div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">AllArgsConstructor</span><span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">Data</span><span class="op">;</span></span>
@@ -1327,62 +1336,124 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-46"><a href="#cb2-46"></a>    <span class="kw">public</span> Movie <span class="fu">getMovie</span><span class="op">(</span><span class="bu">String</span> title<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb2-47"><a href="#cb2-47"></a>        <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="fu">movies</span><span class="op">.</span><span class="fu">get</span><span class="op">(</span>title<span class="op">);</span></span>
 <span id="cb2-48"><a href="#cb2-48"></a>    <span class="op">}</span></span>
-<span id="cb2-49"><a href="#cb2-49"></a></span>
-<span id="cb2-50"><a href="#cb2-50"></a>    <span class="co">// this is a mere idea, just a proposal to understand</span></span>
-<span id="cb2-51"><a href="#cb2-51"></a>    <span class="co">// how it colud be done</span></span>
-<span id="cb2-52"><a href="#cb2-52"></a>    <span class="co">// iterate the hashMap movies to get each movies</span></span>
-<span id="cb2-53"><a href="#cb2-53"></a>    <span class="co">// to save file in Linxu</span></span>
-<span id="cb2-54"><a href="#cb2-54"></a>    <span class="co">//  try (FileWriter writer = new FileWriter("/home/devops/MyProjects/JavaSEProjects/MovieManager/resources/movies.csv"))</span></span>
-<span id="cb2-55"><a href="#cb2-55"></a>    <span class="co">//</span></span>
-<span id="cb2-56"><a href="#cb2-56"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">saveToCSV</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-57"><a href="#cb2-57"></a>        <span class="cf">try</span> <span class="op">(</span><span class="bu">FileWriter</span> writer <span class="op">=</span> <span class="kw">new</span> <span class="bu">FileWriter</span><span class="op">(</span><span class="st">"movies.csv"</span><span class="op">))</span> <span class="op">{</span></span>
-<span id="cb2-58"><a href="#cb2-58"></a>            <span class="cf">for</span> <span class="op">(</span>Movie movie <span class="op">:</span> <span class="kw">this</span><span class="op">.</span><span class="fu">movies</span><span class="op">.</span><span class="fu">values</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb2-59"><a href="#cb2-59"></a>                writer<span class="op">.</span><span class="fu">append</span><span class="op">(</span>movie<span class="op">.</span><span class="fu">getTitle</span><span class="op">());</span></span>
-<span id="cb2-60"><a href="#cb2-60"></a>                writer<span class="op">.</span><span class="fu">append</span><span class="op">(</span><span class="st">","</span><span class="op">);</span></span>
-<span id="cb2-61"><a href="#cb2-61"></a>                writer<span class="op">.</span><span class="fu">append</span><span class="op">(</span>movie<span class="op">.</span><span class="fu">getDirector</span><span class="op">());</span></span>
-<span id="cb2-62"><a href="#cb2-62"></a>                writer<span class="op">.</span><span class="fu">append</span><span class="op">(</span><span class="st">","</span><span class="op">);</span></span>
-<span id="cb2-63"><a href="#cb2-63"></a>                writer<span class="op">.</span><span class="fu">append</span><span class="op">(</span>movie<span class="op">.</span><span class="fu">getGenre</span><span class="op">());</span></span>
-<span id="cb2-64"><a href="#cb2-64"></a>                writer<span class="op">.</span><span class="fu">append</span><span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
-<span id="cb2-65"><a href="#cb2-65"></a>            <span class="op">}</span></span>
-<span id="cb2-66"><a href="#cb2-66"></a>        <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">IOException</span> e<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-67"><a href="#cb2-67"></a>            e<span class="op">.</span><span class="fu">printStackTrace</span><span class="op">();</span></span>
-<span id="cb2-68"><a href="#cb2-68"></a>        <span class="op">}</span></span>
-<span id="cb2-69"><a href="#cb2-69"></a>    <span class="op">}</span></span>
-<span id="cb2-70"><a href="#cb2-70"></a></span>
-<span id="cb2-71"><a href="#cb2-71"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> master</span>
-<span id="cb2-72"><a href="#cb2-72"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Failed to delete the file"</span><span class="op">);</span></span>
-<span id="cb2-73"><a href="#cb2-73"></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-49"><a href="#cb2-49"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="solving-discussion" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="solving-discussion"><span class="header-section-number">1</span> Solving discussion</h2>
-<section id="moviemanager-uses-movie" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="moviemanager-uses-movie"><span class="header-section-number">1.1</span> MovieManager uses Movie</h3>
+</section>
+<section id="solving-discussion" class="level2 page-columns page-full" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="solving-discussion"><span class="header-section-number">2</span> Solving discussion</h2>
+<section id="moviemanager-uses-movie" class="level3 page-columns page-full" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="moviemanager-uses-movie"><span class="header-section-number">2.1</span> MovieManager uses Movie</h3>
+<p>Let’s grow our code of the <code>MovieManager</code> class by adding two methods: <code>saveToCSV()</code> and <code>deleteCSV()</code>.</p>
+<p>The <code>saveToCSV()</code> method is used to save the movie data stored in the movies <code>HashMap</code> field of the <code>MovieManager</code> class to a <code>CSV</code> (Comma Separated Values) file named <strong>movies.csv</strong> located <strong>in the same directory as the running program</strong>. It uses a <code>FileWriter</code> object to write the data to the file.</p>
+<p>The <code>deleteCSV()</code> method is used to delete a <code>CSV</code> file named <strong>movies.csv</strong> located in the directory <strong><code>/home/devops/MyProjects/JavaSEProjects/MovieManager/resources/</code></strong>. It uses a File object to represent the file, and the <code>delete()</code> method of the File class to delete the file.</p>
+<p>If the file is deleted <strong>successfully</strong>, it prints “File deleted successfully” message, otherwise it prints “Failed to delete the file” message.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>MovieManager.java</strong></pre>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">AllArgsConstructor</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">Data</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">NoArgsConstructor</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashMap</span><span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Date</span><span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">io</span><span class="op">.</span><span class="im">FileWriter</span><span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">io</span><span class="op">.</span><span class="im">IOException</span><span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">nio</span><span class="op">.</span><span class="im">file</span><span class="op">.</span><span class="im">Files</span><span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">nio</span><span class="op">.</span><span class="im">file</span><span class="op">.</span><span class="im">Path</span><span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">nio</span><span class="op">.</span><span class="im">file</span><span class="op">.</span><span class="im">Paths</span><span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="kw">public</span> <span class="kw">class</span> MovieManager <span class="op">{</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>    <span class="kw">private</span> <span class="dt">int</span> qty<span class="op">;</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a>    <span class="kw">private</span> <span class="dt">double</span> size<span class="op">;</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>    <span class="kw">private</span> <span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> Movie<span class="op">&gt;</span> movies<span class="op">;</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>    <span class="kw">private</span> <span class="bu">Date</span> lastModified<span class="op">;</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a></span>
+<span id="cb3-19"><a href="#cb3-19"></a>    <span class="kw">public</span> <span class="fu">MovieManager</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a>       <span class="co">// ...</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a>    <span class="op">}</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a></span>
+<span id="cb3-23"><a href="#cb3-23"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">addMovie</span><span class="op">(</span>Movie movie<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a>        <span class="co">// ...</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a>    <span class="op">}</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a></span>
+<span id="cb3-27"><a href="#cb3-27"></a>      <span class="kw">public</span> Movie <span class="fu">getMovie</span><span class="op">(</span><span class="bu">String</span> title<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a>        <span class="co">// ...</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a>    <span class="op">}</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a></span>
+<span id="cb3-31"><a href="#cb3-31"></a>    <span class="co">// this is a mere idea, just a proposal to understand</span></span>
+<span id="cb3-32"><a href="#cb3-32"></a>    <span class="co">// how it colud be done</span></span>
+<span id="cb3-33"><a href="#cb3-33"></a>    <span class="co">// iterate the hashMap movies to get each movies</span></span>
+<span id="cb3-34"><a href="#cb3-34"></a>    <span class="co">// to save file in Linxu</span></span>
+<span id="cb3-35"><a href="#cb3-35"></a>    <span class="co">//  try (FileWriter writer = </span></span>
+<span id="cb3-36"><a href="#cb3-36"></a>    <span class="co">// new FileWriter("/home/~/movies.csv")</span></span>
+<span id="cb3-37"><a href="#cb3-37"></a>    <span class="co">// )</span></span>
+<span id="cb3-38"><a href="#cb3-38"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">saveToCSV</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-39"><a href="#cb3-39"></a>        <span class="cf">try</span> <span class="op">(</span><span class="bu">FileWriter</span> writer <span class="op">=</span> <span class="kw">new</span> <span class="bu">FileWriter</span><span class="op">(</span><span class="st">"movies.csv"</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb3-40"><a href="#cb3-40"></a>            <span class="cf">for</span> <span class="op">(</span>Movie movie <span class="op">:</span> <span class="kw">this</span><span class="op">.</span><span class="fu">movies</span><span class="op">.</span><span class="fu">values</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb3-41"><a href="#cb3-41"></a>                writer<span class="op">.</span><span class="fu">append</span><span class="op">(</span>movie<span class="op">.</span><span class="fu">getTitle</span><span class="op">());</span></span>
+<span id="cb3-42"><a href="#cb3-42"></a>                writer<span class="op">.</span><span class="fu">append</span><span class="op">(</span><span class="st">","</span><span class="op">);</span></span>
+<span id="cb3-43"><a href="#cb3-43"></a>                writer<span class="op">.</span><span class="fu">append</span><span class="op">(</span>movie<span class="op">.</span><span class="fu">getDirector</span><span class="op">());</span></span>
+<span id="cb3-44"><a href="#cb3-44"></a>                writer<span class="op">.</span><span class="fu">append</span><span class="op">(</span><span class="st">","</span><span class="op">);</span></span>
+<span id="cb3-45"><a href="#cb3-45"></a>                writer<span class="op">.</span><span class="fu">append</span><span class="op">(</span>movie<span class="op">.</span><span class="fu">getGenre</span><span class="op">());</span></span>
+<span id="cb3-46"><a href="#cb3-46"></a>                writer<span class="op">.</span><span class="fu">append</span><span class="op">(</span><span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb3-47"><a href="#cb3-47"></a>            <span class="op">}</span></span>
+<span id="cb3-48"><a href="#cb3-48"></a>        <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">IOException</span> e<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-49"><a href="#cb3-49"></a>            e<span class="op">.</span><span class="fu">printStackTrace</span><span class="op">();</span></span>
+<span id="cb3-50"><a href="#cb3-50"></a>        <span class="op">}</span></span>
+<span id="cb3-51"><a href="#cb3-51"></a>    <span class="op">}</span></span>
+<span id="cb3-52"><a href="#cb3-52"></a></span>
+<span id="cb3-53"><a href="#cb3-53"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">deleteCSV</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-54"><a href="#cb3-54"></a>    <span class="bu">File</span> file <span class="op">=</span> <span class="kw">new</span> <span class="bu">File</span><span class="op">(</span><span class="st">"/home/~/movies.csv"</span><span class="op">);</span></span>
+<span id="cb3-55"><a href="#cb3-55"></a>      <span class="cf">if</span><span class="op">(</span>file<span class="op">.</span><span class="fu">delete</span><span class="op">()){</span></span>
+<span id="cb3-56"><a href="#cb3-56"></a>          <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"File deleted successfully"</span><span class="op">);</span></span>
+<span id="cb3-57"><a href="#cb3-57"></a>      <span class="op">}</span><span class="cf">else</span><span class="op">{</span></span>
+<span id="cb3-58"><a href="#cb3-58"></a>          <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Failed to delete the file"</span><span class="op">);</span></span>
+<span id="cb3-59"><a href="#cb3-59"></a>      <span class="op">}</span></span>
+<span id="cb3-60"><a href="#cb3-60"></a>    <span class="op">}</span></span>
+<span id="cb3-61"><a href="#cb3-61"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>It starts by creating a try-with-resources block</strong>, which automatically closes the <strong>FileWriter</strong> object when the block finishes executing. Then it loops through the <code>values()</code> of the movies <code>HashMap</code>, which gives an iterable collection of <code>Movie</code> objects.</p>
+</div><div class="">
+<p>For each <code>Movie</code> object, it appends the title, director and genre information separated <em>by commas</em>, and then a <em>newline character</em>. This creates a <code>CSV</code> file with each line representing a movie, in the format of: <strong>title,director,genre.</strong></p>
+</div><div class="">
+<p>It’s worth noting that this code is just an example, and it will work correctly if the file exists at the specified location. <strong>If the file doesn’t exist, the delete method will return false</strong> and the message <em>“Failed to delete the file”</em> will be printed.</p>
+</div><div class="">
+<p>Also the path of csv file is <strong>hardcoded</strong> and it may change on different systems so <strong>it’s better to make it dynamic or keep it in configuration file.</strong></p>
+</div></div>
+
+
+<p>This diagram shows that the <code>MovieManager</code> class uses the <code>Movie</code> class, and the arrow points <strong>from MovieManager to Movie</strong>.</p>
+<p>This indicates that <strong>MovieManager class is dependent on Movie class</strong> and it uses it as a <strong>data structure.</strong></p>
 <div class="mermaidContent">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <p>
 </p><pre class="mermaid mermaid-js" data-tooltip-selector="#mermaid-tooltip-1">classDiagram
-class MovieManager {
-  -int qty
-  -double size
-  -HashMap&lt;String, Movie&gt; movies
-  -Date lastModified
-  +addMovie(Movie movie)
-  +updateMovie(String title, Movie movie)
-  +deleteMovie(String title)
-  +getMovie(String title)
-  +saveToCSV()
-}
-class Movie{
-  +String title
-  +String director
-  +String genre
-  +double size
-  +getSize()
-}
+ class MovieManager {
+    -int qty
+    -double size
+    -HashMap&lt;String, Movie&gt; movies
+    -Date lastModified
+    +addMovie(Movie movie)
+    +updateMovie(String title, Movie movie)
+    +deleteMovie(String title)
+    +getMovie(String title)
+    +saveToCSV()
+    }
+    class Movie{
+    +String title
+    +String director
+    +String genre
+    +double size
+    +getSize()
+    }
 
-MovieManager --&gt; Movie
+    MovieManager --&gt; Movie
+
 </pre>
 <div id="mermaid-tooltip-1" class="mermaidTooltip">
 
@@ -1392,8 +1463,116 @@ MovieManager --&gt; Movie
 </div>
 </div>
 </div>
-<p>This diagram shows that the <code>MovieManager</code> class uses the <code>Movie</code> class, and the arrow points <strong>from MovieManager to Movie</strong>.</p>
-<p>This indicates that <strong>MovieManager class is dependent on Movie class</strong> and it uses it as a <strong>data structure.</strong></p>
+</section>
+<section id="moviemanager-static-methods" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="moviemanager-static-methods"><span class="header-section-number">2.2</span> MovieManager <code>static</code> methods</h3>
+<p><strong>In Java SE, methods can be either static or non-static.</strong></p>
+<p>Making a method <code>static</code> or <code>non-static</code> affects the way it can be called and how it accesses the fields and methods of a class.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>MovieManager.java</strong></pre>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashMap</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Date</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">public</span> <span class="kw">class</span> MovieManager <span class="op">{</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="kw">private</span> <span class="dt">static</span> <span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> Movie<span class="op">&gt;</span> movies <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashMap</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="kw">private</span> <span class="dt">static</span> <span class="dt">int</span> qty <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    <span class="kw">private</span> <span class="dt">static</span> <span class="dt">double</span> size <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="kw">private</span> <span class="dt">static</span> <span class="bu">Date</span> lastModified <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span><span class="op">();</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">addMovie</span><span class="op">(</span><span class="bu">String</span> title<span class="op">,</span> </span>
+<span id="cb4-11"><a href="#cb4-11"></a>                                <span class="bu">String</span> director<span class="op">,</span> <span class="bu">String</span> genre<span class="op">,</span> <span class="dt">double</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>        Movie movie <span class="op">=</span> <span class="kw">new</span> <span class="fu">Movie</span><span class="op">(</span>title<span class="op">,</span> director<span class="op">,</span> genre<span class="op">,</span> size<span class="op">);</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a>        movies<span class="op">.</span><span class="fu">put</span><span class="op">(</span>title<span class="op">,</span> movie<span class="op">);</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>        qty<span class="op">++;</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>        size <span class="op">+=</span> movie<span class="op">.</span><span class="fu">getSize</span><span class="op">();</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>        lastModified <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span><span class="op">();</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a>    <span class="op">}</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a></span>
+<span id="cb4-19"><a href="#cb4-19"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">updateMovie</span><span class="op">(</span><span class="bu">String</span> title<span class="op">,</span> </span>
+<span id="cb4-20"><a href="#cb4-20"></a>                                   <span class="bu">String</span> director<span class="op">,</span> <span class="bu">String</span> genre<span class="op">,</span> <span class="dt">double</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a>        Movie movie <span class="op">=</span> movies<span class="op">.</span><span class="fu">get</span><span class="op">(</span>title<span class="op">);</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a>        <span class="cf">if</span> <span class="op">(</span>movie <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-23"><a href="#cb4-23"></a>            movie<span class="op">.</span><span class="fu">setDirector</span><span class="op">(</span>director<span class="op">);</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a>            movie<span class="op">.</span><span class="fu">setGenre</span><span class="op">(</span>genre<span class="op">);</span></span>
+<span id="cb4-25"><a href="#cb4-25"></a>            movie<span class="op">.</span><span class="fu">setSize</span><span class="op">(</span>size<span class="op">);</span></span>
+<span id="cb4-26"><a href="#cb4-26"></a>            lastModified <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span><span class="op">();</span></span>
+<span id="cb4-27"><a href="#cb4-27"></a>        <span class="op">}</span></span>
+<span id="cb4-28"><a href="#cb4-28"></a>    <span class="op">}</span></span>
+<span id="cb4-29"><a href="#cb4-29"></a></span>
+<span id="cb4-30"><a href="#cb4-30"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">deleteMovie</span><span class="op">(</span><span class="bu">String</span> title<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-31"><a href="#cb4-31"></a>        <span class="cf">if</span> <span class="op">(</span>movies<span class="op">.</span><span class="fu">containsKey</span><span class="op">(</span>title<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb4-32"><a href="#cb4-32"></a>            size <span class="op">-=</span> movies<span class="op">.</span><span class="fu">get</span><span class="op">(</span>title<span class="op">).</span><span class="fu">getSize</span><span class="op">();</span></span>
+<span id="cb4-33"><a href="#cb4-33"></a>            movies<span class="op">.</span><span class="fu">remove</span><span class="op">(</span>title<span class="op">);</span></span>
+<span id="cb4-34"><a href="#cb4-34"></a>            qty<span class="op">--;</span></span>
+<span id="cb4-35"><a href="#cb4-35"></a>            lastModified <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span><span class="op">();</span></span>
+<span id="cb4-36"><a href="#cb4-36"></a>        <span class="op">}</span></span>
+<span id="cb4-37"><a href="#cb4-37"></a>    <span class="op">}</span></span>
+<span id="cb4-38"><a href="#cb4-38"></a> </span>
+<span id="cb4-39"><a href="#cb4-39"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="static-vs.-non-static" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="static-vs.-non-static"><span class="header-section-number">3</span> <code>static</code> vs.&nbsp;<code>non-static</code></h2>
+<section id="pros-cons-usage-static-methods" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="pros-cons-usage-static-methods"><span class="header-section-number">3.1</span> Pros &amp; cons usage <code>static</code> methods</h3>
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pros of making a method static</th>
+<th>Cons of making a method static</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Can be called directly on the class, without needing to create an instance</td>
+<td>Cannot access non-static fields and methods of the class</td>
+</tr>
+<tr class="even">
+<td>Can be used as utility methods that don’t depend on the state of an object</td>
+<td>Can only work with the parameters passed to it and not use information unique to each object or instance</td>
+</tr>
+<tr class="odd">
+<td>Can be used to access only static variables and methods, making it more efficient</td>
+<td>Can be challenging to make sure all instances of a class are modified consistently when using static methods</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pros-cons-usage-non-static-methods" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="pros-cons-usage-non-static-methods"><span class="header-section-number">3.2</span> Pros &amp; cons usage <code>non-static</code> methods</h3>
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pros of making a method non-static</th>
+<th>Cons of making a method non-static</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Can access both static and non-static fields and methods of the class, allowing it to use the state of an object to determine its behavior</td>
+<td>Can only be called on an instance of the class, so you need to create an object of a class before using the method</td>
+</tr>
+<tr class="even">
+<td>Are associated with an instance of the class, so they can use the information that is unique to each object</td>
+<td>Can cause confusion when working with non-static methods because it could be called on different instances, which could cause unexpected behavior</td>
+</tr>
+<tr class="odd">
+<td>Object-oriented design principles promote the use of non-static methods because they can be overridden by subclasses to change their behavior</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <!--- navLinks -->
 <br><br>
 <div class="row">

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -1176,11 +1176,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#solving-discussion" id="toc-solving-discussion" class="nav-link active" data-scroll-target="#solving-discussion"><span class="toc-section-number">1</span>  Solving discussion</a>
+  <li><a href="#core-classes-and-dependencies" id="toc-core-classes-and-dependencies" class="nav-link active" data-scroll-target="#core-classes-and-dependencies"><span class="toc-section-number">1</span>  Core classes and dependencies</a>
   <ul>
-  <li><a href="#umls" id="toc-umls" class="nav-link" data-scroll-target="#umls"><span class="toc-section-number">1.1</span>  UMLs</a></li>
-  <li><a href="#basic-tests" id="toc-basic-tests" class="nav-link" data-scroll-target="#basic-tests"><span class="toc-section-number">1.2</span>  Basic tests</a></li>
-  <li><a href="#create-a-superclass-person" id="toc-create-a-superclass-person" class="nav-link" data-scroll-target="#create-a-superclass-person"><span class="toc-section-number">1.3</span>  Create a superclass Person</a></li>
+  <li><a href="#dependency-lombok" id="toc-dependency-lombok" class="nav-link" data-scroll-target="#dependency-lombok"><span class="toc-section-number">1.1</span>  Dependency: Lombok</a></li>
+  <li><a href="#dependency-java-faker" id="toc-dependency-java-faker" class="nav-link" data-scroll-target="#dependency-java-faker"><span class="toc-section-number">1.2</span>  Dependency: Java Faker</a></li>
+  <li><a href="#dependency-junit-5" id="toc-dependency-junit-5" class="nav-link" data-scroll-target="#dependency-junit-5"><span class="toc-section-number">1.3</span>  Dependency: JUnit 5</a></li>
+  </ul></li>
+  <li><a href="#solving-discussion" id="toc-solving-discussion" class="nav-link" data-scroll-target="#solving-discussion"><span class="toc-section-number">2</span>  Solving discussion</a>
+  <ul>
+  <li><a href="#umls" id="toc-umls" class="nav-link" data-scroll-target="#umls"><span class="toc-section-number">2.1</span>  UMLs</a></li>
+  <li><a href="#basic-tests" id="toc-basic-tests" class="nav-link" data-scroll-target="#basic-tests"><span class="toc-section-number">2.2</span>  Basic tests</a></li>
+  <li><a href="#create-a-superclass-person" id="toc-create-a-superclass-person" class="nav-link" data-scroll-target="#create-a-superclass-person"><span class="toc-section-number">2.3</span>  Create a superclass Person</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/selab2-1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -1275,6 +1281,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 </div>
 <hr>
+<section id="core-classes-and-dependencies" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="core-classes-and-dependencies"><span class="header-section-number">1</span> Core classes and dependencies</h2>
 <p>You could then use these classes as follows:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -1325,13 +1333,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-43"><a href="#cb1-43"></a>  <span class="kw">private</span> <span class="bu">String</span> comment<span class="op">;</span></span>
 <span id="cb1-44"><a href="#cb1-44"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<section id="dependency-lombok" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="dependency-lombok"><span class="header-section-number">1.1</span> Dependency: Lombok</h3>
 <p>Use <code>Lombok</code>, <a href="https://projectlombok.org/" class="external">link</a>:</p>
 <ul>
 <li><p>The <strong><span class="citation" data-cites="Data">@Data</span></strong> annotation is a <code>Lombok</code> annotation that generates getters and setters for the fields of a class, as well as equals, hashCode, and toString methods based on the fields.</p></li>
 <li><p>The <strong><span class="citation" data-cites="AllArgsConstructor">@AllArgsConstructor</span></strong> annotation is a <code>Lombok</code> annotation that generates a constructor with all of the class’s fields as arguments.</p></li>
 <li><p>The <strong><span class="citation" data-cites="NoArgsConstructor">@NoArgsConstructor</span></strong> annotation is a <code>Lombok</code> annotation that generates a no-argument constructor for a class.</p></li>
 </ul>
-<p>Adding lombok to your pom file: to include lombok as a provided dependency, add it to your <dependencies> block like so:</dependencies></p>
+<p><a href="https://projectlombok.org/features/Data" class="external"><strong><span class="citation" data-cites="Data">@Data</span></strong></a> All together now: A shortcut for <strong><span class="citation" data-cites="ToString">@ToString</span></strong>, <strong><span class="citation" data-cites="EqualsAndHashCode">@EqualsAndHashCode</span></strong>, <strong><span class="citation" data-cites="Getter">@Getter</span></strong> on all fields, <strong><span class="citation" data-cites="Setter">@Setter</span></strong> on all non-final fields, and <strong><span class="citation" data-cites="RequiredArgsConstructor">@RequiredArgsConstructor</span></strong>.</p>
+<p>Adding lombok to your pom file: to include lombok as a provided dependency, add it to your <dependencies>In your Java code: block like so:</dependencies></p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>pom.xml</strong></pre>
@@ -1345,6 +1356,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-7"><a href="#cb2-7"></a>    <span class="op">&lt;/</span>dependency<span class="op">&gt;</span></span>
 <span id="cb2-8"><a href="#cb2-8"></a><span class="op">&lt;/</span>dependencies<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="dependency-java-faker" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="dependency-java-faker"><span class="header-section-number">1.2</span> Dependency: Java Faker</h3>
 <p>Use <a href="https://github.com/DiUS/java-faker" class="external">Java Faker</a>:</p>
 <p>In <code>pom.xml</code>, add the following xml <strong>dependency</strong> between <dependencies> … </dependencies></p>
 <div class="code-with-filename">
@@ -1359,40 +1373,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-6"><a href="#cb3-6"></a>  <span class="op">&lt;/</span>dependency<span class="op">&gt;</span></span>
 <span id="cb3-7"><a href="#cb3-7"></a><span class="op">&lt;/</span>dependencies<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>To configure support for <strong>JUnit Jupiter based tests</strong>, configure test scoped dependencies on the<a href="https://junit.org/junit5/docs/current/user-guide/#running-tests-build-maven-engines-configure" class="external">JUnit Jupiter API and the JUnit Jupiter TestEngine</a> implementation similar to the following.</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>pom.xml</strong></pre>
-</div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">&lt;!--</span> https<span class="op">:</span><span class="co">//mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine --&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>    <span class="op">&lt;</span>dependency<span class="op">&gt;</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>      <span class="op">&lt;</span>groupId<span class="op">&gt;</span>org<span class="op">.</span><span class="fu">junit</span><span class="op">.</span><span class="fu">jupiter</span><span class="op">&lt;/</span>groupId<span class="op">&gt;</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>      <span class="op">&lt;</span>artifactId<span class="op">&gt;</span>junit<span class="op">-</span>jupiter<span class="op">-</span>engine<span class="op">&lt;/</span>artifactId<span class="op">&gt;</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>      <span class="op">&lt;</span>version<span class="op">&gt;</span><span class="fl">5.9.1</span><span class="op">&lt;/</span>version<span class="op">&gt;</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>      <span class="op">&lt;</span>scope<span class="op">&gt;</span>test<span class="op">&lt;/</span>scope<span class="op">&gt;</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>    <span class="op">&lt;/</span>dependency<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>In your Java code:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>testfaker.java</strong></pre>
 </div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">github</span><span class="op">.</span><span class="im">javafaker</span><span class="op">.</span><span class="im">Faker</span><span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a>Faker faker <span class="op">=</span> <span class="kw">new</span> <span class="fu">Faker</span><span class="op">();</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="bu">String</span> name <span class="op">=</span> faker<span class="op">.</span><span class="fu">name</span><span class="op">().</span><span class="fu">fullName</span><span class="op">();</span> <span class="co">// Miss Samanta Schmidt</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="bu">String</span> firstName <span class="op">=</span> faker<span class="op">.</span><span class="fu">name</span><span class="op">().</span><span class="fu">firstName</span><span class="op">();</span> <span class="co">// Emory</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="bu">String</span> lastName <span class="op">=</span> faker<span class="op">.</span><span class="fu">name</span><span class="op">().</span><span class="fu">lastName</span><span class="op">();</span> <span class="co">// Barton</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="bu">String</span> streetAddress <span class="op">=</span> faker<span class="op">.</span><span class="fu">address</span><span class="op">().</span><span class="fu">streetAddress</span><span class="op">();</span> <span class="co">// 60018 Sawayn Brooks Suite 449</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">github</span><span class="op">.</span><span class="im">javafaker</span><span class="op">.</span><span class="im">Faker</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>Faker faker <span class="op">=</span> <span class="kw">new</span> <span class="fu">Faker</span><span class="op">();</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="bu">String</span> name <span class="op">=</span> faker<span class="op">.</span><span class="fu">name</span><span class="op">().</span><span class="fu">fullName</span><span class="op">();</span> <span class="co">// Miss Samanta Schmidt</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="bu">String</span> firstName <span class="op">=</span> faker<span class="op">.</span><span class="fu">name</span><span class="op">().</span><span class="fu">firstName</span><span class="op">();</span> <span class="co">// Emory</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="bu">String</span> lastName <span class="op">=</span> faker<span class="op">.</span><span class="fu">name</span><span class="op">().</span><span class="fu">lastName</span><span class="op">();</span> <span class="co">// Barton</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="bu">String</span> streetAddress <span class="op">=</span> faker<span class="op">.</span><span class="fu">address</span><span class="op">().</span><span class="fu">streetAddress</span><span class="op">();</span> <span class="co">// 60018 Sawayn Brooks Suite 449</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr>
-<section id="solving-discussion" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="solving-discussion"><span class="header-section-number">1</span> Solving discussion</h2>
-<section id="umls" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="umls"><span class="header-section-number">1.1</span> UMLs</h3>
+</section>
+<section id="dependency-junit-5" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="dependency-junit-5"><span class="header-section-number">1.3</span> Dependency: JUnit 5</h3>
+<p>To configure support for <strong>JUnit Jupiter based tests</strong>, configure test scoped dependencies on the<a href="https://junit.org/junit5/docs/current/user-guide/#running-tests-build-maven-engines-configure" class="external">JUnit Jupiter API and the JUnit Jupiter TestEngine</a> implementation similar to the following.</p>
+<p>more on <a href="../javase/se-concepts-tdd.html">Java SE TDD</a></p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>pom.xml</strong></pre>
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="op">&lt;!--</span> https<span class="op">:</span><span class="co">//mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine --&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="op">&lt;</span>dependency<span class="op">&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>      <span class="op">&lt;</span>groupId<span class="op">&gt;</span>org<span class="op">.</span><span class="fu">junit</span><span class="op">.</span><span class="fu">jupiter</span><span class="op">&lt;/</span>groupId<span class="op">&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>      <span class="op">&lt;</span>artifactId<span class="op">&gt;</span>junit<span class="op">-</span>jupiter<span class="op">-</span>engine<span class="op">&lt;/</span>artifactId<span class="op">&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>      <span class="op">&lt;</span>version<span class="op">&gt;</span><span class="fl">5.9.1</span><span class="op">&lt;/</span>version<span class="op">&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>      <span class="op">&lt;</span>scope<span class="op">&gt;</span>test<span class="op">&lt;/</span>scope<span class="op">&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="op">&lt;/</span>dependency<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="solving-discussion" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="solving-discussion"><span class="header-section-number">2</span> Solving discussion</h2>
+<section id="umls" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="umls"><span class="header-section-number">2.1</span> UMLs</h3>
 <p>This first UML diagram for the <code>Movie</code> class represents a design <mark>where a movie has many critics, and a critic has many reviews of movies.</mark></p>
 <p>This is reflected in the multiplicity of the associations between the classes: the Movie class has a <code>many</code> multiplicity with the <code>Critic</code> class, indicating that a movie can have zero or more critics, and the <code>Critic</code> class has a <code>many</code> multiplicity with the <code>Review</code> class, <strong>indicating that a critic can have zero or more reviews.</strong></p>
 <div class="mermaidContent">
@@ -1463,11 +1482,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <hr>
 </section>
-<section id="basic-tests" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="basic-tests"><span class="header-section-number">1.2</span> Basic tests</h3>
+<section id="basic-tests" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="basic-tests"><span class="header-section-number">2.2</span> Basic tests</h3>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>generaltest.java</strong></pre>
+<pre><strong>Generaltest.java</strong></pre>
 </div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.</span><span class="im">assertEquals</span><span class="op">;</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.</span><span class="im">assertNotNull</span><span class="op">;</span></span>
@@ -1505,8 +1524,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-34"><a href="#cb6-34"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="create-a-superclass-person" class="level3" data-number="1.3">
-<h3 data-number="1.3" class="anchored" data-anchor-id="create-a-superclass-person"><span class="header-section-number">1.3</span> Create a superclass Person</h3>
+<section id="create-a-superclass-person" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="create-a-superclass-person"><span class="header-section-number">2.3</span> Create a superclass Person</h3>
 <p>The <code>Critic</code>, <code>Filmmaker</code>, and <code>Actor</code> classes <strong>all extend</strong> the <code>Person</code> class, meaning <strong>they inherit its fields and methods.</strong> In addition, they each have their own field:</p>
 <ul>
 <li>The <code>Critic</code> class has a reviews field, a <strong>Set</strong> of Review objects representing the reviews written by the critic.</li>
