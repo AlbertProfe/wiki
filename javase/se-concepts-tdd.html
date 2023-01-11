@@ -555,15 +555,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>  
         <li>
     <a class="dropdown-item" href="../javase/selab2-1.html">
- <span class="dropdown-text">Lab#SE02-1: Movie/Review, model</span></a>
+ <span class="dropdown-text">Lab#SE02-1: Movie/Review, Model</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../javase/selab2-2.html">
- <span class="dropdown-text">Lab#SE02-1: Movie/Review, operations</span></a>
+ <span class="dropdown-text">Lab#SE02-2: Movie/Review, CRUD Operations</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../javase/selab2-3.html">
  <span class="dropdown-text">Lab#SE02-3: Movie/Review, factory</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab2-4.html">
+ <span class="dropdown-text">Lab#SE02-4: Movie/Review, interactivity</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Java SE readings</li>
@@ -1127,17 +1131,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-1.html" class="sidebar-item-text sidebar-link">Lab#SE02-1: Movie/Review, model</a>
+  <a href="../javase/selab2-1.html" class="sidebar-item-text sidebar-link">Lab#SE02-1: Movie/Review, Model</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-2.html" class="sidebar-item-text sidebar-link">Lab#SE02-1: Movie/Review, operations</a>
+  <a href="../javase/selab2-2.html" class="sidebar-item-text sidebar-link">Lab#SE02-2: Movie/Review, CRUD Operations</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../javase/selab2-3.html" class="sidebar-item-text sidebar-link">Lab#SE02-3: Movie/Review, factory</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab2-4.html" class="sidebar-item-text sidebar-link">Lab#SE02-4: Movie/Review, interactivity</a>
   </div>
 </li>
       </ul>
@@ -1169,7 +1178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#junit-unit-test" id="toc-junit-unit-test" class="nav-link active" data-scroll-target="#junit-unit-test"><span class="toc-section-number">1</span>  JUnit: unit test</a></li>
   <li><a href="#tdd" id="toc-tdd" class="nav-link" data-scroll-target="#tdd"><span class="toc-section-number">2</span>  TDD</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="toc-section-number">3</span>  Example</a></li>
+  <li><a href="#example-test" id="toc-example-test" class="nav-link" data-scroll-target="#example-test"><span class="toc-section-number">3</span>  Example: <code>@Test</code></a></li>
   <li><a href="#naming-the-test-class" id="toc-naming-the-test-class" class="nav-link" data-scroll-target="#naming-the-test-class"><span class="toc-section-number">4</span>  Naming the test class</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/se-concepts-tdd.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -1214,7 +1223,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Monday, January 9, 2023</p>
+      <p class="date-modified">Wednesday, January 11, 2023</p>
     </div>
   </div>
     
@@ -1239,7 +1248,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="1" class="anchored" data-anchor-id="junit-unit-test"><span class="header-section-number">1</span> JUnit: unit test</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/javase/junit5.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="JUnit 5"><img src="../images/javase/junit5.jpeg" class="img-fluid figure-img" style="width:30.0%"></a></p>
+<p><a href="../images/javase/junit5.jpeg" class="lightbox" title="JUnit 5" data-gallery="quarto-lightbox-gallery-1"><img src="../images/javase/junit5.jpeg" class="img-fluid figure-img" style="width:30.0%"></a></p>
 <p></p><figcaption class="figure-caption">JUnit 5</figcaption><p></p>
 </figure>
 </div>
@@ -1281,42 +1290,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Rerun the test and if they fail, then refactor again and repeat.</li>
 </ol>
 </section>
-<section id="example" class="level2 page-columns page-full" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="example"><span class="header-section-number">3</span> Example</h2>
-<p>First, we would write a test for the add method, which should take two numbers as arguments and return their sum. Here is an example of how this test might look using JUnit:</p>
+<section id="example-test" class="level2 page-columns page-full" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="example-test"><span class="header-section-number">3</span> Example: <code>@Test</code></h2>
+<p>First, to configure support for <strong>JUnit Jupiter based tests</strong>, configure test scoped <code>dependencies</code> on the<a href="https://junit.org/junit5/docs/current/user-guide/#running-tests-build-maven-engines-configure" class="external">JUnit Jupiter API and the JUnit Jupiter TestEngine</a> implementation similar to the following.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>pom.xml</strong></pre>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">&lt;!--</span> https<span class="op">:</span><span class="co">//mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine --&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>    <span class="op">&lt;</span>dependency<span class="op">&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>      <span class="op">&lt;</span>groupId<span class="op">&gt;</span>org<span class="op">.</span><span class="fu">junit</span><span class="op">.</span><span class="fu">jupiter</span><span class="op">&lt;/</span>groupId<span class="op">&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>      <span class="op">&lt;</span>artifactId<span class="op">&gt;</span>junit<span class="op">-</span>jupiter<span class="op">-</span>engine<span class="op">&lt;/</span>artifactId<span class="op">&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>      <span class="op">&lt;</span>version<span class="op">&gt;</span><span class="fl">5.9.1</span><span class="op">&lt;/</span>version<span class="op">&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>      <span class="op">&lt;</span>scope<span class="op">&gt;</span>test<span class="op">&lt;/</span>scope<span class="op">&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="op">&lt;/</span>dependency<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Unlike previous versions of JUnit, JUnit 5 is composed of several different modules from three different sub-projects.</p>
+<p><strong>JUnit 5 = JUnit Platform + JUnit Jupiter + JUnit Vintage</strong></p>
+</div><div class="">
+<p>JUnit 5 requires <strong>Java 8 (or higher) at runtime</strong>. However, you can still test code that has been compiled with previous versions of the JDK.</p>
+</div></div>
+<p>Second, we would write a test for the add method, which should take two numbers as arguments and return their sum. Here is an example of how this test might look using JUnit:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>MyFirstJUnitJupiterTests.java</strong></pre>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">public</span> <span class="kw">class</span> CalculatorTest <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="at">@Test</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testAdd</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>    Calculator calc <span class="op">=</span> <span class="kw">new</span> <span class="fu">Calculator</span><span class="op">();</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>    <span class="dt">double</span> result <span class="op">=</span> calc<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">);</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">5</span><span class="op">,</span> result<span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>  <span class="op">}</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">public</span> <span class="kw">class</span> CalculatorTest <span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="at">@Test</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testAdd</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>    Calculator calc <span class="op">=</span> <span class="kw">new</span> <span class="fu">Calculator</span><span class="op">();</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="dt">double</span> result <span class="op">=</span> calc<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">);</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">5</span><span class="op">,</span> result<span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>  <span class="op">}</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p>Here is an example of how TDD could be applied in a Java project using JUnit. Let’s say we are building a class that represents a simple calculator. We want the calculator to have methods for adding, subtracting, multiplying, and dividing two numbers.</p>
+<p>Here is an example of how <strong>TDD could be applied in a Java project using JUnit</strong>. Let’s say we are building a class that represents a simple calculator.</p>
 </div></div><p>Next, we would run the test to see if it fails. Since we have not yet implemented the add method, the test should fail with a message indicating that the add method is not yet implemented.</p>
 <p>Next, we would write the code for the add method. Here is an example of how this method might look:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>MyFirstJUnitJupiterTests.java</strong></pre>
 </div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">public</span> <span class="kw">class</span> Calculator <span class="op">{</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="kw">public</span> <span class="dt">double</span> <span class="fu">add</span><span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>    <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>  <span class="op">}</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">public</span> <span class="kw">class</span> Calculator <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="kw">public</span> <span class="dt">double</span> <span class="fu">add</span><span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="op">}</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Finally, we would run the test again to ensure that it passes. If the test passes, we know that the add method is working correctly and we can move on to the next feature. We would repeat this process for each of the calculator’s methods, writing a test for each one, implementing the code, and then running the test to ensure it passes.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>We want the calculator to have methods for adding, subtracting, multiplying, and dividing two numbers.</p>
+</div></div><p>Finally, we would run the test again to ensure that it passes. If the test passes, we know that the add method is working correctly and we can move on to the next feature. We would repeat this process for each of the calculator’s methods, writing a test for each one, implementing the code, and then running the test to ensure it passes.</p>
 <p>This is just one example of how TDD can be applied in a Java project using JUnit. There are many other ways to approach TDD, and the specific steps and details will vary depending on the project and the requirements.</p>
 </section>
 <section id="naming-the-test-class" class="level2" data-number="4">
@@ -1633,7 +1666,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":true,"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom","selector":".lightbox"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":true,"descPosition":"bottom"});</script>
 
 
 

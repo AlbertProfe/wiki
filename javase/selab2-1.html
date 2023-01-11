@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="albertprofe">
-<meta name="description" content="Java SE Lab 02, part 1">
+<meta name="description" content="Java SE Lab 02, part 1 work on the Model">
 
-<title>albertprofe wiki - Lab#SE02-1: Movie/Review, model</title>
+<title>albertprofe wiki - Lab#SE02-1: Movie/Review, Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -555,15 +555,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>  
         <li>
     <a class="dropdown-item" href="../javase/selab2-1.html">
- <span class="dropdown-text">Lab#SE02-1: Movie/Review, model</span></a>
+ <span class="dropdown-text">Lab#SE02-1: Movie/Review, Model</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../javase/selab2-2.html">
- <span class="dropdown-text">Lab#SE02-1: Movie/Review, operations</span></a>
+ <span class="dropdown-text">Lab#SE02-2: Movie/Review, CRUD Operations</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../javase/selab2-3.html">
  <span class="dropdown-text">Lab#SE02-3: Movie/Review, factory</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab2-4.html">
+ <span class="dropdown-text">Lab#SE02-4: Movie/Review, interactivity</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Java SE readings</li>
@@ -931,7 +935,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Lab#SE02-1: Movie/Review, model</h1>
+      <h1 class="quarto-secondary-nav-title">Lab#SE02-1: Movie/Review, Model</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -1127,17 +1131,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-1.html" class="sidebar-item-text sidebar-link active">Lab#SE02-1: Movie/Review, model</a>
+  <a href="../javase/selab2-1.html" class="sidebar-item-text sidebar-link active">Lab#SE02-1: Movie/Review, Model</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-2.html" class="sidebar-item-text sidebar-link">Lab#SE02-1: Movie/Review, operations</a>
+  <a href="../javase/selab2-2.html" class="sidebar-item-text sidebar-link">Lab#SE02-2: Movie/Review, CRUD Operations</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../javase/selab2-3.html" class="sidebar-item-text sidebar-link">Lab#SE02-3: Movie/Review, factory</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab2-4.html" class="sidebar-item-text sidebar-link">Lab#SE02-4: Movie/Review, interactivity</a>
   </div>
 </li>
       </ul>
@@ -1181,8 +1190,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Lab#SE02-1: Movie/Review, model</h1>
-<p class="subtitle lead">Java SE Lab</p>
+<h1 class="title d-none d-lg-block">Lab#SE02-1: Movie/Review, Model</h1>
+<p class="subtitle lead">Java SE Lab 02 part 1</p>
   <div class="quarto-categories">
     <div class="quarto-category">javase</div>
     <div class="quarto-category">lab</div>
@@ -1191,7 +1200,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div>
   <div class="description">
-    Java SE Lab 02, part 1
+    Java SE Lab 02, part 1 work on the Model
   </div>
 </div>
 
@@ -1215,7 +1224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tuesday, January 10, 2023</p>
+      <p class="date-modified">Wednesday, January 11, 2023</p>
     </div>
   </div>
     
@@ -1271,52 +1280,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="code-with-filename-file">
 <pre><strong>moviemodel.java</strong></pre>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">Data</span><span class="op">;</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="at">@Data</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="at">@AllArgsConstructor</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="at">@NoArgsConstructor</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">class</span> Movie <span class="op">{</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>  <span class="kw">private</span> <span class="bu">String</span> title<span class="op">;</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>  <span class="kw">private</span> <span class="dt">int</span> year<span class="op">;</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>  <span class="kw">private</span> Filmmaker filmmaker<span class="op">;</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Actor<span class="op">&gt;</span> crew<span class="op">;</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Review<span class="op">&gt;</span> reviews<span class="op">;</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="op">}</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="at">@Data</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="at">@AllArgsConstructor</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="at">@NoArgsConstructor</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="kw">class</span> Critic <span class="op">{</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="op">}</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a></span>
-<span id="cb1-21"><a href="#cb1-21"></a><span class="at">@Data</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a><span class="at">@AllArgsConstructor</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a><span class="at">@NoArgsConstructor</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a><span class="kw">class</span> Actor <span class="op">{</span></span>
-<span id="cb1-25"><a href="#cb1-25"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
-<span id="cb1-26"><a href="#cb1-26"></a><span class="op">}</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a><span class="at">@Data</span></span>
-<span id="cb1-28"><a href="#cb1-28"></a><span class="at">@AllArgsConstructor</span></span>
-<span id="cb1-29"><a href="#cb1-29"></a><span class="at">@NoArgsConstructor</span></span>
-<span id="cb1-30"><a href="#cb1-30"></a><span class="kw">class</span> Filmmaker <span class="op">{</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
-<span id="cb1-32"><a href="#cb1-32"></a><span class="op">}</span></span>
-<span id="cb1-33"><a href="#cb1-33"></a></span>
-<span id="cb1-34"><a href="#cb1-34"></a><span class="at">@Data</span></span>
-<span id="cb1-35"><a href="#cb1-35"></a><span class="at">@AllArgsConstructor</span></span>
-<span id="cb1-36"><a href="#cb1-36"></a><span class="at">@NoArgsConstructor</span></span>
-<span id="cb1-37"><a href="#cb1-37"></a><span class="kw">class</span> Review <span class="op">{</span></span>
-<span id="cb1-38"><a href="#cb1-38"></a>  <span class="kw">private</span> Movie movie<span class="op">;</span></span>
-<span id="cb1-39"><a href="#cb1-39"></a>  <span class="kw">private</span> Critic critic<span class="op">;</span></span>
-<span id="cb1-40"><a href="#cb1-40"></a>  <span class="kw">private</span> <span class="dt">int</span> rating<span class="op">;</span></span>
-<span id="cb1-41"><a href="#cb1-41"></a>  <span class="kw">private</span> <span class="bu">String</span> comment<span class="op">;</span></span>
-<span id="cb1-42"><a href="#cb1-42"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">AllArgsConstructor</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">Data</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">NoArgsConstructor</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="at">@Data</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">class</span> Movie <span class="op">{</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="kw">private</span> <span class="bu">String</span> title<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>  <span class="kw">private</span> <span class="dt">int</span> year<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="kw">private</span> Filmmaker filmmaker<span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Actor<span class="op">&gt;</span> crew<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>  <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Review<span class="op">&gt;</span> reviews<span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="op">}</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="at">@Data</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="kw">class</span> Critic <span class="op">{</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="op">}</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a></span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="at">@Data</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a><span class="kw">class</span> Actor <span class="op">{</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="op">}</span></span>
+<span id="cb1-29"><a href="#cb1-29"></a><span class="at">@Data</span></span>
+<span id="cb1-30"><a href="#cb1-30"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb1-32"><a href="#cb1-32"></a><span class="kw">class</span> Filmmaker <span class="op">{</span></span>
+<span id="cb1-33"><a href="#cb1-33"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a><span class="op">}</span></span>
+<span id="cb1-35"><a href="#cb1-35"></a></span>
+<span id="cb1-36"><a href="#cb1-36"></a><span class="at">@Data</span></span>
+<span id="cb1-37"><a href="#cb1-37"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb1-38"><a href="#cb1-38"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb1-39"><a href="#cb1-39"></a><span class="kw">class</span> Review <span class="op">{</span></span>
+<span id="cb1-40"><a href="#cb1-40"></a>  <span class="kw">private</span> Movie movie<span class="op">;</span></span>
+<span id="cb1-41"><a href="#cb1-41"></a>  <span class="kw">private</span> Critic critic<span class="op">;</span></span>
+<span id="cb1-42"><a href="#cb1-42"></a>  <span class="kw">private</span> <span class="dt">int</span> rating<span class="op">;</span></span>
+<span id="cb1-43"><a href="#cb1-43"></a>  <span class="kw">private</span> <span class="bu">String</span> comment<span class="op">;</span></span>
+<span id="cb1-44"><a href="#cb1-44"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Use <code>Lombok</code>, <a href="https://projectlombok.org/" class="external">link</a>:</p>
 <ul>
-<li><p>The <strong><span class="citation" data-cites="Data">@Data</span></strong> annotation is a <code>Lombok</code> annotation that generates getters and setters for the fields of a class, as well as equimport lombok.Data;als, hashCode, and toString methods based on the fields.</p></li>
+<li><p>The <strong><span class="citation" data-cites="Data">@Data</span></strong> annotation is a <code>Lombok</code> annotation that generates getters and setters for the fields of a class, as well as equals, hashCode, and toString methods based on the fields.</p></li>
 <li><p>The <strong><span class="citation" data-cites="AllArgsConstructor">@AllArgsConstructor</span></strong> annotation is a <code>Lombok</code> annotation that generates a constructor with all of the class’s fields as arguments.</p></li>
 <li><p>The <strong><span class="citation" data-cites="NoArgsConstructor">@NoArgsConstructor</span></strong> annotation is a <code>Lombok</code> annotation that generates a no-argument constructor for a class.</p></li>
 </ul>
@@ -1335,7 +1346,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-8"><a href="#cb2-8"></a><span class="op">&lt;/</span>dependencies<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Use <a href="https://github.com/DiUS/java-faker" class="external">Java Faker</a>:</p>
-<p>In <code>pom.xml</code>, add the following xml stanza between <dependencies> … </dependencies></p>
+<p>In <code>pom.xml</code>, add the following xml <strong>dependency</strong> between <dependencies> … </dependencies></p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>pom.xml</strong></pre>
@@ -1348,20 +1359,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-6"><a href="#cb3-6"></a>  <span class="op">&lt;/</span>dependency<span class="op">&gt;</span></span>
 <span id="cb3-7"><a href="#cb3-7"></a><span class="op">&lt;/</span>dependencies<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>To configure support for <strong>JUnit Jupiter based tests</strong>, configure test scoped dependencies on the<a href="https://junit.org/junit5/docs/current/user-guide/#running-tests-build-maven-engines-configure" class="external">JUnit Jupiter API and the JUnit Jupiter TestEngine</a> implementation similar to the following.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>pom.xml</strong></pre>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">&lt;!--</span> https<span class="op">:</span><span class="co">//mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine --&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="op">&lt;</span>dependency<span class="op">&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>      <span class="op">&lt;</span>groupId<span class="op">&gt;</span>org<span class="op">.</span><span class="fu">junit</span><span class="op">.</span><span class="fu">jupiter</span><span class="op">&lt;/</span>groupId<span class="op">&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>      <span class="op">&lt;</span>artifactId<span class="op">&gt;</span>junit<span class="op">-</span>jupiter<span class="op">-</span>engine<span class="op">&lt;/</span>artifactId<span class="op">&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>      <span class="op">&lt;</span>version<span class="op">&gt;</span><span class="fl">5.9.1</span><span class="op">&lt;/</span>version<span class="op">&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>      <span class="op">&lt;</span>scope<span class="op">&gt;</span>test<span class="op">&lt;/</span>scope<span class="op">&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    <span class="op">&lt;/</span>dependency<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>In your Java code:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>testfaker.java</strong></pre>
 </div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">Data</span><span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3"></a>Faker faker <span class="op">=</span> <span class="kw">new</span> <span class="fu">Faker</span><span class="op">();</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="bu">String</span> name <span class="op">=</span> faker<span class="op">.</span><span class="fu">name</span><span class="op">().</span><span class="fu">fullName</span><span class="op">();</span> <span class="co">// Miss Samanta Schmidt</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="bu">String</span> firstName <span class="op">=</span> faker<span class="op">.</span><span class="fu">name</span><span class="op">().</span><span class="fu">firstName</span><span class="op">();</span> <span class="co">// Emory</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="bu">String</span> lastName <span class="op">=</span> faker<span class="op">.</span><span class="fu">name</span><span class="op">().</span><span class="fu">lastName</span><span class="op">();</span> <span class="co">// Barton</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="bu">String</span> streetAddress <span class="op">=</span> faker<span class="op">.</span><span class="fu">address</span><span class="op">().</span><span class="fu">streetAddress</span><span class="op">();</span> <span class="co">// 60018 Sawayn Brooks Suite 449</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">github</span><span class="op">.</span><span class="im">javafaker</span><span class="op">.</span><span class="im">Faker</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a>Faker faker <span class="op">=</span> <span class="kw">new</span> <span class="fu">Faker</span><span class="op">();</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="bu">String</span> name <span class="op">=</span> faker<span class="op">.</span><span class="fu">name</span><span class="op">().</span><span class="fu">fullName</span><span class="op">();</span> <span class="co">// Miss Samanta Schmidt</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="bu">String</span> firstName <span class="op">=</span> faker<span class="op">.</span><span class="fu">name</span><span class="op">().</span><span class="fu">firstName</span><span class="op">();</span> <span class="co">// Emory</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="bu">String</span> lastName <span class="op">=</span> faker<span class="op">.</span><span class="fu">name</span><span class="op">().</span><span class="fu">lastName</span><span class="op">();</span> <span class="co">// Barton</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="bu">String</span> streetAddress <span class="op">=</span> faker<span class="op">.</span><span class="fu">address</span><span class="op">().</span><span class="fu">streetAddress</span><span class="op">();</span> <span class="co">// 60018 Sawayn Brooks Suite 449</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <section id="solving-discussion" class="level2" data-number="1">
@@ -1444,36 +1469,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="code-with-filename-file">
 <pre><strong>generaltest.java</strong></pre>
 </div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">Data</span><span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="at">@Test</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">testCreateMovie</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="co">// create a movie</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>  Movie movie <span class="op">=</span> <span class="kw">new</span> <span class="fu">Movie</span><span class="op">(</span><span class="st">"The Shawshank Redemption"</span><span class="op">);</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>  </span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="co">// check that the movie was created correctly</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>  <span class="fu">assertEquals</span><span class="op">(</span><span class="st">"The Shawshank Redemption"</span><span class="op">,</span> movie<span class="op">.</span><span class="fu">getTitle</span><span class="op">());</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a>  <span class="fu">assertNotNull</span><span class="op">(</span>movie<span class="op">.</span><span class="fu">getReviews</span><span class="op">());</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a>  <span class="fu">assertTrue</span><span class="op">(</span>movie<span class="op">.</span><span class="fu">getReviews</span><span class="op">().</span><span class="fu">isEmpty</span><span class="op">());</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="op">}</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="at">@Testimport</span> lombok<span class="op">.</span><span class="fu">Data</span><span class="op">;</span></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">testCreateCritic</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a>  <span class="co">// create a critic</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a>  Critic critic <span class="op">=</span> <span class="kw">new</span> <span class="fu">Critic</span><span class="op">(</span><span class="st">"Roger Ebert"</span><span class="op">);</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a>  pom<span class="op">.</span><span class="fu">xmlte</span> a movie and a critic</span>
-<span id="cb5-19"><a href="#cb5-19"></a>  Movie movie <span class="op">=</span> <span class="kw">new</span> <span class="fu">Movie</span><span class="op">(</span><span class="st">"The Shawshank Redemption"</span><span class="op">);</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a>  Critic critic <span class="op">=</span> <span class="kw">new</span> <span class="fu">Critic</span><span class="op">(</span><span class="st">"Roger Ebert"</span><span class="op">);</span></span>
-<span id="cb5-21"><a href="#cb5-21"></a>  </span>
-<span id="cb5-22"><a href="#cb5-22"></a>  <span class="co">// create a review</span></span>
-<span id="cb5-23"><a href="#cb5-23"></a>  Review review <span class="op">=</span> <span class="kw">new</span> <span class="fu">Review</span><span class="op">(</span>movie<span class="op">,</span> critic<span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="st">"One of the greatest films ever made"</span><span class="op">);</span></span>
-<span id="cb5-24"><a href="#cb5-24"></a>  </span>
-<span id="cb5-25"><a href="#cb5-25"></a>  <span class="co">// check that the review was created correctly</span></span>
-<span id="cb5-26"><a href="#cb5-26"></a>  <span class="fu">assertEquals</span><span class="op">(</span>movie<span class="op">,</span> review<span class="op">.</span><span class="fu">getMovie</span><span class="op">());</span></span>
-<span id="cb5-27"><a href="#cb5-27"></a>  <span class="fu">assertEquals</span><span class="op">(</span>critic<span class="op">,</span> review<span class="op">.</span><span class="fu">getCritic</span><span class="op">());</span></span>
-<span id="cb5-28"><a href="#cb5-28"></a>  <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">5</span><span class="op">,</span> review<span class="op">.</span><span class="fu">getRating</span><span class="op">());</span></span>
-<span id="cb5-29"><a href="#cb5-29"></a>  <span class="fu">assertEquals</span><span class="op">(</span><span class="st">"One of the greatest films ever made"</span><span class="op">,</span> review<span class="op">.</span><span class="fu">getComment</span><span class="op">());</span></span>
-<span id="cb5-30"><a href="#cb5-30"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.</span><span class="im">assertEquals</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.</span><span class="im">assertNotNull</span><span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.</span><span class="im">assertTrue</span><span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">github</span><span class="op">.</span><span class="im">javafaker</span><span class="op">.</span><span class="im">Faker</span><span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="at">@Test</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">testCreateMovie</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>  <span class="co">// create a movie</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>  Movie movie <span class="op">=</span> <span class="kw">new</span> <span class="fu">Movie</span><span class="op">(</span><span class="st">"The Shawshank Redemption"</span><span class="op">);</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>  </span>
+<span id="cb6-12"><a href="#cb6-12"></a>  <span class="co">// check that the movie was created correctly</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>  <span class="fu">assertEquals</span><span class="op">(</span><span class="st">"The Shawshank Redemption"</span><span class="op">,</span> movie<span class="op">.</span><span class="fu">getTitle</span><span class="op">());</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>  <span class="fu">assertNotNull</span><span class="op">(</span>movie<span class="op">.</span><span class="fu">getReviews</span><span class="op">());</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a>  <span class="fu">assertTrue</span><span class="op">(</span>movie<span class="op">.</span><span class="fu">getReviews</span><span class="op">().</span><span class="fu">isEmpty</span><span class="op">());</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="op">}</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="at">@Test</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">testCreateCritic</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a>  <span class="co">// create a critic</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a>  Critic critic <span class="op">=</span> <span class="kw">new</span> <span class="fu">Critic</span><span class="op">(</span><span class="st">"Roger Ebert"</span><span class="op">);</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a>  pom<span class="op">.</span><span class="fu">xmlte</span> a movie and a critic</span>
+<span id="cb6-23"><a href="#cb6-23"></a>  Movie movie <span class="op">=</span> <span class="kw">new</span> <span class="fu">Movie</span><span class="op">(</span><span class="st">"The Shawshank Redemption"</span><span class="op">);</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a>  Critic critic <span class="op">=</span> <span class="kw">new</span> <span class="fu">Critic</span><span class="op">(</span><span class="st">"Roger Ebert"</span><span class="op">);</span></span>
+<span id="cb6-25"><a href="#cb6-25"></a>  </span>
+<span id="cb6-26"><a href="#cb6-26"></a>  <span class="co">// create a review</span></span>
+<span id="cb6-27"><a href="#cb6-27"></a>  Review review <span class="op">=</span> <span class="kw">new</span> <span class="fu">Review</span><span class="op">(</span>movie<span class="op">,</span> critic<span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="st">"One of the greatest films ever made"</span><span class="op">);</span></span>
+<span id="cb6-28"><a href="#cb6-28"></a>  </span>
+<span id="cb6-29"><a href="#cb6-29"></a>  <span class="co">// check that the review was created correctly</span></span>
+<span id="cb6-30"><a href="#cb6-30"></a>  <span class="fu">assertEquals</span><span class="op">(</span>movie<span class="op">,</span> review<span class="op">.</span><span class="fu">getMovie</span><span class="op">());</span></span>
+<span id="cb6-31"><a href="#cb6-31"></a>  <span class="fu">assertEquals</span><span class="op">(</span>critic<span class="op">,</span> review<span class="op">.</span><span class="fu">getCritic</span><span class="op">());</span></span>
+<span id="cb6-32"><a href="#cb6-32"></a>  <span class="fu">assertEquals</span><span class="op">(</span><span class="dv">5</span><span class="op">,</span> review<span class="op">.</span><span class="fu">getRating</span><span class="op">());</span></span>
+<span id="cb6-33"><a href="#cb6-33"></a>  <span class="fu">assertEquals</span><span class="op">(</span><span class="st">"One of the greatest films ever made"</span><span class="op">,</span> review<span class="op">.</span><span class="fu">getComment</span><span class="op">());</span></span>
+<span id="cb6-34"><a href="#cb6-34"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="create-a-superclass-person" class="level3" data-number="1.3">
@@ -1488,37 +1517,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="code-with-filename-file">
 <pre><strong>personmodel.java</strong></pre>
 </div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">Data</span><span class="op">;</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="at">@Data</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="at">@AllArgsConstructor</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="at">@NoArgsConstructor</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="kw">class</span> Person <span class="op">{</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>  <span class="kw">private</span> <span class="bu">Date</span> birthDate<span class="op">;</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="op">}</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="at">@Data</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="at">@AllArgsConstructor</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="at">@NoArgsConstructor</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="kw">class</span> Critic <span class="kw">extends</span> Person <span class="op">{</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a>  <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Review<span class="op">&gt;</span> reviews<span class="op">;</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="op">}</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a></span>
-<span id="cb6-18"><a href="#cb6-18"></a><span class="at">@Data</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a><span class="at">@AllArgsConstructor</span></span>
-<span id="cb6-20"><a href="#cb6-20"></a><span class="at">@NoArgsConstructor</span></span>
-<span id="cb6-21"><a href="#cb6-21"></a><span class="kw">class</span> Filmmaker <span class="kw">extends</span> Person <span class="op">{</span></span>
-<span id="cb6-22"><a href="#cb6-22"></a>  <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Movie<span class="op">&gt;</span> movies<span class="op">;</span></span>
-<span id="cb6-23"><a href="#cb6-23"></a><span class="op">}</span></span>
-<span id="cb6-24"><a href="#cb6-24"></a></span>
-<span id="cb6-25"><a href="#cb6-25"></a><span class="at">@Data</span></span>
-<span id="cb6-26"><a href="#cb6-26"></a><span class="at">@AllArgsConstructor</span></span>
-<span id="cb6-27"><a href="#cb6-27"></a><span class="at">@NoArgsConstructor</span></span>
-<span id="cb6-28"><a href="#cb6-28"></a><span class="kw">class</span> Actor <span class="kw">extends</span> Person <span class="op">{</span></span>
-<span id="cb6-29"><a href="#cb6-29"></a>  <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Movie<span class="op">&gt;</span> movies<span class="op">;</span></span>
-<span id="cb6-30"><a href="#cb6-30"></a><span class="op">}</span></span>
-<span id="cb6-31"><a href="#cb6-31"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">AllArgsConstructor</span><span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">Data</span><span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">NoArgsConstructor</span><span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="at">@Data</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="kw">class</span> Person <span class="op">{</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>  <span class="kw">private</span> <span class="bu">Date</span> birthDate<span class="op">;</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="op">}</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="at">@Data</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="kw">class</span> Critic <span class="kw">extends</span> Person <span class="op">{</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>  <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Review<span class="op">&gt;</span> reviews<span class="op">;</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="op">}</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="at">@Data</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="kw">class</span> Filmmaker <span class="kw">extends</span> Person <span class="op">{</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a>  <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Movie<span class="op">&gt;</span> movies<span class="op">;</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="op">}</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="at">@Data</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="kw">class</span> Actor <span class="kw">extends</span> Person <span class="op">{</span></span>
+<span id="cb7-31"><a href="#cb7-31"></a>  <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Movie<span class="op">&gt;</span> movies<span class="op">;</span></span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="op">}</span></span>
+<span id="cb7-33"><a href="#cb7-33"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="mermaidContent">
 <div class="cell">
@@ -1607,7 +1638,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../javase/selab2-2.html">Lab#SE02-2: Movie/Review. operations <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
+<p><br> <a href="../javase/selab2-2.html">Lab#SE02-2: Movie/Review: CRUD operations <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
 </div>
