@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -1178,6 +1178,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#birding" id="toc-birding" class="nav-link active" data-scroll-target="#birding"><span class="toc-section-number">1</span>  Birding</a></li>
   <li><a href="#core-classes" id="toc-core-classes" class="nav-link" data-scroll-target="#core-classes"><span class="toc-section-number">2</span>  Core classes</a></li>
+  <li><a href="#create-static-methods" id="toc-create-static-methods" class="nav-link" data-scroll-target="#create-static-methods"><span class="toc-section-number">3</span>  Create <code>static</code> methods</a></li>
+  <li><a href="#grow-your-code" id="toc-grow-your-code" class="nav-link" data-scroll-target="#grow-your-code"><span class="toc-section-number">4</span>  Grow your code</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/selab2-4.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1187,7 +1189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title d-none d-lg-block">Lab#SE02-4: Movie/Review, interactivity and coupling</h1>
-<p class="subtitle lead">Java SE Lab 02</p>
+<p class="subtitle lead">Java SE Lab 04</p>
   <div class="quarto-categories">
     <div class="quarto-category">javase</div>
     <div class="quarto-category">lab</div>
@@ -1220,7 +1222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Wednesday, January 11, 2023</p>
+      <p class="date-modified">Thursday, January 12, 2023</p>
     </div>
   </div>
     
@@ -1247,11 +1249,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <section id="birding" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="birding"><span class="header-section-number">1</span> Birding</h2>
-<p>Before coding, study this example:</p>
+<p>Before coding, study this very basic example and <a href="../javase/selab2-4.html#grow-your-code">check how it could grow</a>:</p>
 <ul>
 <li>First Version: <a href="https://github.com/AlbertProfe/cifojava2022-1/tree/branch2test/Birding" class="external">Birding 1.0</a></li>
-<li>Third Version: <a href="https://github.com/AlbertProfe/JAVA_pqtm2019/tree/master/Birding/src" class="external">Birding 3.0</a></li>
-<li>Fith Version: <a href="https://github.com/AlbertProfe/JAVA_2020/tree/main/BirdingCloud" class="external">Birding 5.0</a></li>
 </ul>
 </section>
 <section id="core-classes" class="level2" data-number="2">
@@ -1259,7 +1259,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>You could then use these:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>Movie.java</strong></pre>
+<pre><strong>MovieController.java</strong></pre>
 </div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Scanner</span><span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
@@ -1420,6 +1420,116 @@ class MovieController {
 </div>
 </div>
 </div>
+</section>
+<section id="create-static-methods" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="create-static-methods"><span class="header-section-number">3</span> Create <code>static</code> methods</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>MovieController.java</strong></pre>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Scanner</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">public</span> <span class="kw">class</span> MovieController <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a>        <span class="bu">Scanner</span> scanner <span class="op">=</span> <span class="kw">new</span> <span class="bu">Scanner</span><span class="op">(</span><span class="bu">System</span><span class="op">.</span><span class="fu">in</span><span class="op">);</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>        MovieManager movieManager <span class="op">=</span> <span class="kw">new</span> <span class="fu">MovieManager</span><span class="op">();</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a>        <span class="cf">while</span> <span class="op">(</span><span class="kw">true</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>            <span class="bu">String</span> command <span class="op">=</span> <span class="fu">ask</span><span class="op">(</span>scanner<span class="op">,</span> <span class="st">"Option?"</span><span class="op">);</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>            <span class="cf">if</span> <span class="op">(</span>command<span class="op">.</span><span class="fu">equals</span><span class="op">(</span><span class="st">"Quit"</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>command<span class="op">.</span><span class="fu">equals</span><span class="op">(</span><span class="st">"Add"</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>                <span class="fu">add</span><span class="op">(</span>scanner<span class="op">,</span>movieManager<span class="op">);</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>command<span class="op">.</span><span class="fu">equals</span><span class="op">(</span><span class="st">"Delete"</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>                <span class="fu">delete</span><span class="op">(</span>scanner<span class="op">,</span>movieManager<span class="op">);</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>command<span class="op">.</span><span class="fu">equals</span><span class="op">(</span><span class="st">"Get"</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a>                <span class="fu">get</span><span class="op">(</span>scanner<span class="op">,</span>movieManager<span class="op">);</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>command<span class="op">.</span><span class="fu">equals</span><span class="op">(</span><span class="st">"Update"</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a>                <span class="fu">update</span><span class="op">(</span>scanner<span class="op">,</span>movieManager<span class="op">);</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>command<span class="op">.</span><span class="fu">equals</span><span class="op">(</span><span class="st">"Showall"</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a>                <span class="fu">showall</span><span class="op">(</span>scanner<span class="op">,</span>movieManager<span class="op">);</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a>                <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Unknown command!"</span><span class="op">);</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a>            <span class="op">}</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a>        <span class="op">}</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a>    <span class="op">}</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a></span>
+<span id="cb2-31"><a href="#cb2-31"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="bu">String</span> <span class="fu">ask</span><span class="op">(</span><span class="bu">Scanner</span> input<span class="op">,</span> <span class="bu">String</span> option<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-32"><a href="#cb2-32"></a>        <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a>    <span class="op">}</span></span>
+<span id="cb2-34"><a href="#cb2-34"></a></span>
+<span id="cb2-35"><a href="#cb2-35"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">add</span><span class="op">(</span><span class="bu">Scanner</span> input<span class="op">,</span> MovieManager movieManager<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a></span>
+<span id="cb2-37"><a href="#cb2-37"></a>    <span class="op">}</span></span>
+<span id="cb2-38"><a href="#cb2-38"></a></span>
+<span id="cb2-39"><a href="#cb2-39"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">delete</span><span class="op">(</span><span class="bu">Scanner</span> input<span class="op">,</span> MovieManager movieManager<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-40"><a href="#cb2-40"></a></span>
+<span id="cb2-41"><a href="#cb2-41"></a>    <span class="op">}</span></span>
+<span id="cb2-42"><a href="#cb2-42"></a></span>
+<span id="cb2-43"><a href="#cb2-43"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">get</span><span class="op">(</span><span class="bu">Scanner</span> input<span class="op">,</span> MovieManager movieManager<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-44"><a href="#cb2-44"></a></span>
+<span id="cb2-45"><a href="#cb2-45"></a>    <span class="op">}</span></span>
+<span id="cb2-46"><a href="#cb2-46"></a></span>
+<span id="cb2-47"><a href="#cb2-47"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">update</span><span class="op">(</span><span class="bu">Scanner</span> input<span class="op">,</span> MovieManager movieManager<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-48"><a href="#cb2-48"></a></span>
+<span id="cb2-49"><a href="#cb2-49"></a></span>
+<span id="cb2-50"><a href="#cb2-50"></a></span>
+<span id="cb2-51"><a href="#cb2-51"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">showall</span><span class="op">(</span><span class="bu">Scanner</span> input<span class="op">,</span> MovieManager movieManager<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-52"><a href="#cb2-52"></a></span>
+<span id="cb2-53"><a href="#cb2-53"></a>    <span class="op">}</span></span>
+<span id="cb2-54"><a href="#cb2-54"></a></span>
+<span id="cb2-55"><a href="#cb2-55"></a>  <span class="op">}</span></span>
+<span id="cb2-56"><a href="#cb2-56"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="grow-your-code" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="grow-your-code"><span class="header-section-number">4</span> Grow your code</h2>
+<ul>
+<li><strong>First</strong> Version:
+<ul>
+<li>Just basic <strong>Core</strong> classes, Model: <a href="https://github.com/AlbertProfe/cifojava2022-1/tree/branch2test/Birding" class="external">Birding v1.0</a></li>
+</ul></li>
+<li><strong>Second</strong> Version:
+<ul>
+<li>Starting to work in <code>main</code> and thinking (that is, create some new classes) in <strong>Domains</strong></li>
+</ul></li>
+<li><strong>Third</strong> Version:
+<ul>
+<li>Some improvements in organize clases, <code>Menu</code>, <code>MenuOptions</code>, <code>Utils</code>: <a href="https://github.com/AlbertProfe/JAVA_pqtm2019/tree/master/Birding/src" class="external">Birding v3.0</a></li>
+</ul></li>
+<li><strong>Fourth</strong> Version:
+<ul>
+<li>Start wiht MVC pattern: problems with <code>coupling</code></li>
+</ul></li>
+<li><strong>Fifth</strong> Version:
+<ul>
+<li>MVC implemented: <a href="https://github.com/AlbertProfe/JAVA_2020/tree/main/BirdingCloud" class="external">Birding v5.0</a></li>
+</ul></li>
+<li><strong>Sixth</strong> version:
+<ul>
+<li>Add singleton and factory pattern</li>
+</ul></li>
+<li><strong>Seventh</strong> version:
+<ul>
+<li>Check security in/within code</li>
+</ul></li>
+<li><strong>Eight</strong> version:
+<ul>
+<li>Implement CRUD operation in local JSON or create mySQL DB o similar</li>
+</ul></li>
+<li><strong>Nineth</strong> version:
+<ul>
+<li>Go to <strong>web</strong> (<code>Spring Boot</code> &amp; <code>React</code>)</li>
+<li>Go to <strong>desktop</strong> <a href="https://openjfx.io/" class="external">Java FX</a></li>
+</ul></li>
+<li><strong>Tenth</strong> version:
+<ul>
+<li>Create extensions and <a href="../linux/lilab04-3.html">publish</a></li>
+</ul></li>
+</ul>
 <!--- navLinks -->
 <br><br>
 <div class="row">
