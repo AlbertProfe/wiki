@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -43,6 +43,8 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -601,19 +603,27 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../spring/spring-mvc.html">
  <span class="dropdown-text">Spring MVC</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../spring/spring-servlets.html">
+ <span class="dropdown-text">Springs Servlets</span></a>
+  </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Spring Boot Basics</li>
         <li>
     <a class="dropdown-item" href="../springboot/boot-what-basics.html">
- <span class="dropdown-text">Spring Boot: Fundamentals</span></a>
+ <span class="dropdown-text">Spring Boot: fundamentals</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../springboot/boot-what-create.html">
- <span class="dropdown-text">Spring Boot: create a Spring Boot Project</span></a>
+ <span class="dropdown-text">Spring Boot: create a Project</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../springboot/boot-what-create-th-h2.html">
- <span class="dropdown-text">Spring Boot: create a Spring Boot Project with H2 DB and Thymeleaf</span></a>
+ <span class="dropdown-text">Spring Boot: H2 DB and Thymeleaf</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-what-cycle.html">
+ <span class="dropdown-text">Spring Boot: cycle</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Spring Boot Concepts</li>
@@ -1078,6 +1088,11 @@ ul.task-list li input[type="checkbox"] {
   <a href="../spring/spring-mvc.html" class="sidebar-item-text sidebar-link">Spring MVC</a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../spring/spring-servlets.html" class="sidebar-item-text sidebar-link">Springs Servlets</a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -1091,17 +1106,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../springboot/boot-what-basics.html" class="sidebar-item-text sidebar-link">Spring Boot: Fundamentals</a>
+  <a href="../springboot/boot-what-basics.html" class="sidebar-item-text sidebar-link">Spring Boot: fundamentals</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../springboot/boot-what-create.html" class="sidebar-item-text sidebar-link">Spring Boot: create a Spring Boot Project</a>
+  <a href="../springboot/boot-what-create.html" class="sidebar-item-text sidebar-link">Spring Boot: create a Project</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../springboot/boot-what-create-th-h2.html" class="sidebar-item-text sidebar-link">Spring Boot: create a Spring Boot Project with H2 DB and Thymeleaf</a>
+  <a href="../springboot/boot-what-create-th-h2.html" class="sidebar-item-text sidebar-link">Spring Boot: H2 DB and Thymeleaf</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-what-cycle.html" class="sidebar-item-text sidebar-link">Spring Boot: cycle</a>
   </div>
 </li>
       </ul>
@@ -1225,7 +1245,17 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#app" id="toc-app" class="nav-link active" data-scroll-target="#app"><span class="toc-section-number">1</span>  App</a></li>
+  <li><a href="#class" id="toc-class" class="nav-link" data-scroll-target="#class"><span class="toc-section-number">2</span>  Class</a></li>
+  <li><a href="#dependence-injection" id="toc-dependence-injection" class="nav-link" data-scroll-target="#dependence-injection"><span class="toc-section-number">3</span>  Dependence Injection</a></li>
+  <li><a href="#jpa" id="toc-jpa" class="nav-link" data-scroll-target="#jpa"><span class="toc-section-number">4</span>  JPA</a></li>
+  <li><a href="#mapping-and-parameters" id="toc-mapping-and-parameters" class="nav-link" data-scroll-target="#mapping-and-parameters"><span class="toc-section-number">5</span>  Mapping and parameters</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/springboot/boot-concepts-annotations.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1266,7 +1296,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tuesday, February 21, 2023</p>
+      <p class="date-modified">Monday, February 27, 2023</p>
     </div>
   </div>
     
@@ -1277,38 +1307,70 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="summary">
 <p>📘 <strong>Annotations</strong></p>
-<p>In Spring Boot, annotations are used to configure and enable various features and functionality. They are used to provide metadata about a class, method, or field, and are used by the Spring framework to determine how to handle that class, method, or field.</p>
+<p>In Spring Boot, <code>annotations</code> are used to <strong>configure and enable various features and functionality</strong>.</p>
+<p>They are used to provide <code>metadata</code> about a class, method, or field, and are used by the <code>Spring framework</code> to determine how to handle that class, method, or field.</p>
 </div>
 <hr>
 <p>Here are some examples of common annotations used in Spring Boot:</p>
+<section id="app" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="app"><span class="header-section-number">1</span> App</h2>
 <ul>
-<li><code>@SpringBootApplication</code>: This annotation is used to enable the default configuration of a Spring Boot application.</li>
+<li><p><code>@SpringBootApplication</code>: This annotation is used to enable the default configuration of a Spring Boot application.</p>
+<ul>
+<li>Basically, the <code>@SpringBootApplication</code> annotation is a combination of the following three Spring annotations: <code>@Configuration</code>, <code>@EnableAutoConfiguration</code> and <code>@ComponentScan</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="class" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="class"><span class="header-section-number">2</span> Class</h2>
+<ul>
+<li><code>@Component</code> : This annotation is used to automatically detect the component classes without any need to write any explicit code. Spring framework scans classes with <code>@component</code>, initialize them, and injects the required dependencies.</li>
 <li><code>@RestController</code>: This annotation is used to define a class as a RESTful web service controller.</li>
+<li><code>@Controller</code>: This annotation is used to define a class as a web service controller</li>
+<li><code>@Repository</code> : This annotation is used to define a class as a <strong>JPA repository, which can be used to perform CRUD operations on a database.</strong></li>
+<li><code>@Service</code> : This annotation is used to define a class as a <strong>service class that defines the business logic.</strong></li>
+</ul>
+</section>
+<section id="dependence-injection" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="dependence-injection"><span class="header-section-number">3</span> Dependence Injection</h2>
+<ul>
+<li><code>@Autowired</code>: This annotation is used to automatically wire a bean from the Spring application context into a class field or method. When we use this annotation Spring Boot is responsible to create the instance of that variable, <strong>it basically manages the whole life cycle of the object</strong>.</li>
+</ul>
+</section>
+<section id="jpa" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="jpa"><span class="header-section-number">4</span> JPA</h2>
+<ul>
+<li><code>@Entity</code>: This annotation is used to define a class as a <strong>JPA entity</strong>, which can be used to interact with a database.</li>
+</ul>
+</section>
+<section id="mapping-and-parameters" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="mapping-and-parameters"><span class="header-section-number">5</span> Mapping and parameters</h2>
+<ul>
 <li><code>@RequestMapping</code>: This annotation is used to map HTTP requests to specific methods in a controller class.</li>
-<li><code>@Autowired</code>: This annotation is used to automatically wire a bean from the Spring application context into a class field or method.</li>
-<li><code>@Entity</code>: This annotation is used to define a class as a JPA entity, which can be used to interact with a database.</li>
-<li><code>@Repository</code> : This annotation is used to define a class as a JPA repository, which can be used to perform CRUD operations on a database.</li>
-<li><code>@Component</code> : This annotation is used to define a class as a Spring Bean which can be used throughout the application.</li>
+<li><code>@RequestParam</code> : This annotation is used to bind request parameters to a method parameter in the controller.<br>
+</li>
+<li><code>@PathVariable</code> : This annotations binds the placeholder from the URI to the method parameter and can be used when the URI is dynamically created or the value of the URI itself acts as a parameter.</li>
 </ul>
 <!--- navLinks -->
 <br><br>
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../springboot/boot-what-create.html"> Spring Boot: create a Spring Boot Project</a> <br></p>
+<p><br> <a href="../springboot/boot-what-create.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> Spring Boot: create a Spring Boot Project</a> <br></p>
 </div>
 <br>
 <div class="column center">
-<p><br> <a href="#top"> top</a> <br></p>
+<p><br> <a href="#top"><i class="fa-solid fa-arrow-up" aria-label="arrow-up"></i> top</a> <br></p>
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../springboot/boot-concepts-controller.html">Spring Boot: Controller </a> <br></p>
+<p><br> <a href="../springboot/boot-concepts-controller.html">Spring Boot: Controller <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
