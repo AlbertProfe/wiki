@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -106,6 +106,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -133,7 +136,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 
 <div id="quarto-search-results"></div>
@@ -1312,14 +1315,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#example" id="toc-example" class="nav-link active" data-scroll-target="#example"><span class="toc-section-number">1</span>  Example</a></li>
-  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1"><span class="toc-section-number">2</span>  Example</a></li>
-  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2"><span class="toc-section-number">3</span>  Example</a></li>
+  <li><a href="#example1-model" id="toc-example1-model" class="nav-link active" data-scroll-target="#example1-model"><span class="toc-section-number">1</span>  Example1: Model</a></li>
+  <li><a href="#example2-pathvariable-and-requestbody" id="toc-example2-pathvariable-and-requestbody" class="nav-link" data-scroll-target="#example2-pathvariable-and-requestbody"><span class="toc-section-number">2</span>  Example2: <code>@PathVariable</code> and <code>@RequestBody</code></a></li>
+  <li><a href="#example3-requestparam" id="toc-example3-requestparam" class="nav-link" data-scroll-target="#example3-requestparam"><span class="toc-section-number">3</span>  Example3: <code>@RequestParam</code></a></li>
+  <li><a href="#thymeleaf" id="toc-thymeleaf" class="nav-link" data-scroll-target="#thymeleaf"><span class="toc-section-number">4</span>  Thymeleaf</a>
+  <ul>
+  <li><a href="#thymeleaf-templates-engine" id="toc-thymeleaf-templates-engine" class="nav-link" data-scroll-target="#thymeleaf-templates-engine"><span class="toc-section-number">4.1</span>  ThymeLeaf <code>Templates Engine</code></a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/springboot/boot-concepts-view.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -1366,14 +1373,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components: Model - View -Controller</p>
+<p>In Spring Boot, the <strong>Model-View-Controller (MVC)</strong> pattern is used to separate the application logic into three components: Model - View -Controller</p>
 <div class="summary">
 <p>📘 <strong>View</strong></p>
-<p>The view is responsible for presenting the data to the user. In Spring Boot, views are typically implemented using template engines such as Thymeleaf or FreeMarker. The view can access the model and use it to generate the HTML, JSON or XML that is sent to the user’s browser.</p>
+<p>The <code>view</code> is responsible <strong>for presenting the data to the user.</strong></p>
+<p>In Spring Boot, views are t<strong>ypically implemented using template engines such as <code>Thymeleaf</code> or <code>FreeMarker</code></strong>.</p>
+<p>The view can access the model and use it to generate the <code>HTML</code>, <code>JSON</code> or <code>XML</code> that is sent to the user’s browser.</p>
 </div>
 <hr>
-<section id="example" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="example"><span class="header-section-number">1</span> Example</h2>
+<section id="example1-model" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="example1-model"><span class="header-section-number">1</span> Example1: Model</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">&lt;html</span> <span class="er">xmlns:th</span><span class="ot">=</span><span class="st">"http://www.thymeleaf.org"</span><span class="kw">&gt;</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="kw">&lt;head&gt;</span></span>
@@ -1383,13 +1392,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-7"><a href="#cb1-7"></a>    <span class="kw">&lt;h1</span> <span class="er">th:text</span><span class="ot">=</span><span class="st">"${message}"</span><span class="kw">&gt;</span>Hello, World!<span class="kw">&lt;/h1&gt;</span></span>
 <span id="cb1-8"><a href="#cb1-8"></a><span class="kw">&lt;/body&gt;</span></span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In this template, the th:text attribute is used to set the text of the <code>&lt;h1&gt;</code> tag to the value of the message attribute in the model. The expression ${message} evaluates to the value of the message attribute.</p>
-<p>Assuming that this template is saved in a file named home.html in your application’s templates directory, the HomeController will render a message that says “Welcome to my Spring Boot app!” when you visit the URL /. The value of the message attribute is set in the home() method of the controller.</p>
+<p>In this template, the <code>th:text</code> attribute is used <strong>to set the text</strong> of the <code>&lt;h1&gt;</code> tag to the value of the message attribute in the model. The expression <code>${message}</code> evaluates to the value of the message attribute.</p>
+<p>Assuming that this template is saved in a file named <code>home.html</code> <strong>in your application’s templates directory</strong>, the <code>HomeController</code> will render a message that says:</p>
+<blockquote class="blockquote">
+<p>“Welcome to my Spring Boot app!”</p>
+</blockquote>
+<p>when you visit the<code>URL /</code>.</p>
+<p>The value of the message attribute is set in the <code>home()</code> method of the <strong>controller</strong>.</p>
 </section>
-<section id="example-1" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="example-1"><span class="header-section-number">2</span> Example</h2>
-<p>Thymeleaf templates that can be used with the hello(), createUser(), and getUserById() methods:</p>
-<p>hello.html:</p>
+<section id="example2-pathvariable-and-requestbody" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="example2-pathvariable-and-requestbody"><span class="header-section-number">2</span> Example2: <code>@PathVariable</code> and <code>@RequestBody</code></h2>
+<p><code>Thymeleaf</code> templates that can be used with the <code>hello()</code>, <code>createUser()</code>, and <code>getUserById()</code> methods:</p>
+<p><code>hello.html</code></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw">&lt;html</span> <span class="er">xmlns:th</span><span class="ot">=</span><span class="st">"http://www.thymeleaf.org"</span><span class="kw">&gt;</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw">&lt;head&gt;</span></span>
@@ -1400,7 +1414,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-8"><a href="#cb2-8"></a><span class="kw">&lt;/body&gt;</span></span>
 <span id="cb2-9"><a href="#cb2-9"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In this template, the th:text attribute is used to set the text of the <code>&lt;h1&gt;</code> tag to the value of the message attribute in the model. The value of message is set in the hello() method of the controller.</p>
-<p>user.html:</p>
+<p><code>user.html</code></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">&lt;html</span> <span class="er">xmlns:th</span><span class="ot">=</span><span class="st">"http://www.thymeleaf.org"</span><span class="kw">&gt;</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="kw">&lt;head&gt;</span></span>
@@ -1416,8 +1430,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The createUser() method doesn’t return a view, so it doesn’t need a Thymeleaf template.</p>
 <p>Finally, the getUserById() method will render a page that displays the details of a user when you visit the URL /users/{id}, where {id} is the ID of the user. The details of the user are passed to the template using the model.addAttribute() method. The th:text attribute is used to set the text of the <code>&lt;h1&gt;</code> tag to the name of the user, and the th:text attribute of the <code>&lt;p&gt;</code> tag is used to set its text to the email of the user.</p>
 </section>
-<section id="example-2" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="example-2"><span class="header-section-number">3</span> Example</h2>
+<section id="example3-requestparam" class="level2 page-columns page-full" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="example3-requestparam"><span class="header-section-number">3</span> Example3: <code>@RequestParam</code></h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw">&lt;html</span> <span class="er">xmlns:th</span><span class="ot">=</span><span class="st">"http://www.thymeleaf.org"</span><span class="kw">&gt;</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="kw">&lt;head&gt;</span></span>
@@ -1427,8 +1441,87 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-7"><a href="#cb4-7"></a>    <span class="kw">&lt;h1</span> <span class="er">th:text</span><span class="ot">=</span><span class="st">"'Hello, ' + ${message}"</span><span class="kw">&gt;</span>Hello, World!<span class="kw">&lt;/h1&gt;</span></span>
 <span id="cb4-8"><a href="#cb4-8"></a><span class="kw">&lt;/body&gt;</span></span>
 <span id="cb4-9"><a href="#cb4-9"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In this template, the th:text attribute is used to set the text of the <code>&lt;h1&gt;</code> tag to the value of the message attribute in the model. The expression ‘Hello,’ + ${message} concatenates the string “Hello,” with the value of the message attribute.</p>
-<p>Assuming that this template is saved in a file named hello.html in your application’s templates directory, the ExampleController will render a message that says “Hello, {name}!” when you visit the URL /hello?name=John, where {name} is the value of the name parameter in the query string. For example, if you visit the URL /hello?name=John, the message will say “Hello, John!”.</p>
+<p>In this template, the <code>th:text</code> attribute is used to set the text of the <code>&lt;h1&gt;</code> tag to the value of the message attribute in the <code>model</code>.</p>
+<p>The expression <code>'Hello, ' + ${message}</code> concatenates the string <code>"Hello, "</code> with the value of the message attribute.</p>
+<p>Assuming that this template is saved in a file named <code>hello.html</code> in your application’s templates directory, the <code>ExampleController</code> will render a message that says:</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>For example, if you visit the URL /hello?name=John, the message will say “Hello, John!”.</p>
+</div></div><blockquote class="blockquote">
+<p>“Hello, {name}!”</p>
+</blockquote>
+<p>when you visit the URL:</p>
+<blockquote class="blockquote">
+<p>/hello?name=John</p>
+</blockquote>
+<p>where <code>{name}</code> is the value of the name parameter in the query string.</p>
+</section>
+<section id="thymeleaf" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="thymeleaf"><span class="header-section-number">4</span> Thymeleaf</h2>
+<ul>
+<li><a href="https://github.com/AlbertProfe/cifojava2022-3/wiki/Library5:-ThymeLeaf-Web-Project" class="external">Library5 Documentation</a></li>
+<li><a href="https://github.com/AlbertProfe/cifojava2022-3/tree/master/library3" class="external">Repo GitHub Code</a></li>
+</ul>
+<section id="thymeleaf-templates-engine" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="thymeleaf-templates-engine"><span class="header-section-number">4.1</span> ThymeLeaf <code>Templates Engine</code></h3>
+<p>Most Thymeleaf <strong>attributes allow their values to be set as or containing expressions</strong>, which we will call Standard Expressions because of the dialects they are used in. These can be of five types:</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Thymeleaf expresssions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>${…} : Variable expressions.</li>
+<li>*{…} : Selection expressions.</li>
+<li>#{…} : Message (i18n) expressions.</li>
+<li><span class="citation" data-cites="...">@...</span> : Link (URL) expressions.</li>
+<li>~{…} : Fragment expressions.</li>
+</ul>
+</div>
+</div>
+<p>Attributes <code>th:</code></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Thyemleaf attributes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>message: <code>&lt;p th:text="#{msg.welcome}"&gt;Welcome everyone!&lt;/p&gt;</code></li>
+<li>list: <code>&lt;li th:each="book : ${books}" th:text="${book.title}"&gt;En las Orillas del Sar&lt;/li&gt;</code></li>
+<li>link: <code>&lt;form th:action="@{/createOrder}"&gt;</code></li>
+<li>action: <code>&lt;input type="button" th:value**="#{form.submit}" /&gt;</code></li>
+<li>path: <code>&lt;a th:href="@{/admin/users}"&gt;</code></li>
+</ul>
+</div>
+</div>
+<p>How to write <code>th:</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/howtagsTHworks.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="ThymeLeaf how TH: works (1/2)"><img src="../images/springboot/howtagsTHworks.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">ThymeLeaf how TH: works (1/2)</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/howtagsTHworks2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="ThymeLeaf how TH: works (2/2)"><img src="../images/springboot/howtagsTHworks2.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">ThymeLeaf how TH: works (2/2)</figcaption><p></p>
+</figure>
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1"></a>- message: `<span class="kw">&lt;p</span> <span class="er">th:text</span><span class="ot">=</span><span class="st">"#{msg.welcome}"</span><span class="kw">&gt;</span>Welcome everyone!<span class="kw">&lt;/p&gt;</span>`</span>
+<span id="cb5-2"><a href="#cb5-2"></a>- list: `<span class="kw">&lt;li</span> <span class="er">th:each</span><span class="ot">=</span><span class="st">"book : ${books}"</span> <span class="er">th:text</span><span class="ot">=</span><span class="st">"${book.title}"</span><span class="kw">&gt;</span>En las Orillas del Sar<span class="kw">&lt;/li&gt;</span>`</span>
+<span id="cb5-3"><a href="#cb5-3"></a>- link: `<span class="kw">&lt;form</span> <span class="er">th:action</span><span class="ot">=</span><span class="st">"@{/createOrder}"</span><span class="kw">&gt;</span>`</span>
+<span id="cb5-4"><a href="#cb5-4"></a>- action: `<span class="kw">&lt;input</span> <span class="er">type</span><span class="ot">=</span><span class="st">"button"</span> <span class="er">th:value**</span><span class="ot">=</span><span class="st">"#{form.submit}"</span> <span class="kw">/&gt;</span>`</span>
+<span id="cb5-5"><a href="#cb5-5"></a>- path: `<span class="kw">&lt;a</span> <span class="er">th:href</span><span class="ot">=</span><span class="st">"@{/admin/users}"</span><span class="kw">&gt;</span>`</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1448,6 +1541,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1722,6 +1816,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom"});</script>
 
 
 

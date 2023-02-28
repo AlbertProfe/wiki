@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -1312,13 +1312,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overwiew" id="toc-overwiew" class="nav-link active" data-scroll-target="#overwiew"><span class="toc-section-number">1</span>  Overwiew</a></li>
-  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model"><span class="toc-section-number">2</span>  Model</a></li>
-  <li><a href="#model-and-view" id="toc-model-and-view" class="nav-link" data-scroll-target="#model-and-view"><span class="toc-section-number">3</span>  Model and View</a></li>
-  <li><a href="#using-annotations" id="toc-using-annotations" class="nav-link" data-scroll-target="#using-annotations"><span class="toc-section-number">4</span>  Using Annotations</a></li>
-  <li><a href="#example-model" id="toc-example-model" class="nav-link" data-scroll-target="#example-model"><span class="toc-section-number">5</span>  Example: <code>Model</code></a></li>
-  <li><a href="#example-pathvariable-and-requestbody" id="toc-example-pathvariable-and-requestbody" class="nav-link" data-scroll-target="#example-pathvariable-and-requestbody"><span class="toc-section-number">6</span>  Example: <code>@PathVariable</code> and <code>@RequestBody</code></a></li>
-  <li><a href="#example-requestparam" id="toc-example-requestparam" class="nav-link" data-scroll-target="#example-requestparam"><span class="toc-section-number">7</span>  Example: `<code>@RequestParam</code></a></li>
+  <li><a href="#overwiew" id="toc-overwiew" class="nav-link active" data-scroll-target="#overwiew"><span class="toc-section-number">1</span>  Overwiew</a>
+  <ul>
+  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model"><span class="toc-section-number">1.1</span>  Model</a></li>
+  <li><a href="#model-and-view" id="toc-model-and-view" class="nav-link" data-scroll-target="#model-and-view"><span class="toc-section-number">1.2</span>  Model and View</a></li>
+  </ul></li>
+  <li><a href="#using-annotations" id="toc-using-annotations" class="nav-link" data-scroll-target="#using-annotations"><span class="toc-section-number">2</span>  Using Annotations</a></li>
+  <li><a href="#example1-model" id="toc-example1-model" class="nav-link" data-scroll-target="#example1-model"><span class="toc-section-number">3</span>  Example1: <code>Model</code></a></li>
+  <li><a href="#example2-pathvariable-and-requestbody" id="toc-example2-pathvariable-and-requestbody" class="nav-link" data-scroll-target="#example2-pathvariable-and-requestbody"><span class="toc-section-number">4</span>  Example2: <code>@PathVariable</code> and <code>@RequestBody</code></a></li>
+  <li><a href="#example3-requestparam" id="toc-example3-requestparam" class="nav-link" data-scroll-target="#example3-requestparam"><span class="toc-section-number">5</span>  Example3: <code>@RequestParam</code></a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/springboot/boot-concepts-controller.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1370,19 +1372,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components: Model - View -Controller</p>
+<p>In Spring Boot, the <strong>Model-View-Controller (MVC)</strong> pattern is used to separate the application logic into three components: Model - View -Controller</p>
 <div class="summary">
 <p>📘 <strong>Controller</strong></p>
 <p>The controller is responsible for <strong>handling incoming requests and mapping them to the appropriate logic in the model and view.</strong></p>
 <p>In Spring Boot, controllers are implemented as classes with methods that handle specific request paths. The <code>@RestController</code> and <code>@Controller</code> annotations are used to define a class as a controller, and the <code>@RequestMapping</code> annotation is used to map request paths to specific methods.</p>
 </div>
 <hr>
-<section id="overwiew" class="level2" data-number="1">
+<section id="overwiew" class="level2 page-columns page-full" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="overwiew"><span class="header-section-number">1</span> Overwiew</h2>
 <p>In Spring Boot, a controller is a class that handles incoming <strong>HTTP requests and returns an HTTP response</strong>. There are two ways to handle the HTTP response in Spring Boot controllers: using a <code>model</code> (or <code>ModelMap</code>) or a <code>model and view.</code></p>
-</section>
-<section id="model" class="level2 page-columns page-full" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="model"><span class="header-section-number">2</span> Model</h2>
+<section id="model" class="level3 page-columns page-full" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="model"><span class="header-section-number">1.1</span> Model</h3>
 <p>A <code>model</code> is an object <strong>that holds data to be rendered by a view.</strong></p>
 <p>To use a model in a <code>@Controller</code>, you need to add the <code>@Controller</code> annotation to the class and use the <strong>Model interface as a parameter for the method that handles the HTTP request.</strong></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a></span>
@@ -1406,8 +1407,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The <code>getHome</code> method returns the name of the view <code>home</code> (html), which will be resolved by Spring Boot to the appropriate <strong>view file.</strong></p>
 </div></div>
 </section>
-<section id="model-and-view" class="level2 page-columns page-full" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="model-and-view"><span class="header-section-number">3</span> Model and View</h2>
+<section id="model-and-view" class="level3 page-columns page-full" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="model-and-view"><span class="header-section-number">1.2</span> Model and View</h3>
 <p>A model and view is a combination of a model object and the name of the view to be rendered. To use a model and view in a controller, you need to add the <span class="citation" data-cites="Controller">@Controller</span> annotation to the class and use the ModelAndView class as the return type for the method that handles the HTTP request.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">stereotype</span><span class="op">.</span><span class="im">Controller</span><span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">web</span><span class="op">.</span><span class="im">bind</span><span class="op">.</span><span class="im">annotation</span><span class="op">.</span><span class="im">GetMapping</span><span class="op">;</span></span>
@@ -1428,8 +1429,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="no-row-height column-margin column-container"><div class="">
 <p>In this example, the <code>getHome</code> method creates a new <code>ModelAndView</code> object and adds a message to the model using the <code>addObject</code> method. The method also sets the name of the view <code>home</code> using the <code>setViewName</code> method.</p>
 </div></div></section>
-<section id="using-annotations" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="using-annotations"><span class="header-section-number">4</span> Using Annotations</h2>
+</section>
+<section id="using-annotations" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="using-annotations"><span class="header-section-number">2</span> Using Annotations</h2>
+<p>In this table, we will explore some of the most commonly used annotations in Spring Boot. These annotations can be used to map HTTP requests to controller methods, extract data from the request, bind data to model attributes, and handle exceptions. Understanding these annotations is essential for building Spring Boot applications that are reliable, scalable, and maintainable.</p>
 <table class="table">
 <colgroup>
 <col style="width: 48%">
@@ -1505,9 +1508,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 </section>
-<section id="example-model" class="level2 page-columns page-full" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="example-model"><span class="header-section-number">5</span> Example: <code>Model</code></h2>
-<p>he most commonly used annotation is <code>@GetMapping</code>, which maps <code>HTTP</code> <code>GET</code> <strong>requests</strong> to a specific method.</p>
+<section id="example1-model" class="level2 page-columns page-full" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="example1-model"><span class="header-section-number">3</span> Example1: <code>Model</code></h2>
+<p>The most commonly used annotation is <code>@GetMapping</code>, which maps <code>HTTP</code> <code>GET</code> <strong>requests</strong> to a specific method.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">stereotype</span><span class="op">.</span><span class="im">Controller</span><span class="op">;</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">ui</span><span class="op">.</span><span class="im">Model</span><span class="op">;</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">web</span><span class="op">.</span><span class="im">bind</span><span class="op">.</span><span class="im">annotation</span><span class="op">.</span><span class="im">GetMapping</span><span class="op">;</span></span>
@@ -1525,8 +1528,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="no-row-height column-margin column-container"><div class="">
 <p>In this example, the <code>@GetMapping("/")</code> annotation maps <code>HTTP</code> <code>GET</code> requests to the root URL (“/”) <strong>to the home method</strong>.</p>
 </div></div></section>
-<section id="example-pathvariable-and-requestbody" class="level2 page-columns page-full" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="example-pathvariable-and-requestbody"><span class="header-section-number">6</span> Example: <code>@PathVariable</code> and <code>@RequestBody</code></h2>
+<section id="example2-pathvariable-and-requestbody" class="level2 page-columns page-full" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="example2-pathvariable-and-requestbody"><span class="header-section-number">4</span> Example2: <code>@PathVariable</code> and <code>@RequestBody</code></h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="at">@GetMapping</span><span class="op">(</span><span class="st">"/hello"</span><span class="op">)</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw">public</span> <span class="bu">String</span> <span class="fu">hello</span><span class="op">()</span> <span class="op">{</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a>    <span class="cf">return</span> <span class="st">"Hello, World!"</span><span class="op">;</span></span>
@@ -1546,26 +1549,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>In these examples, the <span class="citation" data-cites="GetMapping">@GetMapping</span> and <span class="citation" data-cites="PostMapping">@PostMapping</span> annotations are used to map HTTP GET and POST requests to specific methods. The <span class="citation" data-cites="PathVariable">@PathVariable</span> annotation is used to extract a variable from the URL path, and the <span class="citation" data-cites="RequestBody">@RequestBody</span> annotation is used to map the request body to a Java object.</p>
-</div></div></section>
-<section id="example-requestparam" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="example-requestparam"><span class="header-section-number">7</span> Example: `<code>@RequestParam</code></h2>
-<p>Let’s create a method that uses the <code>@RequestParam</code> <strong>annotation</strong> to <strong>extract a variable from the query string:</strong></p>
+</div></div><p>An alternative implementation where the <code>User</code> object <strong>is created directly in the <code>@Controller</code></strong>:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="at">@Controller</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">public</span> <span class="kw">class</span> ExampleController <span class="op">{</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a>    <span class="at">@GetMapping</span><span class="op">(</span><span class="st">"/hello"</span><span class="op">)</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">example</span><span class="op">(</span><span class="at">@RequestParam</span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span> <span class="bu">String</span> name<span class="op">,</span> Model model<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>        model<span class="op">.</span><span class="fu">addAttribute</span><span class="op">(</span><span class="st">"message"</span><span class="op">,</span> <span class="st">"Hello, "</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">"!"</span><span class="op">);</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>        <span class="cf">return</span> <span class="st">"home"</span><span class="op">;</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>    <span class="op">}</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">public</span> <span class="kw">class</span> UserController <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>    </span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span>User<span class="op">&gt;</span> users <span class="op">=</span> <span class="kw">new</span> <span class="bu">ArrayList</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    </span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="at">@PostMapping</span><span class="op">(</span><span class="st">"/users"</span><span class="op">)</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">createUser</span><span class="op">(</span><span class="at">@RequestBody</span> User user<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>        users<span class="op">.</span><span class="fu">add</span><span class="op">(</span>user<span class="op">);</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>    <span class="op">}</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>    </span>
+<span id="cb5-11"><a href="#cb5-11"></a>    <span class="at">@GetMapping</span><span class="op">(</span><span class="st">"/users/{id}"</span><span class="op">)</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">getUserById</span><span class="op">(</span><span class="at">@PathVariable</span><span class="op">(</span><span class="st">"id"</span><span class="op">)</span> <span class="bu">Long</span> id<span class="op">,</span> Model model<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>        User user <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>        <span class="cf">for</span> <span class="op">(</span>User u <span class="op">:</span> users<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>            <span class="cf">if</span> <span class="op">(</span>u<span class="op">.</span><span class="fu">getId</span><span class="op">()</span> <span class="op">==</span> id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>                user <span class="op">=</span> u<span class="op">;</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>            <span class="op">}</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>        <span class="op">}</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a>        <span class="cf">if</span> <span class="op">(</span>user <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>            <span class="co">// handle error case</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>            model<span class="op">.</span><span class="fu">addAttribute</span><span class="op">(</span><span class="st">"user"</span><span class="op">,</span> user<span class="op">);</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a>        <span class="op">}</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a>        <span class="cf">return</span> <span class="st">"user"</span><span class="op">;</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a>    <span class="op">}</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this implementation, we have replaced the <code>userService</code> dependency with an <strong>in-memory</strong> <code>List&lt;User&gt;</code> to <strong>store</strong> the user objects.</p>
+<p>In the <code>createUser()</code> method, <strong>we simply add the User object to the list</strong>.</p>
+<p>In the <code>getUserById()</code> method, we search for the <code>User</code> object with the given <code>id</code> in the <code>list</code> and add it to the model if it exists. If the user is not found, we can handle the error case appropriately.</p>
+</section>
+<section id="example3-requestparam" class="level2 page-columns page-full" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="example3-requestparam"><span class="header-section-number">5</span> Example3: <code>@RequestParam</code></h2>
+<p>Let’s create a method that uses the <code>@RequestParam</code> <strong>annotation</strong> to <strong>extract a variable from the query string:</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="at">@Controller</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">public</span> <span class="kw">class</span> ExampleController <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="at">@GetMapping</span><span class="op">(</span><span class="st">"/hello"</span><span class="op">)</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">example</span><span class="op">(</span><span class="at">@RequestParam</span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span> <span class="bu">String</span> name<span class="op">,</span> Model model<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>        model<span class="op">.</span><span class="fu">addAttribute</span><span class="op">(</span><span class="st">"message"</span><span class="op">,</span> <span class="st">"Hello, "</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">"!"</span><span class="op">);</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>        <span class="cf">return</span> <span class="st">"home"</span><span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>    <span class="op">}</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In this example, the <code>@GetMapping</code> <strong>annotation</strong> maps <code>HTTP</code> <code>GET</code> requests to the <code>/hello</code> <strong>endpoint</strong>.</p>
 <p>The <code>@RequestParam("name")</code> <code>annotation</code> <strong>extracts a variable named name from the query string and binds it to the String name method parameter.</strong></p>
 <p>The Model parameter is used to add an attribute to the model, which will be used to render the view. Finally, the method returns the name of the view, which in this case is <code>home</code>.</p>
-<p>Assuming that you have a view named <code>home.html</code> in your application’s templates directory, this controller method will render a message that says <strong>“Hello, {<code>name</code>}!”</strong> when you visit the URL:</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>For example, if you visit the URL <code>/hello?name=John</code>, the message will say <strong>“Hello, John!”</strong>.</p>
+</div></div><p>Assuming that you have a view named <code>home.html</code> in your application’s templates directory, this controller method will render a message that says <strong>“Hello, {<code>name</code>}!”</strong> when you visit the URL:</p>
+<blockquote class="blockquote">
 <p><code>/hello?name=John.</code></p>
+</blockquote>
 <p>The value of {<code>name</code>} will be taken from the <code>name</code> <strong>parameter</strong> in the query string.</p>
-<p>::: {.column-margin} For example, if you visit the URL <code>/hello?name=John</code>, the message will say <strong>“Hello, John!”</strong>. :::</p>
 <!--- navLinks -->
 <br><br>
 <div class="row">
