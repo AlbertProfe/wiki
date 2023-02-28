@@ -4611,5 +4611,26 @@
     "title": "Spring Boot: Model",
     "section": "2 Example MVC",
     "text": "2 Example MVC\n\nModel View Controller example by MDN Web Docs Glossary\n\nImagine a simple shopping list app. All we want is a list of the name, quantity and price of each item we need to buy this week. Below we’ll describe how we could implement some of this functionality using MVC.\n\n\n\nModel View Controller example\n\n\n\n\n\n\n\n\nThe Model\n\n\n\nThe model defines what data the app should contain. If the state of this data changes, then the model will usually notify the view (so the display can change as needed) and sometimes the controller (if different logic is needed to control the updated view).\nGoing back to our shopping list app, the model would specify what data the list items should contain — item, price, etc. — and what list items are already present.\n\n\n\n\n\n\n\n  Spring Boot: View \n\n\n\n  top \n\n\n\n Spring Boot: JPA"
+  },
+  {
+    "objectID": "springboot/boot-concepts-th.html",
+    "href": "springboot/boot-concepts-th.html",
+    "title": "Spring Boot: Thymeleaf",
+    "section": "",
+    "text": "In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components: Model - View -Controller"
+  },
+  {
+    "objectID": "springboot/boot-concepts-th.html#overview",
+    "href": "springboot/boot-concepts-th.html#overview",
+    "title": "Spring Boot: Thymeleaf",
+    "section": "1 Overview",
+    "text": "1 Overview\nThymeleaf uses HTML attributes to add functionality and dynamic behavior to web pages, allowing for server-side rendering and template processing.\n<p th:text=\"'Thymeleaf will display this'\">text</p>\nHere Thymeleaf will process the text inside the th:text attribute, and replace the contents of the <p> tag with it.\nThymeleaf works by replacing the contents of the tags that its attributes are defined on. so the final in the browser output will be:\n<p>Thymeleaf will display this</p>\nNotice that the special attributes are now gone, as well as the text “text” which is now replace with the contents of the Thymeleaf attribute.\nA more complicated example:\n<tr th:each=\"prod : ${prods}\">\n    <td th:text=\"${prod.name}\">Onions</td>\n    <td th:text=\"${prod.price}\">2.41</td>\n<tr>\nHere Thymeleaf will repeat the <tr> with the list of products, this is defined by the attribute th:each, it will also remove the dummy content in both the <td> tags, and replace them with the content that is evaluated from th:text=\"${prod.name}\" and th:text=\"${prod.price}\"."
+  },
+  {
+    "objectID": "springboot/boot-concepts-th.html#cheatsheet",
+    "href": "springboot/boot-concepts-th.html#cheatsheet",
+    "title": "Spring Boot: Thymeleaf",
+    "section": "2 CheatSheet",
+    "text": "2 CheatSheet\n\nThymeleaf CheatSheet\n\n\n\n\n\n\n\nFeature\nDescription\nSyntax\n\n\n\n\nth:text\nSets the text of an element\n<p th:text=\"${someValue}\">Default Text</p>\n\n\nth:if\nConditionally renders an element\n<p th:if=\"${someCondition}\">Visible when condition is true</p>\n\n\nth:each\nLoops over a collection and renders an element for each item\n<ul><li th:each=\"item : ${items}\" th:text=\"${item}\">Default Text</li></ul>\n\n\nth:object\nBinds a form to an object and sets its properties\n<form th:object=\"${user}\"><input th:field=\"*{name}\" /></form>\n\n\nth:action\nSets the URL for a form’s submission\n<form th:action=\"@{/submit}\" method=\"post\">\n\n\nth:href\nSets the URL for an anchor tag\n<a th:href=\"@{/page}\">Link Text</a>\n\n\nth:src\nSets the source URL for an image tag\n<img th:src=\"@{/image.jpg}\" alt=\"Alt Text\" />\n\n\nth:value\nSets the value of an input field\n<input th:value=\"${someValue}\" />\n\n\nth:selected\nConditionally selects an option in a select field\n<select><option th:selected=\"${isSelected}\">Option Text</option></select>\n\n\nth:disabled\nConditionally disables an input field\n<input th:disabled=\"${isDisabled}\" />\n\n\nth:readonly\nConditionally sets an input field as read-only\n<input th:readonly=\"${isReadOnly}\" />\n\n\nth:classappend\nConditionally appends a CSS class to an element\n<div class=\"default\" th:classappend=\"${additionalClass}\"></div>\n\n\nth:style\nSets the style attribute of an element\n<div th:style=\"'background-color:' + ${bgColor} + ';'\"></div>\n\n\nth:attr\nSets any attribute of an element\n<input th:attr=\"data-id=${itemId}\" />\n\n\nth:replace\nReplaces an element with another\n<div th:replace=\"fragments/header :: header\"></div>\n\n\nth:include\nIncludes a fragment of a template\n<div th:include=\"fragments/footer :: footer\"></div>\n\n\nth:unless\nConditionally renders an element when a condition is false\n<p th:unless=\"${someCondition}\">Visible when condition is false</p>\n\n\nth:inline\nSets the inline mode of an element\n<script th:inline=\"javascript\">alert([[${message}]]);</script>\n\n\nth:textappend\nAppends text to an element\n<span th:textappend=\"${additionalText}\">Default Text</span>\n\n\nth:with\nSets a local variable in the current context\n<div th:with=\"varName=${someValue}\"></div>\n\n\n\n\nA Cheat Sheet for using the Thymeleaf templating Engine\n\n\n\n\n\n\n  Spring Boot: Controller \n\n\n\n  top \n\n\n\n Spring Boot: Model"
   }
 ]
