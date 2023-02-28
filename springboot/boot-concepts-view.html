@@ -1397,8 +1397,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote class="blockquote">
 <p>“Welcome to my Spring Boot app!”</p>
 </blockquote>
-<p>when you visit the<code>URL /</code>.</p>
+<p>when you visit the<code>URL /</code></p>
 <p>The value of the message attribute is set in the <code>home()</code> method of the <strong>controller</strong>.</p>
+<p><a href="../springboot/boot-concepts-controller.html#example1-model">Example1 Controller</a></p>
 </section>
 <section id="example2-pathvariable-and-requestbody" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="example2-pathvariable-and-requestbody"><span class="header-section-number">2</span> Example2: <code>@PathVariable</code> and <code>@RequestBody</code></h2>
@@ -1425,10 +1426,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-8"><a href="#cb3-8"></a>    <span class="kw">&lt;p</span> <span class="er">th:text</span><span class="ot">=</span><span class="st">"${user.email}"</span><span class="kw">&gt;&lt;/p&gt;</span></span>
 <span id="cb3-9"><a href="#cb3-9"></a><span class="kw">&lt;/body&gt;</span></span>
 <span id="cb3-10"><a href="#cb3-10"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In this template, the th:text attribute is used to set the text of the <code>&lt;h1&gt;</code> tag to the value of the name property of the user object in the model. The th:text attribute of the <code>&lt;p&gt;</code> tag is used to set its text to the value of the email property of the user object in the model.</p>
-<p>Assuming that these templates are saved in files named hello.html and user.html, respectively, in your application’s templates directory, the hello() method will render a message that says “Hello, World!” when you visit the URL /hello.</p>
-<p>The createUser() method doesn’t return a view, so it doesn’t need a Thymeleaf template.</p>
-<p>Finally, the getUserById() method will render a page that displays the details of a user when you visit the URL /users/{id}, where {id} is the ID of the user. The details of the user are passed to the template using the model.addAttribute() method. The th:text attribute is used to set the text of the <code>&lt;h1&gt;</code> tag to the name of the user, and the th:text attribute of the <code>&lt;p&gt;</code> tag is used to set its text to the email of the user.</p>
+<p>In this template, the <code>th:text</code> attribute is used <strong>to set the text of</strong> the <code>&lt;h1&gt;</code> tag to the value of the <code>name</code> property of the user object in the model.</p>
+<p>The <code>th:text</code> attribute of the <code>&lt;p&gt;</code> tag is used <strong>to set its text to the value</strong> of the <code>email</code> property of the user object in the model.</p>
+<p>Assuming that these templates are saved in files named <code>hello.html</code> and <code>user.html</code>, respectively, in your application’s templates directory, the <code>hello()</code> method will render a message that says:</p>
+<blockquote class="blockquote">
+<p>“Hello, World!”</p>
+</blockquote>
+<p>when you visit the URL <code>/hello</code></p>
+<p>The <code>createUser()</code> method doesn’t return a view, so it doesn’t need a <code>Thymeleaf template</code>.</p>
+<p>Finally, the <code>getUserById()</code> method <strong>will render a page that displays the details of a user</strong> when you visit the <code>URL</code> <code>/users/{id},</code> where <code>{id</code>} is the ID of the <strong>user</strong>.</p>
+<p>The details of the user are passed to the template using the <code>model.addAttribute()</code> method.</p>
+<p>The <code>th:text</code> attribute is used to set the text of the <code>&lt;h1&gt;</code> tag to the <strong>name</strong> of the user, and the th:text attribute of the <code>&lt;p&gt;</code> tag is used to set its text to the <strong>email</strong> of the user.</p>
+<p><a href="../springboot/boot-concepts-controller.html#example2-model">Example2 Controller</a></p>
 </section>
 <section id="example3-requestparam" class="level2 page-columns page-full" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="example3-requestparam"><span class="header-section-number">3</span> Example3: <code>@RequestParam</code></h2>
@@ -1455,6 +1464,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>/hello?name=John</p>
 </blockquote>
 <p>where <code>{name}</code> is the value of the name parameter in the query string.</p>
+<p><a href="../springboot/boot-concepts-controller.html#example3-model">Example3 Controller</a></p>
 </section>
 <section id="thymeleaf" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="thymeleaf"><span class="header-section-number">4</span> Thymeleaf</h2>
@@ -1507,21 +1517,22 @@ Thyemleaf attributes
 <p>How to write <code>th:</code></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/howtagsTHworks.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="ThymeLeaf how TH: works (1/2)"><img src="../images/springboot/howtagsTHworks.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
-<p></p><figcaption class="figure-caption">ThymeLeaf how TH: works (1/2)</figcaption><p></p>
+<p><a href="../images/springboot/howtagsTHworks.png" class="lightbox" title="ThymeLeaf how TH: works (1/3)" data-gallery="quarto-lightbox-gallery-1"><img src="../images/springboot/howtagsTHworks.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">ThymeLeaf how TH: works (1/3)</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/howtagsTHworks2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="ThymeLeaf how TH: works (2/2)"><img src="../images/springboot/howtagsTHworks2.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
-<p></p><figcaption class="figure-caption">ThymeLeaf how TH: works (2/2)</figcaption><p></p>
+<p><a href="../images/springboot/howtagsTHworks2.png" class="lightbox" title="ThymeLeaf how TH: works (2/3)" data-gallery="quarto-lightbox-gallery-2"><img src="../images/springboot/howtagsTHworks2.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">ThymeLeaf how TH: works (2/3)</figcaption><p></p>
 </figure>
 </div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1"></a>- message: `<span class="kw">&lt;p</span> <span class="er">th:text</span><span class="ot">=</span><span class="st">"#{msg.welcome}"</span><span class="kw">&gt;</span>Welcome everyone!<span class="kw">&lt;/p&gt;</span>`</span>
-<span id="cb5-2"><a href="#cb5-2"></a>- list: `<span class="kw">&lt;li</span> <span class="er">th:each</span><span class="ot">=</span><span class="st">"book : ${books}"</span> <span class="er">th:text</span><span class="ot">=</span><span class="st">"${book.title}"</span><span class="kw">&gt;</span>En las Orillas del Sar<span class="kw">&lt;/li&gt;</span>`</span>
-<span id="cb5-3"><a href="#cb5-3"></a>- link: `<span class="kw">&lt;form</span> <span class="er">th:action</span><span class="ot">=</span><span class="st">"@{/createOrder}"</span><span class="kw">&gt;</span>`</span>
-<span id="cb5-4"><a href="#cb5-4"></a>- action: `<span class="kw">&lt;input</span> <span class="er">type</span><span class="ot">=</span><span class="st">"button"</span> <span class="er">th:value**</span><span class="ot">=</span><span class="st">"#{form.submit}"</span> <span class="kw">/&gt;</span>`</span>
-<span id="cb5-5"><a href="#cb5-5"></a>- path: `<span class="kw">&lt;a</span> <span class="er">th:href</span><span class="ot">=</span><span class="st">"@{/admin/users}"</span><span class="kw">&gt;</span>`</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/howtagsTHworks3.png" class="lightbox" title="ThymeLeaf how TH: works (3/3)" data-gallery="quarto-lightbox-gallery-3"><img src="../images/springboot/howtagsTHworks3.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">ThymeLeaf how TH: works (3/3)</figcaption><p></p>
+</figure>
+</div>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1816,7 +1827,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","descPosition":"bottom"});</script>
 
 
 

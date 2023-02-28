@@ -1320,7 +1320,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#using-annotations" id="toc-using-annotations" class="nav-link" data-scroll-target="#using-annotations"><span class="toc-section-number">2</span>  Using Annotations</a></li>
   <li><a href="#example1-model" id="toc-example1-model" class="nav-link" data-scroll-target="#example1-model"><span class="toc-section-number">3</span>  Example1: <code>Model</code></a></li>
   <li><a href="#example2-pathvariable-and-requestbody" id="toc-example2-pathvariable-and-requestbody" class="nav-link" data-scroll-target="#example2-pathvariable-and-requestbody"><span class="toc-section-number">4</span>  Example2: <code>@PathVariable</code> and <code>@RequestBody</code></a></li>
-  <li><a href="#example3-requestparam" id="toc-example3-requestparam" class="nav-link" data-scroll-target="#example3-requestparam"><span class="toc-section-number">5</span>  Example3: <code>@RequestParam</code></a></li>
+  <li><a href="#example3-requestparam" id="toc-example3-requestparam" class="nav-link" data-scroll-target="#example3-requestparam"><span class="toc-section-number">5</span>  Example3: <code>@RequestParam</code></a>
+  <ul>
+  <li><a href="#requestparam-and-pathvariable" id="toc-requestparam-and-pathvariable" class="nav-link" data-scroll-target="#requestparam-and-pathvariable"><span class="toc-section-number">5.1</span>  <code>@RequestParam</code> and <code>@PathVariable</code></a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/springboot/boot-concepts-controller.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1527,7 +1530,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>In this example, the <code>@GetMapping("/")</code> annotation maps <code>HTTP</code> <code>GET</code> requests to the root URL (“/”) <strong>to the home method</strong>.</p>
-</div></div></section>
+</div></div><p><a href="../springboot/boot-concepts-view.html#example1-model">Example1 View</a></p>
+</section>
 <section id="example2-pathvariable-and-requestbody" class="level2 page-columns page-full" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="example2-pathvariable-and-requestbody"><span class="header-section-number">4</span> Example2: <code>@PathVariable</code> and <code>@RequestBody</code></h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="at">@GetMapping</span><span class="op">(</span><span class="st">"/hello"</span><span class="op">)</span></span>
@@ -1580,6 +1584,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this implementation, we have replaced the <code>userService</code> dependency with an <strong>in-memory</strong> <code>List&lt;User&gt;</code> to <strong>store</strong> the user objects.</p>
 <p>In the <code>createUser()</code> method, <strong>we simply add the User object to the list</strong>.</p>
 <p>In the <code>getUserById()</code> method, we search for the <code>User</code> object with the given <code>id</code> in the <code>list</code> and add it to the model if it exists. If the user is not found, we can handle the error case appropriately.</p>
+<p><a href="../springboot/boot-concepts-view.html#example2-pathvariable-and-requestbody">Example2 View</a></p>
 </section>
 <section id="example3-requestparam" class="level2 page-columns page-full" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="example3-requestparam"><span class="header-section-number">5</span> Example3: <code>@RequestParam</code></h2>
@@ -1604,6 +1609,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>/hello?name=John.</code></p>
 </blockquote>
 <p>The value of {<code>name</code>} will be taken from the <code>name</code> <strong>parameter</strong> in the query string.</p>
+<p><a href="../springboot/boot-concepts-view.html#example3-requestparam">Example3 View</a></p>
+<section id="requestparam-and-pathvariable" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="requestparam-and-pathvariable"><span class="header-section-number">5.1</span> <code>@RequestParam</code> and <code>@PathVariable</code></h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<code>@RequestParam</code> and <code>@PathVariable</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In Spring Boot, <code>@RequestParam</code> and <code>@PathVariable</code> are both annotations used to <strong>extract data from an HTTP request.</strong></p>
+<p>The main difference between the two is the <strong>source of the data they extract</strong>:</p>
+<ul>
+<li><code>@RequestParam</code> : <strong>query string or request body</strong></li>
+<li><code>@PathVariable</code> : <strong>URL path</strong></li>
+</ul>
+</div>
+</div>
+<p><code>@RequestParam</code> extracts data from the query string or request body, whereas <code>@PathVariable</code> extracts data from the URL path.</p>
+<p>For example, if you have a <code>URL</code> like:</p>
+<blockquote class="blockquote">
+<p>/users?name=john</p>
+</blockquote>
+<p>you can use <code>@RequestParam</code> to extract the name <strong>parameter value</strong> <code>john</code> from the query string.</p>
+<p>On the other hand, if you have a <code>URL</code> like:</p>
+<blockquote class="blockquote">
+<p>/users/123</p>
+</blockquote>
+<p>you can use <code>@PathVariable</code> to extract the id <strong>parameter value</strong> <code>123</code> from the URL path.</p>
+<p>In general, use <code>@RequestParam</code> when you need to extract data from the query string or request body, and use <code>@PathVariable</code> when you need to extract data from the URL path.</p>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1623,6 +1661,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
