@@ -1325,7 +1325,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">1</span>  Overview</a></li>
-  <li><a href="#cheatsheet" id="toc-cheatsheet" class="nav-link" data-scroll-target="#cheatsheet"><span class="toc-section-number">2</span>  CheatSheet</a></li>
+  <li><a href="#configuration" id="toc-configuration" class="nav-link" data-scroll-target="#configuration"><span class="toc-section-number">2</span>  Configuration</a></li>
+  <li><a href="#passing-data-to-views-controller-and-view" id="toc-passing-data-to-views-controller-and-view" class="nav-link" data-scroll-target="#passing-data-to-views-controller-and-view"><span class="toc-section-number">3</span>  Passing data to views: <code>@Controller</code> and View</a></li>
+  <li><a href="#messages" id="toc-messages" class="nav-link" data-scroll-target="#messages"><span class="toc-section-number">4</span>  Messages</a></li>
+  <li><a href="#thymeleaf-templates-engine" id="toc-thymeleaf-templates-engine" class="nav-link" data-scroll-target="#thymeleaf-templates-engine"><span class="toc-section-number">5</span>  ThymeLeaf <code>Templates Engine</code></a></li>
+  <li><a href="#cheatsheet" id="toc-cheatsheet" class="nav-link" data-scroll-target="#cheatsheet"><span class="toc-section-number">6</span>  CheatSheet</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/springboot/boot-concepts-th.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1369,7 +1373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tuesday, February 28, 2023</p>
+      <p class="date-modified">Wednesday, March 1, 2023</p>
     </div>
   </div>
     
@@ -1404,8 +1408,139 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-4"><a href="#cb3-4"></a><span class="kw">&lt;tr&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here Thymeleaf will repeat the <code>&lt;tr&gt;</code> with the list of products, this is defined by the attribute th:each, it will also remove the dummy content in both the <code>&lt;td&gt;</code> tags, and replace them with the content that is evaluated from <code>th:text="${prod.name}"</code> and <code>th:text="${prod.price}"</code>.</p>
 </section>
-<section id="cheatsheet" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="cheatsheet"><span class="header-section-number">2</span> CheatSheet</h2>
+<section id="configuration" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="configuration"><span class="header-section-number">2</span> Configuration</h2>
+<p>In order to use thymeleaf in a project, we need to add the following starter to the dependency:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource xml number-lines code-with-copy"><code class="sourceCode xml"><span id="cb4-1"><a href="#cb4-1"></a>&lt;<span class="kw">dependency</span>&gt;</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    &lt;<span class="kw">groupId</span>&gt;org.springframework.boot&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    &lt;<span class="kw">artifactId</span>&gt;spring-boot-starter-thymeleaf&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb4-4"><a href="#cb4-4"></a>&lt;/<span class="kw">dependency</span>&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The starter s<code>pring-boot-starter-thymeleaf</code> added to the project, thanks to the <strong>auto-configuration mechanism</strong>. Default values include:</p>
+<ul>
+<li><code>HTML</code> templates should be in the <code>resources/templates</code> directory (this is the so-called <code>root</code>)</li>
+<li>files should have the <code>html</code> extension (so we won’t have to duplicate this information in the code)</li>
+<li><code>viewResolver</code> has an appropriate implementation (<code>thymeleafViewResolver</code>)</li>
+</ul>
+</section>
+<section id="passing-data-to-views-controller-and-view" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="passing-data-to-views-controller-and-view"><span class="header-section-number">3</span> Passing data to views: <code>@Controller</code> and View</h2>
+<p>The <code>@Controller</code> <a href="../springboot/boot-concepts-view.html#example1-model">will retrun a String object</a>: it will display an HTML view with the appropriate message at the address:</p>
+<blockquote class="blockquote">
+<p>http://localhost:8080/</p>
+</blockquote>
+<p><code>Thymeleaf</code> allows you to define templates of <code>HTML</code> views. In order to be able to use additional <code>Thymeleaf</code> functionalities we need to add the appropriate <code>**namespace**</code> to the <strong>HTML document (and the html tag):</strong></p>
+<blockquote class="blockquote">
+<p>xmlns:th=“http://www.thymeleaf.org”</p>
+</blockquote>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Define the places to replace in the HTML template as follows:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>in the tag we indicate the attribute that should be replaced with the name. We precede this attribute with the name namespace and the character :, e.g.:</p>
+<blockquote class="blockquote">
+<p><code>&lt;p th:text=...&gt;&lt;/p&gt;</code></p>
+</blockquote>
+<p>indicate the value to be replaced inside the braces and precede it with a dollar sign, e.g.&nbsp;${myCustomAttributeName}</p>
+</div>
+</div>
+</section>
+<section id="messages" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="messages"><span class="header-section-number">4</span> Messages</h2>
+<p><code>Thymeleaf</code> by default allows you to define such messages in the <code>messages.properties</code> file, which by default should be located directly in <strong>the resources directory</strong>.</p>
+<p>In this file we store the keys and the corresponding values. In the HTML template, we refer to the key using the <code>#</code> sign:</p>
+<blockquote class="blockquote">
+<p>hi.msg=Hi there!</p>
+</blockquote>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">&lt;html</span> <span class="er">lang</span><span class="ot">=</span><span class="st">"en"</span> <span class="er">xmlns:th</span><span class="ot">=</span><span class="st">"http://www.thymeleaf.org"</span><span class="kw">&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">&lt;body&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="kw">&lt;p</span> <span class="er">th:text</span><span class="ot">=</span><span class="st">"#{hi.msg}"</span><span class="kw">&gt;&lt;/p</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="er">&lt;a</span> <span class="er">href="?lang=fr"</span><span class="kw">&gt;</span>Français<span class="kw">&lt;/a&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="kw">&lt;/body&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We could add another lenguage by creating a new file named <code>messages_fr.properties</code> (<code>messages_cat.properties</code>, <code>messages_es.properties</code>, <code>messages_jap.properties</code>) in the same directory.</p>
+<p>This approach also allows the implementation of <strong>internationalization</strong> by means of the so-called <strong>interceptors</strong>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="at">@Bean</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">public</span> LocaleResolver <span class="fu">localeResolver</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>    SessionLocaleResolver resolver <span class="op">=</span> <span class="kw">new</span> <span class="fu">SessionLocaleResolver</span><span class="op">();</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    resolver<span class="op">.</span><span class="fu">setDefaultLocale</span><span class="op">(</span><span class="bu">Locale</span><span class="op">.</span><span class="fu">ENGLISH</span><span class="op">);</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="cf">return</span> resolver<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="op">}</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="at">@Bean</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="kw">public</span> LocaleChangeInterceptor <span class="fu">localeChangeInterceptor</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>    LocaleChangeInterceptor interceptor <span class="op">=</span> <span class="kw">new</span> <span class="fu">LocaleChangeInterceptor</span><span class="op">();</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>    interceptor<span class="op">.</span><span class="fu">setParamName</span><span class="op">(</span><span class="st">"lang"</span><span class="op">);</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>    <span class="cf">return</span> interceptor<span class="op">;</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="op">}</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="at">@Override</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">addInterceptors</span><span class="op">(</span>InterceptorRegistry registry<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>    registry<span class="op">.</span><span class="fu">addInterceptor</span><span class="op">(</span><span class="fu">localeChangeInterceptor</span><span class="op">());</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="op">}</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="thymeleaf-templates-engine" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="thymeleaf-templates-engine"><span class="header-section-number">5</span> ThymeLeaf <code>Templates Engine</code></h2>
+<p>Most Thymeleaf <strong>attributes allow their values to be set as or containing expressions</strong>, which we will call Standard Expressions because of the dialects they are used in. These can be of five types:</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Thymeleaf expresssions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>${…} : Variable expressions.</li>
+<li>*{…} : Selection expressions.</li>
+<li>#{…} : Message (i18n) expressions.</li>
+<li><span class="citation" data-cites="...">@...</span> : Link (URL) expressions.</li>
+<li>~{…} : Fragment expressions.</li>
+<li>__{…} : use an element inside another</li>
+</ul>
+</div>
+</div>
+<p>Attributes <code>th:</code></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Thyemleaf attributes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>message: <code>&lt;p th:text="#{msg.welcome}"&gt;Welcome everyone!&lt;/p&gt;</code></li>
+<li>list: <code>&lt;li th:each="book : ${books}" th:text="${book.title}"&gt;En las Orillas del Sar&lt;/li&gt;</code></li>
+<li>link: <code>&lt;form th:action="@{/createOrder}"&gt;</code></li>
+<li>action: <code>&lt;input type="button" th:value**="#{form.submit}" /&gt;</code></li>
+<li>path: <code>&lt;a th:href="@{/admin/users}"&gt;</code></li>
+</ul>
+</div>
+</div>
+<p>How to write <code>th:</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/howtagsTHworks.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="ThymeLeaf how TH: works (1/3)"><img src="..\images/springboot/howtagsTHworks.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">ThymeLeaf how TH: works (1/3)</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="cheatsheet" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="cheatsheet"><span class="header-section-number">6</span> CheatSheet</h2>
 <table class="table">
 <caption>Thymeleaf CheatSheet</caption>
 <colgroup>
@@ -1525,6 +1660,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <ul>
 <li><a href="http://engma.github.io/thymeleaf-cheat-sheet/" class="external">A Cheat Sheet for using the Thymeleaf templating Engine</a></li>
+<li><a href="https://docs.java.en.sdacademy.pro/spring/mvc_thymeleaf/" class="external">MVC and Thymeleaf</a></li>
 </ul>
 <!--- navLinks -->
 <br><br>
@@ -1819,7 +1955,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":true,"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":true,"openEffect":"zoom"});</script>
 
 
 
