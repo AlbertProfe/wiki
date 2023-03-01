@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -737,7 +737,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>  
         <li>
     <a class="dropdown-item" href="../springboot/sblab0-2.html">
- <span class="dropdown-text">Spring Boot Lab#SB00-2: Refactor</span></a>
+ <span class="dropdown-text">Spring Boot Lab#SB00-2: CRUD User</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../springboot/sblab1.html">
@@ -1268,7 +1268,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../springboot/sblab0-2.html" class="sidebar-item-text sidebar-link">Spring Boot Lab#SB00-2: Refactor</a>
+  <a href="../springboot/sblab0-2.html" class="sidebar-item-text sidebar-link">Spring Boot Lab#SB00-2: CRUD User</a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -1390,7 +1390,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/thymeleaf_logo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../images/springboot/thymeleaf_logo.png" class="img-fluid figure-img" style="width:50.0%"></a></p>
+<p><a href="../images/springboot/thymeleaf_logo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="..\images/springboot/thymeleaf_logo.png" class="img-fluid figure-img" style="width:50.0%"></a></p>
 </figure>
 </div>
 <section id="overview" class="level2" data-number="1">
@@ -1466,7 +1466,14 @@ Define the places to replace in the HTML template as follows:
 <span id="cb5-7"><a href="#cb5-7"></a></span>
 <span id="cb5-8"><a href="#cb5-8"></a><span class="kw">&lt;/body&gt;</span></span>
 <span id="cb5-9"><a href="#cb5-9"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>We could add another lenguage by creating a new file named <code>messages_fr.properties</code> (<code>messages_cat.properties</code>, <code>messages_es.properties</code>, <code>messages_jap.properties</code>) in the same directory.</p>
+<p>In <code>application.properties</code>, we should define <code>locale</code>:</p>
+<blockquote class="blockquote">
+<p>spring.mvc.locale=<code>en</code></p>
+</blockquote>
+<p>We could add another lenguage by creating a new file named <code>messages_fr.properties</code> (<code>messages_cat.properties</code>, <code>messages_es.properties</code>, <code>messages_ja.properties</code>) in the same directory.</p>
+<ul>
+<li><a href="https://github.com/AlbertProfe/CifoJava2023/tree/master/controllerView/src/main/resources" class="external">resources (examples)</a></li>
+</ul>
 <p>This approach also allows the implementation of <strong>internationalization</strong> by means of the so-called <strong>interceptors</strong>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="at">@Bean</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="kw">public</span> LocaleResolver <span class="fu">localeResolver</span><span class="op">()</span> <span class="op">{</span></span>
@@ -1485,8 +1492,7 @@ Define the places to replace in the HTML template as follows:
 <span id="cb6-15"><a href="#cb6-15"></a><span class="at">@Override</span></span>
 <span id="cb6-16"><a href="#cb6-16"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">addInterceptors</span><span class="op">(</span>InterceptorRegistry registry<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb6-17"><a href="#cb6-17"></a>    registry<span class="op">.</span><span class="fu">addInterceptor</span><span class="op">(</span><span class="fu">localeChangeInterceptor</span><span class="op">());</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a><span class="op">}</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="thymeleaf-templates-engine" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="thymeleaf-templates-engine"><span class="header-section-number">5</span> ThymeLeaf <code>Templates Engine</code></h2>
@@ -1534,7 +1540,7 @@ Thyemleaf attributes
 <p>How to write <code>th:</code></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/howtagsTHworks.png" class="lightbox" title="ThymeLeaf how TH: works (1/3)" data-gallery="quarto-lightbox-gallery-2"><img src="../images/springboot/howtagsTHworks.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p><a href="../images/springboot/howtagsTHworks.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="ThymeLeaf how TH: works (1/3)"><img src="..\images/springboot/howtagsTHworks.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">ThymeLeaf how TH: works (1/3)</figcaption><p></p>
 </figure>
 </div>
@@ -1955,7 +1961,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":true,"openEffect":"zoom"});</script>
 
 
 
