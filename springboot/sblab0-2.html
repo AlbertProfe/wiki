@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -1325,15 +1325,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">1</span>  Overview</a></li>
-  <li><a href="#reference-library5" id="toc-reference-library5" class="nav-link" data-scroll-target="#reference-library5"><span class="toc-section-number">2</span>  Reference: Library5</a>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="toc-section-number">2</span>  References:</a>
   <ul>
-  <li><a href="#repos" id="toc-repos" class="nav-link" data-scroll-target="#repos"><span class="toc-section-number">2.1</span>  Repos</a></li>
-  <li><a href="#java-classes" id="toc-java-classes" class="nav-link" data-scroll-target="#java-classes"><span class="toc-section-number">2.2</span>  Java Classes</a></li>
-  <li><a href="#templates-thynmeleaf" id="toc-templates-thynmeleaf" class="nav-link" data-scroll-target="#templates-thynmeleaf"><span class="toc-section-number">2.3</span>  Templates Thynmeleaf</a></li>
+  <li><a href="#library5" id="toc-library5" class="nav-link" data-scroll-target="#library5"><span class="toc-section-number">2.1</span>  Library5</a>
+  <ul>
+  <li><a href="#repos" id="toc-repos" class="nav-link" data-scroll-target="#repos"><span class="toc-section-number">2.1.1</span>  Repos</a></li>
+  <li><a href="#java-classes" id="toc-java-classes" class="nav-link" data-scroll-target="#java-classes"><span class="toc-section-number">2.1.2</span>  Java Classes</a></li>
+  <li><a href="#templates-thynmeleaf" id="toc-templates-thynmeleaf" class="nav-link" data-scroll-target="#templates-thynmeleaf"><span class="toc-section-number">2.1.3</span>  Templates Thynmeleaf</a></li>
+  </ul></li>
+  <li><a href="#librarymanagement-controllerview" id="toc-librarymanagement-controllerview" class="nav-link" data-scroll-target="#librarymanagement-controllerview"><span class="toc-section-number">2.2</span>  LibraryManagement: controllerView</a></li>
   </ul></li>
   <li><a href="#crud-read" id="toc-crud-read" class="nav-link" data-scroll-target="#crud-read"><span class="toc-section-number">3</span>  CRUD: read</a>
   <ul>
-  <li><a href="#librarymanagement-controllerview" id="toc-librarymanagement-controllerview" class="nav-link" data-scroll-target="#librarymanagement-controllerview"><span class="toc-section-number">3.1</span>  LibraryManagement: controllerView</a></li>
+  <li><a href="#home" id="toc-home" class="nav-link" data-scroll-target="#home"><span class="toc-section-number">3.1</span>  Home</a></li>
+  <li><a href="#users" id="toc-users" class="nav-link" data-scroll-target="#users"><span class="toc-section-number">3.2</span>  Users</a></li>
+  <li><a href="#librarians" id="toc-librarians" class="nav-link" data-scroll-target="#librarians"><span class="toc-section-number">3.3</span>  Librarians</a></li>
   </ul></li>
   <li><a href="#crud-create" id="toc-crud-create" class="nav-link" data-scroll-target="#crud-create"><span class="toc-section-number">4</span>  CRUD: create</a>
   <ul>
@@ -1350,7 +1356,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title d-none d-lg-block">Spring Boot Lab#SB00-2: CRUD User</h1>
-<p class="subtitle lead">Spring Boot Library Management CRUD User</p>
+<p class="subtitle lead">Spring Boot Library Management CRUD User (and Librarian)</p>
   <div class="quarto-categories">
     <div class="quarto-category">Spring-Boot</div>
     <div class="quarto-category">lab</div>
@@ -1383,7 +1389,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, March 2, 2023</p>
+      <p class="date-modified">Friday, March 3, 2023</p>
     </div>
   </div>
     
@@ -1393,7 +1399,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <div class="labs">
-<p>📘 <strong>Spring Boot Lab#SB00-2: CRUD User</strong></p>
+<p>📘 <strong>Spring Boot Lab#SB00-2: CRUD User (and Librarian)</strong></p>
 <p><code>CRUD</code> stands for <code>Create</code>, <code>Read</code>, <code>Update</code>, and <code>Delete</code> - the four basic operations for persistent storage of data.</p>
 <p>In the context of a <code>LibraryMangement</code>, <code>CRUD</code> operations would allow us to create new users, retrieve information about existing users, update user information, and delete users from the system.</p>
 </div>
@@ -1427,15 +1433,17 @@ We should implement it in <strong>several domains.</strong>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">Data</span><span class="op">;</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">NoArgsConstructor</span><span class="op">;</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="at">@Data</span> <span class="co">// generates getters, setters, equals, hashCode, and toString methods</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="at">@NoArgsConstructor</span> <span class="co">// generates a no-args constructor</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="at">@AllArgsConstructor</span> <span class="co">// generates a constructor with all arguments</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">public</span> <span class="kw">class</span> User <span class="op">{</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>    <span class="kw">private</span> <span class="bu">String</span> userId<span class="op">;</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>    <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>    <span class="kw">private</span> <span class="bu">String</span> address<span class="op">;</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>    <span class="kw">private</span> <span class="dt">int</span> age<span class="op">;</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">// generates getters, setters, equals, </span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co">// hashCode, and toString methods</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="at">@Data</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="at">@NoArgsConstructor</span> <span class="co">// generates a no-args constructor</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="at">@AllArgsConstructor</span> <span class="co">// generates a constructor with all arguments</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">public</span> <span class="kw">class</span> User <span class="op">{</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>    <span class="kw">private</span> <span class="bu">String</span> userId<span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>    <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="kw">private</span> <span class="bu">String</span> address<span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="kw">private</span> <span class="dt">int</span> age<span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We might implement the <code>CRUD</code> operations for our <code>LibraryMangement</code> system:</p>
 <ul>
 <li><code>Create</code>: To create a new user, we’ll need to generate a unique user ID and create a new User object with the provided user data. We can then add the new User object to our HashMap using the generated user ID as the key.</li>
@@ -1444,25 +1452,27 @@ We should implement it in <strong>several domains.</strong>
 <li><code>Delete</code>: To delete a user from the system, we’ll need to remove the User object from our HashMap using the user ID as the key.</li>
 </ul>
 </section>
-<section id="reference-library5" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="reference-library5"><span class="header-section-number">2</span> Reference: Library5</h2>
-<section id="repos" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="repos"><span class="header-section-number">2.1</span> Repos</h3>
+<section id="references" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="references"><span class="header-section-number">2</span> References:</h2>
+<section id="library5" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="library5"><span class="header-section-number">2.1</span> Library5</h3>
+<section id="repos" class="level4" data-number="2.1.1">
+<h4 data-number="2.1.1" class="anchored" data-anchor-id="repos"><span class="header-section-number">2.1.1</span> Repos</h4>
 <ul>
 <li><a href="https://github.com/AlbertProfe/cifojava2022-3/tree/master/library5" class="external">Lab#SB02-Library5 Code</a></li>
 <li><a href="https://github.com/AlbertProfe/cifojava2022-3/wiki/Library5:-ThymeLeaf-Web-Project" class="external">Lab#SB02-Library5 Docs</a></li>
 </ul>
 </section>
-<section id="java-classes" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="java-classes"><span class="header-section-number">2.2</span> Java Classes</h3>
+<section id="java-classes" class="level4" data-number="2.1.2">
+<h4 data-number="2.1.2" class="anchored" data-anchor-id="java-classes"><span class="header-section-number">2.1.2</span> Java Classes</h4>
 <ul>
-<li><a href="https://github.com/AlbertProfe/cifojava2022-3/blob/master/library5/src/main/java/io/company/library/Book.java" class="external">Book</a></li>
-<li><a href="https://github.com/AlbertProfe/cifojava2022-3/blob/master/library5/src/main/java/io/company/library/BookService.java" class="external">BookService</a></li>
-<li><a href="https://github.com/AlbertProfe/cifojava2022-3/blob/master/library5/src/main/java/io/company/library/LibraryWebController.java" class="external">LibraryWebController</a></li>
+<li><a href="https://github.com/AlbertProfe/cifojava2022-3/blob/master/library5/src/main/java/io/company/library/Book.java" class="external">Book Entity</a></li>
+<li><a href="https://github.com/AlbertProfe/cifojava2022-3/blob/master/library5/src/main/java/io/company/library/BookService.java" class="external">Book Service</a></li>
+<li><a href="https://github.com/AlbertProfe/cifojava2022-3/blob/master/library5/src/main/java/io/company/library/LibraryWebController.java" class="external">Book Controller</a></li>
 </ul>
 </section>
-<section id="templates-thynmeleaf" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="templates-thynmeleaf"><span class="header-section-number">2.3</span> Templates Thynmeleaf</h3>
+<section id="templates-thynmeleaf" class="level4" data-number="2.1.3">
+<h4 data-number="2.1.3" class="anchored" data-anchor-id="templates-thynmeleaf"><span class="header-section-number">2.1.3</span> Templates Thynmeleaf</h4>
 <ul>
 <li><a href="https://github.com/AlbertProfe/cifojava2022-3/blob/master/library5/src/main/resources/templates/detailBook.html" class="external">detailBook</a></li>
 <li><a href="https://github.com/AlbertProfe/cifojava2022-3/blob/master/library5/src/main/resources/templates/newBook.html" class="external">newBook</a></li>
@@ -1472,32 +1482,141 @@ We should implement it in <strong>several domains.</strong>
 </ul>
 </section>
 </section>
-<section id="crud-read" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="crud-read"><span class="header-section-number">3</span> CRUD: read</h2>
-<section id="librarymanagement-controllerview" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="librarymanagement-controllerview"><span class="header-section-number">3.1</span> LibraryManagement: controllerView</h3>
+<section id="librarymanagement-controllerview" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="librarymanagement-controllerview"><span class="header-section-number">2.2</span> LibraryManagement: controllerView</h3>
 <ul>
 <li><a href="https://github.com/AlbertProfe/CifoJava2023/tree/master/controllerView" class="external">controllerView code github</a></li>
 </ul>
+</section>
+</section>
+<section id="crud-read" class="level2 page-columns page-full" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="crud-read"><span class="header-section-number">3</span> CRUD: read</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/viewController1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="render html chrome: /home"><img src="..\images/springboot/viewController1.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/springboot/controllerView_read.png" class="lightbox" title="Folder-tree controllerView Project just with Read feature" data-gallery="quarto-lightbox-gallery-1"><img src="../images/springboot/controllerView_read.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Folder-tree <code>controllerView</code> Project just with <code>Read</code> feature</figcaption><p></p>
+</figure>
+</div>
+<section id="home" class="level3 page-columns page-full" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="home"><span class="header-section-number">3.1</span> Home</h3>
+<p>This cycle defines a <code>@Controller</code> class that handles requests to the <code>URL</code> <code>"/home"</code>. When a <code>request</code> is made, it adds the current date and time to the <code>model</code> object, and then <code>returns</code> <strong>the name of the view to be rendered.</strong></p>
+<p>The view will have access to the “todayDate” attribute and can use it to display the current date and time.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">stereotype</span><span class="op">.</span><span class="im">Controller</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">ui</span><span class="op">.</span><span class="im">Model</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">web</span><span class="op">.</span><span class="im">bind</span><span class="op">.</span><span class="im">annotation</span><span class="op">.</span><span class="im">RequestMapping</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Date</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="at">@Controller</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="kw">public</span> <span class="kw">class</span> HomeController <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/home"</span><span class="op">)</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">gethome</span><span class="op">(</span>Model model<span class="op">){</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a>        model<span class="op">.</span><span class="fu">addAttribute</span><span class="op">(</span><span class="st">"todayDate"</span><span class="op">,</span> <span class="kw">new</span> <span class="bu">Date</span><span class="op">().</span><span class="fu">toString</span><span class="op">());</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>        <span class="cf">return</span> <span class="st">"home"</span><span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>    <span class="op">}</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/viewController1.png" class="lightbox" title="render html chrome: /home" data-gallery="quarto-lightbox-gallery-2"><img src="../images/springboot/viewController1.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">render html chrome: /home</figcaption><p></p>
 </figure>
 </div>
+</div></div></section>
+<section id="users" class="level3 page-columns page-full" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="users"><span class="header-section-number">3.2</span> Users</h3>
+<p>The cycle request-response relies in the <code>@Controller</code> class called <code>UserController</code>, which <code>maps</code> <code>requests</code> to the <code>"/user/users" URL</code>.</p>
+<p>It uses an <code>@Autowired</code> <code>UserService</code> to <code>fetch</code> a <strong>list of users and adds them to the <code>model</code></strong>, before returning a view called <code>"user/users".</code></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">package</span><span class="im"> com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">controller</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">service</span><span class="op">.</span><span class="im">UserService</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">beans</span><span class="op">.</span><span class="im">factory</span><span class="op">.</span><span class="im">annotation</span><span class="op">.</span><span class="im">Autowired</span><span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">stereotype</span><span class="op">.</span><span class="im">Controller</span><span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">ui</span><span class="op">.</span><span class="im">Model</span><span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">web</span><span class="op">.</span><span class="im">bind</span><span class="op">.</span><span class="im">annotation</span><span class="op">.</span><span class="im">RequestMapping</span><span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="at">@Controller</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/user"</span><span class="op">)</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="kw">public</span> <span class="kw">class</span> UserController <span class="op">{</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a>    <span class="at">@Autowired</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>    UserService userService<span class="op">;</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a></span>
+<span id="cb3-16"><a href="#cb3-16"></a>    <span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/users"</span><span class="op">)</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">getAllUsers</span><span class="op">(</span>Model model<span class="op">){</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a>        <span class="co">// fetch all users, add to model</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a>        model<span class="op">.</span><span class="fu">addAttribute</span><span class="op">(</span><span class="st">"users"</span><span class="op">,</span> userService<span class="op">.</span><span class="fu">getAllUsers</span><span class="op">());</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a>        <span class="cf">return</span> <span class="st">"user/users"</span><span class="op">;</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a>    <span class="op">}</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/viewController2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="render html chrome: /user/users"><img src="..\images/springboot/viewController2.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/springboot/viewController2.png" class="lightbox" title="render html chrome: /user/users" data-gallery="quarto-lightbox-gallery-3"><img src="../images/springboot/viewController2.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">render html chrome: /user/users</figcaption><p></p>
 </figure>
 </div>
+</div></div><p>Here we will define the <span class="citation" data-cites="Service">@Service</span> class, called <code>UserService</code> with a method called <code>getAllUsers</code>, which returns a <code>HashMap</code> of <code>user</code> objects.</p>
+<p>The <code>HashMap</code> is populated <strong>with 20 fake user objects using a utility</strong> method called <code>populateFakeUsers</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">package</span><span class="im"> com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">service</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">model</span><span class="op">.</span><span class="im">User</span><span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">utils</span><span class="op">.</span><span class="im">Utils</span><span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">stereotype</span><span class="op">.</span><span class="im">Service</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashMap</span><span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="at">@Service</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">public</span> <span class="kw">class</span> UserService <span class="op">{</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> User<span class="op">&gt;</span> users <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashMap</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a></span>
+<span id="cb4-12"><a href="#cb4-12"></a>    <span class="dt">static</span> <span class="op">{</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a>        Utils<span class="op">.</span><span class="fu">populateFakeUsers</span><span class="op">(</span><span class="dv">20</span><span class="op">,</span> users<span class="op">);</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>    <span class="op">}</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a></span>
+<span id="cb4-16"><a href="#cb4-16"></a>    <span class="kw">public</span> <span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> User<span class="op">&gt;</span> <span class="fu">getAllUsers</span> <span class="op">(){</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a></span>
+<span id="cb4-18"><a href="#cb4-18"></a>        <span class="cf">return</span> users<span class="op">;</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a>    <span class="op">}</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="librarians" class="level3 page-columns page-full" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="librarians"><span class="header-section-number">3.3</span> Librarians</h3>
+<p>Like <code>User request-response cyle read</code> feature (user-case and user-story) we will code the <code>Librarian</code>.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>Librarian cycle request-response</code> would function similarly to the User cycle request-response, but with different URLs, controller methods, and service methods tailored to the Librarian entity.</p>
+</div>
+</div>
+<ol type="1">
+<li><p>The <code>LibrarianController</code> would <code>map</code> requests to the appropriate URLs, such as <code>"/librarian/librarians"</code>.</p></li>
+<li><p>These <code>requests</code> would be handled by methods in the <code>LibrarianController</code>, which would call methods from the <code>LibrarianService</code> to fetch or manipulate data.</p></li>
+</ol>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>The <code>LibrarianService</code> would contain methods for fetching and manipulating data from the Librarian entity, similar to the UserService for the User entity.</p>
+</div></div><ol start="3" type="1">
+<li>Templates would also be created for rendering views related to the Librarian entity, using <code>Thymeleaf</code> or a similar templating engine.</li>
+</ol>
+
+<div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/viewController3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="render html chrome: /librarian/librarians"><img src="..\images/springboot/viewController3.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/springboot/viewController3.png" class="lightbox" title="render html chrome: /librarian/librarians" data-gallery="quarto-lightbox-gallery-4"><img src="../images/springboot/viewController3.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">render html chrome: /librarian/librarians</figcaption><p></p>
 </figure>
 </div>
-</section>
+</div></div></section>
 </section>
 <section id="crud-create" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="crud-create"><span class="header-section-number">4</span> CRUD: create</h2>
@@ -1505,7 +1624,7 @@ We should implement it in <strong>several domains.</strong>
 <h3 data-number="4.1" class="anchored" data-anchor-id="create-book"><span class="header-section-number">4.1</span> Create book</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/crud-create.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="CRUD: create book"><img src="..\images/springboot/crud-create.png" class="img-fluid figure-img"></a></p>
+<p><a href="../images/springboot/crud-create.png" class="lightbox" title="CRUD: create book" data-gallery="quarto-lightbox-gallery-5"><img src="../images/springboot/crud-create.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">CRUD: create book</figcaption><p></p>
 </figure>
 </div>
@@ -1809,7 +1928,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","loop":true,"selector":".lightbox"});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":true});</script>
 
 
 
