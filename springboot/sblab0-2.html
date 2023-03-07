@@ -1389,7 +1389,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, March 3, 2023</p>
+      <p class="date-modified">Tuesday, March 7, 2023</p>
     </div>
   </div>
     
@@ -1618,9 +1618,9 @@ Note
 </div>
 </div></div></section>
 </section>
-<section id="crud-create" class="level2" data-number="4">
+<section id="crud-create" class="level2 page-columns page-full" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="crud-create"><span class="header-section-number">4</span> CRUD: create</h2>
-<section id="create-book" class="level3" data-number="4.1">
+<section id="create-book" class="level3 page-columns page-full" data-number="4.1">
 <h3 data-number="4.1" class="anchored" data-anchor-id="create-book"><span class="header-section-number">4.1</span> Create book</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1628,7 +1628,86 @@ Note
 <p></p><figcaption class="figure-caption">CRUD: create book</figcaption><p></p>
 </figure>
 </div>
-</section>
+<ol type="1">
+<li><a href="https://github.com/AlbertProfe/CifoJava2023/blob/dea67f25d24bcc89a6141762d5ed17085660349b/controllerView/src/main/resources/templates/user/users.html#L27" class="external">The client sends a request to server-controller to get the user form</a></li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">&lt;p&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="kw">&lt;a</span> <span class="er">th:href</span><span class="ot">=</span><span class="st">"@{/user/emptyForm}"</span><span class="kw">&gt;</span>Add new user to HashMap<span class="kw">&lt;/a&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">&lt;/p&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/createUser-01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="../images/springboot/createUser-01.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div></div><ol start="2" type="1">
+<li><a href="https://github.com/AlbertProfe/CifoJava2023/blob/dea67f25d24bcc89a6141762d5ed17085660349b/controllerView/src/main/java/com/example/myFirstSpring/controller/UserController.java#L36" class="external">The server-controller method handles the request and send a response with the user form</a></li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/emptyForm"</span><span class="op">)</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">public</span> <span class="bu">String</span> <span class="fu">sendUserForm</span><span class="op">(){</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="cf">return</span> <span class="st">"user/userForm"</span><span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li><a href="https://github.com/AlbertProfe/CifoJava2023/blob/dea67f25d24bcc89a6141762d5ed17085660349b/controllerView/src/main/resources/templates/user/userForm.html" class="external">The clients renders the user form received from server-controller</a></li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">&lt;form</span> <span class="er">action</span><span class="ot">=</span><span class="st">"/user/createUser"</span> <span class="kw">&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="kw">&lt;p&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>        <span class="kw">&lt;label</span> <span class="er">for</span><span class="ot">=</span><span class="st">"name"</span><span class="kw">&gt;</span>Name<span class="kw">&lt;/label&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>        <span class="kw">&lt;input</span>  <span class="er">type</span><span class="ot">=</span><span class="st">"text"</span> <span class="er">name</span><span class="ot">=</span><span class="st">"name"</span>  <span class="er">id</span><span class="ot">=</span><span class="st">"name"</span><span class="kw">&gt;&lt;/p&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="kw">&lt;p&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>        <span class="kw">&lt;label</span> <span class="er">for</span><span class="ot">=</span><span class="st">"address"</span><span class="kw">&gt;</span>address<span class="kw">&lt;/label&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>        <span class="kw">&lt;input</span>  <span class="er">type</span><span class="ot">=</span><span class="st">"text"</span> <span class="er">name</span><span class="ot">=</span><span class="st">"address"</span>  <span class="er">id</span><span class="ot">=</span><span class="st">"address"</span><span class="kw">&gt;&lt;/p&gt;</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="kw">&lt;p&gt;</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>        <span class="kw">&lt;label</span> <span class="er">for</span><span class="ot">=</span><span class="st">"age"</span><span class="kw">&gt;</span>age<span class="kw">&lt;/label&gt;</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>        <span class="kw">&lt;input</span> <span class="er">type</span><span class="ot">=</span><span class="st">"number"</span> <span class="er">name</span><span class="ot">=</span><span class="st">"age"</span>  <span class="er">id</span><span class="ot">=</span><span class="st">"age"</span> <span class="kw">&gt;&lt;/p&gt;</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>    <span class="kw">&lt;p&gt;</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a>        <span class="kw">&lt;input</span> <span class="er">type</span><span class="ot">=</span><span class="st">"submit"</span> <span class="er">value</span><span class="ot">=</span><span class="st">"Add new user"</span> <span class="kw">/&gt;</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="kw">&lt;/form&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/createUser-02.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="../images/springboot/createUser-02.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div></div><ol start="4" type="1">
+<li><a href="https://github.com/AlbertProfe/CifoJava2023/blob/dea67f25d24bcc89a6141762d5ed17085660349b/controllerView/src/main/resources/templates/user/userForm.html#L24" class="external">The client sends a request to add this new user to HashMap</a></li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">&lt;form</span> <span class="er">action</span><span class="ot">=</span><span class="st">"/user/createUser"</span> <span class="kw">&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a>    <span class="kw">&lt;input</span> <span class="er">type</span><span class="ot">=</span><span class="st">"submit"</span> <span class="er">value</span><span class="ot">=</span><span class="st">"Add new user"</span> <span class="kw">/&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">&lt;/form&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/createUser-03.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="../images/springboot/createUser-03.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div></div><ol start="5" type="1">
+<li><a href="https://github.com/AlbertProfe/CifoJava2023/blob/dea67f25d24bcc89a6141762d5ed17085660349b/controllerView/src/main/java/com/example/myFirstSpring/controller/UserController.java#L27" class="external">The sever-controller method handles the request, saves the user object in a HashMap and redirects the reponse</a></li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a><span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/createUser"</span><span class="op">)</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">public</span> <span class="bu">String</span> <span class="fu">createUser</span><span class="op">(</span>User user<span class="op">){</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a>    userService<span class="op">.</span><span class="fu">createUser</span><span class="op">(</span>user<span class="op">);</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="cf">return</span> <span class="st">"redirect:users"</span><span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="co">//return "user/userCreationResult";</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/createUser-04.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="../images/springboot/createUser-04.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div></div></section>
 </section>
 <section id="crud-update" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="crud-update"><span class="header-section-number">5</span> CRUD: update</h2>
@@ -1928,7 +2007,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":true});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":true,"closeEffect":"zoom"});</script>
 
 
 
