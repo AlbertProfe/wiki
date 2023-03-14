@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -106,6 +106,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -1342,6 +1345,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#requestparam-and-pathvariable" id="toc-requestparam-and-pathvariable" class="nav-link" data-scroll-target="#requestparam-and-pathvariable"><span class="toc-section-number">5.1</span>  <code>@RequestParam</code> and <code>@PathVariable</code></a></li>
   </ul></li>
+  <li><a href="#url-structure" id="toc-url-structure" class="nav-link" data-scroll-target="#url-structure"><span class="toc-section-number">6</span>  URL structure</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/springboot/boot-concepts-controller.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1384,7 +1388,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Wednesday, March 1, 2023</p>
+      <p class="date-modified">Tuesday, March 14, 2023</p>
     </div>
   </div>
     
@@ -1571,8 +1575,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-16"><a href="#cb4-16"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p>In these examples, the <span class="citation" data-cites="GetMapping">@GetMapping</span> and <span class="citation" data-cites="PostMapping">@PostMapping</span> annotations are used to map HTTP GET and POST requests to specific methods. The <span class="citation" data-cites="PathVariable">@PathVariable</span> annotation is used to extract a variable from the URL path, and the <span class="citation" data-cites="RequestBody">@RequestBody</span> annotation is used to map the request body to a Java object.</p>
-</div></div><p>An alternative implementation where the <code>User</code> object <strong>is created directly in the <code>@Controller</code></strong>:</p>
+<p>In these examples, the <code>@GetMapping</code> and <code>@PostMapping</code> annotations are used to map HTTP <code>GET</code> and <code>POST</code> requests to specific methods.</p>
+</div><div class="">
+<p>The <code>@PathVariable</code> annotation is used <strong>to extract a variable from the URL path</strong>, and the <code>@RequestBody</code> annotation is used to map the request body to a Java object.</p>
+</div></div>
+<p>An alternative implementation where the <code>User</code> object <strong>is created directly in the <code>@Controller</code></strong>:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="at">@Controller</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="kw">public</span> <span class="kw">class</span> UserController <span class="op">{</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a>    </span>
@@ -1661,6 +1668,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <p>you can use <code>@PathVariable</code> to extract the id <strong>parameter value</strong> <code>123</code> from the URL path.</p>
 <p>In general, use <code>@RequestParam</code> when you need to extract data from the query string or request body, and use <code>@PathVariable</code> when you need to extract data from the URL path.</p>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/spring-requestmapping-requestparam-pathvariable-example#spring-requestmapping" class="external">Spring MVC</a> RequestMapping Annotation Example with Controller, Methods, Headers, Params, <span class="citation" data-cites="RequestParam">@RequestParam</span>, <span class="citation" data-cites="PathVariable">@PathVariable</span>.</li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html" class="external">Annotation Interface RequestMapping</a></li>
+</ul>
+</section>
+</section>
+<section id="url-structure" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="url-structure"><span class="header-section-number">6</span> URL structure</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/URL-structure.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="URL Structure Protocol Credential Host Path Username ( Optional ) Password ( Optional ) Hostname Port ( Optional ) Pathname Query Strings ( Optional ) Subdomain ( s ) ( Optional ) Domain Top Level Domain"><img src="..\images/springboot/URL-structure.png" class="img-fluid figure-img"></a></p>
+<p></p><figcaption class="figure-caption">URL Structure Protocol Credential Host Path Username ( Optional ) Password ( Optional ) Hostname Port ( Optional ) Pathname Query Strings ( Optional ) Subdomain ( s ) ( Optional ) Domain Top Level Domain</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><a href="https://developers.google.com/search/docs/crawling-indexing/url-structure" class="external">Keep a simple URL structure</a></li>
+<li><a href="https://www.hostinger.com/tutorials/what-is-a-url" class="external">What is a URL</a></li>
+</ul>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1680,7 +1705,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1955,6 +1979,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":true});</script>
 
 
 
