@@ -4463,7 +4463,7 @@
     "href": "springboot/sblab0-3.html",
     "title": "Lab#SB00-3: LibraryManagement",
     "section": "",
-    "text": "📘 Spring Boot Lab#SB00-3: Borrow Domain\nAfter Lab#SB00-1 and Lab#SB00-2 it is time to integrate and refactor the code created at projects:\n\nLibray5: Book domain (all CRUD operations)\ncontrollerView: User and Librarian domain (all CRUD operations)\nLibraryProject: from Java SE project we have the business logic of borrowing a book and the Borrow clas"
+    "text": "📘 Spring Boot Lab#SB00-3: Borrow Domain\nAfter Lab#SB00-1 and Lab#SB00-2 it is time to integrate and refactor the code created at projects:\n\nLibray5: Book domain (all CRUD operations)\ncontrollerView: User and Librarian domain (all CRUD operations)\nLibraryProject: from Java SE project we have the business logic of borrowing a book and the Borrow clas\nLibraryManagement is the result of combining three base projects into a single system.\nIt is a legacy system, meaning it has been in use for some time. The three original projects likely provided different functionality, such as book creation, user management, and borrowing/returning books, which were combined to eventually create the LibraryManagement system."
   },
   {
     "objectID": "springboot/sblab0-3.html#folder-tree",
@@ -4477,14 +4477,14 @@
     "href": "springboot/sblab0-3.html#user-story-use-case",
     "title": "Lab#SB00-3: LibraryManagement",
     "section": "2 user-story & use-case",
-    "text": "2 user-story & use-case\n\n\n\n\n\n\nuser-story\n\n\n\nAs a user/librarian, we are able to access user’s borrow domain from use/users web domain and perform such a operations:\n\n\n\ncreate a new borrow\nborrows HashMap\nrenovation borrow\nreturn books\nclose a borrow\nfindBorrowsByUser\n\nAnd also:\n\nfake login and logout\n\n\n2.1 use-cases\n\nCreate a new borrow: initiate a new record in the borrow HashMap for a user borrowing a book(s).\nBorrows HashMap: a database HashMap that stores information about borrowed books, including user information and return dates.\nRenovation borrow: extend the return date for a borrowed book by updating the corresponding borrow record.\nReturn books: update the borrow record to indicate that the borrowed book(s) have been returned.\nClose a borrow: mark a borrow record as closed to indicate that the borrowed book(s) have been returned and the borrow is complete.\nFake login as librarian or user: simulate a login as a librarian or user for testing or debugging purposes.\nLogout: terminate a user’s authenticated session.\nFind borrows by user: retrieve all borrow records associated with a particular user from the borrow HashMap.\n\n\n\n\nTemplates Library Management\n\n\n\nLibraryManagement"
+    "text": "2 user-story & use-case\n\n\n\n\n\n\nuser-story\n\n\n\nAs a user/librarian, we are able to access user’s borrow domain from use/users web domain and perform such a operations:\n\n\n\ncreate a new borrow\nborrows stored in a HashMap\nrenovation borrow\nreturn books from borrow\nclose a borrow\nfindBorrowsByUser\nselectBooks by userId\n\nAnd also:\n\nfake login and logout\n\n\n2.1 use-cases\n\nCreate a new borrow: initiate a new record in the borrow HashMap for a user borrowing a book(s).\nBorrows HashMap: a database HashMap that stores information about borrowed books, including user information and return dates.\nRenovation borrow: extend the return date for a borrowed book by updating the corresponding borrow record.\nReturn books: update the borrow record to indicate that the borrowed book(s) have been returned.\nClose a borrow: mark a borrow record as closed to indicate that the borrowed book(s) have been returned and the borrow is complete.\nFake login as librarian or user: simulate a login as a librarian or user for testing or debugging purposes.\nLogout: terminate a user’s authenticated session.\nFind borrows by user: retrieve all borrow records associated with a particular user from the borrow HashMap."
   },
   {
     "objectID": "springboot/sblab0-3.html#mock-up",
     "href": "springboot/sblab0-3.html#mock-up",
     "title": "Lab#SB00-3: LibraryManagement",
     "section": "3 Mock up",
-    "text": "3 Mock up\nCreating a web Thymeleaf app without CSS means that the application’s user interface will not have any styling.\nThe focus of the app is to test Spring Boot’s controller and service layers using data stored in HashMaps.\n\n\n\nMockup Web Library Management core use-case\n\n\nThis app will be useful for testing and development purposes, as it allows developers to quickly build and test the functionality of the controller and service layers without worrying about the presentation layer and the database\n\n\nHowever, it is not intended for production use, as a production app would require a more polished and professional user interface with styling and layout design\nMockup Web Library Management core use-case extended\n\n\n\n\n\n  Spring Boot: Data \n\n\n\n  top \n\n\n\n Lab 2: Spring Boot Projects"
+    "text": "3 Mock up\nCreating a web Thymeleaf app without CSS means that the application’s user interface will not have any styling.\nThe focus of the app is to test Spring Boot’s controller and service layers using data stored in HashMaps.\n\n\n\nMockup Web Library Management core use-case\n\n\nThis app will be useful for testing and development purposes, as it allows developers to quickly build and test the functionality of the controller and service layers without worrying about the presentation layer and the database\n\n\nHowever, it is not intended for production use, as a production app would require a more polished and professional user interface with styling and layout design\nMockup Web Library Management core use-case extended"
   },
   {
     "objectID": "springboot/sblab1.html",
@@ -4702,5 +4702,19 @@
     "title": "Lab#SB05-1: Advanced",
     "section": "",
     "text": "About this site\n\n\n\n\n\n  Lab 4: Spring Boot Projects JPA Inherence strategies \n\n\n\n  top \n\n\n\n Spring Boot Resources"
+  },
+  {
+    "objectID": "springboot/sblab0-3.html#initial-integration",
+    "href": "springboot/sblab0-3.html#initial-integration",
+    "title": "Lab#SB00-3: LibraryManagement",
+    "section": "1 Initial integration",
+    "text": "1 Initial integration\n\nLibrary Management just initial integration with book-selection.\n\n\n\n\n\n\nJava Classes Library Management\n\n\n\n\n\n\nTemplates Library Management\n\n\n\n\n\n\nGeneral View Library Management\n\n\n\nLibrary5 is a library module that provides CRUD (Create, Read, Update, Delete) operations for the Book domain. This means that the Library5 module provides functions or classes that allow users of the software to create, read, update, and delete information about books in the system.\ncontrollerView is a module that provides CRUD operations for both the User and Librarian domains. This module provides functions or classes that allow users and librarians to interact with the system, including creating, reading, updating, and deleting information about users and librarians.\nLibraryProject is the main Java SE project that contains the business logic for borrowing a book, as well as a Borrow class. The Borrow class represents a transaction in which a user borrows a book from the library."
+  },
+  {
+    "objectID": "springboot/sblab0-3.html#versions",
+    "href": "springboot/sblab0-3.html#versions",
+    "title": "Lab#SB00-3: LibraryManagement",
+    "section": "4 Versions",
+    "text": "4 Versions\n\n\n\nVersion\nCode\nCommit\nFolder-Tree\n\n\n\n\n0.0\nLibrary Management\ncreate project pom and first integration\nGeneral View Library Management\n\n\n0.1\nLibrary Management\nselect books and userid without a borrow\n-\n\n\n0.2\nLibrary Management\nsession and httpServletRequest\n-\n\n\n0.3\nLibrary Management\nsimplify login and logout\n-\n\n\n0.4\nLibrary Management\nborrowByUserId and book domain\nTemplates Library Management\n\n\n\n\n\n\n\n\n  Spring Boot: Data \n\n\n\n  top \n\n\n\n Lab 2: Spring Boot Projects"
   }
 ]
