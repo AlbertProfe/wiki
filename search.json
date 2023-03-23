@@ -2048,7 +2048,7 @@
     "href": "springboot/sblab0-3.html#versions",
     "title": "Lab#SB00-3: LibraryManagement",
     "section": "4 Versions",
-    "text": "4 Versions\n\n\n\nCode Version\nCommit\nFolder-Tree\nScreeshoots\n\n\n\n\nLibrary Management 0.0\ncreate project pom and first integration\nBasic Structure - Java Classes - Templates\n-\n\n\nLibrary Management 0.1\nselect books and userid without a borrow, send Array from TH to @Controller\n-\n-\n\n\nLibrary Management 0.2\nsession and httpServletRequest & filter tables with JS script in static resources\n-\n-\n\n\nLibrary Management 0.3\nsimplify login and put together login user and librarian, using select option and th:if\n-\n-\n\n\nLibrary Management 0.4\nborrowByUserId, borrow -serviceBorrow- and book domain, two columns css, logout\nFolder-Tree Library Management\n1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 - 10 - 11\n\n\nLibrary Management 0.5\ncreate borrow and allBorrows & activeBorrows\n-\n12 - 13 - 14\n\n\nLibrary Management 0.6\nreturn book (selecting byBorrowId and not using UserId)\n-\n15 - 16\n\n\nLibrary Management 0.7\ncreate Borrow from borrows ByUserId And BookIds\n-\n17 - 18 - 19 - 20 - 21\n\n\n\n\n\n\n\n\n  Spring Boot: Data \n\n\n\n  top \n\n\n\n Lab 2: Spring Boot Projects"
+    "text": "4 Versions\n\n\n\nCode Version\nCommit\nFolder-Tree\nScreeshoots\n\n\n\n\nLibrary Management 0.0\ncreate project pom and first integration\nBasic Structure - Java Classes - Templates\n-\n\n\nLibrary Management 0.1\nselect books and userid without a borrow, send Array from TH to @Controller\n-\n-\n\n\nLibrary Management 0.2\nsession and httpServletRequest & filter tables with JS script in static resources\n-\n-\n\n\nLibrary Management 0.3\nsimplify login and put together login user and librarian, using select option and th:if\n-\n-\n\n\nLibrary Management 0.4\nborrowByUserId, borrow -serviceBorrow- and book domain, two columns css, logout\nFolder-Tree Library Management\n1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 - 10 - 11\n\n\nLibrary Management 0.5\ncreate borrow from user domain and allBorrows & activeBorrows\n-\n12 - 13 - 14\n\n\nLibrary Management 0.6\nreturn book (selecting byBorrowId and not using UserId)\n-\n15 - 16\n\n\nLibrary Management 0.7\ncreate Borrow from borrows ByUserId And BookIds\n-\n17 - 18 - 19 - 20 - 21\n\n\n\n\n\n\n\n\n  Spring Boot: Data \n\n\n\n  top \n\n\n\n Lab 2: Spring Boot Projects"
   },
   {
     "objectID": "springboot/boot-concepts-controller.html",
@@ -2728,6 +2728,34 @@
     "title": "Lab#SB00-1: Library UML",
     "section": "2.1 Core use-case: borrowBook() and returnBook() with user and librarian",
     "text": "2.1 Core use-case: borrowBook() and returnBook() with user and librarian\n\n\n\nMockup Web Library Management core use-case\n\n\nMockup Web Library Management core use-case extended"
+  },
+  {
+    "objectID": "springboot/sblab0-4.html",
+    "href": "springboot/sblab0-4.html",
+    "title": "Lab#SB00-4: API Rest",
+    "section": "",
+    "text": "📘 Spring Boot Lab#SB00-4: API Rest\nAfter Lab#SB00-3 we are going to creata an API Rest just for book domain.\nYou may also check this introduction to API Rest.\nAn API is a set of definitions and protocols for building and integrating application software. It’s sometimes referred to as a contract between an information provider and an information user—establishing the content required from the consumer (the call) and the content required by the producer (the response).\nWhen a client request is made via a RESTful API, it transfers a representation of the state of the resource to the requester or endpoint. This information, or representation, is delivered in one of several formats via HTTP: JSON (Javascript Object Notation), HTML, XLT, Python, PHP, or plain text. JSON is the most generally popular file format to use because, despite its name, it’s language-agnostic, as well as readable by both humans and machines."
+  },
+  {
+    "objectID": "springboot/sblab0-4.html#library-management-base-project",
+    "href": "springboot/sblab0-4.html#library-management-base-project",
+    "title": "Lab#SB00-4: API Rest",
+    "section": "1 Library Management base project",
+    "text": "1 Library Management base project\n\nLibrary Management 0.7"
+  },
+  {
+    "objectID": "springboot/sblab0-4.html#api-rest-book",
+    "href": "springboot/sblab0-4.html#api-rest-book",
+    "title": "Lab#SB00-4: API Rest",
+    "section": "2 API Rest book",
+    "text": "2 API Rest book\n\n\n\nLibrary Management\n\n\npackage com.example.myFirstSpring.restcontroller;\n\nimport com.example.myFirstSpring.model.Book;\nimport com.example.myFirstSpring.service.BookService;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RequestMapping;\nimport org.springframework.web.bind.annotation.RestController;\nimport java.util.HashMap;\n\n@RestController\n@RequestMapping(\"/api/book\")\npublic class BookRestController {\n\n    @Autowired\n    BookService bookService;\n\n    @GetMapping (\"/books\")\n    public HashMap<String, Book> getAllBooks(){\n\n      return bookService.getAllBooks();\n\n\n    }\n}"
+  },
+  {
+    "objectID": "springboot/sblab0-4.html#postman",
+    "href": "springboot/sblab0-4.html#postman",
+    "title": "Lab#SB00-4: API Rest",
+    "section": "3 Postman",
+    "text": "3 Postman\n\n3.1 Install Postman in Linux Mint\n\n$ sudo rm /etc/apt/preferences.d/nosnap.pref\n$ sudo apt update\n$ sudo apt install snapd\n$ sudo snap install postman\n\nendpoint: http://localhost:8086/api/book/books\n\n\n\nPostman\n\n\n\n\n\n\n\n  Spring Boot: Data \n\n\n\n  top \n\n\n\n Lab 2: Spring Boot Projects"
   },
   {
     "objectID": "markup/mulab1.html",
