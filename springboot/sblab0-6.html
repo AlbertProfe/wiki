@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="albertprofe">
-<meta name="description" content="Code API Rest call on your Quarto web">
+<meta name="description" content="Spring Boot">
 
-<title>albertprofe wiki - Quarto Markdown: api rest call</title>
+<title>albertprofe wiki - Lab#SB00-6: Rest &amp; MongoDB</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,69 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -106,9 +43,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -131,14 +65,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
-<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed slimcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 
 <div id="quarto-search-results"></div>
@@ -750,6 +682,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="dropdown-text">Lab#SB00-4: API Rest</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../springboot/sblab0-5.html">
+ <span class="dropdown-text">Lab#SB00-5: Rest &amp; JPA-H2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-6.html">
+ <span class="dropdown-text">Lab#SB00-6: Rest &amp; MongoDB</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../springboot/sblab1.html">
  <span class="dropdown-text">Lab#SB01-1: DataBase</span></a>
   </li>  
@@ -1127,7 +1067,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Quarto Markdown: api rest call</h1>
+      <h1 class="quarto-secondary-nav-title">Lab#SB00-6: Rest &amp; MongoDB</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -1141,12 +1081,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
-  MarkUp Languages and Styling
+  Spring
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">MarkUp Languages</a>
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Spring Legacy</a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -1154,22 +1094,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-lang-intro.html" class="sidebar-item-text sidebar-link">Introduction Markup</a>
+  <a href="../spring/spring-basics.html" class="sidebar-item-text sidebar-link">Spring Framework</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-lang-html.html" class="sidebar-item-text sidebar-link">HTML Markup</a>
+  <a href="../spring/spring-mvc.html" class="sidebar-item-text sidebar-link">Spring MVC</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-lang-md.html" class="sidebar-item-text sidebar-link">Markdown Markup</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../markup/markup-lang-html-md.html" class="sidebar-item-text sidebar-link">Markdown and HTML working together, good idea?</a>
+  <a href="../spring/spring-servlets.html" class="sidebar-item-text sidebar-link">Springs Servlets</a>
   </div>
 </li>
       </ul>
@@ -1177,45 +1112,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Quarto Markdown</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Spring Boot Basics</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-quarto-basics.html" class="sidebar-item-text sidebar-link">Quarto Markdown: basics</a>
+  <a href="../springboot/boot-what-basics.html" class="sidebar-item-text sidebar-link">Spring Boot: fundamentals</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-quarto-create.html" class="sidebar-item-text sidebar-link">Quarto Markdown: creating</a>
+  <a href="../springboot/boot-what-create.html" class="sidebar-item-text sidebar-link">Spring Boot: create a Project</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-quarto-publish.html" class="sidebar-item-text sidebar-link">Quarto Markdown: publishing</a>
+  <a href="../springboot/boot-what-create-th-h2.html" class="sidebar-item-text sidebar-link">Spring Boot: H2 DB and Thymeleaf</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-quarto-code.html" class="sidebar-item-text sidebar-link">Quarto Markdown: code &amp; data</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../markup/markup-quarto-api-rest.html" class="sidebar-item-text sidebar-link active">Quarto Markdown: api rest call</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../markup/markup-quarto-api-rest-v2.html" class="sidebar-item-text sidebar-link">Quarto Markdown: OJS Cells</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../markup/markup-quarto-cheatsheet.html" class="sidebar-item-text sidebar-link">Quarto Markdown: cheat-sheet</a>
+  <a href="../springboot/boot-what-cycle.html" class="sidebar-item-text sidebar-link">Spring Boot: cycle</a>
   </div>
 </li>
       </ul>
@@ -1223,7 +1143,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Styling: CSS</a>
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Spring Boot Concepts</a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -1231,12 +1151,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-css-basics.html" class="sidebar-item-text sidebar-link">Cascade Style Sheet</a>
+  <a href="../springboot/boot-concepts-annotations.html" class="sidebar-item-text sidebar-link">Spring Boot: Annotations</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-css-w3css.html" class="sidebar-item-text sidebar-link">CSS: W3.css</a>
+  <a href="../springboot/boot-concepts-controller.html" class="sidebar-item-text sidebar-link">Spring Boot: Controller</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-view.html" class="sidebar-item-text sidebar-link">Spring Boot: View</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-th.html" class="sidebar-item-text sidebar-link">Spring Boot: Thymeleaf</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-model.html" class="sidebar-item-text sidebar-link">Spring Boot: Model</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa.html" class="sidebar-item-text sidebar-link">Spring Boot: JPA</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-injection.html" class="sidebar-item-text sidebar-link">Spring Boot: Dependency Injection</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-rest.html" class="sidebar-item-text sidebar-link">Spring Boot: Rest</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-data.html" class="sidebar-item-text sidebar-link">Spring Boot: Data</a>
   </div>
 </li>
       </ul>
@@ -1244,15 +1199,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">MarkUp Languages Laboratories</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Spring Boot Laboratories</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/mulab1.html" class="sidebar-item-text sidebar-link">Lab#MD01-1: Create and publish by Quarto</a>
+  <a href="../springboot/sblab0-1.html" class="sidebar-item-text sidebar-link">Lab#SB00-1: Library UML</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-2.html" class="sidebar-item-text sidebar-link">Lab#SB00-2: CRUD User</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-3.html" class="sidebar-item-text sidebar-link">Lab#SB00-3: LibraryManagement</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-4.html" class="sidebar-item-text sidebar-link">Lab#SB00-4: API Rest</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-5.html" class="sidebar-item-text sidebar-link">Lab#SB00-5: Rest &amp; JPA-H2</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-6.html" class="sidebar-item-text sidebar-link active">Lab#SB00-6: Rest &amp; MongoDB</a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab1.html" class="sidebar-item-text sidebar-link">Lab#SB01-1: DataBase</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab2.html" class="sidebar-item-text sidebar-link">Lab#SB02-1: Projects</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab3.html" class="sidebar-item-text sidebar-link">Lab#SB03-1: API</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab4.html" class="sidebar-item-text sidebar-link">Lab#SB04-1: <code>JPA Inherence</code> strategies</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab5.html" class="sidebar-item-text sidebar-link">Lab#SB05-1: Advanced</a>
   </div>
 </li>
       </ul>
@@ -1260,7 +1266,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">MarkUp Languages readings</a>
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Spring Boot readings</a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -1268,7 +1274,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/resources.html" class="sidebar-item-text sidebar-link">MarkUp Languages Resources</a>
+  <a href="../springboot/resources.html" class="sidebar-item-text sidebar-link">Spring Boot Resources</a>
   </div>
 </li>
       </ul>
@@ -1282,43 +1288,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-api-rest" id="toc-what-is-api-rest" class="nav-link active" data-scroll-target="#what-is-api-rest"><span class="toc-section-number">1</span>  What is API Rest</a>
-  <ul>
-  <li><a href="#api-rest-examples" id="toc-api-rest-examples" class="nav-link" data-scroll-target="#api-rest-examples"><span class="toc-section-number">1.1</span>  API Rest examples</a></li>
-  <li><a href="#example-open-weather-map-london" id="toc-example-open-weather-map-london" class="nav-link" data-scroll-target="#example-open-weather-map-london"><span class="toc-section-number">1.2</span>  Example: open weather map London</a></li>
-  <li><a href="#example-nasa-mars" id="toc-example-nasa-mars" class="nav-link" data-scroll-target="#example-nasa-mars"><span class="toc-section-number">1.3</span>  Example: Nasa Mars</a></li>
-  <li><a href="#free-open-apis" id="toc-free-open-apis" class="nav-link" data-scroll-target="#free-open-apis"><span class="toc-section-number">1.4</span>  Free Open APIs</a></li>
-  </ul></li>
-  <li><a href="#quarto-web-api" id="toc-quarto-web-api" class="nav-link" data-scroll-target="#quarto-web-api"><span class="toc-section-number">2</span>  Quarto web API</a>
-  <ul>
-  <li><a href="#screenshoots" id="toc-screenshoots" class="nav-link" data-scroll-target="#screenshoots"><span class="toc-section-number">2.1</span>  Screenshoots</a>
-  <ul>
-  <li><a href="#success" id="toc-success" class="nav-link" data-scroll-target="#success"><span class="toc-section-number">2.1.1</span>  Success</a></li>
-  <li><a href="#error" id="toc-error" class="nav-link" data-scroll-target="#error"><span class="toc-section-number">2.1.2</span>  Error</a></li>
-  </ul></li>
-  </ul></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">1</span>  Overview</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/markup/markup-quarto-api-rest.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/springboot/sblab0-6.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Quarto Markdown: api rest call</h1>
-<p class="subtitle lead">Code (5/7)</p>
+<h1 class="title d-none d-lg-block">Lab#SB00-6: Rest &amp; MongoDB</h1>
+<p class="subtitle lead">Spring Boot Library Management API Rest and NoSQL-MongoDB</p>
   <div class="quarto-categories">
-    <div class="quarto-category">markup</div>
-    <div class="quarto-category">qmd</div>
-    <div class="quarto-category">quarto</div>
+    <div class="quarto-category">Spring-Boot</div>
+    <div class="quarto-category">lab</div>
     <div class="quarto-category">rest</div>
-    <div class="quarto-category">api</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Code API Rest call on your Quarto web
+    Spring Boot
   </div>
 </div>
 
@@ -1342,7 +1332,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tuesday, February 21, 2023</p>
+      <p class="date-modified">Friday, March 24, 2023</p>
     </div>
   </div>
     
@@ -1351,192 +1341,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<div class="summary">
-<p><strong>REST (Representational State Transfer)</strong></p>
-<p><code>Rest</code> is an architectural style for building web services.</p>
-<p>It is based on a <strong>client-server</strong> model, where a client sends a <code>request</code> to a server and the server sends a <code>response</code>.</p>
-<p>RESTful APIs use HTTP requests to POST (create), PUT (update), GET (read), and DELETE (delete) data.</p>
-<p>A RESTful API is a simple, consistent, and easy-to-use way for applications to communicate with each other over the internet.</p>
+<div class="labs">
+<p>📘 <strong>Spring Boot Lab#SB00-5: API Rest and NoSQL-MongoDB</strong></p>
 </div>
-<section id="what-is-api-rest" class="level2 page-columns page-full" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="what-is-api-rest"><span class="header-section-number">1</span> What is API Rest</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/javase/apirest.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../images/javase/apirest.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
-</figure>
-</div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>In other words, if you want to interact with a computer or system to retrieve information or perform a function, an API helps you communicate what you want to that system so it can understand and fulfill the request.</p>
-</div><div class="">
-<p>Image from: <a href="https://blog.bytebytego.com/p/why-is-restful-api-so-popular" class="external">Why is RESTful API so popular?</a></p>
-</div></div>
-<p><a href="https://www.redhat.com/en/topics/api/what-is-a-rest-api" class="external">An API is a set of definitions and protocols</a> for building and integrating application software.</p>
-<p>It’s sometimes referred to as a <strong>contract</strong> between an <strong>information provider</strong> and an <strong>information user</strong>.</p>
-<p>This contract (API Rest <em>style</em>) establishing the content required from the consumer (the call) and the content required by the producer (the response).</p>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>For example, the API design for a weather service could specify that the user supply a zip code and that the producer reply with a 2-part answer, the first being the high temperature, and the second being the low.</p>
-</div>
-</div>
-<section id="api-rest-examples" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="api-rest-examples"><span class="header-section-number">1.1</span> API Rest examples</h3>
-<p>There are many examples of APIs, but here are a few common ones:</p>
-<ul>
-<li><p><strong>Google Maps API</strong>: allows developers to integrate Google Maps functionality into their own applications, such as displaying maps, getting directions, and searching for places.</p></li>
-<li><p><strong>Twitter API</strong>: allows developers to access and interact with tweets, as well as post new tweets, through their own applications.</p></li>
-<li><p><strong>Facebook API</strong>: allows developers to access and interact with user data, such as posts, photos, and friends, as well as post new content, through their own applications.</p></li>
-<li><p><strong>Stripe API</strong>: allows developers to integrate Stripe’s payment functionality into their own applications, such as processing payments and managing subscriptions.</p></li>
-<li><p><strong>OpenWeather API</strong>: allows developers to access current weather data, as well as forecast, historical data and more for any location on Earth.</p></li>
-<li><p><strong>NASA API</strong>: allows developers to access and interact with various datasets from NASA, such as images, videos, and information about space missions and celestial bodies.</p></li>
-</ul>
-</section>
-<section id="example-open-weather-map-london" class="level3 page-columns page-full" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="example-open-weather-map-london"><span class="header-section-number">1.2</span> Example: open weather map London</h3>
-<p>One example of a public API with a URL that can be used to access data is the <strong>OpenWeather API.</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1"></a>http://api.openweathermap.org/data/2.5/weather?q={city name}<span class="er">&amp;</span>appid={your api key}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>You can access current weather data for a specific location by making a GET request to the following URL:</p>
-</div></div><p>You need to replace <code>{city name}</code> with the name of the city you want to get weather data for and <code>{your api key}</code> with <strong>your own API key</strong>, which you <strong>can get by signing up for a free account on the OpenWeather website.</strong></p>
-<p>For example, if you want to get the current weather data for <strong>London</strong>, you would make a <code>GET</code> <code>request</code> to the following URL:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1"></a>http://api.openweathermap.org/data/2.5/weather?q=London<span class="er">&amp;</span>appid={your api key}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>It will return a <code>JSON</code> object with various information such as temperature, humidity, wind, etc.</p>
-</section>
-<section id="example-nasa-mars" class="level3 page-columns page-full" data-number="1.3">
-<h3 data-number="1.3" class="anchored" data-anchor-id="example-nasa-mars"><span class="header-section-number">1.3</span> Example: Nasa Mars</h3>
-<p><strong>NASA</strong> has several APIs available for developers to access and interact with various datasets, such as images, videos, and information about space missions and celestial bodies.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>One example of a NASA API is the NASA Image and Video Library API, which allows you to access NASA’s media assets, including images, videos, and audio files.</p>
-</div>
-</div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1"></a>https://images-api.nasa.gov/search?q={your search term}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>You can access the NASA Image and Video Library API by making a GET request to the following URL:</p>
-</div></div><p>For example, if you want to search for <strong>images of the planet Mars</strong>, you would make a GET request to the following URL:</p>
-<p><a href="https://images-api.nasa.gov/search?q=mars" class="external">Nasa API for Mars</a></p>
-<p>This will return a <code>JSON</code> object with a list of assets, including links to the images and other information such as title and description.</p>
-</section>
-<section id="free-open-apis" class="level3" data-number="1.4">
-<h3 data-number="1.4" class="anchored" data-anchor-id="free-open-apis"><span class="header-section-number">1.4</span> Free Open APIs</h3>
-<ul>
-<li><a href="https://mixedanalytics.com/blog/list-actually-free-open-no-auth-needed-apis/" class="external">Big List of Free Open APIs</a></li>
-<li>To create integrations, retpythoncom/collection/list-of-free-apis){.external}</li>
-<li>This is a collection of different REST APIs that are completley public and do not require any authentication, making it easier for consumers to play with and understand what APIs are all about by seeing the many different ways in which APIs can be used: <a href="https://documenter.getpostman.com/view/8854915/Szf7znEe" class="external">Public REST APIs</a></li>
-<li>Get a list of universities in a specified country: <a href="http://universities.hipolabs.com/search?country=United+States" class="external">Universities List</a></li>
-<li>Free API – Huge List of Public APIs For Testing [No Key]: <a href="https://apipheny.io/free-api/" class="external">Free APIs You Can Use for Testing</a></li>
-</ul>
-</section>
-</section>
-<section id="quarto-web-api" class="level2 page-columns page-full" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="quarto-web-api"><span class="header-section-number">2</span> Quarto web API</h2>
-<p><a href="https://quarto.org/docs/interactive/ojs/data-sources.html#web-apis" class="external">Web APIs Quarto with d3.json and Observable JavaScript</a></p>
-<ul>
-<li>You can use the <a href="https://github.com/d3/d3-fetch/blob/v3.0.1/README.md#json" class="external">d3.json</a> function to read JSON data from web services and data sources.</li>
-<li>We are using the <a href="https://observablehq.com/@observablehq/observable-javascript" class="external">Observable JavaScript</a> / <a href="https://observablehq.com/" class="external">Explore, analyze, and explain data. As a team</a> to run script cells</li>
-</ul>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><a href="https://quarto.org/docs/interactive/ojs/" class="external">Quarto: Observable JS</a></p>
-</div></div><p>Here we <strong>query</strong> the <strong>GitHub API</strong> for data on contributions to the albertprofe wiki:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4" data-startfrom="146" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 145;"><span id="cb4-146"><a href="#cb4-146"></a>d3 <span class="op">=</span> <span class="pp">require</span>(<span class="st">'d3'</span>)</span>
-<span id="cb4-147"><a href="#cb4-147"></a></span>
-<span id="cb4-148"><a href="#cb4-148"></a>contributors <span class="op">=</span> <span class="cf">await</span> d3<span class="op">.</span><span class="fu">json</span>(</span>
-<span id="cb4-149"><a href="#cb4-149"></a>  <span class="st">"https://api.github.com/repos/albertprofe/wiki/stats/contributors"</span></span>
-<span id="cb4-150"><a href="#cb4-150"></a>)</span>
-<span id="cb4-151"><a href="#cb4-151"></a></span>
-<span id="cb4-152"><a href="#cb4-152"></a>commits <span class="op">=</span> contributors<span class="op">.</span><span class="fu">map</span>(contributor <span class="kw">=&gt;</span> {</span>
-<span id="cb4-153"><a href="#cb4-153"></a>  <span class="kw">const</span> author <span class="op">=</span> contributor<span class="op">.</span><span class="at">author</span><span class="op">;</span></span>
-<span id="cb4-154"><a href="#cb4-154"></a>  <span class="cf">return</span> {</span>
-<span id="cb4-155"><a href="#cb4-155"></a>    <span class="dt">name</span><span class="op">:</span> author<span class="op">.</span><span class="at">login</span><span class="op">,</span></span>
-<span id="cb4-156"><a href="#cb4-156"></a>    <span class="dt">title</span><span class="op">:</span> author<span class="op">.</span><span class="at">login</span><span class="op">,</span></span>
-<span id="cb4-157"><a href="#cb4-157"></a>    <span class="dt">group</span><span class="op">:</span> author<span class="op">.</span><span class="at">type</span><span class="op">,</span></span>
-<span id="cb4-158"><a href="#cb4-158"></a>    <span class="dt">value</span><span class="op">:</span> contributor<span class="op">.</span><span class="at">total</span></span>
-<span id="cb4-159"><a href="#cb4-159"></a>  }</span>
-<span id="cb4-160"><a href="#cb4-160"></a>})</span>
-<span id="cb4-161"><a href="#cb4-161"></a></span>
-<span id="cb4-162"><a href="#cb4-162"></a></span>
-<span id="cb4-163"><a href="#cb4-163"></a>Inputs<span class="op">.</span><span class="fu">table</span>(commits<span class="op">,</span> { <span class="dt">sort</span><span class="op">:</span> <span class="st">"value"</span><span class="op">,</span> <span class="dt">reverse</span><span class="op">:</span> <span class="kw">true</span> })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-1-1" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-1-2" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-1-3" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-1-4" data-nodetype="expression">
-
-</div>
-</div>
-</div>
-</div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>JavaScript on Observable is almost — but not entirely — vanilla. This is intentional: by building on the native language of the web, Observable is familiar. And you can use the libraries you know and love, such as D3, Lodash, and Apache Arrow.</p>
-</div></div><p><br></p>
-<blockquote class="blockquote">
-<p>See the <a href="https://quarto.org/docs/interactive/ojs/examples/github.html" class="externaL">GitHub API</a> example for the full source code.</p>
-</blockquote>
-<section id="screenshoots" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="screenshoots"><span class="header-section-number">2.1</span> Screenshoots</h3>
-<section id="success" class="level4" data-number="2.1.1">
-<h4 data-number="2.1.1" class="anchored" data-anchor-id="success"><span class="header-section-number">2.1.1</span> Success</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/javase/quarto_api_rest_github.png" class="lightbox" title="Quarto Api Rest call to github Rest API" data-gallery="quarto-lightbox-gallery-2"><img src="../images/javase/quarto_api_rest_github.png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">Quarto Api Rest call to github Rest API</figcaption><p></p>
-</figure>
-</div>
-</section>
-<section id="error" class="level4" data-number="2.1.2">
-<h4 data-number="2.1.2" class="anchored" data-anchor-id="error"><span class="header-section-number">2.1.2</span> Error</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/javase/quarto_api_rest_github_error.png" class="lightbox" title="Quarto Api Rest call to github Rest API ERROR" data-gallery="quarto-lightbox-gallery-3"><img src="../images/javase/quarto_api_rest_github_error.png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">Quarto Api Rest call to github Rest API ERROR</figcaption><p></p>
-</figure>
-</div>
+<p><br></p>
+<section id="overview" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
 <!--- navLinks -->
 <br><br>
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../markup/markup-quarto-publish.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> Quarto Markdown: publishing</a> <br></p>
+<p><br> <a href="../springboot/boot-concepts-data.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> Spring Boot: Data</a> <br></p>
 </div>
 <br>
 <div class="column center">
@@ -1544,28 +1360,15 @@ Tip
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../markup/markup-quarto-cheatsheet.html">Quarto Markdown: cheat-sheet <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
+<p><br> <a href="../springboot/sblab2.html">Lab 2: Spring Boot Projects <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
 </div>
 
 
 </section>
-</section>
-</section>
 
 </main> <!-- /main -->
-
-<script type="ojs-module-contents">
-{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"d3 = require('d3')\n\ncontributors = await d3.json(\n  \"https://api.github.com/repos/albertprofe/wiki/stats/contributors\"\n)\n\ncommits = contributors.map(contributor => {\n  const author = contributor.author;\n  return {\n    name: author.login,\n    title: author.login,\n    group: author.type,\n    value: contributor.total\n  }\n})\n\n\nInputs.table(commits, { sort: \"value\", reverse: true })\n\n"}]}
-</script>
-<script type="module">
-window._ojs.paths.runtimeToDoc = "../../markup";
-window._ojs.paths.runtimeToRoot = "../..";
-window._ojs.paths.docToRoot = "..";
-window._ojs.selfContained = false;
-window._ojs.runtime.interpretFromScriptTags();
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1837,7 +1640,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":true,"openEffect":"zoom"});</script>
 
 
 
