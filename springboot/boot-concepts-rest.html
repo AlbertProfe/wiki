@@ -106,6 +106,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -133,7 +136,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 
 <div id="quarto-search-results"></div>
@@ -711,16 +714,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="dropdown-text">Spring Boot: Model</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../springboot/boot-concepts-jpa.html">
- <span class="dropdown-text">Spring Boot: JPA</span></a>
+    <a class="dropdown-item" href="../springboot/boot-concepts-rest.html">
+ <span class="dropdown-text">Spring Boot: Rest</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../springboot/boot-concepts-injection.html">
  <span class="dropdown-text">Spring Boot: Dependency Injection</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../springboot/boot-concepts-rest.html">
- <span class="dropdown-text">Spring Boot: Rest</span></a>
+    <a class="dropdown-item" href="../springboot/boot-concepts-jpa.html">
+ <span class="dropdown-text">Spring Boot: JPA</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../springboot/boot-concepts-data.html">
@@ -743,6 +746,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li>
     <a class="dropdown-item" href="../springboot/sblab0-4.html">
  <span class="dropdown-text">Lab#SB00-4: API Rest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-5.html">
+ <span class="dropdown-text">Lab#SB00-5: Rest &amp; JPA-H2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-6.html">
+ <span class="dropdown-text">Lab#SB00-6: Rest &amp; MongoDB</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../springboot/sblab1.html">
@@ -1231,7 +1242,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../springboot/boot-concepts-jpa.html" class="sidebar-item-text sidebar-link">Spring Boot: JPA</a>
+  <a href="../springboot/boot-concepts-rest.html" class="sidebar-item-text sidebar-link active">Spring Boot: Rest</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1241,7 +1252,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../springboot/boot-concepts-rest.html" class="sidebar-item-text sidebar-link active">Spring Boot: Rest</a>
+  <a href="../springboot/boot-concepts-jpa.html" class="sidebar-item-text sidebar-link">Spring Boot: JPA</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1278,6 +1289,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../springboot/sblab0-4.html" class="sidebar-item-text sidebar-link">Lab#SB00-4: API Rest</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-5.html" class="sidebar-item-text sidebar-link">Lab#SB00-5: Rest &amp; JPA-H2</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-6.html" class="sidebar-item-text sidebar-link">Lab#SB00-6: Rest &amp; MongoDB</a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -1333,12 +1354,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#example" id="toc-example" class="nav-link active" data-scroll-target="#example"><span class="toc-section-number">1</span>  Example</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">1</span>  Overview</a></li>
+  <li><a href="#stateless" id="toc-stateless" class="nav-link" data-scroll-target="#stateless"><span class="toc-section-number">2</span>  <code>stateless</code></a></li>
+  <li><a href="#http-messages" id="toc-http-messages" class="nav-link" data-scroll-target="#http-messages"><span class="toc-section-number">3</span>  HTTP messages</a></li>
+  <li><a href="#http-status-messages" id="toc-http-status-messages" class="nav-link" data-scroll-target="#http-status-messages"><span class="toc-section-number">4</span>  HTTP status messages</a></li>
+  <li><a href="#spring-boot" id="toc-spring-boot" class="nav-link" data-scroll-target="#spring-boot"><span class="toc-section-number">5</span>  Spring Boot</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="toc-section-number">6</span>  Example</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/springboot/boot-concepts-rest.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -1376,7 +1402,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tuesday, February 28, 2023</p>
+      <p class="date-modified">Tuesday, March 28, 2023</p>
     </div>
   </div>
     
@@ -1387,15 +1413,130 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div class="summary">
 <p>📘 <strong>Rest</strong></p>
-<p>REST stands for Representational State Transfer. It is an architectural style for building web services that are designed to be lightweight, stateless, and easy to scale.</p>
+<p><code>REST</code> stands for <strong>Representational State Transfer</strong>. It is an architectural style for building web services that are designed to be lightweight, <strong>stateless</strong>, and easy to scale.</p>
 </div>
 <hr>
-<p>In Spring Boot, the Spring MVC framework is used to build RESTful web services. The <span class="citation" data-cites="RestController">@RestController</span> annotation is used to define a class as a RESTful web service controller. This annotation is a combination of the <span class="citation" data-cites="Controller">@Controller</span> and <span class="citation" data-cites="ResponseBody">@ResponseBody</span> annotations, which means that the class is a controller and the methods return the data directly rather than returning the name of a view.</p>
-<p>The <span class="citation" data-cites="RequestMapping">@RequestMapping</span> annotation is used to map HTTP requests to specific methods in a controller class. This annotation can be used at the class level or the method level to define the path that the method should handle.</p>
-<p>In addition to these annotations, Spring Boot also provides a number of other features that make it easy to build RESTful web services, such as support for JSON and XML serialization and deserialization, automatic content negotiation, and built-in exception handling.</p>
-<p>In summary, REST stands for Representational State Transfer. In Spring Boot, the Spring MVC framework is used to build RESTful web services, the <span class="citation" data-cites="RestController">@RestController</span> and <span class="citation" data-cites="RequestMapping">@RequestMapping</span> annotations are used to define a class as a RESTful web service controller and map HTTP requests to specific methods, respectively. Spring Boot provides many features to make building RESTful web services easy, such as support for JSON and XML serialization and deserialization, automatic content negotiation, and built-in exception handling.</p>
-<section id="example" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="example"><span class="header-section-number">1</span> Example</h2>
+<section id="overview" class="level2 page-columns page-full" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
+<p>An <code>API</code> is a <strong>set of definitions and protocols for building and integrating application software</strong>.</p>
+<blockquote class="blockquote">
+<p>It’s sometimes referred to as a contract between an information provider and an information user—establishing the content required from the consumer (the <code>call</code>) and the content required by the producer (the <code>response</code>).</p>
+</blockquote>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>For example, the API design for a <code>weather service</code> could specify that the user supply a <code>zip code</code> and that the producer reply with a 2-part answer, the first being the <code>high temperature</code>, and the second being the <code>low temperature</code>.</p>
+</div></div><div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Rest
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>REST is a set of architectural constraints, not a protocol or a standard. <em>API developers can implement REST in a variety of ways.</em></p>
+</div>
+</div>
+<p>When a client request is made via a RESTful API, it transfers a representation of the state of the resource to the requester or endpoint.</p>
+<p>This information, or representation, is delivered in one of several formats via <code>HTTP</code>: <code>JSON</code> (Javascript Object Notation), <code>HTML</code>, <code>XLT</code>, <code>Python</code>, <code>PHP</code>, or <code>plain text</code>.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+JSON
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>JSON is the most generally popular file format to use because, despite its name, it’s language-agnostic, as well as readable by both humans and machines.</p>
+</div>
+</div>
+</section>
+<section id="stateless" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="stateless"><span class="header-section-number">2</span> <code>stateless</code></h2>
+<p>In REST (Representational State Transfer), a <code>stateless</code> system is one in which t<strong>he server does not maintain any state or session information about the client between requests.</strong></p>
+<p>This means that <strong>each request from the client to the server is treated as an independent and complete operation, and the server responds with the appropriate data based solely on the information provided in the request.</strong></p>
+<p>In other words, the server does not keep track of any information about the previous requests made by the client. This is in contrast to stateful systems, where the server maintains information about the client’s session or context, and uses that information to provide a personalized response to each request.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+stateless architecture
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The stateless architecture of REST provides several benefits, such as improved scalability, simplicity, and reliability, as well as allowing requests to be processed in parallel by different servers or nodes.</p>
+<p>However, it also means that <strong>the client needs to include all the necessary information in each request</strong>, and the server cannot assume any context or information beyond what is provided in the request.</p>
+</div>
+</div>
+</section>
+<section id="http-messages" class="level2 page-columns page-full" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="http-messages"><span class="header-section-number">3</span> HTTP messages</h2>
+<p><code>HTTP messages</code> are <strong>how data is exchanged between a server and a client.</strong></p>
+<p>There are two types of messages:</p>
+<ul>
+<li><code>requests</code> sent by the client to trigger an action on the server,</li>
+<li>and <code>responses</code>, the answer from the server.</li>
+</ul>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages" class="external">HTTP messages</a> are composed of <strong>textual information encoded in ASCII</strong>, and span over multiple lines.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>In HTTP/1.1, and earlier versions of the protocol, these messages were openly sent across the connection. In HTTP/2, the once human-readable message is now divided up into <code>HTTP frames</code>, providing <strong>optimization and performance improvements.</strong></p>
+</div></div><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/httpmsg2.png" class="lightbox" title="HTTP message" data-gallery="quarto-lightbox-gallery-1"><img src="../images/springboot/httpmsg2.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">HTTP message</figcaption><p></p>
+</figure>
+</div>
+<p>HTTP <code>requests</code>, and <code>responses</code>, share similar structure and are composed of:</p>
+<ol type="1">
+<li><strong>A start-line describing the requests to be implemented,</strong> or its status of whether successful or a failure. This start-line is always a single line.</li>
+<li><strong>An optional set of HTTP headers specifying the request,</strong> or describing the body included in the message.</li>
+<li>A blank line indicating all meta-information for the request has been sent.</li>
+<li><strong>An optional body containing data associated with the request</strong> (like content of an HTML form), or the document associated with a response. The presence of the body and its size is specified by the start-line and HTTP headers.</li>
+</ol>
+</section>
+<section id="http-status-messages" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="http-status-messages"><span class="header-section-number">4</span> HTTP status messages</h2>
+<ul>
+<li><a href="https://www.w3schools.com/tags/ref_httpmessages.asp" class="external">HTTP status messages</a></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/httpstatus.png" class="lightbox" title="HTTP status messages poster" data-gallery="quarto-lightbox-gallery-2"><img src="../images/springboot/httpstatus.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
+<p></p><figcaption class="figure-caption">HTTP status messages poster</figcaption><p></p>
+</figure>
+</div>
+<p><a href="https://www.steveschoger.com/status-code-poster/" class="external">Source-status-code-poster by Steve Schoger</a></p>
+</section>
+<section id="spring-boot" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="spring-boot"><span class="header-section-number">5</span> Spring Boot</h2>
+<p>In <code>Spring Boot</code>, the <code>Spring MVC framework</code> is used to build <code>RESTful</code> web services.</p>
+<p>The <code>@RestController</code> <strong>annotation is used to define a class as a RESTful web service controller</strong>. This annotation is a combination of the <code>@Controller</code> and <code>@ResponseBody</code> annotations, which means that the class is a controller and the methods return the data directly rather than returning the name of a view.</p>
+<p>The <code>@RequestMapping</code> annotation is used <strong>to map HTTP requests to specific methods in a controller class</strong>. This annotation can be used at the class level or the method level to define the path that the method should handle.</p>
+<p>In addition to these annotations, <code>Spring Boot</code> also provides a number of other features that make it easy to build RESTful web services, such as support for <code>JSON</code> and <code>XML serialization</code> and <code>deserialization</code>, automatic content negotiation, and built-in exception handling.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Rest and Spring Boot
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In summary, REST stands for Representational State Transfer.</p>
+<p>In Spring Boot, the Spring MVC framework is used to build RESTful web services, the <span class="citation" data-cites="RestController">@RestController</span> and <span class="citation" data-cites="RequestMapping">@RequestMapping</span> annotations are used to define a class as a RESTful web service controller and map HTTP requests to specific methods, respectively.</p>
+<p>Spring Boot provides many features to make building RESTful web services easy, such as support for JSON and XML serialization and deserialization, automatic content negotiation, and built-in exception handling.</p>
+</div>
+</div>
+</section>
+<section id="example" class="level2 page-columns page-full" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="example"><span class="header-section-number">6</span> Example</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="at">@RestController</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/api"</span><span class="op">)</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="kw">public</span> <span class="kw">class</span> MyController <span class="op">{</span></span>
@@ -1411,8 +1552,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-13"><a href="#cb1-13"></a>        <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">ok</span><span class="op">().</span><span class="fu">build</span><span class="op">();</span></span>
 <span id="cb1-14"><a href="#cb1-14"></a>    <span class="op">}</span></span>
 <span id="cb1-15"><a href="#cb1-15"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In this example, the <span class="citation" data-cites="RestController">@RestController</span> annotation indicates that this class is a controller, and the <span class="citation" data-cites="RequestMapping">@RequestMapping</span>(“/api”) annotation specifies that all routes in this controller should be prefixed with “/api”. The hello() method is annotated with <span class="citation" data-cites="GetMapping">@GetMapping</span>(“/hello”), which means it will handle GET requests to the “/api/hello” endpoint and return the string “Hello, world!”. The postData() method is annotated with <span class="citation" data-cites="PostMapping">@PostMapping</span>(“/data”), which means it will handle POST requests to the “/api/data” endpoint and accept a JSON payload in the request body, which will be automatically converted to a MyData object using Spring’s request body parsing functionality. The method then returns a ResponseEntity object with an HTTP status code of 200 (OK) and an empty response body.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
 <p>By defining controllers like this, you can create RESTful APIs and web applications that can handle a wide range of HTTP requests and responses.</p>
+</div><div class="">
+<p>The method then returns a <code>ResponseEntity</code> object with an HTTP status code of 200 (OK) and an empty response body.</p>
+</div></div>
+<p>In this example, the <code>@RestController</code> annotation <strong>indicates that this class is a controller,</strong> and the <code>@RequestMapping("/api")</code> annotation <strong>specifies that all routes in this controller should be prefixed with “/api”.</strong></p>
+<p>The <code>hello()</code> method is annotated with <code>@GetMapping("/hello")</code>, which means it will handle <code>GET</code> requests to the <code>"/api/hello"</code> <strong>endpoint</strong> and return the string <strong>“Hello, world!”.</strong></p>
+<p>The <code>postData()</code> method is annotated with <code>@PostMapping("/data")</code>, which means it will handle <code>POST</code> requests to the <code>"/api/data"</code> <strong>endpoint</strong> and accept a JSON payload in the request body, which will be automatically converted to a MyData object using Spring’s request body parsing functionality.</p>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1706,6 +1854,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":true,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});</script>
 
 
 
