@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -1292,11 +1292,14 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">1</span>  Overview</a></li>
-  <li><a href="#sql-vs-nosql" id="toc-sql-vs-nosql" class="nav-link" data-scroll-target="#sql-vs-nosql"><span class="toc-section-number">2</span>  SQL vs NoSQL</a>
+  <li><a href="#database-or-store" id="toc-database-or-store" class="nav-link" data-scroll-target="#database-or-store"><span class="toc-section-number">2</span>  Database or store?</a></li>
+  <li><a href="#sql" id="toc-sql" class="nav-link" data-scroll-target="#sql"><span class="toc-section-number">3</span>  SQL</a></li>
+  <li><a href="#nosql" id="toc-nosql" class="nav-link" data-scroll-target="#nosql"><span class="toc-section-number">4</span>  NoSQL</a></li>
+  <li><a href="#sql-vs-nosql" id="toc-sql-vs-nosql" class="nav-link" data-scroll-target="#sql-vs-nosql"><span class="toc-section-number">5</span>  SQL vs NoSQL</a>
   <ul>
-  <li><a href="#comparative-table" id="toc-comparative-table" class="nav-link" data-scroll-target="#comparative-table"><span class="toc-section-number">2.1</span>  Comparative table</a></li>
+  <li><a href="#comparative-table" id="toc-comparative-table" class="nav-link" data-scroll-target="#comparative-table"><span class="toc-section-number">5.1</span>  Comparative table</a></li>
   </ul></li>
-  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="toc-section-number">3</span>  Examples</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="toc-section-number">6</span>  Examples</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/springboot/boot-concepts-data.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1339,7 +1342,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Wednesday, March 29, 2023</p>
+      <p class="date-modified">Thursday, March 30, 2023</p>
     </div>
   </div>
     
@@ -1358,7 +1361,7 @@ ul.task-list li input[type="checkbox"] {
 <p><br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/springdata.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Spring Data"><img src="..\images/springboot/springdata.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/springboot/springdata.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Spring Data"><img src="../images/springboot/springdata.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">Spring Data</figcaption><p></p>
 </figure>
 </div>
@@ -1381,11 +1384,46 @@ ul.task-list li input[type="checkbox"] {
 <p>To use Spring Data in your Spring Boot application, you can add the appropriate Spring Data dependency to your project and configure the data source properties in your <code>application.properties</code> or <code>application.yml</code> file.</p>
 <p>Once configured, you can use <strong>Spring Data repositories to interact with your database and perform CRUD operations on your data</strong>.</p>
 </section>
-<section id="sql-vs-nosql" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="sql-vs-nosql"><span class="header-section-number">2</span> SQL vs NoSQL</h2>
+<section id="database-or-store" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="database-or-store"><span class="header-section-number">2</span> Database or store?</h2>
+<p><strong>A datastore (store) is, as the name indicates, a place where data is stored.</strong> The simplest example of a store is a flat file saved on your disk.</p>
+<p>You can also save data in a database, in which the data are stored physically in files, but those files are managed by some, very often sophisticated, <strong>management system</strong>.</p>
+<blockquote class="blockquote">
+<p>Viewed from this perspective, <strong>database are a special type of datastore.</strong></p>
+</blockquote>
+<p>Not all <code>NoSQL</code> databases have a builtin “manager”, or their functionality is very limited, so the management is done in the application level. That is why you may see them just as an another one storage system. Simply speaking, simple <code>NoSQL</code> databases <strong>(for example key-value)</strong> are very often referred as a store while those more complicated (graph for example) as a database, but this is not rule of the thumb.</p>
+</section>
+<section id="sql" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="sql"><span class="header-section-number">3</span> SQL</h2>
+<p>We can classify database-management systems according to the database models that they support. Not going far into the past we can say that <em>first large-scale used model, dominant in the market for more than 20 years, were relational databases arise in the 1970s.</em></p>
+<p>We refer them as <strong>SQL databases because Structured Query Language</strong> was used by the vast majority of them for writing and querying data. <code>SQL (in a sense: SQL databases)</code> utilizes Edgar F. Codd’s relational model based on tabular data representation:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/sqlvsnosql.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="NoSQL vs.&nbsp;SQL: Important Differences"><img src="..\images/springboot/sqlvsnosql.png" class="img-fluid figure-img" style="width:50.0%"></a></p>
+<p><a href="../images/springboot/db-sql.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Database model used by SQL"><img src="../images/springboot/db-sql.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">Database model used by SQL</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="nosql" class="level2 page-columns page-full" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="nosql"><span class="header-section-number">4</span> NoSQL</h2>
+<ul>
+<li><a href="https://www.mongodb.com/nosql-explained" class="external">What is NoSQL?</a></li>
+</ul>
+<p><code>NoSQL</code> databases (aka “not only SQL”) are <strong>non-tabular databases and store data differently than relational tables.</strong></p>
+<p><code>NoSQL</code> databases come in a variety of types based on their data model. The main types are document, key-value, wide-column, document-oriented and graph.</p>
+<p>They provide flexible schemas and <strong>scale easily with large amounts of data and high user loads.</strong></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Denormalization</strong> can be defined as the <strong>copying of the same data into multiple documents or tables</strong> in order to <strong>simplify/optimize query processing</strong> or to fit the user’s data into a particular data model.</p>
+</div></div><ul>
+<li><a href="../images/springboot/db-nosql.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="What is NoSQL?"><img src="../images/springboot/db-nosql.png" class="img-fluid" style="width:80.0%" alt="What is NoSQL?"></a></li>
+</ul>
+</section>
+<section id="sql-vs-nosql" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="sql-vs-nosql"><span class="header-section-number">5</span> SQL vs NoSQL</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/sqlvsnosql.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="NoSQL vs.&nbsp;SQL: Important Differences"><img src="../images/springboot/sqlvsnosql.png" class="img-fluid figure-img" style="width:50.0%"></a></p>
 <p></p><figcaption class="figure-caption">NoSQL vs.&nbsp;SQL: Important Differences</figcaption><p></p>
 </figure>
 </div>
@@ -1395,8 +1433,8 @@ ul.task-list li input[type="checkbox"] {
 <blockquote class="blockquote">
 <p>Examples of <a href="https://en.wikipedia.org/wiki/NoSQL" class="external">Non-Relational</a> database engines are: <a href="https://www.mongodb.com/" class="external">MongoDB</a>, <a href="https://cassandra.apache.org/" class="external">Apache Cassandra</a>, <a href="https://redis.io/" class="external">Redis</a>, <a href="https://www.couchbase.com/" class="external">Couchbase</a>, <a href="https://hbase.apache.org/" class="external">Apache HBase</a> and <a href="https://aws.amazon.com/dynamodb/" class="external">DynamoDB AWS</a>.</p>
 </blockquote>
-<section id="comparative-table" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="comparative-table"><span class="header-section-number">2.1</span> Comparative table</h3>
+<section id="comparative-table" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="comparative-table"><span class="header-section-number">5.1</span> Comparative table</h3>
 <table class="table">
 <colgroup>
 <col style="width: 15%">
@@ -1465,8 +1503,8 @@ ul.task-list li input[type="checkbox"] {
 </table>
 </section>
 </section>
-<section id="examples" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="examples"><span class="header-section-number">3</span> Examples</h2>
+<section id="examples" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="examples"><span class="header-section-number">6</span> Examples</h2>
 <ul>
 <li><a href="https://github.com/AlbertProfe/cifojava2022-4/wiki" class="external">Evolution of SQL DB mapping in Spring</a></li>
 <li><a href="../springboot/sblab4.html">Lab#SB04-1: JPA Inherence strategies</a></li>
@@ -1765,7 +1803,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":true,"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});</script>
 
 
 
