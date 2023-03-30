@@ -1368,7 +1368,17 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><a href="https://spring.io/projects/spring-data#overview" class="external">Spring Boot Data</a></li>
 </ul>
-<hr>
+<p>Spring Data’s mission is to provide a familiar and consistent, Spring-based programming model for data access while still retaining the special traits of the underlying data store. Features:</p>
+<ul>
+<li>Powerful repository and <strong>custom object-mapping abstractions</strong></li>
+<li><strong>Dynamic query derivation</strong> from repository method names</li>
+<li>Implementation domain base classes providing basic properties</li>
+<li>Support for transparent auditing (created, last changed)</li>
+<li>Possibility to integrate custom repository code</li>
+<li>Easy Spring integration via JavaConfig and custom XML namespaces</li>
+<li>Advanced integration with Spring MVC controllers</li>
+<li>Experimental support for cross-store persistence</li>
+</ul>
 <section id="overview" class="level2 page-columns page-full" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
 <p><code>Spring Boot</code> provides support for both <code>SQL</code> and <code>NoSQ</code>L databases through its <code>Spring Data</code> module.</p>
@@ -1386,6 +1396,9 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="database-or-store" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="database-or-store"><span class="header-section-number">2</span> Database or store?</h2>
+<ul>
+<li><a href="https://fulmanski.pl/books/doc/nosql_theory_and_examples_excerpt.pdf" class="external">Book: PIOTR FULMAŃSKI, NoSQL Theory and examples</a></li>
+</ul>
 <p><strong>A datastore (store) is, as the name indicates, a place where data is stored.</strong> The simplest example of a store is a flat file saved on your disk.</p>
 <p>You can also save data in a database, in which the data are stored physically in files, but those files are managed by some, very often sophisticated, <strong>management system</strong>.</p>
 <blockquote class="blockquote">
@@ -1395,12 +1408,18 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="sql" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="sql"><span class="header-section-number">3</span> SQL</h2>
-<p>We can classify database-management systems according to the database models that they support. Not going far into the past we can say that <em>first large-scale used model, dominant in the market for more than 20 years, were relational databases arise in the 1970s.</em></p>
-<p>We refer them as <strong>SQL databases because Structured Query Language</strong> was used by the vast majority of them for writing and querying data. <code>SQL (in a sense: SQL databases)</code> utilizes Edgar F. Codd’s relational model based on tabular data representation:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="../images/springboot/db-sql.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Database model used by SQL"><img src="../images/springboot/db-sql.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">Database model used by SQL</figcaption><p></p>
+</figure>
+</div>
+<p>We can classify database-management systems according to the database models that they support. Not going far into the past we can say that <em>first large-scale used model, dominant in the market for more than 20 years, were relational databases arise in the 1970s.</em></p>
+<p>We refer them as <strong>SQL databases because Structured Query Language</strong> was used by the vast majority of them for writing and querying data. <code>SQL (in a sense: SQL databases)</code> utilizes Edgar F. Codd’s <a href="https://www.sqlshack.com/learn-sql-types-of-relations/" class="external">relational model based</a> on tabular data representation:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/many-to-many-relation (1).png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="SQL is relationnal"><img src="../images/springboot/many-to-many-relation (1).png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">SQL is relationnal</figcaption><p></p>
 </figure>
 </div>
 </section>
@@ -1411,19 +1430,31 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p><code>NoSQL</code> databases (aka “not only SQL”) are <strong>non-tabular databases and store data differently than relational tables.</strong></p>
 <p><code>NoSQL</code> databases come in a variety of types based on their data model. The main types are document, key-value, wide-column, document-oriented and graph.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/db-nosql.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="What is NoSQL?"><img src="../images/springboot/db-nosql.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">What is NoSQL?</figcaption><p></p>
+</figure>
+</div>
 <p>They provide flexible schemas and <strong>scale easily with large amounts of data and high user loads.</strong></p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong>Denormalization</strong> can be defined as the <strong>copying of the same data into multiple documents or tables</strong> in order to <strong>simplify/optimize query processing</strong> or to fit the user’s data into a particular data model.</p>
-</div></div><ul>
-<li><a href="../images/springboot/db-nosql.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="What is NoSQL?"><img src="../images/springboot/db-nosql.png" class="img-fluid" style="width:80.0%" alt="What is NoSQL?"></a></li>
+</div></div><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/nosql_employee.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="employee NoSQL"><img src="../images/springboot/nosql_employee.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">employee NoSQL</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><a href="https://docs.google.com/spreadsheets/d/1X4r6_FaPeXt11Wil_D9j6fqxJDhAzvL4KJUithBVqGQ/edit?usp=sharing" class="external">Google sheet Employee template</a></li>
 </ul>
 </section>
 <section id="sql-vs-nosql" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="sql-vs-nosql"><span class="header-section-number">5</span> SQL vs NoSQL</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/sqlvsnosql.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="NoSQL vs.&nbsp;SQL: Important Differences"><img src="../images/springboot/sqlvsnosql.png" class="img-fluid figure-img" style="width:50.0%"></a></p>
+<p><a href="../images/springboot/sqlvsnosql.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="NoSQL vs.&nbsp;SQL: Important Differences"><img src="../images/springboot/sqlvsnosql.png" class="img-fluid figure-img" style="width:50.0%"></a></p>
 <p></p><figcaption class="figure-caption">NoSQL vs.&nbsp;SQL: Important Differences</figcaption><p></p>
 </figure>
 </div>
@@ -1803,7 +1834,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":true,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","loop":true});</script>
 
 
 
