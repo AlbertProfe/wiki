@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -43,6 +43,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -1284,7 +1287,14 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">1</span>  Overview</a></li>
+  <li><a href="#advantages" id="toc-advantages" class="nav-link" data-scroll-target="#advantages"><span class="toc-section-number">2</span>  Advantages</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/springboot/boot-concepts-injection.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1336,19 +1346,55 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="summary">
 <p>📘 <strong>Dependency Injection</strong></p>
-<p>Dependency injection (DI) is a design pattern that allows objects to receive their dependencies from external sources rather than creating them internally. In other words, it is a way to manage the dependencies between objects in a software application.</p>
+<p><code>Dependency injection</code> (DI) is a design pattern that allows objects to receive their dependencies from external sources rather than creating them internally. In other words, it is a way to manage the dependencies between objects in a software application.</p>
 </div>
 <hr>
-<p>Dependency injection (DI) is a design pattern that allows objects to receive their dependencies from external sources rather than creating them internally. In other words, it is a way to manage the dependencies between objects in a software application.</p>
-<p>In Spring Boot, the dependency injection is provided by the Spring Framework. The Spring container is responsible for creating and managing the objects in the application, and it uses dependency injection to provide the objects with their dependencies.</p>
-<p>There are two types of dependency injection: Constructor injection and setter injection.</p>
+<section id="overview" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/springboot-architecture-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Spring Boot Request-Response Cycle"><img src="..\images/springboot/springboot-architecture-2.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">Spring Boot Request-Response Cycle</figcaption><p></p>
+</figure>
+</div>
+<p><code>Dependency injection</code> (DI) is a design pattern that <strong>allows objects to receive their dependencies from external sources rather than creating them internally</strong>. In other words, it is a way to manage the dependencies between objects in a software application.</p>
+<p>In Spring Boot, the <code>dependency injection</code> is provided by the <code>Spring Framework</code>. The <code>Spring container</code> is responsible for <strong>creating and managing the objects in the application</strong>, and it uses <code>dependency injection</code> to provide the objects with their dependencies.</p>
+<p>There are thre types of <code>dependency injection</code>:</p>
 <ul>
-<li>Constructor injection: The dependencies are provided to the class through its constructor.</li>
-<li>Setter injection: The dependencies are provided to the class through setter methods.</li>
+<li><code>Constructor injection</code>: The dependencies are provided to the class through its constructor.</li>
+<li><code>Setter injection</code>: The dependencies are provided to the class through setter methods.</li>
+<li><code>Method Injection</code>: The dependencies are provided to the class through an interface which declares the method(s)</li>
 </ul>
-<p>With dependency injection, objects are no longer responsible for creating or managing their dependencies, which makes the code more maintainable and easier to test.</p>
-<p>The <span class="citation" data-cites="Autowired">@Autowired</span> annotation is used in Spring Boot to automatically wire a bean from the Spring application context into a class field or method. This allows you to use dependency injection to provide objects with their dependencies without having to manually create or manage them.</p>
-<p>In summary, Dependency Injection (DI) is a design pattern that allows objects to receive their dependencies from external sources rather than creating them internally. Spring Boot uses DI to manage the dependencies between objects and provide them with their dependencies using Constructor injection and setter injection, the <span class="citation" data-cites="Autowired">@Autowired</span> annotation is used to wire the bean from the Spring application context.</p>
+<p>With <code>dependency injectio</code>n, objects are no longer responsible for creating or managing their dependencies, which makes the code more maintainable and easier to test.</p>
+<p>The <span class="citation" data-cites="Autowired">@Autowired</span> annotation is used in Spring Boot to automatically wire a bean from the Spring application context into a class field or method. This allows you to use <code>dependency injection</code> to provide objects with their dependencies without having to manually create or manage them.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Dependency Injection
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>Dependency Injection</code> (DI) is a design pattern that allows objects to receive their dependencies from external sources rather than creating them internally.</p>
+<p>Spring Boot uses DI to manage the dependencies between objects and provide them with their dependencies using Constructor injection and setter injection, the <span class="citation" data-cites="Autowired">@Autowired</span> annotation is used to wire the bean from the Spring application context.</p>
+</div>
+</div>
+</section>
+<section id="advantages" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="advantages"><span class="header-section-number">2</span> Advantages</h2>
+<ul>
+<li><a href="https://umuzi-org.github.io/tech-department/topics/java-specific/introduction-to-spring-boot/part-1/#dependency-injection" class="external">Dependency Injection</a></li>
+</ul>
+<p><code>Inversion of Control</code> is a principle in software engineering by which the control of objects or portions of a program is transferred to a container or framework. It’s most often used in the context of object-oriented programming.</p>
+<p>By contrast with traditional programming, in which our custom code makes calls to a library, <code>IoC</code> enables a framework to take control of the flow of a program and make calls to our custom code.</p>
+<ul>
+<li>decoupling the execution of a task from its implementation</li>
+<li>making it easier to switch between different implementations</li>
+<li>greater modularity of a program</li>
+<li>greater ease in testing a program by isolating a component or mocking its dependencies and - allowing components to communicate through contracts</li>
+</ul>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1368,6 +1414,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1641,6 +1688,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":true});</script>
 
 
 
