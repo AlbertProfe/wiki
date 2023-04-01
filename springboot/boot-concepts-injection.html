@@ -1292,7 +1292,10 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">1</span>  Overview</a></li>
-  <li><a href="#advantages" id="toc-advantages" class="nav-link" data-scroll-target="#advantages"><span class="toc-section-number">2</span>  Advantages</a></li>
+  <li><a href="#inversion-of-control-ioc" id="toc-inversion-of-control-ioc" class="nav-link" data-scroll-target="#inversion-of-control-ioc"><span class="toc-section-number">2</span>  Inversion of Control <code>IoC</code></a></li>
+  <li><a href="#dependency-inversion-principle-dip" id="toc-dependency-inversion-principle-dip" class="nav-link" data-scroll-target="#dependency-inversion-principle-dip"><span class="toc-section-number">3</span>  Dependency Inversion Principle <code>DIP</code></a></li>
+  <li><a href="#dependency-injection-di" id="toc-dependency-injection-di" class="nav-link" data-scroll-target="#dependency-injection-di"><span class="toc-section-number">4</span>  Dependency Injection <code>DI</code></a></li>
+  <li><a href="#advantages" id="toc-advantages" class="nav-link" data-scroll-target="#advantages"><span class="toc-section-number">5</span>  Advantages</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/springboot/boot-concepts-injection.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1335,7 +1338,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, March 31, 2023</p>
+      <p class="date-modified">Saturday, April 1, 2023</p>
     </div>
   </div>
     
@@ -1348,15 +1351,9 @@ ul.task-list li input[type="checkbox"] {
 <p>📘 <strong>Dependency Injection</strong></p>
 <p><code>Dependency injection</code> (DI) is a design pattern that allows objects to receive their dependencies from external sources rather than creating them internally. In other words, it is a way to manage the dependencies between objects in a software application.</p>
 </div>
-<hr>
+<p><br> <a href="../images/springboot/springboot-architecture-2.png" class="lightbox" title="Spring Boot Request-Response Cycle" data-gallery="quarto-lightbox-gallery-1"><img src="..\images/springboot/springboot-architecture-2.png" class="img-fluid" style="width:80.0%" alt="Spring Boot Request-Response Cycle"></a></p>
 <section id="overview" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/springboot/springboot-architecture-2.png" class="lightbox" title="Spring Boot Request-Response Cycle" data-gallery="quarto-lightbox-gallery-1"><img src="..\images/springboot/springboot-architecture-2.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
-<p></p><figcaption class="figure-caption">Spring Boot Request-Response Cycle</figcaption><p></p>
-</figure>
-</div>
 <p><code>Dependency injection</code> (DI) is a design pattern that <strong>allows objects to receive their dependencies from external sources rather than creating them internally</strong>. In other words, it is a way to manage the dependencies between objects in a software application.</p>
 <p>In Spring Boot, the <code>dependency injection</code> is provided by the <code>Spring Framework</code>. The <code>Spring container</code> is responsible for <strong>creating and managing the objects in the application</strong>, and it uses <code>dependency injection</code> to provide the objects with their dependencies.</p>
 <p>There are thre types of <code>dependency injection</code>:</p>
@@ -1365,8 +1362,9 @@ ul.task-list li input[type="checkbox"] {
 <li><code>Setter injection</code>: The dependencies are provided to the class through setter methods.</li>
 <li><code>Method Injection</code>: The dependencies are provided to the class through an interface which declares the method(s)</li>
 </ul>
-<p>With <code>dependency injectio</code>n, objects are no longer responsible for creating or managing their dependencies, which makes the code more maintainable and easier to test.</p>
-<p>The <span class="citation" data-cites="Autowired">@Autowired</span> annotation is used in Spring Boot to automatically wire a bean from the Spring application context into a class field or method. This allows you to use <code>dependency injection</code> to provide objects with their dependencies without having to manually create or manage them.</p>
+<p>With <code>dependency injectio</code>n, objects are no longer responsible for creating or managing their dependencies, which makes the code more maintainable and easier to test (<em>not used in Spring Boot</em>).</p>
+<p>The <code>@Autowired</code> annotation is used in <code>Spring Boot</code> to <strong>automatically wire a bean from the Spring application context into a class field or method.</strong></p>
+<p>This allows you to use <code>dependency injection</code> to provide objects with their dependencies <strong>without having to manually create or manage them.</strong></p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1377,23 +1375,68 @@ Dependency Injection
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><code>Dependency Injection</code> (DI) is a design pattern that allows objects to receive their dependencies from external sources rather than creating them internally.</p>
-<p>Spring Boot uses DI to manage the dependencies between objects and provide them with their dependencies using Constructor injection and setter injection, the <span class="citation" data-cites="Autowired">@Autowired</span> annotation is used to wire the bean from the Spring application context.</p>
+<p><code>Dependency Injection</code> (DI) is a design pattern that <strong>allows objects to receive their dependencies from external sources rather than creating them internally.</strong></p>
+<p><code>Spring Boot</code> uses<code>DI</code> to manage the <code>dependencies</code> between objects and provide them with their dependencies using Constructor injection and setter injection, the<code>@Autowired</code> annotation is used to wire the <code>bean</code> from the <code>Spring application context.</code></p>
 </div>
 </div>
 </section>
-<section id="advantages" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="advantages"><span class="header-section-number">2</span> Advantages</h2>
+<section id="inversion-of-control-ioc" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="inversion-of-control-ioc"><span class="header-section-number">2</span> Inversion of Control <code>IoC</code></h2>
+<ul>
+<li><a href="https://martinfowler.com/bliki/InversionOfControl.html" class="external">InversionOfControl</a></li>
+<li><a href="https://stackoverflow.com/questions/6550700/inversion-of-control-vs-dependency-injection" class="external">Inversion of Control vs Dependency Injection</a></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/ioc-di.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="..\images/springboot/ioc-di.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+DIP, IoC and DI
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>IoC is a design pattern that allows for the inversion of control of object creation and management. DI is the process of providing dependencies to a class, rather than the class creating them itself.</p>
+<p>Both IoC and DI are related to the DIP, which is a design principle that promotes decoupling and abstraction.</p>
+<p>The hierarchy between these concepts is that IoC is the pattern that enables DI, and DI is a way of implementing the DIP.</p>
+</div>
+</div>
+<p><code>Inversion of Control (IoC)</code> is a <strong>design pattern commonly used in Spring Boot applications, where the framework is responsible for creating and managing objects (beans) and their dependencies.</strong></p>
+<p><strong>The control of the application flow is inverted,</strong> as the framework decides when and how to instantiate objects, rather than the developer having to explicitly create them.</p>
+<p>This <strong>simplifies</strong> the development process and makes the code more modular and testable.</p>
+</section>
+<section id="dependency-inversion-principle-dip" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="dependency-inversion-principle-dip"><span class="header-section-number">3</span> Dependency Inversion Principle <code>DIP</code></h2>
+<p><code>The Dependency Inversion Principle (DIP)</code> is a <strong>software design principle that states that high-level modules should not depend on low-level modules, but both should depend on abstractions.</strong></p>
+<p>This allows for <strong>decoupling</strong> and easier <strong>maintenance</strong> of the codebase, as changes in low-level modules don’t affect high-level ones.</p>
+<p>The use of interfaces and abstract classes are common in implementing the DIP.</p>
+</section>
+<section id="dependency-injection-di" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="dependency-injection-di"><span class="header-section-number">4</span> Dependency Injection <code>DI</code></h2>
+<p><code>Dependency Injection (DI)</code> is the process of <strong>providing dependencies (objects) to a class, rather than the class creating them itself.</strong></p>
+<p>This is often done using frameworks like Spring Boot, where dependencies are defined as beans and injected into other beans using annotations.</p>
+<p>This <strong>reduces the amount of boilerplate code</strong> and makes the codebase more modular and maintainable.</p>
+<p>The DI principle is closely related to the DIP, as it allows for the injection of abstractions rather than concrete implementations.</p>
+</section>
+<section id="advantages" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="advantages"><span class="header-section-number">5</span> Advantages</h2>
 <ul>
 <li><a href="https://umuzi-org.github.io/tech-department/topics/java-specific/introduction-to-spring-boot/part-1/#dependency-injection" class="external">Dependency Injection</a></li>
 </ul>
-<p><code>Inversion of Control</code> is a principle in software engineering by which the control of objects or portions of a program is transferred to a container or framework. It’s most often used in the context of object-oriented programming.</p>
+<p><code>Inversion of Control</code> is a <strong>principle</strong> in software engineering by which the <strong>control of objects or portions of a program is transferred to a container or framework</strong>.</p>
+<p>It’s most often used in the context of object-oriented programming.</p>
 <p>By contrast with traditional programming, in which our custom code makes calls to a library, <code>IoC</code> enables a framework to take control of the flow of a program and make calls to our custom code.</p>
 <ul>
-<li>decoupling the execution of a task from its implementation</li>
-<li>making it easier to switch between different implementations</li>
-<li>greater modularity of a program</li>
-<li>greater ease in testing a program by isolating a component or mocking its dependencies and - allowing components to communicate through contracts</li>
+<li><strong>decoupling</strong> the execution of a task from its implementation</li>
+<li>making it easier to <strong>switch</strong> between different implementations</li>
+<li>greater <strong>modularity</strong> of a program</li>
+<li>greater ease in <strong>testing</strong> a program by isolating a component or mocking its dependencies and</li>
+<li>allowing components to <strong>communicate through contracts</strong></li>
 </ul>
 <!--- navLinks -->
 <br><br>
@@ -1688,7 +1731,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":true,"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":true,"openEffect":"zoom","selector":".lightbox","descPosition":"bottom"});</script>
 
 
 
