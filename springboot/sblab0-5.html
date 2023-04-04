@@ -1357,7 +1357,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#install-and-create-a-h2-db" id="toc-install-and-create-a-h2-db" class="nav-link active" data-scroll-target="#install-and-create-a-h2-db"><span class="toc-section-number">1</span>  Install and create a H2 DB</a></li>
   <li><a href="#librarymanagmentrest-using-h2" id="toc-librarymanagmentrest-using-h2" class="nav-link" data-scroll-target="#librarymanagmentrest-using-h2"><span class="toc-section-number">2</span>  LibraryManagmentRest using H2</a>
   <ul>
-  <li><a href="#configure-h2-database-in-librarymanagmentrest" id="toc-configure-h2-database-in-librarymanagmentrest" class="nav-link" data-scroll-target="#configure-h2-database-in-librarymanagmentrest"><span class="toc-section-number">2.1</span>  Configure H2 database in LibraryManagmentRest:</a></li>
+  <li><a href="#configure-h2-db" id="toc-configure-h2-db" class="nav-link" data-scroll-target="#configure-h2-db"><span class="toc-section-number">2.1</span>  Configure H2 DB</a></li>
   <li><a href="#application.properties" id="toc-application.properties" class="nav-link" data-scroll-target="#application.properties"><span class="toc-section-number">2.2</span>  <code>application.properties</code></a></li>
   <li><a href="#create-a-user-repository-and-user-entity" id="toc-create-a-user-repository-and-user-entity" class="nav-link" data-scroll-target="#create-a-user-repository-and-user-entity"><span class="toc-section-number">2.3</span>  Create a User repository and User entity</a></li>
   <li><a href="#execute-project" id="toc-execute-project" class="nav-link" data-scroll-target="#execute-project"><span class="toc-section-number">2.4</span>  Execute project</a></li>
@@ -1407,7 +1407,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Monday, April 3, 2023</p>
+      <p class="date-modified">Tuesday, April 4, 2023</p>
     </div>
   </div>
     
@@ -1425,6 +1425,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><br></p>
 <section id="install-and-create-a-h2-db" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="install-and-create-a-h2-db"><span class="header-section-number">1</span> Install and create a H2 DB</h2>
+<p>References:</p>
+<ul>
+<li><a href="../springboot/boot-what-create-th-h2.html">Spring Boot: H2 DB and Thymeleaf</a></li>
+<li><a href="../springboot/boot-concepts-rest.html">Spring Boot: Rest</a></li>
+<li><a href="https://github.com/AlbertProfe/cifojava2022-3/tree/master/library5" class="external">Library5</a></li>
+</ul>
 <p>Install Java and Spring Boot on your Linux machine or <a href="../springboot/sblab0-4.html">start from previous project</a>:</p>
 <ul>
 <li>Download and install Java JDK from the official Oracle website.</li>
@@ -1448,15 +1454,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p></p><figcaption class="figure-caption">Tree-folder project with UserRepository</figcaption><p></p>
 </figure>
 </div>
-<section id="configure-h2-database-in-librarymanagmentrest" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="configure-h2-database-in-librarymanagmentrest"><span class="header-section-number">2.1</span> Configure H2 database in LibraryManagmentRest:</h3>
+<section id="configure-h2-db" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="configure-h2-db"><span class="header-section-number">2.1</span> Configure H2 DB</h3>
 <ul>
 <li><code>pom.xml</code>: dependencies H2 and JPA</li>
 <li><code>UserRepository</code> interface</li>
 <li><code>User</code> class <span class="citation" data-cites="Entity">@Entity</span></li>
 <li><code>application.properties</code></li>
-<li>modify service to create a User and save it to H2 DB</li>
+<li>modify <code>service</code> to create a user object from API Rest and save it to H2 DB</li>
 </ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">&lt;</span>dependency<span class="op">&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="op">&lt;</span>groupId<span class="op">&gt;</span>com<span class="op">.</span><span class="fu">h2database</span><span class="op">&lt;/</span>groupId<span class="op">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="op">&lt;</span>artifactId<span class="op">&gt;</span>h2<span class="op">&lt;/</span>artifactId<span class="op">&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="op">&lt;</span>scope<span class="op">&gt;</span>runtime<span class="op">&lt;/</span>scope<span class="op">&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="op">&lt;/</span>dependency<span class="op">&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="op">&lt;</span>dependency<span class="op">&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="op">&lt;</span>groupId<span class="op">&gt;</span>org<span class="op">.</span><span class="fu">springframework</span><span class="op">.</span><span class="fu">boot</span><span class="op">&lt;/</span>groupId<span class="op">&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="op">&lt;</span>artifactId<span class="op">&gt;</span>spring<span class="op">-</span>boot<span class="op">-</span>starter<span class="op">-</span>data<span class="op">-</span>jpa<span class="op">&lt;/</span>artifactId<span class="op">&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="op">&lt;/</span>dependency<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="application.properties" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="application.properties"><span class="header-section-number">2.2</span> <code>application.properties</code></h3>
@@ -1464,28 +1479,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Open the <code>application.properties</code> file located in the s<code>rc/main/resources</code> directory of your Spring Boot project.</li>
 <li>Add the following configuration to use the <code>H2 database</code>:</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a>server<span class="op">.</span><span class="fu">port</span><span class="op">=</span><span class="dv">8090</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>spring<span class="op">.</span><span class="fu">h2</span><span class="op">.</span><span class="fu">console</span><span class="op">.</span><span class="fu">enabled</span><span class="op">=</span><span class="kw">true</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a>#H2 DATASOURCE</span>
-<span id="cb1-6"><a href="#cb1-6"></a>spring<span class="op">.</span><span class="fu">datasource</span><span class="op">.</span><span class="fu">url</span><span class="op">=</span>jdbc<span class="op">:</span>h2<span class="op">:/</span>home<span class="op">/</span>albert<span class="op">/</span>MyProjects<span class="op">/</span>MyDBs<span class="op">/</span>h2DBs<span class="op">/</span>libraryManagementRest</span>
-<span id="cb1-7"><a href="#cb1-7"></a>#spring<span class="op">.</span><span class="fu">datasource</span><span class="op">.</span><span class="fu">url</span><span class="op">=</span>jdbc<span class="op">:</span>h2<span class="op">:</span>mem<span class="op">:</span>testdb</span>
-<span id="cb1-8"><a href="#cb1-8"></a>spring<span class="op">.</span><span class="fu">datasource</span><span class="op">.</span><span class="fu">username</span><span class="op">=</span>albert</span>
-<span id="cb1-9"><a href="#cb1-9"></a>spring<span class="op">.</span><span class="fu">datasource</span><span class="op">.</span><span class="fu">password</span><span class="op">=</span><span class="dv">1234</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>spring<span class="op">.</span><span class="fu">datasource</span><span class="op">.</span><span class="fu">driver</span><span class="op">-</span><span class="kw">class</span><span class="op">-</span>name<span class="op">=</span>org<span class="op">.</span><span class="fu">h2</span><span class="op">.</span><span class="fu">Driver</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a>#JPA</span>
-<span id="cb1-13"><a href="#cb1-13"></a>#spring<span class="op">.</span><span class="fu">jpa</span><span class="op">.</span><span class="fu">properties</span><span class="op">.</span><span class="fu">hibernate</span><span class="op">.</span><span class="fu">dialect</span><span class="op">=</span>org<span class="op">.</span><span class="fu">hibernate</span><span class="op">.</span><span class="fu">dialect</span><span class="op">.</span><span class="fu">MySQL5Dialect</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>spring<span class="op">.</span><span class="fu">jpa</span><span class="op">.</span><span class="fu">properties</span><span class="op">.</span><span class="fu">hibernate</span><span class="op">.</span><span class="fu">dialect</span><span class="op">=</span>org<span class="op">.</span><span class="fu">hibernate</span><span class="op">.</span><span class="fu">dialect</span><span class="op">.</span><span class="fu">H2Dialect</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>spring<span class="op">.</span><span class="fu">jpa</span><span class="op">.</span><span class="fu">defer</span><span class="op">-</span>datasource<span class="op">-</span>initialization<span class="op">=</span><span class="kw">true</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a></span>
-<span id="cb1-17"><a href="#cb1-17"></a>#Remove banner</span>
-<span id="cb1-18"><a href="#cb1-18"></a>spring<span class="op">.</span><span class="fu">main</span><span class="op">.</span><span class="fu">banner</span><span class="op">-</span>mode<span class="op">=</span>off</span>
-<span id="cb1-19"><a href="#cb1-19"></a></span>
-<span id="cb1-20"><a href="#cb1-20"></a>#DDL</span>
-<span id="cb1-21"><a href="#cb1-21"></a>#create table <span class="fu">book_table</span> <span class="op">(</span>book_id bigint not <span class="kw">null</span><span class="op">,</span> author <span class="fu">varchar</span><span class="op">(</span><span class="dv">255</span><span class="op">),</span> isbn <span class="fu">varchar</span><span class="op">(</span><span class="dv">255</span><span class="op">),</span> pages integer not <span class="kw">null</span><span class="op">,</span> published_year integer<span class="op">,</span> book_title <span class="fu">varchar</span><span class="op">(</span><span class="dv">255</span><span class="op">),</span> primary <span class="fu">key</span> <span class="op">(</span>book_id<span class="op">))</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a>spring<span class="op">.</span><span class="fu">jpa</span><span class="op">.</span><span class="fu">hibernate</span><span class="op">.</span><span class="fu">ddl</span><span class="op">-</span>auto<span class="op">=</span>update</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a>server<span class="op">.</span><span class="fu">port</span><span class="op">=</span><span class="dv">8090</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>spring<span class="op">.</span><span class="fu">h2</span><span class="op">.</span><span class="fu">console</span><span class="op">.</span><span class="fu">enabled</span><span class="op">=</span><span class="kw">true</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a>#H2 DATASOURCE</span>
+<span id="cb2-6"><a href="#cb2-6"></a>spring<span class="op">.</span><span class="fu">datasource</span><span class="op">.</span><span class="fu">url</span><span class="op">=</span>jdbc<span class="op">:</span>h2<span class="op">:/</span>home<span class="op">/</span>albert<span class="op">/</span>MyProjects<span class="op">/</span>MyDBs<span class="op">/</span>h2DBs<span class="op">/</span>libraryManagementRest</span>
+<span id="cb2-7"><a href="#cb2-7"></a>#spring<span class="op">.</span><span class="fu">datasource</span><span class="op">.</span><span class="fu">url</span><span class="op">=</span>jdbc<span class="op">:</span>h2<span class="op">:</span>mem<span class="op">:</span>testdb</span>
+<span id="cb2-8"><a href="#cb2-8"></a>spring<span class="op">.</span><span class="fu">datasource</span><span class="op">.</span><span class="fu">username</span><span class="op">=</span>albert</span>
+<span id="cb2-9"><a href="#cb2-9"></a>spring<span class="op">.</span><span class="fu">datasource</span><span class="op">.</span><span class="fu">password</span><span class="op">=</span><span class="dv">1234</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>spring<span class="op">.</span><span class="fu">datasource</span><span class="op">.</span><span class="fu">driver</span><span class="op">-</span><span class="kw">class</span><span class="op">-</span>name<span class="op">=</span>org<span class="op">.</span><span class="fu">h2</span><span class="op">.</span><span class="fu">Driver</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a>#JPA</span>
+<span id="cb2-13"><a href="#cb2-13"></a>#spring<span class="op">.</span><span class="fu">jpa</span><span class="op">.</span><span class="fu">properties</span><span class="op">.</span><span class="fu">hibernate</span><span class="op">.</span><span class="fu">dialect</span><span class="op">=</span>org<span class="op">.</span><span class="fu">hibernate</span><span class="op">.</span><span class="fu">dialect</span><span class="op">.</span><span class="fu">MySQL5Dialect</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>spring<span class="op">.</span><span class="fu">jpa</span><span class="op">.</span><span class="fu">properties</span><span class="op">.</span><span class="fu">hibernate</span><span class="op">.</span><span class="fu">dialect</span><span class="op">=</span>org<span class="op">.</span><span class="fu">hibernate</span><span class="op">.</span><span class="fu">dialect</span><span class="op">.</span><span class="fu">H2Dialect</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>spring<span class="op">.</span><span class="fu">jpa</span><span class="op">.</span><span class="fu">defer</span><span class="op">-</span>datasource<span class="op">-</span>initialization<span class="op">=</span><span class="kw">true</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a></span>
+<span id="cb2-17"><a href="#cb2-17"></a>#Remove banner</span>
+<span id="cb2-18"><a href="#cb2-18"></a>spring<span class="op">.</span><span class="fu">main</span><span class="op">.</span><span class="fu">banner</span><span class="op">-</span>mode<span class="op">=</span>off</span>
+<span id="cb2-19"><a href="#cb2-19"></a></span>
+<span id="cb2-20"><a href="#cb2-20"></a>#DDL</span>
+<span id="cb2-21"><a href="#cb2-21"></a>#create table <span class="fu">book_table</span> <span class="op">(</span>book_id bigint not <span class="kw">null</span><span class="op">,</span> author <span class="fu">varchar</span><span class="op">(</span><span class="dv">255</span><span class="op">),</span> isbn <span class="fu">varchar</span><span class="op">(</span><span class="dv">255</span><span class="op">),</span> pages integer not <span class="kw">null</span><span class="op">,</span> published_year integer<span class="op">,</span> book_title <span class="fu">varchar</span><span class="op">(</span><span class="dv">255</span><span class="op">),</span> primary <span class="fu">key</span> <span class="op">(</span>book_id<span class="op">))</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a>spring<span class="op">.</span><span class="fu">jpa</span><span class="op">.</span><span class="fu">hibernate</span><span class="op">.</span><span class="fu">ddl</span><span class="op">-</span>auto<span class="op">=</span>update</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This is a configuration file in the <code>application.properties</code> format for a Spring Boot application. It specifies various settings related to the H2 database, JPA, and the application’s server port.</p>
 <ul>
 <li>The <code>server.port</code> setting sets the port number for the application’s server to <code>8090.</code></li>
@@ -1501,45 +1516,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Create a new package and a new interface named <code>UserRepository</code> in the package with the following code:</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">model</span><span class="op">.</span><span class="im">User</span><span class="op">;</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">data</span><span class="op">.</span><span class="im">repository</span><span class="op">.</span><span class="im">CrudRepository</span><span class="op">;</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">public</span> <span class="kw">interface</span> UserRepository <span class="kw">extends</span> CrudRepository<span class="op">&lt;</span>User<span class="op">,</span> <span class="bu">String</span><span class="op">&gt;</span> <span class="op">{}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">model</span><span class="op">.</span><span class="im">User</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">data</span><span class="op">.</span><span class="im">repository</span><span class="op">.</span><span class="im">CrudRepository</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">public</span> <span class="kw">interface</span> UserRepository <span class="kw">extends</span> CrudRepository<span class="op">&lt;</span>User<span class="op">,</span> <span class="bu">String</span><span class="op">&gt;</span> <span class="op">{}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Create a User entity: create a new package and a new class named User in the package with the following code:</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">import</span> <span class="im">jakarta</span><span class="op">.</span><span class="im">persistence</span><span class="op">.</span><span class="im">Entity</span><span class="op">;</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">import</span> <span class="im">jakarta</span><span class="op">.</span><span class="im">persistence</span><span class="op">.</span><span class="im">Id</span><span class="op">;</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">import</span> <span class="im">jakarta</span><span class="op">.</span><span class="im">persistence</span><span class="op">.</span><span class="im">Table</span><span class="op">;</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">AllArgsConstructor</span><span class="op">;</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">Data</span><span class="op">;</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">NoArgsConstructor</span><span class="op">;</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="at">@Data</span> <span class="co">// generates getters, setters, equals, hashCode, and toString methods</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="at">@NoArgsConstructor</span> <span class="co">// generates a no-args constructor</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="at">@AllArgsConstructor</span> <span class="co">// generates a constructor with all arguments</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"User"</span><span class="op">)</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"USER_TABLE"</span><span class="op">)</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="kw">public</span> <span class="kw">class</span> User <span class="op">{</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a>    <span class="at">@Id</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a>    <span class="kw">private</span> <span class="bu">String</span> userId<span class="op">;</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a>    <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a>    <span class="kw">private</span> <span class="bu">String</span> address<span class="op">;</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a>    <span class="kw">private</span> <span class="dt">int</span> age<span class="op">;</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">import</span> <span class="im">jakarta</span><span class="op">.</span><span class="im">persistence</span><span class="op">.</span><span class="im">Entity</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">import</span> <span class="im">jakarta</span><span class="op">.</span><span class="im">persistence</span><span class="op">.</span><span class="im">Id</span><span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">import</span> <span class="im">jakarta</span><span class="op">.</span><span class="im">persistence</span><span class="op">.</span><span class="im">Table</span><span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">AllArgsConstructor</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">Data</span><span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">NoArgsConstructor</span><span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="at">@Data</span> <span class="co">// generates getters, setters, equals, hashCode, and toString methods</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="at">@NoArgsConstructor</span> <span class="co">// generates a no-args constructor</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="at">@AllArgsConstructor</span> <span class="co">// generates a constructor with all arguments</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"User"</span><span class="op">)</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"USER_TABLE"</span><span class="op">)</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="kw">public</span> <span class="kw">class</span> User <span class="op">{</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>    <span class="at">@Id</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>    <span class="kw">private</span> <span class="bu">String</span> userId<span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>    <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a>    <span class="kw">private</span> <span class="bu">String</span> address<span class="op">;</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a>    <span class="kw">private</span> <span class="dt">int</span> age<span class="op">;</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Add <code>userRepository.save(user);</code> in <code>createUser</code>, <code>userService</code>:</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a>  <span class="kw">public</span> User <span class="fu">createUser</span><span class="op">(</span>User user<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3"></a>        <span class="bu">String</span> newUserId <span class="op">=</span> Utils<span class="op">.</span><span class="fu">createUUID</span><span class="op">();</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>        user<span class="op">.</span><span class="fu">setUserId</span><span class="op">(</span>newUserId<span class="op">);</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a>        userRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>user<span class="op">);</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a></span>
-<span id="cb4-8"><a href="#cb4-8"></a>        <span class="cf">return</span> users<span class="op">.</span><span class="fu">put</span><span class="op">(</span>newUserId<span class="op">,</span> user<span class="op">);</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a></span>
-<span id="cb4-10"><a href="#cb4-10"></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a>  <span class="kw">public</span> User <span class="fu">createUser</span><span class="op">(</span>User user<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a>        <span class="bu">String</span> newUserId <span class="op">=</span> Utils<span class="op">.</span><span class="fu">createUUID</span><span class="op">();</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>        user<span class="op">.</span><span class="fu">setUserId</span><span class="op">(</span>newUserId<span class="op">);</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a>        userRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>user<span class="op">);</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a>        <span class="cf">return</span> users<span class="op">.</span><span class="fu">put</span><span class="op">(</span>newUserId<span class="op">,</span> user<span class="op">);</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="execute-project" class="level3 page-columns page-full" data-number="2.4">
 <h3 data-number="2.4" class="anchored" data-anchor-id="execute-project"><span class="header-section-number">2.4</span> Execute project</h3>
@@ -1566,11 +1581,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Set the HTTP method to <code>"POST"</code> and set the request URL to <code>"http://localhost:8090/api/user/createUser".</code></li>
 <li>Click on the “Body” tab and select the “raw” radio button. Set the request body to the following JSON object:</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">{</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>    <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"I AI"</span><span class="fu">,</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>    <span class="dt">"address"</span><span class="fu">:</span> <span class="st">"Isaac Asimov"</span><span class="fu">,</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>    <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">566</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">{</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>    <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"I AI"</span><span class="fu">,</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="dt">"address"</span><span class="fu">:</span> <span class="st">"Isaac Asimov"</span><span class="fu">,</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">566</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>This will create a <strong>new User entity</strong>, so click on the “Send” button to send the <code>request</code>.</li>
 <li>If the <code>request</code> is successful, you should receive a response with a status code of 201 Created and the User entity in the response body.</li>
@@ -1597,7 +1612,7 @@ Password: 1234</p>
 </figure>
 </div>
 <p>Enter the following SQL query:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> USER_TABLE;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> USER_TABLE;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This should return a result set containing the User entity you just created.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1621,9 +1636,21 @@ Password: 1234</p>
 <tbody>
 <tr class="odd">
 <td><a href="https://github.com/AlbertProfe/CifoJava2023/tree/4b1fd3c8f9be159c7b0f3f9f400ac3de737ac8e2/LibraryManagementRest" class="external">Library Management Rest H2 0.0</a></td>
-<td>add H2 to project: application.properties, <span class="citation" data-cites="Entity">@Entity</span>, <span class="citation" data-cites="UserRepository">@UserRepository</span>, POM</td>
+<td>add H2 to project: application.properties, <span class="citation" data-cites="Entity">@Entity</span>, <span class="citation" data-cites="UserRepository">@UserRepository</span>, POM <br> userRestController: createUser, getAllusers</td>
 <td><a href="../images/springboot/LibraryManagementRest-H2-3.png" width="80%">Basic Structure</a></td>
 <td><a href="../images/springboot/LibraryManagementRest-H2-4.png" width="80%">localhost:8090/api/user/createUser</a></td>
+</tr>
+<tr class="even">
+<td><a href="" class="external">Library Management Rest H2 0.1</a></td>
+<td>refactor user to H2, remove HashMap users and add ResponseEntity</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td><a href="" class="external">Library Management Rest H2 0.2</a></td>
+<td>refactor book to H2, remove HashMap books and add ResponseEntity</td>
+<td>-</td>
+<td>-</td>
 </tr>
 </tbody>
 </table>
@@ -1920,7 +1947,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":true,"selector":".lightbox"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":true,"openEffect":"zoom","descPosition":"bottom"});</script>
 
 
 
