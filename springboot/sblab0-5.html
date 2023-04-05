@@ -1359,11 +1359,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#configure-h2-db" id="toc-configure-h2-db" class="nav-link" data-scroll-target="#configure-h2-db"><span class="toc-section-number">2.1</span>  Configure H2 DB</a></li>
   <li><a href="#application.properties" id="toc-application.properties" class="nav-link" data-scroll-target="#application.properties"><span class="toc-section-number">2.2</span>  <code>application.properties</code></a></li>
-  <li><a href="#create-a-user-repository-and-user-entity" id="toc-create-a-user-repository-and-user-entity" class="nav-link" data-scroll-target="#create-a-user-repository-and-user-entity"><span class="toc-section-number">2.3</span>  Create a User repository and User entity</a></li>
-  <li><a href="#execute-project" id="toc-execute-project" class="nav-link" data-scroll-target="#execute-project"><span class="toc-section-number">2.4</span>  Execute project</a></li>
+  <li><a href="#ddl" id="toc-ddl" class="nav-link" data-scroll-target="#ddl"><span class="toc-section-number">2.3</span>  DDL</a></li>
+  <li><a href="#create-a-user-repository-and-user-entity" id="toc-create-a-user-repository-and-user-entity" class="nav-link" data-scroll-target="#create-a-user-repository-and-user-entity"><span class="toc-section-number">2.4</span>  Create a User repository and User entity</a></li>
+  <li><a href="#execute-project" id="toc-execute-project" class="nav-link" data-scroll-target="#execute-project"><span class="toc-section-number">2.5</span>  Execute project</a></li>
   </ul></li>
   <li><a href="#api-rest" id="toc-api-rest" class="nav-link" data-scroll-target="#api-rest"><span class="toc-section-number">3</span>  API Rest</a></li>
-  <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="toc-section-number">4</span>  Versions</a></li>
+  <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="toc-section-number">4</span>  Versions</a>
+  <ul>
+  <li><a href="#postman-apis" id="toc-postman-apis" class="nav-link" data-scroll-target="#postman-apis"><span class="toc-section-number">4.1</span>  Postman apis</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/springboot/sblab0-5.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1475,8 +1479,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="application.properties" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="application.properties"><span class="header-section-number">2.2</span> <code>application.properties</code></h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/application-properties.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="application properties file"><img src="../images/springboot/application-properties.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">application properties file</figcaption><p></p>
+</figure>
+</div>
 <ul>
-<li>Open the <code>application.properties</code> file located in the s<code>rc/main/resources</code> directory of your Spring Boot project.</li>
+<li>Open the <code>application.properties</code> file located in the <code>sc/main/resources</code> directory of your Spring Boot project.</li>
 <li>Add the following configuration to use the <code>H2 database</code>:</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a>server<span class="op">.</span><span class="fu">port</span><span class="op">=</span><span class="dv">8090</span></span>
@@ -1511,8 +1521,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>spring.jpa.hibernate.ddl-auto=update</code> instructs Hibernate to automatically update the database schema based on changes to JPA entity classes. In this case, it specifies a single table named book_table with columns for book_id, author, isbn, pages, published_year, and book_title.</li>
 </ul>
 </section>
-<section id="create-a-user-repository-and-user-entity" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="create-a-user-repository-and-user-entity"><span class="header-section-number">2.3</span> Create a User repository and User entity</h3>
+<section id="ddl" class="level3 page-columns page-full" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="ddl"><span class="header-section-number">2.3</span> DDL</h3>
+<p>DDL stands for <code>Data Definition Language</code>. <strong>It is a subset of SQL (Structured Query Language) used to define, modify and delete the structure of database objects</strong> like tables, indexes, views, and procedures.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>DDL commands are used to create or alter the schema of a database, which defines the layout of the data and the relationships between the tables. Some examples of DDL statements include CREATE TABLE, ALTER TABLE, DROP TABLE, CREATE INDEX, and CREATE PROCEDURE.</p>
+</div></div><div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<code>spring.jpa.hibernate.ddl-auto</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Specifically, the <code>spring.jpa.hibernate.ddl-auto</code> <strong>property</strong> is used to control how <strong>Hibernate generates or updates the database schema.</strong></p>
+<p>The available options are <code>create</code>, <code>create-drop</code>, <code>update</code>, <code>validate</code>, and <code>none</code>.</p>
+</div>
+</div>
+<p>The available options are:</p>
+<ul>
+<li>If set to <code>create</code>, Hibernate will create the database schema on application startup.</li>
+<li>If set to c<code>reate-drop</code>, Hibernate will create the schema on startup and drop it on shutdown.</li>
+<li>If set to <code>update</code>“, Hibernate will update the schema to match the entity mappings.</li>
+<li>If set to <code>validate</code>“, Hibernate will only validate the schema but not update it.</li>
+<li>And if set to <code>none</code>, Hibernate will not perform any schema management operations.</li>
+</ul>
+<p>It’s important to choose the appropriate value for this property based on your specific needs and deployment environment.</p>
+</section>
+<section id="create-a-user-repository-and-user-entity" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="create-a-user-repository-and-user-entity"><span class="header-section-number">2.4</span> Create a User repository and User entity</h3>
 <ul>
 <li>Create a new package and a new interface named <code>UserRepository</code> in the package with the following code:</li>
 </ul>
@@ -1556,8 +1596,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-9"><a href="#cb5-9"></a></span>
 <span id="cb5-10"><a href="#cb5-10"></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="execute-project" class="level3 page-columns page-full" data-number="2.4">
-<h3 data-number="2.4" class="anchored" data-anchor-id="execute-project"><span class="header-section-number">2.4</span> Execute project</h3>
+<section id="execute-project" class="level3 page-columns page-full" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="execute-project"><span class="header-section-number">2.5</span> Execute project</h3>
 <p>When the application starts, Spring Boot w<strong>ill automatically execute the DDL scripts</strong> specified in the schema.sql or data.sql files located in the src/main/resources directory.</p>
 <p>If these files are not present, Spring Boot <strong>will create an empty H2 database using the default settings specified in the <code>application.properties</code> file.</strong></p>
 
@@ -1565,7 +1605,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Once the database is created and configured, Spring Boot will use JPA to manage the database schema and entities, allowing you to easily perform CRUD operations and other database operations in your application.</p>
 </div></div><div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/LibraryManagementRest-H2-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Spring Boot Execution and DDL creating a empty H2 DB"><img src="../images/springboot/LibraryManagementRest-H2-2.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/springboot/LibraryManagementRest-H2-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Spring Boot Execution and DDL creating a empty H2 DB"><img src="../images/springboot/LibraryManagementRest-H2-2.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">Spring Boot Execution and DDL creating a empty H2 DB</figcaption><p></p>
 </figure>
 </div>
@@ -1592,7 +1632,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/LibraryManagementRest-H2-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Postman sends a request and shows the response of the created User object"><img src="../images/springboot/LibraryManagementRest-H2-4.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/springboot/LibraryManagementRest-H2-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Postman sends a request and shows the response of the created User object"><img src="../images/springboot/LibraryManagementRest-H2-4.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">Postman sends a request and shows the response of the created User object</figcaption><p></p>
 </figure>
 </div>
@@ -1607,7 +1647,7 @@ Password: 1234</p>
 </blockquote>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/LibraryManagementRest-H2-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="H2 console URL and data to enter"><img src="../images/springboot/LibraryManagementRest-H2-6.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/springboot/LibraryManagementRest-H2-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="H2 console URL and data to enter"><img src="../images/springboot/LibraryManagementRest-H2-6.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">H2 console URL and data to enter</figcaption><p></p>
 </figure>
 </div>
@@ -1616,7 +1656,7 @@ Password: 1234</p>
 <p>This should return a result set containing the User entity you just created.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/LibraryManagementRest-H2-5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="SELECT * FROM USER_TABLE;"><img src="../images/springboot/LibraryManagementRest-H2-5.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/springboot/LibraryManagementRest-H2-5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="SELECT * FROM USER_TABLE;"><img src="../images/springboot/LibraryManagementRest-H2-5.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">SELECT * FROM USER_TABLE;</figcaption><p></p>
 </figure>
 </div>
@@ -1666,6 +1706,34 @@ Password: 1234</p>
 </tr>
 </tbody>
 </table>
+<section id="postman-apis" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="postman-apis"><span class="header-section-number">4.1</span> Postman apis</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Domain</th>
+<th>Link</th>
+<th>Objects</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>books</td>
+<td><a href="https://restless-comet-543993.postman.co/workspace/CifoJava2023~7b247b84-dbad-483c-be9a-c0fe5d691413/collection/7473960-c1620d8c-c576-4e34-8af4-0c9f990b6dfa?action=share&amp;creator=7473960" class="external">postman link</a></td>
+<td><code>book</code></td>
+</tr>
+<tr class="even">
+<td>borrow</td>
+<td><a href="https://restless-comet-543993.postman.co/workspace/CifoJava2023~7b247b84-dbad-483c-be9a-c0fe5d691413/collection/7473960-b26c4d68-8937-49c1-97d1-fc4919283023?action=share&amp;creator=7473960" class="external">postman link</a></td>
+<td><code>borrow</code></td>
+</tr>
+<tr class="odd">
+<td>user</td>
+<td><a href="https://restless-comet-543993.postman.co/workspace/CifoJava2023~7b247b84-dbad-483c-be9a-c0fe5d691413/collection/7473960-ccbd64c8-014d-4c44-9707-619aee02eeb3?action=share&amp;creator=7473960" class="external">postman link</a></td>
+<td><code>user</code></td>
+</tr>
+</tbody>
+</table>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1685,6 +1753,7 @@ Password: 1234</p>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1959,7 +2028,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom","loop":true,"selector":".lightbox"});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":true,"descPosition":"bottom"});</script>
 
 
 
