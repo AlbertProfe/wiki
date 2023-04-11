@@ -2545,14 +2545,14 @@
     "href": "springboot/sblab0-6.html",
     "title": "Lab#SB00-6: Rest & MongoDB",
     "section": "",
-    "text": "📘 Spring Boot Lab#SB00-5: API Rest and NoSQL-MongoDB"
+    "text": "📘 Spring Boot Lab#SB00-5: API Rest and NoSQL-MongoDB\nConnecting Spring Boot entity book to MongoDB Atlas can be completed in a few steps.\nTo connect Spring Boot entity book to MongoDB Atlas, create an account, cluster and database user on MongoDB Atlas. Add MongoDB dependency, configure application.properties and create a Book entity and repository.\nFinally, use the repository to perform CRUD operations on your books collection."
   },
   {
     "objectID": "springboot/sblab0-6.html#overview",
     "href": "springboot/sblab0-6.html#overview",
     "title": "Lab#SB00-6: Rest & MongoDB",
-    "section": "1 Overview",
-    "text": "1 Overview\n\n\n\n\n\n  Lab#SB00-5: Rest & JPA-H2 \n\n\n\n  top \n\n\n\n Lab#SB01-1: DataBase"
+    "section": "1 Overview:",
+    "text": "1 Overview:\nTo connect your Spring Boot entity book to MongoDB Atlas, you can follow these steps:\n\nCreate a MongoDB Atlas account: First, you need to create an account on MongoDB Atlas. You can sign up for a free account with a limit of 512 MB storage.\nCreate a new project: After logging in, create a new project and give it a name.\nCreate a new cluster: In the project dashboard, click on the “Build a New Cluster” button. Choose a provider, region, and the cluster tier that suits your requirements. Configure your cluster and click “Create Cluster” to start building your cluster.\nCreate a database user and IP permission: Once the cluster is ready, create a database user with appropriate permissions.\nGet connection string: After creating a database user, you will get a connection string that you can use to connect to your MongoDB Atlas cluster. Copy the connection string to use it later.\nAdd MongoDB dependency: In your Spring Boot project, add the MongoDB dependency in the pom.xml file:\n\n<dependency>\n   <groupId>org.springframework.boot</groupId>\n   <artifactId>spring-boot-starter-data-mongodb</artifactId>\n</dependency>\n\nConfigure application.properties: In the application.properties file, add the following properties:\n\nspring.data.mongodb.uri=mongodb+srv://<username>:<password>@<clustername>.mongodb.net/<dbname>?retryWrites=true&w=majority\nspring.data.mongodb.database=<dbname>\nReplace , , , and  with your own values.\n\nCreate Book Entity: Create a Book entity class with annotations.\n\n@Document(collection = \"books\")\npublic class Book {\n    @Id\n    private String id;\n    private String title;\n    private String author;\n    // getters and setters\n}\n\nCreate a Book repository: Create a repository interface that extends MongoRepository<Book, String>:\n\n\npublic interface BookRepository extends MongoRepository<Book, String> {\n}\n\nUse the Book repository: You can use the Book repository to perform CRUD operations on your books collection.\n\n@Service\npublic class BookService {\n    @Autowired\n    private BookRepository bookRepository;\n\n    public List<Book> getAllBooks() {\n        return bookRepository.findAll();\n    }\n\n    public void addBook(Book book) {\n        bookRepository.save(book);\n    }\n\n    public void deleteBook(String id) {\n        bookRepository.deleteById(id);\n    }\n}"
   },
   {
     "objectID": "springboot/sblab4.html",
@@ -5108,5 +5108,68 @@
     "title": "Lab#SB06-1: employeeCourse",
     "section": "4 How layout works",
     "text": "4 How layout works\n\n\n\nHow layout works\n\n\n\n\n\n\n\n  Lab#SB05-1: Advanced strategies \n\n\n\n  top \n\n\n\n Spring Boot Resources"
+  },
+  {
+    "objectID": "springboot/sblab0-6.html#ver",
+    "href": "springboot/sblab0-6.html#ver",
+    "title": "Lab#SB00-6: Rest & MongoDB",
+    "section": "2 Ver",
+    "text": "2 Ver\n\n\n\n\n\n  Lab#SB00-5: Rest & JPA-H2 \n\n\n\n  top \n\n\n\n Lab#SB01-1: DataBase"
+  },
+  {
+    "objectID": "springboot/sblab0-6.html#versions",
+    "href": "springboot/sblab0-6.html#versions",
+    "title": "Lab#SB00-6: Rest & MongoDB",
+    "section": "4 Versions",
+    "text": "4 Versions\n\n\n\n\n\n  Lab#SB00-5: Rest & JPA-H2 \n\n\n\n  top \n\n\n\n Lab#SB01-1: DataBase"
+  },
+  {
+    "objectID": "springboot/sblab0-6.html#overview-book",
+    "href": "springboot/sblab0-6.html#overview-book",
+    "title": "Lab#SB00-6: Rest & MongoDB",
+    "section": "1 Overview: Book",
+    "text": "1 Overview: Book\nTo connect your Spring Boot entity book to MongoDB Atlas, you can follow these steps:\n\nCreate a MongoDB Atlas account: First, you need to create an account on MongoDB Atlas. You can sign up for a free account with a limit of 512 MB storage.\nCreate a new project: After logging in, create a new project and give it a name.\nCreate a new cluster: In the project dashboard, click on the “Build a New Cluster” button. Choose a provider, region, and the cluster tier that suits your requirements. Configure your cluster and click “Create Cluster” to start building your cluster.\nCreate a database user and IP permission: Once the cluster is ready, create a database user with appropriate permissions.\nGet connection string: After creating a database user, you will get a connection string that you can use to connect to your MongoDB Atlas cluster. Copy the connection string to use it later.\nAdd MongoDB dependency: In your Spring Boot project, add the MongoDB dependency in the pom.xml file:\n\n<dependency>\n   <groupId>org.springframework.boot</groupId>\n   <artifactId>spring-boot-starter-data-mongodb</artifactId>\n</dependency>\n\nConfigure application.properties: In the application.properties file, add the following properties:\n\nspring.data.mongodb.uri=mongodb+srv://<username>:<password>@<clustername>.mongodb.net/<dbname>?retryWrites=true&w=majority\nspring.data.mongodb.database=<dbname>\nReplace , , , and  with your own values.\n\nCreate Book Entity: Create a Book entity class with annotations.\n\n@Document(collection = \"books\")\npublic class Book {\n    @Id\n    private String id;\n    private String title;\n    private String author;\n    // getters and setters\n}\n\nCreate a Book repository: Create a repository interface that extends MongoRepository<Book, String>:\n\n\npublic interface BookRepository extends MongoRepository<Book, String> {\n}\n\nUse the Book repository: You can use the Book repository to perform CRUD operations on your books collection.\n\n@Service\npublic class BookService {\n    @Autowired\n    private BookRepository bookRepository;\n\n    public List<Book> getAllBooks() {\n        return bookRepository.findAll();\n    }\n\n    public void addBook(Book book) {\n        bookRepository.save(book);\n    }\n\n    public void deleteBook(String id) {\n        bookRepository.deleteById(id);\n    }\n}"
+  },
+  {
+    "objectID": "springboot/sblab0-6.html#section",
+    "href": "springboot/sblab0-6.html#section",
+    "title": "Lab#SB00-6: Rest & MongoDB",
+    "section": "2 `",
+    "text": "2 `"
+  },
+  {
+    "objectID": "springboot/sblab0-6.html#book",
+    "href": "springboot/sblab0-6.html#book",
+    "title": "Lab#SB00-6: Rest & MongoDB",
+    "section": "2 Book",
+    "text": "2 Book"
+  },
+  {
+    "objectID": "springboot/sblab0-6.html#bookimage",
+    "href": "springboot/sblab0-6.html#bookimage",
+    "title": "Lab#SB00-6: Rest & MongoDB",
+    "section": "2 BookImage",
+    "text": "2 BookImage"
+  },
+  {
+    "objectID": "springboot/sblab0-6.html#bookimage-mongodb",
+    "href": "springboot/sblab0-6.html#bookimage-mongodb",
+    "title": "Lab#SB00-6: Rest & MongoDB",
+    "section": "3 BookImage mongoDB",
+    "text": "3 BookImage mongoDB"
+  },
+  {
+    "objectID": "springboot/sblab0-6.html#example-book",
+    "href": "springboot/sblab0-6.html#example-book",
+    "title": "Lab#SB00-6: Rest & MongoDB",
+    "section": "2 Example: Book",
+    "text": "2 Example: Book\nTo connect your Spring Boot entity book to MongoDB Atlas, you can follow these steps:\n\nCreate a MongoDB Atlas account: First, you need to create an account on MongoDB Atlas. You can sign up for a free account with a limit of 512 MB storage.\nCreate a new project: After logging in, create a new project and give it a name.\nCreate a new cluster: In the project dashboard, click on the “Build a New Cluster” button. Choose a provider, region, and the cluster tier that suits your requirements. Configure your cluster and click “Create Cluster” to start building your cluster.\nCreate a database user and IP permission: Once the cluster is ready, create a database user with appropriate permissions and give network access (add your IP to IP Access List).\nGet connection string: After creating a database user, you will get a connection string that you can use to connect to your MongoDB Atlas cluster. Copy the connection string to use it later.\nAdd MongoDB dependency: In your Spring Boot project, add the MongoDB dependency in the pom.xml file:\n\n<dependency>\n   <groupId>org.springframework.boot</groupId>\n   <artifactId>spring-boot-starter-data-mongodb</artifactId>\n</dependency>\n\nConfigure application.properties: In the application.properties file, add the following properties:\n\nspring.data.mongodb.uri=mongodb+srv://<username>:<password>@<clustername>.mongodb.net/<dbname>?retryWrites=true&w=majority\nspring.data.mongodb.database=<dbname>\nReplace <username>, <password>, <clustername>, and <dbname> with your own values.\n\nCreate Book Document: Create a Book entity class with annotations.\n\n@Document(collection = \"books\")\npublic class Book {\n    @Id\n    private String id;\n    private String title;\n    private String author;\n    // getters and setters\n}\n\nCreate a Book repository: Create a repository interface that extends MongoRepository<Book, String>:\n\npublic interface BookRepository extends MongoRepository<Book, String> {\n}\n\nUse the Book repository: You can use the Book repository to perform CRUD operations on your books collection.\n\n@Service\npublic class BookService {\n    @Autowired\n    private BookRepository bookRepository;\n\n    public List<Book> getAllBooks() {\n        return bookRepository.findAll();\n    }\n\n    public void addBook(Book book) {\n        bookRepository.save(book);\n    }\n\n    public void deleteBook(String id) {\n        bookRepository.deleteById(id);\n    }\n}"
+  },
+  {
+    "objectID": "springboot/sblab0-6.html#references",
+    "href": "springboot/sblab0-6.html#references",
+    "title": "Lab#SB00-6: Rest & MongoDB",
+    "section": "1 References",
+    "text": "1 References\n\nSpring Boot Data\nAccessing Data with MongoDB\nSpring Boot Integration with MongoDB Tutorial\nJava - Mapping POJOs\nMongoDB Atlas\nLibrary7"
   }
 ]
