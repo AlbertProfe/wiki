@@ -106,6 +106,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -133,7 +136,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 
 <div id="quarto-search-results"></div>
@@ -1372,13 +1375,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references"><span class="toc-section-number">1</span>  References</a></li>
   <li><a href="#example-book" id="toc-example-book" class="nav-link" data-scroll-target="#example-book"><span class="toc-section-number">2</span>  Example: <code>Book</code></a></li>
-  <li><a href="#bookimage-mongodb" id="toc-bookimage-mongodb" class="nav-link" data-scroll-target="#bookimage-mongodb"><span class="toc-section-number">3</span>  <code>BookImage</code> mongoDB</a></li>
-  <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="toc-section-number">4</span>  Versions</a></li>
+  <li><a href="#librarymanagementrest-mongodb" id="toc-librarymanagementrest-mongodb" class="nav-link" data-scroll-target="#librarymanagementrest-mongodb"><span class="toc-section-number">3</span>  LibraryManagementRest: mongoDB</a>
+  <ul>
+  <li><a href="#folder-tree" id="toc-folder-tree" class="nav-link" data-scroll-target="#folder-tree"><span class="toc-section-number">3.1</span>  folder-tree</a></li>
+  <li><a href="#mongodb-string-connection" id="toc-mongodb-string-connection" class="nav-link" data-scroll-target="#mongodb-string-connection"><span class="toc-section-number">3.2</span>  mongoDB: <code>string connection</code></a></li>
+  <li><a href="#application.properties" id="toc-application.properties" class="nav-link" data-scroll-target="#application.properties"><span class="toc-section-number">3.3</span>  application.properties</a></li>
+  <li><a href="#document" id="toc-document" class="nav-link" data-scroll-target="#document"><span class="toc-section-number">3.4</span>  <span class="citation" data-cites="Document">@Document</span></a></li>
+  <li><a href="#restcontroller" id="toc-restcontroller" class="nav-link" data-scroll-target="#restcontroller"><span class="toc-section-number">3.5</span>  <span class="citation" data-cites="RestController">@RestController</span></a></li>
+  <li><a href="#repository" id="toc-repository" class="nav-link" data-scroll-target="#repository"><span class="toc-section-number">3.6</span>  <span class="citation" data-cites="Repository">@Repository</span></a></li>
+  <li><a href="#api-rest-postman" id="toc-api-rest-postman" class="nav-link" data-scroll-target="#api-rest-postman"><span class="toc-section-number">3.7</span>  API Rest: postman</a></li>
+  </ul></li>
+  <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="toc-section-number">4</span>  Versions</a>
+  <ul>
+  <li><a href="#postman-apis" id="toc-postman-apis" class="nav-link" data-scroll-target="#postman-apis"><span class="toc-section-number">4.1</span>  Postman apis</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/springboot/sblab0-6.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -1417,7 +1432,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tuesday, April 11, 2023</p>
+      <p class="date-modified">Wednesday, April 12, 2023</p>
     </div>
   </div>
     
@@ -1433,6 +1448,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Finally, use the repository to perform CRUD operations on your books collection.</p>
 </div>
 <p><br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/mongodb-springboot-rest.png" class="lightbox" title="Basic architecture MongoDB Spring Boot Rest" data-gallery="quarto-lightbox-gallery-1"><img src="../images/springboot/mongodb-springboot-rest.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
+<p></p><figcaption class="figure-caption">Basic architecture MongoDB Spring Boot Rest</figcaption><p></p>
+</figure>
+</div>
 <section id="references" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="references"><span class="header-section-number">1</span> References</h2>
 <ul>
@@ -1481,7 +1502,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">public</span> <span class="kw">interface</span> BookRepository <span class="kw">extends</span> MongoRepository<span class="op">&lt;</span><span class="bu">Book</span><span class="op">,</span> <span class="bu">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol type="1">
+<ol start="10" type="1">
 <li>Use the <code>Book</code> <code>repository</code>: You can use the <code>Book</code> <code>repository</code> to perform CRUD operations on your books collection.</li>
 </ol>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="at">@Service</span></span>
@@ -1502,11 +1523,251 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-16"><a href="#cb5-16"></a>    <span class="op">}</span></span>
 <span id="cb5-17"><a href="#cb5-17"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="bookimage-mongodb" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="bookimage-mongodb"><span class="header-section-number">3</span> <code>BookImage</code> mongoDB</h2>
+<section id="librarymanagementrest-mongodb" class="level2 page-columns page-full" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="librarymanagementrest-mongodb"><span class="header-section-number">3</span> LibraryManagementRest: mongoDB</h2>
+<section id="folder-tree" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="folder-tree"><span class="header-section-number">3.1</span> folder-tree</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-0.png" class="lightbox" title="Folder-tree bookImage" data-gallery="quarto-lightbox-gallery-2"><img src="../images/springboot/LibraryManagementRest-vmongodb-0.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Folder-tree <code>bookImage</code></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="mongodb-string-connection" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="mongodb-string-connection"><span class="header-section-number">3.2</span> mongoDB: <code>string connection</code></h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-1.png" class="lightbox" title="Create account and cluster" data-gallery="quarto-lightbox-gallery-3"><img src="../images/springboot/LibraryManagementRest-vmongodb-1.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Create account and cluster</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-2.png" class="lightbox" title="ClusterTest where we will create our db" data-gallery="quarto-lightbox-gallery-4"><img src="../images/springboot/LibraryManagementRest-vmongodb-2.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">ClusterTest where we will create our db</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-3.png" class="lightbox" title="Create DB" data-gallery="quarto-lightbox-gallery-5"><img src="../images/springboot/LibraryManagementRest-vmongodb-3.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Create DB</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-4.png" class="lightbox" title="DB and Collection name" data-gallery="quarto-lightbox-gallery-6"><img src="../images/springboot/LibraryManagementRest-vmongodb-4.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">DB and Collection name</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-5.png" class="lightbox" title="Just created LibraryManagmentRest DB" data-gallery="quarto-lightbox-gallery-7"><img src="../images/springboot/LibraryManagementRest-vmongodb-5.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Just created LibraryManagmentRest DB</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-6.png" class="lightbox" title="Creating user to access DB" data-gallery="quarto-lightbox-gallery-8"><img src="../images/springboot/LibraryManagementRest-vmongodb-6.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Creating user to access DB</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-7.png" class="lightbox" title="Add new user to db" data-gallery="quarto-lightbox-gallery-9"><img src="../images/springboot/LibraryManagementRest-vmongodb-7.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Add new user to db</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-8.png" class="lightbox" title="Network access" data-gallery="quarto-lightbox-gallery-10"><img src="../images/springboot/LibraryManagementRest-vmongodb-8.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Network access</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-9.png" class="lightbox" title="Connect mongoDB to app: string connection" data-gallery="quarto-lightbox-gallery-11"><img src="../images/springboot/LibraryManagementRest-vmongodb-9.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Connect mongoDB to app: string connection</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-10.png" class="lightbox" title="Connect to Clustertest: connect your application" data-gallery="quarto-lightbox-gallery-12"><img src="../images/springboot/LibraryManagementRest-vmongodb-10.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Connect to Clustertest: connect your application</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-11.png" class="lightbox" title="Connect to Clustertest: string connection" data-gallery="quarto-lightbox-gallery-13"><img src="../images/springboot/LibraryManagementRest-vmongodb-11.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Connect to Clustertest: string connection</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="application.properties" class="level3 page-columns page-full" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="application.properties"><span class="header-section-number">3.3</span> application.properties</h3>
+<p>To connect a Spring Boot application to MongoDB, you can use the spring.data.mongodb.uri property in the application.properties file to specify the connection string.</p>
+<p>The connection string typically consists of the username, password, host, port, and database name.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a>spring<span class="op">.</span><span class="fu">data</span><span class="op">.</span><span class="fu">mongodb</span><span class="op">.</span><span class="fu">uri</span><span class="op">=</span>mongodb<span class="op">+</span>srv<span class="op">:</span><span class="co">//cifo:1234@clustertest.0h8fd.mongodb.net/LibraryManagementRest</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>spring<span class="op">.</span><span class="fu">data</span><span class="op">.</span><span class="fu">mongodb</span><span class="op">.</span><span class="fu">database</span><span class="op">=</span>LibraryManagementRest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>You can also use a connection string with additional options like SSL, authentication mechanisms, and connection pooling. By placing the connection string in the application.properties file, you can easily configure the connection and change it without modifying the source code.</p>
+</div></div><p>The Spring Boot MongoDB starter will automatically use the connection string to create a MongoDB client and configure the data source.</p>
+</section>
+<section id="document" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="document"><span class="header-section-number">3.4</span> <span class="citation" data-cites="Document">@Document</span></h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="at">@Data</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="at">@Document</span><span class="op">(</span>collection <span class="op">=</span> <span class="st">"bookImage"</span><span class="op">)</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">public</span> <span class="kw">class</span> BookImage <span class="op">{</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="at">@Id</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="kw">private</span> <span class="bu">String</span> id<span class="op">;</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>    <span class="kw">private</span> Binary image<span class="op">;</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="restcontroller" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="restcontroller"><span class="header-section-number">3.5</span> <span class="citation" data-cites="RestController">@RestController</span></h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a><span class="at">@RestController</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"api/image"</span><span class="op">)</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">public</span> <span class="kw">class</span> BookImageRestController <span class="op">{</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="at">@Autowired</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>    BookImageRepository bookImageRepository<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a></span>
+<span id="cb8-8"><a href="#cb8-8"></a>    <span class="at">@PostMapping</span><span class="op">(</span><span class="st">"upload"</span><span class="op">)</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>    <span class="kw">public</span> BookImage <span class="fu">saveBookImage</span><span class="op">(</span> <span class="at">@RequestParam</span> <span class="bu">String</span> name<span class="op">,</span> <span class="at">@RequestParam</span> MultipartFile file<span class="op">)</span> <span class="kw">throws</span> <span class="bu">IOException</span> <span class="op">{</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>        BookImage bookImage  <span class="op">=</span> <span class="kw">new</span> <span class="fu">BookImage</span><span class="op">();</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>        <span class="co">//bookImage.setId(Utils.createUUID());</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>        bookImage<span class="op">.</span><span class="fu">setName</span><span class="op">(</span>name<span class="op">);</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>        bookImage<span class="op">.</span><span class="fu">setImage</span><span class="op">(</span> <span class="kw">new</span> <span class="fu">Binary</span><span class="op">(</span>file<span class="op">.</span><span class="fu">getBytes</span><span class="op">()</span> <span class="op">));</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a></span>
+<span id="cb8-15"><a href="#cb8-15"></a>        bookImageRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>bookImage<span class="op">);</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a></span>
+<span id="cb8-17"><a href="#cb8-17"></a>        <span class="cf">return</span> bookImage<span class="op">;</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a></span>
+<span id="cb8-19"><a href="#cb8-19"></a>    <span class="op">}</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a></span>
+<span id="cb8-21"><a href="#cb8-21"></a>    <span class="at">@GetMapping</span><span class="op">(</span><span class="st">"/getData"</span><span class="op">)</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">getDataBookImage</span><span class="op">(</span><span class="at">@RequestParam</span>  <span class="bu">String</span> id<span class="op">){</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a></span>
+<span id="cb8-24"><a href="#cb8-24"></a>        Optional<span class="op">&lt;</span>BookImage<span class="op">&gt;</span> bookImage <span class="op">=</span> bookImageRepository<span class="op">.</span><span class="fu">findById</span><span class="op">(</span>id<span class="op">);</span></span>
+<span id="cb8-25"><a href="#cb8-25"></a>        <span class="bu">Encoder</span> encoder <span class="op">=</span> Base64<span class="op">.</span><span class="fu">getEncoder</span><span class="op">();</span></span>
+<span id="cb8-26"><a href="#cb8-26"></a></span>
+<span id="cb8-27"><a href="#cb8-27"></a>        <span class="cf">return</span> encoder<span class="op">.</span><span class="fu">encodeToString</span><span class="op">(</span> bookImage<span class="op">.</span><span class="fu">get</span><span class="op">().</span><span class="fu">getImage</span><span class="op">().</span><span class="fu">getData</span><span class="op">()</span> <span class="op">);</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a></span>
+<span id="cb8-29"><a href="#cb8-29"></a>    <span class="op">}</span></span>
+<span id="cb8-30"><a href="#cb8-30"></a></span>
+<span id="cb8-31"><a href="#cb8-31"></a>    <span class="at">@GetMapping</span><span class="op">(</span><span class="st">"/getImage"</span><span class="op">)</span></span>
+<span id="cb8-32"><a href="#cb8-32"></a>    <span class="kw">public</span> ResponseEntity<span class="op">&lt;</span><span class="dt">byte</span><span class="op">[]&gt;</span> <span class="fu">getBookImage</span><span class="op">(</span><span class="at">@RequestParam</span> <span class="bu">String</span> id<span class="op">){</span></span>
+<span id="cb8-33"><a href="#cb8-33"></a></span>
+<span id="cb8-34"><a href="#cb8-34"></a>        Optional<span class="op">&lt;</span>BookImage<span class="op">&gt;</span> bookImage <span class="op">=</span> bookImageRepository<span class="op">.</span><span class="fu">findById</span><span class="op">(</span>id<span class="op">);</span></span>
+<span id="cb8-35"><a href="#cb8-35"></a>        HttpHeaders headers <span class="op">=</span> <span class="kw">new</span> <span class="fu">HttpHeaders</span><span class="op">();</span></span>
+<span id="cb8-36"><a href="#cb8-36"></a>        headers<span class="op">.</span><span class="fu">setContentType</span><span class="op">(</span>MediaType<span class="op">.</span><span class="fu">IMAGE_JPEG</span><span class="op">);</span></span>
+<span id="cb8-37"><a href="#cb8-37"></a></span>
+<span id="cb8-38"><a href="#cb8-38"></a>        <span class="cf">return</span> <span class="kw">new</span> ResponseEntity<span class="op">&lt;&gt;(</span> bookImage<span class="op">.</span><span class="fu">get</span><span class="op">().</span><span class="fu">getImage</span><span class="op">().</span><span class="fu">getData</span><span class="op">(),</span> headers<span class="op">,</span> HttpStatus<span class="op">.</span><span class="fu">OK</span> <span class="op">);</span></span>
+<span id="cb8-39"><a href="#cb8-39"></a></span>
+<span id="cb8-40"><a href="#cb8-40"></a>    <span class="op">}</span></span>
+<span id="cb8-41"><a href="#cb8-41"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="repository" class="level3" data-number="3.6">
+<h3 data-number="3.6" class="anchored" data-anchor-id="repository"><span class="header-section-number">3.6</span> <span class="citation" data-cites="Repository">@Repository</span></h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a><span class="at">@Repository</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">public</span> <span class="kw">interface</span> BookImageRepository <span class="kw">extends</span> MongoRepository<span class="op">&lt;</span>BookImage<span class="op">,</span> <span class="bu">String</span><span class="op">&gt;</span> <span class="op">{}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="api-rest-postman" class="level3" data-number="3.7">
+<h3 data-number="3.7" class="anchored" data-anchor-id="api-rest-postman"><span class="header-section-number">3.7</span> API Rest: postman</h3>
+<ul>
+<li>Open Postman and <strong>create a new request.</strong></li>
+<li>Set the HTTP method to <code>"POST"</code> and set the request URL to <code>"http://localhost:8090/api/image/upload".</code></li>
+<li>Click on the “Body” tab and select the “form-data” radio button. Set the request body to the following key-value:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-14.png" class="lightbox" title="key-value to send an Image" data-gallery="quarto-lightbox-gallery-14"><img src="../images/springboot/LibraryManagementRest-vmongodb-14.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">key-value to send an Image</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>This will create a <strong>new bookImage document</strong>, so click on the “Send” button to send the <code>request</code>.</li>
+<li>If the <code>request</code> is successful, you should receive a response with a status code of 201 Created and the bookImage document in the response body.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-12.png" class="lightbox" title="Request Post create bookImage" data-gallery="quarto-lightbox-gallery-15"><img src="../images/springboot/LibraryManagementRest-vmongodb-12.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Request Post create bookImage</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-13.png" class="lightbox" title="MongoDB collection document created" data-gallery="quarto-lightbox-gallery-16"><img src="../images/springboot/LibraryManagementRest-vmongodb-13.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">MongoDB collection document created</figcaption><p></p>
+</figure>
+</div>
+</section>
 </section>
 <section id="versions" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="versions"><span class="header-section-number">4</span> Versions</h2>
+<p><strong>endpoint</strong> example: <code>http://localhost:8090/api/image/upload</code></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Code Version</th>
+<th>Commit</th>
+<th>Folder-Tree</th>
+<th>Screeshoots</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/AlbertProfe/CifoJava2023/tree/d56d89b50179209547097c36a2da977a22d33875" class="external">Library Management Rest MongoDB 0.0</a></td>
+<td>add MongoDB to project: application.properties, <span class="citation" data-cites="Document">@Document</span>, <span class="citation" data-cites="Repository">@Repository</span>, POM <br> BookImageRestController: <code>upload</code>, <code>getImage</code>, <code>getDataImage</code></td>
+<td><a href="../images/springboot/LibraryManagementRest-vmongodb-0.png" width="60%">Folder-tree <code>bookImage</code></a></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="postman-apis" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="postman-apis"><span class="header-section-number">4.1</span> Postman apis</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Domain</th>
+<th>Link</th>
+<th>Objects</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>books</td>
+<td><a href="https://restless-comet-543993.postman.co/workspace/CifoJava2023~7b247b84-dbad-483c-be9a-c0fe5d691413/collection/7473960-c1620d8c-c576-4e34-8af4-0c9f990b6dfa?action=share&amp;creator=7473960" class="external">postman link</a></td>
+<td><code>book</code></td>
+</tr>
+<tr class="even">
+<td>borrow</td>
+<td><a href="https://restless-comet-543993.postman.co/workspace/CifoJava2023~7b247b84-dbad-483c-be9a-c0fe5d691413/collection/7473960-b26c4d68-8937-49c1-97d1-fc4919283023?action=share&amp;creator=7473960" class="external">postman link</a></td>
+<td><code>borrow</code></td>
+</tr>
+<tr class="odd">
+<td>user</td>
+<td><a href="https://restless-comet-543993.postman.co/workspace/CifoJava2023~7b247b84-dbad-483c-be9a-c0fe5d691413/collection/7473960-ccbd64c8-014d-4c44-9707-619aee02eeb3?action=share&amp;creator=7473960" class="external">postman link</a></td>
+<td><code>user</code></td>
+</tr>
+<tr class="even">
+<td>bookImage</td>
+<td><a href="https://restless-comet-543993.postman.co/workspace/CifoJava2023~7b247b84-dbad-483c-be9a-c0fe5d691413/collection/7473960-ccbd64c8-014d-4c44-9707-619aee02eeb3?action=share&amp;creator=7473960" class="external">postman link</a></td>
+<td><code>bookImage</code></td>
+</tr>
+</tbody>
+</table>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1526,6 +1787,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1800,6 +2062,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"loop":true,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});</script>
 
 
 
