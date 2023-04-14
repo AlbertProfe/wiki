@@ -1754,8 +1754,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p></p><figcaption class="figure-caption">Spring Boot using two very diferent data-soruces</figcaption><p></p>
 </figure>
 </div>
-<p>We are going to update <code>upload</code> method, the below code is retrieving a book by its ID from a book repository. It then checks if the book exists and sets the book ID for a book image. If the book exists, it saves the book image to the book image repository and adds the book image ID to the book’s list of image IDs, and then saves the updated book.</p>
-<p>Sharing the IDs is relevant for ensuring that the book and its associated images are properly linked and can be retrieved later.</p>
+<p>We are going to update <code>upload</code> method: both classes, <code>Book</code> and <code>BookImage</code> <strong>will share ids in a one-to-many relationship.</strong></p>
+<ul>
+<li><code>Book</code> will be stored at <strong>local H2 SQL DB</strong>.</li>
+<li><code>BookImage</code> will be stores at <strong>MongoDB Cloud noSQL DB.</strong></li>
+</ul>
+<p>The below code is designed to:</p>
+<ul>
+<li>retrieve a book by its ID from a book repository.</li>
+<li>It then checks if the book exists and sets the book ID for a book image.</li>
+<li>If the book exists, it saves the book image to the book image repository and adds the book image ID to the book’s list of image IDs,</li>
+<li>and then saves the updated book.</li>
+</ul>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+upload image updated
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>method Create CRUD API Rest <code>public BookImage saveBookImage()</code> on <span class="citation" data-cites="RestController">@RestController</span> <code>public class BookImageRestController{}</code>:</p>
+<p><a href="https://github.com/AlbertProfe/CifoJava2023/blob/44b54624a5a156edabe8095d0a9dc6bf28329591/LibraryManagementRest/src/main/java/com/example/myFirstSpring/restcontroller/BookImageRestController.java#L37" class="external">upload updated</a></p>
+</div>
+</div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1"></a>  <span class="co">// Finds a book in the book repository by its ID, if present.</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a>  Optional<span class="op">&lt;</span><span class="bu">Book</span><span class="op">&gt;</span> book <span class="op">=</span> bookRepository<span class="op">.</span><span class="fu">findById</span><span class="op">(</span>bookId<span class="op">);</span></span>
 <span id="cb10-3"><a href="#cb10-3"></a>  <span class="co">// Checks if the book exists and sets the book ID for the book image.</span></span>
@@ -1767,6 +1791,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-9"><a href="#cb10-9"></a>  <span class="co">// Adds the book image ID to the book's list of image IDs and saves the updated book.</span></span>
 <span id="cb10-10"><a href="#cb10-10"></a>  <span class="bu">Book</span> bookUpdated <span class="op">=</span> book<span class="op">.</span><span class="fu">get</span><span class="op">().</span><span class="fu">addBookImageId</span><span class="op">(</span>bookImageSaved<span class="op">.</span><span class="fu">getId</span><span class="op">());</span></span>
 <span id="cb10-11"><a href="#cb10-11"></a>  bookRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>bookUpdated<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Open Postman and <strong>create a new request.</strong></li>
+<li>Set the HTTP method to <code>"POST"</code> and set the request URL to <code>"http://localhost:8090/api/image/upload".</code></li>
+<li>Click on the “Body” tab and select the “form-data” radio button. Set the request body to the following key-value for both, <code>name</code> and <code>bookId</code>:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-17.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20" title="upload image with bookId @RequestParam"><img src="../images/springboot/LibraryManagementRest-vmongodb-17.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">upload image with bookId <span class="citation" data-cites="RequestParam">@RequestParam</span></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/LibraryManagementRest-vmongodb-18.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21" title="getAll bookImages and find out the previous bookId with the bookImageId related"><img src="../images/springboot/LibraryManagementRest-vmongodb-18.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">getAll bookImages and find out the previous bookId with the bookImageId related</figcaption><p></p>
+</figure>
+</div>
 </section>
 </section>
 <section id="versions" class="level2" data-number="5">
@@ -2135,7 +2176,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":true,"descPosition":"bottom","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":true,"openEffect":"zoom"});</script>
 
 
 
