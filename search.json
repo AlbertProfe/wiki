@@ -4916,9 +4916,9 @@
   {
     "objectID": "reactjs/rjslab2.html",
     "href": "reactjs/rjslab2.html",
-    "title": "React JS: Lab#RE02-1",
+    "title": "Lab#RE02-1: Router & Hooks",
     "section": "",
-    "text": "📘 lab\n\n\nAbout this site\n\n\n\n\n\n  React JS: Lab#RE01-1 \n\n\n\n  top \n\n\n\n React JS: Lab#RE03-1"
+    "text": "📘 React JS Lab#RE02-1: Router & Hooks\nIn this lab, we will be using:\n\nthe react-router-dom, which is a package with bindings for using React Router in web applications.\nWe will use the Axios library to make HTTP requests to the API and retrieve the data in JSON format.\nhooks: useState, useEffect, useReducer.\n\nThe lab will demonstrate how to use a react-router-dom with React to build a functional web application."
   },
   {
     "objectID": "reactjs/reactjs-hook-context.html",
@@ -5282,7 +5282,7 @@
     "href": "ifcd0210/ifcd0210backlog-sprint.html#sprint18-april",
     "title": "IFCD0210 Sprint Backlog",
     "section": "Sprint#18 (April)",
-    "text": "Sprint#18 (April)\n\n\nBacklog Sprint#18 April 2023\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#18\n83\n24/04\n- React:  (0) roadmap  (1) props  (2) update/render cycle  (3) userState  (4) project structure: tree-folder \nRoadmap  useState  React project structure  router example\n\n\n\n84\n25/04\n- React:  (1) userEffect  (2) JS ES6  - Pràctiques \nuseEffect \n\n\n\n85\n26/04\n- React:  (1) userReducer  (2) JS ES6  (3) conditional render\nuseReducer  Conditional Render\n\n\n\n86\n27/04\n- React:  (1) userReducer  (2) JS ES6 \n-\n\n\n\n87\n28/04\n- SCRUM:  (2) Retrospecive  (1) Lateralization  - Pràctiques  - Vocabulary \n-\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\n- topic planned or pending\n+ topic done in class\n++ new topic not planned\n\n\n\n\n\n\n\n\n  IFCD0210 Calendar \n\n\n\n  top \n\n\n\n IFCD0210 Product Backlog"
+    "text": "Sprint#18 (April)\n\n\nBacklog Sprint#18 April 2023\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#18\n83\n24/04\n- React:  (0) roadmap  (1) props  (2) update/render cycle  (3) userState  (4) project structure: tree-folder \nRoadmap  useState  React project structure  router example\n\n\n\n84\n25/04\n- React:  (1) userEffect  (2) JS ES6  (3) route  - Pràctiques \nuseEffect \n\n\n\n85\n26/04\n- React:  (1) userReducer  (2) JS ES6  (3) conditional render\nuseReducer  Conditional Render\n\n\n\n86\n27/04\n- React:  (1) userReducer  (2) JS ES6 \n-\n\n\n\n87\n28/04\n- SCRUM:  (2) Retrospecive  (1) Lateralization  - Pràctiques  - Vocabulary \n-\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\n- topic planned or pending\n+ topic done in class\n++ new topic not planned\n\n\n\n\n\n\n\n\n  IFCD0210 Calendar \n\n\n\n  top \n\n\n\n IFCD0210 Product Backlog"
   },
   {
     "objectID": "reactjs/reactjs-what-props.html#overview",
@@ -5290,5 +5290,12 @@
     "title": "React JS: props and state",
     "section": "2 Overview",
     "text": "2 Overview\nIn React.js, “props” (short for “properties”) are used to pass data from one component to another. Props are passed as an object (which is similar to a JSON object) and contain key-value pairs of data:\n\nJSON is a lightweight data interchange format that is easy to read and write for both humans and machines.\nprops is a reserved keyword that refers to an object containing all the properties (or props) passed to a component.\n\nFor example, let’s say we have a component called MyComponent that receives an object named person as a prop. This person object might look like this:\nconst person = {\n  name: 'John',\n  age: 30,\n  address: {\n    street: '123 Main St',\n    city: 'Anytown',\n    state: 'CA',\n    zip: '12345'\n  }\n};\nIn this case, the person object contains some key-value pairs and another object. We can then pass this person object as a prop to our MyComponent component like this:\n<MyComponent person={person} />\nInside MyComponent, we can access the person prop using the props object like this:\nfunction MyComponent(props) {\n  console.log(props.person.name); // 'John'\n  console.log(props.person.age); // 30\n  console.log(props.person.address.street); // '123 Main St'\n  // ...\n}\n\n2.1 Example1\nconst car = {\n  make: 'Toyota',\n  model: 'Corolla',\n  year: 2022,\n  color: 'blue'\n};\n\nconst person = {\n  name: 'John',\n  age: 30,\n  address: {\n    street: '123 Main St',\n    city: 'Anytown',\n    state: 'CA',\n    zip: '12345'\n  }\n};\n\n<MyComponent person={person} car={car} />\n\nfunction MyComponent(props) {\n  console.log(props.person.name); // 'John'\n  console.log(props.person.age); // 30\n  console.log(props.person.address.street); // '123 Main St'\n\n  console.log(props.car.make); // 'Toyota'\n  console.log(props.car.model); // 'Corolla'\n  console.log(props.car.year); // 2022\n  console.log(props.car.color); // 'blue'\n  // ...\n}\n\n\n2.2 Example2\nUse the same syntax as HTML attributes to send props into a component:\n\n\nprofile.jsx\n\nfunction Avatar({ person, size }) {\n  // person and size are available here\n}\n\n\n\nlin.jsx\n\nexport default function Lin() {\n  return (\n    <Avatar\n      person={{ name: 'Lin Lanying', imageId: '1bX5QH6' }}\n      size={100}\n    />\n  );\n}\n\n\n\ncarla.jsx\n\nexport default function Carla() {\n  return (\n    <Avatar\n      person={{ name: 'Carla Lan', imageId: 'KIU3QH1' }}\n      size={60}\n    />\n  );\n}"
+  },
+  {
+    "objectID": "reactjs/rjslab2.html#install-react-router-dom",
+    "href": "reactjs/rjslab2.html#install-react-router-dom",
+    "title": "Lab#RE02-1: Router & Hooks",
+    "section": "1 Install react-router-dom",
+    "text": "1 Install react-router-dom\nFrom: npm pacakge and react router\nnpm i react-router-dom\n\n\n\n\n\n  React JS: Lab#RE01-1 \n\n\n\n  top \n\n\n\n React JS: Lab#RE03-1"
   }
 ]
