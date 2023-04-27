@@ -1381,7 +1381,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#tree-folder-routes" id="toc-tree-folder-routes" class="nav-link" data-scroll-target="#tree-folder-routes"><span class="toc-section-number">2</span>  Tree-folder &amp; routes</a></li>
   <li><a href="#usereduceruser-profile-form" id="toc-usereduceruser-profile-form" class="nav-link" data-scroll-target="#usereduceruser-profile-form"><span class="toc-section-number">3</span>  <code>useReducer</code>user profile form</a>
   <ul>
-  <li><a href="#component-and-route" id="toc-component-and-route" class="nav-link" data-scroll-target="#component-and-route"><span class="toc-section-number">3.1</span>  component and route</a></li>
+  <li><a href="#create-route" id="toc-create-route" class="nav-link" data-scroll-target="#create-route"><span class="toc-section-number">3.1</span>  Create <code>route</code></a></li>
   <li><a href="#reducer" id="toc-reducer" class="nav-link" data-scroll-target="#reducer"><span class="toc-section-number">3.2</span>  <code>reducer</code></a></li>
   </ul></li>
   <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="toc-section-number">4</span>  Versions</a></li>
@@ -1534,12 +1534,18 @@ SPA vs MultiPage
 <h2 data-number="3" class="anchored" data-anchor-id="usereduceruser-profile-form"><span class="header-section-number">3</span> <code>useReducer</code>user profile form</h2>
 <p>Reference:</p>
 <ul>
-<li><a href="https://codesandbox.io/s/usereducer-example-form-nuyyyi?file=/App.js" class="external">codesandbox</a></li>
+<li><a href="https://codesandbox.io/s/usereducer-example-form-nuyyyi?file=/App.js" class="external">codesandbox with handlers functions</a></li>
+<li><a href="https://codesandbox.io/s/usereducer-example-form-v2-pbj3kh?file=/App.js" class="external">codesandbox dispatcher onChange, onClick</a></li>
 <li><a href="https://react.dev/reference/react/useReducer#usage" class="external">React reference manual</a></li>
 </ul>
-<section id="component-and-route" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="component-and-route"><span class="header-section-number">3.1</span> component and route</h3>
-<p>Create the new component, the route and the link at layout.</p>
+<section id="create-route" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="create-route"><span class="header-section-number">3.1</span> Create <code>route</code></h3>
+<p>To add a <code>PersonForm</code> or <code>Form</code> component to a new route:</p>
+<ul>
+<li>first import the <code>PersonForm</code> <strong>component</strong>.</li>
+<li>Then, add a new <strong>Route</strong> element under the Layout Route element with a path of “person-form” and an element prop with the <code>PersonForm</code> component.</li>
+<li>Finally, update the <code>Layout</code> component to render a <strong>Link</strong> component to the new route.</li>
+</ul>
 </section>
 <section id="reducer" class="level3 page-columns page-full" data-number="3.2">
 <h3 data-number="3.2" class="anchored" data-anchor-id="reducer"><span class="header-section-number">3.2</span> <code>reducer</code></h3>
@@ -1608,7 +1614,55 @@ SPA vs MultiPage
 <p></p><figcaption class="figure-caption">render reducer</figcaption><p></p>
 </figure>
 </div>
-</div></div></section>
+</div></div><p>With or without handlers functions? Best without:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Form</span>() {</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="kw">const</span> [state<span class="op">,</span> dispatch] <span class="op">=</span> <span class="fu">useReducer</span>(reducer<span class="op">,</span> initialState)<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="cf">return</span> (</span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="op">&lt;&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>      <span class="op">&lt;</span>h1<span class="op">&gt;</span> Person Profile form<span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>      <span class="op">&lt;</span>hr <span class="op">/&gt;&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>      <span class="op">&lt;</span>h3<span class="op">&gt;</span> Modify data<span class="op">&lt;/</span>h3<span class="op">&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a>      <span class="op">&lt;</span>label<span class="op">&gt;</span>Name<span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>      <span class="op">&lt;</span>input</span>
+<span id="cb5-12"><a href="#cb5-12"></a>        value<span class="op">=</span>{state<span class="op">.</span><span class="at">name</span>}</span>
+<span id="cb5-13"><a href="#cb5-13"></a>        onChange<span class="op">=</span>{(e) <span class="kw">=&gt;</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>          <span class="fu">dispatch</span>({</span>
+<span id="cb5-15"><a href="#cb5-15"></a>            <span class="dt">type</span><span class="op">:</span> <span class="st">"changed_name"</span><span class="op">,</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>            <span class="dt">nextName</span><span class="op">:</span> e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>          })</span>
+<span id="cb5-18"><a href="#cb5-18"></a>        }</span>
+<span id="cb5-19"><a href="#cb5-19"></a>      <span class="op">/&gt;</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a></span>
+<span id="cb5-21"><a href="#cb5-21"></a>      <span class="op">&lt;</span>label<span class="op">&gt;</span>Surame<span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>      <span class="op">&lt;</span>input</span>
+<span id="cb5-23"><a href="#cb5-23"></a>        value<span class="op">=</span>{state<span class="op">.</span><span class="at">surname</span>}</span>
+<span id="cb5-24"><a href="#cb5-24"></a>        onChange<span class="op">=</span>{(e) <span class="kw">=&gt;</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a>          <span class="fu">dispatch</span>({</span>
+<span id="cb5-26"><a href="#cb5-26"></a>            <span class="dt">type</span><span class="op">:</span> <span class="st">"changed_surname"</span><span class="op">,</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a>            <span class="dt">nextSurName</span><span class="op">:</span> e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a>          })</span>
+<span id="cb5-29"><a href="#cb5-29"></a>        }</span>
+<span id="cb5-30"><a href="#cb5-30"></a>      <span class="op">/&gt;</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a></span>
+<span id="cb5-32"><a href="#cb5-32"></a>      <span class="op">&lt;</span>button onClick<span class="op">=</span>{() <span class="kw">=&gt;</span> <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"incremented_age"</span> })}<span class="op">&gt;</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a>        Increment age</span>
+<span id="cb5-34"><a href="#cb5-34"></a>      <span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a></span>
+<span id="cb5-36"><a href="#cb5-36"></a>      <span class="op">&lt;</span>button onClick<span class="op">=</span>{() <span class="kw">=&gt;</span> <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"decremented_age"</span> })}<span class="op">&gt;</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a>        Decrement age</span>
+<span id="cb5-38"><a href="#cb5-38"></a>      <span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb5-39"><a href="#cb5-39"></a>      <span class="op">&lt;</span>br <span class="op">/&gt;</span> <span class="op">&lt;</span>br <span class="op">/&gt;</span> <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb5-40"><a href="#cb5-40"></a></span>
+<span id="cb5-41"><a href="#cb5-41"></a>      <span class="op">&lt;</span>h3<span class="op">&gt;</span>Person Profile<span class="op">&lt;/</span>h3<span class="op">&gt;</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a>      <span class="op">&lt;</span>p<span class="op">&gt;&lt;</span>strong<span class="op">&gt;</span><span class="dt">Name</span><span class="op">:&lt;/</span>strong<span class="op">&gt;</span> {state<span class="op">.</span><span class="at">name</span>}<span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb5-43"><a href="#cb5-43"></a>      <span class="op">&lt;</span>p<span class="op">&gt;&lt;</span>strong<span class="op">&gt;</span><span class="dt">Surname</span><span class="op">:&lt;/</span>strong<span class="op">&gt;</span> {state<span class="op">.</span><span class="at">surname</span>}<span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb5-44"><a href="#cb5-44"></a>      <span class="op">&lt;</span>p<span class="op">&gt;&lt;</span>strong<span class="op">&gt;</span><span class="dt">Age</span><span class="op">:&lt;/</span>strong<span class="op">&gt;</span> {state<span class="op">.</span><span class="at">age</span>}<span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb5-45"><a href="#cb5-45"></a>    <span class="op">&lt;/&gt;</span></span>
+<span id="cb5-46"><a href="#cb5-46"></a>  )<span class="op">;</span></span>
+<span id="cb5-47"><a href="#cb5-47"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 <section id="versions" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="versions"><span class="header-section-number">4</span> Versions</h2>
@@ -1630,7 +1684,7 @@ SPA vs MultiPage
 </tr>
 <tr class="even">
 <td>Hola5 0.1</td>
-<td>useReducer: user Profile <a href="" class="external">hola5 0.1</a> <br> compoonent useReducer on <a href="https://codesandbox.io/s/usereducer-example-form-nuyyyi?file=/App.js" class="external">codesandbox</a></td>
+<td>useReducer: user Profile <a href="" class="external">hola5 0.1</a> <br> compoonent useReducer on <a href="https://codesandbox.io/s/usereducer-example-form-nuyyyi?file=/App.js" class="external">codesandbox with handlers functions</a> <br> or <a href="https://codesandbox.io/s/usereducer-example-form-v2-pbj3kh?file=/App.js" class="external">codesandbox dispatcher onChange, onClick</a></td>
 <td><a href="../images/reactjs/lab-re-2-1.png" width="60%">userReducer tree-folder</a></td>
 <td><a href="../images/reactjs/lab-re-2-3.png" width="80%">render reducer</a></td>
 </tr>
@@ -1929,7 +1983,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":true,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":true});</script>
 
 
 
