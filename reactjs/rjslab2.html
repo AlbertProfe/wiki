@@ -1560,7 +1560,7 @@ SPA vs MultiPage
 </blockquote>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-2-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Basic structure component"><img src="../images/reactjs/lab-re-2-4.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-2-4.png" class="lightbox" title="Basic structure component" data-gallery="quarto-lightbox-gallery-3"><img src="../images/reactjs/lab-re-2-4.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">Basic structure component</figcaption><p></p>
 </figure>
 </div>
@@ -1610,7 +1610,7 @@ SPA vs MultiPage
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-2-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="render reducer"><img src="../images/reactjs/lab-re-2-3.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-2-3.png" class="lightbox" title="render reducer" data-gallery="quarto-lightbox-gallery-4"><img src="../images/reactjs/lab-re-2-3.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">render reducer</figcaption><p></p>
 </figure>
 </div>
@@ -1662,6 +1662,58 @@ SPA vs MultiPage
 <span id="cb5-45"><a href="#cb5-45"></a>    <span class="op">&lt;/&gt;</span></span>
 <span id="cb5-46"><a href="#cb5-46"></a>  )<span class="op">;</span></span>
 <span id="cb5-47"><a href="#cb5-47"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>With handlers, perhaps a more verboise option:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Form</span>() {</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="kw">const</span> [state<span class="op">,</span> dispatch] <span class="op">=</span> <span class="fu">useReducer</span>(reducer<span class="op">,</span> initialState)<span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="kw">function</span> <span class="fu">handleButtonClickIncrement</span>() {</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"incremented_age"</span> })<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  }</span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a>  <span class="kw">function</span> <span class="fu">handleButtonClickDecrement</span>() {</span>
+<span id="cb6-9"><a href="#cb6-9"></a>    <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"decremented_age"</span> })<span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>  }</span>
+<span id="cb6-11"><a href="#cb6-11"></a></span>
+<span id="cb6-12"><a href="#cb6-12"></a>  <span class="kw">function</span> <span class="fu">handleInputChangeName</span>(e) {</span>
+<span id="cb6-13"><a href="#cb6-13"></a>    <span class="fu">dispatch</span>({</span>
+<span id="cb6-14"><a href="#cb6-14"></a>      <span class="dt">type</span><span class="op">:</span> <span class="st">"changed_name"</span><span class="op">,</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a>      <span class="dt">nextName</span><span class="op">:</span> e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a>    })<span class="op">;</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>  }</span>
+<span id="cb6-18"><a href="#cb6-18"></a></span>
+<span id="cb6-19"><a href="#cb6-19"></a>  <span class="kw">function</span> <span class="fu">handleInputChangeSurName</span>(e) {</span>
+<span id="cb6-20"><a href="#cb6-20"></a>    <span class="fu">dispatch</span>({</span>
+<span id="cb6-21"><a href="#cb6-21"></a>      <span class="dt">type</span><span class="op">:</span> <span class="st">"changed_surname"</span><span class="op">,</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a>      <span class="dt">nextSurName</span><span class="op">:</span> e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a>    })<span class="op">;</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a>  }</span>
+<span id="cb6-25"><a href="#cb6-25"></a></span>
+<span id="cb6-26"><a href="#cb6-26"></a>  <span class="cf">return</span> (</span>
+<span id="cb6-27"><a href="#cb6-27"></a>    <span class="op">&lt;&gt;</span></span>
+<span id="cb6-28"><a href="#cb6-28"></a>      <span class="op">&lt;</span>h1<span class="op">&gt;</span> Person Profile form<span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a>      <span class="op">&lt;</span>hr <span class="op">/&gt;</span></span>
+<span id="cb6-30"><a href="#cb6-30"></a>      <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb6-31"><a href="#cb6-31"></a>      <span class="op">&lt;</span>h3<span class="op">&gt;</span> Modify data<span class="op">&lt;/</span>h3<span class="op">&gt;</span></span>
+<span id="cb6-32"><a href="#cb6-32"></a>      <span class="op">&lt;</span>label<span class="op">&gt;</span>Name<span class="op">&lt;/</span>label<span class="op">&gt;</span>{<span class="st">" "</span>}</span>
+<span id="cb6-33"><a href="#cb6-33"></a>      <span class="op">&lt;</span>input value<span class="op">=</span>{state<span class="op">.</span><span class="at">name</span>} onChange<span class="op">=</span>{handleInputChangeName} <span class="op">/&gt;</span></span>
+<span id="cb6-34"><a href="#cb6-34"></a>      <span class="op">&lt;</span>label<span class="op">&gt;</span> Surame <span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
+<span id="cb6-35"><a href="#cb6-35"></a>      <span class="op">&lt;</span>input value<span class="op">=</span>{state<span class="op">.</span><span class="at">surname</span>} onChange<span class="op">=</span>{handleInputChangeSurName} <span class="op">/&gt;</span></span>
+<span id="cb6-36"><a href="#cb6-36"></a>      <span class="op">&lt;</span>button onClick<span class="op">=</span>{handleButtonClickIncrement}<span class="op">&gt;</span>Increment age<span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb6-37"><a href="#cb6-37"></a>      <span class="op">&lt;</span>button onClick<span class="op">=</span>{handleButtonClickDecrement}<span class="op">&gt;</span>Decrement age<span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb6-38"><a href="#cb6-38"></a>      <span class="op">&lt;</span>br <span class="op">/&gt;</span> <span class="op">&lt;</span>br <span class="op">/&gt;</span> <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb6-39"><a href="#cb6-39"></a>      <span class="op">&lt;</span>h3<span class="op">&gt;</span>Person Profile<span class="op">&lt;/</span>h3<span class="op">&gt;</span></span>
+<span id="cb6-40"><a href="#cb6-40"></a>      <span class="op">&lt;</span>p<span class="op">&gt;</span></span>
+<span id="cb6-41"><a href="#cb6-41"></a>        <span class="op">&lt;</span>strong<span class="op">&gt;</span><span class="dt">Name</span><span class="op">:&lt;/</span>strong<span class="op">&gt;</span> {state<span class="op">.</span><span class="at">name</span>}</span>
+<span id="cb6-42"><a href="#cb6-42"></a>      <span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb6-43"><a href="#cb6-43"></a>      <span class="op">&lt;</span>p<span class="op">&gt;</span></span>
+<span id="cb6-44"><a href="#cb6-44"></a>        <span class="op">&lt;</span>strong<span class="op">&gt;</span><span class="dt">Surname</span><span class="op">:&lt;/</span>strong<span class="op">&gt;</span> {state<span class="op">.</span><span class="at">surname</span>}</span>
+<span id="cb6-45"><a href="#cb6-45"></a>      <span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb6-46"><a href="#cb6-46"></a>      <span class="op">&lt;</span>p<span class="op">&gt;</span></span>
+<span id="cb6-47"><a href="#cb6-47"></a>        <span class="op">&lt;</span>strong<span class="op">&gt;</span><span class="dt">Age</span><span class="op">:&lt;/</span>strong<span class="op">&gt;</span> {state<span class="op">.</span><span class="at">age</span>}</span>
+<span id="cb6-48"><a href="#cb6-48"></a>      <span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb6-49"><a href="#cb6-49"></a>    <span class="op">&lt;/&gt;</span></span>
+<span id="cb6-50"><a href="#cb6-50"></a>  )<span class="op">;</span></span>
+<span id="cb6-51"><a href="#cb6-51"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="versions" class="level2" data-number="4">
@@ -1983,7 +2035,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":true});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":true,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox"});</script>
 
 
 
