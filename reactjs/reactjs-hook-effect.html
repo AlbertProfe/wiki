@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -1382,7 +1382,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters"><span class="toc-section-number">1.1</span>  Parameters</a></li>
   <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns"><span class="toc-section-number">1.2</span>  Returns</a></li>
   </ul></li>
-  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1"><span class="toc-section-number">2</span>  Example 1</a></li>
+  <li><a href="#synchronizing-with-effects" id="toc-synchronizing-with-effects" class="nav-link" data-scroll-target="#synchronizing-with-effects"><span class="toc-section-number">2</span>  Synchronizing with Effects</a>
+  <ul>
+  <li><a href="#effects-events" id="toc-effects-events" class="nav-link" data-scroll-target="#effects-events"><span class="toc-section-number">2.1</span>  Effects &amp; events</a></li>
+  </ul></li>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1"><span class="toc-section-number">3</span>  Example 1</a></li>
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2"><span class="toc-section-number">4</span>  Example 2</a></li>
+  <li><a href="#refs" id="toc-refs" class="nav-link" data-scroll-target="#refs"><span class="toc-section-number">5</span>  Refs</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/reactjs-hook-effect.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1426,7 +1432,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, April 28, 2023</p>
+      <p class="date-modified">Tuesday, May 2, 2023</p>
     </div>
   </div>
     
@@ -1438,6 +1444,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="summary">
 <p>📘 <strong>useEfect</strong></p>
 <p><code>useEffect</code> allows you to perform side effects in your components. Some examples of side effects are: fetching data, directly updating the DOM, and timers.</p>
+<p>useEffect lets you <a href="https://react.dev/learn/synchronizing-with-effects" class="external">synchronize</a> a component with an external system.</p>
 <p><code>useEffect(setup, dependencies?)</code></p>
 </div>
 <hr>
@@ -1479,19 +1486,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>setup</code>: The function with your Effect’s logic. Your setup function may also optionally return a cleanup function. When your component is first added to the DOM, React will run your setup function. After every re-render with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. After your component is removed from the DOM, React will run your cleanup function one last time.</p></li>
 <li><p><code>optional dependencies</code>: The list of all reactive values referenced inside of the setup code. Reactive values include props, state, and all the variables and functions declared directly inside your component body.</p></li>
 </ul>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Note
+Important
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>If your linter is configured for React, it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like [dep1, dep2, dep3]. React will compare each dependency with its previous value using the Object.is comparison algorithm. If you don’t specify the dependencies at all, your Effect will re-run after every re-render of the component. See the difference between passing an array of dependencies, an empty array, and no dependencies at all.</p>
+<ul>
+<li><p>When Strict Mode is on, React will run one extra <strong>development-only setup+cleanup cycle before the first real setup</strong>.</p></li>
+<li><p>If some of your dependencies are objects or functions defined inside the component, <strong>there is a risk that they will cause the Effect to re-run more often than needed.</strong></p></li>
+<li><p>If your Effect wasn’t caused by an interaction (like a click), <strong>React will let the browser paint the updated screen first before running your Effect.</strong></p></li>
+<li><p>If your Effect is doing something visual (for example, positioning a tooltip), and the delay is noticeable (for example, it flickers), <strong>replace useEffect with useLayoutEffect.</strong></p></li>
+<li><p>Even if your Effect was caused by an interaction (like a click), <strong>the browser may repaint the screen before processing the state updates inside your Effect.</strong></p></li>
+<li><p>Effects only run on the client. They don’t run during server rendering.</p></li>
+</ul>
 </div>
 </div>
 </div>
@@ -1503,8 +1517,15 @@ Note
 </ul>
 </section>
 </section>
-<section id="example-1" class="level2 page-columns page-full" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="example-1"><span class="header-section-number">2</span> Example 1</h2>
+<section id="synchronizing-with-effects" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="synchronizing-with-effects"><span class="header-section-number">2</span> Synchronizing with Effects</h2>
+<p><code>Effects</code> let you run some code after rendering so that you can synchronize your component with some system outside of React.</p>
+<section id="effects-events" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="effects-events"><span class="header-section-number">2.1</span> Effects &amp; events</h3>
+</section>
+</section>
+<section id="example-1" class="level2 page-columns page-full" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="example-1"><span class="header-section-number">3</span> Example 1</h2>
 <p>In this example, the <code>useEffect</code> hook manages a state object with one field: <code>count</code> and a function-setter <code>setCalculation</code>.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -1533,26 +1554,70 @@ Note
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ex27.png" class="lightbox" title="useEffect inital render" data-gallery="quarto-lightbox-gallery-1"><img src="../images/reactjs/ex27.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="../images/reactjs/ex27.png" class="lightbox" title="useEffect inital render" data-gallery="quarto-lightbox-gallery-1"><img src="..\images/reactjs/ex27.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption"><code>useEffect</code> inital render</figcaption><p></p>
 </figure>
 </div>
 </div><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ex28.png" class="lightbox" title="useEffect second render" data-gallery="quarto-lightbox-gallery-2"><img src="../images/reactjs/ex28.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="../images/reactjs/ex28.png" class="lightbox" title="useEffect second render" data-gallery="quarto-lightbox-gallery-2"><img src="..\images/reactjs/ex28.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption"><code>useEffect</code> second render</figcaption><p></p>
 </figure>
 </div>
 </div><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ex29.png" class="lightbox" title="useEffect third render" data-gallery="quarto-lightbox-gallery-3"><img src="../images/reactjs/ex29.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="../images/reactjs/ex29.png" class="lightbox" title="useEffect third render" data-gallery="quarto-lightbox-gallery-3"><img src="..\images/reactjs/ex29.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption"><code>useEffect</code> third render</figcaption><p></p>
 </figure>
 </div>
 </div></div>
 
+</section>
+<section id="example-2" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="example-2"><span class="header-section-number">4</span> Example 2</h2>
+<p>By default <code>useEffect</code> will trigger anytime an update happens to the component.</p>
+<p>This means if the component receives new props from its parent component or even when you change the state locally, <strong>the effect will run again.</strong></p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Bad use of useEffect
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you don’t control the render cycle, <strong>you could run into an infinite loop of updates.</strong></p>
+</div>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">const</span> Counter <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="kw">const</span> [counter<span class="op">,</span> setCounter] <span class="op">=</span> React<span class="op">.</span><span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  React<span class="op">.</span><span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="kw">const</span> s <span class="op">=</span> <span class="pp">setInterval</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb3-6"><a href="#cb3-6"></a>      <span class="fu">setCounter</span>(c <span class="kw">=&gt;</span> c <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>    }<span class="op">,</span> <span class="dv">1000</span>)<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a></span>
+<span id="cb3-10"><a href="#cb3-10"></a>  <span class="cf">return</span> (</span>
+<span id="cb3-11"><a href="#cb3-11"></a>    <span class="op">&lt;</span>div style<span class="op">=</span>{{<span class="dt">textAlign</span><span class="op">:</span> <span class="st">'center'</span>}}<span class="op">&gt;</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>      <span class="op">&lt;</span>h1<span class="op">&gt;</span><span class="dt">Counter</span><span class="op">:</span> {counter}<span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>  )<span class="op">;</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><section id="refs" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="refs"><span class="header-section-number">5</span> Refs</h2>
+<ul>
+<li><a href="https://codesandbox.io/s/useeffect-example-43e65y?file=/App.js" class="external">codesanbox</a></li>
+<li><a href="https://manningbooks.medium.com/exploring-the-useeffect-api-with-easy-examples-7e9382ffef97" class="external">Exploring the useEffect API with Easy Examples</a></li>
+<li><a href="https://linguinecode.com/post/getting-started-with-react-useeffect" class="external">React useEffect hook with code examples</a></li>
+<li><a href="https://theodorusclarence.com/blog/react-core-concept-rendering-state" class="external">React Core Concept I: Rendering &amp; useState</a></li>
+</ul>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1572,9 +1637,7 @@ Note
 </div>
 
 
-</section>
-
-</main> <!-- /main -->
+</section></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1846,7 +1909,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":true});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":true,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});</script>
 
 
 
