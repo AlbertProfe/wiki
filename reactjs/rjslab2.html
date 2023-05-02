@@ -1384,7 +1384,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#create-route" id="toc-create-route" class="nav-link" data-scroll-target="#create-route"><span class="toc-section-number">3.1</span>  Create <code>route</code></a></li>
   <li><a href="#reducer" id="toc-reducer" class="nav-link" data-scroll-target="#reducer"><span class="toc-section-number">3.2</span>  <code>reducer</code></a></li>
   </ul></li>
-  <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="toc-section-number">4</span>  Versions</a></li>
+  <li><a href="#usereducer-useeffect-useref-clock" id="toc-usereducer-useeffect-useref-clock" class="nav-link" data-scroll-target="#usereducer-useeffect-useref-clock"><span class="toc-section-number">4</span>  <code>useReducer</code>, <code>useEffect</code>, <code>useRef</code> clock</a></li>
+  <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="toc-section-number">5</span>  Versions</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/rjslab2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1427,7 +1428,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, April 27, 2023</p>
+      <p class="date-modified">Tuesday, May 2, 2023</p>
     </div>
   </div>
     
@@ -1747,8 +1748,18 @@ SPA vs MultiPage
 <span id="cb7-60"><a href="#cb7-60"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="versions" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="versions"><span class="header-section-number">4</span> Versions</h2>
+<section id="usereducer-useeffect-useref-clock" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="usereducer-useeffect-useref-clock"><span class="header-section-number">4</span> <code>useReducer</code>, <code>useEffect</code>, <code>useRef</code> clock</h2>
+<p>Reference: <a href="https://codesandbox.io/s/usereducer-example-clock-11y79d?file=/App.js" class="external">codesandbox</a></p>
+<p>This component creates a simple stopwatch with three buttons: <code>Start</code>, <code>Stop</code>, and <code>Reset</code>.</p>
+<p>The state of the stopwatch is managed using the <code>useReducer</code> hook, which takes in a reducer function and an initial state.</p>
+<p>The <code>reducer</code> function is responsible for updating the state based on actions dispatched by the buttons. The initial state includes two properties, <code>isRunning</code> and time, which are set to false and 0 respectively.</p>
+<p>The <code>useEffect</code> hook is used to start and stop the stopwatch. When the <code>isRunning</code> state is true, a timer is started using setInterval that dispatches a tick action every second. When <code>isRunning</code> state is false, the timer is cleared using <code>clearInterval</code>.</p>
+<p>The <code>idRef</code> is a reference to the timer, and it is updated every time the <code>useEffect</code> hook is called.</p>
+<p>The return statement returns a <code>JSX</code> template that displays the stopwatch: there are three buttons: “<code>Start</code>”, “<code>Stop</code>”, and “<code>Reset</code>” that dispatch start, stop, and reset actions respectively.</p>
+</section>
+<section id="versions" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="versions"><span class="header-section-number">5</span> Versions</h2>
 <table class="table">
 <thead>
 <tr class="header">
@@ -1767,9 +1778,15 @@ SPA vs MultiPage
 </tr>
 <tr class="even">
 <td>Hola5 0.1</td>
-<td>useReducer: user Profile <a href="" class="external">hola5 0.1</a> <br> compoonent useReducer on <a href="https://codesandbox.io/s/usereducer-example-form-nuyyyi?file=/App.js" class="external">codesandbox with handlers functions</a> <br> or <a href="https://codesandbox.io/s/usereducer-example-form-v2-pbj3kh?file=/App.js" class="external">codesandbox dispatcher onChange, onClick</a></td>
-<td><a href="../images/reactjs/lab-re-2-1.png" width="60%">userReducer tree-folder</a></td>
-<td><a href="../images/reactjs/lab-re-2-3.png" width="80%">render reducer</a></td>
+<td>useReducer: user Profile <a href="https://github.com/AlbertProfe/CifoJava2023-2/tree/aa824232395113d08efd6a86af38ebbc2a1e1e14/hola5" class="external">hola5 0.1</a> <br> compoonent useReducer on <a href="https://codesandbox.io/s/usereducer-example-form-nuyyyi?file=/App.js" class="external">codesandbox with handlers functions</a> <br> or <a href="https://codesandbox.io/s/usereducer-example-form-v2-pbj3kh?file=/App.js" class="external">codesandbox dispatcher onChange, onClick</a></td>
+<td><a href="../images/reactjs/lab-re-2-6.png" width="60%">userReducer tree-folder</a></td>
+<td><a href="../images/reactjs/lab-re-2-5.png" width="80%">render user profile</a></td>
+</tr>
+<tr class="odd">
+<td>Hola5 0.2</td>
+<td>useReducer, userRef, useEffect: clock <a href="" class="external">hola5 0.2</a> <br> compoonent clock on <a href="https://codesandbox.io/s/usereducer-example-clock-11y79d?file=/App.js" class="external">codesandbox</a> <br></td>
+<td><a href="../images/reactjs/lab-re-2-6.png" width="60%">clock tree-folder</a></td>
+<td><a href="../images/reactjs/lab-re-2-5.png" width="80%">render clock</a></td>
 </tr>
 </tbody>
 </table>
@@ -2066,7 +2083,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":true});</script>
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":true,"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom"});</script>
 
 
 
