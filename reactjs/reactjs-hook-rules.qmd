@@ -1,0 +1,101 @@
+---
+title: "React JS: Rules of Hooks"
+subtitle: ReactJS Rules of Hooks
+author: albertprofe
+date: "06/01/2021"
+date-modified: last-modified
+date-format: full
+description: description
+categories: [reactjs, hooks, rules]
+toc: true
+number-sections: true
+format:
+  html
+---
+
+::: {.summary}
+
+📘 **Rules of Hooks**
+
+`Hooks` are a new addition in `React 16.8`. They let you use state and other React features w**ithout writing a class.**
+
+
+:::
+
+</br>
+
+Reference: [Rules of Hooks](https://legacy.reactjs.org/docs/hooks-rules.html){.external}
+
+## Overview
+
+`Hooks` are JavaScript functions, but you need to follow two rules when using them. We provide a linter plugin to enforce these rules automatically:
+
+
+### Rule#1: Only Call Hooks at the Top Level
+
+> Don’t call Hooks inside loops, conditions, or nested functions. 
+
+Instead, always use Hooks at the top level of your React function, before any early returns.
+
+By following this rule, you ensure that Hooks are called in the same order each time a component renders. 
+
+That’s what allows React to correctly preserve the state of Hooks between multiple useState and useEffect calls.
+
+### Rule2: Only Call Hooks from React Functions
+
+> Don’t call Hooks from regular JavaScript functions. Instead, you can:
+
+- Call `Hooks` **from React function components**.
+- Call `Hooks` `from custom Hooks` (we’ll learn about them on the next page).
+
+
+## ESLint Plugin
+
+React team released an `ESLint plugin` called `eslint-plugin-react-hooks` that enforces these two rules. You can add this plugin to your project if you’d like to try it:
+
+This plugin is included by default in `Create React App.`
+
+```js
+npm install eslint-plugin-react-hooks --save-dev
+```
+
+```js
+// Your ESLint configuration
+{
+  "plugins": [
+    // ...
+    "react-hooks"
+  ],
+  "rules": {
+    // ...
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
+  }
+}
+```
+
+
+
+<!--- navLinks -->
+<br><br>
+<div class=row>
+<br>
+<div class='column left previous'>
+<br>
+[{{< fa solid arrow-left >}} React JS ES6: spread operator](/reactjs/reactjs-es6-spread.qmd)
+<br>
+</div>
+<br>
+<div class='column center'>
+<br>
+[{{< fa solid arrow-up >}} top](#top)
+<br>
+</div>
+<br>
+<div class='column right next'>
+<br>
+[ReactJS: useState  {{< fa solid arrow-right >}}](/reactjs/reactjs-hook-state.qmd)
+<br>
+</div>
+<br>
+</div>

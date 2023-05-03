@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -851,6 +851,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">ReacJS 18: Hooks</li>
         <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-rules.html">
+ <span class="dropdown-text">React JS: Rules of Hooks</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../reactjs/reactjs-hook-state.html">
  <span class="dropdown-text">ReactJS: useState</span></a>
   </li>  
@@ -1250,6 +1254,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-rules.html" class="sidebar-item-text sidebar-link">React JS: Rules of Hooks</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../reactjs/reactjs-hook-state.html" class="sidebar-item-text sidebar-link">ReactJS: useState</a>
   </div>
 </li>
@@ -1388,7 +1397,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1"><span class="toc-section-number">3</span>  Example 1</a></li>
   <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2"><span class="toc-section-number">4</span>  Example 2</a></li>
-  <li><a href="#refs" id="toc-refs" class="nav-link" data-scroll-target="#refs"><span class="toc-section-number">5</span>  Refs</a></li>
+  <li><a href="#refs-articles" id="toc-refs-articles" class="nav-link" data-scroll-target="#refs-articles"><span class="toc-section-number">5</span>  Refs articles</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/reactjs-hook-effect.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1432,7 +1441,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tuesday, May 2, 2023</p>
+      <p class="date-modified">Wednesday, May 3, 2023</p>
     </div>
   </div>
     
@@ -1451,7 +1460,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="introduction" class="level2 page-columns page-full" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1</span> Introduction</h2>
 <p><code>useEffect</code> accepts two arguments. The second argument is optional.</p>
-<blockquote class="blockquote">
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>“The question is not ‘when does this effect run,’ the question is ‘with which state does this effect synchronize?’” – Ryan Florence</p>
+</div></div><blockquote class="blockquote">
 <p>useEffect(setup, dependencies?)</p>
 </blockquote>
 <div class="code-with-filename">
@@ -1515,13 +1527,52 @@ Important
 <ul>
 <li><code>useEffect</code> returns undefined.</li>
 </ul>
+<p>Dependency array passed to <code>useEffect</code>:</p>
+<ul>
+<li><strong>It’s optional.</strong> If you don’t specify it, <strong>the effect runs after each render.</strong></li>
+<li><strong>If it’s empty <code>([])</code></strong>, the effect runs <strong>once</strong>, after the initial render.</li>
+<li>It must — or as we’ll see later, should — contain <strong>the list of values used in the effect</strong>. The effect runs after any of these values changes (and after the initial render).</li>
+<li>The array of dependencies <strong>is not passed as argument to the effect function.</strong></li>
+</ul>
 </section>
 </section>
 <section id="synchronizing-with-effects" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="synchronizing-with-effects"><span class="header-section-number">2</span> Synchronizing with Effects</h2>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+synchronize is a key-word
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>“The question is not ‘when does this effect run,’ the question is ‘with which state does this effect synchronize?’”</p>
+<p>– Ryan Florence</p>
+</div>
+</div>
 <p><code>Effects</code> let you run some code after rendering so that you can synchronize your component with some system outside of React.</p>
 <section id="effects-events" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="effects-events"><span class="header-section-number">2.1</span> Effects &amp; events</h3>
+<blockquote class="blockquote">
+<p>An <strong>event</strong> is an <strong>action triggered by the user or the system</strong>, while an <strong>effect</strong> is a <strong>consequence of an event</strong>, usually referring to a change or action that results from it.</p>
+</blockquote>
+<p>What are the <strong>effects</strong>, really? Examples are:</p>
+<ul>
+<li>Fetching data</li>
+<li>Reading from local storage</li>
+<li>Registering and deregistering event listeners</li>
+<li>Upadating the DOM</li>
+<li>Timers</li>
+<li>Updating the document title</li>
+<li>Updating a state variable based on props change</li>
+<li>Cleanup operations</li>
+<li>Triggering animations or transitions</li>
+<li>Logging or analytics tracking</li>
+<li>Managing scroll position</li>
+</ul>
+<p>React’s effects are a completely different animal <strong>than the lifecycle methods of class-based components</strong>.</p>
 </section>
 </section>
 <section id="example-1" class="level2 page-columns page-full" data-number="3">
@@ -1554,21 +1605,21 @@ Important
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ex27.png" class="lightbox" title="useEffect inital render" data-gallery="quarto-lightbox-gallery-1"><img src="..\images/reactjs/ex27.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="../images/reactjs/ex27.png" class="lightbox" title="useEffect inital render" data-gallery="quarto-lightbox-gallery-1"><img src="../images/reactjs/ex27.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption"><code>useEffect</code> inital render</figcaption><p></p>
 </figure>
 </div>
 </div><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ex28.png" class="lightbox" title="useEffect second render" data-gallery="quarto-lightbox-gallery-2"><img src="..\images/reactjs/ex28.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="../images/reactjs/ex28.png" class="lightbox" title="useEffect second render" data-gallery="quarto-lightbox-gallery-2"><img src="../images/reactjs/ex28.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption"><code>useEffect</code> second render</figcaption><p></p>
 </figure>
 </div>
 </div><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ex29.png" class="lightbox" title="useEffect third render" data-gallery="quarto-lightbox-gallery-3"><img src="..\images/reactjs/ex29.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="../images/reactjs/ex29.png" class="lightbox" title="useEffect third render" data-gallery="quarto-lightbox-gallery-3"><img src="../images/reactjs/ex29.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption"><code>useEffect</code> third render</figcaption><p></p>
 </figure>
 </div>
@@ -1608,14 +1659,14 @@ Bad use of useEffect
 <span id="cb3-14"><a href="#cb3-14"></a>  )<span class="op">;</span></span>
 <span id="cb3-15"><a href="#cb3-15"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><section id="refs" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="refs"><span class="header-section-number">5</span> Refs</h2>
+<section id="refs-articles" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="refs-articles"><span class="header-section-number">5</span> Refs articles</h2>
 <ul>
 <li><a href="https://codesandbox.io/s/useeffect-example-43e65y?file=/App.js" class="external">codesanbox</a></li>
 <li><a href="https://manningbooks.medium.com/exploring-the-useeffect-api-with-easy-examples-7e9382ffef97" class="external">Exploring the useEffect API with Easy Examples</a></li>
 <li><a href="https://linguinecode.com/post/getting-started-with-react-useeffect" class="external">React useEffect hook with code examples</a></li>
+<li><a href="https://blog.logrocket.com/useeffect-hook-complete-guide/" class="external">A complete guide to the useEffect React Hook</a></li>
+<li><a href="https://overreacted.io/a-complete-guide-to-useeffect/" class="external">A Complete Guide to useEffect</a></li>
 <li><a href="https://theodorusclarence.com/blog/react-core-concept-rendering-state" class="external">React Core Concept I: Rendering &amp; useState</a></li>
 </ul>
 <!--- navLinks -->
@@ -1637,7 +1688,9 @@ Bad use of useEffect
 </div>
 
 
-</section></section></div></main> <!-- /main -->
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1909,7 +1962,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":true,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":true,"closeEffect":"zoom","descPosition":"bottom"});</script>
 
 
 
