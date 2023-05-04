@@ -1394,7 +1394,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#reducer" id="toc-reducer" class="nav-link" data-scroll-target="#reducer"><span class="toc-section-number">3.2</span>  <code>reducer</code></a></li>
   </ul></li>
   <li><a href="#usereducer-useeffect-useref-clock" id="toc-usereducer-useeffect-useref-clock" class="nav-link" data-scroll-target="#usereducer-useeffect-useref-clock"><span class="toc-section-number">4</span>  <code>useReducer</code>, <code>useEffect</code>, <code>useRef</code> clock</a></li>
-  <li><a href="#api-rest" id="toc-api-rest" class="nav-link" data-scroll-target="#api-rest"><span class="toc-section-number">5</span>  api Rest</a></li>
+  <li><a href="#api-rest" id="toc-api-rest" class="nav-link" data-scroll-target="#api-rest"><span class="toc-section-number">5</span>  api Rest</a>
+  <ul>
+  <li><a href="#axios" id="toc-axios" class="nav-link" data-scroll-target="#axios"><span class="toc-section-number">5.1</span>  Axios</a></li>
+  <li><a href="#component" id="toc-component" class="nav-link" data-scroll-target="#component"><span class="toc-section-number">5.2</span>  Component</a></li>
+  </ul></li>
   <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="toc-section-number">6</span>  Versions</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/rjslab2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -1593,7 +1597,7 @@ SPA vs MultiPage
 </blockquote>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-2-4.png" class="lightbox" title="Basic structure component" data-gallery="quarto-lightbox-gallery-3"><img src="../images/reactjs/lab-re-2-4.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-2-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Basic structure component"><img src="../images/reactjs/lab-re-2-4.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">Basic structure component</figcaption><p></p>
 </figure>
 </div>
@@ -1643,7 +1647,7 @@ SPA vs MultiPage
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-2-3.png" class="lightbox" title="render reducer" data-gallery="quarto-lightbox-gallery-4"><img src="../images/reactjs/lab-re-2-3.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-2-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="render reducer"><img src="../images/reactjs/lab-re-2-3.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">render reducer</figcaption><p></p>
 </figure>
 </div>
@@ -1654,7 +1658,7 @@ SPA vs MultiPage
 <p><a href="https://alexsidorenko.com/blog/onclick-too-many-re-renders/" class="external">Why does onClick={x()} causes “too many re-renders” error in React?</a></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://alexsidorenko.com/static/376998171a95346fce4bec68c1d39cee/29114/initial-3.png" class="lightbox" title="recursion" data-gallery="quarto-lightbox-gallery-5"><img src="https://alexsidorenko.com/static/376998171a95346fce4bec68c1d39cee/29114/initial-3.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p><a href="https://alexsidorenko.com/static/376998171a95346fce4bec68c1d39cee/29114/initial-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="recursion"><img src="https://alexsidorenko.com/static/376998171a95346fce4bec68c1d39cee/29114/initial-3.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">recursion</figcaption><p></p>
 </figure>
 </div>
@@ -1779,7 +1783,7 @@ SPA vs MultiPage
 <p>This component creates a simple stopwatch with three buttons: <code>Start</code>, <code>Stop</code>, and <code>Reset</code>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-2-7.png" class="lightbox" title="render clock" data-gallery="quarto-lightbox-gallery-6"><img src="../images/reactjs/lab-re-2-7.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-2-7.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="render clock"><img src="../images/reactjs/lab-re-2-7.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">render clock</figcaption><p></p>
 </figure>
 </div>
@@ -1833,57 +1837,74 @@ SPA vs MultiPage
 <div class="sourceCode" id="cb12"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1"></a>  <span class="kw">const</span> idRef <span class="op">=</span> <span class="fu">useRef</span>(<span class="dv">0</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The return statement returns a <code>JSX</code> template that displays the stopwatch: there are three buttons: “<code>Start</code>”, “<code>Stop</code>”, and “<code>Reset</code>” that dispatch start, stop, and reset actions respectively.</p>
 </section>
-<section id="api-rest" class="level2" data-number="5">
+<section id="api-rest" class="level2 page-columns page-full" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="api-rest"><span class="header-section-number">5</span> api Rest</h2>
-<p>We use the <a href="https://axios-http.com/docs/intro" class="external">Axios</a> library <strong>to fetch data from the <a href="https://jsonplaceholder.typicode.com/" class="external">JSONPlaceholder</a> API</strong>, which provides a fake REST API for testing and prototyping.</p>
+<section id="axios" class="level3 page-columns page-full" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="axios"><span class="header-section-number">5.1</span> Axios</h3>
+<p>Intall <code>axios</code> using <code>npm</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1"></a>$ npm install axios</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p><code>Axios</code> is a <strong>promise-based HTTP Client for node.js and the browser</strong>.</p>
+<p>It is <code>isomorphic</code></p>
+<p>On the server-side it uses the native <code>node.js</code> http module</p>
+<p>On the client (browser) it uses <code>XMLHttpRequests</code>.</p>
+</blockquote>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><code>isomorphic</code>: it can run in the browser and nodejs with the same codebase.</p>
+</div></div><p>We use the <a href="https://axios-http.com/docs/intro" class="external">Axios</a> library <strong>to fetch data from the <a href="https://jsonplaceholder.typicode.com/" class="external">JSONPlaceholder</a> API</strong>, which provides a fake REST API for testing and prototyping.</p>
+</section>
+<section id="component" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="component"><span class="header-section-number">5.2</span> Component</h3>
 <p>The component initializes a state variable called data using the <code>useState</code> hook, and sets <strong>its initial value to an empty array.</strong></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1"></a> <span class="kw">const</span> [data<span class="op">,</span> setData] <span class="op">=</span> <span class="fu">useState</span>([])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1"></a> <span class="kw">const</span> [data<span class="op">,</span> setData] <span class="op">=</span> <span class="fu">useState</span>([])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>useEffect</code> hook is used <strong>to fetch the data from the API</strong> and update the data state variable when:</p>
 <ul>
 <li>the <strong>component mounts</strong> or</li>
 <li>when <strong>the <code>setData</code> function is called</strong>.</li>
 </ul>
 <p>The <code>axios.get()</code> method is called with <strong>the URL of the API endpoint</strong>:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">const</span> url <span class="op">=</span> <span class="st">"https://jsonplaceholder.typicode.com/todos"</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">const</span> url <span class="op">=</span> <span class="st">"https://jsonplaceholder.typicode.com/todos"</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The response is handled with a <code>then</code> block that sets the data state variable to the <code>response</code> data. If there is an error, it is logged to the console with a <code>catch</code> block.</p>
 <p>In the component’s <code>return</code> statement, the fetched data <strong>is rendered using the <code>.map()</code> method to loop through each item</strong> in the data array.</p>
 <p>The <code>key</code> prop is added to each item to help React identify the items and improve performance.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1"></a><span class="im">import</span> React<span class="op">,</span> { useEffect<span class="op">,</span> useState } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="im">import</span> axios <span class="im">from</span> <span class="st">"axios"</span><span class="op">;</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">AxiosApiRest</span>() {</span>
-<span id="cb15-5"><a href="#cb15-5"></a>  <span class="kw">const</span> url <span class="op">=</span> <span class="st">"https://jsonplaceholder.typicode.com/todos"</span><span class="op">;</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a>  <span class="kw">const</span> [data<span class="op">,</span> setData] <span class="op">=</span> <span class="fu">useState</span>([])<span class="op">;</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a></span>
-<span id="cb15-8"><a href="#cb15-8"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb15-9"><a href="#cb15-9"></a>    axios</span>
-<span id="cb15-10"><a href="#cb15-10"></a>      <span class="op">.</span><span class="fu">get</span>(url)</span>
-<span id="cb15-11"><a href="#cb15-11"></a>      <span class="op">.</span><span class="fu">then</span>((response) <span class="kw">=&gt;</span> {</span>
-<span id="cb15-12"><a href="#cb15-12"></a>        <span class="fu">setData</span>(response<span class="op">.</span><span class="at">data</span>)<span class="op">;</span></span>
-<span id="cb15-13"><a href="#cb15-13"></a>      })</span>
-<span id="cb15-14"><a href="#cb15-14"></a>      <span class="op">.</span><span class="fu">catch</span>((error) <span class="kw">=&gt;</span> {</span>
-<span id="cb15-15"><a href="#cb15-15"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(error)<span class="op">;</span></span>
-<span id="cb15-16"><a href="#cb15-16"></a>      })<span class="op">;</span></span>
-<span id="cb15-17"><a href="#cb15-17"></a>  }<span class="op">,</span> [setData])<span class="op">;</span></span>
-<span id="cb15-18"><a href="#cb15-18"></a></span>
-<span id="cb15-19"><a href="#cb15-19"></a>  <span class="cf">return</span> (</span>
-<span id="cb15-20"><a href="#cb15-20"></a>    <span class="op">&lt;&gt;</span></span>
-<span id="cb15-21"><a href="#cb15-21"></a>      <span class="op">&lt;</span>h1<span class="op">&gt;</span> My data todos <span class="im">from</span> axios<span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
-<span id="cb15-22"><a href="#cb15-22"></a>      {data <span class="op">&amp;&amp;</span></span>
-<span id="cb15-23"><a href="#cb15-23"></a>        data<span class="op">.</span><span class="fu">map</span>((item) <span class="kw">=&gt;</span> {</span>
-<span id="cb15-24"><a href="#cb15-24"></a>          <span class="cf">return</span> (</span>
-<span id="cb15-25"><a href="#cb15-25"></a>            <span class="op">&lt;</span>spam key<span class="op">=</span>{item<span class="op">.</span><span class="at">id</span>}<span class="op">&gt;</span></span>
-<span id="cb15-26"><a href="#cb15-26"></a>              <span class="dt">id</span><span class="op">:</span> {item<span class="op">.</span><span class="at">id</span>}</span>
-<span id="cb15-27"><a href="#cb15-27"></a>              <span class="op">&lt;</span>spam<span class="op">&gt;</span><span class="dt">userId</span><span class="op">:</span> {item<span class="op">.</span><span class="at">userId</span>} <span class="op">&lt;/</span>spam<span class="op">&gt;</span></span>
-<span id="cb15-28"><a href="#cb15-28"></a>              <span class="op">&lt;</span>spam<span class="op">&gt;</span><span class="dt">title</span><span class="op">:</span> {item<span class="op">.</span><span class="at">title</span>} <span class="op">&lt;/</span>spam<span class="op">&gt;</span></span>
-<span id="cb15-29"><a href="#cb15-29"></a>              <span class="op">&lt;</span>spam<span class="op">&gt;</span><span class="dt">completed</span><span class="op">:</span> {item<span class="op">.</span><span class="at">completed</span>} <span class="op">&lt;/</span>spam<span class="op">&gt;</span></span>
-<span id="cb15-30"><a href="#cb15-30"></a>              <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
-<span id="cb15-31"><a href="#cb15-31"></a>            <span class="op">&lt;/</span>spam<span class="op">&gt;</span></span>
-<span id="cb15-32"><a href="#cb15-32"></a>          )<span class="op">;</span></span>
-<span id="cb15-33"><a href="#cb15-33"></a>        })}</span>
-<span id="cb15-34"><a href="#cb15-34"></a>    <span class="op">&lt;/&gt;</span></span>
-<span id="cb15-35"><a href="#cb15-35"></a>  )<span class="op">;</span></span>
-<span id="cb15-36"><a href="#cb15-36"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1"></a><span class="im">import</span> React<span class="op">,</span> { useEffect<span class="op">,</span> useState } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="im">import</span> axios <span class="im">from</span> <span class="st">"axios"</span><span class="op">;</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">AxiosApiRest</span>() {</span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="kw">const</span> url <span class="op">=</span> <span class="st">"https://jsonplaceholder.typicode.com/todos"</span><span class="op">;</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a>  <span class="kw">const</span> [data<span class="op">,</span> setData] <span class="op">=</span> <span class="fu">useState</span>([])<span class="op">;</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a></span>
+<span id="cb16-8"><a href="#cb16-8"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb16-9"><a href="#cb16-9"></a>    axios</span>
+<span id="cb16-10"><a href="#cb16-10"></a>      <span class="op">.</span><span class="fu">get</span>(url)</span>
+<span id="cb16-11"><a href="#cb16-11"></a>      <span class="op">.</span><span class="fu">then</span>((response) <span class="kw">=&gt;</span> {</span>
+<span id="cb16-12"><a href="#cb16-12"></a>        <span class="fu">setData</span>(response<span class="op">.</span><span class="at">data</span>)<span class="op">;</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a>      })</span>
+<span id="cb16-14"><a href="#cb16-14"></a>      <span class="op">.</span><span class="fu">catch</span>((error) <span class="kw">=&gt;</span> {</span>
+<span id="cb16-15"><a href="#cb16-15"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(error)<span class="op">;</span></span>
+<span id="cb16-16"><a href="#cb16-16"></a>      })<span class="op">;</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a>  }<span class="op">,</span> [setData])<span class="op">;</span></span>
+<span id="cb16-18"><a href="#cb16-18"></a></span>
+<span id="cb16-19"><a href="#cb16-19"></a>  <span class="cf">return</span> (</span>
+<span id="cb16-20"><a href="#cb16-20"></a>    <span class="op">&lt;&gt;</span></span>
+<span id="cb16-21"><a href="#cb16-21"></a>      <span class="op">&lt;</span>h1<span class="op">&gt;</span> My data todos <span class="im">from</span> axios<span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
+<span id="cb16-22"><a href="#cb16-22"></a>      {data <span class="op">&amp;&amp;</span></span>
+<span id="cb16-23"><a href="#cb16-23"></a>        data<span class="op">.</span><span class="fu">map</span>((item) <span class="kw">=&gt;</span> {</span>
+<span id="cb16-24"><a href="#cb16-24"></a>          <span class="cf">return</span> (</span>
+<span id="cb16-25"><a href="#cb16-25"></a>            <span class="op">&lt;</span>spam key<span class="op">=</span>{item<span class="op">.</span><span class="at">id</span>}<span class="op">&gt;</span></span>
+<span id="cb16-26"><a href="#cb16-26"></a>              <span class="dt">id</span><span class="op">:</span> {item<span class="op">.</span><span class="at">id</span>}</span>
+<span id="cb16-27"><a href="#cb16-27"></a>              <span class="op">&lt;</span>spam<span class="op">&gt;</span><span class="dt">userId</span><span class="op">:</span> {item<span class="op">.</span><span class="at">userId</span>} <span class="op">&lt;/</span>spam<span class="op">&gt;</span></span>
+<span id="cb16-28"><a href="#cb16-28"></a>              <span class="op">&lt;</span>spam<span class="op">&gt;</span><span class="dt">title</span><span class="op">:</span> {item<span class="op">.</span><span class="at">title</span>} <span class="op">&lt;/</span>spam<span class="op">&gt;</span></span>
+<span id="cb16-29"><a href="#cb16-29"></a>              <span class="op">&lt;</span>spam<span class="op">&gt;</span><span class="dt">completed</span><span class="op">:</span> {item<span class="op">.</span><span class="at">completed</span>} <span class="op">&lt;/</span>spam<span class="op">&gt;</span></span>
+<span id="cb16-30"><a href="#cb16-30"></a>              <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb16-31"><a href="#cb16-31"></a>            <span class="op">&lt;/</span>spam<span class="op">&gt;</span></span>
+<span id="cb16-32"><a href="#cb16-32"></a>          )<span class="op">;</span></span>
+<span id="cb16-33"><a href="#cb16-33"></a>        })}</span>
+<span id="cb16-34"><a href="#cb16-34"></a>    <span class="op">&lt;/&gt;</span></span>
+<span id="cb16-35"><a href="#cb16-35"></a>  )<span class="op">;</span></span>
+<span id="cb16-36"><a href="#cb16-36"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 <section id="versions" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="versions"><span class="header-section-number">6</span> Versions</h2>
@@ -1917,9 +1938,9 @@ SPA vs MultiPage
 </tr>
 <tr class="even">
 <td>Hola5 0.3</td>
-<td>api Rest <a href="" class="external">hola5 0.3</a> <br> component api Rest <a href="" class="external">codesandbox</a> <br></td>
+<td>api Rest <a href="https://github.com/AlbertProfe/CifoJava2023-2/tree/9fccb4721f3c37e17a68927e60812c43c31cf03c/hola5" class="external">hola5 0.3</a> <br> component api Rest <a href="https://codesandbox.io/s/to-do-11-hh9efc?file=/src/AxiosApiRest.jsx" class="external">codesandbox</a> <br></td>
 <td><a href="../images/reactjs/lab-re-2-9.png" width="60%">api Rest tree-folder</a></td>
-<td><a href="../images/reactjs/lab-re-2-5.png" width="80%">render api Rest</a></td>
+<td><a href="../images/reactjs/lab-re-2-11.png" width="80%">render api Rest</a></td>
 </tr>
 </tbody>
 </table>
@@ -2216,7 +2237,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":true,"selector":".lightbox"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":true,"closeEffect":"zoom"});</script>
 
 
 
