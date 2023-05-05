@@ -1442,7 +1442,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, May 4, 2023</p>
+      <p class="date-modified">Friday, May 5, 2023</p>
     </div>
   </div>
     
@@ -1833,7 +1833,19 @@ SPA vs MultiPage
 </div><div class="">
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/clearInterval" class="external">clearInterval</a>: <code>clearInterval(intervalID)</code></p>
 </div></div>
-<p>The <code>idRef</code> is a reference to the timer, and it is updated every time the <code>useEffect</code> hook is called.</p>
+<blockquote class="blockquote">
+<p>The combination of (1) the <code>useEffect</code> hook (which synchronizes execution with two different sources) and (2) the render cycle trigger-render-paint (due the change of state) <strong>are the core business-logic of this code.</strong></p>
+</blockquote>
+<p>The key-idea of the <code>useEffect</code> in this particular use (related to a timer problem) is <strong>the synchronization of the execution with two different sources</strong> and <strong>when and who call the render-cycle</strong>:</p>
+<ul>
+<li><code>useEffect</code>, <strong>first render</strong>: when the component is loaded.</li>
+<li><code>useEffect</code>, with its dependencies: <code>state.isRunning</code>, when user clicks button <code>start</code>, <code>stop</code> or <code>reset</code>.</li>
+<li>with the change of the <strong>state</strong> the component triggers the <strong>render cycle</strong>: every time clock is ticking, that is, every one second.</li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>timer</strong>: <code>setInterval</code>and <code>clearInterval</code>with <code>idRef</code></p>
+</div></div><p>The <code>idRef</code> is a reference to the timer, and it is updated every time the <code>useEffect</code> hook is called.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1"></a>  <span class="kw">const</span> idRef <span class="op">=</span> <span class="fu">useRef</span>(<span class="dv">0</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The return statement returns a <code>JSX</code> template that displays the stopwatch: there are three buttons: “<code>Start</code>”, “<code>Stop</code>”, and “<code>Reset</code>” that dispatch start, stop, and reset actions respectively.</p>
 </section>
@@ -1841,7 +1853,7 @@ SPA vs MultiPage
 <h2 data-number="5" class="anchored" data-anchor-id="api-rest"><span class="header-section-number">5</span> api Rest</h2>
 <section id="axios" class="level3 page-columns page-full" data-number="5.1">
 <h3 data-number="5.1" class="anchored" data-anchor-id="axios"><span class="header-section-number">5.1</span> Axios</h3>
-<p>Intall <code>axios</code> using <code>npm</code>:</p>
+<p>Install <code>axios</code> using <code>npm</code>:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1"></a>$ npm install axios</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <blockquote class="blockquote">
 <p><code>Axios</code> is a <strong>promise-based HTTP Client for node.js and the browser</strong>.</p>
@@ -2237,7 +2249,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":true,"closeEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":true,"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom"});</script>
 
 
 
