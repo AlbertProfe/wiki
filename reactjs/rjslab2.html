@@ -1834,18 +1834,25 @@ SPA vs MultiPage
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/clearInterval" class="external">clearInterval</a>: <code>clearInterval(intervalID)</code></p>
 </div></div>
 <blockquote class="blockquote">
-<p>The combination of (1) the <code>useEffect</code> hook (which synchronizes execution with two different sources) and (2) the render cycle trigger-render-paint (due the change of state) <strong>are the core business-logic of this code.</strong></p>
+<p>The <strong>core business-logic</strong> of this code is the combination of:</p>
+<ol type="1">
+<li><p>the <code>useEffect</code> <strong>hook</strong> (which synchronizes execution with two different sources) and</p></li>
+<li><p>the render cycle <code>trigger-render-paint</code> (due the change of state of <code>state.time</code> by <code>setInterval</code> and <code>tick</code>).</p></li>
+</ol>
 </blockquote>
-<p>The key-idea of the <code>useEffect</code> in this particular use (related to a timer problem) is <strong>the synchronization of the execution with two different sources</strong> and <strong>when and who call the render-cycle</strong>:</p>
-<ul>
-<li><code>useEffect</code>, <strong>first render</strong>: when the component is loaded.</li>
-<li><code>useEffect</code>, with its dependencies: <code>state.isRunning</code>, when user clicks button <code>start</code>, <code>stop</code> or <code>reset</code>.</li>
-<li>with the change of the <strong>state</strong> the component triggers the <strong>render cycle</strong>: every time clock is ticking, that is, every one second.</li>
-</ul>
+<p>The key-idea of the <code>useEffect</code> in this particular use (related to a timer problem) is <mark>the synchronization of the execution with two different triggers</mark>:</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong>timer</strong>: <code>setInterval</code>and <code>clearInterval</code>with <code>idRef</code></p>
-</div></div><div class="quarto-figure quarto-figure-center">
+</div></div><ul>
+<li><code>useEffect</code>, <strong>first render</strong>: when the component is loaded.</li>
+<li><code>useEffect</code>, with its <strong>dependencies</strong>: <code>state.isRunning</code>, when user clicks button <code>start</code>, <code>stop</code> or <code>reset</code>.</li>
+</ul>
+<p>The <mark>core business-logic</mark> is completed with the <code>render-cycle</code>. The key-idea here is <strong>when and who call the render-cycle</strong>:</p>
+<ul>
+<li>with the change of the <strong>state</strong> the component triggers the <strong>render cycle</strong>: every time clock is ticking, that is, every one second: <code>state.time</code> by <code>setInterval</code> and <code>tick</code>.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="../images/reactjs/lab-re-2-12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="core business-logic Time Manager code"><img src="../images/reactjs/lab-re-2-12.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">core business-logic Time Manager code</figcaption><p></p>
@@ -1854,13 +1861,34 @@ SPA vs MultiPage
 <p>The <code>idRef</code> is a reference to the timer, and it is updated every time the <code>useEffect</code> hook is called.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1"></a>  <span class="kw">const</span> idRef <span class="op">=</span> <span class="fu">useRef</span>(<span class="dv">0</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The return statement returns a <code>JSX</code> template that displays the stopwatch: there are three buttons: “<code>Start</code>”, “<code>Stop</code>”, and “<code>Reset</code>” that dispatch start, stop, and reset actions respectively.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/lab-re-2-13.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Cleanup return"><img src="../images/reactjs/lab-re-2-13.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">Cleanup return</figcaption><p></p>
+</figure>
+</div>
+<p>The <code>cleanup function</code> of the <code>useEffect</code> hook allows us to stop side effects that no longer need to be executed before our component is unmounted.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="co">// Core business-logic</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="cf">return</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb13-4"><a href="#cb13-4"></a>    <span class="co">// Cleanup</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  }</span>
+<span id="cb13-6"><a href="#cb13-6"></a>}<span class="op">,</span> [dependencies])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>When to <a href="" class="external">use</a> a <code>cleanup function</code>:</p>
+<ul>
+<li>Canceling a fetch request</li>
+<li>Cleaning up Timeouts</li>
+<li>Cleaning up Intervals</li>
+<li>Cleaning up Event Listeners</li>
+<li>Cleaning up Web Sockets</li>
+</ul>
 </section>
 <section id="api-rest" class="level2 page-columns page-full" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="api-rest"><span class="header-section-number">5</span> api Rest</h2>
 <section id="axios" class="level3 page-columns page-full" data-number="5.1">
 <h3 data-number="5.1" class="anchored" data-anchor-id="axios"><span class="header-section-number">5.1</span> Axios</h3>
 <p>Install <code>axios</code> using <code>npm</code>:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1"></a>$ npm install axios</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1"></a>$ npm install axios</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <blockquote class="blockquote">
 <p><code>Axios</code> is a <strong>promise-based HTTP Client for node.js and the browser</strong>.</p>
 <p>It is <code>isomorphic</code></p>
@@ -1875,53 +1903,53 @@ SPA vs MultiPage
 <section id="component" class="level3" data-number="5.2">
 <h3 data-number="5.2" class="anchored" data-anchor-id="component"><span class="header-section-number">5.2</span> Component</h3>
 <p>The component initializes a state variable called data using the <code>useState</code> hook, and sets <strong>its initial value to an empty array.</strong></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1"></a> <span class="kw">const</span> [data<span class="op">,</span> setData] <span class="op">=</span> <span class="fu">useState</span>([])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1"></a> <span class="kw">const</span> [data<span class="op">,</span> setData] <span class="op">=</span> <span class="fu">useState</span>([])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>useEffect</code> hook is used <strong>to fetch the data from the API</strong> and update the data state variable when:</p>
 <ul>
 <li>the <strong>component mounts</strong> or</li>
 <li>when <strong>the <code>setData</code> function is called</strong>.</li>
 </ul>
 <p>The <code>axios.get()</code> method is called with <strong>the URL of the API endpoint</strong>:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">const</span> url <span class="op">=</span> <span class="st">"https://jsonplaceholder.typicode.com/todos"</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">const</span> url <span class="op">=</span> <span class="st">"https://jsonplaceholder.typicode.com/todos"</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The response is handled with a <code>then</code> block that sets the data state variable to the <code>response</code> data. If there is an error, it is logged to the console with a <code>catch</code> block.</p>
 <p>In the component’s <code>return</code> statement, the fetched data <strong>is rendered using the <code>.map()</code> method to loop through each item</strong> in the data array.</p>
 <p>The <code>key</code> prop is added to each item to help React identify the items and improve performance.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1"></a><span class="im">import</span> React<span class="op">,</span> { useEffect<span class="op">,</span> useState } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="im">import</span> axios <span class="im">from</span> <span class="st">"axios"</span><span class="op">;</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a></span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">AxiosApiRest</span>() {</span>
-<span id="cb16-5"><a href="#cb16-5"></a>  <span class="kw">const</span> url <span class="op">=</span> <span class="st">"https://jsonplaceholder.typicode.com/todos"</span><span class="op">;</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a>  <span class="kw">const</span> [data<span class="op">,</span> setData] <span class="op">=</span> <span class="fu">useState</span>([])<span class="op">;</span></span>
-<span id="cb16-7"><a href="#cb16-7"></a></span>
-<span id="cb16-8"><a href="#cb16-8"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb16-9"><a href="#cb16-9"></a>    axios</span>
-<span id="cb16-10"><a href="#cb16-10"></a>      <span class="op">.</span><span class="fu">get</span>(url)</span>
-<span id="cb16-11"><a href="#cb16-11"></a>      <span class="op">.</span><span class="fu">then</span>((response) <span class="kw">=&gt;</span> {</span>
-<span id="cb16-12"><a href="#cb16-12"></a>        <span class="fu">setData</span>(response<span class="op">.</span><span class="at">data</span>)<span class="op">;</span></span>
-<span id="cb16-13"><a href="#cb16-13"></a>      })</span>
-<span id="cb16-14"><a href="#cb16-14"></a>      <span class="op">.</span><span class="fu">catch</span>((error) <span class="kw">=&gt;</span> {</span>
-<span id="cb16-15"><a href="#cb16-15"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(error)<span class="op">;</span></span>
-<span id="cb16-16"><a href="#cb16-16"></a>      })<span class="op">;</span></span>
-<span id="cb16-17"><a href="#cb16-17"></a>  }<span class="op">,</span> [setData])<span class="op">;</span></span>
-<span id="cb16-18"><a href="#cb16-18"></a></span>
-<span id="cb16-19"><a href="#cb16-19"></a>  <span class="cf">return</span> (</span>
-<span id="cb16-20"><a href="#cb16-20"></a>    <span class="op">&lt;&gt;</span></span>
-<span id="cb16-21"><a href="#cb16-21"></a>      <span class="op">&lt;</span>h1<span class="op">&gt;</span> My data todos <span class="im">from</span> axios<span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
-<span id="cb16-22"><a href="#cb16-22"></a>      {data <span class="op">&amp;&amp;</span></span>
-<span id="cb16-23"><a href="#cb16-23"></a>        data<span class="op">.</span><span class="fu">map</span>((item) <span class="kw">=&gt;</span> {</span>
-<span id="cb16-24"><a href="#cb16-24"></a>          <span class="cf">return</span> (</span>
-<span id="cb16-25"><a href="#cb16-25"></a>            <span class="op">&lt;</span>spam key<span class="op">=</span>{item<span class="op">.</span><span class="at">id</span>}<span class="op">&gt;</span></span>
-<span id="cb16-26"><a href="#cb16-26"></a>              <span class="dt">id</span><span class="op">:</span> {item<span class="op">.</span><span class="at">id</span>}</span>
-<span id="cb16-27"><a href="#cb16-27"></a>              <span class="op">&lt;</span>spam<span class="op">&gt;</span><span class="dt">userId</span><span class="op">:</span> {item<span class="op">.</span><span class="at">userId</span>} <span class="op">&lt;/</span>spam<span class="op">&gt;</span></span>
-<span id="cb16-28"><a href="#cb16-28"></a>              <span class="op">&lt;</span>spam<span class="op">&gt;</span><span class="dt">title</span><span class="op">:</span> {item<span class="op">.</span><span class="at">title</span>} <span class="op">&lt;/</span>spam<span class="op">&gt;</span></span>
-<span id="cb16-29"><a href="#cb16-29"></a>              <span class="op">&lt;</span>spam<span class="op">&gt;</span><span class="dt">completed</span><span class="op">:</span> {item<span class="op">.</span><span class="at">completed</span>} <span class="op">&lt;/</span>spam<span class="op">&gt;</span></span>
-<span id="cb16-30"><a href="#cb16-30"></a>              <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
-<span id="cb16-31"><a href="#cb16-31"></a>            <span class="op">&lt;/</span>spam<span class="op">&gt;</span></span>
-<span id="cb16-32"><a href="#cb16-32"></a>          )<span class="op">;</span></span>
-<span id="cb16-33"><a href="#cb16-33"></a>        })}</span>
-<span id="cb16-34"><a href="#cb16-34"></a>    <span class="op">&lt;/&gt;</span></span>
-<span id="cb16-35"><a href="#cb16-35"></a>  )<span class="op">;</span></span>
-<span id="cb16-36"><a href="#cb16-36"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb17-1"><a href="#cb17-1"></a><span class="im">import</span> React<span class="op">,</span> { useEffect<span class="op">,</span> useState } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="im">import</span> axios <span class="im">from</span> <span class="st">"axios"</span><span class="op">;</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">AxiosApiRest</span>() {</span>
+<span id="cb17-5"><a href="#cb17-5"></a>  <span class="kw">const</span> url <span class="op">=</span> <span class="st">"https://jsonplaceholder.typicode.com/todos"</span><span class="op">;</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>  <span class="kw">const</span> [data<span class="op">,</span> setData] <span class="op">=</span> <span class="fu">useState</span>([])<span class="op">;</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a></span>
+<span id="cb17-8"><a href="#cb17-8"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb17-9"><a href="#cb17-9"></a>    axios</span>
+<span id="cb17-10"><a href="#cb17-10"></a>      <span class="op">.</span><span class="fu">get</span>(url)</span>
+<span id="cb17-11"><a href="#cb17-11"></a>      <span class="op">.</span><span class="fu">then</span>((response) <span class="kw">=&gt;</span> {</span>
+<span id="cb17-12"><a href="#cb17-12"></a>        <span class="fu">setData</span>(response<span class="op">.</span><span class="at">data</span>)<span class="op">;</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a>      })</span>
+<span id="cb17-14"><a href="#cb17-14"></a>      <span class="op">.</span><span class="fu">catch</span>((error) <span class="kw">=&gt;</span> {</span>
+<span id="cb17-15"><a href="#cb17-15"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(error)<span class="op">;</span></span>
+<span id="cb17-16"><a href="#cb17-16"></a>      })<span class="op">;</span></span>
+<span id="cb17-17"><a href="#cb17-17"></a>  }<span class="op">,</span> [setData])<span class="op">;</span></span>
+<span id="cb17-18"><a href="#cb17-18"></a></span>
+<span id="cb17-19"><a href="#cb17-19"></a>  <span class="cf">return</span> (</span>
+<span id="cb17-20"><a href="#cb17-20"></a>    <span class="op">&lt;&gt;</span></span>
+<span id="cb17-21"><a href="#cb17-21"></a>      <span class="op">&lt;</span>h1<span class="op">&gt;</span> My data todos <span class="im">from</span> axios<span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
+<span id="cb17-22"><a href="#cb17-22"></a>      {data <span class="op">&amp;&amp;</span></span>
+<span id="cb17-23"><a href="#cb17-23"></a>        data<span class="op">.</span><span class="fu">map</span>((item) <span class="kw">=&gt;</span> {</span>
+<span id="cb17-24"><a href="#cb17-24"></a>          <span class="cf">return</span> (</span>
+<span id="cb17-25"><a href="#cb17-25"></a>            <span class="op">&lt;</span>spam key<span class="op">=</span>{item<span class="op">.</span><span class="at">id</span>}<span class="op">&gt;</span></span>
+<span id="cb17-26"><a href="#cb17-26"></a>              <span class="dt">id</span><span class="op">:</span> {item<span class="op">.</span><span class="at">id</span>}</span>
+<span id="cb17-27"><a href="#cb17-27"></a>              <span class="op">&lt;</span>spam<span class="op">&gt;</span><span class="dt">userId</span><span class="op">:</span> {item<span class="op">.</span><span class="at">userId</span>} <span class="op">&lt;/</span>spam<span class="op">&gt;</span></span>
+<span id="cb17-28"><a href="#cb17-28"></a>              <span class="op">&lt;</span>spam<span class="op">&gt;</span><span class="dt">title</span><span class="op">:</span> {item<span class="op">.</span><span class="at">title</span>} <span class="op">&lt;/</span>spam<span class="op">&gt;</span></span>
+<span id="cb17-29"><a href="#cb17-29"></a>              <span class="op">&lt;</span>spam<span class="op">&gt;</span><span class="dt">completed</span><span class="op">:</span> {item<span class="op">.</span><span class="at">completed</span>} <span class="op">&lt;/</span>spam<span class="op">&gt;</span></span>
+<span id="cb17-30"><a href="#cb17-30"></a>              <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb17-31"><a href="#cb17-31"></a>            <span class="op">&lt;/</span>spam<span class="op">&gt;</span></span>
+<span id="cb17-32"><a href="#cb17-32"></a>          )<span class="op">;</span></span>
+<span id="cb17-33"><a href="#cb17-33"></a>        })}</span>
+<span id="cb17-34"><a href="#cb17-34"></a>    <span class="op">&lt;/&gt;</span></span>
+<span id="cb17-35"><a href="#cb17-35"></a>  )<span class="op">;</span></span>
+<span id="cb17-36"><a href="#cb17-36"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="versions" class="level2" data-number="6">
@@ -2255,7 +2283,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","loop":true,"openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom","closeEffect":"zoom"});</script>
 
 
 
