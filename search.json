@@ -5078,8 +5078,8 @@
     "objectID": "reactjs/rjslab2.html#versions",
     "href": "reactjs/rjslab2.html#versions",
     "title": "Lab#RE02-1: Router & Hooks",
-    "section": "6 Versions",
-    "text": "6 Versions\n\n\n\nCode Version\nCommit\nFolder-Tree\nScreeshoots\n\n\n\n\nHola5 0.0\ncreate project with route: hola5 0.0\ninitial tree-folder\nrender home\n\n\nHola5 0.1\nuseReducer: user Profile hola5 0.1  compoonent useReducer on codesandbox with handlers functions  or codesandbox dispatcher onChange, onClick\nuserReducer tree-folder\nrender user profile\n\n\nHola5 0.2\nuseReducer, userRef, useEffect: clock hola5 0.2  component clock on codesandbox \nclock tree-folder\nrender clock\n\n\nHola5 0.3\napi Rest hola5 0.3  component api Rest codesandbox \napi Rest tree-folder\nrender api Rest\n\n\n\n\n\n\n\n\n  React JS: Lab#RE01-1 \n\n\n\n  top \n\n\n\n React JS: Lab#RE03-1"
+    "section": "7 Versions",
+    "text": "7 Versions\n\n\n\nCode Version\nCommit\nFolder-Tree\nScreeshoots\n\n\n\n\nHola5 0.0\ncreate project with route: hola5 0.0\ninitial tree-folder\nrender home\n\n\nHola5 0.1\nuseReducer: user Profile hola5 0.1  compoonent useReducer on codesandbox with handlers functions  or codesandbox dispatcher onChange, onClick\nuserReducer tree-folder\nrender user profile\n\n\nHola5 0.2\nuseReducer, userRef, useEffect: clock hola5 0.2  component clock on codesandbox \nclock tree-folder\nrender clock\n\n\nHola5 0.3\napi Rest hola5 0.3  component api Rest codesandbox \napi Rest tree-folder\nrender api Rest\n\n\nHola5 0.4\nuseContext: fake login hola5 0.4\nuseContxt login tree-folder\nrender useContext login - render useContext loged\n\n\n\n\n\n\n\n\n  React JS: Lab#RE01-1 \n\n\n\n  top \n\n\n\n React JS: Lab#RE03-1"
   },
   {
     "objectID": "reactjs/reactjs-hook-context.html",
@@ -5675,5 +5675,12 @@
     "title": "The mom test",
     "section": "More info",
     "text": "More info\n\nEl Mom Test\nThe Mom Test"
+  },
+  {
+    "objectID": "reactjs/rjslab2.html#usecontext-login",
+    "href": "reactjs/rjslab2.html#usecontext-login",
+    "title": "Lab#RE02-1: Router & Hooks",
+    "section": "6 useContext login",
+    "text": "6 useContext login\nReference: useContext hook: Example #1\n\n\n\nuseContext: create, provide, consume\n\n\n\n\n\nuseContext: consume in components-tree\n\n\n\ncreateContext, useContext, useState working together\n\nIn this example, there is a currentUser state variable which holds an object.\nWe combine { currentUser, setCurrentUser } into a single object and pass it down through the context inside the value={}.\nThis lets any component below, such as LoginButton, read both currentUser and setCurrentUser, and then call setCurrentUser when needed.\n\n\nApp.js\n\nimport { createContext, useContext, useState } from 'react';\n\nconst CurrentUserContext = createContext(null);\n\nexport default function MyApp() {\n  const [currentUser, setCurrentUser] = useState(null);\n  return (\n    <CurrentUserContext.Provider\n      value={{\n        currentUser,\n        setCurrentUser\n      }}\n    >\n      <Form />\n    </CurrentUserContext.Provider>\n  );\n}\n\nfunction Form({ children }) {\n  return (\n    <Panel title=\"Welcome\">\n      <LoginButton />\n    </Panel>\n  );\n}\n\nfunction LoginButton() {\n  const {\n    currentUser,\n    setCurrentUser\n  } = useContext(CurrentUserContext);\n\n  if (currentUser !== null) {\n    return <p>You logged in as {currentUser.name}.</p>;\n  }\n\n  return (\n    <Button onClick={() => {\n      setCurrentUser({ name: 'Advika' })\n    }}>Log in as Advika</Button>\n  );\n}\n\nfunction Panel({ title, children }) {\n  return (\n    <section className=\"panel\">\n      <h1>{title}</h1>\n      {children}\n    </section>\n  )\n}\n\nfunction Button({ children, onClick }) {\n  return (\n    <button className=\"button\" onClick={onClick}>\n      {children}\n    </button>\n  );\n}\n\n\n\n\n\n\nInitial render\n\n\n\n\n\n\nInitial render\n\n\n\nExamples of updating context"
   }
 ]
