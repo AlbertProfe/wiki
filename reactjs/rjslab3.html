@@ -1387,7 +1387,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#user-story-mock-up" id="toc-user-story-mock-up" class="nav-link active" data-scroll-target="#user-story-mock-up"><span class="toc-section-number">1</span>  user-story &amp; mock-up</a></li>
-  <li><a href="#step-by-step-code" id="toc-step-by-step-code" class="nav-link" data-scroll-target="#step-by-step-code"><span class="toc-section-number">2</span>  step-by-step code</a></li>
+  <li><a href="#step-by-step-code" id="toc-step-by-step-code" class="nav-link" data-scroll-target="#step-by-step-code"><span class="toc-section-number">2</span>  step-by-step code</a>
+  <ul>
+  <li><a href="#project-creation" id="toc-project-creation" class="nav-link" data-scroll-target="#project-creation"><span class="toc-section-number">2.1</span>  Project creation</a></li>
+  </ul></li>
   <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="toc-section-number">3</span>  Versions</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/rjslab3.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -1470,6 +1473,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="1" class="anchored" data-anchor-id="user-story-mock-up"><span class="header-section-number">1</span> user-story &amp; mock-up</h2>
 <p>This lab is a basic implementation of a <strong>Todo List application</strong> using React. It utilizes <strong>React hooks</strong> such as <code>useReducer</code> and <code>useContext</code> for state management.</p>
 <p>We will define an <code>initial set of todos</code> and a reducer function that handles various actions like <code>adding a new todo</code>, <code>deleting a todo</code>, <code>marking a todo as completed</code>, and <code>resetting the list.</code></p>
+<p>Actions definition:</p>
+<ul>
+<li><code>add</code> action: Adds a new todo item to the list.</li>
+<li><code>delete</code> action: Removes a todo item from the list.</li>
+<li><code>completed</code> action: Toggles the completed status of a todo item.</li>
+<li><code>reset</code> action: Resets the todo list to its initial state.</li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">const</span> initialTodos <span class="op">=</span> [</span>
 <span id="cb1-2"><a href="#cb1-2"></a>  {</span>
 <span id="cb1-3"><a href="#cb1-3"></a>    <span class="dt">id</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
@@ -1508,6 +1518,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="step-by-step-code" class="level2 page-columns page-full" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="step-by-step-code"><span class="header-section-number">2</span> step-by-step code</h2>
+<section id="project-creation" class="level3 page-columns page-full" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="project-creation"><span class="header-section-number">2.1</span> Project creation</h3>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
@@ -1516,7 +1528,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p></p><figcaption class="figure-caption">step-by-step cheatsheet</figcaption><p></p>
 </figure>
 </div>
-</div></div></section>
+</div></div><p>First at all we create the React project with <code>Route</code> and <code>Semantic</code> css Library.</p>
+<p>Then, the reducer component: <code>&lt;ToDoApp /&gt;</code>.</p>
+<p>It uses React’s <code>useReducer</code> hook to manage the state of the todo items. The initial todos are predefined, and the app supports actions like adding a new todo, deleting a todo, and marking a todo as completed. The state of the todos is stored in an array.</p>
+<p>We crete a placeholder <code>useReducer</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> { Button<span class="op">,</span> Input<span class="op">,</span> Checkbox } <span class="im">from</span> <span class="st">"semantic-ui-react"</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="im">import</span> { useReducer } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">const</span> initialTodos <span class="op">=</span> [</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  {</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="dt">id</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="dt">text</span><span class="op">:</span> <span class="st">"lean how to comunicate"</span><span class="op">,</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="dt">completed</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="dt">author</span><span class="op">:</span> <span class="st">"Faby"</span><span class="op">,</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>    <span class="dt">due</span><span class="op">:</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">5</span> <span class="op">/</span> <span class="dv">2022</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>  }<span class="op">,</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>  {</span>
+<span id="cb2-13"><a href="#cb2-13"></a>    <span class="dt">id</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>    <span class="dt">text</span><span class="op">:</span> <span class="st">"road out of hell"</span><span class="op">,</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>    <span class="dt">complete</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>    <span class="dt">author</span><span class="op">:</span> <span class="st">"Alex"</span><span class="op">,</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>    <span class="dt">due</span><span class="op">:</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">6</span> <span class="op">/</span> <span class="dv">2022</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>  }</span>
+<span id="cb2-19"><a href="#cb2-19"></a>]<span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="kw">function</span> <span class="fu">reducer</span>(state<span class="op">,</span> action) {</span>
+<span id="cb2-22"><a href="#cb2-22"></a>  <span class="cf">switch</span> (action<span class="op">.</span><span class="at">type</span>) {</span>
+<span id="cb2-23"><a href="#cb2-23"></a>    <span class="cf">case</span> <span class="st">"bla"</span><span class="op">:</span> {</span>
+<span id="cb2-24"><a href="#cb2-24"></a>      <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a>    }</span>
+<span id="cb2-26"><a href="#cb2-26"></a>    <span class="cf">case</span> <span class="st">"blabla"</span><span class="op">:</span> {</span>
+<span id="cb2-27"><a href="#cb2-27"></a>      <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a>    }</span>
+<span id="cb2-29"><a href="#cb2-29"></a>    <span class="cf">default</span><span class="op">:</span> {</span>
+<span id="cb2-30"><a href="#cb2-30"></a>      <span class="cf">return</span> state<span class="op">;</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a>    }</span>
+<span id="cb2-32"><a href="#cb2-32"></a>  }}<span class="op">;</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a></span>
+<span id="cb2-34"><a href="#cb2-34"></a></span>
+<span id="cb2-35"><a href="#cb2-35"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">ToDoApp</span>(){</span>
+<span id="cb2-36"><a href="#cb2-36"></a>    <span class="kw">const</span> [state<span class="op">,</span> dispacher] <span class="op">=</span> <span class="fu">useReducer</span> (reducer<span class="op">,</span> initialTodos)<span class="op">;</span></span>
+<span id="cb2-37"><a href="#cb2-37"></a></span>
+<span id="cb2-38"><a href="#cb2-38"></a>    <span class="cf">return</span> (</span>
+<span id="cb2-39"><a href="#cb2-39"></a>      <span class="op">&lt;&gt;</span></span>
+<span id="cb2-40"><a href="#cb2-40"></a>        <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb2-41"><a href="#cb2-41"></a>        <span class="op">&lt;</span>span<span class="op">&gt;</span>ToDo<span class="op">&lt;/</span>span<span class="op">&gt;</span></span>
+<span id="cb2-42"><a href="#cb2-42"></a>        <span class="op">&lt;</span>Button<span class="op">&gt;</span>Delete<span class="op">&lt;/</span>Button<span class="op">&gt;</span></span>
+<span id="cb2-43"><a href="#cb2-43"></a>        <span class="op">&lt;</span>Input placeholder<span class="op">=</span><span class="st">"Write something"</span> <span class="op">/&gt;</span></span>
+<span id="cb2-44"><a href="#cb2-44"></a>        <span class="op">&lt;</span>Checkbox toggle <span class="op">/&gt;</span></span>
+<span id="cb2-45"><a href="#cb2-45"></a>        <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb2-46"><a href="#cb2-46"></a>      <span class="op">&lt;/&gt;</span></span>
+<span id="cb2-47"><a href="#cb2-47"></a>    )<span class="op">;</span></span>
+<span id="cb2-48"><a href="#cb2-48"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
 <section id="versions" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="versions"><span class="header-section-number">3</span> Versions</h2>
 <table class="table">
@@ -1830,7 +1895,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":true});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":true});</script>
 
 
 
