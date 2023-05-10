@@ -1595,59 +1595,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="create-new-todo" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="create-new-todo"><span class="header-section-number">2.2</span> create new todo</h3>
+<p>Step-by-step new todo creation:</p>
+<ol type="1">
+<li>The <code>&lt;Button&gt;</code> component is rendered with an <strong>onClick event handler</strong>,</li>
+<li>when the button is clicked, it <strong>dispatches</strong> an action of type <code>"add"</code> using the <code>dispatch</code> function</li>
+<li>and calls the <code>reducer</code>.</li>
+<li>The <code>reducer</code> executes a case <code>add</code> creating a new state.</li>
+<li>As a new state is created, a new render is painted.</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">import</span> { Button<span class="op">,</span> Input<span class="op">,</span> Checkbox } <span class="im">from</span> <span class="st">"semantic-ui-react"</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="im">import</span> { useReducer } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">const</span> initialTodos <span class="op">=</span> [</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="co">// todos objects</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>]<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="kw">function</span> <span class="fu">reducer</span>(state<span class="op">,</span> action) {</span>
+<span id="cb3-9"><a href="#cb3-9"></a>  <span class="cf">switch</span> (action<span class="op">.</span><span class="at">type</span>) {</span>
+<span id="cb3-10"><a href="#cb3-10"></a>     <span class="cf">case</span> <span class="st">"add"</span><span class="op">:</span> {</span>
+<span id="cb3-11"><a href="#cb3-11"></a>      <span class="cf">return</span> [</span>
+<span id="cb3-12"><a href="#cb3-12"></a>        <span class="op">...</span>state<span class="op">,</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>        {</span>
+<span id="cb3-14"><a href="#cb3-14"></a>          <span class="dt">id</span><span class="op">:</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">,</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a>          <span class="dt">text</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>          <span class="dt">author</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>          <span class="dt">due</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a>          <span class="dt">completed</span><span class="op">:</span> <span class="kw">false</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a>        }</span>
+<span id="cb3-20"><a href="#cb3-20"></a>      ]<span class="op">;</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a>    }</span>
+<span id="cb3-22"><a href="#cb3-22"></a>    <span class="cf">case</span> <span class="st">"blabla"</span><span class="op">:</span> {</span>
+<span id="cb3-23"><a href="#cb3-23"></a>      <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a>    }</span>
+<span id="cb3-25"><a href="#cb3-25"></a>    <span class="cf">default</span><span class="op">:</span> {</span>
+<span id="cb3-26"><a href="#cb3-26"></a>      <span class="cf">return</span> state<span class="op">;</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a>    }</span>
+<span id="cb3-28"><a href="#cb3-28"></a>  }}<span class="op">;</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a></span>
+<span id="cb3-30"><a href="#cb3-30"></a></span>
+<span id="cb3-31"><a href="#cb3-31"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">ToDoApp</span>(){</span>
+<span id="cb3-32"><a href="#cb3-32"></a>    <span class="kw">const</span> [state<span class="op">,</span> dispatch] <span class="op">=</span> <span class="fu">useReducer</span>(reducer<span class="op">,</span> initialTodos)<span class="op">;</span></span>
+<span id="cb3-33"><a href="#cb3-33"></a></span>
+<span id="cb3-34"><a href="#cb3-34"></a>    <span class="cf">return</span> (</span>
+<span id="cb3-35"><a href="#cb3-35"></a>      <span class="op">&lt;&gt;</span></span>
+<span id="cb3-36"><a href="#cb3-36"></a>      <span class="op">&lt;</span>div style<span class="op">=</span>{{<span class="dt">margin</span><span class="op">:</span> <span class="st">"40px"</span>}}<span class="op">&gt;</span>        </span>
+<span id="cb3-37"><a href="#cb3-37"></a>        <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb3-38"><a href="#cb3-38"></a>        <span class="op">&lt;</span>Button onClick<span class="op">=</span>{</span>
+<span id="cb3-39"><a href="#cb3-39"></a>          () <span class="kw">=&gt;</span> <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"add"</span> })}<span class="op">&gt;</span>Create Todo<span class="op">&lt;/</span>Button<span class="op">&gt;</span></span>
+<span id="cb3-40"><a href="#cb3-40"></a>        <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb3-41"><a href="#cb3-41"></a>        <span class="op">&lt;</span>span<span class="op">&gt;</span>todo id<span class="op">&lt;/</span>span<span class="op">&gt;</span> {<span class="st">" "</span>}</span>
+<span id="cb3-42"><a href="#cb3-42"></a>        <span class="op">&lt;</span>Button<span class="op">&gt;</span>Delete<span class="op">&lt;/</span>Button<span class="op">&gt;</span></span>
+<span id="cb3-43"><a href="#cb3-43"></a>        <span class="op">&lt;</span>Input placeholder<span class="op">=</span><span class="st">"Write something"</span> <span class="op">/&gt;</span></span>
+<span id="cb3-44"><a href="#cb3-44"></a>        <span class="op">&lt;</span>Checkbox toggle <span class="op">/&gt;</span></span>
+<span id="cb3-45"><a href="#cb3-45"></a>        <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb3-46"><a href="#cb3-46"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb3-47"><a href="#cb3-47"></a></span>
+<span id="cb3-48"><a href="#cb3-48"></a>      <span class="op">&lt;/&gt;</span></span>
+<span id="cb3-49"><a href="#cb3-49"></a>    )<span class="op">;</span></span>
+<span id="cb3-50"><a href="#cb3-50"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>&lt;Button&gt;</code> component is rendered with an <strong>onClick event handler</strong>. When the button is clicked, it <strong>dispatches</strong> an action of type <code>"add"</code> using the <code>dispatch</code> function and calls the <code>reducer</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a>  <span class="op">&lt;</span>Button onClick<span class="op">=</span>{() <span class="kw">=&gt;</span> <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"add"</span> })}<span class="op">&gt;</span>Create Todo<span class="op">&lt;/</span>Button<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a>  <span class="op">&lt;</span>Button onClick<span class="op">=</span>{() <span class="kw">=&gt;</span> <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"add"</span> })}<span class="op">&gt;</span>Create Todo<span class="op">&lt;/</span>Button<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In the reducer, the <code>spread</code> operator <code>(...state)</code> is used to create a new array that includes all the existing elements without mutating the original state.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> { Button<span class="op">,</span> Input<span class="op">,</span> Checkbox } <span class="im">from</span> <span class="st">"semantic-ui-react"</span><span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="im">import</span> { useReducer } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">const</span> initialTodos <span class="op">=</span> [</span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="co">// todos objects</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>]<span class="op">;</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="kw">function</span> <span class="fu">reducer</span>(state<span class="op">,</span> action) {</span>
-<span id="cb4-9"><a href="#cb4-9"></a>  <span class="cf">switch</span> (action<span class="op">.</span><span class="at">type</span>) {</span>
-<span id="cb4-10"><a href="#cb4-10"></a>     <span class="cf">case</span> <span class="st">"add"</span><span class="op">:</span> {</span>
-<span id="cb4-11"><a href="#cb4-11"></a>      <span class="cf">return</span> [</span>
-<span id="cb4-12"><a href="#cb4-12"></a>        <span class="op">...</span>state<span class="op">,</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a>        {</span>
-<span id="cb4-14"><a href="#cb4-14"></a>          <span class="dt">id</span><span class="op">:</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">,</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a>          <span class="dt">text</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a>          <span class="dt">author</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a>          <span class="dt">due</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a>          <span class="dt">completed</span><span class="op">:</span> <span class="kw">false</span></span>
-<span id="cb4-19"><a href="#cb4-19"></a>        }</span>
-<span id="cb4-20"><a href="#cb4-20"></a>      ]<span class="op">;</span></span>
-<span id="cb4-21"><a href="#cb4-21"></a>    }</span>
-<span id="cb4-22"><a href="#cb4-22"></a>    <span class="cf">case</span> <span class="st">"blabla"</span><span class="op">:</span> {</span>
-<span id="cb4-23"><a href="#cb4-23"></a>      <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb4-24"><a href="#cb4-24"></a>    }</span>
-<span id="cb4-25"><a href="#cb4-25"></a>    <span class="cf">default</span><span class="op">:</span> {</span>
-<span id="cb4-26"><a href="#cb4-26"></a>      <span class="cf">return</span> state<span class="op">;</span></span>
-<span id="cb4-27"><a href="#cb4-27"></a>    }</span>
-<span id="cb4-28"><a href="#cb4-28"></a>  }}<span class="op">;</span></span>
-<span id="cb4-29"><a href="#cb4-29"></a></span>
-<span id="cb4-30"><a href="#cb4-30"></a></span>
-<span id="cb4-31"><a href="#cb4-31"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">ToDoApp</span>(){</span>
-<span id="cb4-32"><a href="#cb4-32"></a>    <span class="kw">const</span> [state<span class="op">,</span> dispatch] <span class="op">=</span> <span class="fu">useReducer</span>(reducer<span class="op">,</span> initialTodos)<span class="op">;</span></span>
-<span id="cb4-33"><a href="#cb4-33"></a></span>
-<span id="cb4-34"><a href="#cb4-34"></a>    <span class="cf">return</span> (</span>
-<span id="cb4-35"><a href="#cb4-35"></a>      <span class="op">&lt;&gt;</span></span>
-<span id="cb4-36"><a href="#cb4-36"></a>      <span class="op">&lt;</span>div style<span class="op">=</span>{{<span class="dt">margin</span><span class="op">:</span> <span class="st">"40px"</span>}}<span class="op">&gt;</span>        </span>
-<span id="cb4-37"><a href="#cb4-37"></a>        <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
-<span id="cb4-38"><a href="#cb4-38"></a>        <span class="op">&lt;</span>Button onClick<span class="op">=</span>{</span>
-<span id="cb4-39"><a href="#cb4-39"></a>          () <span class="kw">=&gt;</span> <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"add"</span> })}<span class="op">&gt;</span>Create Todo<span class="op">&lt;/</span>Button<span class="op">&gt;</span></span>
-<span id="cb4-40"><a href="#cb4-40"></a>        <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
-<span id="cb4-41"><a href="#cb4-41"></a>        <span class="op">&lt;</span>span<span class="op">&gt;</span>todo id<span class="op">&lt;/</span>span<span class="op">&gt;</span> {<span class="st">" "</span>}</span>
-<span id="cb4-42"><a href="#cb4-42"></a>        <span class="op">&lt;</span>Button<span class="op">&gt;</span>Delete<span class="op">&lt;/</span>Button<span class="op">&gt;</span></span>
-<span id="cb4-43"><a href="#cb4-43"></a>        <span class="op">&lt;</span>Input placeholder<span class="op">=</span><span class="st">"Write something"</span> <span class="op">/&gt;</span></span>
-<span id="cb4-44"><a href="#cb4-44"></a>        <span class="op">&lt;</span>Checkbox toggle <span class="op">/&gt;</span></span>
-<span id="cb4-45"><a href="#cb4-45"></a>        <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
-<span id="cb4-46"><a href="#cb4-46"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb4-47"><a href="#cb4-47"></a></span>
-<span id="cb4-48"><a href="#cb4-48"></a>      <span class="op">&lt;/&gt;</span></span>
-<span id="cb4-49"><a href="#cb4-49"></a>    )<span class="op">;</span></span>
-<span id="cb4-50"><a href="#cb4-50"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">import</span> { Button<span class="op">,</span> Input<span class="op">,</span> Checkbox } <span class="im">from</span> <span class="st">"semantic-ui-react"</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="im">import</span> { useReducer } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">const</span> initialTodos <span class="op">=</span> [</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="co">// todos objects</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>]<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="kw">function</span> <span class="fu">reducer</span>(state<span class="op">,</span> action) {</span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="cf">switch</span> (action<span class="op">.</span><span class="at">type</span>) {</span>
+<span id="cb5-10"><a href="#cb5-10"></a>     <span class="cf">case</span> <span class="st">"add"</span><span class="op">:</span> {</span>
+<span id="cb5-11"><a href="#cb5-11"></a>      <span class="cf">return</span> [</span>
+<span id="cb5-12"><a href="#cb5-12"></a>        <span class="op">...</span>state<span class="op">,</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>        {</span>
+<span id="cb5-14"><a href="#cb5-14"></a>          <span class="dt">id</span><span class="op">:</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">,</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>          <span class="dt">text</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>          <span class="dt">author</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>          <span class="dt">due</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>          <span class="dt">completed</span><span class="op">:</span> <span class="kw">false</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>        }</span>
+<span id="cb5-20"><a href="#cb5-20"></a>      ]<span class="op">;</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>    }</span>
+<span id="cb5-22"><a href="#cb5-22"></a>    <span class="cf">case</span> <span class="st">"blabla"</span><span class="op">:</span> {</span>
+<span id="cb5-23"><a href="#cb5-23"></a>      <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a>    }</span>
+<span id="cb5-25"><a href="#cb5-25"></a>    <span class="cf">default</span><span class="op">:</span> {</span>
+<span id="cb5-26"><a href="#cb5-26"></a>      <span class="cf">return</span> state<span class="op">;</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a>    }</span>
+<span id="cb5-28"><a href="#cb5-28"></a>  }}<span class="op">;</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a></span>
+<span id="cb5-30"><a href="#cb5-30"></a></span>
+<span id="cb5-31"><a href="#cb5-31"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">ToDoApp</span>(){</span>
+<span id="cb5-32"><a href="#cb5-32"></a>   <span class="co">// render</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>spread</code> operator <code>(...state)</code> is used <mark>to create a new array that includes all the elements from the existing state array. This is done to avoid mutating the original state.</mark></p>
 <p>A <em>new object is created</em> with the following properties:</p>
 <ul>
@@ -1684,7 +1725,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td>todoApp 0.1</td>
 <td>create new todo: <a href="https://github.com/AlbertProfe/CifoJava2023-2/tree/96c8f427a889ccd8f32517c38ee1b8b6a2bd54ba/todoapp" class="external">todoApp 0.1</a></td>
 <td>-</td>
-<td><a href="../images/reactjs/lab-re-3-7.png">initial render</a> - <a href="../images/reactjs/lab-re-3-8.png" width="80%">tod created render</a></td>
+<td><a href="../images/reactjs/lab-re-3-7.png">initial render</a> - <a href="../images/reactjs/lab-re-3-8.png" width="80%">todo created render</a></td>
 </tr>
 </tbody>
 </table>
@@ -1981,7 +2022,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":true,"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});</script>
 
 
 
