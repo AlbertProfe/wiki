@@ -1717,6 +1717,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="read-and-render-todo" class="level3 page-columns page-full" data-number="2.3">
 <h3 data-number="2.3" class="anchored" data-anchor-id="read-and-render-todo"><span class="header-section-number">2.3</span> read and render todo</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a><span class="im">import</span> React<span class="op">,</span> { useReducer } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">const</span> initialTodos <span class="op">=</span> [</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="co">// todos initial</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>]<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="kw">function</span> <span class="fu">appReducer</span>(state<span class="op">,</span> action) {</span>
+<span id="cb6-8"><a href="#cb6-8"></a>  <span class="cf">switch</span> (action<span class="op">.</span><span class="at">type</span>) {</span>
+<span id="cb6-9"><a href="#cb6-9"></a>    <span class="co">// cases</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>}</span>
+<span id="cb6-11"><a href="#cb6-11"></a></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">TodoApp</span>() {</span>
+<span id="cb6-13"><a href="#cb6-13"></a>  <span class="kw">const</span> [state<span class="op">,</span> dispatch] <span class="op">=</span> <span class="fu">useReducer</span>(appReducer<span class="op">,</span> initialTodos)<span class="op">;</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a></span>
+<span id="cb6-15"><a href="#cb6-15"></a>  <span class="cf">return</span> (</span>
+<span id="cb6-16"><a href="#cb6-16"></a>    <span class="op">&lt;&gt;</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>      <span class="op">&lt;</span>h3<span class="op">&gt;</span><span class="dt">List</span><span class="op">:</span> add<span class="op">,</span> <span class="kw">delete</span><span class="op">,</span> complete and refresh<span class="op">&lt;/</span>h3<span class="op">&gt;</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a>      <span class="op">&lt;</span>button onClick<span class="op">=</span>{() <span class="kw">=&gt;</span> <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"add"</span> })}<span class="op">&gt;</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a>        Create Todo</span>
+<span id="cb6-20"><a href="#cb6-20"></a>      <span class="op">&lt;/</span>button<span class="op">&gt;</span>{<span class="st">" "</span>}</span>
+<span id="cb6-21"><a href="#cb6-21"></a>      <span class="op">&lt;</span>button<span class="op">&gt;</span>Clear Todo<span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a>      <span class="op">&lt;</span>br <span class="op">/&gt;</span> <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a>      <span class="op">&lt;</span>div style<span class="op">=</span>{{ <span class="dt">margin</span><span class="op">:</span> <span class="st">"20px"</span> }}<span class="op">&gt;</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a>        {state<span class="op">.</span><span class="fu">map</span>((item) <span class="kw">=&gt;</span> (</span>
+<span id="cb6-25"><a href="#cb6-25"></a>          <span class="op">&lt;&gt;</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a>            <span class="op">&lt;</span>input type<span class="op">=</span><span class="st">"checkbox"</span><span class="op">/&gt;</span></span>
+<span id="cb6-27"><a href="#cb6-27"></a>            <span class="op">&lt;</span>input type<span class="op">=</span><span class="st">"text"</span> defaultValue<span class="op">=</span>{item<span class="op">.</span><span class="at">text</span>} <span class="op">/&gt;</span>{<span class="st">" "</span>}</span>
+<span id="cb6-28"><a href="#cb6-28"></a>            <span class="op">&lt;</span>input type<span class="op">=</span><span class="st">"text"</span> defaultValue<span class="op">=</span>{item<span class="op">.</span><span class="at">author</span>} <span class="op">/&gt;</span>{<span class="st">" "</span>}</span>
+<span id="cb6-29"><a href="#cb6-29"></a>            <span class="op">&lt;</span>input type<span class="op">=</span><span class="st">"date"</span> defaultValue<span class="op">=</span>{item<span class="op">.</span><span class="at">due</span>} <span class="op">/&gt;</span>{<span class="st">" "</span>}</span>
+<span id="cb6-30"><a href="#cb6-30"></a>            <span class="op">&lt;</span>button<span class="op">&gt;</span></span>
+<span id="cb6-31"><a href="#cb6-31"></a>              Delete</span>
+<span id="cb6-32"><a href="#cb6-32"></a>            <span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb6-33"><a href="#cb6-33"></a>            <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb6-34"><a href="#cb6-34"></a>          <span class="op">&lt;/&gt;</span></span>
+<span id="cb6-35"><a href="#cb6-35"></a>        ))}</span>
+<span id="cb6-36"><a href="#cb6-36"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb6-37"><a href="#cb6-37"></a>    <span class="op">&lt;/&gt;</span></span>
+<span id="cb6-38"><a href="#cb6-38"></a>  )<span class="op">;</span></span>
+<span id="cb6-39"><a href="#cb6-39"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We are going to <strong>map over</strong> our <code>state</code> and generating a list of <code>htmml</code> elements based on its contents.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -1753,22 +1792,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>reducer creates new state which triggers new render with new state</li>
 </ul>
 <p>The <code>button</code> element, when clicked, <strong>triggers</strong> an action to delete an item. It uses an <code>onClick</code> <code>event</code> <code>handler</code> that <code>dispatches</code> <mark> a “delete” action with the item’s ID as the payload,<mark> allowing the application to handle the deletion logic based on the dispatched action.</mark></mark></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a>  <span class="op">&lt;</span>Button</span>
-<span id="cb6-2"><a href="#cb6-2"></a>    onClick<span class="op">=</span>{() <span class="kw">=&gt;</span> <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"delete"</span><span class="op">,</span> <span class="dt">payload</span><span class="op">:</span> item<span class="op">.</span><span class="at">id</span> })}<span class="op">&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>    Delete</span>
-<span id="cb6-4"><a href="#cb6-4"></a>  <span class="op">&lt;/</span>Button<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="op">&lt;</span>Button</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    onClick<span class="op">=</span>{() <span class="kw">=&gt;</span> <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"delete"</span><span class="op">,</span> <span class="dt">payload</span><span class="op">:</span> item<span class="op">.</span><span class="at">id</span> })}<span class="op">&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>    Delete</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="op">&lt;/</span>Button<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The reducer case statement for handling the “delete” action filters the state array based on the item’s ID, removing the item with the matching ID from the state.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">function</span> <span class="fu">appReducer</span>(state<span class="op">,</span> action) {</span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="cf">switch</span> (action<span class="op">.</span><span class="at">type</span>) {</span>
-<span id="cb7-3"><a href="#cb7-3"></a>    <span class="co">//.. other cases</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a></span>
-<span id="cb7-5"><a href="#cb7-5"></a>    <span class="cf">case</span> <span class="st">"delete"</span><span class="op">:</span> {</span>
-<span id="cb7-6"><a href="#cb7-6"></a>      <span class="cf">return</span> state<span class="op">.</span><span class="fu">filter</span>((item) <span class="kw">=&gt;</span> item<span class="op">.</span><span class="at">id</span> <span class="op">!==</span> action<span class="op">.</span><span class="at">payload</span>)<span class="op">;</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a>    }</span>
-<span id="cb7-8"><a href="#cb7-8"></a>    </span>
-<span id="cb7-9"><a href="#cb7-9"></a>    <span class="co">//.. other cases  </span></span>
-<span id="cb7-10"><a href="#cb7-10"></a>  }</span>
-<span id="cb7-11"><a href="#cb7-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">function</span> <span class="fu">appReducer</span>(state<span class="op">,</span> action) {</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="cf">switch</span> (action<span class="op">.</span><span class="at">type</span>) {</span>
+<span id="cb8-3"><a href="#cb8-3"></a>    <span class="co">//.. other cases</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="cf">case</span> <span class="st">"delete"</span><span class="op">:</span> {</span>
+<span id="cb8-6"><a href="#cb8-6"></a>      <span class="cf">return</span> state<span class="op">.</span><span class="fu">filter</span>((item) <span class="kw">=&gt;</span> item<span class="op">.</span><span class="at">id</span> <span class="op">!==</span> action<span class="op">.</span><span class="at">payload</span>)<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>    }</span>
+<span id="cb8-8"><a href="#cb8-8"></a>    </span>
+<span id="cb8-9"><a href="#cb8-9"></a>    <span class="co">//.. other cases  </span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>  }</span>
+<span id="cb8-11"><a href="#cb8-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="update-todo" class="level3" data-number="2.5">
 <h3 data-number="2.5" class="anchored" data-anchor-id="update-todo"><span class="header-section-number">2.5</span> update todo</h3>
@@ -1800,6 +1839,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td>create new todo: <a href="https://github.com/AlbertProfe/CifoJava2023-2/tree/96c8f427a889ccd8f32517c38ee1b8b6a2bd54ba/todoapp" class="external">todoApp 0.1</a></td>
 <td>-</td>
 <td><a href="../images/reactjs/lab-re-3-7.png">initial render</a> - <a href="../images/reactjs/lab-re-3-8.png" width="80%">todo created render</a></td>
+</tr>
+<tr class="odd">
+<td>todoApp 0.1</td>
+<td>render todos, clear, delete todo: <a href="https://github.com/AlbertProfe/CifoJava2023-2/tree/9b1cc003788e3335ed04e6630b19e0a2b841c297/todoapp" class="external">todoApp 0.2</a></td>
+<td>-</td>
+<td><a href="../images/reactjs/lab-re-3-9.png">initial render</a> - <a href="../images/reactjs/lab-re-3-10.png" width="80%">todo created render</a></td>
 </tr>
 </tbody>
 </table>
@@ -2096,7 +2141,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","loop":true,"closeEffect":"zoom","descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":true,"closeEffect":"zoom"});</script>
 
 
 
