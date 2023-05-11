@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -1404,8 +1404,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#create-new-todo" id="toc-create-new-todo" class="nav-link" data-scroll-target="#create-new-todo"><span class="toc-section-number">2.2</span>  create new todo</a></li>
   <li><a href="#read-and-render-todo" id="toc-read-and-render-todo" class="nav-link" data-scroll-target="#read-and-render-todo"><span class="toc-section-number">2.3</span>  read and render todo</a></li>
   <li><a href="#delete-todo" id="toc-delete-todo" class="nav-link" data-scroll-target="#delete-todo"><span class="toc-section-number">2.4</span>  delete todo</a></li>
-  <li><a href="#update-todo" id="toc-update-todo" class="nav-link" data-scroll-target="#update-todo"><span class="toc-section-number">2.5</span>  update todo</a></li>
-  <li><a href="#usecontext-todo" id="toc-usecontext-todo" class="nav-link" data-scroll-target="#usecontext-todo"><span class="toc-section-number">2.6</span>  <code>useContext</code> todo</a></li>
+  <li><a href="#update-chekbox-todo" id="toc-update-chekbox-todo" class="nav-link" data-scroll-target="#update-chekbox-todo"><span class="toc-section-number">2.5</span>  update <code>chekbox</code> todo</a></li>
+  <li><a href="#update-input-todo" id="toc-update-input-todo" class="nav-link" data-scroll-target="#update-input-todo"><span class="toc-section-number">2.6</span>  update <code>input</code> todo</a></li>
+  <li><a href="#usecontext-useeffect-useref-todo" id="toc-usecontext-useeffect-useref-todo" class="nav-link" data-scroll-target="#usecontext-useeffect-useref-todo"><span class="toc-section-number">2.7</span>  <code>useContext</code>, <code>useEffect</code>, <code>useRef</code> todo</a></li>
   </ul></li>
   <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="toc-section-number">3</span>  Versions</a></li>
   </ul>
@@ -1483,6 +1484,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Reference:</p>
 <ul>
 <li><a href="https://codesandbox.io/s/todo-app-1-oh3324" class="external">codesanbox basic todo</a></li>
+<li><a href="https://codesandbox.io/s/todo-app-1-update-1oqrbq" class="external">codesanbox update handle function todo</a></li>
 <li><a href="https://codesandbox.io/s/todo-app-2-6cfpry" class="external">codesanbox useContext todo</a></li>
 </ul>
 <section id="user-story-mock-up" class="level2" data-number="1">
@@ -1515,19 +1517,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The <code>TodoApp component</code> uses the <code>useReducer</code> hook to manage the state of todos and <code>dispatch</code> actions based on user interactions. It renders a header, a button to create new todos, and a TodosList component that displays the list of todos.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-3-1.png" class="lightbox" title="inital render app" data-gallery="quarto-lightbox-gallery-1"><img src="../images/reactjs/lab-re-3-1.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="inital render app"><img src="..\images/reactjs/lab-re-3-1.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">inital render app</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-3-2.png" class="lightbox" title="calendar picker to set date" data-gallery="quarto-lightbox-gallery-2"><img src="../images/reactjs/lab-re-3-2.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-3-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="calendar picker to set date"><img src="..\images/reactjs/lab-re-3-2.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">calendar picker to set date</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-3-3.png" class="lightbox" title="creating new todos" data-gallery="quarto-lightbox-gallery-3"><img src="../images/reactjs/lab-re-3-3.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-3-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="creating new todos"><img src="..\images/reactjs/lab-re-3-3.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">creating new todos</figcaption><p></p>
 </figure>
 </div>
@@ -1540,7 +1542,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/todo-app-reducer-context.png" class="lightbox" title="step-by-step cheatsheet" data-gallery="quarto-lightbox-gallery-4"><img src="../images/reactjs/todo-app-reducer-context.png" class="img-fluid figure-img" style="width:30.0%"></a></p>
+<p><a href="../images/reactjs/todo-app-reducer-context.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="step-by-step cheatsheet"><img src="..\images/reactjs/todo-app-reducer-context.png" class="img-fluid figure-img" style="width:30.0%"></a></p>
 <p></p><figcaption class="figure-caption">step-by-step cheatsheet</figcaption><p></p>
 </figure>
 </div>
@@ -1612,7 +1614,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-2-19.png" class="lightbox" title="Highchart Pie example" data-gallery="quarto-lightbox-gallery-5"><img src="../images/reactjs/lab-re-2-19.png" class="img-fluid figure-img"></a></p>
+<p><a href="../images/reactjs/lab-re-2-19.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Highchart Pie example"><img src="..\images/reactjs/lab-re-2-19.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">Highchart Pie example</figcaption><p></p>
 </figure>
 </div>
@@ -1809,11 +1811,159 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-10"><a href="#cb8-10"></a>  }</span>
 <span id="cb8-11"><a href="#cb8-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="update-todo" class="level3" data-number="2.5">
-<h3 data-number="2.5" class="anchored" data-anchor-id="update-todo"><span class="header-section-number">2.5</span> update todo</h3>
+<section id="update-chekbox-todo" class="level3 page-columns page-full" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="update-chekbox-todo"><span class="header-section-number">2.5</span> update <code>chekbox</code> todo</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+JSX elements directly inside a map() call always need keys!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Keys tell React which array item each component corresponds to, so that it can match them up later. This becomes important if your array items can move (e.g.&nbsp;due to sorting), get inserted, or get deleted. A well-chosen key helps React infer what exactly has happened, and make the correct updates to the DOM tree.</p>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><a href="https://react.dev/learn/rendering-lists#why-does-react-need-keys" class="external">Rendering Lists</a> - <a href="https://react.dev/learn/rendering-lists#why-does-react-need-keys" class="external">Why does React need keys?</a></p>
+</div></div><p>For example, <code>React.Fragment</code> and a key for our list:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1"></a>{state<span class="op">.</span><span class="fu">map</span>((item) <span class="kw">=&gt;</span> (</span>
+<span id="cb9-2"><a href="#cb9-2"></a>      <span class="op">&lt;</span>React<span class="op">.</span><span class="at">Fragment</span> key<span class="op">=</span>{item<span class="op">.</span><span class="at">id</span>}<span class="op">&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>        </span>
+<span id="cb9-4"><a href="#cb9-4"></a>      <span class="op">&lt;/</span>React<span class="op">.</span><span class="at">Fragment</span><span class="op">&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>))}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We could update the <code>complete</code> field by using a event <code>onChange</code> that dispatchs as a payload the <code>item.id</code> with the <code>completed</code> type:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1"></a> <span class="op">&lt;</span>input</span>
+<span id="cb10-2"><a href="#cb10-2"></a>    type<span class="op">=</span><span class="st">"checkbox"</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>    checked<span class="op">=</span>{item<span class="op">.</span><span class="at">completed</span>}</span>
+<span id="cb10-4"><a href="#cb10-4"></a>    onChange<span class="op">=</span>{() <span class="kw">=&gt;</span> <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"completed"</span><span class="op">,</span> <span class="dt">payload</span><span class="op">:</span> item<span class="op">.</span><span class="at">id</span> })}</span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="op">/&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And the reducer with the <code>completed</code> action:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">function</span> <span class="fu">appReducer</span>(state<span class="op">,</span> action) {</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="cf">switch</span> (action<span class="op">.</span><span class="at">type</span>) {</span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="co">// other cases</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="cf">case</span> <span class="st">"completed"</span><span class="op">:</span> {</span>
+<span id="cb11-5"><a href="#cb11-5"></a>      <span class="cf">return</span> state<span class="op">.</span><span class="fu">map</span>((item) <span class="kw">=&gt;</span> {</span>
+<span id="cb11-6"><a href="#cb11-6"></a>        <span class="cf">if</span> (item<span class="op">.</span><span class="at">id</span> <span class="op">===</span> action<span class="op">.</span><span class="at">payload</span>) {</span>
+<span id="cb11-7"><a href="#cb11-7"></a>          <span class="cf">return</span> {</span>
+<span id="cb11-8"><a href="#cb11-8"></a>            <span class="op">...</span>item<span class="op">,</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>            <span class="dt">completed</span><span class="op">:</span> <span class="op">!</span>item<span class="op">.</span><span class="at">completed</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>          }<span class="op">;</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>        }</span>
+<span id="cb11-12"><a href="#cb11-12"></a>        <span class="cf">return</span> item<span class="op">;</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a>      })<span class="op">;</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a>    }</span>
+<span id="cb11-15"><a href="#cb11-15"></a>    <span class="co">// default case</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="usecontext-todo" class="level3" data-number="2.6">
-<h3 data-number="2.6" class="anchored" data-anchor-id="usecontext-todo"><span class="header-section-number">2.6</span> <code>useContext</code> todo</h3>
+<section id="update-input-todo" class="level3" data-number="2.6">
+<h3 data-number="2.6" class="anchored" data-anchor-id="update-input-todo"><span class="header-section-number">2.6</span> update <code>input</code> todo</h3>
+<p>We could update the <code>input</code> common fields -<code>text</code>, <code>author</code>, <code>due</code>- by creating a handler function <code>handleUpdate</code>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">const</span> handleUpdate <span class="op">=</span> (id<span class="op">,</span> field<span class="op">,</span> value) <span class="kw">=&gt;</span> {</span>
+<span id="cb12-2"><a href="#cb12-2"></a>    <span class="fu">dispatch</span>({</span>
+<span id="cb12-3"><a href="#cb12-3"></a>      <span class="dt">type</span><span class="op">:</span> <span class="st">"update"</span><span class="op">,</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>      <span class="dt">payload</span><span class="op">:</span> {</span>
+<span id="cb12-5"><a href="#cb12-5"></a>        id<span class="op">,</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>        field<span class="op">,</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>        value</span>
+<span id="cb12-8"><a href="#cb12-8"></a>      }</span>
+<span id="cb12-9"><a href="#cb12-9"></a>    })<span class="op">;</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The inputs <code>onChange</code>, now, will call the <code>handleUpdate</code> function with the <code>field</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1"></a><span class="op">&lt;</span>input</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  type<span class="op">=</span><span class="st">"text"</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  value<span class="op">=</span>{item<span class="op">.</span><span class="at">text</span>}</span>
+<span id="cb13-4"><a href="#cb13-4"></a>  onChange<span class="op">=</span>{(e) <span class="kw">=&gt;</span> <span class="fu">handleUpdate</span>(item<span class="op">.</span><span class="at">id</span><span class="op">,</span> <span class="st">"text"</span><span class="op">,</span> e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>)}</span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="op">/&gt;</span>{<span class="st">" "</span>}</span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="op">&lt;</span>input</span>
+<span id="cb13-7"><a href="#cb13-7"></a>  type<span class="op">=</span><span class="st">"text"</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>  value<span class="op">=</span>{item<span class="op">.</span><span class="at">author</span>}</span>
+<span id="cb13-9"><a href="#cb13-9"></a>  onChange<span class="op">=</span>{(e) <span class="kw">=&gt;</span> <span class="fu">handleUpdate</span>(item<span class="op">.</span><span class="at">id</span><span class="op">,</span> <span class="st">"author"</span><span class="op">,</span> e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>)}</span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="op">/&gt;</span>{<span class="st">" "</span>}</span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="op">&lt;</span>input</span>
+<span id="cb13-12"><a href="#cb13-12"></a>  type<span class="op">=</span><span class="st">"date"</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a>  value<span class="op">=</span>{item<span class="op">.</span><span class="at">due</span>}</span>
+<span id="cb13-14"><a href="#cb13-14"></a>  onChange<span class="op">=</span>{(e) <span class="kw">=&gt;</span> <span class="fu">handleUpdate</span>(item<span class="op">.</span><span class="at">id</span><span class="op">,</span> <span class="st">"due"</span><span class="op">,</span> e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>)}</span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="op">/&gt;</span>{<span class="st">" "</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And the reducer with the <code>update</code> action:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">function</span> <span class="fu">appReducer</span>(state<span class="op">,</span> action) {</span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="cf">switch</span> (action<span class="op">.</span><span class="at">type</span>) {</span>
+<span id="cb14-3"><a href="#cb14-3"></a>    <span class="co">// other cases</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>    <span class="cf">case</span> <span class="st">"update"</span><span class="op">:</span> {</span>
+<span id="cb14-5"><a href="#cb14-5"></a>      <span class="kw">const</span> { id<span class="op">,</span> field<span class="op">,</span> value } <span class="op">=</span> action<span class="op">.</span><span class="at">payload</span><span class="op">;</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>      <span class="cf">return</span> state<span class="op">.</span><span class="fu">map</span>((item) <span class="kw">=&gt;</span> {</span>
+<span id="cb14-7"><a href="#cb14-7"></a>        <span class="cf">if</span> (item<span class="op">.</span><span class="at">id</span> <span class="op">===</span> id) {</span>
+<span id="cb14-8"><a href="#cb14-8"></a>          <span class="cf">return</span> {</span>
+<span id="cb14-9"><a href="#cb14-9"></a>            <span class="op">...</span>item<span class="op">,</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a>            [field]<span class="op">:</span> value</span>
+<span id="cb14-11"><a href="#cb14-11"></a>          }<span class="op">;</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a>        }</span>
+<span id="cb14-13"><a href="#cb14-13"></a>        <span class="cf">return</span> item<span class="op">;</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a>      })<span class="op">;</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a>    }</span>
+<span id="cb14-16"><a href="#cb14-16"></a>    <span class="co">// default case</span></span>
+<span id="cb14-17"><a href="#cb14-17"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="usecontext-useeffect-useref-todo" class="level3" data-number="2.7">
+<h3 data-number="2.7" class="anchored" data-anchor-id="usecontext-useeffect-useref-todo"><span class="header-section-number">2.7</span> <code>useContext</code>, <code>useEffect</code>, <code>useRef</code> todo</h3>
+<p>The <code>useEffect</code>, <code>useRef</code>, and <code>useContext</code> hooks are <mark>used to handle different aspects of state management and render lifecycle.</mark></p>
+<ul>
+<li><code>useEffect</code>: is used to update the <code>stateRef.current</code> value whenever the state changes.
+<ul>
+<li>It ensures that the stateRef always holds the latest value of state.</li>
+<li>The effect is triggered whenever the state dependency changes, which means it will run after every state update.</li>
+</ul></li>
+<li><code>useRef</code>: the <code>stateRef</code> variable is created using <code>useRef</code>. <mark>It creates a mutable reference that persists across renders. </mark>
+<ul>
+<li><code>stateRef</code> is used to hold the current value of state.</li>
+<li>By using useRef, the value can be updated without causing a re-render, and it can be accessed inside the useEffect hook.</li>
+</ul></li>
+<li><code>useContext</code>: the Context is created using <code>React.createContext()</code>, and it is used to share the dispatch function with child components.
+<ul>
+<li>By wrapping the components inside <code>&lt;Context.Provider value={dispatch}&gt;</code>, the dispatch function is made available to all components within the <code>Context.Provider</code> scope.</li>
+<li>The child component, <code>TodosList</code>, accesses the <code>dispatch</code> function using the <code>useContext</code> hook.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">function</span> <span class="fu">appReducer</span>(state<span class="op">,</span> action) {</span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="co">// ---</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>}</span>
+<span id="cb15-4"><a href="#cb15-4"></a></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="kw">const</span> Context <span class="op">=</span> React<span class="op">.</span><span class="fu">createContext</span>()<span class="op">;</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a></span>
+<span id="cb15-7"><a href="#cb15-7"></a></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">TodoApp</span>() {</span>
+<span id="cb15-9"><a href="#cb15-9"></a>  <span class="kw">const</span> [state<span class="op">,</span> dispatch] <span class="op">=</span> <span class="fu">useReducer</span>(appReducer<span class="op">,</span> initialTodos)<span class="op">;</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a>  <span class="kw">const</span> stateRef <span class="op">=</span> <span class="fu">useRef</span>(state)<span class="op">;</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a></span>
+<span id="cb15-12"><a href="#cb15-12"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb15-13"><a href="#cb15-13"></a>    stateRef<span class="op">.</span><span class="at">current</span> <span class="op">=</span> state<span class="op">;</span></span>
+<span id="cb15-14"><a href="#cb15-14"></a>  }<span class="op">,</span> [state])<span class="op">;</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a></span>
+<span id="cb15-16"><a href="#cb15-16"></a>  <span class="cf">return</span> (</span>
+<span id="cb15-17"><a href="#cb15-17"></a>    <span class="op">&lt;</span>Context<span class="op">.</span><span class="at">Provider</span> value<span class="op">=</span>{dispatch}<span class="op">&gt;</span></span>
+<span id="cb15-18"><a href="#cb15-18"></a>      <span class="op">&lt;</span>h3<span class="op">&gt;</span><span class="dt">List</span><span class="op">:</span> add<span class="op">,</span> <span class="kw">delete</span><span class="op">,</span> complete and refresh<span class="op">&lt;/</span>h3<span class="op">&gt;</span></span>
+<span id="cb15-19"><a href="#cb15-19"></a>      <span class="op">&lt;</span>button onClick<span class="op">=</span>{</span>
+<span id="cb15-20"><a href="#cb15-20"></a>        () <span class="kw">=&gt;</span> <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"add"</span> })}<span class="op">&gt;</span>Create Todo<span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb15-21"><a href="#cb15-21"></a>      <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb15-22"><a href="#cb15-22"></a>      <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb15-23"><a href="#cb15-23"></a>      <span class="op">&lt;</span>TodosList items<span class="op">=</span>{stateRef<span class="op">.</span><span class="at">current</span>} <span class="op">/&gt;</span></span>
+<span id="cb15-24"><a href="#cb15-24"></a>    <span class="op">&lt;/</span>Context<span class="op">.</span><span class="at">Provider</span><span class="op">&gt;</span></span>
+<span id="cb15-25"><a href="#cb15-25"></a>  )<span class="op">;</span></span>
+<span id="cb15-26"><a href="#cb15-26"></a>}</span>
+<span id="cb15-27"><a href="#cb15-27"></a></span>
+<span id="cb15-28"><a href="#cb15-28"></a><span class="kw">function</span> <span class="fu">TodosList</span>({ items }) {</span>
+<span id="cb15-29"><a href="#cb15-29"></a>  <span class="cf">return</span> items<span class="op">.</span><span class="fu">map</span>((item) <span class="kw">=&gt;</span> <span class="op">&lt;</span>TodoItem key<span class="op">=</span>{item<span class="op">.</span><span class="at">id</span>} {<span class="op">...</span>item} <span class="op">/&gt;</span>)<span class="op">;</span></span>
+<span id="cb15-30"><a href="#cb15-30"></a>}</span>
+<span id="cb15-31"><a href="#cb15-31"></a></span>
+<span id="cb15-32"><a href="#cb15-32"></a>}</span>
+<span id="cb15-33"><a href="#cb15-33"></a></span>
+<span id="cb15-34"><a href="#cb15-34"></a><span class="kw">function</span> <span class="fu">TodoItem</span>({ id<span class="op">,</span> completed<span class="op">,</span> author<span class="op">,</span> text<span class="op">,</span> due }) {</span>
+<span id="cb15-35"><a href="#cb15-35"></a>  <span class="kw">const</span> dispatch <span class="op">=</span> <span class="fu">useContext</span>(Context)<span class="op">;</span></span>
+<span id="cb15-36"><a href="#cb15-36"></a>  <span class="co">//..</span></span>
+<span id="cb15-37"><a href="#cb15-37"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="versions" class="level2" data-number="3">
@@ -1841,7 +1991,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td><a href="../images/reactjs/lab-re-3-7.png">initial render</a> - <a href="../images/reactjs/lab-re-3-8.png" width="80%">todo created render</a></td>
 </tr>
 <tr class="odd">
-<td>todoApp 0.1</td>
+<td>todoApp 0.2</td>
 <td>render todos, clear, delete todo: <a href="https://github.com/AlbertProfe/CifoJava2023-2/tree/9b1cc003788e3335ed04e6630b19e0a2b841c297/todoapp" class="external">todoApp 0.2</a></td>
 <td>-</td>
 <td><a href="../images/reactjs/lab-re-3-9.png">initial render</a> - <a href="../images/reactjs/lab-re-3-10.png" width="80%">todo created render</a></td>
@@ -2141,7 +2291,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":true,"closeEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":true,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});</script>
 
 
 
