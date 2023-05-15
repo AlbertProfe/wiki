@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -44,6 +44,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -857,8 +860,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Lab#RE03-3: API Rest CRUD</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../reactjs/rjslab3-4.html">
+ <span class="dropdown-text">Lab#RE03-4: store</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../reactjs/rjslab4.html">
- <span class="dropdown-text">Lab#RE04-1: CRUD useContext</span></a>
+ <span class="dropdown-text">Lab#RE04-1:</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../reactjs/rjslab5.html">
@@ -1302,10 +1309,15 @@ ul.task-list li input[type="checkbox"] {
   <a href="../reactjs/rjslab3-3.html" class="sidebar-item-text sidebar-link active">Lab#RE03-3: API Rest CRUD</a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab3-4.html" class="sidebar-item-text sidebar-link">Lab#RE03-4: store</a>
+  </div>
+</li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reactjs/rjslab4.html" class="sidebar-item-text sidebar-link">Lab#RE04-1: CRUD useContext</a>
+  <a href="../reactjs/rjslab4.html" class="sidebar-item-text sidebar-link">Lab#RE04-1:</a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -1341,7 +1353,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">1</span>  Overview</a></li>
+  <li><a href="#mock-api" id="toc-mock-api" class="nav-link active" data-scroll-target="#mock-api"><span class="toc-section-number">1</span>  mock api</a></li>
+  <li><a href="#axios" id="toc-axios" class="nav-link" data-scroll-target="#axios"><span class="toc-section-number">2</span>  axios</a></li>
+  <li><a href="#fetch" id="toc-fetch" class="nav-link" data-scroll-target="#fetch"><span class="toc-section-number">3</span>  fetch</a></li>
+  <li><a href="#step-by-step-todo-api-rest" id="toc-step-by-step-todo-api-rest" class="nav-link" data-scroll-target="#step-by-step-todo-api-rest"><span class="toc-section-number">4</span>  step-by-step todo api rest</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/rjslab3-3.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1385,7 +1400,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Saturday, May 13, 2023</p>
+      <p class="date-modified">Monday, May 15, 2023</p>
     </div>
   </div>
     
@@ -1396,11 +1411,49 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="labs">
 <p>📘 <strong>React JS Lab#RE03-3: <code>API Rest CRUD</code></strong></p>
+<p>A <code>CRUD</code> (Create, Read, Update, Delete) Todo app with RESTful API integration:</p>
+<ul>
+<li>Using <code>Axios</code> and <code>Fetch</code>
+<ul>
+<li><code>Axios</code> and <code>Fetch</code> are <strong>JavaScript libraries used for making HTTP requests to the API endpoints.</strong></li>
+<li><code>Axios</code> or <code>Fetch</code> can be used to send HTTP requests to these endpoints, allowing data manipulation through CRUD operations.</li>
+</ul></li>
+<li>Server side implemented with <code>MockAPI</code>:
+<ul>
+<li>by utilizing MockAPI, developers can create custom API endpoints to mimic server-side functionality.</li>
+</ul></li>
+<li>The Todo app allows users to create, view, update, and delete tasks.</li>
+<li>This integration <mark>will build a fully functional Todo application with API communication and data persistence.</mark></li>
+</ul>
 </div>
 <p><br></p>
-<section id="overview" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
-<p><a href="https://mockapi.io/" class="external">The easiest way to mock REST APIs</a></p>
+<p>References:</p>
+<ul>
+<li><a href="https://mockapi.io/" class="external">The easiest way to mock REST APIs</a></li>
+<li><a href="" class="external">codesanbox api rest CRUD axios/fetch</a></li>
+</ul>
+<section id="mock-api" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="mock-api"><span class="header-section-number">1</span> mock api</h2>
+<blockquote class="blockquote">
+<p><code>MockAPI.io</code> is a web service that allows developers <strong>to create and simulate RESTful APIs for testing and development purposes.</strong></p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/lab-re-3-11.png" class="lightbox" title="mockapi creating scheme-model" data-gallery="quarto-lightbox-gallery-1"><img src="../images/reactjs/lab-re-3-11.png" class="img-fluid figure-img" style="width:50.0%"></a></p>
+<p></p><figcaption class="figure-caption">mockapi creating scheme-model</figcaption><p></p>
+</figure>
+</div>
+<p>With <code>MockAPI.io</code>, developers can easily generate custom API endpoints and define the responses they want to receive when those endpoints are called. It provides a user-friendly interface to create, manage, and configure mock APIs, making it simple to simulate different scenarios and test how an application interacts with an API.</p>
+<p><code>MockAPI.io</code> supports various HTTP methods, request headers, query parameters, and response types, allowing developers to mimic real API behavior. It’s a valuable tool for rapid prototyping, integration testing, and mocking data during development.</p>
+</section>
+<section id="axios" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="axios"><span class="header-section-number">2</span> axios</h2>
+</section>
+<section id="fetch" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="fetch"><span class="header-section-number">3</span> fetch</h2>
+</section>
+<section id="step-by-step-todo-api-rest" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="step-by-step-todo-api-rest"><span class="header-section-number">4</span> step-by-step todo api rest</h2>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1414,7 +1467,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../reactjs/rjslab4.html">React JS: Lab#RE04-1 <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
+<p><br> <a href="../reactjs/rjslab3-4.html">React JS: Lab#RE03-4 <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
 </div>
@@ -1694,6 +1747,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":true,"closeEffect":"zoom"});</script>
 
 
 
