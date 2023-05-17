@@ -1428,7 +1428,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#fetch" id="toc-fetch" class="nav-link" data-scroll-target="#fetch"><span class="toc-section-number">4</span>  fetch</a></li>
   <li><a href="#step-by-step-todo-api-rest" id="toc-step-by-step-todo-api-rest" class="nav-link" data-scroll-target="#step-by-step-todo-api-rest"><span class="toc-section-number">5</span>  step-by-step todo api rest</a>
   <ul>
-  <li><a href="#basic-structure" id="toc-basic-structure" class="nav-link" data-scroll-target="#basic-structure"><span class="toc-section-number">5.1</span>  Basic structure</a></li>
+  <li><a href="#general-idea" id="toc-general-idea" class="nav-link" data-scroll-target="#general-idea"><span class="toc-section-number">5.1</span>  General idea</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/rjslab3-3.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -1524,7 +1524,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-3-11.png" class="lightbox" title="mockapi creating scheme-model" data-gallery="quarto-lightbox-gallery-1"><img src="..\images/reactjs/lab-re-3-11.png" class="img-fluid figure-img" style="width:50.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-3-11.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="mockapi creating scheme-model"><img src="..\images/reactjs/lab-re-3-11.png" class="img-fluid figure-img" style="width:50.0%"></a></p>
 <p></p><figcaption class="figure-caption">mockapi creating scheme-model</figcaption><p></p>
 </figure>
 </div>
@@ -1539,7 +1539,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>It provides an <strong>easy-to-use</strong> and consistent API for performing <strong>asynchronous operations</strong>, such as fetching data from an API.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-3-13.png" class="lightbox" title="Axios example Request Config" data-gallery="quarto-lightbox-gallery-2"><img src="..\images/reactjs/lab-re-3-13.png" class="img-fluid figure-img"></a></p>
+<p><a href="../images/reactjs/lab-re-3-13.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Axios example Request Config"><img src="..\images/reactjs/lab-re-3-13.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">Axios example <a href="https://axios-http.com/docs/req_config" class="external">Request Config</a></figcaption><p></p>
 </figure>
 </div>
@@ -1559,12 +1559,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="5" class="anchored" data-anchor-id="step-by-step-todo-api-rest"><span class="header-section-number">5</span> step-by-step todo api rest</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-3-12.png" class="lightbox" title="Render todo with grid, cards and CRUD operations, render deployed" data-gallery="quarto-lightbox-gallery-3"><img src="..\images/reactjs/lab-re-3-12.png" class="img-fluid figure-img"></a></p>
+<p><a href="../images/reactjs/lab-re-3-12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Render todo with grid, cards and CRUD operations, render deployed"><img src="..\images/reactjs/lab-re-3-12.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">Render todo with grid, cards and CRUD operations, <a href="https://6kgxh7.csb.app/todoapp" class="external">render deployed</a></figcaption><p></p>
 </figure>
 </div>
-<section id="basic-structure" class="level3" data-number="5.1">
-<h3 data-number="5.1" class="anchored" data-anchor-id="basic-structure"><span class="header-section-number">5.1</span> Basic structure</h3>
+<section id="general-idea" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="general-idea"><span class="header-section-number">5.1</span> General idea</h3>
+<p>Let’s create first at all our core components:</p>
+<ul>
+<li>The <code>CreateTodo</code> component is responsible for rendering a form to create a new Todo item. It uses React’s useState hook to manage the state of input fields.</li>
+<li>The <code>UpdateTodo</code> component displays a checkbox that represents the completion status of a Todo item. It receives the Todo object as a prop and handles the update of the completion status.</li>
+<li>The <code>ReadTodos</code> component renders a list of Todo items fetched from an API. It uses React’s useState hook to manage the state of the Todo items.</li>
+<li>The <code>DeleteTodo</code> component displays a button to delete a Todo item. It receives the Todo object as a prop and handles the deletion.</li>
+</ul>
+<blockquote class="blockquote">
+<p>The main <code>Todos</code> component is responsible for managing the state of all Todo items.</p>
+</blockquote>
+<p>It fetches the Todo items from an API using the <code>useEffect</code> hook and stores them in the state using the <code>useState</code> hook.</p>
+<p>It also provides the necessary functions:</p>
+<ul>
+<li><code>addTodo</code>,</li>
+<li><code>updateTodo</code></li>
+<li><code>deleteTodo</code></li>
+<li><code>fetchTodos</code></li>
+</ul>
+<p>to manipulate the <code>Todo</code> items through the <code>ApiContext</code>, which is created using React’s createContext hook.</p>
+<p>The <code>Todos</code> component renders the <code>CreateTodo</code> component and the <code>ReadTodos</code> component within a container.</p>
+<p>The <code>ApiContext.Provider</code> wraps these components to provide access to the Todo items and manipulation functions throughout the component tree.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> React<span class="op">,</span> { useState<span class="op">,</span> useEffect<span class="op">,</span> useContext } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> {Container<span class="op">,</span> Card<span class="op">,</span> Checkbox<span class="op">,</span> Button<span class="op">,</span> Form<span class="op">,</span> Divider<span class="op">,</span>Icon } </span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="im">from</span> <span class="st">"semantic-ui-react"</span><span class="op">;</span></span>
@@ -1666,9 +1687,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-99"><a href="#cb1-99"></a>  )<span class="op">;</span></span>
 <span id="cb1-100"><a href="#cb1-100"></a>}<span class="op">;</span></span>
 <span id="cb1-101"><a href="#cb1-101"></a></span>
-<span id="cb1-102"><a href="#cb1-102"></a><span class="im">export</span> <span class="im">default</span> Todos<span class="op">;</span></span>
-<span id="cb1-103"><a href="#cb1-103"></a></span>
-<span id="cb1-104"><a href="#cb1-104"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-102"><a href="#cb1-102"></a><span class="im">export</span> <span class="im">default</span> Todos<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1963,7 +1982,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":true});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","descPosition":"bottom"});</script>
 
 
 
