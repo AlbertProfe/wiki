@@ -44,6 +44,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -71,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 
 <div id="quarto-search-results"></div>
@@ -1359,13 +1362,24 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overall" id="toc-overall" class="nav-link active" data-scroll-target="#overall"><span class="toc-section-number">1</span>  Overall</a></li>
-  <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="toc-section-number">2</span>  Versions</a></li>
+  <li><a href="#approach" id="toc-approach" class="nav-link active" data-scroll-target="#approach"><span class="toc-section-number">1</span>  Approach</a>
+  <ul>
+  <li><a href="#decoupling-the-communication-layer" id="toc-decoupling-the-communication-layer" class="nav-link" data-scroll-target="#decoupling-the-communication-layer"><span class="toc-section-number">1.1</span>  Decoupling the communication layer</a></li>
+  <li><a href="#mutable-immutable" id="toc-mutable-immutable" class="nav-link" data-scroll-target="#mutable-immutable"><span class="toc-section-number">1.2</span>  <code>mutable</code> &amp; <code>immutable</code></a></li>
+  <li><a href="#context-api" id="toc-context-api" class="nav-link" data-scroll-target="#context-api"><span class="toc-section-number">1.3</span>  Context API</a></li>
+  <li><a href="#using-react-context" id="toc-using-react-context" class="nav-link" data-scroll-target="#using-react-context"><span class="toc-section-number">1.4</span>  Using React context</a></li>
+  <li><a href="#fetching-data-abort" id="toc-fetching-data-abort" class="nav-link" data-scroll-target="#fetching-data-abort"><span class="toc-section-number">1.5</span>  fetching data: abort</a></li>
+  </ul></li>
+  <li><a href="#asyncsync-passing-down-async-functions" id="toc-asyncsync-passing-down-async-functions" class="nav-link" data-scroll-target="#asyncsync-passing-down-async-functions"><span class="toc-section-number">2</span>  <code>async</code>/<code>sync</code>: passing down <code>async</code> functions</a>
+  <ul>
+  <li><a href="#using-context" id="toc-using-context" class="nav-link" data-scroll-target="#using-context"><span class="toc-section-number">2.1</span>  using Context</a></li>
+  </ul></li>
+  <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="toc-section-number">3</span>  Versions</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/rjslab3-4.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -1404,7 +1418,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, May 19, 2023</p>
+      <p class="date-modified">Monday, May 22, 2023</p>
     </div>
   </div>
     
@@ -1417,16 +1431,175 @@ ul.task-list li input[type="checkbox"] {
 <p>📘 <strong>React JS Lab#RE03-4:API Rest Domains”</strong></p>
 <p>In this lab, we will be using:</p>
 <ul>
-<li>the <code>react-router-dom</code>, which is a package with bindings for using React Router in web applications:</li>
+<li>the <code>react-router-dom</code>, which is a package with bindings for using React Router in web applications:
+<ul>
+<li><code>decoupling</code> the communication layer by creating a separate service in React <code>JSX</code> and <code>JS</code>:
+<ul>
+<li><code>service layer</code>: <code>TodoService.js</code>, api Rest Axios functions</li>
+<li><code>service layer</code>: <code>TodoContext.js</code>, creation of Context and repository of data and data-functions</li>
+<li><code>UI components</code>: <code>todoApp.jsx</code> and its components to render the App.</li>
+</ul></li>
+</ul></li>
 </ul>
 </div>
 <p><br></p>
-<section id="overall" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="overall"><span class="header-section-number">1</span> Overall</h2>
 <p>References:</p>
+<ul>
+<li><a href="../reactjs/reactjs-hook-context.html">useContext</a></li>
+<li><a href="../reactjs/reactjs-app-async.html">async</a></li>
+<li><a href="https://codesandbox.io/s/todo-app-5-domain-7l18sb" class="external">codesanbox todo-app-5-domain</a></li>
+<li><a href="https://codesandbox.io/s/todo-app-6-9q6lzy" class="external">codesanbox todo-app-6</a></li>
+</ul>
+<section id="approach" class="level2 page-columns page-full" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="approach"><span class="header-section-number">1</span> Approach</h2>
+<section id="decoupling-the-communication-layer" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="decoupling-the-communication-layer"><span class="header-section-number">1.1</span> Decoupling the communication layer</h3>
+<p>Decoupling the communication layer by creating a separate service in React JSX and JS architecture brings several benefits:</p>
+<ul>
+<li><code>Separation of Concerns</code>: By creating a dedicated service layer, you separate the concerns of handling API communication and data manipulation from the components that render the UI. This promotes a cleaner and more maintainable codebase.</li>
+<li><code>Reusability</code>: The service layer can be reused across multiple components or even in different parts of your application. By encapsulating API calls and data handling in a service, you can easily reuse the same logic without duplicating code.</li>
+<li><code>Abstraction</code>: The service layer abstracts the details of API communication, such as HTTP requests and error handling, from the components. This abstraction simplifies the component code, making it more focused on rendering the UI and managing local state.</li>
+<li><code>Testability</code>: Separating the communication layer as a service makes it easier to write unit tests. You can write tests specifically for the service functions, mocking the API calls and asserting the expected behavior, without the need to render the entire component hierarchy.</li>
+<li><code>Maintainable and Scalable</code>: By centralizing the API communication logic in a service, it becomes easier to manage and update as your application grows. If the API changes or new features are added, you only need to update the service layer without affecting the components.</li>
+</ul>
 </section>
-<section id="versions" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="versions"><span class="header-section-number">2</span> Versions</h2>
+<section id="mutable-immutable" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="mutable-immutable"><span class="header-section-number">1.2</span> <code>mutable</code> &amp; <code>immutable</code></h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/lab-re-3-16.png" class="lightbox" title="codesanbox todo-app-6 folder-tree to decouple the communication-layer" data-gallery="quarto-lightbox-gallery-1"><img src="../images/reactjs/lab-re-3-16.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
+<p></p><figcaption class="figure-caption"><a href="https://codesandbox.io/s/todo-app-6-9q6lzy" class="external">codesanbox todo-app-6</a> folder-tree to decouple the communication-layer</figcaption><p></p>
+</figure>
+</div>
+<p>Regarding the separation of <code>mutable</code> and <code>immutable</code> code:</p>
+<ul>
+<li>The <code>service layer</code> (<code>TodoService.js</code>) handles mutable code related to <strong>API requests and updates the server-side data</strong>.
+<ul>
+<li>It performs actions like creating, updating, and deleting todos by interacting with the server.</li>
+</ul></li>
+<li>The component layer, specifically the <code>TodoContext.js</code> and <code>UI components</code>, deals with <code>immutable</code> code.
+<ul>
+<li>It manages the <strong>local state,</strong> such as the list of todos, and provides an interface for components to interact with the service layer.</li>
+<li>The components use the provided functions to update the state or <strong>trigger API calls when necessary.</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="context-api" class="level3 page-columns page-full" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="context-api"><span class="header-section-number">1.3</span> Context API</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+React API Context
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>React API Context provides a way to share data across the component tree without passing props explicitly at each level. It allows you to create a context object that can be accessed by components nested within a Provider component. Context is primarily used for managing immutable data and state.</p>
+</div>
+</div>
+<p>The context itself is <code>immutable</code> because it provides a fixed value that can’t be modified directly. The data or <strong>state</strong> it holds should be treated as <code>immutable</code> to <mark>maintain the unidirectional data flow and ensure predictable updates.</mark></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>However, the components consuming the context can read the data from the context and use it to update their state or trigger actions. The components can then propagate the changes back to the context by using the provided functions or callbacks.</p>
+</div></div><div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+immutability
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The concept of immutability is crucial in React as it helps ensure predictable rendering and state management. Immutable data allows for efficient change detection and can optimize rendering performance, as React can easily determine when to re-render components based on changes in immutable data.</p>
+</div>
+</div>
+</section>
+<section id="using-react-context" class="level3" data-number="1.4">
+<h3 data-number="1.4" class="anchored" data-anchor-id="using-react-context"><span class="header-section-number">1.4</span> Using React context</h3>
+<p>When using React context, it’s important to follow best practices to make the most of this concept:</p>
+<ul>
+<li><code>Define the context:</code> Create a context object using React.createContext(), providing an initial value. This value should typically be an immutable object or state.</li>
+<li><code>Wrap components with the Provider</code>: Wrap the relevant components with the Provider component, passing the desired value as a prop. This will make the value accessible to the nested components.</li>
+<li><code>Access the context value:</code> Components that need access to the context can consume it using either useContext or by wrapping the component with the Context.Consumer component.</li>
+<li><code>Manage mutable state locally:</code> Components consuming the context can manage their own local state using useState, useReducer, or any other state management technique. They can update the state based on the context data and trigger actions accordingly.</li>
+<li><code>Propagate changes back to the context:</code> If components need to update the context data or trigger actions that affect the context, they can use functions or callbacks provided by the context. These functions should handle the necessary updates and ensure immutability is maintained.</li>
+</ul>
+</section>
+<section id="fetching-data-abort" class="level3" data-number="1.5">
+<h3 data-number="1.5" class="anchored" data-anchor-id="fetching-data-abort"><span class="header-section-number">1.5</span> fetching data: abort</h3>
+<p>If your <a href="https://react.dev/learn/synchronizing-with-effects#fetching-data" class="external">Effect fetches something</a>, the cleanup function should either <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController" class="external">abort</a> the fetch or ignore its result:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/lab-re-3-17.png" class="lightbox" title="abort second trigger" data-gallery="quarto-lightbox-gallery-2"><img src="../images/reactjs/lab-re-3-17.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
+<p></p><figcaption class="figure-caption">abort second trigger</figcaption><p></p>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>You can’t “undo” a network request that already happened, but your cleanup function should ensure that the fetch that’s not relevant anymore does not keep affecting your application. If the userId changes from ‘Alice’ to ‘Bob’, cleanup ensures that the ‘Alice’ response is ignored even if it arrives after ‘Bob’.</p>
+</blockquote>
+</section>
+</section>
+<section id="asyncsync-passing-down-async-functions" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="asyncsync-passing-down-async-functions"><span class="header-section-number">2</span> <code>async</code>/<code>sync</code>: passing down <code>async</code> functions</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/lab-re-3-18.png" class="lightbox" title="coupled UI components" data-gallery="quarto-lightbox-gallery-3"><img src="../images/reactjs/lab-re-3-18.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
+<p></p><figcaption class="figure-caption">coupled UI components</figcaption><p></p>
+</figure>
+</div>
+<p>Passing asynchronous functions as props <mark>can lead to some drawbacks and is generally not considered a good practice.</mark> Here are a few reasons why it’s not recommended:</p>
+<ul>
+<li><code>Prop Drilling</code>: If you pass asynchronous functions as props to deeply nested components, it requires you to propagate these props through each intermediate component. This leads to a concept known as “prop drilling,” where components that do not directly need the asynchronous function still have to receive and pass it down. This can make your code more complex and harder to maintain.</li>
+<li><code>Coupling Components</code>: By passing asynchronous functions as props, you tightly couple the components together. This means that if you decide to change the implementation of the asynchronous function or replace it with a different approach (e.g., using a different library, refactoring the code), you will have to update all the components that rely on that function. This can introduce unnecessary dependencies and make your codebase less flexible.</li>
+<li><code>Code Duplication</code>: If multiple components require access to the same asynchronous function, passing it as a prop to each component results in code duplication. You’ll need to repeat the prop declaration and handling in each component, leading to redundant code. This can make it more difficult to maintain and update the codebase.</li>
+</ul>
+<section id="using-context" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="using-context"><span class="header-section-number">2.1</span> using Context</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Instead of passing asynchronous functions as props, <mark>using a shared context and provider pattern, such as React Context, allows you to decouple the components and provide a centralized location for managing and accessing shared state and functions.</mark></p>
+<p>By using a context, you can <strong>avoid prop drilling</strong> and provide a <strong>clean and efficient</strong> way to access the <strong>asynchronous functions from any component within the context’s scope.</strong></p>
+</div>
+</div>
+<ul>
+<li>Additionally, using a provider and context pattern allows for better <strong>separation of concerns</strong>.
+<ul>
+<li>The provider handles the implementation details and provides the necessary functions, while the components consuming the context can focus on rendering and utilizing the shared data and functionality without worrying about how it is implemented or passed down through props.</li>
+</ul></li>
+<li>Using context allows you to create a <strong>central place to manage and access the asynchronous function</strong>, making it available to any component that needs it within the context’s scope.
+<ul>
+<li>This avoids the need for prop drilling, where you would have to pass the function down through multiple levels of components as props.</li>
+</ul></li>
+</ul>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Propagating the asynchronous function via props can work, but it may lead to some issues. Asynchronous operations like API requests typically have a delay in fetching data, and the results may not be available immediately. If you pass the function as a prop and try to execute it synchronously within a component, you won’t be able to wait for the response or handle any errors properly. It can lead to unpredictable behavior and may cause the component to render with incomplete or incorrect data.</p>
+</div>
+</div>
+<p>By using context, you can handle the asynchronous behavior appropriately, whether it’s using async/await or promises, and ensure that the components consuming the context can work with the asynchronous function correctly.</p>
+</section>
+</section>
+<section id="versions" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="versions"><span class="header-section-number">3</span> Versions</h2>
 <table class="table">
 <thead>
 <tr class="header">
@@ -1738,6 +1911,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":true,"openEffect":"zoom","descPosition":"bottom"});</script>
 
 
 
