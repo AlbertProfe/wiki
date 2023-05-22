@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -869,7 +869,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="../reactjs/rjslab4.html">
- <span class="dropdown-text">Lab#RE04-1: feathers</span></a>
+ <span class="dropdown-text">Lab#RE04-1: server</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../reactjs/rjslab5.html">
@@ -1326,7 +1326,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reactjs/rjslab4.html" class="sidebar-item-text sidebar-link">Lab#RE04-1: feathers</a>
+  <a href="../reactjs/rjslab4.html" class="sidebar-item-text sidebar-link">Lab#RE04-1: server</a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -1369,11 +1369,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#context-api" id="toc-context-api" class="nav-link" data-scroll-target="#context-api"><span class="toc-section-number">1.3</span>  Context API</a></li>
   <li><a href="#using-react-context" id="toc-using-react-context" class="nav-link" data-scroll-target="#using-react-context"><span class="toc-section-number">1.4</span>  Using React context</a></li>
   <li><a href="#fetching-data-abort" id="toc-fetching-data-abort" class="nav-link" data-scroll-target="#fetching-data-abort"><span class="toc-section-number">1.5</span>  fetching data: abort</a></li>
-  </ul></li>
-  <li><a href="#asyncsync-passing-down-async-functions" id="toc-asyncsync-passing-down-async-functions" class="nav-link" data-scroll-target="#asyncsync-passing-down-async-functions"><span class="toc-section-number">2</span>  <code>async</code>/<code>sync</code>: passing down <code>async</code> functions</a>
+  <li><a href="#asyncsync-passing-down-async-functions" id="toc-asyncsync-passing-down-async-functions" class="nav-link" data-scroll-target="#asyncsync-passing-down-async-functions"><span class="toc-section-number">1.6</span>  <code>async</code>/<code>sync</code>: passing down <code>async</code> functions</a>
   <ul>
-  <li><a href="#using-context" id="toc-using-context" class="nav-link" data-scroll-target="#using-context"><span class="toc-section-number">2.1</span>  using Context</a></li>
+  <li><a href="#using-context" id="toc-using-context" class="nav-link" data-scroll-target="#using-context"><span class="toc-section-number">1.6.1</span>  using Context</a></li>
   </ul></li>
+  </ul></li>
+  <li><a href="#step-by-step-todo-api-rest-domains" id="toc-step-by-step-todo-api-rest-domains" class="nav-link" data-scroll-target="#step-by-step-todo-api-rest-domains"><span class="toc-section-number">2</span>  step-by-step todo api rest domains</a></li>
   <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="toc-section-number">3</span>  Versions</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/rjslab3-4.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -1388,7 +1389,7 @@ ul.task-list li input[type="checkbox"] {
   <div class="quarto-categories">
     <div class="quarto-category">reactjs</div>
     <div class="quarto-category">lab</div>
-    <div class="quarto-category">Lab#RE04</div>
+    <div class="quarto-category">Lab#RE03</div>
   </div>
   </div>
 
@@ -1447,8 +1448,14 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><a href="../reactjs/reactjs-hook-context.html">useContext</a></li>
 <li><a href="../reactjs/reactjs-app-async.html">async</a></li>
-<li><a href="https://codesandbox.io/s/todo-app-5-domain-7l18sb" class="external">codesanbox todo-app-5-domain</a></li>
-<li><a href="https://codesandbox.io/s/todo-app-6-9q6lzy" class="external">codesanbox todo-app-6</a></li>
+<li><code>todo</code> refactored to domains:
+<ul>
+<li>component and sevice layer, <a href="https://codesandbox.io/s/todo-app-5-domain-7l18sb" class="external">codesanbox todo-app-5-domain</a></li>
+</ul></li>
+<li><code>todo</code> refactored to domains:
+<ul>
+<li>three components and sevice layer, <a href="https://codesandbox.io/s/todo-app-6-9q6lzy" class="external">codesanbox todo-app-6</a></li>
+</ul></li>
 </ul>
 <section id="approach" class="level2 page-columns page-full" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="approach"><span class="header-section-number">1</span> Approach</h2>
@@ -1467,7 +1474,7 @@ ul.task-list li input[type="checkbox"] {
 <h3 data-number="1.2" class="anchored" data-anchor-id="mutable-immutable"><span class="header-section-number">1.2</span> <code>mutable</code> &amp; <code>immutable</code></h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-3-16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="codesanbox todo-app-6 folder-tree to decouple the communication-layer"><img src="../images/reactjs/lab-re-3-16.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-3-16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="codesanbox todo-app-6 folder-tree to decouple the communication-layer"><img src="..\images/reactjs/lab-re-3-16.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
 <p></p><figcaption class="figure-caption"><a href="https://codesandbox.io/s/todo-app-6-9q6lzy" class="external">codesanbox todo-app-6</a> folder-tree to decouple the communication-layer</figcaption><p></p>
 </figure>
 </div>
@@ -1533,7 +1540,7 @@ immutability
 <p>If your <a href="https://react.dev/learn/synchronizing-with-effects#fetching-data" class="external">Effect fetches something</a>, the cleanup function should either <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController" class="external">abort</a> the fetch or ignore its result:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-3-17.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="abort second trigger"><img src="../images/reactjs/lab-re-3-17.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-3-17.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="abort second trigger"><img src="..\images/reactjs/lab-re-3-17.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
 <p></p><figcaption class="figure-caption">abort second trigger</figcaption><p></p>
 </figure>
 </div>
@@ -1541,12 +1548,11 @@ immutability
 <p>You can’t “undo” a network request that already happened, but your cleanup function should ensure that the fetch that’s not relevant anymore does not keep affecting your application. If the userId changes from ‘Alice’ to ‘Bob’, cleanup ensures that the ‘Alice’ response is ignored even if it arrives after ‘Bob’.</p>
 </blockquote>
 </section>
-</section>
-<section id="asyncsync-passing-down-async-functions" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="asyncsync-passing-down-async-functions"><span class="header-section-number">2</span> <code>async</code>/<code>sync</code>: passing down <code>async</code> functions</h2>
+<section id="asyncsync-passing-down-async-functions" class="level3" data-number="1.6">
+<h3 data-number="1.6" class="anchored" data-anchor-id="asyncsync-passing-down-async-functions"><span class="header-section-number">1.6</span> <code>async</code>/<code>sync</code>: passing down <code>async</code> functions</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-3-18.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="coupled UI components"><img src="../images/reactjs/lab-re-3-18.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-3-18.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="coupled UI components"><img src="..\images/reactjs/lab-re-3-18.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
 <p></p><figcaption class="figure-caption">coupled UI components</figcaption><p></p>
 </figure>
 </div>
@@ -1556,8 +1562,8 @@ immutability
 <li><code>Coupling Components</code>: By passing asynchronous functions as props, you tightly couple the components together. This means that if you decide to change the implementation of the asynchronous function or replace it with a different approach (e.g., using a different library, refactoring the code), you will have to update all the components that rely on that function. This can introduce unnecessary dependencies and make your codebase less flexible.</li>
 <li><code>Code Duplication</code>: If multiple components require access to the same asynchronous function, passing it as a prop to each component results in code duplication. You’ll need to repeat the prop declaration and handling in each component, leading to redundant code. This can make it more difficult to maintain and update the codebase.</li>
 </ul>
-<section id="using-context" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="using-context"><span class="header-section-number">2.1</span> using Context</h3>
+<section id="using-context" class="level4" data-number="1.6.1">
+<h4 data-number="1.6.1" class="anchored" data-anchor-id="using-context"><span class="header-section-number">1.6.1</span> using Context</h4>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1568,18 +1574,18 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Instead of passing asynchronous functions as props, <mark>using a shared context and provider pattern, such as React Context, allows you to decouple the components and provide a centralized location for managing and accessing shared state and functions.</mark></p>
+<p>Instead of passing <code>asynchronous</code> functions as props, <mark>using a shared context and provider pattern, such as React Context, allows you to decouple the components and provide a centralized location for managing and accessing shared state and functions.</mark></p>
 <p>By using a context, you can <strong>avoid prop drilling</strong> and provide a <strong>clean and efficient</strong> way to access the <strong>asynchronous functions from any component within the context’s scope.</strong></p>
 </div>
 </div>
 <ul>
-<li>Additionally, using a provider and context pattern allows for better <strong>separation of concerns</strong>.
+<li>Additionally, using a <code>provider</code> and <code>context</code> pattern allows for better <strong>separation of concerns</strong>.
 <ul>
-<li>The provider handles the implementation details and provides the necessary functions, while the components consuming the context can focus on rendering and utilizing the shared data and functionality without worrying about how it is implemented or passed down through props.</li>
+<li>The <code>provider</code> handles the implementation details and provides the necessary functions, while the components consuming the context can focus on rendering and utilizing the shared data and functionality without worrying about how it is implemented or passed down through props.</li>
 </ul></li>
-<li>Using context allows you to create a <strong>central place to manage and access the asynchronous function</strong>, making it available to any component that needs it within the context’s scope.
+<li>Using <code>context</code> allows you to create a <strong>central place to manage and access the asynchronous function</strong>, making it available to any component that needs it within the context’s scope.
 <ul>
-<li>This avoids the need for prop drilling, where you would have to pass the function down through multiple levels of components as props.</li>
+<li>This avoids the need for <strong>prop drilling</strong>, where you would have to pass the function down through multiple levels of components as props.</li>
 </ul></li>
 </ul>
 <div class="callout-warning callout callout-style-default callout-captioned">
@@ -1592,11 +1598,24 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Propagating the asynchronous function via props can work, but it may lead to some issues. Asynchronous operations like API requests typically have a delay in fetching data, and the results may not be available immediately. If you pass the function as a prop and try to execute it synchronously within a component, you won’t be able to wait for the response or handle any errors properly. It can lead to unpredictable behavior and may cause the component to render with incomplete or incorrect data.</p>
+<p>Propagating the asynchronous function via props can work, <strong>but it may lead to some issues.</strong></p>
+<p>Asynchronous operations like API requests typically have a delay in fetching data, and the results may not be available immediately.</p>
+<p>If you pass the function as a prop and try to execute it synchronously within a component, you won’t be able to wait for the response or handle any errors properly.</p>
+<p>It can lead to unpredictable behavior and may cause the component to render with incomplete or incorrect data.</p>
 </div>
 </div>
-<p>By using context, you can handle the asynchronous behavior appropriately, whether it’s using async/await or promises, and ensure that the components consuming the context can work with the asynchronous function correctly.</p>
+<p>By using <code>context</code>, you can handle the <code>asynchronous</code> behavior appropriately, whether it’s using async/await or promises, and ensure that the components consuming the context can work with the <code>asynchronous</code> function correctly.</p>
 </section>
+</section>
+</section>
+<section id="step-by-step-todo-api-rest-domains" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="step-by-step-todo-api-rest-domains"><span class="header-section-number">2</span> step-by-step todo api rest domains</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/todo-domains-schema.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="todo domains schema"><img src="..\images/reactjs/todo-domains-schema.jpg" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">todo domains schema</figcaption><p></p>
+</figure>
+</div>
 </section>
 <section id="versions" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="versions"><span class="header-section-number">3</span> Versions</h2>
@@ -1911,7 +1930,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","loop":true,"selector":".lightbox"});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","descPosition":"bottom"});</script>
 
 
 
