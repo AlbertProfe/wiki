@@ -1428,14 +1428,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#approach" id="toc-approach" class="nav-link active" data-scroll-target="#approach"><span class="toc-section-number">1</span>  Approach</a>
   <ul>
-  <li><a href="#decoupling-the-communication-layer" id="toc-decoupling-the-communication-layer" class="nav-link" data-scroll-target="#decoupling-the-communication-layer"><span class="toc-section-number">1.1</span>  Decoupling the communication layer</a></li>
-  <li><a href="#mutable-immutable" id="toc-mutable-immutable" class="nav-link" data-scroll-target="#mutable-immutable"><span class="toc-section-number">1.2</span>  <code>mutable</code> &amp; <code>immutable</code></a></li>
-  <li><a href="#context-api" id="toc-context-api" class="nav-link" data-scroll-target="#context-api"><span class="toc-section-number">1.3</span>  Context API</a></li>
-  <li><a href="#using-react-context" id="toc-using-react-context" class="nav-link" data-scroll-target="#using-react-context"><span class="toc-section-number">1.4</span>  Using React context</a></li>
-  <li><a href="#fetching-data-abort" id="toc-fetching-data-abort" class="nav-link" data-scroll-target="#fetching-data-abort"><span class="toc-section-number">1.5</span>  fetching data: abort</a></li>
-  <li><a href="#asyncsync-passing-down-async-functions" id="toc-asyncsync-passing-down-async-functions" class="nav-link" data-scroll-target="#asyncsync-passing-down-async-functions"><span class="toc-section-number">1.6</span>  <code>async</code>/<code>sync</code>: passing down <code>async</code> functions</a>
+  <li><a href="#hexagonal-architecture" id="toc-hexagonal-architecture" class="nav-link" data-scroll-target="#hexagonal-architecture"><span class="toc-section-number">1.1</span>  Hexagonal Architecture</a></li>
+  <li><a href="#decoupling-the-communication-layer" id="toc-decoupling-the-communication-layer" class="nav-link" data-scroll-target="#decoupling-the-communication-layer"><span class="toc-section-number">1.2</span>  Decoupling the communication layer</a></li>
+  <li><a href="#mutable-immutable" id="toc-mutable-immutable" class="nav-link" data-scroll-target="#mutable-immutable"><span class="toc-section-number">1.3</span>  <code>mutable</code> &amp; <code>immutable</code></a></li>
+  <li><a href="#context-api" id="toc-context-api" class="nav-link" data-scroll-target="#context-api"><span class="toc-section-number">1.4</span>  Context API</a></li>
+  <li><a href="#using-react-context" id="toc-using-react-context" class="nav-link" data-scroll-target="#using-react-context"><span class="toc-section-number">1.5</span>  Using React context</a></li>
+  <li><a href="#fetching-data-abort" id="toc-fetching-data-abort" class="nav-link" data-scroll-target="#fetching-data-abort"><span class="toc-section-number">1.6</span>  fetching data: abort</a></li>
+  <li><a href="#asyncsync-passing-down-async-functions" id="toc-asyncsync-passing-down-async-functions" class="nav-link" data-scroll-target="#asyncsync-passing-down-async-functions"><span class="toc-section-number">1.7</span>  <code>async</code>/<code>sync</code>: passing down <code>async</code> functions</a>
   <ul>
-  <li><a href="#using-context" id="toc-using-context" class="nav-link" data-scroll-target="#using-context"><span class="toc-section-number">1.6.1</span>  using Context</a></li>
+  <li><a href="#using-context" id="toc-using-context" class="nav-link" data-scroll-target="#using-context"><span class="toc-section-number">1.7.1</span>  using Context</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#step-by-step-todo-api-rest-domains" id="toc-step-by-step-todo-api-rest-domains" class="nav-link" data-scroll-target="#step-by-step-todo-api-rest-domains"><span class="toc-section-number">2</span>  step-by-step todo api rest domains</a>
@@ -1530,8 +1531,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <section id="approach" class="level2 page-columns page-full" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="approach"><span class="header-section-number">1</span> Approach</h2>
-<section id="decoupling-the-communication-layer" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="decoupling-the-communication-layer"><span class="header-section-number">1.1</span> Decoupling the communication layer</h3>
+<section id="hexagonal-architecture" class="level3 page-columns page-full" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="hexagonal-architecture"><span class="header-section-number">1.1</span> Hexagonal Architecture</h3>
+<p>The architecture by domains to decoupled concerns, with a <code>service layer</code> handling <strong>CRUD operations</strong> and using a provider and <code>context</code> in React, shares some similarities with the <code>Hexagonal Architecture</code> (also known as Ports and Adapters Architecture).</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><a href="../javase/selab3-2.html">Onion architecture</a> already used in other labs. Very similar to Hexagonal one.</p>
+</div></div><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/home/hexagonal.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Hexagonal Architecture"><img src="../images/home/hexagonal.png" class="img-fluid figure-img" style="width:50.0%"></a></p>
+<p></p><figcaption class="figure-caption">Hexagonal Architecture</figcaption><p></p>
+</figure>
+</div>
+<p>In the <code>Hexagonal Architecture</code>, the core principle is <mark>to decouple the application’s business logic from its external dependencies, such as databases, APIs, or user interfaces.<mark></mark></mark></p>
+<p>It promotes the use of ports and adapters to <strong>isolate</strong> and <strong>abstract</strong> these dependencies.</p>
+<p>In our architecture, the <code>service layer</code> acts as an adapter that interfaces with external dependencies (such as the API through Axios) and <strong>exposes a clean interface (the CRUD operations)</strong> for the application’s business logic (the React components) to interact with.</p>
+<p>The <code>provider</code> and <code>context</code> in React provide a way to <strong>propagate this functionality throughout the component tree, decoupling it from individual component props.</strong></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Has our App an <code>Hexagonal Architecture</code>?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>While not an exact implementation of <code>Hexagonal Architecture</code>, the separation of concerns, decoupling of dependencies, and focus on clean interfaces align with the principles of <code>Hexagonal Architecture</code>.</p>
+<p>This allows for better maintainability, testability, and flexibility in the application’s design.</p>
+</div>
+</div>
+</section>
+<section id="decoupling-the-communication-layer" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="decoupling-the-communication-layer"><span class="header-section-number">1.2</span> Decoupling the communication layer</h3>
 <p>Decoupling the communication layer by creating a separate service in React JSX and JS architecture brings several benefits:</p>
 <ul>
 <li><code>Separation of Concerns</code>: By creating a dedicated service layer, you separate the concerns of handling API communication and data manipulation from the components that render the UI. This promotes a cleaner and more maintainable codebase.</li>
@@ -1541,11 +1573,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>Maintainable and Scalable</code>: By centralizing the API communication logic in a service, it becomes easier to manage and update as your application grows. If the API changes or new features are added, you only need to update the service layer without affecting the components.</li>
 </ul>
 </section>
-<section id="mutable-immutable" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="mutable-immutable"><span class="header-section-number">1.2</span> <code>mutable</code> &amp; <code>immutable</code></h3>
+<section id="mutable-immutable" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="mutable-immutable"><span class="header-section-number">1.3</span> <code>mutable</code> &amp; <code>immutable</code></h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-3-16.png" class="lightbox" title="codesanbox todo-app-6 folder-tree to decouple the communication-layer" data-gallery="quarto-lightbox-gallery-1"><img src="../images/reactjs/lab-re-3-16.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-3-16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="codesanbox todo-app-6 folder-tree to decouple the communication-layer"><img src="../images/reactjs/lab-re-3-16.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
 <p></p><figcaption class="figure-caption"><a href="https://codesandbox.io/s/todo-app-6-9q6lzy" class="external">codesanbox todo-app-6</a> folder-tree to decouple the communication-layer</figcaption><p></p>
 </figure>
 </div>
@@ -1562,8 +1594,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 </section>
-<section id="context-api" class="level3 page-columns page-full" data-number="1.3">
-<h3 data-number="1.3" class="anchored" data-anchor-id="context-api"><span class="header-section-number">1.3</span> Context API</h3>
+<section id="context-api" class="level3 page-columns page-full" data-number="1.4">
+<h3 data-number="1.4" class="anchored" data-anchor-id="context-api"><span class="header-section-number">1.4</span> Context API</h3>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1595,8 +1627,8 @@ immutability
 </div>
 </div>
 </section>
-<section id="using-react-context" class="level3" data-number="1.4">
-<h3 data-number="1.4" class="anchored" data-anchor-id="using-react-context"><span class="header-section-number">1.4</span> Using React context</h3>
+<section id="using-react-context" class="level3" data-number="1.5">
+<h3 data-number="1.5" class="anchored" data-anchor-id="using-react-context"><span class="header-section-number">1.5</span> Using React context</h3>
 <p>When using React context, it’s important to follow best practices to make the most of this concept:</p>
 <ul>
 <li><code>Define the context:</code> Create a context object using React.createContext(), providing an initial value. This value should typically be an immutable object or state.</li>
@@ -1606,12 +1638,12 @@ immutability
 <li><code>Propagate changes back to the context:</code> If components need to update the context data or trigger actions that affect the context, they can use functions or callbacks provided by the context. These functions should handle the necessary updates and ensure immutability is maintained.</li>
 </ul>
 </section>
-<section id="fetching-data-abort" class="level3" data-number="1.5">
-<h3 data-number="1.5" class="anchored" data-anchor-id="fetching-data-abort"><span class="header-section-number">1.5</span> fetching data: abort</h3>
+<section id="fetching-data-abort" class="level3" data-number="1.6">
+<h3 data-number="1.6" class="anchored" data-anchor-id="fetching-data-abort"><span class="header-section-number">1.6</span> fetching data: abort</h3>
 <p>If your <a href="https://react.dev/learn/synchronizing-with-effects#fetching-data" class="external">Effect fetches something</a>, the cleanup function should either <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController" class="external">abort</a> the fetch or ignore its result:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-3-17.png" class="lightbox" title="abort second trigger" data-gallery="quarto-lightbox-gallery-2"><img src="../images/reactjs/lab-re-3-17.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-3-17.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="abort second trigger"><img src="../images/reactjs/lab-re-3-17.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
 <p></p><figcaption class="figure-caption">abort second trigger</figcaption><p></p>
 </figure>
 </div>
@@ -1619,11 +1651,11 @@ immutability
 <p>You can’t “undo” a network request that already happened, but your cleanup function should ensure that the fetch that’s not relevant anymore does not keep affecting your application. If the userId changes from ‘Alice’ to ‘Bob’, cleanup ensures that the ‘Alice’ response is ignored even if it arrives after ‘Bob’.</p>
 </blockquote>
 </section>
-<section id="asyncsync-passing-down-async-functions" class="level3" data-number="1.6">
-<h3 data-number="1.6" class="anchored" data-anchor-id="asyncsync-passing-down-async-functions"><span class="header-section-number">1.6</span> <code>async</code>/<code>sync</code>: passing down <code>async</code> functions</h3>
+<section id="asyncsync-passing-down-async-functions" class="level3" data-number="1.7">
+<h3 data-number="1.7" class="anchored" data-anchor-id="asyncsync-passing-down-async-functions"><span class="header-section-number">1.7</span> <code>async</code>/<code>sync</code>: passing down <code>async</code> functions</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-3-18.png" class="lightbox" title="coupled UI components" data-gallery="quarto-lightbox-gallery-3"><img src="../images/reactjs/lab-re-3-18.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-3-18.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="coupled UI components"><img src="../images/reactjs/lab-re-3-18.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
 <p></p><figcaption class="figure-caption">coupled UI components</figcaption><p></p>
 </figure>
 </div>
@@ -1633,8 +1665,8 @@ immutability
 <li><code>Coupling Components</code>: By passing asynchronous functions as props, you tightly couple the components together. This means that if you decide to change the implementation of the asynchronous function or replace it with a different approach (e.g., using a different library, refactoring the code), you will have to update all the components that rely on that function. This can introduce unnecessary dependencies and make your codebase less flexible.</li>
 <li><code>Code Duplication</code>: If multiple components require access to the same asynchronous function, passing it as a prop to each component results in code duplication. You’ll need to repeat the prop declaration and handling in each component, leading to redundant code. This can make it more difficult to maintain and update the codebase.</li>
 </ul>
-<section id="using-context" class="level4" data-number="1.6.1">
-<h4 data-number="1.6.1" class="anchored" data-anchor-id="using-context"><span class="header-section-number">1.6.1</span> using Context</h4>
+<section id="using-context" class="level4" data-number="1.7.1">
+<h4 data-number="1.7.1" class="anchored" data-anchor-id="using-context"><span class="header-section-number">1.7.1</span> using Context</h4>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1683,7 +1715,7 @@ Warning
 <h2 data-number="2" class="anchored" data-anchor-id="step-by-step-todo-api-rest-domains"><span class="header-section-number">2</span> step-by-step todo api rest domains</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/todo-domains-schema.jpg" class="lightbox" title="todo domains schema" data-gallery="quarto-lightbox-gallery-4"><img src="../images/reactjs/todo-domains-schema.jpg" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/reactjs/todo-domains-schema.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="todo domains schema"><img src="../images/reactjs/todo-domains-schema.jpg" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">todo domains schema</figcaption><p></p>
 </figure>
 </div>
@@ -2305,7 +2337,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":true,"closeEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":true,"descPosition":"bottom"});</script>
 
 
 
