@@ -1442,9 +1442,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#service-todoservice.js" id="toc-service-todoservice.js" class="nav-link" data-scroll-target="#service-todoservice.js"><span class="toc-section-number">2.1</span>  Service: <code>TodoService.js</code></a></li>
   <li><a href="#service-todocontext.js" id="toc-service-todocontext.js" class="nav-link" data-scroll-target="#service-todocontext.js"><span class="toc-section-number">2.2</span>  Service: <code>TodoContext.js</code></a></li>
+  <li><a href="#main-component-todoapp.jsx" id="toc-main-component-todoapp.jsx" class="nav-link" data-scroll-target="#main-component-todoapp.jsx"><span class="toc-section-number">2.3</span>  Main Component: <code>ToDoApp.jsx</code></a></li>
+  <li><a href="#component-todoadd.jsx" id="toc-component-todoadd.jsx" class="nav-link" data-scroll-target="#component-todoadd.jsx"><span class="toc-section-number">2.4</span>  Component: <code>ToDoAdd.jsx</code></a></li>
+  <li><a href="#component-todolist.jsx" id="toc-component-todolist.jsx" class="nav-link" data-scroll-target="#component-todolist.jsx"><span class="toc-section-number">2.5</span>  Component: <code>ToDoList.jsx</code></a></li>
   </ul></li>
-  <li><a href="#main-component-todoapp.jsx" id="toc-main-component-todoapp.jsx" class="nav-link" data-scroll-target="#main-component-todoapp.jsx"><span class="toc-section-number">3</span>  Main Component: <code>ToDoApp.jsx</code></a></li>
-  <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="toc-section-number">4</span>  Versions</a></li>
+  <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="toc-section-number">3</span>  Versions</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/rjslab3-4.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1786,7 +1788,7 @@ object literal notation in JavaScript
 <li>a state manager, the <code>TodoProvider</code> component is responsible for <strong>managing the state of the TODO</strong> items using the <code>useState</code> hook.</li>
 </ul>
 <table class="table">
-<caption>TodoContext<code>and</code>TodoProvider`</caption>
+<caption><code>TodoContext</code> and <code>TodoProvider</code></caption>
 <colgroup>
 <col style="width: 20%">
 <col style="width: 80%">
@@ -1902,71 +1904,96 @@ object literal notation in JavaScript
 <span id="cb2-73"><a href="#cb2-73"></a><span class="im">export</span> { TodoContext<span class="op">,</span> TodoProvider }<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-</section>
-<section id="main-component-todoapp.jsx" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="main-component-todoapp.jsx"><span class="header-section-number">3</span> Main Component: <code>ToDoApp.jsx</code></h2>
-<div class="code-with-filename">
+<section id="main-component-todoapp.jsx" class="level3 page-columns page-full" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="main-component-todoapp.jsx"><span class="header-section-number">2.3</span> Main Component: <code>ToDoApp.jsx</code></h3>
+<p>The main component is <code>TodoApp</code>, which renders a:</p>
+<ul>
+<li><code>header</code>,</li>
+<li>a <code>TodoAdd</code> component for creating new TODO items, and</li>
+<li>a <code>TodoList</code> component for displaying the list of TODO items.</li>
+</ul>
+<p>Within TodoApp, the <code>useContext</code> hook is used to access the <code>TodoContext</code> and retrieve the <code>todos</code>, <code>createTodo</code>, <code>updateTodo</code>, and <code>deleteTodo</code> functions from the <strong>context</strong>.</p>
+<p>Handlers:</p>
+<ul>
+<li>The <code>handleCreateTodo</code> function calls <strong>createTodo</strong> when a new TODO item is created in the <code>TodoAdd</code> component.</li>
+<li>The <code>handleUpdateTodo</code> function invokes <strong>updateTodo</strong> when a TODO item is updated in the <code>TodoList</code> component.</li>
+<li>The <code>handleDeleteTodo</code> function calls <strong>deleteTodo</strong> when a TODO item is deleted in the <code>TodoList</code> component.</li>
+</ul>
+<p>The App component <strong>wraps</strong> the <code>TodoApp</code> component with the <code>TodoProvider</code>, <mark>providing the necessary context and functions to manage the TODO items.</mark></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>The <strong>code-architecture</strong> establishes a connection between the TODO data management in <code>TodoProvider</code> and the rendering of components in <code>TodoApp</code> using the <code>TodoContext</code>. It allows for seamless communication and manipulation of TODO items within the React application.</p>
+</div></div><div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>ToDoApp.jsx</strong></pre>
 </div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">import</span> React<span class="op">,</span> { useContext } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="im">import</span> TodoAdd <span class="im">from</span> <span class="st">"./TodoAdd"</span><span class="op">;</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="im">import</span> TodoList <span class="im">from</span> <span class="st">"./TodoList"</span><span class="op">;</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="im">import</span> { TodoContext<span class="op">,</span> TodoProvider } <span class="im">from</span> <span class="st">"../service/TodoContext.js"</span><span class="op">;</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="kw">const</span> TodoApp <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb3-7"><a href="#cb3-7"></a>  <span class="kw">const</span> { todos<span class="op">,</span> createTodo<span class="op">,</span> updateTodo<span class="op">,</span> deleteTodo } <span class="op">=</span> <span class="fu">useContext</span>(TodoContext)<span class="op">;</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a></span>
-<span id="cb3-9"><a href="#cb3-9"></a>  <span class="kw">const</span> handleCreateTodo <span class="op">=</span> (todo) <span class="kw">=&gt;</span> {</span>
-<span id="cb3-10"><a href="#cb3-10"></a>    <span class="fu">createTodo</span>(todo)<span class="op">;</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a>  }<span class="op">;</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a></span>
-<span id="cb3-13"><a href="#cb3-13"></a>  <span class="kw">const</span> handleUpdateTodo <span class="op">=</span> (todo) <span class="kw">=&gt;</span> {</span>
-<span id="cb3-14"><a href="#cb3-14"></a>    <span class="fu">updateTodo</span>(todo)<span class="op">;</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a>  }<span class="op">;</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a></span>
-<span id="cb3-17"><a href="#cb3-17"></a>  <span class="kw">const</span> handleDeleteTodo <span class="op">=</span> (todoId) <span class="kw">=&gt;</span> {</span>
-<span id="cb3-18"><a href="#cb3-18"></a>    <span class="fu">deleteTodo</span>(todoId)<span class="op">;</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a>  }<span class="op">;</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a></span>
-<span id="cb3-21"><a href="#cb3-21"></a>  <span class="cf">return</span> (</span>
-<span id="cb3-22"><a href="#cb3-22"></a>    <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
-<span id="cb3-23"><a href="#cb3-23"></a>      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Todo App<span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
-<span id="cb3-24"><a href="#cb3-24"></a>      <span class="op">&lt;</span>TodoAdd onCreate<span class="op">=</span>{handleCreateTodo} <span class="op">/&gt;</span></span>
-<span id="cb3-25"><a href="#cb3-25"></a>      <span class="op">&lt;</span>TodoList</span>
-<span id="cb3-26"><a href="#cb3-26"></a>        todos<span class="op">=</span>{todos}</span>
-<span id="cb3-27"><a href="#cb3-27"></a>        onDelete<span class="op">=</span>{handleDeleteTodo}</span>
-<span id="cb3-28"><a href="#cb3-28"></a>        onUpdate<span class="op">=</span>{handleUpdateTodo}</span>
-<span id="cb3-29"><a href="#cb3-29"></a>      <span class="op">/&gt;</span></span>
-<span id="cb3-30"><a href="#cb3-30"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb3-31"><a href="#cb3-31"></a>  )<span class="op">;</span></span>
-<span id="cb3-32"><a href="#cb3-32"></a>}<span class="op">;</span></span>
-<span id="cb3-33"><a href="#cb3-33"></a></span>
-<span id="cb3-34"><a href="#cb3-34"></a><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb3-35"><a href="#cb3-35"></a>  <span class="cf">return</span> (</span>
-<span id="cb3-36"><a href="#cb3-36"></a>    <span class="op">&lt;</span>TodoProvider<span class="op">&gt;</span></span>
-<span id="cb3-37"><a href="#cb3-37"></a>      <span class="op">&lt;</span>TodoApp <span class="op">/&gt;</span></span>
-<span id="cb3-38"><a href="#cb3-38"></a>    <span class="op">&lt;/</span>TodoProvider<span class="op">&gt;</span></span>
-<span id="cb3-39"><a href="#cb3-39"></a>  )<span class="op">;</span></span>
-<span id="cb3-40"><a href="#cb3-40"></a>}<span class="op">;</span></span>
-<span id="cb3-41"><a href="#cb3-41"></a></span>
-<span id="cb3-42"><a href="#cb3-42"></a><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="im">import</span> { TodoContext<span class="op">,</span> TodoProvider } </span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="im">from</span> <span class="st">"../service/TodoContext.js"</span><span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">const</span> TodoApp <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb3-8"><a href="#cb3-8"></a>  <span class="kw">const</span> { todos<span class="op">,</span> createTodo<span class="op">,</span> updateTodo<span class="op">,</span> deleteTodo } <span class="op">=</span> </span>
+<span id="cb3-9"><a href="#cb3-9"></a>    <span class="fu">useContext</span>(TodoContext)<span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a></span>
+<span id="cb3-11"><a href="#cb3-11"></a>  <span class="kw">const</span> handleCreateTodo <span class="op">=</span> (todo) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-12"><a href="#cb3-12"></a>    <span class="fu">createTodo</span>(todo)<span class="op">;</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>  }<span class="op">;</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a></span>
+<span id="cb3-15"><a href="#cb3-15"></a>  <span class="kw">const</span> handleUpdateTodo <span class="op">=</span> (todo) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-16"><a href="#cb3-16"></a>    <span class="fu">updateTodo</span>(todo)<span class="op">;</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>  }<span class="op">;</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a></span>
+<span id="cb3-19"><a href="#cb3-19"></a>  <span class="kw">const</span> handleDeleteTodo <span class="op">=</span> (todoId) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-20"><a href="#cb3-20"></a>    <span class="fu">deleteTodo</span>(todoId)<span class="op">;</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a>  }<span class="op">;</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a></span>
+<span id="cb3-23"><a href="#cb3-23"></a>  <span class="cf">return</span> (</span>
+<span id="cb3-24"><a href="#cb3-24"></a>    <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a>      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Todo App<span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a>      <span class="op">&lt;</span>TodoAdd onCreate<span class="op">=</span>{handleCreateTodo} <span class="op">/&gt;</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a>      <span class="op">&lt;</span>TodoList</span>
+<span id="cb3-28"><a href="#cb3-28"></a>        todos<span class="op">=</span>{todos}</span>
+<span id="cb3-29"><a href="#cb3-29"></a>        onDelete<span class="op">=</span>{handleDeleteTodo}</span>
+<span id="cb3-30"><a href="#cb3-30"></a>        onUpdate<span class="op">=</span>{handleUpdateTodo}</span>
+<span id="cb3-31"><a href="#cb3-31"></a>      <span class="op">/&gt;</span></span>
+<span id="cb3-32"><a href="#cb3-32"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb3-33"><a href="#cb3-33"></a>  )<span class="op">;</span></span>
+<span id="cb3-34"><a href="#cb3-34"></a>}<span class="op">;</span></span>
+<span id="cb3-35"><a href="#cb3-35"></a></span>
+<span id="cb3-36"><a href="#cb3-36"></a><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb3-37"><a href="#cb3-37"></a>  <span class="cf">return</span> (</span>
+<span id="cb3-38"><a href="#cb3-38"></a>    <span class="op">&lt;</span>TodoProvider<span class="op">&gt;</span></span>
+<span id="cb3-39"><a href="#cb3-39"></a>      <span class="op">&lt;</span>TodoApp <span class="op">/&gt;</span></span>
+<span id="cb3-40"><a href="#cb3-40"></a>    <span class="op">&lt;/</span>TodoProvider<span class="op">&gt;</span></span>
+<span id="cb3-41"><a href="#cb3-41"></a>  )<span class="op">;</span></span>
+<span id="cb3-42"><a href="#cb3-42"></a>}<span class="op">;</span></span>
+<span id="cb3-43"><a href="#cb3-43"></a></span>
+<span id="cb3-44"><a href="#cb3-44"></a><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="component-todoadd.jsx" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="component-todoadd.jsx"><span class="header-section-number">2.4</span> Component: <code>ToDoAdd.jsx</code></h3>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>ToDoGrid.jsx</strong></pre>
+<pre><strong>ToDoAdd.jsx</strong></pre>
 </div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="component-todolist.jsx" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="component-todolist.jsx"><span class="header-section-number">2.5</span> Component: <code>ToDoList.jsx</code></h3>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>ToDoGrid.jsx</strong></pre>
+<pre><strong>ToDoList.jsx</strong></pre>
 </div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="versions" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="versions"><span class="header-section-number">4</span> Versions</h2>
+</section>
+<section id="versions" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="versions"><span class="header-section-number">3</span> Versions</h2>
 <table class="table">
 <thead>
 <tr class="header">
@@ -2278,7 +2305,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","loop":true,"openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":true,"closeEffect":"zoom"});</script>
 
 
 
