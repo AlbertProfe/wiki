@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -1472,7 +1472,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Monday, May 22, 2023</p>
+      <p class="date-modified">Wednesday, May 24, 2023</p>
     </div>
   </div>
     
@@ -1483,15 +1483,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div class="labs">
 <p>📘 <strong>React JS Lab#RE04-1: feathers / spring boot</strong></p>
-<p>In this lab, we will be using:</p>
+<p>In this lab, we will be using these server frameworks to feed our React <code>Todo</code> app through API Rest. For many reasons described below the use of a React App with a Spring Boot/Feathers server is a very good option:</p>
 <ul>
-<li><a href="https://feathersjs.com/" class="external">feathers</a>, the API and Real-time Application Framework.</li>
-<li><a href="../spring/spring-basics.html">Spring Boot</a></li>
+<li><a href="https://feathersjs.com/" class="external">feathers</a>, the API and Real-time light Application Framework over <a href="https://expressjs.com/" class="external">Express</a>.</li>
+<li><a href="../spring/spring-basics.html">Spring Boot</a>: <a href="https://spring.io/projects/spring-boot" class="external">Spring Boot</a> makes it easy to create <strong>stand-alone, production-grade</strong> Spring based Applications that you can “just run”.</li>
 </ul>
 </div>
 <p><br></p>
-<section id="overall" class="level2 page-columns page-full" data-number="1">
+<section id="overall" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="overall"><span class="header-section-number">1</span> Overall</h2>
+<p>Creating a server for a React <code>Todo</code> application is essential for several reasons:</p>
+<ul>
+<li><code>Data Persistence</code>: A server allows you to store and retrieve data from a database or a file system. In the case of a todo application, you need to store the todo items, their status, and any other relevant information. A server enables you to save this data and retrieve it whenever necessary, ensuring that the todos remain persistent even if the user refreshes the page or closes the application.</li>
+<li><code>User Authentication</code>: If you want to add user accounts and authentication to your todo application, a server is required. It allows you to handle user registration, login, and session management. With a server, you can securely authenticate users and restrict access to certain features or data based on user permissions.</li>
+<li><code>API Integration</code>: In many cases, todo applications need to integrate with external services or APIs. For example, you may want to sync todos with a cloud storage service or send notifications to users. A server acts as an intermediary between your React application and these external APIs, handling the necessary requests and responses.</li>
+<li><code>Server-side Operations</code>: Some operations are better suited to be performed on the server side. For instance, if you need to calculate statistics or generate reports based on the todos, it’s more efficient to offload these tasks to the server rather than executing them in the client’s browser.</li>
+<li><code>Scalability and Performance</code>: As your todo application grows and handles more users and data, a server allows you to scale your infrastructure to meet the demand. You can distribute the load across multiple servers or utilize cloud services that provide auto-scaling capabilities, ensuring optimal performance and responsiveness.</li>
+</ul>
+<p>The <code>Todo</code> React code can be deployed and <strong>served using various frameworks and platforms</strong>, depending on your specific requirements and preferences. Here are some options:</p>
+<ol type="1">
+<li><p><strong>Spring Boot</strong>: <a href="https://spring.io/projects/spring-boot">Spring Boot</a> is a popular Java-based framework for building web applications. It provides a robust server-side environment for running React code.</p></li>
+<li><p><strong>Feathers.js</strong>: <a href="https://feathersjs.com/">Feathers.js</a> is a lightweight and flexible Node.js framework that enables the creation of real-time applications. It can serve React code effectively.</p></li>
+<li><p><strong>PHP Laravel</strong>: <a href="https://laravel.com/">Laravel</a> is a powerful PHP framework known for its elegant syntax and expressive features. It can be used to serve React code alongside server-side logic.</p></li>
+<li><p><strong>.NET C# Razor</strong>: <a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-5.0">Razor</a> is a view engine that integrates with ASP.NET Core, a framework for building web applications with C#. It provides seamless integration of React code with server-side rendering.</p></li>
+<li><p><strong>AWS</strong>: <a href="https://aws.amazon.com/">Amazon Web Services (AWS)</a> offers a range of services for deploying React applications. You can use AWS Amplify, AWS Elastic Beanstalk, or AWS Lambda, depending on your specific needs.</p></li>
+</ol>
+</section>
+<section id="api-rest-server-with-feathers" class="level2 page-columns page-full" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="api-rest-server-with-feathers"><span class="header-section-number">2</span> API REST Server with Feathers</h2>
 <ul>
 <li><a href="https://feathersjs.com/guides/basics/starting.html" class="external">Quick start</a></li>
 <li><a href="https://www.sitepoint.com/crud-app-node-react-feathersjs/" class="external">Node.js CRUD App Using React and FeathersJS</a></li>
@@ -1514,16 +1533,107 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Once you confirm the last prompt, the final selection should look similar to this:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-4-1.png" class="lightbox" title="Prompt feathers" data-gallery="quarto-lightbox-gallery-1"><img src="..\images/reactjs/lab-re-4-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="../images/reactjs/lab-re-4-1.png" class="lightbox" title="Prompt feathers" data-gallery="quarto-lightbox-gallery-1"><img src="../images/reactjs/lab-re-4-1.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">Prompt feathers</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="api-rest-server-with-feathers" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="api-rest-server-with-feathers"><span class="header-section-number">2</span> API REST Server with Feathers</h2>
-</section>
 <section id="api-rest-server-with-spring-boot" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="api-rest-server-with-spring-boot"><span class="header-section-number">3</span> API REST Server with spring boot</h2>
+<p>Let’s create a Spring Boot server. It will publish our todo API Rest with a <code>command-line runner</code> that interacts with a <code>Todo</code> model.</p>
+<ul>
+<li>Create a new <code>Spring Boot</code> project using your preferred IDE or the <a href="https://start.spring.io/" class="external">Spring Initializr</a>. Include the necessary dependencies for RESTful web services and JPA (Java Persistence API).</li>
+<li>Create a <code>Todo</code> <code>entity</code> class to represent our <code>Todo</code> model. This class will have the properties id, text, completed, author, and due.</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Todo.java</strong></pre>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">Data</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">import</span> <span class="im">javax</span><span class="op">.</span><span class="im">persistence</span><span class="op">.</span><span class="im">Entity</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">import</span> <span class="im">javax</span><span class="op">.</span><span class="im">persistence</span><span class="op">.</span><span class="im">GeneratedValue</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">import</span> <span class="im">javax</span><span class="op">.</span><span class="im">persistence</span><span class="op">.</span><span class="im">GenerationType</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">import</span> <span class="im">javax</span><span class="op">.</span><span class="im">persistence</span><span class="op">.</span><span class="im">Id</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Date</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="at">@Data</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="at">@Entity</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="kw">public</span> <span class="kw">class</span> Todo <span class="op">{</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a>    <span class="at">@Id</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>    <span class="at">@GeneratedValue</span><span class="op">(</span>strategy <span class="op">=</span> GenerationType<span class="op">.</span><span class="fu">IDENTITY</span><span class="op">)</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>    <span class="kw">private</span> <span class="bu">String</span> id<span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>    <span class="kw">private</span> <span class="bu">String</span> text<span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>    <span class="kw">private</span> <span class="dt">boolean</span> completed<span class="op">;</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>    <span class="kw">private</span> <span class="bu">String</span> author<span class="op">;</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>    <span class="kw">private</span> <span class="bu">Date</span> due<span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a></span>
+<span id="cb2-20"><a href="#cb2-20"></a>    <span class="co">// Constructors, getters, and setters</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Create a <code>repository</code> <code>interface</code> <code>TodoRepository</code> that extends <code>CurdRepository</code> to handle CRUD operations for the <code>Todo</code> <code>entity</code>.</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>TodoRepository.java</strong></pre>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">data</span><span class="op">.</span><span class="im">jpa</span><span class="op">.</span><span class="im">repository</span><span class="op">.</span><span class="im">CrudRepository</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">public</span> <span class="kw">interface</span> TodoRepository <span class="kw">extends</span> CrudRepository<span class="op">&lt;</span>Todo<span class="op">,</span> <span class="bu">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Create a REST <code>controller</code> <code>TodoController</code> to handle the HTTP requests related to the <code>Todo</code> model.</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>TodoController.java</strong></pre>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.</span><span class="im">RequiredArgsConstructor</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">boot</span><span class="op">.</span><span class="im">CommandLineRunner</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">http</span><span class="op">.</span><span class="im">HttpStatus</span><span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">http</span><span class="op">.</span><span class="im">ResponseEntity</span><span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">web</span><span class="op">.</span><span class="im">bind</span><span class="op">.</span><span class="im">annotation</span><span class="op">.*;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Date</span><span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">List</span><span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="at">@RestController</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/todo"</span><span class="op">)</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="at">@RequiredArgsConstructor</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="kw">public</span> <span class="kw">class</span> TodoController <span class="kw">implements</span> CommandLineRunner <span class="op">{</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a></span>
+<span id="cb4-15"><a href="#cb4-15"></a>    <span class="kw">private</span> <span class="dt">final</span> TodoRepository todoRepository<span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a></span>
+<span id="cb4-17"><a href="#cb4-17"></a>    <span class="at">@GetMapping</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a>    <span class="kw">public</span> ResponseEntity<span class="op">&lt;</span><span class="bu">List</span><span class="op">&lt;</span>Todo<span class="op">&gt;&gt;</span> <span class="fu">getAllTodos</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a>        <span class="bu">List</span><span class="op">&lt;</span>Todo<span class="op">&gt;</span> todos <span class="op">=</span> todoRepository<span class="op">.</span><span class="fu">findAll</span><span class="op">();</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a>        <span class="cf">return</span> <span class="kw">new</span> ResponseEntity<span class="op">&lt;&gt;(</span>todos<span class="op">,</span> HttpStatus<span class="op">.</span><span class="fu">OK</span><span class="op">);</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a>    <span class="op">}</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a></span>
+<span id="cb4-23"><a href="#cb4-23"></a>    <span class="at">@PostMapping</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a>    <span class="kw">public</span> ResponseEntity<span class="op">&lt;</span>Todo<span class="op">&gt;</span> <span class="fu">createTodo</span><span class="op">(</span><span class="at">@RequestBody</span> Todo todo<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-25"><a href="#cb4-25"></a>        Todo createdTodo <span class="op">=</span> todoRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>todo<span class="op">);</span></span>
+<span id="cb4-26"><a href="#cb4-26"></a>        <span class="cf">return</span> <span class="kw">new</span> ResponseEntity<span class="op">&lt;&gt;(</span>createdTodo<span class="op">,</span> HttpStatus<span class="op">.</span><span class="fu">CREATED</span><span class="op">);</span></span>
+<span id="cb4-27"><a href="#cb4-27"></a>    <span class="op">}</span></span>
+<span id="cb4-28"><a href="#cb4-28"></a></span>
+<span id="cb4-29"><a href="#cb4-29"></a>    <span class="at">@Override</span></span>
+<span id="cb4-30"><a href="#cb4-30"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">run</span><span class="op">(</span><span class="bu">String</span><span class="kw">...</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-31"><a href="#cb4-31"></a>        <span class="co">// Optional: You can add some initial Todos here if needed</span></span>
+<span id="cb4-32"><a href="#cb4-32"></a>        Todo todo1 <span class="op">=</span> <span class="kw">new</span> <span class="fu">Todo</span><span class="op">();</span></span>
+<span id="cb4-33"><a href="#cb4-33"></a>        todo1<span class="op">.</span><span class="fu">setText</span><span class="op">(</span><span class="st">"Example Todo 1"</span><span class="op">);</span></span>
+<span id="cb4-34"><a href="#cb4-34"></a>        todo1<span class="op">.</span><span class="fu">setCompleted</span><span class="op">(</span><span class="kw">false</span><span class="op">);</span></span>
+<span id="cb4-35"><a href="#cb4-35"></a>        todo1<span class="op">.</span><span class="fu">setAuthor</span><span class="op">(</span><span class="st">"John"</span><span class="op">);</span></span>
+<span id="cb4-36"><a href="#cb4-36"></a>        todo1<span class="op">.</span><span class="fu">setDue</span><span class="op">(</span><span class="kw">new</span> <span class="bu">Date</span><span class="op">());</span></span>
+<span id="cb4-37"><a href="#cb4-37"></a>        todoRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>todo1<span class="op">);</span></span>
+<span id="cb4-38"><a href="#cb4-38"></a>    <span class="op">}</span></span>
+<span id="cb4-39"><a href="#cb4-39"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Run the <code>Spring Boot application</code>, and the RESTful API for managing Todos will be available at <code>http://localhost:8080/todo</code></li>
+<li>The <code>command-line runner</code> is implemented in the <code>run</code> method of the <code>TodoController</code> class. You can use it to pre-populate the database with some initial <code>Todos</code> if needed.</li>
+</ul>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1817,7 +1927,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":true,"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":true,"selector":".lightbox"});</script>
 
 
 
