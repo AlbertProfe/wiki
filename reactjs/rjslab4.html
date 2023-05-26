@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -110,8 +110,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -935,8 +933,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="dropdown-text">Lab#RE04-1: todo &amp; server</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../reactjs/rjslab5.html">
+    <a class="dropdown-item" href="../reactjs/rjslab5-1.html">
  <span class="dropdown-text">Lab#RE05-1: chat &amp; websockets</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab5-2.html">
+ <span class="dropdown-text">Lab#RE05-2: chat &amp; ws: back</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab5-3.html">
+ <span class="dropdown-text">Lab#RE05-3: chat &amp; ws: front</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">React JS readings</li>
@@ -1396,7 +1402,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reactjs/rjslab5.html" class="sidebar-item-text sidebar-link">Lab#RE05-1: chat &amp; websockets</a>
+  <a href="../reactjs/rjslab5-1.html" class="sidebar-item-text sidebar-link">Lab#RE05-1: chat &amp; websockets</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab5-2.html" class="sidebar-item-text sidebar-link">Lab#RE05-2: chat &amp; ws: back</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab5-3.html" class="sidebar-item-text sidebar-link">Lab#RE05-3: chat &amp; ws: front</a>
   </div>
 </li>
       </ul>
@@ -1479,7 +1495,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, May 25, 2023</p>
+      <p class="date-modified">Friday, May 26, 2023</p>
     </div>
   </div>
     
@@ -1503,11 +1519,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="1" class="anchored" data-anchor-id="overall"><span class="header-section-number">1</span> Overall</h2>
 <p>Creating a server for a React <code>Todo</code> application is essential for several reasons:</p>
 <ul>
-<li><code>Data Persistence</code>: A server allows you to store and retrieve data from a database or a file system. In the case of a todo application, you need to store the todo items, their status, and any other relevant information. A server enables you to save this data and retrieve it whenever necessary, ensuring that the todos remain persistent even if the user refreshes the page or closes the application.</li>
-<li><code>User Authentication</code>: If you want to add user accounts and authentication to your todo application, a server is required. It allows you to handle user registration, login, and session management. With a server, you can securely authenticate users and restrict access to certain features or data based on user permissions.</li>
-<li><code>API Integration</code>: In many cases, todo applications need to integrate with external services or APIs. For example, you may want to sync todos with a cloud storage service or send notifications to users. A server acts as an intermediary between your React application and these external APIs, handling the necessary requests and responses.</li>
-<li><code>Server-side Operations</code>: Some operations are better suited to be performed on the server side. For instance, if you need to calculate statistics or generate reports based on the todos, it’s more efficient to offload these tasks to the server rather than executing them in the client’s browser.</li>
-<li><code>Scalability and Performance</code>: As your todo application grows and handles more users and data, a server allows you to scale your infrastructure to meet the demand. You can distribute the load across multiple servers or utilize cloud services that provide auto-scaling capabilities, ensuring optimal performance and responsiveness.</li>
+<li><code>Data Persistence</code>: A server allows you to <strong>store and retrieve data from a database or a file system.</strong>
+<ul>
+<li>In the case of a <code>todo</code> application, you need to store the <code>todo</code> items, their status, and any other relevant information.</li>
+<li>A server enables you to save this data and retrieve it whenever necessary, ensuring that the <code>todos</code> remain persistent even if the user <strong>refreshes</strong> the page or closes the application.</li>
+</ul></li>
+<li><code>User Authentication</code>: If you want to add <strong>user accounts and authentication</strong> to your todo application, a server is required.
+<ul>
+<li>It allows you to handle user registration, login, and session management.</li>
+<li>With a server, you can securely authenticate users and restrict access to certain features or data based on user permissions.</li>
+</ul></li>
+<li><code>API Integration</code>: In many cases, <code>todo</code> applications need to <strong>integrate with external services or APIs</strong>.
+<ul>
+<li>For example, you may want to sync todos with a cloud storage service or send notifications to users.</li>
+<li>A server acts as an intermediary between your React application and these external APIs, handling the necessary requests and responses.</li>
+</ul></li>
+<li><code>Server-side Operations</code>: Some operations are better suited to be performed on the server side.
+<ul>
+<li>For instance, if you need to <strong>calculate statistics or generate reports based on the <code>todos</code></strong>, it’s more efficient to offload these tasks to the server rather than executing them in the client’s browser.</li>
+</ul></li>
+<li><code>Scalability and Performance</code>: As your <code>todo</code> application grows and handles more users and data, a server <strong>allows you to scale your infrastructure to meet the demand.</strong>
+<ul>
+<li>You can distribute the load across multiple servers or utilize cloud services that provide auto-scaling capabilities, ensuring optimal performance and responsiveness.</li>
+</ul></li>
 </ul>
 <p>The <code>Todo</code> React code can be deployed and <strong>served using various frameworks and platforms</strong>, depending on your specific requirements and preferences. Here are some options:</p>
 <ol type="1">
@@ -1517,6 +1551,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><strong>.NET C# Razor</strong>: <a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-5.0">Razor</a> is a view engine that integrates with ASP.NET Core, a framework for building web applications with C#. It provides seamless integration of React code with server-side rendering.</p></li>
 <li><p><strong>AWS</strong>: <a href="https://aws.amazon.com/">Amazon Web Services (AWS)</a> offers a range of services for deploying React applications. You can use AWS Amplify, AWS Elastic Beanstalk, or AWS Lambda, depending on your specific needs.</p></li>
 </ol>
+<p>Let’s study three of them as a model of server implementation to our <code>React Todo</code>:</p>
+<ul>
+<li>a lighter weight one with <code>NodeJS</code>, <code>FeathersJS</code>,</li>
+<li>a natural leader <code>Java EE</code>, <code>Spring Boot</code>,</li>
+<li>and a seveless cloud option, <code>AWS</code></li>
+</ul>
 </section>
 <section id="api-rest-server-with-feathers" class="level2 page-columns page-full" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="api-rest-server-with-feathers"><span class="header-section-number">2</span> API REST Server with Feathers</h2>
@@ -1542,7 +1582,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Once you confirm the last prompt, the final selection should look similar to this:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Prompt feathers"><img src="..\images/reactjs/lab-re-4-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="../images/reactjs/lab-re-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Prompt feathers"><img src="../images/reactjs/lab-re-4-1.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">Prompt feathers</figcaption><p></p>
 </figure>
 </div>
@@ -1598,7 +1638,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-4-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="initial render on http://localhost:3030/"><img src="..\images/reactjs/lab-re-4-2.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-4-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="initial render on http://localhost:3030/"><img src="../images/reactjs/lab-re-4-2.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">initial render on <code>http://localhost:3030/</code></figcaption><p></p>
 </figure>
 </div>
@@ -1706,7 +1746,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="4" class="anchored" data-anchor-id="api-rest-server-with-aws"><span class="header-section-number">4</span> API REST Server with AWS</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-4-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="AWS Architecture"><img src="..\images/reactjs/lab-re-4-3.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-4-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="AWS Architecture"><img src="../images/reactjs/lab-re-4-3.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">AWS Architecture</figcaption><p></p>
 </figure>
 </div>
@@ -1722,22 +1762,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p>Here’s how each component plays a role in this architecture:</p>
 <ol type="1">
-<li><code>AWS API Gateway</code>: API Gateway acts as a front-end to your backend services.
+<li><code>AWS API Gateway</code>: API Gateway acts as a <strong>front-end to your backend services</strong>.
 <ol type="1">
-<li>It allows you to create a RESTful API that can receive requests from your Todo React app and route them to the appropriate backend services.</li>
-<li>With API Gateway, you can define API endpoints, set up authentication and authorization, perform request validation, and handle rate limiting.</li>
+<li>It allows you to create a <strong>RESTful</strong> API that can receive requests from your <code>Todo</code> React app and route them to the appropriate backend services.</li>
+<li>With API Gateway, you can define API <strong>endpoints</strong>, set up <strong>authentication</strong> and <strong>authorization</strong>, perform request validation, and handle rate limiting.</li>
 <li>It also integrates well with other AWS services, making it easy to connect with Lambda and DynamoDB.</li>
 </ol></li>
 <li><code>AWS Lambda</code>: Lambda is a serverless compute service that allows you to run code without provisioning or managing servers.
 <ol type="1">
-<li>In the context of a Todo React app, you can write your backend logic as individual Lambda functions. Each function can handle a specific task, such as creating a new task, updating a task, or retrieving a list of tasks.</li>
+<li>In the context of a <code>Todo</code> React app, you can write your <strong>backend logic as individual Lambda functions</strong>. Each function can handle a specific task, such as creating a new task, updating a task, or retrieving a list of tasks.</li>
 <li>Lambda functions can be written in various programming languages, including JavaScript, which makes it convenient for integration with your React app.</li>
 <li>API Gateway can be configured to trigger the appropriate Lambda function based on the incoming request, and the function can then process the request and return a response.</li>
 </ol></li>
-<li><code>Amazon DynamoD</code>B: DynamoDB is a fully managed NoSQL database service offered by AWS.
+<li><code>Amazon DynamoDb</code>: DynamoDB is a <strong>fully managed NoSQL database service offered by AWS.</strong>
 <ol type="1">
-<li>It provides high scalability, low latency, and automatic scaling, making it a great choice for storing and retrieving task data for a Todo app.</li>
-<li>DynamoDB organizes data in tables, and each table consists of items (representing tasks in this case) and attributes (representing properties of each task).</li>
+<li>It provides high scalability, low latency, and automatic scaling, making it a great choice for storing and retrieving task data for a <code>Todo</code> app.</li>
+<li>DynamoDB organizes data in <strong>tables</strong>, and each table consists of items (representing tasks in this case) and attributes (representing properties of each task).</li>
 <li>You can store and retrieve task data using DynamoDB APIs, and Lambda functions can interact with DynamoDB to perform CRUD operations on the tasks.</li>
 </ol></li>
 </ol>
@@ -1746,15 +1786,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../reactjs/rjslab3-4.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> React JS: Lab#RE03-4</a> <br></p>
+<p><br> <a href="../reactjs/rjslab3-4.html"> React JS: Lab#RE03-4</a> <br></p>
 </div>
 <br>
 <div class="column center">
-<p><br> <a href="#top"><i class="fa-solid fa-arrow-up" aria-label="arrow-up"></i> top</a> <br></p>
+<p><br> <a href="#top"> top</a> <br></p>
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../reactjs/rjslab5.html">React JS: Lab#RE05-1 <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
+<p><br> <a href="../reactjs/rjslab5-1.html">React JS: Lab#RE05-1 </a> <br></p>
 </div>
 <p><br></p>
 </div>
@@ -2034,7 +2074,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":true,"descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":true});</script>
 
 
 
