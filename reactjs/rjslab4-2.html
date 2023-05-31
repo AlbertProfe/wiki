@@ -1660,45 +1660,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p></p><figcaption class="figure-caption">Published docs API Rest</figcaption><p></p>
 </figure>
 </div>
+<p>Base URL : <code>http://localhost:9898</code></p>
 <table class="table">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Operation</th>
-<th>Base URL + Path</th>
+<th>Path</th>
 <th>Query</th>
 <th>JSON</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>GET</td>
-<td><code>http://localhost:9898/todo</code></td>
+<td><code>/todo</code></td>
 <td><code>/</code></td>
-<td></td>
+<td>{<code>todo items</code>}</td>
+<td>Retrieves a list of all todo items.</td>
 </tr>
 <tr class="even">
 <td>POST</td>
-<td><code>http://localhost:9898/todo</code></td>
+<td><code>/todo</code></td>
 <td><code>/createTodo</code></td>
-<td><strong>body/raw/JSON</strong></td>
+<td>{<code>todo item</code>} <strong>body/raw/JSON</strong></td>
+<td>Creates a new todo item.</td>
 </tr>
 <tr class="odd">
 <td>DELETE</td>
-<td><code>http://localhost:9898/todo</code></td>
+<td><code>/todo</code></td>
 <td><code>/?id=4</code></td>
-<td>id as a param</td>
+<td><code>id</code> as a <strong>param</strong></td>
+<td>Deletes all todo items.</td>
 </tr>
 <tr class="even">
 <td>PUT</td>
-<td><code>http://localhost:9898/todo</code></td>
+<td><code>/todo</code></td>
 <td>-</td>
-<td></td>
+<td>-</td>
+<td>Updates an existing todo item.</td>
 </tr>
 </tbody>
 </table>
@@ -1880,12 +1887,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb9-11"><a href="#cb9-11"></a></span>
 <span id="cb9-12"><a href="#cb9-12"></a>      <span class="cf">if</span> <span class="op">(</span>todoCreated <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb9-13"><a href="#cb9-13"></a>         headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"statusOperation"</span><span class="op">,</span> <span class="st">"success"</span><span class="op">);</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a>         <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">accepted</span><span class="op">().</span><span class="fu">headers</span><span class="op">(</span>headers<span class="op">).</span><span class="fu">body</span><span class="op">(</span>todoCreated<span class="op">);</span></span>
-<span id="cb9-15"><a href="#cb9-15"></a>      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a>         headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"statusOperation"</span><span class="op">,</span> <span class="st">"not created"</span><span class="op">);</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a>         <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">accepted</span><span class="op">().</span><span class="fu">body</span><span class="op">(</span><span class="kw">null</span><span class="op">);</span></span>
-<span id="cb9-18"><a href="#cb9-18"></a>      <span class="op">}</span></span>
-<span id="cb9-19"><a href="#cb9-19"></a>   <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-14"><a href="#cb9-14"></a>         <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">accepted</span><span class="op">()</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>            <span class="op">.</span><span class="fu">headers</span><span class="op">(</span>headers<span class="op">)</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>            <span class="op">.</span><span class="fu">body</span><span class="op">(</span>todoCreated<span class="op">);</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a>      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a>         headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"statusOperation"</span><span class="op">,</span> <span class="st">"not created"</span><span class="op">);</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a>         <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">accepted</span><span class="op">().</span><span class="fu">body</span><span class="op">(</span><span class="kw">null</span><span class="op">);</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a>      <span class="op">}</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a>   <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="frontend-reactjs-todo" class="level3" data-number="4.3">
@@ -2217,7 +2226,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","loop":true});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":true,"descPosition":"bottom"});</script>
 
 
 
