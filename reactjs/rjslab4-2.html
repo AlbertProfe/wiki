@@ -1471,7 +1471,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#step-by-step-code" id="toc-step-by-step-code" class="nav-link" data-scroll-target="#step-by-step-code"><span class="toc-section-number">4</span>  step-by-step code</a>
   <ul>
   <li><a href="#mongodb" id="toc-mongodb" class="nav-link" data-scroll-target="#mongodb"><span class="toc-section-number">4.1</span>  MongoDB</a></li>
-  <li><a href="#backend-spring-boot-todo" id="toc-backend-spring-boot-todo" class="nav-link" data-scroll-target="#backend-spring-boot-todo"><span class="toc-section-number">4.2</span>  Backend: Spring Boot todo</a></li>
+  <li><a href="#backend-spring-boot-todo" id="toc-backend-spring-boot-todo" class="nav-link" data-scroll-target="#backend-spring-boot-todo"><span class="toc-section-number">4.2</span>  Backend: Spring Boot todo</a>
+  <ul>
+  <li><a href="#java-classes" id="toc-java-classes" class="nav-link" data-scroll-target="#java-classes"><span class="toc-section-number">4.2.1</span>  Java classes</a></li>
+  <li><a href="#crossorigin" id="toc-crossorigin" class="nav-link" data-scroll-target="#crossorigin"><span class="toc-section-number">4.2.2</span>  <code>@CrossOrigin</code></a></li>
+  </ul></li>
   <li><a href="#frontend-reactjs-todo" id="toc-frontend-reactjs-todo" class="nav-link" data-scroll-target="#frontend-reactjs-todo"><span class="toc-section-number">4.3</span>  FrontEnd: ReactJS todo</a></li>
   </ul></li>
   <li><a href="#versions" id="toc-versions" class="nav-link" data-scroll-target="#versions"><span class="toc-section-number">5</span>  Versions</a></li>
@@ -1752,12 +1756,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="backend-spring-boot-todo" class="level3" data-number="4.2">
 <h3 data-number="4.2" class="anchored" data-anchor-id="backend-spring-boot-todo"><span class="header-section-number">4.2</span> Backend: Spring Boot todo</h3>
+<p>First, create and install dependencies (pom.xml) Spring Boot:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="../images/reactjs/lab-re-4-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="folder-tree Spring Boot, IntellIJIdea, todo"><img src="../images/reactjs/lab-re-4-6.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
 <p></p><figcaption class="figure-caption">folder-tree Spring Boot, <a href="../devops/devops-ide-intelljidea.html">IntellIJIdea</a>, todo</figcaption><p></p>
 </figure>
 </div>
+<p>You may read about Spring Boot creation <a href="../springboot/boot-what-create-th-h2.html">here</a></p>
+<section id="java-classes" class="level4" data-number="4.2.1">
+<h4 data-number="4.2.1" class="anchored" data-anchor-id="java-classes"><span class="header-section-number">4.2.1</span> Java classes</h4>
+<p>Model:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Todo.java</strong></pre>
@@ -1787,115 +1796,138 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-23"><a href="#cb5-23"></a>    <span class="co">//private Binary image;</span></span>
 <span id="cb5-24"><a href="#cb5-24"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="crossorigin" class="level4" data-number="4.2.2">
+<h4 data-number="4.2.2" class="anchored" data-anchor-id="crossorigin"><span class="header-section-number">4.2.2</span> <code>@CrossOrigin</code></h4>
+<p>By default, <mark>web browsers enforce the same-origin policy, which means that a web page can only make requests to the same origin (domain, protocol, and port) from which it was loaded.<mark></mark></mark></p>
+<p>However, in the case of a React.js app consuming a Spring Boot API running on a different origin (such as <code>http://localhost:3000</code> for the React.js development server), the <strong>same-origin</strong> policy would block the <strong>API requests.</strong></p>
+<p>The <code>@CrossOrigin(origins = "http://localhost:3000")</code> annotation in the Spring Boot controller allows the API to respond to requests from the specified origin, in this case, <code>http://localhost:3000</code>, which is where the React.js app is hosted during development.</p>
+<p>This enables the React.js app to successfully consume the API’s endpoints and access the necessary data.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Todo.java</strong></pre>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="at">@Data</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="at">@CrossOrigin</span><span class="op">(</span>origins <span class="op">=</span> <span class="st">"http://localhost:3000"</span><span class="op">)</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="at">@Document</span><span class="op">(</span>collection <span class="op">=</span> <span class="st">"todo"</span><span class="op">)</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="kw">public</span> <span class="kw">class</span> Todo <span class="op">{</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>   <span class="co">//...</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>TodoRepository</code></p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>TodoRepository.java</strong></pre>
 </div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">package</span><span class="im"> com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">repository</span><span class="op">;</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">model</span><span class="op">.</span><span class="im">Todo</span><span class="op">;</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">data</span><span class="op">.</span><span class="im">mongodb</span><span class="op">.</span><span class="im">repository</span><span class="op">.</span><span class="im">MongoRepository</span><span class="op">;</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Optional</span><span class="op">;</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="kw">public</span> <span class="kw">interface</span> TodoRepository <span class="kw">extends</span> MongoRepository<span class="op">&lt;</span>Todo<span class="op">,</span> <span class="bu">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>    Optional<span class="op">&lt;</span>Todo<span class="op">&gt;</span> <span class="fu">findTodoById</span><span class="op">(</span><span class="bu">String</span> id<span class="op">);</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a>    <span class="dt">void</span> <span class="fu">deleteTodoById</span><span class="op">(</span><span class="bu">String</span> id<span class="op">);</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>TodoRestController.java</strong></pre>
-</div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">package</span><span class="im"> com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">restcontroller</span><span class="op">;</span></span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">package</span><span class="im"> com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">repository</span><span class="op">;</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">model</span><span class="op">.</span><span class="im">Todo</span><span class="op">;</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">repository</span><span class="op">.</span><span class="im">TodoRepository</span><span class="op">;</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">beans</span><span class="op">.</span><span class="im">factory</span><span class="op">.</span><span class="im">annotation</span><span class="op">.</span><span class="im">Autowired</span><span class="op">;</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">http</span><span class="op">.</span><span class="im">HttpHeaders</span><span class="op">;</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">http</span><span class="op">.</span><span class="im">ResponseEntity</span><span class="op">;</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">web</span><span class="op">.</span><span class="im">bind</span><span class="op">.</span><span class="im">annotation</span><span class="op">.*;</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashMap</span><span class="op">;</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Optional</span><span class="op">;</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="at">@RestController</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/todo"</span><span class="op">)</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="kw">public</span> <span class="kw">class</span> TodoRestController <span class="op">{</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a>    <span class="co">//here we are creating our end-point rest API</span></span>
-<span id="cb7-16"><a href="#cb7-16"></a>    <span class="at">@Autowired</span></span>
-<span id="cb7-17"><a href="#cb7-17"></a>    TodoRepository todoRepository<span class="op">;</span></span>
-<span id="cb7-18"><a href="#cb7-18"></a></span>
-<span id="cb7-19"><a href="#cb7-19"></a></span>
-<span id="cb7-20"><a href="#cb7-20"></a>    <span class="co">//CRUD: read</span></span>
-<span id="cb7-21"><a href="#cb7-21"></a>    <span class="at">@CrossOrigin</span><span class="op">(</span>origins <span class="op">=</span> <span class="st">"http://localhost:3000"</span><span class="op">)</span></span>
-<span id="cb7-22"><a href="#cb7-22"></a>    <span class="at">@GetMapping</span></span>
-<span id="cb7-23"><a href="#cb7-23"></a>    <span class="kw">public</span> ResponseEntity<span class="op">&lt;</span><span class="bu">Iterable</span><span class="op">&lt;</span>Todo<span class="op">&gt;&gt;</span> <span class="fu">getAllTodos</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb7-24"><a href="#cb7-24"></a>        <span class="co">//</span></span>
-<span id="cb7-25"><a href="#cb7-25"></a>        HttpHeaders headers <span class="op">=</span> <span class="kw">new</span> <span class="fu">HttpHeaders</span><span class="op">();</span></span>
-<span id="cb7-26"><a href="#cb7-26"></a>        headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"operation"</span><span class="op">,</span> <span class="st">"findAll"</span><span class="op">);</span></span>
-<span id="cb7-27"><a href="#cb7-27"></a>        headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"version"</span><span class="op">,</span> <span class="st">"api 1.0"</span><span class="op">);</span></span>
-<span id="cb7-28"><a href="#cb7-28"></a>        headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"statusOperation"</span><span class="op">,</span> <span class="st">"success"</span><span class="op">);</span></span>
-<span id="cb7-29"><a href="#cb7-29"></a></span>
-<span id="cb7-30"><a href="#cb7-30"></a>        <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">accepted</span><span class="op">()</span></span>
-<span id="cb7-31"><a href="#cb7-31"></a>         <span class="op">.</span><span class="fu">headers</span><span class="op">(</span>headers<span class="op">)</span></span>
-<span id="cb7-32"><a href="#cb7-32"></a>         <span class="op">.</span><span class="fu">body</span><span class="op">(</span>todoRepository</span>
-<span id="cb7-33"><a href="#cb7-33"></a>         <span class="op">.</span><span class="fu">findAll</span><span class="op">());</span></span>
-<span id="cb7-34"><a href="#cb7-34"></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">data</span><span class="op">.</span><span class="im">mongodb</span><span class="op">.</span><span class="im">repository</span><span class="op">.</span><span class="im">MongoRepository</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Optional</span><span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="kw">public</span> <span class="kw">interface</span> TodoRepository <span class="kw">extends</span> MongoRepository<span class="op">&lt;</span>Todo<span class="op">,</span> <span class="bu">String</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>    Optional<span class="op">&lt;</span>Todo<span class="op">&gt;</span> <span class="fu">findTodoById</span><span class="op">(</span><span class="bu">String</span> id<span class="op">);</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="dt">void</span> <span class="fu">deleteTodoById</span><span class="op">(</span><span class="bu">String</span> id<span class="op">);</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><code>TodoRestController</code></p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>TodoRestController.java</strong></pre>
 </div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a></span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="at">@DeleteMapping</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>   <span class="kw">public</span> ResponseEntity<span class="op">&lt;</span>Todo<span class="op">&gt;</span> <span class="fu">deleteTodo</span><span class="op">(</span><span class="at">@RequestParam</span> <span class="bu">String</span> id<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>      <span class="co">//</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>      HttpHeaders headers <span class="op">=</span> <span class="kw">new</span> <span class="fu">HttpHeaders</span><span class="op">();</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a>      headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"operation"</span><span class="op">,</span> <span class="st">"deleteBook"</span><span class="op">);</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a>      headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"version"</span><span class="op">,</span> <span class="st">"api 1.0"</span><span class="op">);</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a></span>
-<span id="cb8-9"><a href="#cb8-9"></a>      Optional<span class="op">&lt;</span>Todo<span class="op">&gt;</span> todoFound <span class="op">=</span> todoRepository<span class="op">.</span><span class="fu">findTodoById</span><span class="op">(</span>id<span class="op">);</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a>      <span class="dt">boolean</span> isTodo <span class="op">=</span> todoFound<span class="op">.</span><span class="fu">isPresent</span><span class="op">();</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a>      <span class="cf">if</span> <span class="op">(</span>isTodo<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a>         <span class="co">//Optional&lt;Book&gt; deletedBook = </span></span>
-<span id="cb8-13"><a href="#cb8-13"></a>         <span class="co">//bookservice.deleteBookById(id);</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a>         todoRepository<span class="op">.</span><span class="fu">deleteTodoById</span><span class="op">(</span>id<span class="op">);</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a>         headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"operationStatus"</span><span class="op">,</span> <span class="st">"deleted"</span><span class="op">);</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a>         <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">accepted</span><span class="op">()</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a>            <span class="op">.</span><span class="fu">headers</span><span class="op">(</span>headers<span class="op">)</span></span>
-<span id="cb8-18"><a href="#cb8-18"></a>            <span class="op">.</span><span class="fu">body</span><span class="op">(</span>todoFound</span>
-<span id="cb8-19"><a href="#cb8-19"></a>            <span class="op">.</span><span class="fu">get</span><span class="op">());</span></span>
-<span id="cb8-20"><a href="#cb8-20"></a>      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb8-21"><a href="#cb8-21"></a>         headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"operationStatus"</span><span class="op">,</span> <span class="st">"not found"</span><span class="op">);</span></span>
-<span id="cb8-22"><a href="#cb8-22"></a>         <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">accepted</span><span class="op">().</span><span class="fu">body</span><span class="op">(</span><span class="kw">null</span><span class="op">);</span></span>
-<span id="cb8-23"><a href="#cb8-23"></a>      <span class="op">}</span></span>
-<span id="cb8-24"><a href="#cb8-24"></a>   <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">package</span><span class="im"> com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">restcontroller</span><span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">model</span><span class="op">.</span><span class="im">Todo</span><span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">repository</span><span class="op">.</span><span class="im">TodoRepository</span><span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">beans</span><span class="op">.</span><span class="im">factory</span><span class="op">.</span><span class="im">annotation</span><span class="op">.</span><span class="im">Autowired</span><span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">http</span><span class="op">.</span><span class="im">HttpHeaders</span><span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">http</span><span class="op">.</span><span class="im">ResponseEntity</span><span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">web</span><span class="op">.</span><span class="im">bind</span><span class="op">.</span><span class="im">annotation</span><span class="op">.*;</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashMap</span><span class="op">;</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Optional</span><span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="at">@RestController</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/todo"</span><span class="op">)</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="kw">public</span> <span class="kw">class</span> TodoRestController <span class="op">{</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a>    <span class="co">//here we are creating our end-point rest API</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a>    <span class="at">@Autowired</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a>    TodoRepository todoRepository<span class="op">;</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a></span>
+<span id="cb8-19"><a href="#cb8-19"></a></span>
+<span id="cb8-20"><a href="#cb8-20"></a>    <span class="co">//CRUD: read</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a>    <span class="at">@CrossOrigin</span><span class="op">(</span>origins <span class="op">=</span> <span class="st">"http://localhost:3000"</span><span class="op">)</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a>    <span class="at">@GetMapping</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a>    <span class="kw">public</span> ResponseEntity<span class="op">&lt;</span><span class="bu">Iterable</span><span class="op">&lt;</span>Todo<span class="op">&gt;&gt;</span> <span class="fu">getAllTodos</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a>        <span class="co">//</span></span>
+<span id="cb8-25"><a href="#cb8-25"></a>        HttpHeaders headers <span class="op">=</span> <span class="kw">new</span> <span class="fu">HttpHeaders</span><span class="op">();</span></span>
+<span id="cb8-26"><a href="#cb8-26"></a>        headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"operation"</span><span class="op">,</span> <span class="st">"findAll"</span><span class="op">);</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a>        headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"version"</span><span class="op">,</span> <span class="st">"api 1.0"</span><span class="op">);</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a>        headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"statusOperation"</span><span class="op">,</span> <span class="st">"success"</span><span class="op">);</span></span>
+<span id="cb8-29"><a href="#cb8-29"></a></span>
+<span id="cb8-30"><a href="#cb8-30"></a>        <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">accepted</span><span class="op">()</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a>         <span class="op">.</span><span class="fu">headers</span><span class="op">(</span>headers<span class="op">)</span></span>
+<span id="cb8-32"><a href="#cb8-32"></a>         <span class="op">.</span><span class="fu">body</span><span class="op">(</span>todoRepository</span>
+<span id="cb8-33"><a href="#cb8-33"></a>         <span class="op">.</span><span class="fu">findAll</span><span class="op">());</span></span>
+<span id="cb8-34"><a href="#cb8-34"></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>TodoRestController.java</strong></pre>
 </div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a></span>
-<span id="cb9-2"><a href="#cb9-2"></a>   <span class="at">@PostMapping</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"createTodo"</span><span class="op">,</span> consumes <span class="op">=</span> <span class="st">"application/JSON"</span><span class="op">)</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>   <span class="kw">public</span> ResponseEntity<span class="op">&lt;</span>Todo<span class="op">&gt;</span> <span class="fu">addTodo</span><span class="op">(</span><span class="at">@RequestBody</span> Todo todo<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="at">@DeleteMapping</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>   <span class="kw">public</span> ResponseEntity<span class="op">&lt;</span>Todo<span class="op">&gt;</span> <span class="fu">deleteTodo</span><span class="op">(</span><span class="at">@RequestParam</span> <span class="bu">String</span> id<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb9-4"><a href="#cb9-4"></a>      <span class="co">//</span></span>
 <span id="cb9-5"><a href="#cb9-5"></a>      HttpHeaders headers <span class="op">=</span> <span class="kw">new</span> <span class="fu">HttpHeaders</span><span class="op">();</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a>      headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"operation"</span><span class="op">,</span> <span class="st">"createTodo"</span><span class="op">);</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>      headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"operation"</span><span class="op">,</span> <span class="st">"deleteBook"</span><span class="op">);</span></span>
 <span id="cb9-7"><a href="#cb9-7"></a>      headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"version"</span><span class="op">,</span> <span class="st">"api 1.0"</span><span class="op">);</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a>      headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"statusOperation"</span><span class="op">,</span> <span class="st">"success"</span><span class="op">);</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a></span>
-<span id="cb9-10"><a href="#cb9-10"></a>      Todo todoCreated <span class="op">=</span> todoRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>todo<span class="op">);</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a></span>
-<span id="cb9-12"><a href="#cb9-12"></a>      <span class="cf">if</span> <span class="op">(</span>todoCreated <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a>         headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"statusOperation"</span><span class="op">,</span> <span class="st">"success"</span><span class="op">);</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a>         <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">accepted</span><span class="op">()</span></span>
-<span id="cb9-15"><a href="#cb9-15"></a>            <span class="op">.</span><span class="fu">headers</span><span class="op">(</span>headers<span class="op">)</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a>            <span class="op">.</span><span class="fu">body</span><span class="op">(</span>todoCreated<span class="op">);</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a>      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb9-18"><a href="#cb9-18"></a>         headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"statusOperation"</span><span class="op">,</span> <span class="st">"not created"</span><span class="op">);</span></span>
-<span id="cb9-19"><a href="#cb9-19"></a>         <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">accepted</span><span class="op">().</span><span class="fu">body</span><span class="op">(</span><span class="kw">null</span><span class="op">);</span></span>
-<span id="cb9-20"><a href="#cb9-20"></a>      <span class="op">}</span></span>
-<span id="cb9-21"><a href="#cb9-21"></a>   <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a>      Optional<span class="op">&lt;</span>Todo<span class="op">&gt;</span> todoFound <span class="op">=</span> todoRepository<span class="op">.</span><span class="fu">findTodoById</span><span class="op">(</span>id<span class="op">);</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>      <span class="dt">boolean</span> isTodo <span class="op">=</span> todoFound<span class="op">.</span><span class="fu">isPresent</span><span class="op">();</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>      <span class="cf">if</span> <span class="op">(</span>isTodo<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>         <span class="co">//Optional&lt;Book&gt; deletedBook = </span></span>
+<span id="cb9-13"><a href="#cb9-13"></a>         <span class="co">//bookservice.deleteBookById(id);</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a>         todoRepository<span class="op">.</span><span class="fu">deleteTodoById</span><span class="op">(</span>id<span class="op">);</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>         headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"operationStatus"</span><span class="op">,</span> <span class="st">"deleted"</span><span class="op">);</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>         <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">accepted</span><span class="op">()</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a>            <span class="op">.</span><span class="fu">headers</span><span class="op">(</span>headers<span class="op">)</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a>            <span class="op">.</span><span class="fu">body</span><span class="op">(</span>todoFound</span>
+<span id="cb9-19"><a href="#cb9-19"></a>            <span class="op">.</span><span class="fu">get</span><span class="op">());</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a>      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a>         headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"operationStatus"</span><span class="op">,</span> <span class="st">"not found"</span><span class="op">);</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a>         <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">accepted</span><span class="op">().</span><span class="fu">body</span><span class="op">(</span><span class="kw">null</span><span class="op">);</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a>      <span class="op">}</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a>   <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>TodoRestController.java</strong></pre>
+</div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1"></a></span>
+<span id="cb10-2"><a href="#cb10-2"></a>   <span class="at">@PostMapping</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"createTodo"</span><span class="op">,</span> consumes <span class="op">=</span> <span class="st">"application/JSON"</span><span class="op">)</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>   <span class="kw">public</span> ResponseEntity<span class="op">&lt;</span>Todo<span class="op">&gt;</span> <span class="fu">addTodo</span><span class="op">(</span><span class="at">@RequestBody</span> Todo todo<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>      <span class="co">//</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>      HttpHeaders headers <span class="op">=</span> <span class="kw">new</span> <span class="fu">HttpHeaders</span><span class="op">();</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>      headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"operation"</span><span class="op">,</span> <span class="st">"createTodo"</span><span class="op">);</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>      headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"version"</span><span class="op">,</span> <span class="st">"api 1.0"</span><span class="op">);</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>      headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"statusOperation"</span><span class="op">,</span> <span class="st">"success"</span><span class="op">);</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a></span>
+<span id="cb10-10"><a href="#cb10-10"></a>      Todo todoCreated <span class="op">=</span> todoRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>todo<span class="op">);</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a></span>
+<span id="cb10-12"><a href="#cb10-12"></a>      <span class="cf">if</span> <span class="op">(</span>todoCreated <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a>         headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"statusOperation"</span><span class="op">,</span> <span class="st">"success"</span><span class="op">);</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>         <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">accepted</span><span class="op">()</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a>            <span class="op">.</span><span class="fu">headers</span><span class="op">(</span>headers<span class="op">)</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a>            <span class="op">.</span><span class="fu">body</span><span class="op">(</span>todoCreated<span class="op">);</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a>      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a>         headers<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"statusOperation"</span><span class="op">,</span> <span class="st">"not created"</span><span class="op">);</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a>         <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">accepted</span><span class="op">().</span><span class="fu">body</span><span class="op">(</span><span class="kw">null</span><span class="op">);</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a>      <span class="op">}</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a>   <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 </section>
 <section id="frontend-reactjs-todo" class="level3" data-number="4.3">
 <h3 data-number="4.3" class="anchored" data-anchor-id="frontend-reactjs-todo"><span class="header-section-number">4.3</span> FrontEnd: ReactJS todo</h3>
@@ -2226,7 +2258,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":true,"descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":true,"descPosition":"bottom"});</script>
 
 
 
