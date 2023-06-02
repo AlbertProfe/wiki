@@ -5058,14 +5058,14 @@
     "href": "reactjs/rjslab5-1.html#project-architecture",
     "title": "Lab#RE05-1: chat & websockets",
     "section": "2 Project Architecture",
-    "text": "2 Project Architecture\n\n\n\nGeneral architecture"
+    "text": "2 Project Architecture\nWe could use Spring Boot as a server for our MyChat app, instead we are going to design an AWS architecture:\n\n\n\nGeneral architecture"
   },
   {
     "objectID": "reactjs/rjslab5-1.html#websockets",
     "href": "reactjs/rjslab5-1.html#websockets",
     "title": "Lab#RE05-1: chat & websockets",
     "section": "3 Websockets",
-    "text": "3 Websockets\n\n\n\n\n\n  React JS: Lab#RE04-1 \n\n\n\n  top \n\n\n\n React JS: Lab#RE05-2"
+    "text": "3 Websockets\n\nWebSocket is a computer communications protocol, providing full-duplex communication channels over a single TCP connection./ The current API specification allowing web applications to use this protocol is known as WebSockets.\n\n\n3.1 Websocket vs. HTTP\nWebSocket is distinct from HTTP. Both protocols are located at layer 7 in the OSI model and depend on TCP at layer 4.\nAlthough they are different, the WebSocket is designed to work over HTTP ports 443 and 80 as well as to support HTTP proxies and intermediaries, thus making it compatible with HTTP. To achieve compatibility, the WebSocket handshake uses the HTTP Upgrade header to change from the HTTP protocol to the WebSocket protocol.\n\n\n\nWebsocket vs HTTP\n\n\n\n\n3.2 Websocket client\n\n3.2.1 Instance methods\nWebSocket.close(): Closes the connection.\nWebSocket.send(): Enqueues data to be transmitted.\n\n\n3.2.2 Events\nListen to these events using addEventListener() or by assigning an event listener to the oneventname property of this interface.\nclose: Fired when a connection with a WebSocket is closed. Also available via the onclose property\nerror: Fired when a connection with a WebSocket has been closed because of an error, such as when some data couldn’t be sent. Also available via the onerror property.\nmessage: Fired when data is received through a WebSocket. Also available via the onmessage property.\nopen: Fired when a connection with a WebSocket is opened. Also available via the onopen property.\n\n\n3.2.3 Example: Websocket client\n// Creates new WebSocket object with a wss URI as the parameter\nconst socket = new WebSocket('wss://game.example.com/ws/updates');\n\n// Fired when a connection with a WebSocket is opened\nsocket.onopen = function () {\n  setInterval(function() {\n    if (socket.bufferedAmount == 0)\n      socket.send(getUpdateData());\n  }, 50);\n};\n\n// Fired when data is received through a WebSocket\nsocket.onmessage = function(event) {\n  handleUpdateData(event.data);\n};\n\n// Fired when a connection with a WebSocket is closed\nsocket.onclose = function(event) {\n  onSocketClose(event);\n};\n\n// Fired when a connection with a WebSocket has been closed because of an error\nsocket.onerror = function(event) {\n  onSocketError(event);\n};\n\n\n\n\n\n\n  React JS: Lab#RE04-1 \n\n\n\n  top \n\n\n\n React JS: Lab#RE05-2"
   },
   {
     "objectID": "reactjs/rjslab3-3.html",

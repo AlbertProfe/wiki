@@ -22,6 +22,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -870,6 +933,10 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Lab#RE04-1: todo &amp; server</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../reactjs/rjslab4-2.html">
+ <span class="dropdown-text">Lab#RE04-2: Spring Boot &amp; ReactJS</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../reactjs/rjslab5-1.html">
  <span class="dropdown-text">Lab#RE05-1: chat &amp; websockets</span></a>
   </li>  
@@ -1336,6 +1403,11 @@ ul.task-list li input[type="checkbox"] {
   <a href="../reactjs/rjslab4.html" class="sidebar-item-text sidebar-link">Lab#RE04-1: todo &amp; server</a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab4-2.html" class="sidebar-item-text sidebar-link">Lab#RE04-2: Spring Boot &amp; ReactJS</a>
+  </div>
+</li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -1381,7 +1453,16 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#overall" id="toc-overall" class="nav-link active" data-scroll-target="#overall"><span class="toc-section-number">1</span>  Overall</a></li>
   <li><a href="#project-architecture" id="toc-project-architecture" class="nav-link" data-scroll-target="#project-architecture"><span class="toc-section-number">2</span>  Project Architecture</a></li>
-  <li><a href="#websockets" id="toc-websockets" class="nav-link" data-scroll-target="#websockets"><span class="toc-section-number">3</span>  Websockets</a></li>
+  <li><a href="#websockets" id="toc-websockets" class="nav-link" data-scroll-target="#websockets"><span class="toc-section-number">3</span>  Websockets</a>
+  <ul>
+  <li><a href="#websocket-vs.-http" id="toc-websocket-vs.-http" class="nav-link" data-scroll-target="#websocket-vs.-http"><span class="toc-section-number">3.1</span>  Websocket vs.&nbsp;HTTP</a></li>
+  <li><a href="#websocket-client" id="toc-websocket-client" class="nav-link" data-scroll-target="#websocket-client"><span class="toc-section-number">3.2</span>  Websocket client</a>
+  <ul>
+  <li><a href="#instance-methods" id="toc-instance-methods" class="nav-link" data-scroll-target="#instance-methods"><span class="toc-section-number">3.2.1</span>  Instance methods</a></li>
+  <li><a href="#events" id="toc-events" class="nav-link" data-scroll-target="#events"><span class="toc-section-number">3.2.2</span>  Events</a></li>
+  <li><a href="#example-websocket-client" id="toc-example-websocket-client" class="nav-link" data-scroll-target="#example-websocket-client"><span class="toc-section-number">3.2.3</span>  Example: Websocket client</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/rjslab5-1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1425,7 +1506,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, May 26, 2023</p>
+      <p class="date-modified">Friday, June 2, 2023</p>
     </div>
   </div>
     
@@ -1468,6 +1549,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="project-architecture" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="project-architecture"><span class="header-section-number">2</span> Project Architecture</h2>
+<p>We could use <a href="https://github.com/AlbertProfe/cifojava2022-5/wiki/Library8-:-Websockets-Spring-Boot-Project-with-JS-Web-Client-SockJS-&amp;-Stomp" class="external">Spring Boot</a> as a server for our <code>MyChat app</code>, instead we are going to design an <code>AWS architecture</code>:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="../images/reactjs/AWS-Lambda-and-DynamoDB-Architecture.png" class="lightbox" title="General architecture" data-gallery="quarto-lightbox-gallery-1"><img src="../images/reactjs/AWS-Lambda-and-DynamoDB-Architecture.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
@@ -1477,6 +1559,63 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="websockets" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="websockets"><span class="header-section-number">3</span> Websockets</h2>
+<div class="calout-note">
+<p><code>WebSocket</code> is a computer communications protocol, <mark>providing full-duplex communication channels over a single TCP connection./<mark> The current API specification allowing web applications to use this protocol is known as <strong>WebSockets</strong>.</mark></mark></p>
+</div>
+<section id="websocket-vs.-http" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="websocket-vs.-http"><span class="header-section-number">3.1</span> Websocket vs.&nbsp;HTTP</h3>
+<p><code>WebSocket</code> is distinct from <code>HTTP</code>. Both protocols are located at <strong>layer 7 in the OSI model</strong> and depend on <code>TCP</code> at layer 4.</p>
+<p>Although they are different, the <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API" class="external">WebSocket</a> <mark>is designed to work over HTTP ports 443 and 80 as well as to support HTTP proxies and intermediaries</mark>, thus making it compatible with HTTP. To achieve compatibility, the WebSocket handshake uses the HTTP Upgrade header to change from the HTTP protocol to the WebSocket protocol.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/ws-http.png" class="lightbox" title="Websocket vs HTTP" data-gallery="quarto-lightbox-gallery-2"><img src="../images/reactjs/ws-http.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
+<p></p><figcaption class="figure-caption">Websocket vs HTTP</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="websocket-client" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="websocket-client"><span class="header-section-number">3.2</span> Websocket client</h3>
+<section id="instance-methods" class="level4" data-number="3.2.1">
+<h4 data-number="3.2.1" class="anchored" data-anchor-id="instance-methods"><span class="header-section-number">3.2.1</span> Instance methods</h4>
+<p><code>WebSocket.close()</code>: Closes the connection.</p>
+<p><code>WebSocket.send()</code>: Enqueues data to be transmitted.</p>
+</section>
+<section id="events" class="level4" data-number="3.2.2">
+<h4 data-number="3.2.2" class="anchored" data-anchor-id="events"><span class="header-section-number">3.2.2</span> Events</h4>
+<p>Listen to these events using <code>addEventListener()</code> or by assigning an event listener to the oneventname property of this interface.</p>
+<p><code>close</code>: Fired when a connection with a WebSocket is closed. Also available via the onclose property</p>
+<p><code>error</code>: Fired when a connection with a WebSocket has been closed because of an error, such as when some data couldn’t be sent. Also available via the onerror property.</p>
+<p><code>message</code>: Fired when data is received through a WebSocket. Also available via the onmessage property.</p>
+<p><code>open</code>: Fired when a connection with a WebSocket is opened. Also available via the onopen property.</p>
+</section>
+<section id="example-websocket-client" class="level4" data-number="3.2.3">
+<h4 data-number="3.2.3" class="anchored" data-anchor-id="example-websocket-client"><span class="header-section-number">3.2.3</span> Example: Websocket client</h4>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">// Creates new WebSocket object with a wss URI as the parameter</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">const</span> socket <span class="op">=</span> <span class="kw">new</span> <span class="bu">WebSocket</span>(<span class="st">'wss://game.example.com/ws/updates'</span>)<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">// Fired when a connection with a WebSocket is opened</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>socket<span class="op">.</span><span class="at">onopen</span> <span class="op">=</span> <span class="kw">function</span> () {</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="pp">setInterval</span>(<span class="kw">function</span>() {</span>
+<span id="cb1-7"><a href="#cb1-7"></a>    <span class="cf">if</span> (socket<span class="op">.</span><span class="at">bufferedAmount</span> <span class="op">==</span> <span class="dv">0</span>)</span>
+<span id="cb1-8"><a href="#cb1-8"></a>      socket<span class="op">.</span><span class="fu">send</span>(<span class="fu">getUpdateData</span>())<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>  }<span class="op">,</span> <span class="dv">50</span>)<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>}<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">// Fired when data is received through a WebSocket</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>socket<span class="op">.</span><span class="at">onmessage</span> <span class="op">=</span> <span class="kw">function</span>(<span class="bu">event</span>) {</span>
+<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">handleUpdateData</span>(<span class="bu">event</span><span class="op">.</span><span class="at">data</span>)<span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>}<span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="co">// Fired when a connection with a WebSocket is closed</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>socket<span class="op">.</span><span class="at">onclose</span> <span class="op">=</span> <span class="kw">function</span>(<span class="bu">event</span>) {</span>
+<span id="cb1-19"><a href="#cb1-19"></a>  <span class="fu">onSocketClose</span>(<span class="bu">event</span>)<span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>}<span class="op">;</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a></span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="co">// Fired when a connection with a WebSocket has been closed because of an error</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a>socket<span class="op">.</span><span class="at">onerror</span> <span class="op">=</span> <span class="kw">function</span>(<span class="bu">event</span>) {</span>
+<span id="cb1-24"><a href="#cb1-24"></a>  <span class="fu">onSocketError</span>(<span class="bu">event</span>)<span class="op">;</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a>}<span class="op">;</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1496,6 +1635,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1770,7 +1911,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":true,"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom","closeEffect":"zoom"});</script>
 
 
 
