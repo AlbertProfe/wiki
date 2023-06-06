@@ -135,7 +135,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 
 <div id="quarto-search-results"></div>
@@ -1467,7 +1467,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/rjslab5-1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -1506,7 +1506,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, June 2, 2023</p>
+      <p class="date-modified">Tuesday, June 6, 2023</p>
     </div>
   </div>
     
@@ -1552,23 +1552,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We could use <a href="https://github.com/AlbertProfe/cifojava2022-5/wiki/Library8-:-Websockets-Spring-Boot-Project-with-JS-Web-Client-SockJS-&amp;-Stomp" class="external">Spring Boot</a> as a server for our <code>MyChat app</code>, instead we are going to design an <code>AWS architecture</code>:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/AWS-Lambda-and-DynamoDB-Architecture.png" class="lightbox" title="General architecture" data-gallery="quarto-lightbox-gallery-1"><img src="../images/reactjs/AWS-Lambda-and-DynamoDB-Architecture.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/reactjs/AWS-Lambda-and-DynamoDB-Architecture.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="General architecture"><img src="../images/reactjs/AWS-Lambda-and-DynamoDB-Architecture.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">General architecture</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="websockets" class="level2" data-number="3">
+<section id="websockets" class="level2 page-columns page-full" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="websockets"><span class="header-section-number">3</span> Websockets</h2>
-<div class="calout-note">
-<p><code>WebSocket</code> is a computer communications protocol, <mark>providing full-duplex communication channels over a single TCP connection./<mark> The current API specification allowing web applications to use this protocol is known as <strong>WebSockets</strong>.</mark></mark></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>WebSocket</code> is a computer communications protocol, <mark>providing full-duplex communication channels over a single TCP connection.</mark></p>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>The current API specification allowing web applications to use this protocol is known as <strong>WebSockets</strong>.</p>
+</div></div><p><code>WebSockets</code> are a communication protocol that provides a persistent, full-duplex connection between a client and a server over a single, long-lived connection. Unlike traditional HTTP connections, which are stateless and require the client to initiate each request, <code>WebSockets</code> allow for real-time, bidirectional communication between the client and the server.</p>
+<p>Here are some basic ideas and features of <code>WebSockets</code>:</p>
+<ol type="1">
+<li><p><strong>Persistent Connection</strong>: <code>WebSockets</code> establish a <mark>persistent connection between the client and the server, allowing for continuous communication without the need to send multiple HTTP requests.<mark></mark></mark></p></li>
+<li><p><strong>Full-Duplex Communication</strong>: <code>WebSockets</code> enable full-duplex communication, meaning both the client and the server can send and receive data simultaneously. This bidirectional nature allows for real-time updates and interactive applications.</p></li>
+<li><p><strong>Lightweight Overhead</strong>: The <code>WebSocket</code> protocol has a minimal overhead compared to HTTP. After the initial handshake, the data exchange occurs using a much smaller header, resulting in reduced latency and bandwidth usage.</p></li>
+<li><p><strong>Event-Driven Architecture</strong>: <code>WebSockets</code> use an event-driven architecture, where the server can push data to the connected clients without the need for explicit requests. This makes it suitable for applications that require real-time updates, such as chat applications, live dashboards, and multiplayer games.</p></li>
+<li><p><strong>Wide Browser Support</strong>: <code>WebSockets</code> are supported by modern web browsers, including Chrome, Firefox, Safari, and Edge. This allows for cross-browser compatibility and ensures that <code>WebSockets</code> can be utilized in a variety of web-based applications.</p></li>
+<li><p><strong>Security</strong>: <code>WebSocket</code> connections can be <mark>secured using encryption protocols such as SSL/TLS, ensuring the confidentiality and integrity of the transmitted data.</mark></p></li>
+<li><p><strong>Compatibility with Existing Web Infrastructure</strong>: <code>WebSockets</code> can work alongside existing web infrastructure and technologies. They can be seamlessly integrated into web applications that utilize other protocols like HTTP or REST, allowing for a combination of traditional request-response communication and real-time updates through <code>WebSockets</code>.</p></li>
+</ol>
+<p><code>WebSockets</code> provide a powerful mechanism for building interactive and real-time web applications, enabling efficient and seamless communication between clients and servers.</p>
 <section id="websocket-vs.-http" class="level3" data-number="3.1">
 <h3 data-number="3.1" class="anchored" data-anchor-id="websocket-vs.-http"><span class="header-section-number">3.1</span> Websocket vs.&nbsp;HTTP</h3>
 <p><code>WebSocket</code> is distinct from <code>HTTP</code>. Both protocols are located at <strong>layer 7 in the OSI model</strong> and depend on <code>TCP</code> at layer 4.</p>
 <p>Although they are different, the <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API" class="external">WebSocket</a> <mark>is designed to work over HTTP ports 443 and 80 as well as to support HTTP proxies and intermediaries</mark>, thus making it compatible with HTTP. To achieve compatibility, the WebSocket handshake uses the HTTP Upgrade header to change from the HTTP protocol to the WebSocket protocol.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ws-http.png" class="lightbox" title="Websocket vs HTTP" data-gallery="quarto-lightbox-gallery-2"><img src="../images/reactjs/ws-http.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
+<p><a href="../images/reactjs/ws-http.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Websocket vs HTTP"><img src="../images/reactjs/ws-http.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
 <p></p><figcaption class="figure-caption">Websocket vs HTTP</figcaption><p></p>
 </figure>
 </div>
@@ -1911,7 +1936,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom","closeEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":true});</script>
 
 
 
