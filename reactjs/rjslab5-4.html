@@ -9,7 +9,7 @@
 <meta name="author" content="albertprofe">
 <meta name="description" content="labs">
 
-<title>albertprofe wiki - Lab#RE05-1: chat &amp; websockets</title>
+<title>albertprofe wiki - Lab#RE05-4: chat &amp; ws</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -135,7 +135,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed slimcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 
 <div id="quarto-search-results"></div>
@@ -1188,7 +1188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Lab#RE05-1: chat &amp; websockets</h1>
+      <h1 class="quarto-secondary-nav-title">Lab#RE05-4: chat &amp; ws</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -1423,7 +1423,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reactjs/rjslab5-1.html" class="sidebar-item-text sidebar-link active">Lab#RE05-1: chat &amp; websockets</a>
+  <a href="../reactjs/rjslab5-1.html" class="sidebar-item-text sidebar-link">Lab#RE05-1: chat &amp; websockets</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1438,7 +1438,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reactjs/rjslab5-4.html" class="sidebar-item-text sidebar-link">Lab#RE05-4: chat &amp; ws</a>
+  <a href="../reactjs/rjslab5-4.html" class="sidebar-item-text sidebar-link active">Lab#RE05-4: chat &amp; ws</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1473,27 +1473,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overall" id="toc-overall" class="nav-link active" data-scroll-target="#overall"><span class="toc-section-number">1</span>  Overall</a></li>
-  <li><a href="#project-architecture" id="toc-project-architecture" class="nav-link" data-scroll-target="#project-architecture"><span class="toc-section-number">2</span>  Project Architecture</a></li>
-  <li><a href="#websockets" id="toc-websockets" class="nav-link" data-scroll-target="#websockets"><span class="toc-section-number">3</span>  Websockets</a>
+  <li><a href="#backend-websockets" id="toc-backend-websockets" class="nav-link active" data-scroll-target="#backend-websockets"><span class="toc-section-number">1</span>  Backend: websockets</a>
   <ul>
-  <li><a href="#websocket-vs.-http" id="toc-websocket-vs.-http" class="nav-link" data-scroll-target="#websocket-vs.-http"><span class="toc-section-number">3.1</span>  Websocket vs.&nbsp;HTTP</a></li>
-  <li><a href="#websocket-client" id="toc-websocket-client" class="nav-link" data-scroll-target="#websocket-client"><span class="toc-section-number">3.2</span>  Websocket client</a>
-  <ul>
-  <li><a href="#instance-methods" id="toc-instance-methods" class="nav-link" data-scroll-target="#instance-methods"><span class="toc-section-number">3.2.1</span>  Instance methods</a></li>
-  <li><a href="#events" id="toc-events" class="nav-link" data-scroll-target="#events"><span class="toc-section-number">3.2.2</span>  Events</a></li>
-  <li><a href="#example-websocket-client" id="toc-example-websocket-client" class="nav-link" data-scroll-target="#example-websocket-client"><span class="toc-section-number">3.2.3</span>  Example: Websocket client</a></li>
-  </ul></li>
+  <li><a href="#test-backend" id="toc-test-backend" class="nav-link" data-scroll-target="#test-backend"><span class="toc-section-number">1.1</span>  Test backend</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/rjslab5-1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/rjslab5-4.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Lab#RE05-1: chat &amp; websockets</h1>
+<h1 class="title d-none d-lg-block">Lab#RE05-4: chat &amp; ws</h1>
 <p class="subtitle lead">ReactJS labs</p>
   <div class="quarto-categories">
     <div class="quarto-category">reactjs</div>
@@ -1528,7 +1520,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tuesday, June 6, 2023</p>
+      <p class="date-modified">Friday, June 9, 2023</p>
     </div>
   </div>
     
@@ -1563,112 +1555,75 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="https://codesandbox.io/s/mychat-1-ktru2t?file=/src/chat/SocketProvider.js:1278-1317" class="external">codesanbox myChat</a></li>
 <li><a href="https://sites.google.com/view/devopscifo/labs/1-chat-app" class="external">myChat docs, backend &amp; frontend</a></li>
 </ul>
-<section id="overall" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="overall"><span class="header-section-number">1</span> Overall</h2>
-<p><code>WebSockets</code> is a <mark>communication protocol that enables real-time, bidirectional communication between a client (usually a web browser) and a server</mark>. It provides a persistent connection that allows for efficient data exchange without the need for repeated HTTP requests.</p>
-<p><code>WebSockets</code> are particularly useful for applications that require instant updates, such as real-time chat applications, collaborative editing tools, and live data streaming.</p>
-<p>In React, you can leverage the power of <code>WebSockets</code> by using libraries like <code>Socket.IO</code> or the native <code>WebSocket</code> API. These libraries enable you to establish a WebSocket connection, send and receive messages, and handle events for seamless real-time communication in your React applications.</p>
-</section>
-<section id="project-architecture" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="project-architecture"><span class="header-section-number">2</span> Project Architecture</h2>
-<p>We could use <a href="https://github.com/AlbertProfe/cifojava2022-5/wiki/Library8-:-Websockets-Spring-Boot-Project-with-JS-Web-Client-SockJS-&amp;-Stomp" class="external">Spring Boot</a> as a server for our <code>MyChat app</code>, instead we are going to design an <code>AWS architecture</code>:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/AWS-Lambda-and-DynamoDB-Architecture.png" class="lightbox" title="General architecture" data-gallery="quarto-lightbox-gallery-1"><img src="../images/reactjs/AWS-Lambda-and-DynamoDB-Architecture.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/reactjs/AWS-Lambda-and-DynamoDB-Architecture.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="General architecture"><img src="../images/reactjs/AWS-Lambda-and-DynamoDB-Architecture.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">General architecture</figcaption><p></p>
 </figure>
 </div>
-</section>
-<section id="websockets" class="level2 page-columns page-full" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="websockets"><span class="header-section-number">3</span> Websockets</h2>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>WebSocket</code> is a computer communications protocol, <mark>providing full-duplex communication channels over a single TCP connection.</mark></p>
-</div>
-</div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>The current API specification allowing web applications to use this protocol is known as <strong>WebSockets</strong>.</p>
-</div></div><p><code>WebSockets</code> are a communication protocol that provides a persistent, full-duplex connection between a client and a server over a single, long-lived connection. Unlike traditional HTTP connections, which are stateless and require the client to initiate each request, <code>WebSockets</code> allow for real-time, bidirectional communication between the client and the server.</p>
-<p>Here are some basic ideas and features of <code>WebSockets</code>:</p>
-<ol type="1">
-<li><p><strong>Persistent Connection</strong>: <code>WebSockets</code> establish a <mark>persistent connection between the client and the server, allowing for continuous communication without the need to send multiple HTTP requests.<mark></mark></mark></p></li>
-<li><p><strong>Full-Duplex Communication</strong>: <code>WebSockets</code> enable full-duplex communication, meaning both the client and the server can send and receive data simultaneously. This bidirectional nature allows for real-time updates and interactive applications.</p></li>
-<li><p><strong>Lightweight Overhead</strong>: The <code>WebSocket</code> protocol has a minimal overhead compared to HTTP. After the initial handshake, the data exchange occurs using a much smaller header, resulting in reduced latency and bandwidth usage.</p></li>
-<li><p><strong>Event-Driven Architecture</strong>: <code>WebSockets</code> use an event-driven architecture, where the server can push data to the connected clients without the need for explicit requests. This makes it suitable for applications that require real-time updates, such as chat applications, live dashboards, and multiplayer games.</p></li>
-<li><p><strong>Wide Browser Support</strong>: <code>WebSockets</code> are supported by modern web browsers, including Chrome, Firefox, Safari, and Edge. This allows for cross-browser compatibility and ensures that <code>WebSockets</code> can be utilized in a variety of web-based applications.</p></li>
-<li><p><strong>Security</strong>: <code>WebSocket</code> connections can be <mark>secured using encryption protocols such as SSL/TLS, ensuring the confidentiality and integrity of the transmitted data.</mark></p></li>
-<li><p><strong>Compatibility with Existing Web Infrastructure</strong>: <code>WebSockets</code> can work alongside existing web infrastructure and technologies. They can be seamlessly integrated into web applications that utilize other protocols like HTTP or REST, allowing for a combination of traditional request-response communication and real-time updates through <code>WebSockets</code>.</p></li>
-</ol>
-<p><code>WebSockets</code> provide a powerful mechanism for building interactive and real-time web applications, enabling efficient and seamless communication between clients and servers.</p>
-<section id="websocket-vs.-http" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="websocket-vs.-http"><span class="header-section-number">3.1</span> Websocket vs.&nbsp;HTTP</h3>
-<p><code>WebSocket</code> is distinct from <code>HTTP</code>. Both protocols are located at <strong>layer 7 in the OSI model</strong> and depend on <code>TCP</code> at layer 4.</p>
-<p>Although they are different, the <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API" class="external">WebSocket</a> <mark>is designed to work over HTTP ports 443 and 80 as well as to support HTTP proxies and intermediaries</mark>, thus making it compatible with HTTP. To achieve compatibility, the WebSocket handshake uses the HTTP Upgrade header to change from the HTTP protocol to the WebSocket protocol.</p>
+<section id="backend-websockets" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="backend-websockets"><span class="header-section-number">1</span> Backend: websockets</h2>
+<p>JSON websocket example scheme, <code>login</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a>{</span>
+<span id="cb1-2"><a href="#cb1-2"></a>   <span class="st">"action"</span><span class="op">:</span> <span class="st">"login"</span><span class="op">,</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>   <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"DEVOPS"</span><span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>   <span class="st">"userId"</span><span class="op">:</span> <span class="st">"albert"</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a> </span>
+<span id="cb1-6"><a href="#cb1-6"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>JSON websocket example scheme, <code>conversation</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a>{</span>
+<span id="cb2-2"><a href="#cb2-2"></a> <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"DEVOPS"</span><span class="op">,</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a> <span class="st">"userId"</span><span class="op">:</span> <span class="st">"ALBET#1666862612315"</span><span class="op">,</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a> <span class="st">"connectionid"</span><span class="op">:</span> <span class="st">"aqEgvdwRFiACEYw="</span><span class="op">,</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a> <span class="st">"requesttime"</span><span class="op">:</span> <span class="st">"27/Oct/2022:09:23:31 +0000"</span><span class="op">,</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a> <span class="st">"sourceip"</span><span class="op">:</span> <span class="st">"83.247.137.2"</span><span class="op">,</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a> <span class="st">"text"</span><span class="op">:</span> <span class="st">"ASDFA"</span><span class="op">,</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a> <span class="st">"timestampEpoch"</span><span class="op">:</span> <span class="dv">1666862612315</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="test-backend" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="test-backend"><span class="header-section-number">1.1</span> Test backend</h3>
+<ul>
+<li>Web test websocket: <a href="https://websocketking.com/" class="external">Websocket King</a></li>
+</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/ws-http.png" class="lightbox" title="Websocket vs HTTP" data-gallery="quarto-lightbox-gallery-2"><img src="../images/reactjs/ws-http.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
-<p></p><figcaption class="figure-caption">Websocket vs HTTP</figcaption><p></p>
+<p><a href="../images/reactjs/lab-re-5-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Test app with websocketking"><img src="../images/reactjs/lab-re-5-3.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Test app with websocketking</figcaption><p></p>
 </figure>
 </div>
-</section>
-<section id="websocket-client" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="websocket-client"><span class="header-section-number">3.2</span> Websocket client</h3>
-<section id="instance-methods" class="level4" data-number="3.2.1">
-<h4 data-number="3.2.1" class="anchored" data-anchor-id="instance-methods"><span class="header-section-number">3.2.1</span> Instance methods</h4>
-<p><code>WebSocket.close()</code>: Closes the connection.</p>
-<p><code>WebSocket.send()</code>: Enqueues data to be transmitted.</p>
-</section>
-<section id="events" class="level4" data-number="3.2.2">
-<h4 data-number="3.2.2" class="anchored" data-anchor-id="events"><span class="header-section-number">3.2.2</span> Events</h4>
-<p>Listen to these events using <code>addEventListener()</code> or by assigning an event listener to the oneventname property of this interface.</p>
-<p><code>close</code>: Fired when a connection with a WebSocket is closed. Also available via the onclose property</p>
-<p><code>error</code>: Fired when a connection with a WebSocket has been closed because of an error, such as when some data couldn’t be sent. Also available via the onerror property.</p>
-<p><code>message</code>: Fired when data is received through a WebSocket. Also available via the onmessage property.</p>
-<p><code>open</code>: Fired when a connection with a WebSocket is opened. Also available via the onopen property.</p>
-</section>
-<section id="example-websocket-client" class="level4" data-number="3.2.3">
-<h4 data-number="3.2.3" class="anchored" data-anchor-id="example-websocket-client"><span class="header-section-number">3.2.3</span> Example: Websocket client</h4>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">// Creates new WebSocket object with a wss URI as the parameter</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">const</span> socket <span class="op">=</span> <span class="kw">new</span> <span class="bu">WebSocket</span>(<span class="st">'wss://game.example.com/ws/updates'</span>)<span class="op">;</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co">// Fired when a connection with a WebSocket is opened</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>socket<span class="op">.</span><span class="at">onopen</span> <span class="op">=</span> <span class="kw">function</span> () {</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="pp">setInterval</span>(<span class="kw">function</span>() {</span>
-<span id="cb1-7"><a href="#cb1-7"></a>    <span class="cf">if</span> (socket<span class="op">.</span><span class="at">bufferedAmount</span> <span class="op">==</span> <span class="dv">0</span>)</span>
-<span id="cb1-8"><a href="#cb1-8"></a>      socket<span class="op">.</span><span class="fu">send</span>(<span class="fu">getUpdateData</span>())<span class="op">;</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>  }<span class="op">,</span> <span class="dv">50</span>)<span class="op">;</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>}<span class="op">;</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co">// Fired when data is received through a WebSocket</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>socket<span class="op">.</span><span class="at">onmessage</span> <span class="op">=</span> <span class="kw">function</span>(<span class="bu">event</span>) {</span>
-<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">handleUpdateData</span>(<span class="bu">event</span><span class="op">.</span><span class="at">data</span>)<span class="op">;</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>}<span class="op">;</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="co">// Fired when a connection with a WebSocket is closed</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>socket<span class="op">.</span><span class="at">onclose</span> <span class="op">=</span> <span class="kw">function</span>(<span class="bu">event</span>) {</span>
-<span id="cb1-19"><a href="#cb1-19"></a>  <span class="fu">onSocketClose</span>(<span class="bu">event</span>)<span class="op">;</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>}<span class="op">;</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a></span>
-<span id="cb1-22"><a href="#cb1-22"></a><span class="co">// Fired when a connection with a WebSocket has been closed because of an error</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a>socket<span class="op">.</span><span class="at">onerror</span> <span class="op">=</span> <span class="kw">function</span>(<span class="bu">event</span>) {</span>
-<span id="cb1-24"><a href="#cb1-24"></a>  <span class="fu">onSocketError</span>(<span class="bu">event</span>)<span class="op">;</span></span>
-<span id="cb1-25"><a href="#cb1-25"></a>}<span class="op">;</span></span>
-<span id="cb1-26"><a href="#cb1-26"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>Websocket King</code> is a <mark>web tool used to test the functionality and performance of WebSocket connections<mark>.</mark></mark></p>
+<p>With <code>Websocket King</code>, you can <strong>simulate</strong> <code>WebSocket</code> communication by connecting to the <code>WebSocket</code> <code>endpoint</code> of your AWS backend.</p>
+<p>It provides an intuitive interface to send and receive <code>WebSocket</code> messages, monitor the connection status, and analyze the received data. By using <code>Websocket King</code> to test your AWS backend, you can ensure that the <code>WebSocket</code> communication is working correctly, validate the message handling, and assess the overall performance and reliability of your backend implementation.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/lab-re-5-11.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Test app with websocketking: connecting with the endpoint proporcionated by API gateway AWS"><img src="../images/reactjs/lab-re-5-11.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Test app with websocketking: connecting with the endpoint proporcionated by API gateway AWS</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/lab-re-5-12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Test app with websocketking: connected with the endpoint proporcionated by API gateway AWS"><img src="../images/reactjs/lab-re-5-12.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Test app with websocketking: connected with the endpoint proporcionated by API gateway AWS</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/lab-re-5-13.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Test app with websocketking: sending a websocket with a mistake, sever error"><img src="../images/reactjs/lab-re-5-13.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Test app with websocketking: <strong>sending a websocket with a mistake</strong>, sever error</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/lab-re-5-14.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Test app with websocketking: sending a websocket, logged properly"><img src="../images/reactjs/lab-re-5-14.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Test app with websocketking: <strong>sending a websocket</strong>, logged properly</figcaption><p></p>
+</figure>
+</div>
 <!--- navLinks -->
 <br><br>
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../reactjs/rjslab4.html"> React JS: Lab#RE04-1</a> <br></p>
+<p><br> <a href="../reactjs/rjslab5-3.html">React JS: Lab#RE05-3 </a> <br></p>
 </div>
 <br>
 <div class="column center">
@@ -1676,13 +1631,12 @@ Note
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../reactjs/rjslab5-2.html">React JS: Lab#RE05-2 </a> <br></p>
+<p><br> <a href="../reactjs/rjslab5-5.html">React JS: Lab#RE05-5 </a> <br></p>
 </div>
 <p><br></p>
 </div>
 
 
-</section>
 </section>
 </section>
 
@@ -1958,7 +1912,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":true,"openEffect":"zoom"});</script>
 
 
 
