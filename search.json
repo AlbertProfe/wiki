@@ -5934,5 +5934,33 @@
     "title": "React JS ES6: spread operator",
     "section": "2 Copying objects with the spread syntax",
     "text": "2 Copying objects with the spread syntax\n\n\n\n\n\n\nImportant\n\n\n\nWe need to use spread operator to quickly copy part of the existing Person object (state variable) into another new object (state variable).\n\n\nNote that the … spread syntax is “shallow”—it only copies things one level deep. This makes it fast, but it also means that if you want to update a nested property, you’ll have to use it more than once.\n\n\nApp.js\n\nimport { useState } from 'react';\n\nexport default function Form() {\n  const [person, setPerson] = useState({\n    firstName: 'Barbara',\n    lastName: 'Hepworth',\n    email: 'bhepworth@sculpture.com'\n  });\n\n  function handleChange(e) {\n    setPerson({\n      ...person,\n      [e.target.name]: e.target.value\n    });\n  }\n\n  return (\n    <>\n      <label>\n        First name:\n        <input\n          name=\"firstName\"\n          value={person.firstName}\n          onChange={handleChange}\n        />\n      </label>\n      <label>\n        Last name:\n        <input\n          name=\"lastName\"\n          value={person.lastName}\n          onChange={handleChange}\n        />\n      </label>\n      <label>\n        Email:\n        <input\n          name=\"email\"\n          value={person.email}\n          onChange={handleChange}\n        />\n      </label>\n      <p>\n        {person.firstName}{' '}\n        {person.lastName}{' '}\n        ({person.email})\n      </p>\n    </>\n  );\n}\n\n\n\n\n\n\nInitial render\n\n\n\n\n\n\nRe-render with handleChange(e)\n\n\n\nHere, you want to also copy the existing data into the new object to be rendered next render (that is lastName and email) because only one of the fields has changed: firstName from input and e.target.value to trigger setPerson.\n\nSo with big objects we must use spread operator.\n\n\n\nApp.js\n\nsetPerson({\n  firstName: e.target.value, // New first name from the input\n  lastName: person.lastName,\n  email: person.email\n  // ..\n  // imagine a big object with 50 fields\n  // ..\n});\n\nUse spread operator to create a new object and pass it to setPerson.\n\nYou can use the … object spread syntax so that you don’t need to copy every property separately.\n\n\n\nApp.js\n\nsetPerson({\n  ...person, // Copy the old fields\n  firstName: e.target.value // But override this one\n});\n\n\n\n\n\n\n  React JS ES6: destructuring \n\n\n\n  top \n\n\n\n ReactJS: hooks rules"
+  },
+  {
+    "objectID": "learning/learning-how-document.html",
+    "href": "learning/learning-how-document.html",
+    "title": "Document",
+    "section": "",
+    "text": "Dilbert, by Scott Adams"
+  },
+  {
+    "objectID": "learning/learning-how-document.html#some-ideas-about-documentation",
+    "href": "learning/learning-how-document.html#some-ideas-about-documentation",
+    "title": "Document",
+    "section": "2 Some ideas about documentation",
+    "text": "2 Some ideas about documentation\n\n2.1 Start\nStart: always start. No matter what. Start small, if necessary. Start bad, if necessary. Start in a piece of paper, if necessary. But start.\n\n\n2.2 Document is paramount\nGood documentation is key: always apply pareto. Good documentation is the basis for everything: learning, coding, communicating and growing. No make a mistake: document is paramout.\n\n\n2.3 Make documenting easy\nChoose the right documentation tools: quarto\n\n\n2.4 It is an habit\nIt is an habit: make it a part of your culture, part of your code, part of your habits. So code and document. Document and code:\n\nTiming: learn the when. Document the right things at the right time is very relevant: it allow you to get in the documenting flow.\nWhen you hare happy with a nice solution: explain it to yourserlf and document.\nWhen you think it is a relevant knowledge: explain it to yourserlf and document.\nExplain the decision-making to get to that solution: explain the why. And how do you get there.\nRegarding that solution, that note, that writing with your context. Remember: Lateralization. Iterate.\nKeep it simple\n\n\n\n\n\n\n  Writing \n\n\n\n  top \n\n\n\n Comments"
+  },
+  {
+    "objectID": "learning/learning-how-document.html#wr",
+    "href": "learning/learning-how-document.html#wr",
+    "title": "Document",
+    "section": "1 Wr",
+    "text": "1 Wr"
+  },
+  {
+    "objectID": "learning/learning-how-document.html#write",
+    "href": "learning/learning-how-document.html#write",
+    "title": "Document",
+    "section": "1 Write",
+    "text": "1 Write\nBefore starting, write."
   }
 ]
