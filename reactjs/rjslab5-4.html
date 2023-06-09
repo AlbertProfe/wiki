@@ -1475,7 +1475,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#backend-websockets" id="toc-backend-websockets" class="nav-link active" data-scroll-target="#backend-websockets"><span class="toc-section-number">1</span>  Backend: websockets</a>
   <ul>
-  <li><a href="#test-backend" id="toc-test-backend" class="nav-link" data-scroll-target="#test-backend"><span class="toc-section-number">1.1</span>  Test backend</a></li>
+  <li><a href="#test-backend" id="toc-test-backend" class="nav-link" data-scroll-target="#test-backend"><span class="toc-section-number">1.1</span>  Test backend</a>
+  <ul>
+  <li><a href="#example-conversation" id="toc-example-conversation" class="nav-link" data-scroll-target="#example-conversation"><span class="toc-section-number">1.1.1</span>  Example conversation</a>
+  <ul class="collapse">
+  <li><a href="#albert" id="toc-albert" class="nav-link" data-scroll-target="#albert"><span class="toc-section-number">1.1.1.1</span>  Albert</a></li>
+  <li><a href="#victor" id="toc-victor" class="nav-link" data-scroll-target="#victor"><span class="toc-section-number">1.1.1.2</span>  Victor</a></li>
+  <li><a href="#fabrizio" id="toc-fabrizio" class="nav-link" data-scroll-target="#fabrizio"><span class="toc-section-number">1.1.1.3</span>  Fabrizio</a></li>
+  </ul></li>
+  <li><a href="#reconnect" id="toc-reconnect" class="nav-link" data-scroll-target="#reconnect"><span class="toc-section-number">1.1.2</span>  Reconnect</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/rjslab5-4.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -1557,7 +1566,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/AWS-Lambda-and-DynamoDB-Architecture.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="General architecture"><img src="../images/reactjs/AWS-Lambda-and-DynamoDB-Architecture.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/reactjs/AWS-Lambda-and-DynamoDB-Architecture.png" class="lightbox" title="General architecture" data-gallery="quarto-lightbox-gallery-1"><img src="../images/reactjs/AWS-Lambda-and-DynamoDB-Architecture.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">General architecture</figcaption><p></p>
 </figure>
 </div>
@@ -1565,21 +1574,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="1" class="anchored" data-anchor-id="backend-websockets"><span class="header-section-number">1</span> Backend: websockets</h2>
 <p>JSON websocket example scheme, <code>login</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a>{</span>
-<span id="cb1-2"><a href="#cb1-2"></a>   <span class="st">"action"</span><span class="op">:</span> <span class="st">"login"</span><span class="op">,</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>   <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"DEVOPS"</span><span class="op">,</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>   <span class="st">"userId"</span><span class="op">:</span> <span class="st">"albert"</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a> </span>
-<span id="cb1-6"><a href="#cb1-6"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>   <span class="st">"action"</span><span class="op">:</span> <span class="st">"login"</span><span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>   <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"DEVOPS"</span><span class="op">,</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>   <span class="st">"userId"</span><span class="op">:</span> <span class="st">"albert"</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a> </span>
+<span id="cb1-7"><a href="#cb1-7"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>JSON websocket example scheme, <code>conversation</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a>{</span>
-<span id="cb2-2"><a href="#cb2-2"></a> <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"DEVOPS"</span><span class="op">,</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a> <span class="st">"userId"</span><span class="op">:</span> <span class="st">"ALBET#1666862612315"</span><span class="op">,</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a> <span class="st">"connectionid"</span><span class="op">:</span> <span class="st">"aqEgvdwRFiACEYw="</span><span class="op">,</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a> <span class="st">"requesttime"</span><span class="op">:</span> <span class="st">"27/Oct/2022:09:23:31 +0000"</span><span class="op">,</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a> <span class="st">"sourceip"</span><span class="op">:</span> <span class="st">"83.247.137.2"</span><span class="op">,</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a> <span class="st">"text"</span><span class="op">:</span> <span class="st">"ASDFA"</span><span class="op">,</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a> <span class="st">"timestampEpoch"</span><span class="op">:</span> <span class="dv">1666862612315</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>   <span class="st">"action"</span><span class="op">:</span> <span class="st">"conversation"</span><span class="op">,</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>   <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"DEVOPS"</span><span class="op">,</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>   <span class="st">"userId"</span><span class="op">:</span> <span class="st">"ALBET#1666862612315"</span><span class="op">,</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>   <span class="st">"connectionid"</span><span class="op">:</span> <span class="st">"aqEgvdwRFiACEYw="</span><span class="op">,</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>   <span class="st">"requesttime"</span><span class="op">:</span> <span class="st">"27/Oct/2022:09:23:31 +0000"</span><span class="op">,</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>   <span class="st">"sourceip"</span><span class="op">:</span> <span class="st">"83.247.137.2"</span><span class="op">,</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>   <span class="st">"text"</span><span class="op">:</span> <span class="st">"ASDFA"</span><span class="op">,</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>   <span class="st">"timestampEpoch"</span><span class="op">:</span> <span class="dv">1666862612315</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="test-backend" class="level3" data-number="1.1">
 <h3 data-number="1.1" class="anchored" data-anchor-id="test-backend"><span class="header-section-number">1.1</span> Test backend</h3>
 <ul>
@@ -1587,7 +1600,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-5-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Test app with websocketking"><img src="../images/reactjs/lab-re-5-3.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-5-3.png" class="lightbox" title="Test app with websocketking" data-gallery="quarto-lightbox-gallery-2"><img src="../images/reactjs/lab-re-5-3.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">Test app with websocketking</figcaption><p></p>
 </figure>
 </div>
@@ -1596,26 +1609,207 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>It provides an intuitive interface to send and receive <code>WebSocket</code> messages, monitor the connection status, and analyze the received data. By using <code>Websocket King</code> to test your AWS backend, you can ensure that the <code>WebSocket</code> communication is working correctly, validate the message handling, and assess the overall performance and reliability of your backend implementation.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-5-11.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Test app with websocketking: connecting with the endpoint proporcionated by API gateway AWS"><img src="../images/reactjs/lab-re-5-11.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-5-11.png" class="lightbox" title="Test app with websocketking: connecting with the endpoint proporcionated by API gateway AWS" data-gallery="quarto-lightbox-gallery-3"><img src="../images/reactjs/lab-re-5-11.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">Test app with websocketking: connecting with the endpoint proporcionated by API gateway AWS</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-5-12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Test app with websocketking: connected with the endpoint proporcionated by API gateway AWS"><img src="../images/reactjs/lab-re-5-12.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-5-12.png" class="lightbox" title="Test app with websocketking: connected with the endpoint proporcionated by API gateway AWS" data-gallery="quarto-lightbox-gallery-4"><img src="../images/reactjs/lab-re-5-12.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">Test app with websocketking: connected with the endpoint proporcionated by API gateway AWS</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-5-13.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Test app with websocketking: sending a websocket with a mistake, sever error"><img src="../images/reactjs/lab-re-5-13.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-5-13.png" class="lightbox" title="Test app with websocketking: sending a websocket with a mistake, sever error" data-gallery="quarto-lightbox-gallery-5"><img src="../images/reactjs/lab-re-5-13.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">Test app with websocketking: <strong>sending a websocket with a mistake</strong>, sever error</figcaption><p></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/lab-re-5-14.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Test app with websocketking: sending a websocket, logged properly"><img src="../images/reactjs/lab-re-5-14.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/reactjs/lab-re-5-14.png" class="lightbox" title="Test app with websocketking: sending a websocket, logged properly" data-gallery="quarto-lightbox-gallery-6"><img src="../images/reactjs/lab-re-5-14.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <p></p><figcaption class="figure-caption">Test app with websocketking: <strong>sending a websocket</strong>, logged properly</figcaption><p></p>
+</figure>
+</div>
+<section id="example-conversation" class="level4" data-number="1.1.1">
+<h4 data-number="1.1.1" class="anchored" data-anchor-id="example-conversation"><span class="header-section-number">1.1.1</span> Example conversation</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/lab-re-5-15.png" class="lightbox" title="Test app with websocketking: sending a websocket, conversation example" data-gallery="quarto-lightbox-gallery-7"><img src="../images/reactjs/lab-re-5-15.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Test app with websocketking: <strong>sending a websocket</strong>, conversation example</figcaption><p></p>
+</figure>
+</div>
+<section id="albert" class="level5" data-number="1.1.1.1">
+<h5 data-number="1.1.1.1" class="anchored" data-anchor-id="albert"><span class="header-section-number">1.1.1.1</span> Albert</h5>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a><span class="dv">11</span><span class="op">:</span><span class="dv">14</span> <span class="fl">21.34</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>{</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="st">"action"</span><span class="op">:</span> <span class="st">"conversation"</span><span class="op">,</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="st">"time"</span><span class="op">:</span> <span class="st">"09/Jun/2023:09:14:19 +0000"</span><span class="op">,</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"friday"</span><span class="op">,</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="st">"userId"</span><span class="op">:</span> <span class="st">"fabrizio"</span><span class="op">,</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  <span class="st">"text"</span><span class="op">:</span> <span class="st">"yessss"</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>}</span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="dv">11</span><span class="op">:</span><span class="bn">04</span> <span class="fl">54.53</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>{</span>
+<span id="cb3-11"><a href="#cb3-11"></a>  <span class="st">"action"</span><span class="op">:</span> <span class="st">"conversation"</span><span class="op">,</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>  <span class="st">"time"</span><span class="op">:</span> <span class="st">"09/Jun/2023:09:04:54 +0000"</span><span class="op">,</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>  <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"friday"</span><span class="op">,</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>  <span class="st">"userId"</span><span class="op">:</span> <span class="st">"victor"</span><span class="op">,</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a>  <span class="st">"text"</span><span class="op">:</span> <span class="st">"yeaahhhhhh"</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>}</span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="dv">11</span><span class="op">:</span><span class="bn">03</span> <span class="fl">36.06</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="st">"sent at 09/Jun/2023:09:03:35 +0000"</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="dv">11</span><span class="op">:</span><span class="bn">03</span> <span class="fl">35.22</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a>{</span>
+<span id="cb3-21"><a href="#cb3-21"></a>  <span class="st">"action"</span><span class="op">:</span> <span class="st">"conversation"</span><span class="op">,</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a>  <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"friday"</span><span class="op">,</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a>  <span class="st">"userId"</span><span class="op">:</span> <span class="st">"albert"</span><span class="op">,</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a>  <span class="st">"text"</span><span class="op">:</span> <span class="st">"hola, it is friday!!!!"</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a>}</span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="dv">11</span><span class="op">:</span><span class="bn">02</span> <span class="fl">47.08</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="st">"sent at 09/Jun/2023:09:02:45 +0000"</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="dv">11</span><span class="op">:</span><span class="bn">02</span> <span class="fl">45.43</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a>{</span>
+<span id="cb3-30"><a href="#cb3-30"></a>  <span class="st">"action"</span><span class="op">:</span> <span class="st">"conversation"</span><span class="op">,</span></span>
+<span id="cb3-31"><a href="#cb3-31"></a>  <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"frideay"</span><span class="op">,</span></span>
+<span id="cb3-32"><a href="#cb3-32"></a>  <span class="st">"userId"</span><span class="op">:</span> <span class="st">"albert"</span><span class="op">,</span></span>
+<span id="cb3-33"><a href="#cb3-33"></a>  <span class="st">"text"</span><span class="op">:</span> <span class="st">"hola, it is friday!!!!"</span></span>
+<span id="cb3-34"><a href="#cb3-34"></a>}</span>
+<span id="cb3-35"><a href="#cb3-35"></a><span class="dv">10</span><span class="op">:</span><span class="dv">56</span> <span class="fl">20.53</span></span>
+<span id="cb3-36"><a href="#cb3-36"></a>{</span>
+<span id="cb3-37"><a href="#cb3-37"></a>  <span class="st">"action"</span><span class="op">:</span> <span class="st">"logged in"</span><span class="op">,</span></span>
+<span id="cb3-38"><a href="#cb3-38"></a>  <span class="st">"connectionId"</span><span class="op">:</span> <span class="st">"GPk-Qe7cliACGeA="</span><span class="op">,</span></span>
+<span id="cb3-39"><a href="#cb3-39"></a>  <span class="st">"time"</span><span class="op">:</span> <span class="st">"09/Jun/2023:08:56:19 +0000"</span></span>
+<span id="cb3-40"><a href="#cb3-40"></a>}</span>
+<span id="cb3-41"><a href="#cb3-41"></a><span class="dv">10</span><span class="op">:</span><span class="dv">56</span> <span class="fl">19.61</span></span>
+<span id="cb3-42"><a href="#cb3-42"></a>{</span>
+<span id="cb3-43"><a href="#cb3-43"></a>  <span class="st">"action"</span><span class="op">:</span> <span class="st">"login"</span><span class="op">,</span></span>
+<span id="cb3-44"><a href="#cb3-44"></a>  <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"friday"</span><span class="op">,</span></span>
+<span id="cb3-45"><a href="#cb3-45"></a>  <span class="st">"userId"</span><span class="op">:</span> <span class="st">"albert"</span></span>
+<span id="cb3-46"><a href="#cb3-46"></a>}</span>
+<span id="cb3-47"><a href="#cb3-47"></a><span class="dv">10</span><span class="op">:</span><span class="dv">55</span> <span class="fl">42.50</span></span>
+<span id="cb3-48"><a href="#cb3-48"></a>{</span>
+<span id="cb3-49"><a href="#cb3-49"></a>  <span class="st">"message"</span><span class="op">:</span> <span class="st">"Internal server error"</span><span class="op">,</span></span>
+<span id="cb3-50"><a href="#cb3-50"></a>  <span class="st">"connectionId"</span><span class="op">:</span> <span class="st">"GPk-Qe7cliACGeA="</span><span class="op">,</span></span>
+<span id="cb3-51"><a href="#cb3-51"></a>  <span class="st">"requestId"</span><span class="op">:</span> <span class="st">"GPlaNF6dFiAFqjg="</span></span>
+<span id="cb3-52"><a href="#cb3-52"></a>}</span>
+<span id="cb3-53"><a href="#cb3-53"></a><span class="dv">10</span><span class="op">:</span><span class="dv">55</span> <span class="fl">41.76</span></span>
+<span id="cb3-54"><a href="#cb3-54"></a>{</span>
+<span id="cb3-55"><a href="#cb3-55"></a>   <span class="st">"action"</span><span class="op">:</span> <span class="st">"login"</span><span class="op">,</span></span>
+<span id="cb3-56"><a href="#cb3-56"></a>   <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"friday"</span><span class="op">,</span></span>
+<span id="cb3-57"><a href="#cb3-57"></a>   <span class="st">"userId"</span><span class="op">:</span> <span class="st">"albert"</span><span class="op">,</span></span>
+<span id="cb3-58"><a href="#cb3-58"></a> </span>
+<span id="cb3-59"><a href="#cb3-59"></a>}</span>
+<span id="cb3-60"><a href="#cb3-60"></a><span class="dv">10</span><span class="op">:</span><span class="dv">53</span> <span class="fl">37.50</span></span>
+<span id="cb3-61"><a href="#cb3-61"></a><span class="st">"Hello from CIFO Chat! Be careful wiht your ROUTE, it is not right"</span></span>
+<span id="cb3-62"><a href="#cb3-62"></a><span class="dv">10</span><span class="op">:</span><span class="dv">53</span> <span class="fl">37.07</span></span>
+<span id="cb3-63"><a href="#cb3-63"></a>{</span>
+<span id="cb3-64"><a href="#cb3-64"></a><span class="st">"adsfda"</span><span class="op">:</span> agfafds</span>
+<span id="cb3-65"><a href="#cb3-65"></a>}</span>
+<span id="cb3-66"><a href="#cb3-66"></a><span class="dv">10</span><span class="op">:</span><span class="dv">52</span> <span class="fl">42.95</span></span>
+<span id="cb3-67"><a href="#cb3-67"></a>Connected to wss<span class="op">:</span><span class="co">//xxxxxx.execute-api.eu-central-1.amazonaws.com/test</span></span>
+<span id="cb3-68"><a href="#cb3-68"></a><span class="dv">10</span><span class="op">:</span><span class="dv">52</span> <span class="fl">42.70</span></span>
+<span id="cb3-69"><a href="#cb3-69"></a>Connecting to wss<span class="op">:</span><span class="co">//xxxxxx.execute-api.eu-central-1.amazonaws.com/test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="victor" class="level5" data-number="1.1.1.2">
+<h5 data-number="1.1.1.2" class="anchored" data-anchor-id="victor"><span class="header-section-number">1.1.1.2</span> Victor</h5>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a><span class="dv">11</span><span class="op">:</span><span class="dv">24</span> <span class="fl">21.27</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>Disconnected <span class="im">from</span> wss<span class="op">:</span><span class="co">//4rytv4evb2.execute-api.eu-central-1.amazonaws.com/test</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="dv">11</span><span class="op">:</span><span class="dv">14</span> <span class="fl">21.32</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>{</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="st">"action"</span><span class="op">:</span> <span class="st">"conversation"</span><span class="op">,</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="st">"time"</span><span class="op">:</span> <span class="st">"09/Jun/2023:09:14:19 +0000"</span><span class="op">,</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>  <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"friday"</span><span class="op">,</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>  <span class="st">"userId"</span><span class="op">:</span> <span class="st">"fabrizio"</span><span class="op">,</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>  <span class="st">"text"</span><span class="op">:</span> <span class="st">"yessss"</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>}</span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="dv">11</span><span class="op">:</span><span class="bn">04</span> <span class="fl">54.57</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="st">"sent at 09/Jun/2023:09:04:54 +0000"</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="dv">11</span><span class="op">:</span><span class="bn">04</span> <span class="fl">53.93</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>{</span>
+<span id="cb4-15"><a href="#cb4-15"></a>  <span class="st">"action"</span><span class="op">:</span> <span class="st">"conversation"</span><span class="op">,</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>  <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"friday"</span><span class="op">,</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a>  <span class="st">"userId"</span><span class="op">:</span> <span class="st">"victor"</span><span class="op">,</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a>  <span class="st">"text"</span><span class="op">:</span> <span class="st">"yeaahhhhhh"</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a>}</span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="dv">11</span><span class="op">:</span><span class="bn">03</span> <span class="fl">36.02</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a>{</span>
+<span id="cb4-22"><a href="#cb4-22"></a>  <span class="st">"action"</span><span class="op">:</span> <span class="st">"conversation"</span><span class="op">,</span></span>
+<span id="cb4-23"><a href="#cb4-23"></a>  <span class="st">"time"</span><span class="op">:</span> <span class="st">"09/Jun/2023:09:03:35 +0000"</span><span class="op">,</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a>  <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"friday"</span><span class="op">,</span></span>
+<span id="cb4-25"><a href="#cb4-25"></a>  <span class="st">"userId"</span><span class="op">:</span> <span class="st">"albert"</span><span class="op">,</span></span>
+<span id="cb4-26"><a href="#cb4-26"></a>  <span class="st">"text"</span><span class="op">:</span> <span class="st">"hola, it is friday!!!!"</span></span>
+<span id="cb4-27"><a href="#cb4-27"></a>}</span>
+<span id="cb4-28"><a href="#cb4-28"></a><span class="dv">11</span><span class="op">:</span><span class="dv">00</span> <span class="fl">10.76</span></span>
+<span id="cb4-29"><a href="#cb4-29"></a>{</span>
+<span id="cb4-30"><a href="#cb4-30"></a>  <span class="st">"action"</span><span class="op">:</span> <span class="st">"logged in"</span><span class="op">,</span></span>
+<span id="cb4-31"><a href="#cb4-31"></a>  <span class="st">"connectionId"</span><span class="op">:</span> <span class="st">"GPmCofVfFiACFlA="</span><span class="op">,</span></span>
+<span id="cb4-32"><a href="#cb4-32"></a>  <span class="st">"time"</span><span class="op">:</span> <span class="st">"09/Jun/2023:09:00:10 +0000"</span></span>
+<span id="cb4-33"><a href="#cb4-33"></a>}</span>
+<span id="cb4-34"><a href="#cb4-34"></a><span class="dv">11</span><span class="op">:</span><span class="dv">00</span> <span class="fl">10.65</span></span>
+<span id="cb4-35"><a href="#cb4-35"></a>{</span>
+<span id="cb4-36"><a href="#cb4-36"></a>  <span class="st">"action"</span><span class="op">:</span> <span class="st">"login"</span><span class="op">,</span></span>
+<span id="cb4-37"><a href="#cb4-37"></a>  <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"friday"</span><span class="op">,</span></span>
+<span id="cb4-38"><a href="#cb4-38"></a>  <span class="st">"userId"</span><span class="op">:</span> <span class="st">"victor"</span></span>
+<span id="cb4-39"><a href="#cb4-39"></a>}</span>
+<span id="cb4-40"><a href="#cb4-40"></a><span class="dv">11</span><span class="op">:</span><span class="dv">00</span> <span class="bn">02</span><span class="fl">.29</span></span>
+<span id="cb4-41"><a href="#cb4-41"></a>Connected to wss<span class="op">:</span><span class="co">//xxxxxx.execute-api.eu-central-1.amazonaws.com/test</span></span>
+<span id="cb4-42"><a href="#cb4-42"></a><span class="dv">11</span><span class="op">:</span><span class="dv">00</span> <span class="dv">00</span><span class="fl">.27</span></span>
+<span id="cb4-43"><a href="#cb4-43"></a>Connecting to wss<span class="op">:</span><span class="co">//xxxxxxx.execute-api.eu-central-1.amazonaws.com/test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="fabrizio" class="level5" data-number="1.1.1.3">
+<h5 data-number="1.1.1.3" class="anchored" data-anchor-id="fabrizio"><span class="header-section-number">1.1.1.3</span> Fabrizio</h5>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a><span class="dv">11</span><span class="op">:</span><span class="dv">24</span> <span class="fl">21.34</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>Disconnected <span class="im">from</span> wss<span class="op">:</span><span class="co">//4rytv4evb2.execute-api.eu-central-1.amazonaws.com/test</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="dv">11</span><span class="op">:</span><span class="dv">14</span> <span class="fl">21.36</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="st">"sent at 09/Jun/2023:09:14:19 +0000"</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="dv">11</span><span class="op">:</span><span class="dv">14</span> <span class="fl">19.25</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>{</span>
+<span id="cb5-7"><a href="#cb5-7"></a>  <span class="st">"action"</span><span class="op">:</span> <span class="st">"conversation"</span><span class="op">,</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"friday"</span><span class="op">,</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="st">"userId"</span><span class="op">:</span> <span class="st">"fabrizio"</span><span class="op">,</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>  <span class="st">"text"</span><span class="op">:</span> <span class="st">"yessss"</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>}</span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="dv">11</span><span class="op">:</span><span class="bn">04</span> <span class="fl">54.55</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>{</span>
+<span id="cb5-14"><a href="#cb5-14"></a>  <span class="st">"action"</span><span class="op">:</span> <span class="st">"conversation"</span><span class="op">,</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>  <span class="st">"time"</span><span class="op">:</span> <span class="st">"09/Jun/2023:09:04:54 +0000"</span><span class="op">,</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>  <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"friday"</span><span class="op">,</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>  <span class="st">"userId"</span><span class="op">:</span> <span class="st">"victor"</span><span class="op">,</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>  <span class="st">"text"</span><span class="op">:</span> <span class="st">"yeaahhhhhh"</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>}</span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="dv">11</span><span class="op">:</span><span class="bn">03</span> <span class="fl">36.04</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>{</span>
+<span id="cb5-22"><a href="#cb5-22"></a>  <span class="st">"action"</span><span class="op">:</span> <span class="st">"conversation"</span><span class="op">,</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>  <span class="st">"time"</span><span class="op">:</span> <span class="st">"09/Jun/2023:09:03:35 +0000"</span><span class="op">,</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a>  <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"friday"</span><span class="op">,</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a>  <span class="st">"userId"</span><span class="op">:</span> <span class="st">"albert"</span><span class="op">,</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a>  <span class="st">"text"</span><span class="op">:</span> <span class="st">"hola, it is friday!!!!"</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a>}</span>
+<span id="cb5-28"><a href="#cb5-28"></a><span class="dv">10</span><span class="op">:</span><span class="dv">58</span> <span class="fl">44.85</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a>{</span>
+<span id="cb5-30"><a href="#cb5-30"></a>  <span class="st">"action"</span><span class="op">:</span> <span class="st">"logged in"</span><span class="op">,</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a>  <span class="st">"connectionId"</span><span class="op">:</span> <span class="st">"GPl0Jc34liACElg="</span><span class="op">,</span></span>
+<span id="cb5-32"><a href="#cb5-32"></a>  <span class="st">"time"</span><span class="op">:</span> <span class="st">"09/Jun/2023:08:58:44 +0000"</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a>}</span>
+<span id="cb5-34"><a href="#cb5-34"></a><span class="dv">10</span><span class="op">:</span><span class="dv">58</span> <span class="fl">44.45</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a>{</span>
+<span id="cb5-36"><a href="#cb5-36"></a>  <span class="st">"action"</span><span class="op">:</span> <span class="st">"login"</span><span class="op">,</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a>  <span class="st">"chatId"</span><span class="op">:</span> <span class="st">"friday"</span><span class="op">,</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a>  <span class="st">"userId"</span><span class="op">:</span> <span class="st">"fabrizio"</span></span>
+<span id="cb5-39"><a href="#cb5-39"></a>}</span>
+<span id="cb5-40"><a href="#cb5-40"></a><span class="dv">10</span><span class="op">:</span><span class="dv">58</span> <span class="fl">29.23</span></span>
+<span id="cb5-41"><a href="#cb5-41"></a>Connected to wss<span class="op">:</span><span class="co">//xxxxxx.execute-api.eu-central-1.amazonaws.com/test</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a><span class="dv">10</span><span class="op">:</span><span class="dv">58</span> <span class="fl">27.52</span></span>
+<span id="cb5-43"><a href="#cb5-43"></a>Connecting to wss<span class="op">:</span><span class="co">//xxxxxx.execute-api.eu-central-1.amazonaws.com/test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="reconnect" class="level4" data-number="1.1.2">
+<h4 data-number="1.1.2" class="anchored" data-anchor-id="reconnect"><span class="header-section-number">1.1.2</span> Reconnect</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/lab-re-5-16.png" class="lightbox" title="Test app with websocketking: reconnect" data-gallery="quarto-lightbox-gallery-8"><img src="../images/reactjs/lab-re-5-16.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Test app with websocketking: reconnect</figcaption><p></p>
 </figure>
 </div>
 <!--- navLinks -->
@@ -1637,6 +1831,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
+</section>
 </section>
 </section>
 
@@ -1912,7 +2107,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":true,"openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":true,"descPosition":"bottom","openEffect":"zoom"});</script>
 
 
 
