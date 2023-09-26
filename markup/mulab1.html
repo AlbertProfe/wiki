@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.4.383">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,11 +19,12 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -48,43 +49,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -107,6 +78,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -117,6 +90,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -126,7 +105,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -137,24 +117,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <body class="nav-sidebar floating nav-fixed">
 
-
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">albertprofe wiki</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-linux-os" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -1183,58 +1163,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
   </li>
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Lab#MD01-1: Create and publish by Quarto</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../markup/mulab1.html">MarkUp Languages Laboratories</a></li><li class="breadcrumb-item"><a href="../markup/mulab1.html">Lab#MD01-1: Create and publish by Quarto</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
-  MarkUp Languages and Styling
+ <span class="menu-text">MarkUp Languages and Styling</span>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">MarkUp Languages</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">MarkUp Languages</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-lang-intro.html" class="sidebar-item-text sidebar-link">Introduction Markup</a>
+  <a href="../markup/markup-lang-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction Markup</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-lang-html.html" class="sidebar-item-text sidebar-link">HTML Markup</a>
+  <a href="../markup/markup-lang-html.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HTML Markup</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-lang-md.html" class="sidebar-item-text sidebar-link">Markdown Markup</a>
+  <a href="../markup/markup-lang-md.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Markdown Markup</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-lang-html-md.html" class="sidebar-item-text sidebar-link">Markdown and HTML working together, good idea?</a>
+  <a href="../markup/markup-lang-html-md.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Markdown and HTML working together, good idea?</span></a>
   </div>
 </li>
       </ul>
@@ -1242,45 +1228,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Quarto Markdown</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">Quarto Markdown</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-quarto-basics.html" class="sidebar-item-text sidebar-link">Quarto Markdown: basics</a>
+  <a href="../markup/markup-quarto-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto Markdown: basics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-quarto-create.html" class="sidebar-item-text sidebar-link">Quarto Markdown: creating</a>
+  <a href="../markup/markup-quarto-create.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto Markdown: creating</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-quarto-publish.html" class="sidebar-item-text sidebar-link">Quarto Markdown: publishing</a>
+  <a href="../markup/markup-quarto-publish.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto Markdown: publishing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-quarto-code.html" class="sidebar-item-text sidebar-link">Quarto Markdown: code &amp; data</a>
+  <a href="../markup/markup-quarto-code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto Markdown: code &amp; data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-quarto-api-rest.html" class="sidebar-item-text sidebar-link">Quarto Markdown: api rest call</a>
+  <a href="../markup/markup-quarto-api-rest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto Markdown: api rest call</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-quarto-api-rest-v2.html" class="sidebar-item-text sidebar-link">Quarto Markdown: OJS Cells</a>
+  <a href="../markup/markup-quarto-api-rest-v2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto Markdown: OJS Cells</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-quarto-cheatsheet.html" class="sidebar-item-text sidebar-link">Quarto Markdown: cheat-sheet</a>
+  <a href="../markup/markup-quarto-cheatsheet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto Markdown: cheat-sheet</span></a>
   </div>
 </li>
       </ul>
@@ -1288,20 +1282,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Styling: CSS</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Styling: CSS</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-css-basics.html" class="sidebar-item-text sidebar-link">Cascade Style Sheet</a>
+  <a href="../markup/markup-css-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cascade Style Sheet</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/markup-css-w3css.html" class="sidebar-item-text sidebar-link">CSS: W3.css</a>
+  <a href="../markup/markup-css-w3css.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CSS: W3.css</span></a>
   </div>
 </li>
       </ul>
@@ -1309,15 +1306,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">MarkUp Languages Laboratories</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">MarkUp Languages Laboratories</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/mulab1.html" class="sidebar-item-text sidebar-link active">Lab#MD01-1: Create and publish by Quarto</a>
+  <a href="../markup/mulab1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lab#MD01-1: Create and publish by Quarto</span></a>
   </div>
 </li>
       </ul>
@@ -1325,15 +1324,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">MarkUp Languages readings</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">MarkUp Languages readings</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../markup/resources.html" class="sidebar-item-text sidebar-link">MarkUp Languages Resources</a>
+  <a href="../markup/resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MarkUp Languages Resources</span></a>
   </div>
 </li>
       </ul>
@@ -1341,25 +1342,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="toc-section-number">1</span>  Overview</a></li>
-  <li><a href="#step-by-step" id="toc-step-by-step" class="nav-link" data-scroll-target="#step-by-step"><span class="toc-section-number">2</span>  Step-by-step</a></li>
-  <li><a href="#screen-shoots-2022-12-12-installing-quarto-and-cloning-project-from-github.com" id="toc-screen-shoots-2022-12-12-installing-quarto-and-cloning-project-from-github.com" class="nav-link" data-scroll-target="#screen-shoots-2022-12-12-installing-quarto-and-cloning-project-from-github.com"><span class="toc-section-number">3</span>  Screen-shoots (2022-12-12): installing Quarto and cloning project from GitHub.com</a></li>
-  <li><a href="#screen-shoots-2022-12-08-pushing-quarto-project-to-github-and-publishing-on-gh-pages" id="toc-screen-shoots-2022-12-08-pushing-quarto-project-to-github-and-publishing-on-gh-pages" class="nav-link" data-scroll-target="#screen-shoots-2022-12-08-pushing-quarto-project-to-github-and-publishing-on-gh-pages"><span class="toc-section-number">4</span>  Screen-shoots (2022-12-08): pushing Quarto project to GitHub and publishing on gh-pages</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
+  <li><a href="#step-by-step" id="toc-step-by-step" class="nav-link" data-scroll-target="#step-by-step"><span class="header-section-number">2</span> Step-by-step</a></li>
+  <li><a href="#screen-shoots-2022-12-12-installing-quarto-and-cloning-project-from-github.com" id="toc-screen-shoots-2022-12-12-installing-quarto-and-cloning-project-from-github.com" class="nav-link" data-scroll-target="#screen-shoots-2022-12-12-installing-quarto-and-cloning-project-from-github.com"><span class="header-section-number">3</span> Screen-shoots (2022-12-12): installing Quarto and cloning project from GitHub.com</a></li>
+  <li><a href="#screen-shoots-2022-12-08-pushing-quarto-project-to-github-and-publishing-on-gh-pages" id="toc-screen-shoots-2022-12-08-pushing-quarto-project-to-github-and-publishing-on-gh-pages" class="nav-link" data-scroll-target="#screen-shoots-2022-12-08-pushing-quarto-project-to-github-and-publishing-on-gh-pages"><span class="header-section-number">4</span> Screen-shoots (2022-12-08): pushing Quarto project to GitHub and publishing on gh-pages</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/markup/mulab1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/main/markup/mulab1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../markup/mulab1.html">MarkUp Languages Laboratories</a></li><li class="breadcrumb-item"><a href="../markup/mulab1.html">Lab#MD01-1: Create and publish by Quarto</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Lab#MD01-1: Create and publish by Quarto</h1>
+<h1 class="title">Lab#MD01-1: Create and publish by Quarto</h1>
 <p class="subtitle lead">Lab</p>
   <div class="quarto-categories">
     <div class="quarto-category">markup</div>
@@ -1394,14 +1396,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, May 25, 2023</p>
+      <p class="date-modified">Tuesday, September 26, 2023</p>
     </div>
   </div>
     
   </div>
   
 
+
 </header>
+
 
 <section id="overview" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
@@ -1486,9 +1490,11 @@ The Quarto website project is a great opportunity for students to develop their 
 </section>
 <section id="step-by-step" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="step-by-step"><span class="header-section-number">2</span> Step-by-step</h2>
-<div id="markdown-lab1">
-<p><a href="../images/about/quarto_website.png" class="lightbox" title="Step-by-step guide to create and publish a Quarto website" data-gallery="quarto-lightbox-gallery-1"><img src="../images/about/quarto_website.png" class="img-fluid"></a></p>
-<p>Step-by-step guide to create and publish a Quarto website</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="..\images/about/quarto_website.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-description="" title="Step-by-step guide to create and publish a Quarto website"><img src="..\images/about/quarto_website.png" class="img-fluid figure-img" alt="Step-by-step guide to create and publish a Quarto website"></a></p>
+<figcaption>Step-by-step guide to create and publish a Quarto website</figcaption>
+</figure>
 </div>
 <ol type="1">
 <li>Install some software and Sign in:
@@ -1529,12 +1535,12 @@ The Quarto website project is a great opportunity for students to develop their 
 </section>
 <section id="screen-shoots-2022-12-08-pushing-quarto-project-to-github-and-publishing-on-gh-pages" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="screen-shoots-2022-12-08-pushing-quarto-project-to-github-and-publishing-on-gh-pages"><span class="header-section-number">4</span> Screen-shoots (2022-12-08): pushing Quarto project to GitHub and publishing on gh-pages</h2>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Basic Quarto Project
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1543,19 +1549,19 @@ Basic Quarto Project
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (1).png" class="lightbox" title="fig 1" data-gallery="quarto-lightbox-gallery-2"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (1).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 1</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (1).png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-description="" title="fig 1"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (1).png" class="img-fluid figure-img" alt="fig 1"></a></p>
+<figcaption>fig 1</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Initialize Repository and Publish
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1564,19 +1570,19 @@ Initialize Repository and Publish
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (2).png" class="lightbox" title="fig 2" data-gallery="quarto-lightbox-gallery-3"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (2).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 2</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (2).png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-description="" title="fig 2"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (2).png" class="img-fluid figure-img" alt="fig 2"></a></p>
+<figcaption>fig 2</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 You may use another Extensions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1585,19 +1591,19 @@ You may use another Extensions
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (3).png" class="lightbox" title="fig 3" data-gallery="quarto-lightbox-gallery-4"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (3).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 3</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (3).png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-description="" title="fig 3"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (3).png" class="img-fluid figure-img" alt="fig 3"></a></p>
+<figcaption>fig 3</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 let s do a commit but .. first
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1606,19 +1612,19 @@ let s do a commit but .. first
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (4).png" class="lightbox" title="fig 4" data-gallery="quarto-lightbox-gallery-5"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (4).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 4</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (4).png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" data-description="" title="fig 4"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (4).png" class="img-fluid figure-img" alt="fig 4"></a></p>
+<figcaption>fig 4</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 we need to publish branch
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1627,19 +1633,19 @@ we need to publish branch
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (5).png" class="lightbox" title="fig 5" data-gallery="quarto-lightbox-gallery-6"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (5).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 5</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (5).png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" data-description="" title="fig 5"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (5).png" class="img-fluid figure-img" alt="fig 5"></a></p>
+<figcaption>fig 5</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Permission 1/2
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1648,19 +1654,19 @@ Permission 1/2
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (6).png" class="lightbox" title="fig 6" data-gallery="quarto-lightbox-gallery-7"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (6).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 6</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (6).png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" data-description="" title="fig 6"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (6).png" class="img-fluid figure-img" alt="fig 6"></a></p>
+<figcaption>fig 6</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Permission 2/2
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1669,19 +1675,19 @@ Permission 2/2
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (7).png" class="lightbox" title="fig 7" data-gallery="quarto-lightbox-gallery-8"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (7).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 7</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (7).png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" data-description="" title="fig 7"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (7).png" class="img-fluid figure-img" alt="fig 7"></a></p>
+<figcaption>fig 7</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 publish in public repository: name
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1690,19 +1696,19 @@ publish in public repository: name
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (8).png" class="lightbox" title="fig 8" data-gallery="quarto-lightbox-gallery-9"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (8).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 8</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (8).png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" data-description="" title="fig 8"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (8).png" class="img-fluid figure-img" alt="fig 8"></a></p>
+<figcaption>fig 8</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 repository name: wiki is better! :-)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1711,19 +1717,19 @@ repository name: wiki is better! :-)
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (9).png" class="lightbox" title="fig 9" data-gallery="quarto-lightbox-gallery-10"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (9).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 9</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (9).png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" data-description="" title="fig 9"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (9).png" class="img-fluid figure-img" alt="fig 9"></a></p>
+<figcaption>fig 9</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 repository name: publishing
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1732,19 +1738,19 @@ repository name: publishing
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (10).png" class="lightbox" title="fig 10" data-gallery="quarto-lightbox-gallery-11"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (10).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 10</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (10).png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" data-description="" title="fig 10"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (10).png" class="img-fluid figure-img" alt="fig 10"></a></p>
+<figcaption>fig 10</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 this tree folder is publised
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1753,19 +1759,19 @@ this tree folder is publised
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (11).png" class="lightbox" title="fig 11" data-gallery="quarto-lightbox-gallery-12"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (11).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 11</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (11).png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" data-description="" title="fig 11"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (11).png" class="img-fluid figure-img" alt="fig 11"></a></p>
+<figcaption>fig 11</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 tree folder in github
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1774,19 +1780,19 @@ tree folder in github
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (12).png" class="lightbox" title="fig 12" data-gallery="quarto-lightbox-gallery-13"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (12).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 12</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (12).png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" data-description="" title="fig 12"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (12).png" class="img-fluid figure-img" alt="fig 12"></a></p>
+<figcaption>fig 12</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 gh-pages activation
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1795,19 +1801,19 @@ gh-pages activation
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (13).png" class="lightbox" title="fig 13" data-gallery="quarto-lightbox-gallery-14"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (13).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 13</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (13).png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" data-description="" title="fig 13"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (13).png" class="img-fluid figure-img" alt="fig 13"></a></p>
+<figcaption>fig 13</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 at first gh-pages branck doesn’t exist: don’t worry, quarto will create later
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1816,19 +1822,19 @@ at first gh-pages branck doesn’t exist: don’t worry, quarto will create late
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (14).png" class="lightbox" title="fig 14" data-gallery="quarto-lightbox-gallery-15"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (14).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 14</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (14).png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" data-description="" title="fig 14"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (14).png" class="img-fluid figure-img" alt="fig 14"></a></p>
+<figcaption>fig 14</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 master is our branch: root
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1837,19 +1843,19 @@ master is our branch: root
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (15).png" class="lightbox" title="fig 15" data-gallery="quarto-lightbox-gallery-16"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (15).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 15</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (15).png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" data-description="" title="fig 15"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (15).png" class="img-fluid figure-img" alt="fig 15"></a></p>
+<figcaption>fig 15</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 there is just one brach: master (brach gh-pages NOT YET)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1858,19 +1864,19 @@ there is just one brach: master (brach gh-pages NOT YET)
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (16).png" class="lightbox" title="fig 16" data-gallery="quarto-lightbox-gallery-17"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (16).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 16</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (16).png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" data-description="" title="fig 16"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (16).png" class="img-fluid figure-img" alt="fig 16"></a></p>
+<figcaption>fig 16</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 render
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1879,19 +1885,19 @@ render
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (17).png" class="lightbox" title="fig 17" data-gallery="quarto-lightbox-gallery-18"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (17).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 17</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (17).png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" data-description="" title="fig 17"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (17).png" class="img-fluid figure-img" alt="fig 17"></a></p>
+<figcaption>fig 17</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 quarto publish
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1900,19 +1906,19 @@ quarto publish
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (18).png" class="lightbox" title="fig 18" data-gallery="quarto-lightbox-gallery-19"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (18).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 18</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (18).png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" data-description="" title="fig 18"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (18).png" class="img-fluid figure-img" alt="fig 18"></a></p>
+<figcaption>fig 18</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 yes
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1921,19 +1927,19 @@ yes
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (19).png" class="lightbox" title="fig 19" data-gallery="quarto-lightbox-gallery-20"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (19).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 19</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (19).png" class="lightbox" data-gallery="quarto-lightbox-gallery-20" data-description="" title="fig 19"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (19).png" class="img-fluid figure-img" alt="fig 19"></a></p>
+<figcaption>fig 19</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 now: brach created
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1942,19 +1948,19 @@ now: brach created
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (20).png" class="lightbox" title="fig 20" data-gallery="quarto-lightbox-gallery-21"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (20).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 20</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (20).png" class="lightbox" data-gallery="quarto-lightbox-gallery-21" data-description="" title="fig 20"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (20).png" class="img-fluid figure-img" alt="fig 20"></a></p>
+<figcaption>fig 20</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 and … gh pages now has got the gh-pages branch selected
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1963,19 +1969,19 @@ and … gh pages now has got the gh-pages branch selected
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (21).png" class="lightbox" title="fig 21" data-gallery="quarto-lightbox-gallery-22"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (21).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 21</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (21).png" class="lightbox" data-gallery="quarto-lightbox-gallery-22" data-description="" title="fig 21"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (21).png" class="img-fluid figure-img" alt="fig 21"></a></p>
+<figcaption>fig 21</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 we may check all is right: commit
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1984,19 +1990,19 @@ we may check all is right: commit
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (22).png" class="lightbox" title="fig 22" data-gallery="quarto-lightbox-gallery-23"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (22).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 22</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (22).png" class="lightbox" data-gallery="quarto-lightbox-gallery-23" data-description="" title="fig 22"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (22).png" class="img-fluid figure-img" alt="fig 22"></a></p>
+<figcaption>fig 22</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 we may check all is right: deploy
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -2005,19 +2011,19 @@ we may check all is right: deploy
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (23).png" class="lightbox" title="fig 23" data-gallery="quarto-lightbox-gallery-24"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (23).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 23</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (23).png" class="lightbox" data-gallery="quarto-lightbox-gallery-24" data-description="" title="fig 23"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (23).png" class="img-fluid figure-img" alt="fig 23"></a></p>
+<figcaption>fig 23</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 we may check all is right: actions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -2026,19 +2032,19 @@ we may check all is right: actions
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (24).png" class="lightbox" title="fig 24" data-gallery="quarto-lightbox-gallery-25"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (24).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 24</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (24).png" class="lightbox" data-gallery="quarto-lightbox-gallery-25" data-description="" title="fig 24"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (24).png" class="img-fluid figure-img" alt="fig 24"></a></p>
+<figcaption>fig 24</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 web deployed: live
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -2047,19 +2053,19 @@ web deployed: live
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (25).png" class="lightbox" title="fig 25" data-gallery="quarto-lightbox-gallery-26"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (25).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 25</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (25).png" class="lightbox" data-gallery="quarto-lightbox-gallery-26" data-description="" title="fig 25"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (25).png" class="img-fluid figure-img" alt="fig 25"></a></p>
+<figcaption>fig 25</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 log publising terminal 1/4
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -2068,19 +2074,19 @@ log publising terminal 1/4
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (26).png" class="lightbox" title="fig 26" data-gallery="quarto-lightbox-gallery-27"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (26).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 26</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (26).png" class="lightbox" data-gallery="quarto-lightbox-gallery-27" data-description="" title="fig 26"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (26).png" class="img-fluid figure-img" alt="fig 26"></a></p>
+<figcaption>fig 26</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 log publising terminal 2/4
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -2089,19 +2095,19 @@ log publising terminal 2/4
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (27).png" class="lightbox" title="fig 27" data-gallery="quarto-lightbox-gallery-28"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (27).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 27</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (27).png" class="lightbox" data-gallery="quarto-lightbox-gallery-28" data-description="" title="fig 27"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (27).png" class="img-fluid figure-img" alt="fig 27"></a></p>
+<figcaption>fig 27</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 log publising terminal 3/4
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -2110,19 +2116,19 @@ log publising terminal 3/4
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (28).png" class="lightbox" title="fig 28" data-gallery="quarto-lightbox-gallery-29"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (28).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 28</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (28).png" class="lightbox" data-gallery="quarto-lightbox-gallery-29" data-description="" title="fig 28"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (28).png" class="img-fluid figure-img" alt="fig 28"></a></p>
+<figcaption>fig 28</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 log publising terminal 4/4
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -2131,8 +2137,8 @@ log publising terminal 4/4
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (29).png" class="lightbox" title="fig 29" data-gallery="quarto-lightbox-gallery-30"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (29).png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">fig 29</figcaption><p></p>
+<p><a href="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (29).png" class="lightbox" data-gallery="quarto-lightbox-gallery-30" data-description="" title="fig 29"><img src="../images/markup/publish_quarto_gh-pages/publish_quarto_website_gh-pages (29).png" class="img-fluid figure-img" alt="fig 29"></a></p>
+<figcaption>fig 29</figcaption>
 </figure>
 </div>
 </div>
@@ -2143,15 +2149,15 @@ log publising terminal 4/4
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../markup/markup-css-w3css.html"> CSS: W3.css</a> <br></p>
+<p><br> <a href="../markup/markup-css-w3css.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> CSS: W3.css</a> <br></p>
 </div>
 <br>
 <div class="column center">
-<p><br> <a href="#top"> top</a> <br></p>
+<p><br> <a href="#top"><i class="fa-solid fa-arrow-up" aria-label="arrow-up"></i> top</a> <br></p>
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../markup/resources.html">MarkUp Languages Resources </a> <br></p>
+<p><br> <a href="../markup/resources.html">MarkUp Languages Resources <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
 </div>
@@ -2201,6 +2207,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -2269,13 +2302,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -2302,9 +2337,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -2340,10 +2389,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -2353,8 +2401,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2369,6 +2426,241 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        typesetMath(container);
+        return container.innerHTML
+      } else {
+        typesetMath(note);
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      typesetMath(note);
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -2411,8 +2703,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left"><a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0 International (CC BY 4.0)</a></div>   
-      <div class="nav-footer-center">If you want to go far, walk slow / We love dukkha</div>
+    <div class="nav-footer-left">
+<p><a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0 International (CC BY 4.0)</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>If you want to go far, walk slow / We love dukkha</p>
+</div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -2431,7 +2727,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":true,"descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","loop":true,"selector":".lightbox","closeEffect":"zoom"});</script>
+
 
 
 

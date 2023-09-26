@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.4.383">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,11 +19,12 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -48,43 +49,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -107,6 +78,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -117,6 +90,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -126,7 +105,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -137,24 +117,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <body class="nav-sidebar floating nav-fixed">
 
-
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">albertprofe wiki</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-linux-os" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -1183,68 +1163,76 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
   </li>
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Linux: Bash</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../linux/linux-what-basics.html">Linux: concepts</a></li><li class="breadcrumb-item"><a href="../linux/linux-what-bash.html">Linux: Bash</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
-  Linux OS
+ <span class="menu-text">Linux OS</span>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Linux: concepts</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Linux: concepts</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/linux-what-basics.html" class="sidebar-item-text sidebar-link">Linux: basic concepts</a>
+  <a href="../linux/linux-what-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux: basic concepts</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/linux-what-bash.html" class="sidebar-item-text sidebar-link active">Linux: Bash</a>
+  <a href="../linux/linux-what-bash.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Linux: Bash</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/linux-what-sudo.html" class="sidebar-item-text sidebar-link">Linux: su and sudo</a>
+  <a href="../linux/linux-what-sudo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux: su and sudo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/linux-what-pipes.html" class="sidebar-item-text sidebar-link">Linux: pipes</a>
+  <a href="../linux/linux-what-pipes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux: pipes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/linux-what-fsys.html" class="sidebar-item-text sidebar-link">Linux: File System</a>
+  <a href="../linux/linux-what-fsys.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux: File System</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/linux-what-vm.html" class="sidebar-item-text sidebar-link">Linux: Virtual Machines</a>
+  <a href="../linux/linux-what-vm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux: Virtual Machines</span></a>
   </div>
 </li>
       </ul>
@@ -1252,40 +1240,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Linux: distros</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">Linux: distros</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/linux-distros-ubuntu.html" class="sidebar-item-text sidebar-link">Linux Distros: Ubuntu</a>
+  <a href="../linux/linux-distros-ubuntu.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Distros: Ubuntu</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/linux-distros-mint.html" class="sidebar-item-text sidebar-link">Linux Distros: Mint</a>
+  <a href="../linux/linux-distros-mint.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Distros: Mint</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/linux-distros-debian.html" class="sidebar-item-text sidebar-link">Linux Distros: Debian</a>
+  <a href="../linux/linux-distros-debian.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Distros: Debian</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/linux-distros-opensuse.html" class="sidebar-item-text sidebar-link">Linux Distros: openSuse</a>
+  <a href="../linux/linux-distros-opensuse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Distros: openSuse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/linux-distros-manjaro.html" class="sidebar-item-text sidebar-link">Linux Distros: Manjaro</a>
+  <a href="../linux/linux-distros-manjaro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Distros: Manjaro</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/linux-distros-redhat.html" class="sidebar-item-text sidebar-link">Linux Distros: Red Hat Enterprise Linux</a>
+  <a href="../linux/linux-distros-redhat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Distros: Red Hat Enterprise Linux</span></a>
   </div>
 </li>
       </ul>
@@ -1293,65 +1288,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Linux: laboratories</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Linux: laboratories</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/lilab01-1.html" class="sidebar-item-text sidebar-link">Linux Lab#LI01-1: Choose Linux</a>
+  <a href="../linux/lilab01-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Lab#LI01-1: Choose Linux</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/lilab01-2.html" class="sidebar-item-text sidebar-link">Linux Lab#LI01-2: Install at least three distributions</a>
+  <a href="../linux/lilab01-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Lab#LI01-2: Install at least three distributions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/lilab01-3.html" class="sidebar-item-text sidebar-link">Linux Lab#LI01-3: Adjust user permissions</a>
+  <a href="../linux/lilab01-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Lab#LI01-3: Adjust user permissions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/lilab02-1.html" class="sidebar-item-text sidebar-link">Linux Lab#LI02-1: Export env user with grep and pipe</a>
+  <a href="../linux/lilab02-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Lab#LI02-1: Export env user with grep and pipe</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/lilab03-1.html" class="sidebar-item-text sidebar-link">Linux Lab#LI03-1: Manage users and groups</a>
+  <a href="../linux/lilab03-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Lab#LI03-1: Manage users and groups</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/lilab03-2.html" class="sidebar-item-text sidebar-link">Linux Lab#LI03-2: Manage files</a>
+  <a href="../linux/lilab03-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Lab#LI03-2: Manage files</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/lilab03-3.html" class="sidebar-item-text sidebar-link">Linux Lab#LI03-3: Manage software</a>
+  <a href="../linux/lilab03-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Lab#LI03-3: Manage software</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/lilab03-4.html" class="sidebar-item-text sidebar-link">Linux Lab#LI03-4: Manage hardware</a>
+  <a href="../linux/lilab03-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Lab#LI03-4: Manage hardware</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/lilab04-1.html" class="sidebar-item-text sidebar-link">Linux Lab#LI04-1: Bash scripting, qtool</a>
+  <a href="../linux/lilab04-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Lab#LI04-1: Bash scripting, qtool</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/lilab04-2.html" class="sidebar-item-text sidebar-link">Linux Lab#LI04-2: Bash scripts as terminal tool</a>
+  <a href="../linux/lilab04-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Lab#LI04-2: Bash scripts as terminal tool</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/lilab04-3.html" class="sidebar-item-text sidebar-link">Linux Lab#LI04-3: Distribute the terminal app</a>
+  <a href="../linux/lilab04-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Lab#LI04-3: Distribute the terminal app</span></a>
   </div>
 </li>
       </ul>
@@ -1359,15 +1366,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Linux readings</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Linux readings</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../linux/resources.html" class="sidebar-item-text sidebar-link">Linux Resources</a>
+  <a href="../linux/resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linux Resources</span></a>
   </div>
 </li>
       </ul>
@@ -1375,25 +1384,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="toc-section-number">1</span>  Introduction</a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="toc-section-number">2</span>  Overview</a></li>
-  <li><a href="#basic-command-on-bash" id="toc-basic-command-on-bash" class="nav-link" data-scroll-target="#basic-command-on-bash"><span class="toc-section-number">3</span>  Basic command on Bash</a></li>
-  <li><a href="#cheat-sheet" id="toc-cheat-sheet" class="nav-link" data-scroll-target="#cheat-sheet"><span class="toc-section-number">4</span>  Cheat-sheet</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">2</span> Overview</a></li>
+  <li><a href="#basic-command-on-bash" id="toc-basic-command-on-bash" class="nav-link" data-scroll-target="#basic-command-on-bash"><span class="header-section-number">3</span> Basic command on Bash</a></li>
+  <li><a href="#cheat-sheet" id="toc-cheat-sheet" class="nav-link" data-scroll-target="#cheat-sheet"><span class="header-section-number">4</span> Cheat-sheet</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/linux/linux-what-bash.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/main/linux/linux-what-bash.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../linux/linux-what-basics.html">Linux: concepts</a></li><li class="breadcrumb-item"><a href="../linux/linux-what-bash.html">Linux: Bash</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Linux: Bash</h1>
+<h1 class="title">Linux: Bash</h1>
 <p class="subtitle lead">Bash</p>
   <div class="quarto-categories">
     <div class="quarto-category">linux</div>
@@ -1427,14 +1437,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, May 25, 2023</p>
+      <p class="date-modified">Tuesday, September 26, 2023</p>
     </div>
   </div>
     
   </div>
   
 
+
 </header>
+
 
 <section id="introduction" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1</span> Introduction</h2>
@@ -1448,19 +1460,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="2" class="anchored" data-anchor-id="overview"><span class="header-section-number">2</span> Overview</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/linux/bash.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Screenshot of Bourne Again SHell (BASH)"><img src="../images/linux/bash.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
-<p></p><figcaption class="figure-caption">Screenshot of Bourne Again SHell (BASH)</figcaption><p></p>
+<p><a href="..\images/linux/bash.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-description="" title="Screenshot of Bourne Again SHell (BASH)"><img src="..\images/linux/bash.png" class="preview-image img-fluid figure-img" style="width:40.0%" alt="Screenshot of Bourne Again SHell (BASH)"></a></p>
+<figcaption>Screenshot of Bourne Again SHell (BASH)</figcaption>
 </figure>
 </div>
 <p><strong>Bash is a powerful and flexible tool that is widely used by developers</strong>, system administrators, and other users to automate tasks, write scripts, and perform other types of command-line operations.</p>
 <p>It is particularly <strong>useful</strong> for managing and interacting with large numbers of files and directories, as well as for automating repetitive tasks.</p>
 <p>Bash scripts can be used to <strong>automate a wide variety of tasks, such as setting up and configuring systems, performing backups, and managing network resources.</strong> Bash is also widely used as a programming language, with a syntax and structure that is similar to other programming languages.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 More on bash
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1473,8 +1485,8 @@ More on bash
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/linux/bash2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Screenshot of Bourne Again SHell (BASH) by Wikimedia Foundation"><img src="../images/linux/bash2.png" class="img-fluid figure-img" style="width:90.0%"></a></p>
-<p></p><figcaption class="figure-caption">Screenshot of Bourne Again SHell (BASH) by Wikimedia <a href="https://commons.wikimedia.org/wiki/Commons:Reusing_content_outside_Wikimedia">Foundation</a></figcaption><p></p>
+<p><a href="..\images/linux/bash2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-description="" title="Screenshot of Bourne Again SHell (BASH) by Wikimedia Foundation"><img src="..\images/linux/bash2.png" class="img-fluid figure-img" style="width:90.0%" alt="Screenshot of Bourne Again SHell (BASH) by Wikimedia Foundation"></a></p>
+<figcaption>Screenshot of Bourne Again SHell (BASH) by Wikimedia <a href="https://commons.wikimedia.org/wiki/Commons:Reusing_content_outside_Wikimedia">Foundation</a></figcaption>
 </figure>
 </div>
 </section>
@@ -1488,92 +1500,92 @@ Code Bash
 <div class="code-with-filename-file">
 <pre><strong>introduction.sh</strong></pre>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash code-overflow-wrap number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#!/usr/bin/env bash</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># First line of the script is the shebang which tells the system how to execute</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># the script: https://en.wikipedia.org/wiki/Shebang_(Unix)</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># As you already figured, comments start with #. Shebang is also a comment.</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co"># Simple hello world example:</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="bu">echo</span> <span class="st">"Hello world!"</span> <span class="co"># =&gt; Hello world!</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># Each command starts on a new line, or after a semicolon:</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="bu">echo</span> <span class="st">"This is the first command"</span><span class="kw">;</span> <span class="bu">echo</span> <span class="st">"This is the second command"</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># =&gt; This is the first command</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co"># =&gt; This is the second command</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="co"># Declaring a variable looks like this:</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="va">variable</span><span class="op">=</span><span class="st">"Some string"</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="co"># But not like this:</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="ex">variable</span> = <span class="st">"Some string"</span> <span class="co"># =&gt; returns error "variable: command not found"</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="co"># Bash will decide that `variable` is a command it must execute and give an error</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a><span class="co"># because it can't be found.</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a></span>
-<span id="cb1-22"><a href="#cb1-22"></a><span class="co"># Nor like this:</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a><span class="va">variable</span><span class="op">=</span> <span class="st">"Some string"</span> <span class="co"># =&gt; returns error: "Some string: command not found"</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a><span class="co"># Bash will decide that "Some string" is a command it must execute and give an</span></span>
-<span id="cb1-25"><a href="#cb1-25"></a><span class="co"># error because it can't be found. In this case the "variable=" part is seen</span></span>
-<span id="cb1-26"><a href="#cb1-26"></a><span class="co"># as a variable assignment valid only for the scope of the "Some string"</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a><span class="co"># command.</span></span>
-<span id="cb1-28"><a href="#cb1-28"></a></span>
-<span id="cb1-29"><a href="#cb1-29"></a><span class="co"># Using the variable:</span></span>
-<span id="cb1-30"><a href="#cb1-30"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">$variable</span><span class="st">"</span> <span class="co"># =&gt; Some string</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a><span class="bu">echo</span> <span class="st">'$variable'</span> <span class="co"># =&gt; $variable</span></span>
-<span id="cb1-32"><a href="#cb1-32"></a><span class="co"># When you use a variable itself — assign it, export it, or else — you write</span></span>
-<span id="cb1-33"><a href="#cb1-33"></a><span class="co"># its name without $. If you want to use the variable's value, you should use $.</span></span>
-<span id="cb1-34"><a href="#cb1-34"></a><span class="co"># Note that ' (single quote) won't expand the variables!</span></span>
-<span id="cb1-35"><a href="#cb1-35"></a><span class="co"># You can write variable without surrounding quotes but it's not recommended.</span></span>
-<span id="cb1-36"><a href="#cb1-36"></a></span>
-<span id="cb1-37"><a href="#cb1-37"></a><span class="co"># Parameter expansion ${...}:</span></span>
-<span id="cb1-38"><a href="#cb1-38"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${variable}</span><span class="st">"</span> <span class="co"># =&gt; Some string</span></span>
-<span id="cb1-39"><a href="#cb1-39"></a><span class="co"># This is a simple usage of parameter expansion such as two examples above.</span></span>
-<span id="cb1-40"><a href="#cb1-40"></a><span class="co"># Parameter expansion gets a value from a variable.</span></span>
-<span id="cb1-41"><a href="#cb1-41"></a><span class="co"># It "expands" or prints the value.</span></span>
-<span id="cb1-42"><a href="#cb1-42"></a><span class="co"># During the expansion time the value or parameter can be modified.</span></span>
-<span id="cb1-43"><a href="#cb1-43"></a><span class="co"># Below are other modifications that add onto this expansion.</span></span>
-<span id="cb1-44"><a href="#cb1-44"></a></span>
-<span id="cb1-45"><a href="#cb1-45"></a><span class="co"># String substitution in variables:</span></span>
-<span id="cb1-46"><a href="#cb1-46"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${variable</span><span class="op">/</span><span class="ss">Some</span><span class="op">/</span>A<span class="va">}</span><span class="st">"</span> <span class="co"># =&gt; A string</span></span>
-<span id="cb1-47"><a href="#cb1-47"></a><span class="co"># This will substitute the first occurrence of "Some" with "A".</span></span>
-<span id="cb1-48"><a href="#cb1-48"></a></span>
-<span id="cb1-49"><a href="#cb1-49"></a><span class="co"># Substring from a variable:</span></span>
-<span id="cb1-50"><a href="#cb1-50"></a><span class="va">length</span><span class="op">=</span>7</span>
-<span id="cb1-51"><a href="#cb1-51"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${variable</span><span class="op">:</span><span class="dv">0</span><span class="op">:</span>length<span class="va">}</span><span class="st">"</span> <span class="co"># =&gt; Some st</span></span>
-<span id="cb1-52"><a href="#cb1-52"></a><span class="co"># This will return only the first 7 characters of the value</span></span>
-<span id="cb1-53"><a href="#cb1-53"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${variable</span><span class="op">:</span> -<span class="dv">5</span><span class="va">}</span><span class="st">"</span> <span class="co"># =&gt; tring</span></span>
-<span id="cb1-54"><a href="#cb1-54"></a><span class="co"># This will return the last 5 characters (note the space before -5).</span></span>
-<span id="cb1-55"><a href="#cb1-55"></a><span class="co"># The space before minus is mandatory here.</span></span>
-<span id="cb1-56"><a href="#cb1-56"></a></span>
-<span id="cb1-57"><a href="#cb1-57"></a><span class="co"># String length:</span></span>
-<span id="cb1-58"><a href="#cb1-58"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${</span><span class="op">#</span><span class="va">variable}</span><span class="st">"</span> <span class="co"># =&gt; 11</span></span>
-<span id="cb1-59"><a href="#cb1-59"></a></span>
-<span id="cb1-60"><a href="#cb1-60"></a><span class="co"># Indirect expansion:</span></span>
-<span id="cb1-61"><a href="#cb1-61"></a><span class="va">other_variable</span><span class="op">=</span><span class="st">"variable"</span></span>
-<span id="cb1-62"><a href="#cb1-62"></a><span class="bu">echo</span> <span class="va">${</span><span class="op">!</span><span class="va">other_variable}</span> <span class="co"># =&gt; Some string</span></span>
-<span id="cb1-63"><a href="#cb1-63"></a><span class="co"># This will expand the value of `other_variable`.</span></span>
-<span id="cb1-64"><a href="#cb1-64"></a></span>
-<span id="cb1-65"><a href="#cb1-65"></a><span class="co"># The default value for variable:</span></span>
-<span id="cb1-66"><a href="#cb1-66"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${foo</span><span class="op">:-</span><span class="st">"DefaultValueIfFooIsMissingOrEmpty"</span><span class="va">}</span><span class="st">"</span></span>
-<span id="cb1-67"><a href="#cb1-67"></a><span class="co"># =&gt; DefaultValueIfFooIsMissingOrEmpty</span></span>
-<span id="cb1-68"><a href="#cb1-68"></a><span class="co"># This works for null (foo=) and empty string (foo=""); zero (foo=0) returns 0.</span></span>
-<span id="cb1-69"><a href="#cb1-69"></a><span class="co"># Note that it only returns default value and doesn't change variable value.</span></span>
-<span id="cb1-70"><a href="#cb1-70"></a></span>
-<span id="cb1-71"><a href="#cb1-71"></a><span class="co"># Declare an array with 6 elements:</span></span>
-<span id="cb1-72"><a href="#cb1-72"></a><span class="va">array</span><span class="op">=</span><span class="va">(</span>one two three four five six<span class="va">)</span></span>
-<span id="cb1-73"><a href="#cb1-73"></a><span class="co"># Print the first element:</span></span>
-<span id="cb1-74"><a href="#cb1-74"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${array</span><span class="op">[</span><span class="dv">0</span><span class="op">]</span><span class="va">}</span><span class="st">"</span> <span class="co"># =&gt; "one"</span></span>
-<span id="cb1-75"><a href="#cb1-75"></a><span class="co"># Print all elements:</span></span>
-<span id="cb1-76"><a href="#cb1-76"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${array</span><span class="op">[@]</span><span class="va">}</span><span class="st">"</span> <span class="co"># =&gt; "one two three four five six"</span></span>
-<span id="cb1-77"><a href="#cb1-77"></a><span class="co"># Print the number of elements:</span></span>
-<span id="cb1-78"><a href="#cb1-78"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${</span><span class="op">#</span><span class="va">array</span><span class="op">[@]</span><span class="va">}</span><span class="st">"</span> <span class="co"># =&gt; "6"</span></span>
-<span id="cb1-79"><a href="#cb1-79"></a><span class="co"># Print the number of characters in third element</span></span>
-<span id="cb1-80"><a href="#cb1-80"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${</span><span class="op">#</span><span class="va">array</span><span class="op">[</span><span class="dv">2</span><span class="op">]</span><span class="va">}</span><span class="st">"</span> <span class="co"># =&gt; "5"</span></span>
-<span id="cb1-81"><a href="#cb1-81"></a><span class="co"># Print 2 elements starting from fourth:</span></span>
-<span id="cb1-82"><a href="#cb1-82"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${array</span><span class="op">[@]:</span><span class="dv">3</span><span class="op">:</span><span class="dv">2</span><span class="va">}</span><span class="st">"</span> <span class="co"># =&gt; "four five"</span></span>
-<span id="cb1-83"><a href="#cb1-83"></a><span class="co"># Print all elements each of them on new line.</span></span>
-<span id="cb1-84"><a href="#cb1-84"></a><span class="cf">for</span> item <span class="kw">in</span> <span class="st">"</span><span class="va">${array</span><span class="op">[@]</span><span class="va">}</span><span class="st">"</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb1-85"><a href="#cb1-85"></a>    <span class="bu">echo</span> <span class="st">"</span><span class="va">$item</span><span class="st">"</span></span>
-<span id="cb1-86"><a href="#cb1-86"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-filename="introduction.sh"><pre class="sourceCode bash code-overflow-wrap code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># First line of the script is the shebang which tells the system how to execute</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the script: https://en.wikipedia.org/wiki/Shebang_(Unix)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># As you already figured, comments start with #. Shebang is also a comment.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple hello world example:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Hello world!"</span> <span class="co"># =&gt; Hello world!</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Each command starts on a new line, or after a semicolon:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"This is the first command"</span><span class="kw">;</span> <span class="bu">echo</span> <span class="st">"This is the second command"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; This is the first command</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; This is the second command</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Declaring a variable looks like this:</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="va">variable</span><span class="op">=</span><span class="st">"Some string"</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># But not like this:</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ex">variable</span> = <span class="st">"Some string"</span> <span class="co"># =&gt; returns error "variable: command not found"</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Bash will decide that `variable` is a command it must execute and give an error</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># because it can't be found.</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Nor like this:</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="va">variable</span><span class="op">=</span> <span class="st">"Some string"</span> <span class="co"># =&gt; returns error: "Some string: command not found"</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Bash will decide that "Some string" is a command it must execute and give an</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># error because it can't be found. In this case the "variable=" part is seen</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># as a variable assignment valid only for the scope of the "Some string"</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># command.</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the variable:</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">$variable</span><span class="st">"</span> <span class="co"># =&gt; Some string</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'$variable'</span> <span class="co"># =&gt; $variable</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co"># When you use a variable itself — assign it, export it, or else — you write</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># its name without $. If you want to use the variable's value, you should use $.</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that ' (single quote) won't expand the variables!</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># You can write variable without surrounding quotes but it's not recommended.</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameter expansion ${...}:</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${variable}</span><span class="st">"</span> <span class="co"># =&gt; Some string</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># This is a simple usage of parameter expansion such as two examples above.</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameter expansion gets a value from a variable.</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co"># It "expands" or prints the value.</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co"># During the expansion time the value or parameter can be modified.</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Below are other modifications that add onto this expansion.</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co"># String substitution in variables:</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${variable</span><span class="op">/</span><span class="ss">Some</span><span class="op">/</span>A<span class="va">}</span><span class="st">"</span> <span class="co"># =&gt; A string</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># This will substitute the first occurrence of "Some" with "A".</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Substring from a variable:</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="va">length</span><span class="op">=</span>7</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${variable</span><span class="op">:</span><span class="dv">0</span><span class="op">:</span>length<span class="va">}</span><span class="st">"</span> <span class="co"># =&gt; Some st</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co"># This will return only the first 7 characters of the value</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${variable</span><span class="op">:</span> -<span class="dv">5</span><span class="va">}</span><span class="st">"</span> <span class="co"># =&gt; tring</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co"># This will return the last 5 characters (note the space before -5).</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co"># The space before minus is mandatory here.</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="co"># String length:</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${</span><span class="op">#</span><span class="va">variable}</span><span class="st">"</span> <span class="co"># =&gt; 11</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Indirect expansion:</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="va">other_variable</span><span class="op">=</span><span class="st">"variable"</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">${</span><span class="op">!</span><span class="va">other_variable}</span> <span class="co"># =&gt; Some string</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co"># This will expand the value of `other_variable`.</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="co"># The default value for variable:</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${foo</span><span class="op">:-</span><span class="st">"DefaultValueIfFooIsMissingOrEmpty"</span><span class="va">}</span><span class="st">"</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; DefaultValueIfFooIsMissingOrEmpty</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="co"># This works for null (foo=) and empty string (foo=""); zero (foo=0) returns 0.</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that it only returns default value and doesn't change variable value.</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Declare an array with 6 elements:</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="va">array</span><span class="op">=</span><span class="va">(</span>one two three four five six<span class="va">)</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the first element:</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${array</span><span class="op">[</span><span class="dv">0</span><span class="op">]</span><span class="va">}</span><span class="st">"</span> <span class="co"># =&gt; "one"</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Print all elements:</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${array</span><span class="op">[@]</span><span class="va">}</span><span class="st">"</span> <span class="co"># =&gt; "one two three four five six"</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the number of elements:</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${</span><span class="op">#</span><span class="va">array</span><span class="op">[@]</span><span class="va">}</span><span class="st">"</span> <span class="co"># =&gt; "6"</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the number of characters in third element</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${</span><span class="op">#</span><span class="va">array</span><span class="op">[</span><span class="dv">2</span><span class="op">]</span><span class="va">}</span><span class="st">"</span> <span class="co"># =&gt; "5"</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="co"># Print 2 elements starting from fourth:</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${array</span><span class="op">[@]:</span><span class="dv">3</span><span class="op">:</span><span class="dv">2</span><span class="va">}</span><span class="st">"</span> <span class="co"># =&gt; "four five"</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="co"># Print all elements each of them on new line.</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> <span class="st">"</span><span class="va">${array</span><span class="op">[@]</span><span class="va">}</span><span class="st">"</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"</span><span class="va">$item</span><span class="st">"</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </details>
 </section>
@@ -1585,15 +1597,15 @@ Code Bash
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../linux/linux-what-basics.html"> Linux: basic concepts</a> <br></p>
+<p><br> <a href="../linux/linux-what-basics.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> Linux: basic concepts</a> <br></p>
 </div>
 <br>
 <div class="column center">
-<p><br> <a href="#top"> top</a> <br></p>
+<p><br> <a href="#top"><i class="fa-solid fa-arrow-up" aria-label="arrow-up"></i> top</a> <br></p>
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../linux/linux-what-sudo.html">Linux: su and sudo </a> <br></p>
+<p><br> <a href="../linux/linux-what-sudo.html">Linux: su and sudo <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
 </div></li>
@@ -1644,6 +1656,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1712,13 +1751,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1745,9 +1786,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1783,10 +1838,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1796,8 +1850,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1812,6 +1875,241 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        typesetMath(container);
+        return container.innerHTML
+      } else {
+        typesetMath(note);
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      typesetMath(note);
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1854,8 +2152,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left"><a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0 International (CC BY 4.0)</a></div>   
-      <div class="nav-footer-center">If you want to go far, walk slow / We love dukkha</div>
+    <div class="nav-footer-left">
+<p><a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0 International (CC BY 4.0)</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>If you want to go far, walk slow / We love dukkha</p>
+</div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -1874,7 +2176,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":true,"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":true});</script>
+
 
 
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.4.383">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -20,11 +20,12 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -49,43 +50,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -108,6 +79,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -118,6 +91,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -127,7 +106,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -138,24 +118,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <body class="nav-sidebar floating nav-fixed">
 
-
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">albertprofe wiki</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-linux-os" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -1184,53 +1164,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
   </li>
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Lab#SE03-2: Library/Book, Sprint Zero</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../javase/selab0-1.html">Java SE Laboratories</a></li><li class="breadcrumb-item"><a href="../javase/selab3-2.html">Lab#SE03-2: Library/Book, Sprint Zero</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
-  Java Standard Edition
+ <span class="menu-text">Java Standard Edition</span>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">What is Java SE</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">What is Java SE</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-what-basics.html" class="sidebar-item-text sidebar-link">Java Standard Edition: Basics</a>
+  <a href="../javase/se-what-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java Standard Edition: Basics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-what-principles.html" class="sidebar-item-text sidebar-link">Java Standard Edition: Principles</a>
+  <a href="../javase/se-what-principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java Standard Edition: Principles</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-what-moochelsinki.html" class="sidebar-item-text sidebar-link">Java MOOC Helsinki</a>
+  <a href="../javase/se-what-moochelsinki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java MOOC Helsinki</span></a>
   </div>
 </li>
       </ul>
@@ -1238,30 +1223,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Java Create Project</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">Java Create Project</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-maven.html" class="sidebar-item-text sidebar-link">Java SE: Maven</a>
+  <a href="../javase/se-concepts-maven.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Maven</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-createproject.html" class="sidebar-item-text sidebar-link">Java SE: Create Maven Project</a>
+  <a href="../javase/se-concepts-createproject.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Create Maven Project</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-projectgit.html" class="sidebar-item-text sidebar-link">Java SE: Project push GitHub</a>
+  <a href="../javase/se-concepts-projectgit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Project push GitHub</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-tdd.html" class="sidebar-item-text sidebar-link">Java SE: JUnit and TDD</a>
+  <a href="../javase/se-concepts-tdd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: JUnit and TDD</span></a>
   </div>
 </li>
       </ul>
@@ -1269,45 +1259,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Java Concepts</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Java Concepts</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-objects.html" class="sidebar-item-text sidebar-link">Java SE: Class and Objects</a>
+  <a href="../javase/se-concepts-objects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Class and Objects</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-scope.html" class="sidebar-item-text sidebar-link">Java SE: Scope</a>
+  <a href="../javase/se-concepts-scope.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Scope</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-static.html" class="sidebar-item-text sidebar-link">Java SE: static modifier</a>
+  <a href="../javase/se-concepts-static.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: static modifier</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-coupling.html" class="sidebar-item-text sidebar-link">Java SE: Coupling and DDD</a>
+  <a href="../javase/se-concepts-coupling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Coupling and DDD</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-package.html" class="sidebar-item-text sidebar-link">Java SE: Packages</a>
+  <a href="../javase/se-concepts-package.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-interface.html" class="sidebar-item-text sidebar-link">Java SE: Abstract/Interface</a>
+  <a href="../javase/se-concepts-interface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Abstract/Interface</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-java8.html" class="sidebar-item-text sidebar-link">Java SE: Java 8</a>
+  <a href="../javase/se-concepts-java8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Java 8</span></a>
   </div>
 </li>
       </ul>
@@ -1315,30 +1313,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Java Principles</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Java Principles</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-principles-encapsulation.html" class="sidebar-item-text sidebar-link">Java SE: Encapsulation</a>
+  <a href="../javase/se-principles-encapsulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Encapsulation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-principles-abstraction.html" class="sidebar-item-text sidebar-link">Java SE: Abstraction</a>
+  <a href="../javase/se-principles-abstraction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Abstraction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-principles-inheritance.html" class="sidebar-item-text sidebar-link">Java SE: Inherence</a>
+  <a href="../javase/se-principles-inheritance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Inherence</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-principles-polymorphism.html" class="sidebar-item-text sidebar-link">Java SE: Polymorphism</a>
+  <a href="../javase/se-principles-polymorphism.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Polymorphism</span></a>
   </div>
 </li>
       </ul>
@@ -1346,89 +1349,104 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Java Design Patterns</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Java Design Patterns</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-uml.html" class="sidebar-item-text sidebar-link">Java Patterns: UML</a>
+  <a href="../javase/se-pattern-uml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java Patterns: UML</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-intro.html" class="sidebar-item-text sidebar-link">Java Patterns: Types</a>
+  <a href="../javase/se-pattern-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java Patterns: Types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
-  <b>Creational</b>
+ <span class="menu-text"><b>Creational</b></span>
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-singleton.html" class="sidebar-item-text sidebar-link">Singleton</a>
+  <a href="../javase/se-pattern-singleton.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Singleton</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-factory.html" class="sidebar-item-text sidebar-link">Factory</a>
+  <a href="../javase/se-pattern-factory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Factory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-abstractfactory.html" class="sidebar-item-text sidebar-link">Abstract Factory</a>
+  <a href="../javase/se-pattern-abstractfactory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Abstract Factory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-builder.html" class="sidebar-item-text sidebar-link">Builder</a>
+  <a href="../javase/se-pattern-builder.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Builder</span></a>
   </div>
 </li>
           <li class="sidebar-item">
-  <b>Structural</b>
+ <span class="menu-text"><b>Structural</b></span>
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-facade.html" class="sidebar-item-text sidebar-link">Facade</a>
+  <a href="../javase/se-pattern-facade.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Facade</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-bridge.html" class="sidebar-item-text sidebar-link">Bridge</a>
+  <a href="../javase/se-pattern-bridge.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bridge</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-decorator.html" class="sidebar-item-text sidebar-link">Decorator</a>
+  <a href="../javase/se-pattern-decorator.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Decorator</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-composite.html" class="sidebar-item-text sidebar-link">Composite</a>
+  <a href="../javase/se-pattern-composite.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Composite</span></a>
   </div>
 </li>
           <li class="sidebar-item">
-  <b>Behavioral</b>
+ <span class="menu-text"><b>Behavioral</b></span>
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-observer.html" class="sidebar-item-text sidebar-link">Observer</a>
+  <a href="../javase/se-pattern-observer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Observer</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-strategy.html" class="sidebar-item-text sidebar-link">Strategy</a>
+  <a href="../javase/se-pattern-strategy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Strategy</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-state.html" class="sidebar-item-text sidebar-link">State</a>
+  <a href="../javase/se-pattern-state.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">State</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-commander.html" class="sidebar-item-text sidebar-link">Commander</a>
+  <a href="../javase/se-pattern-commander.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Commander</span></a>
   </div>
 </li>
       </ul>
@@ -1436,83 +1454,98 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">Java SE Laboratories</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Java SE Laboratories</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab0-1.html" class="sidebar-item-text sidebar-link">Lab#SE00-1: Maven Person</a>
+  <a href="../javase/selab0-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE00-1: Maven Person</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab0-2.html" class="sidebar-item-text sidebar-link">Lab#SE00-2: Maven Clinic</a>
+  <a href="../javase/selab0-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE00-2: Maven Clinic</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab0-3.html" class="sidebar-item-text sidebar-link">Lab#SE00-3: Library Model</a>
+  <a href="../javase/selab0-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE00-3: Library Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab0-4.html" class="sidebar-item-text sidebar-link">Lab#SE00-4: Abstract/Interface Human</a>
-  </div>
-</li>
-          <li class="px-0"><hr class="sidebar-divider hi "></li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab1-1.html" class="sidebar-item-text sidebar-link">Lab#SE01-1: Maven/Gradle Person and Account</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab1-2.html" class="sidebar-item-text sidebar-link">Lab#SE01-2: Maven/Gradle Person and Account stored in JSON</a>
+  <a href="../javase/selab0-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE00-4: Abstract/Interface Human</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-1.html" class="sidebar-item-text sidebar-link">Lab#SE02-1: Movie/Review, Model</a>
+  <a href="../javase/selab1-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE01-1: Maven/Gradle Person and Account</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-2.html" class="sidebar-item-text sidebar-link">Lab#SE02-2: Movie/Review, CRUD Operations</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-3.html" class="sidebar-item-text sidebar-link">Lab#SE02-3: Movie/Review, factory</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-4.html" class="sidebar-item-text sidebar-link">Lab#SE02-4: Movie/Review, interactivity and coupling</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-5.html" class="sidebar-item-text sidebar-link">Lab#SE02-5: Movie/Review, simulate interactivity by console</a>
+  <a href="../javase/selab1-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE01-2: Maven/Gradle Person and Account stored in JSON</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab3-1.html" class="sidebar-item-text sidebar-link">Lab#SE03-1: Library/Book, Core-Model</a>
+  <a href="../javase/selab2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE02-1: Movie/Review, Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab3-2.html" class="sidebar-item-text sidebar-link active">Lab#SE03-2: Library/Book, Sprint Zero</a>
+  <a href="../javase/selab2-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE02-2: Movie/Review, CRUD Operations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab3-3.html" class="sidebar-item-text sidebar-link">Lab#SE03-3: Library/Book, Expand Model</a>
+  <a href="../javase/selab2-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE02-3: Movie/Review, factory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab2-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE02-4: Movie/Review, interactivity and coupling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab2-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE02-5: Movie/Review, simulate interactivity by console</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab3-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE03-1: Library/Book, Core-Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab3-2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lab#SE03-2: Library/Book, Sprint Zero</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab3-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE03-3: Library/Book, Expand Model</span></a>
   </div>
 </li>
       </ul>
@@ -1520,15 +1553,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">Java SE readings</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+ <span class="menu-text">Java SE readings</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/resources.html" class="sidebar-item-text sidebar-link">Java SE Resources</a>
+  <a href="../javase/resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE Resources</span></a>
   </div>
 </li>
       </ul>
@@ -1536,48 +1571,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sprint-zero-hatsjobs" id="toc-sprint-zero-hatsjobs" class="nav-link active" data-scroll-target="#sprint-zero-hatsjobs"><span class="toc-section-number">1</span>  Sprint Zero hats&amp;jobs</a>
+  <li><a href="#sprint-zero-hatsjobs" id="toc-sprint-zero-hatsjobs" class="nav-link active" data-scroll-target="#sprint-zero-hatsjobs"><span class="header-section-number">1</span> Sprint Zero hats&amp;jobs</a>
   <ul>
-  <li><a href="#architecture-and-first-draft" id="toc-architecture-and-first-draft" class="nav-link" data-scroll-target="#architecture-and-first-draft"><span class="toc-section-number">1.1</span>  Architecture and first draft</a>
+  <li><a href="#architecture-and-first-draft" id="toc-architecture-and-first-draft" class="nav-link" data-scroll-target="#architecture-and-first-draft"><span class="header-section-number">1.1</span> Architecture and first draft</a>
   <ul>
-  <li><a href="#tasksrequirements-list" id="toc-tasksrequirements-list" class="nav-link" data-scroll-target="#tasksrequirements-list"><span class="toc-section-number">1.1.1</span>  Tasks/Requirements list</a></li>
-  <li><a href="#onion-architecture" id="toc-onion-architecture" class="nav-link" data-scroll-target="#onion-architecture"><span class="toc-section-number">1.1.2</span>  Onion Architecture</a></li>
+  <li><a href="#tasksrequirements-list" id="toc-tasksrequirements-list" class="nav-link" data-scroll-target="#tasksrequirements-list"><span class="header-section-number">1.1.1</span> Tasks/Requirements list</a></li>
+  <li><a href="#onion-architecture" id="toc-onion-architecture" class="nav-link" data-scroll-target="#onion-architecture"><span class="header-section-number">1.1.2</span> Onion Architecture</a></li>
   </ul></li>
-  <li><a href="#features-core-use-case-user-borrows-a-book" id="toc-features-core-use-case-user-borrows-a-book" class="nav-link" data-scroll-target="#features-core-use-case-user-borrows-a-book"><span class="toc-section-number">1.2</span>  Features: core use-case: <code>user</code>-borrows-a-<code>book</code></a>
+  <li><a href="#features-core-use-case-user-borrows-a-book" id="toc-features-core-use-case-user-borrows-a-book" class="nav-link" data-scroll-target="#features-core-use-case-user-borrows-a-book"><span class="header-section-number">1.2</span> Features: core use-case: <code>user</code>-borrows-a-<code>book</code></a>
   <ul>
-  <li><a href="#use-story" id="toc-use-story" class="nav-link" data-scroll-target="#use-story"><span class="toc-section-number">1.2.1</span>  Use-Story</a></li>
-  <li><a href="#mock-up" id="toc-mock-up" class="nav-link" data-scroll-target="#mock-up"><span class="toc-section-number">1.2.2</span>  Mock-up</a></li>
-  <li><a href="#menus" id="toc-menus" class="nav-link" data-scroll-target="#menus"><span class="toc-section-number">1.2.3</span>  Menus</a></li>
+  <li><a href="#use-story" id="toc-use-story" class="nav-link" data-scroll-target="#use-story"><span class="header-section-number">1.2.1</span> Use-Story</a></li>
+  <li><a href="#mock-up" id="toc-mock-up" class="nav-link" data-scroll-target="#mock-up"><span class="header-section-number">1.2.2</span> Mock-up</a></li>
+  <li><a href="#menus" id="toc-menus" class="nav-link" data-scroll-target="#menus"><span class="header-section-number">1.2.3</span> Menus</a></li>
   </ul></li>
-  <li><a href="#pieces-of-code" id="toc-pieces-of-code" class="nav-link" data-scroll-target="#pieces-of-code"><span class="toc-section-number">1.3</span>  Pieces of code</a>
+  <li><a href="#pieces-of-code" id="toc-pieces-of-code" class="nav-link" data-scroll-target="#pieces-of-code"><span class="header-section-number">1.3</span> Pieces of code</a>
   <ul>
-  <li><a href="#uuid" id="toc-uuid" class="nav-link" data-scroll-target="#uuid"><span class="toc-section-number">1.3.1</span>  UUID</a></li>
-  <li><a href="#borrowmanager-class" id="toc-borrowmanager-class" class="nav-link" data-scroll-target="#borrowmanager-class"><span class="toc-section-number">1.3.2</span>  <code>BorrowManager</code> class</a></li>
-  <li><a href="#faker-users-and-books" id="toc-faker-users-and-books" class="nav-link" data-scroll-target="#faker-users-and-books"><span class="toc-section-number">1.3.3</span>  faker <code>Users</code> and <code>Books</code></a></li>
+  <li><a href="#uuid" id="toc-uuid" class="nav-link" data-scroll-target="#uuid"><span class="header-section-number">1.3.1</span> UUID</a></li>
+  <li><a href="#borrowmanager-class" id="toc-borrowmanager-class" class="nav-link" data-scroll-target="#borrowmanager-class"><span class="header-section-number">1.3.2</span> <code>BorrowManager</code> class</a></li>
+  <li><a href="#faker-users-and-books" id="toc-faker-users-and-books" class="nav-link" data-scroll-target="#faker-users-and-books"><span class="header-section-number">1.3.3</span> faker <code>Users</code> and <code>Books</code></a></li>
   </ul></li>
-  <li><a href="#tests" id="toc-tests" class="nav-link" data-scroll-target="#tests"><span class="toc-section-number">1.4</span>  Tests</a>
+  <li><a href="#tests" id="toc-tests" class="nav-link" data-scroll-target="#tests"><span class="header-section-number">1.4</span> Tests</a>
   <ul>
-  <li><a href="#borrow-object-test" id="toc-borrow-object-test" class="nav-link" data-scroll-target="#borrow-object-test"><span class="toc-section-number">1.4.1</span>  <code>borrow</code> object test</a></li>
-  <li><a href="#make-a-borrow-test" id="toc-make-a-borrow-test" class="nav-link" data-scroll-target="#make-a-borrow-test"><span class="toc-section-number">1.4.2</span>  make-a-borrow test</a></li>
+  <li><a href="#borrow-object-test" id="toc-borrow-object-test" class="nav-link" data-scroll-target="#borrow-object-test"><span class="header-section-number">1.4.1</span> <code>borrow</code> object test</a></li>
+  <li><a href="#make-a-borrow-test" id="toc-make-a-borrow-test" class="nav-link" data-scroll-target="#make-a-borrow-test"><span class="header-section-number">1.4.2</span> make-a-borrow test</a></li>
   </ul></li>
-  <li><a href="#uml" id="toc-uml" class="nav-link" data-scroll-target="#uml"><span class="toc-section-number">1.5</span>  UML</a></li>
-  <li><a href="#domains-tree" id="toc-domains-tree" class="nav-link" data-scroll-target="#domains-tree"><span class="toc-section-number">1.6</span>  Domains &amp; Tree</a></li>
+  <li><a href="#uml" id="toc-uml" class="nav-link" data-scroll-target="#uml"><span class="header-section-number">1.5</span> UML</a></li>
+  <li><a href="#domains-tree" id="toc-domains-tree" class="nav-link" data-scroll-target="#domains-tree"><span class="header-section-number">1.6</span> Domains &amp; Tree</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/selab3-2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/main/javase/selab3-2.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../javase/selab0-1.html">Java SE Laboratories</a></li><li class="breadcrumb-item"><a href="../javase/selab3-2.html">Lab#SE03-2: Library/Book, Sprint Zero</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Lab#SE03-2: Library/Book, Sprint Zero</h1>
+<h1 class="title">Lab#SE03-2: Library/Book, Sprint Zero</h1>
 <p class="subtitle lead">Java SE Lab 03 part 2</p>
   <div class="quarto-categories">
     <div class="quarto-category">javase</div>
@@ -1614,14 +1650,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, May 25, 2023</p>
+      <p class="date-modified">Tuesday, September 26, 2023</p>
     </div>
   </div>
     
   </div>
   
 
+
 </header>
+
 
 <div class="labs">
 <p>📘 <strong>Linux Lab#SE03-2: Library/Book Sprint Zero</strong></p>
@@ -1663,371 +1701,509 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<p>
-<svg width="672" height="480" viewbox="0.00 0.00 1242.31 1608.67" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 1242.31 1608.67" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1604.67)">
-<title>
-sprintZero
-</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-1604.67 1238.31,-1604.67 1238.31,4 -4,4"></polygon> <text text-anchor="middle" x="617.16" y="-8.2" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Sprint Zero</text> <!-- Sprint Zero --> <g id="node1" class="node">
-<title>
-Sprint Zero
-</title>
-<ellipse fill="olive" stroke="#000000" stroke-opacity="0.533333" cx="610.76" cy="-998.97" rx="50.5" ry="50.5"></ellipse> <text text-anchor="middle" x="610.76" y="-994.77" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Sprint Zero</text> </g> <!-- 1 &#45; Project --> <g id="node2" class="node">
-<title>
-1 - Project
-</title>
-<ellipse fill="orange" stroke="#000000" stroke-opacity="0.533333" cx="773.18" cy="-1105.79" rx="50.5" ry="50.5"></ellipse> <text text-anchor="middle" x="773.18" y="-1101.59" font-family="Helvetica,Arial,sans-serif" font-size="14.00">1 - Project</text> </g> <!-- Sprint Zero&#45;&#45;1 &#45; Project --> <g id="edge1" class="edge">
-<title>
-Sprint Zero–1 - Project
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M653.01,-1026.75C676.98,-1042.52 706.88,-1062.18 730.86,-1077.96"></path> </g> <!-- 2 &#45; DDD --> <g id="node3" class="node">
-<title>
-2 - DDD
-</title>
-<ellipse fill="black" stroke="#000000" stroke-opacity="0.533333" cx="577.01" cy="-1190.41" rx="50.5" ry="50.5"></ellipse> <text text-anchor="middle" x="577.01" y="-1186.21" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">2 - DDD</text> </g> <!-- Sprint Zero&#45;&#45;2 &#45; DDD --> <g id="edge2" class="edge">
-<title>
-Sprint Zero–2 - DDD
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M601.98,-1048.77C597,-1077.02 590.79,-1112.26 585.8,-1140.53"></path> </g> <!-- 3 &#45; UML --> <g id="node4" class="node">
-<title>
-3 - UML
-</title>
-<ellipse fill="green" stroke="#000000" stroke-opacity="0.533333" cx="437.04" cy="-1086.21" rx="50.5" ry="50.5"></ellipse> <text text-anchor="middle" x="437.04" y="-1082.01" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">3 - UML</text> </g> <!-- Sprint Zero&#45;&#45;3 &#45; UML --> <g id="edge3" class="edge">
-<title>
-Sprint Zero–3 - UML
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M565.57,-1021.66C539.94,-1034.54 507.95,-1050.6 482.31,-1063.48"></path> </g> <!-- 4 &#45; Code --> <g id="node5" class="node">
-<title>
-4 - Code
-</title>
-<ellipse fill="blue" stroke="#000000" stroke-opacity="0.533333" cx="599.46" cy="-804.89" rx="50.5" ry="50.5"></ellipse> <text text-anchor="middle" x="599.46" y="-800.69" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">4 - Code</text> </g> <!-- Sprint Zero&#45;&#45;4 &#45; Code --> <g id="edge4" class="edge">
-<title>
-Sprint Zero–4 - Code
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M607.82,-948.48C606.16,-919.84 604.07,-884.11 602.41,-855.46"></path> </g> <!-- Use Case --> <g id="node6" class="node">
-<title>
-Use Case
-</title>
-<ellipse fill="gold" stroke="#000000" stroke-opacity="0.533333" cx="996.93" cy="-1044.1" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="996.93" y="-1039.9" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Use Case</text> </g> <!-- 1 &#45; Project&#45;&#45;Use Case --> <g id="edge5" class="edge">
-<title>
-1 - Project–Use Case
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M822.01,-1092.33C861.87,-1081.34 917.59,-1065.98 955.35,-1055.57"></path> </g> <!-- Documentation --> <g id="node7" class="node">
-<title>
-Documentation
-</title>
-<ellipse fill="gold" stroke="#000000" stroke-opacity="0.533333" cx="958.21" cy="-1173.46" rx="53.35" ry="53.35"></ellipse> <text text-anchor="middle" x="958.21" y="-1169.26" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Documentation</text> </g> <!-- 1 &#45; Project&#45;&#45;Documentation --> <g id="edge6" class="edge">
-<title>
-1 - Project–Documentation
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M820.83,-1123.22C847.49,-1132.97 880.71,-1145.12 907.81,-1155.03"></path> </g> <!-- Mock&#45;up --> <g id="node8" class="node">
-<title>
-Mock-up
-</title>
-<ellipse fill="gold" stroke="#000000" stroke-opacity="0.533333" cx="877.57" cy="-1281.77" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="877.57" y="-1277.57" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Mock-up</text> </g> <!-- 1 &#45; Project&#45;&#45;Mock&#45;up --> <g id="edge7" class="edge">
-<title>
-1 - Project–Mock-up
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M798.99,-1149.29C816.38,-1178.6 839.07,-1216.86 855.59,-1244.72"></path> </g> <!-- Open\nProject? --> <g id="node9" class="node">
-<title>
-Open?
-</title>
-<ellipse fill="gold" stroke="#000000" stroke-opacity="0.533333" cx="805.16" cy="-1335.68" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="805.16" y="-1339.88" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Open</text> <text text-anchor="middle" x="805.16" y="-1323.08" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Project?</text> </g> <!-- 1 &#45; Project&#45;&#45;Open\nProject? --> <g id="edge8" class="edge">
-<title>
-1 - Project–Open?
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M780.16,-1155.96C785.86,-1196.91 793.82,-1254.16 799.22,-1292.95"></path> </g> <!-- Vocabulary --> <g id="node14" class="node">
-<title>
-Vocabulary
-</title>
-<ellipse fill="#000000" fill-opacity="0.533333" stroke="#000000" stroke-opacity="0.533333" cx="722.27" cy="-1371.43" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="722.27" y="-1367.23" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Vocabulary</text> </g> <!-- 2 &#45; DDD&#45;&#45;Vocabulary --> <g id="edge13" class="edge">
-<title>
-2 - DDD–Vocabulary
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M608.89,-1230.14C634.78,-1262.4 670.88,-1307.39 695.34,-1337.87"></path> </g> <!-- Packages --> <g id="node15" class="node">
-<title>
-Packages
-</title>
-<ellipse fill="#000000" fill-opacity="0.533333" stroke="#000000" stroke-opacity="0.533333" cx="633.37" cy="-1387.11" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="633.37" y="-1382.91" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Packages</text> </g> <!-- 2 &#45; DDD&#45;&#45;Packages --> <g id="edge14" class="edge">
-<title>
-2 - DDD–Packages
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M590.94,-1239.03C600.33,-1271.8 612.58,-1314.55 621.5,-1345.69"></path> </g> <!-- Model --> <g id="node16" class="node">
-<title>
-Model
-</title>
-<ellipse fill="#000000" fill-opacity="0.533333" stroke="#000000" stroke-opacity="0.533333" cx="543.25" cy="-1381.86" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="543.25" y="-1377.66" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Model</text> </g> <!-- 2 &#45; DDD&#45;&#45;Model --> <g id="edge15" class="edge">
-<title>
-2 - DDD–Model
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M568.22,-1240.21C562.79,-1271.01 555.9,-1310.13 550.73,-1339.44"></path> </g> <!-- Controller --> <g id="node17" class="node">
-<title>
-Controller
-</title>
-<ellipse fill="#000000" fill-opacity="0.533333" stroke="#000000" stroke-opacity="0.533333" cx="456.77" cy="-1355.97" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="456.77" y="-1351.77" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Controller</text> </g> <!-- 2 &#45; DDD&#45;&#45;Controller --> <g id="edge16" class="edge">
-<title>
-2 - DDD–Controller
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M547.28,-1231.34C527.26,-1258.91 501.12,-1294.9 482.08,-1321.11"></path> </g> <!-- Refactor\nDomain --> <g id="node18" class="node">
-<title>
-Refactor
-</title>
-<ellipse fill="#000000" fill-opacity="0.533333" stroke="#000000" stroke-opacity="0.533333" cx="378.59" cy="-1310.83" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="378.59" y="-1315.03" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Refactor</text> <text text-anchor="middle" x="378.59" y="-1298.23" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Domain</text> </g> <!-- 2 &#45; DDD&#45;&#45;Refactor\nDomain --> <g id="edge17" class="edge">
-<title>
-2 - DDD–Refactor
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M533.46,-1216.84C498.1,-1238.3 448.78,-1268.23 415.37,-1288.51"></path> </g> <!-- Relationships --> <g id="node21" class="node">
-<title>
-Relationships
-</title>
-<ellipse fill="yellowgreen" stroke="#000000" stroke-opacity="0.533333" cx="263.32" cy="-1173.46" rx="48.31" ry="48.31"></ellipse> <text text-anchor="middle" x="263.32" y="-1169.26" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Relationships</text> </g> <!-- 3 &#45; UML&#45;&#45;Relationships --> <g id="edge20" class="edge">
-<title>
-3 - UML–Relationships
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M391.85,-1108.91C365.51,-1122.14 332.47,-1138.73 306.49,-1151.78"></path> </g> <!-- Utilities --> <g id="node25" class="node">
-<title>
-Utilities
-</title>
-<ellipse fill="deepskyblue" stroke="#000000" stroke-opacity="0.533333" cx="221.96" cy="-998.97" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="221.96" y="-994.77" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Utilities</text> </g> <!-- 4 &#45; Code&#45;&#45;Utilities --> <g id="edge24" class="edge">
-<title>
-4 - Code–Utilities
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M554.3,-828.11C479.35,-866.65 330.56,-943.13 260.35,-979.23"></path> </g> <!-- Core model --> <g id="node26" class="node">
-<title>
-Core model
-</title>
-<ellipse fill="deepskyblue" stroke="#000000" stroke-opacity="0.533333" cx="263.32" cy="-824.47" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="263.32" y="-820.27" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Core model</text> </g> <!-- 4 &#45; Code&#45;&#45;Core model --> <g id="edge25" class="edge">
-<title>
-4 - Code–Core model
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M548.77,-807.85C482.75,-811.69 368.45,-818.35 306.4,-821.96"></path> </g> <!-- Managers --> <g id="node27" class="node">
-<title>
-Managers
-</title>
-<ellipse fill="deepskyblue" stroke="#000000" stroke-opacity="0.533333" cx="378.59" cy="-687.1" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="378.59" y="-682.9" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Managers</text> </g> <!-- 4 &#45; Code&#45;&#45;Managers --> <g id="edge26" class="edge">
-<title>
-4 - Code–Managers
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M554.76,-781.06C514.17,-759.41 454.96,-727.83 416.6,-707.37"></path> </g> <!-- Dependencies --> <g id="node28" class="node">
-<title>
-Dependencies
-</title>
-<ellipse fill="deepskyblue" stroke="#000000" stroke-opacity="0.533333" cx="633.37" cy="-610.82" rx="49.21" ry="49.21"></ellipse> <text text-anchor="middle" x="633.37" y="-606.62" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Dependencies</text> </g> <!-- 4 &#45; Code&#45;&#45;Dependencies --> <g id="edge27" class="edge">
-<title>
-4 - Code–Dependencies
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M608.19,-754.92C613.31,-725.6 619.76,-688.73 624.84,-659.63"></path> </g> <!-- Maven --> <g id="node29" class="node">
-<title>
-Maven
-</title>
-<ellipse fill="deepskyblue" stroke="#000000" stroke-opacity="0.533333" cx="877.57" cy="-716.16" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="877.57" y="-711.96" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Maven</text> </g> <!-- 4 &#45; Code&#45;&#45;Maven --> <g id="edge28" class="edge">
-<title>
-4 - Code–Maven
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M647.59,-789.54C700.91,-772.53 786.01,-745.38 836.37,-729.31"></path> </g> <!-- Refactor\nCode --> <g id="node30" class="node">
-<title>
-Refactor
-</title>
-<ellipse fill="deepskyblue" stroke="#000000" stroke-opacity="0.533333" cx="935.6" cy="-785.32" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="935.6" y="-789.52" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Refactor</text> <text text-anchor="middle" x="935.6" y="-772.72" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Code</text> </g> <!-- 4 &#45; Code&#45;&#45;Refactor\nCode --> <g id="edge29" class="edge">
-<title>
-4 - Code–Refactor
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M650.15,-801.94C716.17,-798.1 830.47,-791.44 892.52,-787.83"></path> </g> <!-- Test --> <g id="node31" class="node">
-<title>
-Test
-</title>
-<ellipse fill="deepskyblue" stroke="#000000" stroke-opacity="0.533333" cx="976.12" cy="-865.99" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="976.12" y="-861.79" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Test</text> </g> <!-- 4 &#45; Code&#45;&#45;Test --> <g id="edge30" class="edge">
-<title>
-4 - Code–Test
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M649.48,-813.01C724.12,-825.11 863.36,-847.7 933.47,-859.07"></path> </g> <!-- Git --> <g id="node32" class="node">
-<title>
-Git
-</title>
-<ellipse fill="deepskyblue" stroke="#000000" stroke-opacity="0.533333" cx="996.93" cy="-953.83" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="996.93" y="-949.63" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Git</text> </g> <!-- 4 &#45; Code&#45;&#45;Git --> <g id="edge31" class="edge">
-<title>
-4 - Code–Git
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M647.01,-822.71C725.93,-852.28 882.59,-910.98 956.52,-938.68"></path> </g> <!-- User Stories --> <g id="node10" class="node">
-<title>
-User Stories
-</title>
-<ellipse fill="peachpuff" stroke="#000000" stroke-opacity="0.533333" cx="1190.02" cy="-1066.67" rx="44.09" ry="44.09"></ellipse> <text text-anchor="middle" x="1190.02" y="-1062.47" font-family="Helvetica,Arial,sans-serif" font-size="14.00">User Stories</text> </g> <!-- Use Case&#45;&#45;User Stories --> <g id="edge9" class="edge">
-<title>
-Use Case–User Stories
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M1039.79,-1049.11C1071.34,-1052.8 1114.11,-1057.8 1145.95,-1061.52"></path> </g> <!-- Quarto --> <g id="node11" class="node">
-<title>
-Quarto
-</title>
-<ellipse fill="peachpuff" stroke="#000000" stroke-opacity="0.533333" cx="1158.79" cy="-1198.43" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="1158.79" y="-1194.23" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Quarto</text> </g> <!-- Documentation&#45;&#45;Quarto --> <g id="edge10" class="edge">
-<title>
-Documentation–Quarto
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M1011.43,-1180.09C1044.16,-1184.16 1085.54,-1189.31 1116.11,-1193.12"></path> </g> <!-- Obsidian --> <g id="node12" class="node">
-<title>
-Obsidian
-</title>
-<ellipse fill="peachpuff" stroke="#000000" stroke-opacity="0.533333" cx="1098.02" cy="-1319.44" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="1098.02" y="-1315.24" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Obsidian</text> </g> <!-- Documentation&#45;&#45;Obsidian --> <g id="edge11" class="edge">
-<title>
-Documentation–Obsidian
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M995.31,-1212.2C1018.12,-1236.02 1046.96,-1266.13 1068.27,-1288.38"></path> </g> <!-- New Feature --> <g id="node13" class="node">
-<title>
-New Feature
-</title>
-<ellipse fill="peachpuff" stroke="#000000" stroke-opacity="0.533333" cx="1010.98" cy="-1423.17" rx="45.81" ry="45.81"></ellipse> <text text-anchor="middle" x="1010.98" y="-1418.97" font-family="Helvetica,Arial,sans-serif" font-size="14.00">New Feature</text> </g> <!-- Mock&#45;up&#45;&#45;New Feature --> <g id="edge12" class="edge">
-<title>
-Mock-up–New Feature
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M907.18,-1313.15C928.6,-1335.85 957.5,-1366.48 979.36,-1389.66"></path> </g> <!-- Common\nLanguage --> <g id="node19" class="node">
-<title>
-Common
-</title>
-<ellipse fill="#000000" fill-opacity="0.533333" stroke="#000000" stroke-opacity="0.533333" cx="778.03" cy="-1557.67" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="778.03" y="-1561.87" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Common</text> <text text-anchor="middle" x="778.03" y="-1545.07" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Language</text> </g> <!-- Vocabulary&#45;&#45;Common\nLanguage --> <g id="edge18" class="edge">
-<title>
-Vocabulary–Common
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M734.65,-1412.76C743.89,-1443.63 756.46,-1485.62 765.69,-1516.45"></path> </g> <!-- Controller&#45;&#45;Managers --> <g id="edge44" class="edge">
-<title>
-Controller–Managers
-</title>
-<path fill="none" stroke="#000000" stroke-dasharray="1,5" stroke-opacity="0.533333" d="M451.76,-1313.11C437.65,-1192.44 397.72,-850.79 383.61,-730.03"></path> </g> <!-- If there is\nLegacy Code --> <g id="node20" class="node">
-<title>
-If there isCode
-</title>
-<ellipse fill="#000000" fill-opacity="0.533333" stroke="#000000" stroke-opacity="0.533333" cx="262.5" cy="-1466.76" rx="51.61" ry="51.61"></ellipse> <text text-anchor="middle" x="262.5" y="-1470.96" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">If there is</text> <text text-anchor="middle" x="262.5" y="-1454.16" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Legacy Code</text> </g> <!-- Refactor\nDomain&#45;&#45;If there is\nLegacy Code --> <g id="edge19" class="edge">
-<title>
-Refactor–If there isCode
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M352.82,-1345.44C335.26,-1369.04 311.9,-1400.4 293.35,-1425.33"></path> </g> <!-- Refactor\nDomain&#45;&#45;Refactor\nCode --> <g id="edge45" class="edge">
-<title>
-Refactor–Refactor
-</title>
-<path fill="none" stroke="#000000" stroke-dasharray="1,5" stroke-opacity="0.533333" d="M410.13,-1281.07C508.06,-1188.68 806.14,-907.46 904.06,-815.07"></path> </g> <!-- Composition --> <g id="node22" class="node">
-<title>
-Composition
-</title>
-<ellipse fill="#e5ffcc" stroke="#000000" stroke-opacity="0.533333" cx="164.01" cy="-1373.84" rx="46.26" ry="46.26"></ellipse> <text text-anchor="middle" x="164.01" y="-1369.64" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Composition</text> </g> <!-- Relationships&#45;&#45;Composition --> <g id="edge21" class="edge">
-<title>
-Relationships–Composition
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M241.77,-1216.94C224.77,-1251.24 201.22,-1298.76 184.5,-1332.5"></path> </g> <!-- Inheritance --> <g id="node23" class="node">
-<title>
-Inheritance
-</title>
-<ellipse fill="#e5ffcc" stroke="#000000" stroke-opacity="0.533333" cx="89.6" cy="-1260.71" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="89.6" y="-1256.51" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Inheritance</text> </g> <!-- Relationships&#45;&#45;Inheritance --> <g id="edge22" class="edge">
-<title>
-Relationships–Inheritance
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M219.93,-1195.25C191.79,-1209.38 155.45,-1227.63 128.29,-1241.27"></path> </g> <!-- Multiplicity --> <g id="node24" class="node">
-<title>
-Multiplicity
-</title>
-<ellipse fill="#e5ffcc" stroke="#000000" stroke-opacity="0.533333" cx="43.28" cy="-1133.46" rx="43.07" ry="43.07"></ellipse> <text text-anchor="middle" x="43.28" y="-1129.26" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Multiplicity</text> </g> <!-- Relationships&#45;&#45;Multiplicity --> <g id="edge23" class="edge">
-<title>
-Relationships–Multiplicity
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M215.85,-1164.83C177.31,-1157.82 123.45,-1148.03 86.2,-1141.26"></path> </g> <!-- Book --> <g id="node33" class="node">
-<title>
-Book
-</title>
-<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="43.28" cy="-864.47" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="43.28" y="-860.27" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Book</text> </g> <!-- Core model&#45;&#45;Book --> <g id="edge32" class="edge">
-<title>
-Core model–Book
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M220.89,-832.18C182.06,-839.24 124.87,-849.64 85.95,-856.71"></path> </g> <!-- Borrow --> <g id="node34" class="node">
-<title>
-Borrow
-</title>
-<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="89.6" cy="-737.23" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="89.6" y="-733.03" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Borrow</text> </g> <!-- Core model&#45;&#45;Borrow --> <g id="edge33" class="edge">
-<title>
-Core model–Borrow
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M224.76,-805.11C195.98,-790.65 156.81,-770.98 128.04,-756.53"></path> </g> <!-- User --> <g id="node35" class="node">
-<title>
-User
-</title>
-<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="164.01" cy="-624.09" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="164.01" y="-619.89" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">User</text> </g> <!-- Core model&#45;&#45;User --> <g id="edge34" class="edge">
-<title>
-Core model–User
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M244.17,-785.84C226.64,-750.47 200.83,-698.39 183.27,-662.95"></path> </g> <!-- lombok --> <g id="node38" class="node">
-<title>
-lombok
-</title>
-<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="379.77" cy="-463.46" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="379.77" y="-459.26" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">lombok</text> </g> <!-- Dependencies&#45;&#45;lombok --> <g id="edge37" class="edge">
-<title>
-Dependencies–lombok
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M590.64,-585.99C542.08,-557.78 463.58,-512.16 417.3,-485.27"></path> </g> <!-- JUnit --> <g id="node39" class="node">
-<title>
-JUnit
-</title>
-<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="509.49" cy="-424.63" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="509.49" y="-420.43" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">JUnit</text> </g> <!-- Dependencies&#45;&#45;JUnit --> <g id="edge38" class="edge">
-<title>
-Dependencies–JUnit
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M605.88,-569.5C584.14,-536.82 554.09,-491.67 533.36,-460.5"></path> </g> <!-- Jupiter --> <g id="node40" class="node">
-<title>
-Jupiter
-</title>
-<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="644.67" cy="-416.75" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="644.67" y="-412.55" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Jupiter</text> </g> <!-- Dependencies&#45;&#45;Jupiter --> <g id="edge39" class="edge">
-<title>
-Dependencies–Jupiter
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M636.25,-561.35C638.08,-530.02 640.41,-489.9 642.16,-459.87"></path> </g> <!-- faker --> <g id="node41" class="node">
-<title>
-faker
-</title>
-<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="841.76" cy="-463.46" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="841.76" y="-459.26" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">faker</text> </g> <!-- Dependencies&#45;&#45;faker --> <g id="edge40" class="edge">
-<title>
-Dependencies–faker
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M674.04,-582.06C712.54,-554.84 769.74,-514.39 806.39,-488.47"></path> </g> <!-- Make Borrow --> <g id="node36" class="node">
-<title>
-Make Borrow
-</title>
-<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="1158.79" cy="-799.5" rx="49.33" ry="49.33"></ellipse> <text text-anchor="middle" x="1158.79" y="-795.3" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Make Borrow</text> </g> <!-- Test&#45;&#45;Make Borrow --> <g id="edge35" class="edge">
-<title>
-Test–Make Borrow
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M1016.66,-851.23C1045.04,-840.9 1083.01,-827.08 1112.57,-816.32"></path> </g> <!-- GitHub --> <g id="node37" class="node">
-<title>
-GitHub
-</title>
-<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="1190.02" cy="-931.26" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="1190.02" y="-927.06" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">GitHub</text> </g> <!-- Git&#45;&#45;GitHub --> <g id="edge36" class="edge">
-<title>
-Git–GitHub
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M1039.79,-948.82C1071.78,-945.08 1115.32,-939.99 1147.29,-936.26"></path> </g> <!-- Create --> <g id="node42" class="node">
-<title>
-Create
-</title>
-<ellipse fill="lightskyblue" stroke="#000000" stroke-opacity="0.533333" cx="918.75" cy="-284.96" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="918.75" y="-280.76" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Create</text> </g> <!-- faker&#45;&#45;Create --> <g id="edge41" class="edge">
-<title>
-faker–Create
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M858.85,-423.85C871.61,-394.27 888.97,-354.02 901.71,-324.47"></path> </g> <!-- 100 books --> <g id="node43" class="node">
-<title>
-100 books
-</title>
-<ellipse fill="lightskyblue" stroke="#000000" stroke-opacity="0.533333" cx="889.54" cy="-67.8" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="889.54" y="-63.6" font-family="Helvetica,Arial,sans-serif" font-size="14.00">100 books</text> </g> <!-- Create&#45;&#45;100 books --> <g id="edge42" class="edge">
-<title>
-Create–100 books
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M913.02,-242.32C907.9,-204.27 900.44,-148.85 895.31,-110.72"></path> </g> <!-- 100 users --> <g id="node44" class="node">
-<title>
-100 users
-</title>
-<ellipse fill="lightskyblue" stroke="#000000" stroke-opacity="0.533333" cx="1096.76" cy="-157.19" rx="43" ry="43"></ellipse> <text text-anchor="middle" x="1096.76" y="-152.99" font-family="Helvetica,Arial,sans-serif" font-size="14.00">100 users</text> </g> <!-- Create&#45;&#45;100 users --> <g id="edge43" class="edge">
-<title>
-Create–100 users
-</title>
-<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M953.92,-259.72C985.13,-237.32 1030.48,-204.76 1061.67,-182.38"></path> </g> </g>
+<title>sprintZero</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-1604.67 1238.31,-1604.67 1238.31,4 -4,4"></polygon>
+<text text-anchor="middle" x="617.16" y="-8.2" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Sprint Zero</text>
+<!-- Sprint Zero -->
+<g id="node1" class="node">
+<title>Sprint Zero</title>
+<ellipse fill="olive" stroke="#000000" stroke-opacity="0.533333" cx="610.76" cy="-998.97" rx="50.5" ry="50.5"></ellipse>
+<text text-anchor="middle" x="610.76" y="-994.77" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Sprint Zero</text>
+</g>
+<!-- 1 &#45; Project -->
+<g id="node2" class="node">
+<title>1 - Project</title>
+<ellipse fill="orange" stroke="#000000" stroke-opacity="0.533333" cx="773.18" cy="-1105.79" rx="50.5" ry="50.5"></ellipse>
+<text text-anchor="middle" x="773.18" y="-1101.59" font-family="Helvetica,Arial,sans-serif" font-size="14.00">1 - Project</text>
+</g>
+<!-- Sprint Zero&#45;&#45;1 &#45; Project -->
+<g id="edge1" class="edge">
+<title>Sprint Zero--1 - Project</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M653.01,-1026.75C676.98,-1042.52 706.88,-1062.18 730.86,-1077.96"></path>
+</g>
+<!-- 2 &#45; DDD -->
+<g id="node3" class="node">
+<title>2 - DDD</title>
+<ellipse fill="black" stroke="#000000" stroke-opacity="0.533333" cx="577.01" cy="-1190.41" rx="50.5" ry="50.5"></ellipse>
+<text text-anchor="middle" x="577.01" y="-1186.21" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">2 - DDD</text>
+</g>
+<!-- Sprint Zero&#45;&#45;2 &#45; DDD -->
+<g id="edge2" class="edge">
+<title>Sprint Zero--2 - DDD</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M601.98,-1048.77C597,-1077.02 590.79,-1112.26 585.8,-1140.53"></path>
+</g>
+<!-- 3 &#45; UML -->
+<g id="node4" class="node">
+<title>3 - UML</title>
+<ellipse fill="green" stroke="#000000" stroke-opacity="0.533333" cx="437.04" cy="-1086.21" rx="50.5" ry="50.5"></ellipse>
+<text text-anchor="middle" x="437.04" y="-1082.01" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">3 - UML</text>
+</g>
+<!-- Sprint Zero&#45;&#45;3 &#45; UML -->
+<g id="edge3" class="edge">
+<title>Sprint Zero--3 - UML</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M565.57,-1021.66C539.94,-1034.54 507.95,-1050.6 482.31,-1063.48"></path>
+</g>
+<!-- 4 &#45; Code -->
+<g id="node5" class="node">
+<title>4 - Code</title>
+<ellipse fill="blue" stroke="#000000" stroke-opacity="0.533333" cx="599.46" cy="-804.89" rx="50.5" ry="50.5"></ellipse>
+<text text-anchor="middle" x="599.46" y="-800.69" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">4 - Code</text>
+</g>
+<!-- Sprint Zero&#45;&#45;4 &#45; Code -->
+<g id="edge4" class="edge">
+<title>Sprint Zero--4 - Code</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M607.82,-948.48C606.16,-919.84 604.07,-884.11 602.41,-855.46"></path>
+</g>
+<!-- Use Case -->
+<g id="node6" class="node">
+<title>Use Case</title>
+<ellipse fill="gold" stroke="#000000" stroke-opacity="0.533333" cx="996.93" cy="-1044.1" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="996.93" y="-1039.9" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Use Case</text>
+</g>
+<!-- 1 &#45; Project&#45;&#45;Use Case -->
+<g id="edge5" class="edge">
+<title>1 - Project--Use Case</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M822.01,-1092.33C861.87,-1081.34 917.59,-1065.98 955.35,-1055.57"></path>
+</g>
+<!-- Documentation -->
+<g id="node7" class="node">
+<title>Documentation</title>
+<ellipse fill="gold" stroke="#000000" stroke-opacity="0.533333" cx="958.21" cy="-1173.46" rx="53.35" ry="53.35"></ellipse>
+<text text-anchor="middle" x="958.21" y="-1169.26" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Documentation</text>
+</g>
+<!-- 1 &#45; Project&#45;&#45;Documentation -->
+<g id="edge6" class="edge">
+<title>1 - Project--Documentation</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M820.83,-1123.22C847.49,-1132.97 880.71,-1145.12 907.81,-1155.03"></path>
+</g>
+<!-- Mock&#45;up -->
+<g id="node8" class="node">
+<title>Mock-up</title>
+<ellipse fill="gold" stroke="#000000" stroke-opacity="0.533333" cx="877.57" cy="-1281.77" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="877.57" y="-1277.57" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Mock-up</text>
+</g>
+<!-- 1 &#45; Project&#45;&#45;Mock&#45;up -->
+<g id="edge7" class="edge">
+<title>1 - Project--Mock-up</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M798.99,-1149.29C816.38,-1178.6 839.07,-1216.86 855.59,-1244.72"></path>
+</g>
+<!-- Open\nProject? -->
+<g id="node9" class="node">
+<title>Open\nProject?</title>
+<ellipse fill="gold" stroke="#000000" stroke-opacity="0.533333" cx="805.16" cy="-1335.68" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="805.16" y="-1339.88" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Open</text>
+<text text-anchor="middle" x="805.16" y="-1323.08" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Project?</text>
+</g>
+<!-- 1 &#45; Project&#45;&#45;Open\nProject? -->
+<g id="edge8" class="edge">
+<title>1 - Project--Open\nProject?</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M780.16,-1155.96C785.86,-1196.91 793.82,-1254.16 799.22,-1292.95"></path>
+</g>
+<!-- Vocabulary -->
+<g id="node14" class="node">
+<title>Vocabulary</title>
+<ellipse fill="#000000" fill-opacity="0.533333" stroke="#000000" stroke-opacity="0.533333" cx="722.27" cy="-1371.43" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="722.27" y="-1367.23" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Vocabulary</text>
+</g>
+<!-- 2 &#45; DDD&#45;&#45;Vocabulary -->
+<g id="edge13" class="edge">
+<title>2 - DDD--Vocabulary</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M608.89,-1230.14C634.78,-1262.4 670.88,-1307.39 695.34,-1337.87"></path>
+</g>
+<!-- Packages -->
+<g id="node15" class="node">
+<title>Packages</title>
+<ellipse fill="#000000" fill-opacity="0.533333" stroke="#000000" stroke-opacity="0.533333" cx="633.37" cy="-1387.11" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="633.37" y="-1382.91" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Packages</text>
+</g>
+<!-- 2 &#45; DDD&#45;&#45;Packages -->
+<g id="edge14" class="edge">
+<title>2 - DDD--Packages</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M590.94,-1239.03C600.33,-1271.8 612.58,-1314.55 621.5,-1345.69"></path>
+</g>
+<!-- Model -->
+<g id="node16" class="node">
+<title>Model</title>
+<ellipse fill="#000000" fill-opacity="0.533333" stroke="#000000" stroke-opacity="0.533333" cx="543.25" cy="-1381.86" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="543.25" y="-1377.66" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Model</text>
+</g>
+<!-- 2 &#45; DDD&#45;&#45;Model -->
+<g id="edge15" class="edge">
+<title>2 - DDD--Model</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M568.22,-1240.21C562.79,-1271.01 555.9,-1310.13 550.73,-1339.44"></path>
+</g>
+<!-- Controller -->
+<g id="node17" class="node">
+<title>Controller</title>
+<ellipse fill="#000000" fill-opacity="0.533333" stroke="#000000" stroke-opacity="0.533333" cx="456.77" cy="-1355.97" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="456.77" y="-1351.77" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Controller</text>
+</g>
+<!-- 2 &#45; DDD&#45;&#45;Controller -->
+<g id="edge16" class="edge">
+<title>2 - DDD--Controller</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M547.28,-1231.34C527.26,-1258.91 501.12,-1294.9 482.08,-1321.11"></path>
+</g>
+<!-- Refactor\nDomain -->
+<g id="node18" class="node">
+<title>Refactor\nDomain</title>
+<ellipse fill="#000000" fill-opacity="0.533333" stroke="#000000" stroke-opacity="0.533333" cx="378.59" cy="-1310.83" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="378.59" y="-1315.03" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Refactor</text>
+<text text-anchor="middle" x="378.59" y="-1298.23" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Domain</text>
+</g>
+<!-- 2 &#45; DDD&#45;&#45;Refactor\nDomain -->
+<g id="edge17" class="edge">
+<title>2 - DDD--Refactor\nDomain</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M533.46,-1216.84C498.1,-1238.3 448.78,-1268.23 415.37,-1288.51"></path>
+</g>
+<!-- Relationships -->
+<g id="node21" class="node">
+<title>Relationships</title>
+<ellipse fill="yellowgreen" stroke="#000000" stroke-opacity="0.533333" cx="263.32" cy="-1173.46" rx="48.31" ry="48.31"></ellipse>
+<text text-anchor="middle" x="263.32" y="-1169.26" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Relationships</text>
+</g>
+<!-- 3 &#45; UML&#45;&#45;Relationships -->
+<g id="edge20" class="edge">
+<title>3 - UML--Relationships</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M391.85,-1108.91C365.51,-1122.14 332.47,-1138.73 306.49,-1151.78"></path>
+</g>
+<!-- Utilities -->
+<g id="node25" class="node">
+<title>Utilities</title>
+<ellipse fill="deepskyblue" stroke="#000000" stroke-opacity="0.533333" cx="221.96" cy="-998.97" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="221.96" y="-994.77" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Utilities</text>
+</g>
+<!-- 4 &#45; Code&#45;&#45;Utilities -->
+<g id="edge24" class="edge">
+<title>4 - Code--Utilities</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M554.3,-828.11C479.35,-866.65 330.56,-943.13 260.35,-979.23"></path>
+</g>
+<!-- Core model -->
+<g id="node26" class="node">
+<title>Core model</title>
+<ellipse fill="deepskyblue" stroke="#000000" stroke-opacity="0.533333" cx="263.32" cy="-824.47" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="263.32" y="-820.27" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Core model</text>
+</g>
+<!-- 4 &#45; Code&#45;&#45;Core model -->
+<g id="edge25" class="edge">
+<title>4 - Code--Core model</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M548.77,-807.85C482.75,-811.69 368.45,-818.35 306.4,-821.96"></path>
+</g>
+<!-- Managers -->
+<g id="node27" class="node">
+<title>Managers</title>
+<ellipse fill="deepskyblue" stroke="#000000" stroke-opacity="0.533333" cx="378.59" cy="-687.1" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="378.59" y="-682.9" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Managers</text>
+</g>
+<!-- 4 &#45; Code&#45;&#45;Managers -->
+<g id="edge26" class="edge">
+<title>4 - Code--Managers</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M554.76,-781.06C514.17,-759.41 454.96,-727.83 416.6,-707.37"></path>
+</g>
+<!-- Dependencies -->
+<g id="node28" class="node">
+<title>Dependencies</title>
+<ellipse fill="deepskyblue" stroke="#000000" stroke-opacity="0.533333" cx="633.37" cy="-610.82" rx="49.21" ry="49.21"></ellipse>
+<text text-anchor="middle" x="633.37" y="-606.62" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Dependencies</text>
+</g>
+<!-- 4 &#45; Code&#45;&#45;Dependencies -->
+<g id="edge27" class="edge">
+<title>4 - Code--Dependencies</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M608.19,-754.92C613.31,-725.6 619.76,-688.73 624.84,-659.63"></path>
+</g>
+<!-- Maven -->
+<g id="node29" class="node">
+<title>Maven</title>
+<ellipse fill="deepskyblue" stroke="#000000" stroke-opacity="0.533333" cx="877.57" cy="-716.16" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="877.57" y="-711.96" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Maven</text>
+</g>
+<!-- 4 &#45; Code&#45;&#45;Maven -->
+<g id="edge28" class="edge">
+<title>4 - Code--Maven</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M647.59,-789.54C700.91,-772.53 786.01,-745.38 836.37,-729.31"></path>
+</g>
+<!-- Refactor\nCode -->
+<g id="node30" class="node">
+<title>Refactor\nCode</title>
+<ellipse fill="deepskyblue" stroke="#000000" stroke-opacity="0.533333" cx="935.6" cy="-785.32" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="935.6" y="-789.52" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Refactor</text>
+<text text-anchor="middle" x="935.6" y="-772.72" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Code</text>
+</g>
+<!-- 4 &#45; Code&#45;&#45;Refactor\nCode -->
+<g id="edge29" class="edge">
+<title>4 - Code--Refactor\nCode</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M650.15,-801.94C716.17,-798.1 830.47,-791.44 892.52,-787.83"></path>
+</g>
+<!-- Test -->
+<g id="node31" class="node">
+<title>Test</title>
+<ellipse fill="deepskyblue" stroke="#000000" stroke-opacity="0.533333" cx="976.12" cy="-865.99" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="976.12" y="-861.79" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Test</text>
+</g>
+<!-- 4 &#45; Code&#45;&#45;Test -->
+<g id="edge30" class="edge">
+<title>4 - Code--Test</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M649.48,-813.01C724.12,-825.11 863.36,-847.7 933.47,-859.07"></path>
+</g>
+<!-- Git -->
+<g id="node32" class="node">
+<title>Git</title>
+<ellipse fill="deepskyblue" stroke="#000000" stroke-opacity="0.533333" cx="996.93" cy="-953.83" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="996.93" y="-949.63" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Git</text>
+</g>
+<!-- 4 &#45; Code&#45;&#45;Git -->
+<g id="edge31" class="edge">
+<title>4 - Code--Git</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M647.01,-822.71C725.93,-852.28 882.59,-910.98 956.52,-938.68"></path>
+</g>
+<!-- User Stories -->
+<g id="node10" class="node">
+<title>User Stories</title>
+<ellipse fill="peachpuff" stroke="#000000" stroke-opacity="0.533333" cx="1190.02" cy="-1066.67" rx="44.09" ry="44.09"></ellipse>
+<text text-anchor="middle" x="1190.02" y="-1062.47" font-family="Helvetica,Arial,sans-serif" font-size="14.00">User Stories</text>
+</g>
+<!-- Use Case&#45;&#45;User Stories -->
+<g id="edge9" class="edge">
+<title>Use Case--User Stories</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M1039.79,-1049.11C1071.34,-1052.8 1114.11,-1057.8 1145.95,-1061.52"></path>
+</g>
+<!-- Quarto -->
+<g id="node11" class="node">
+<title>Quarto</title>
+<ellipse fill="peachpuff" stroke="#000000" stroke-opacity="0.533333" cx="1158.79" cy="-1198.43" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="1158.79" y="-1194.23" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Quarto</text>
+</g>
+<!-- Documentation&#45;&#45;Quarto -->
+<g id="edge10" class="edge">
+<title>Documentation--Quarto</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M1011.43,-1180.09C1044.16,-1184.16 1085.54,-1189.31 1116.11,-1193.12"></path>
+</g>
+<!-- Obsidian -->
+<g id="node12" class="node">
+<title>Obsidian</title>
+<ellipse fill="peachpuff" stroke="#000000" stroke-opacity="0.533333" cx="1098.02" cy="-1319.44" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="1098.02" y="-1315.24" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Obsidian</text>
+</g>
+<!-- Documentation&#45;&#45;Obsidian -->
+<g id="edge11" class="edge">
+<title>Documentation--Obsidian</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M995.31,-1212.2C1018.12,-1236.02 1046.96,-1266.13 1068.27,-1288.38"></path>
+</g>
+<!-- New Feature -->
+<g id="node13" class="node">
+<title>New Feature</title>
+<ellipse fill="peachpuff" stroke="#000000" stroke-opacity="0.533333" cx="1010.98" cy="-1423.17" rx="45.81" ry="45.81"></ellipse>
+<text text-anchor="middle" x="1010.98" y="-1418.97" font-family="Helvetica,Arial,sans-serif" font-size="14.00">New Feature</text>
+</g>
+<!-- Mock&#45;up&#45;&#45;New Feature -->
+<g id="edge12" class="edge">
+<title>Mock-up--New Feature</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M907.18,-1313.15C928.6,-1335.85 957.5,-1366.48 979.36,-1389.66"></path>
+</g>
+<!-- Common\nLanguage -->
+<g id="node19" class="node">
+<title>Common\nLanguage</title>
+<ellipse fill="#000000" fill-opacity="0.533333" stroke="#000000" stroke-opacity="0.533333" cx="778.03" cy="-1557.67" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="778.03" y="-1561.87" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Common</text>
+<text text-anchor="middle" x="778.03" y="-1545.07" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Language</text>
+</g>
+<!-- Vocabulary&#45;&#45;Common\nLanguage -->
+<g id="edge18" class="edge">
+<title>Vocabulary--Common\nLanguage</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M734.65,-1412.76C743.89,-1443.63 756.46,-1485.62 765.69,-1516.45"></path>
+</g>
+<!-- Controller&#45;&#45;Managers -->
+<g id="edge44" class="edge">
+<title>Controller--Managers</title>
+<path fill="none" stroke="#000000" stroke-dasharray="1,5" stroke-opacity="0.533333" d="M451.76,-1313.11C437.65,-1192.44 397.72,-850.79 383.61,-730.03"></path>
+</g>
+<!-- If there is\nLegacy Code -->
+<g id="node20" class="node">
+<title>If there is\nLegacy Code</title>
+<ellipse fill="#000000" fill-opacity="0.533333" stroke="#000000" stroke-opacity="0.533333" cx="262.5" cy="-1466.76" rx="51.61" ry="51.61"></ellipse>
+<text text-anchor="middle" x="262.5" y="-1470.96" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">If there is</text>
+<text text-anchor="middle" x="262.5" y="-1454.16" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Legacy Code</text>
+</g>
+<!-- Refactor\nDomain&#45;&#45;If there is\nLegacy Code -->
+<g id="edge19" class="edge">
+<title>Refactor\nDomain--If there is\nLegacy Code</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M352.82,-1345.44C335.26,-1369.04 311.9,-1400.4 293.35,-1425.33"></path>
+</g>
+<!-- Refactor\nDomain&#45;&#45;Refactor\nCode -->
+<g id="edge45" class="edge">
+<title>Refactor\nDomain--Refactor\nCode</title>
+<path fill="none" stroke="#000000" stroke-dasharray="1,5" stroke-opacity="0.533333" d="M410.13,-1281.07C508.06,-1188.68 806.14,-907.46 904.06,-815.07"></path>
+</g>
+<!-- Composition -->
+<g id="node22" class="node">
+<title>Composition</title>
+<ellipse fill="#e5ffcc" stroke="#000000" stroke-opacity="0.533333" cx="164.01" cy="-1373.84" rx="46.26" ry="46.26"></ellipse>
+<text text-anchor="middle" x="164.01" y="-1369.64" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Composition</text>
+</g>
+<!-- Relationships&#45;&#45;Composition -->
+<g id="edge21" class="edge">
+<title>Relationships--Composition</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M241.77,-1216.94C224.77,-1251.24 201.22,-1298.76 184.5,-1332.5"></path>
+</g>
+<!-- Inheritance -->
+<g id="node23" class="node">
+<title>Inheritance</title>
+<ellipse fill="#e5ffcc" stroke="#000000" stroke-opacity="0.533333" cx="89.6" cy="-1260.71" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="89.6" y="-1256.51" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Inheritance</text>
+</g>
+<!-- Relationships&#45;&#45;Inheritance -->
+<g id="edge22" class="edge">
+<title>Relationships--Inheritance</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M219.93,-1195.25C191.79,-1209.38 155.45,-1227.63 128.29,-1241.27"></path>
+</g>
+<!-- Multiplicity -->
+<g id="node24" class="node">
+<title>Multiplicity</title>
+<ellipse fill="#e5ffcc" stroke="#000000" stroke-opacity="0.533333" cx="43.28" cy="-1133.46" rx="43.07" ry="43.07"></ellipse>
+<text text-anchor="middle" x="43.28" y="-1129.26" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Multiplicity</text>
+</g>
+<!-- Relationships&#45;&#45;Multiplicity -->
+<g id="edge23" class="edge">
+<title>Relationships--Multiplicity</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M215.85,-1164.83C177.31,-1157.82 123.45,-1148.03 86.2,-1141.26"></path>
+</g>
+<!-- Book -->
+<g id="node33" class="node">
+<title>Book</title>
+<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="43.28" cy="-864.47" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="43.28" y="-860.27" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Book</text>
+</g>
+<!-- Core model&#45;&#45;Book -->
+<g id="edge32" class="edge">
+<title>Core model--Book</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M220.89,-832.18C182.06,-839.24 124.87,-849.64 85.95,-856.71"></path>
+</g>
+<!-- Borrow -->
+<g id="node34" class="node">
+<title>Borrow</title>
+<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="89.6" cy="-737.23" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="89.6" y="-733.03" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Borrow</text>
+</g>
+<!-- Core model&#45;&#45;Borrow -->
+<g id="edge33" class="edge">
+<title>Core model--Borrow</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M224.76,-805.11C195.98,-790.65 156.81,-770.98 128.04,-756.53"></path>
+</g>
+<!-- User -->
+<g id="node35" class="node">
+<title>User</title>
+<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="164.01" cy="-624.09" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="164.01" y="-619.89" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">User</text>
+</g>
+<!-- Core model&#45;&#45;User -->
+<g id="edge34" class="edge">
+<title>Core model--User</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M244.17,-785.84C226.64,-750.47 200.83,-698.39 183.27,-662.95"></path>
+</g>
+<!-- lombok -->
+<g id="node38" class="node">
+<title>lombok</title>
+<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="379.77" cy="-463.46" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="379.77" y="-459.26" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">lombok</text>
+</g>
+<!-- Dependencies&#45;&#45;lombok -->
+<g id="edge37" class="edge">
+<title>Dependencies--lombok</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M590.64,-585.99C542.08,-557.78 463.58,-512.16 417.3,-485.27"></path>
+</g>
+<!-- JUnit -->
+<g id="node39" class="node">
+<title>JUnit</title>
+<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="509.49" cy="-424.63" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="509.49" y="-420.43" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">JUnit</text>
+</g>
+<!-- Dependencies&#45;&#45;JUnit -->
+<g id="edge38" class="edge">
+<title>Dependencies--JUnit</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M605.88,-569.5C584.14,-536.82 554.09,-491.67 533.36,-460.5"></path>
+</g>
+<!-- Jupiter -->
+<g id="node40" class="node">
+<title>Jupiter</title>
+<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="644.67" cy="-416.75" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="644.67" y="-412.55" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Jupiter</text>
+</g>
+<!-- Dependencies&#45;&#45;Jupiter -->
+<g id="edge39" class="edge">
+<title>Dependencies--Jupiter</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M636.25,-561.35C638.08,-530.02 640.41,-489.9 642.16,-459.87"></path>
+</g>
+<!-- faker -->
+<g id="node41" class="node">
+<title>faker</title>
+<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="841.76" cy="-463.46" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="841.76" y="-459.26" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">faker</text>
+</g>
+<!-- Dependencies&#45;&#45;faker -->
+<g id="edge40" class="edge">
+<title>Dependencies--faker</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M674.04,-582.06C712.54,-554.84 769.74,-514.39 806.39,-488.47"></path>
+</g>
+<!-- Make Borrow -->
+<g id="node36" class="node">
+<title>Make Borrow</title>
+<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="1158.79" cy="-799.5" rx="49.33" ry="49.33"></ellipse>
+<text text-anchor="middle" x="1158.79" y="-795.3" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">Make Borrow</text>
+</g>
+<!-- Test&#45;&#45;Make Borrow -->
+<g id="edge35" class="edge">
+<title>Test--Make Borrow</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M1016.66,-851.23C1045.04,-840.9 1083.01,-827.08 1112.57,-816.32"></path>
+</g>
+<!-- GitHub -->
+<g id="node37" class="node">
+<title>GitHub</title>
+<ellipse fill="cornflowerblue" stroke="#000000" stroke-opacity="0.533333" cx="1190.02" cy="-931.26" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="1190.02" y="-927.06" font-family="Helvetica,Arial,sans-serif" font-size="14.00" fill="white">GitHub</text>
+</g>
+<!-- Git&#45;&#45;GitHub -->
+<g id="edge36" class="edge">
+<title>Git--GitHub</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M1039.79,-948.82C1071.78,-945.08 1115.32,-939.99 1147.29,-936.26"></path>
+</g>
+<!-- Create -->
+<g id="node42" class="node">
+<title>Create</title>
+<ellipse fill="lightskyblue" stroke="#000000" stroke-opacity="0.533333" cx="918.75" cy="-284.96" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="918.75" y="-280.76" font-family="Helvetica,Arial,sans-serif" font-size="14.00">Create</text>
+</g>
+<!-- faker&#45;&#45;Create -->
+<g id="edge41" class="edge">
+<title>faker--Create</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M858.85,-423.85C871.61,-394.27 888.97,-354.02 901.71,-324.47"></path>
+</g>
+<!-- 100 books -->
+<g id="node43" class="node">
+<title>100 books</title>
+<ellipse fill="lightskyblue" stroke="#000000" stroke-opacity="0.533333" cx="889.54" cy="-67.8" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="889.54" y="-63.6" font-family="Helvetica,Arial,sans-serif" font-size="14.00">100 books</text>
+</g>
+<!-- Create&#45;&#45;100 books -->
+<g id="edge42" class="edge">
+<title>Create--100 books</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M913.02,-242.32C907.9,-204.27 900.44,-148.85 895.31,-110.72"></path>
+</g>
+<!-- 100 users -->
+<g id="node44" class="node">
+<title>100 users</title>
+<ellipse fill="lightskyblue" stroke="#000000" stroke-opacity="0.533333" cx="1096.76" cy="-157.19" rx="43" ry="43"></ellipse>
+<text text-anchor="middle" x="1096.76" y="-152.99" font-family="Helvetica,Arial,sans-serif" font-size="14.00">100 users</text>
+</g>
+<!-- Create&#45;&#45;100 users -->
+<g id="edge43" class="edge">
+<title>Create--100 users</title>
+<path fill="none" stroke="#000000" stroke-opacity="0.533333" d="M953.92,-259.72C985.13,-237.32 1030.48,-204.76 1061.67,-182.38"></path>
+</g>
+</g>
 </svg>
-</p>
+</div>
 </div>
 </div>
 </div>
@@ -2038,8 +2214,8 @@ Create–100 users
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="onion-architecture"><span class="header-section-number">1.1.2</span> Onion Architecture</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/javase/onion_architecture.jpg" class="lightbox" title="Onion Architecture" data-gallery="quarto-lightbox-gallery-1"><img src="../images/javase/onion_architecture.jpg" class="img-fluid figure-img" style="width:40.0%"></a></p>
-<p></p><figcaption class="figure-caption">Onion Architecture</figcaption><p></p>
+<p><a href="..\images/javase/onion_architecture.jpg" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-1" title="Onion Architecture"><img src="..\images/javase/onion_architecture.jpg" class="img-fluid figure-img" style="width:40.0%" alt="Onion Architecture"></a></p>
+<figcaption>Onion Architecture</figcaption>
 </figure>
 </div>
 <p>The layers are of <a href="" class="external">Onion Architecture</a> and sublayers are:</p>
@@ -2053,8 +2229,8 @@ Create–100 users
 <hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/javase/libraryproject_board.jpg" class="lightbox" title="Library Project key-words sprint zero" data-gallery="quarto-lightbox-gallery-2"><img src="../images/javase/libraryproject_board.jpg" class="img-fluid figure-img" style="width:70.0%"></a></p>
-<p></p><figcaption class="figure-caption">Library Project key-words sprint zero</figcaption><p></p>
+<p><a href="..\images/javase/libraryproject_board.jpg" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-2" title="Library Project key-words sprint zero"><img src="..\images/javase/libraryproject_board.jpg" class="img-fluid figure-img" style="width:70.0%" alt="Library Project key-words sprint zero"></a></p>
+<figcaption>Library Project key-words sprint zero</figcaption>
 </figure>
 </div>
 <p><a href="../ifcd0210/ifcd0210backlog-sprint.html#">Sprint#6, dia 01/02 image Library Project</a></p>
@@ -2206,12 +2382,12 @@ cb7125cc-d78a-4442-b21b-96ce9227ef51</code></pre>
 <section id="make-a-borrow-test" class="level3" data-number="1.4.2">
 <h3 data-number="1.4.2" class="anchored" data-anchor-id="make-a-borrow-test"><span class="header-section-number">1.4.2</span> make-a-borrow test</h3>
 <p><a href="https://github.com/AlbertProfe/CifoJava2023/blob/12a97938cc4a0718ae66f08075a402af13354dce/LibraryProject/src/test/java/org/example/makeBorrowByConsoleTest.java#L20" class="external">Test to make-a-borrow operation by simulate-console</a></p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -2229,8 +2405,8 @@ Important
 <h2 data-number="1.6" class="anchored" data-anchor-id="domains-tree"><span class="header-section-number">1.6</span> Domains &amp; Tree</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/javase/libraryProjectTree.png" class="lightbox" title="Folder tree LibraryProject" data-gallery="quarto-lightbox-gallery-3"><img src="../images/javase/libraryProjectTree.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
-<p></p><figcaption class="figure-caption">Folder tree LibraryProject</figcaption><p></p>
+<p><a href="..\images/javase/libraryProjectTree.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-3" title="Folder tree LibraryProject"><img src="..\images/javase/libraryProjectTree.png" class="img-fluid figure-img" style="width:40.0%" alt="Folder tree LibraryProject"></a></p>
+<figcaption>Folder tree LibraryProject</figcaption>
 </figure>
 </div>
 <!--- navLinks -->
@@ -2238,15 +2414,15 @@ Important
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../javase/selab3-1.html"> Lab#SE03-1: Library/Book, Core-Model</a> <br></p>
+<p><br> <a href="../javase/selab3-1.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> Lab#SE03-1: Library/Book, Core-Model</a> <br></p>
 </div>
 <br>
 <div class="column center">
-<p><br> <a href="#top"> top</a> <br></p>
+<p><br> <a href="#top"><i class="fa-solid fa-arrow-up" aria-label="arrow-up"></i> top</a> <br></p>
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../javase/selab3-3.html">Lab#SE03-3: Library/Book, Expand Model </a> <br></p>
+<p><br> <a href="../javase/selab3-3.html">Lab#SE03-3: Library/Book, Expand Model <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
 </div>
@@ -2297,6 +2473,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -2365,13 +2568,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -2398,9 +2603,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -2436,10 +2655,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -2449,8 +2667,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2465,6 +2692,241 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        typesetMath(container);
+        return container.innerHTML
+      } else {
+        typesetMath(note);
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      typesetMath(note);
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -2507,8 +2969,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left"><a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0 International (CC BY 4.0)</a></div>   
-      <div class="nav-footer-center">If you want to go far, walk slow / We love dukkha</div>
+    <div class="nav-footer-left">
+<p><a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0 International (CC BY 4.0)</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>If you want to go far, walk slow / We love dukkha</p>
+</div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -2527,7 +2993,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":true,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":true,"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox"});</script>
+
 
 
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.4.383">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -44,6 +44,8 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -51,6 +53,12 @@ ul.task-list li input[type="checkbox"] {
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -60,10 +68,10 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
-
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
@@ -96,6 +104,7 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
@@ -103,24 +112,24 @@ ul.task-list li input[type="checkbox"] {
 
 <body class="nav-sidebar floating nav-fixed">
 
-
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">albertprofe wiki</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-linux-os" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -1149,78 +1158,88 @@ ul.task-list li input[type="checkbox"] {
     </ul>
   </li>
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Books table</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../learning/learning-listing-table-books.html">Books &amp; Articles</a></li><li class="breadcrumb-item"><a href="../learning/learning-listing-table-books.html">Books table</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
-  Vocabulary
+ <span class="menu-text">Vocabulary</span>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Vocabulary</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Vocabulary</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-vocab-general.html" class="sidebar-item-text sidebar-link">General Vocabulary</a>
+  <a href="../learning/learning-vocab-general.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General Vocabulary</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-vocab-scrum.html" class="sidebar-item-text sidebar-link">SCRUM Vocabulary</a>
+  <a href="../learning/learning-vocab-scrum.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SCRUM Vocabulary</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-vocab-devops.html" class="sidebar-item-text sidebar-link">DevOps Vocabulary</a>
+  <a href="../learning/learning-vocab-devops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DevOps Vocabulary</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-vocab-java-se.html" class="sidebar-item-text sidebar-link">Java SE Vocabulay</a>
+  <a href="../learning/learning-vocab-java-se.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE Vocabulay</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-vocab-spring-boot.html" class="sidebar-item-text sidebar-link">Spring Boot Vocabulary</a>
+  <a href="../learning/learning-vocab-spring-boot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot Vocabulary</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-vocab-data-base.html" class="sidebar-item-text sidebar-link">DataBase Vocabulary</a>
+  <a href="../learning/learning-vocab-data-base.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DataBase Vocabulary</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-vocab-reactjs.html" class="sidebar-item-text sidebar-link">ReactJS Vocabulary</a>
+  <a href="../learning/learning-vocab-reactjs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ReactJS Vocabulary</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-vocab-web.html" class="sidebar-item-text sidebar-link">Web Vocabulary</a>
+  <a href="../learning/learning-vocab-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Web Vocabulary</span></a>
   </div>
 </li>
       </ul>
@@ -1228,45 +1247,53 @@ ul.task-list li input[type="checkbox"] {
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Learning</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-how-questions.html" class="sidebar-item-text sidebar-link">Useful Questions</a>
+  <a href="../learning/learning-how-questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Useful Questions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-how-tips.html" class="sidebar-item-text sidebar-link">Learning: tips</a>
+  <a href="../learning/learning-how-tips.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Learning: tips</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-how-writing.html" class="sidebar-item-text sidebar-link">Writing</a>
+  <a href="../learning/learning-how-writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-how-take-notes.html" class="sidebar-item-text sidebar-link">Taking Notes</a>
+  <a href="../learning/learning-how-take-notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Taking Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-how-write-comments.html" class="sidebar-item-text sidebar-link">Comments</a>
+  <a href="../learning/learning-how-write-comments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Comments</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-how-document.html" class="sidebar-item-text sidebar-link">Document</a>
+  <a href="../learning/learning-how-document.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Document</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-how-auto-evaluate.html" class="sidebar-item-text sidebar-link">Auto-Evaluate</a>
+  <a href="../learning/learning-how-auto-evaluate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Auto-Evaluate</span></a>
   </div>
 </li>
       </ul>
@@ -1274,30 +1301,35 @@ ul.task-list li input[type="checkbox"] {
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Books &amp; Articles</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Books &amp; Articles</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-listing-table-books.html" class="sidebar-item-text sidebar-link active">Books table</a>
+  <a href="../learning/learning-listing-table-books.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Books table</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-listing-card-books.html" class="sidebar-item-text sidebar-link">Books cards</a>
+  <a href="../learning/learning-listing-card-books.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Books cards</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-listing-table-articles.html" class="sidebar-item-text sidebar-link">Articles table</a>
+  <a href="../learning/learning-listing-table-articles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Articles table</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../learning/learning-listing-card-articles.html" class="sidebar-item-text sidebar-link">Articles cards</a>
+  <a href="../learning/learning-listing-card-articles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Articles cards</span></a>
   </div>
 </li>
       </ul>
@@ -1305,6 +1337,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
@@ -1312,9 +1345,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../learning/learning-listing-table-books.html">Books &amp; Articles</a></li><li class="breadcrumb-item"><a href="../learning/learning-listing-table-books.html">Books table</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Books table</h1>
+<h1 class="title">Books table</h1>
   <div class="quarto-categories">
     <div class="quarto-category">listing</div>
     <div class="quarto-category">table</div>
@@ -1331,12 +1364,13 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
+
 
 <p>You can look up the following table listing for additional information:</p>
 <div class="column-page-left">
 <div id="listing-books-table-listing" class="quarto-listing quarto-listing-container-table">
-
 <div class="listing-actions-group">
    <div class="input-group input-group-sm quarto-listing-sort">
      <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
@@ -1373,1327 +1407,1325 @@ Modified
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-categories="design" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1686034471818" data-listing-reading-time-sort="0.45" data-listing-title-sort="System Design" data-listing-filename-sort="systemdesign.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="0" data-categories="communication" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1695723254861" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="14" data-listing-title-sort="Write Tight" data-listing-filename-sort="writeTight.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/systemdesign.png" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\writetight.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/systemdesign.html" class="title">System Design</a>
+<td>
+<a href="../books/writeTight.html" class="title listing-title">Write Tight</a>
 </td>
-<td class="listing-subtitle">
-Alex Xu, 2022, System Design: the big archive
+<td>
+<span class="listing-subtitle">William Brohaugh, 2007, Write Tight: Say Exactly What You Mean with Precision and Power</span>
 </td>
-<td class="listing-categories">
-design
+<td>
+<span class="listing-categories">communication</span>
 </td>
-<td class="listing-file-modified">
-Tuesday, June 6, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="1" data-categories="design" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1686034339048" data-listing-reading-time-sort="0.035" data-listing-title-sort="System Design Interview" data-listing-filename-sort="systemdesigninterview.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="1" data-categories="java" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254861" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="120" data-listing-title-sort="Thinking in Java" data-listing-filename-sort="thinkInJava.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/systemdesigninterview.png" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\thinkInJava.jpeg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/systemdesigninterview.html" class="title">System Design Interview</a>
+<td>
+<a href="../books/thinkInJava.html" class="title listing-title">Thinking in Java</a>
 </td>
-<td class="listing-subtitle">
-Alex Xu, 2022, System Design Interview: An insider’s guide
+<td>
+<span class="listing-subtitle"> Eckel Bruce, 2006, Scrum: The Art of Doing Twice the Work in Half the Time</span>
 </td>
-<td class="listing-categories">
-design
+<td>
+<span class="listing-categories">java</span>
 </td>
-<td class="listing-file-modified">
-Tuesday, June 6, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="2" data-categories="study-case" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1685087216125" data-listing-reading-time-sort="1.2" data-listing-title-sort="No Rules Rules" data-listing-filename-sort="norulesrules.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="2" data-categories="strategy" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254860" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="11" data-listing-title-sort="The five disfunctions of a team" data-listing-filename-sort="thefivedisfunctionteam.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/No-Rules-Rules.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\thefivedisfunctionteam.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/norulesrules.html" class="title">No Rules Rules</a>
+<td>
+<a href="../books/thefivedisfunctionteam.html" class="title listing-title">The five disfunctions of a team</a>
 </td>
-<td class="listing-subtitle">
-Reed Hastings, Erin Meyer, 2020, No Rules Rules
+<td>
+<span class="listing-subtitle">Patrick Lencioni, 2002, The five disfunctions of a team</span>
 </td>
-<td class="listing-categories">
-study-case
+<td>
+<span class="listing-categories">strategy</span>
 </td>
-<td class="listing-file-modified">
-Friday, May 26, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="3" data-categories="communication" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1685001914602" data-listing-reading-time-sort="0.07" data-listing-title-sort="Write Tight" data-listing-filename-sort="writeTight.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="3" data-categories="strategy" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254843" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="2" data-listing-word-count-sort="307" data-listing-title-sort="The Art of Agile Development" data-listing-filename-sort="theartofagiledevelopment.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/writetight.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\theartofagiledevelopment.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/writeTight.html" class="title">Write Tight</a>
+<td>
+<a href="../books/theartofagiledevelopment.html" class="title listing-title">The Art of Agile Development</a>
 </td>
-<td class="listing-subtitle">
-William Brohaugh, 2007, Write Tight: Say Exactly What You Mean with Precision and Power
+<td>
+<span class="listing-subtitle">James Shore, 2007, The Art of Agile Development: Pragmatic guide to agile software development</span>
 </td>
-<td class="listing-categories">
-communication
+<td>
+<span class="listing-categories">strategy</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="4" data-categories="java" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914602" data-listing-reading-time-sort="0.6" data-listing-title-sort="Thinking in Java" data-listing-filename-sort="thinkInJava.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="4" data-categories="psychology" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254842" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="2" data-listing-word-count-sort="380" data-listing-title-sort="The Righteous Mind" data-listing-filename-sort="theRighteousMind.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/thinkInJava.jpeg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\theRighteousMind.jpeg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/thinkInJava.html" class="title">Thinking in Java</a>
+<td>
+<a href="../books/theRighteousMind.html" class="title listing-title">The Righteous Mind</a>
 </td>
-<td class="listing-subtitle">
-Eckel Bruce, 2006, Scrum: The Art of Doing Twice the Work in Half the Time
+<td>
+<span class="listing-subtitle">Jonathan Haidt, 2013, The Righteous Mind: Why Good People are Divided by Politics and Religion</span>
 </td>
-<td class="listing-categories">
-java
+<td>
+<span class="listing-categories">psychology</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="5" data-categories="strategy" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914602" data-listing-reading-time-sort="0.055" data-listing-title-sort="The five disfunctions of a team" data-listing-filename-sort="thefivedisfunctionteam.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="5" data-categories="communication" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1695723254841" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="9" data-listing-title-sort="The mom test" data-listing-filename-sort="theMomTest.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/thefivedisfunctionteam.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\theMomTest.jpeg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/thefivedisfunctionteam.html" class="title">The five disfunctions of a team</a>
+<td>
+<a href="../books/theMomTest.html" class="title listing-title">The mom test</a>
 </td>
-<td class="listing-subtitle">
-Patrick Lencioni, 2002, The five disfunctions of a team
+<td>
+<span class="listing-subtitle">How to talk to customers &amp; learn if your business is a good idea when everyone is lying to you.</span>
 </td>
-<td class="listing-categories">
-strategy
+<td>
+<span class="listing-categories">communication</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="6" data-categories="assay" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914594" data-listing-reading-time-sort="0.06" data-listing-title-sort="The Bed of Procrustes" data-listing-filename-sort="theBedOfProcrustes.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="6" data-categories="neuropsychology" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254841" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="2" data-listing-word-count-sort="257" data-listing-title-sort="The Master and His Emissary" data-listing-filename-sort="theMasterAndHisEmissary.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/theBedOfProcrustes.jpeg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\themasterandhisemissary.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/theBedOfProcrustes.html" class="title">The Bed of Procrustes</a>
+<td>
+<a href="../books/theMasterAndHisEmissary.html" class="title listing-title">The Master and His Emissary</a>
 </td>
-<td class="listing-subtitle">
-Nassim Nicholas Taleb, 2010, The Bed of Procrustes: Philosophical and Practical Aphorisms (Incerto)
+<td>
+<span class="listing-subtitle">Iain McGilchrist, 2009, The Master and His Emissary: The Divided Brain and the Making of the Western World</span>
 </td>
-<td class="listing-categories">
-assay
+<td>
+<span class="listing-categories">neuropsychology</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="7" data-categories="assay" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914594" data-listing-reading-time-sort="0.065" data-listing-title-sort="The Black Swan" data-listing-filename-sort="theBlackSwan.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="7" data-categories="psychology" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254841" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="86" data-listing-title-sort="The Intelligence Trap" data-listing-filename-sort="theIntellingenceTrap.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/theBlackSwan.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\theIntellingenceTrap.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/theBlackSwan.html" class="title">The Black Swan</a>
+<td>
+<a href="../books/theIntellingenceTrap.html" class="title listing-title">The Intelligence Trap</a>
 </td>
-<td class="listing-subtitle">
-Nassim Nicholas Taleb, 2007, The Black Swan: The Impact of the Highly Improbable (Incerto)
+<td>
+<span class="listing-subtitle">The Intelligence Trap, 2019, The Intelligence Trap: Why Smart People Make Dumb Decisions</span>
 </td>
-<td class="listing-categories">
-assay
+<td>
+<span class="listing-categories">psychology</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="8" data-categories="communication" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1685001914594" data-listing-reading-time-sort="0.045" data-listing-title-sort="The mom test" data-listing-filename-sort="theMomTest.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="8" data-categories="strategy" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1695723254840" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="13" data-listing-title-sort="The Compound Effect" data-listing-filename-sort="theCompoundEffect.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/theMomTest.jpeg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\theCompoundEffect.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/theMomTest.html" class="title">The mom test</a>
+<td>
+<a href="../books/theCompoundEffect.html" class="title listing-title">The Compound Effect</a>
 </td>
-<td class="listing-subtitle">
-How to talk to customers &amp; learn if your business is a good idea when everyone is lying to you.
+<td>
+<span class="listing-subtitle">Darren Hardy, 2012, The Compound Effect: Jumpstart Your Income, Your Life, Your Success</span>
 </td>
-<td class="listing-categories">
-communication
+<td>
+<span class="listing-categories">strategy</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="9" data-categories="java" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914594" data-listing-reading-time-sort="0.58" data-listing-title-sort="Stratospheric" data-listing-filename-sort="stratospheric.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="9" data-categories="assay" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254839" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="13" data-listing-title-sort="The Black Swan" data-listing-filename-sort="theBlackSwan.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/stratospheric.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\theBlackSwan.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/stratospheric.html" class="title">Stratospheric</a>
+<td>
+<a href="../books/theBlackSwan.html" class="title listing-title">The Black Swan</a>
 </td>
-<td class="listing-subtitle">
-Stratospheric, 2020, From Zero to Production with Spring Boot and AWS: Building Scalable and Resilient Applications
+<td>
+<span class="listing-subtitle">Nassim Nicholas Taleb, 2007, The Black Swan: The Impact of the Highly Improbable (Incerto)</span>
 </td>
-<td class="listing-categories">
-java
+<td>
+<span class="listing-categories">assay</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="10" data-categories="neuropsychology" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914594" data-listing-reading-time-sort="1.285" data-listing-title-sort="The Master and His Emissary" data-listing-filename-sort="theMasterAndHisEmissary.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="10" data-categories="assay" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254838" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="12" data-listing-title-sort="The Bed of Procrustes" data-listing-filename-sort="theBedOfProcrustes.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/themasterandhisemissary.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\theBedOfProcrustes.jpeg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/theMasterAndHisEmissary.html" class="title">The Master and His Emissary</a>
+<td>
+<a href="../books/theBedOfProcrustes.html" class="title listing-title">The Bed of Procrustes</a>
 </td>
-<td class="listing-subtitle">
-Iain McGilchrist, 2009, The Master and His Emissary: The Divided Brain and the Making of the Western World
+<td>
+<span class="listing-subtitle">Nassim Nicholas Taleb, 2010, The Bed of Procrustes: Philosophical and Practical Aphorisms (Incerto)</span>
 </td>
-<td class="listing-categories">
-neuropsychology
+<td>
+<span class="listing-categories">assay</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="11" data-categories="psychology" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914594" data-listing-reading-time-sort="0.43" data-listing-title-sort="The Intelligence Trap" data-listing-filename-sort="theIntellingenceTrap.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="11" data-categories="design" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1695723254837" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="7" data-listing-title-sort="System Design Interview" data-listing-filename-sort="systemdesigninterview.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/theIntellingenceTrap.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\systemdesigninterview.png" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/theIntellingenceTrap.html" class="title">The Intelligence Trap</a>
+<td>
+<a href="../books/systemdesigninterview.html" class="title listing-title">System Design Interview</a>
 </td>
-<td class="listing-subtitle">
-The Intelligence Trap, 2019, The Intelligence Trap: Why Smart People Make Dumb Decisions
+<td>
+<span class="listing-subtitle">Alex Xu, 2022, System Design Interview: An insider’s guide</span>
 </td>
-<td class="listing-categories">
-psychology
+<td>
+<span class="listing-categories">design</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="12" data-categories="psychology" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914594" data-listing-reading-time-sort="1.9" data-listing-title-sort="The Righteous Mind" data-listing-filename-sort="theRighteousMind.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="12" data-categories="design" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1695723254834" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="90" data-listing-title-sort="System Design" data-listing-filename-sort="systemdesign.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/theRighteousMind.jpeg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\systemdesign.png" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/theRighteousMind.html" class="title">The Righteous Mind</a>
+<td>
+<a href="../books/systemdesign.html" class="title listing-title">System Design</a>
 </td>
-<td class="listing-subtitle">
-Jonathan Haidt, 2013, The Righteous Mind: Why Good People are Divided by Politics and Religion
+<td>
+<span class="listing-subtitle">Alex Xu, 2022, System Design: the big archive</span>
 </td>
-<td class="listing-categories">
-psychology
+<td>
+<span class="listing-categories">design</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="13" data-categories="psychology" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914594" data-listing-reading-time-sort="1.13" data-listing-title-sort="The Status Game" data-listing-filename-sort="statusGame.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="13" data-categories="java" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254500" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="116" data-listing-title-sort="Stratospheric" data-listing-filename-sort="stratospheric.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/statusGame.jpeg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\stratospheric.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/statusGame.html" class="title">The Status Game</a>
+<td>
+<a href="../books/stratospheric.html" class="title listing-title">Stratospheric</a>
 </td>
-<td class="listing-subtitle">
-Will Storr, 2021, The Status Game: On Social Position and How We Use It
+<td>
+<span class="listing-subtitle">Stratospheric, 2020, From Zero to Production with Spring Boot and AWS: Building Scalable and Resilient Applications</span>
 </td>
-<td class="listing-categories">
-psychology
+<td>
+<span class="listing-categories">java</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="14" data-categories="strategy" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914594" data-listing-reading-time-sort="1.535" data-listing-title-sort="The Art of Agile Development" data-listing-filename-sort="theartofagiledevelopment.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="14" data-categories="psychology" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254500" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="2" data-listing-word-count-sort="226" data-listing-title-sort="The Status Game" data-listing-filename-sort="statusGame.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/theartofagiledevelopment.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\statusGame.jpeg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/theartofagiledevelopment.html" class="title">The Art of Agile Development</a>
+<td>
+<a href="../books/statusGame.html" class="title listing-title">The Status Game</a>
 </td>
-<td class="listing-subtitle">
-James Shore, 2007, The Art of Agile Development: Pragmatic guide to agile software development
+<td>
+<span class="listing-subtitle">Will Storr, 2021, The Status Game: On Social Position and How We Use It</span>
 </td>
-<td class="listing-categories">
-strategy
+<td>
+<span class="listing-categories">psychology</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="15" data-categories="strategy" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1685001914594" data-listing-reading-time-sort="0.065" data-listing-title-sort="The Compound Effect" data-listing-filename-sort="theCompoundEffect.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="15" data-categories="devops" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254499" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="3" data-listing-word-count-sort="458" data-listing-title-sort="Site Reliability Engineering" data-listing-filename-sort="sre.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/theCompoundEffect.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\sre.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/theCompoundEffect.html" class="title">The Compound Effect</a>
+<td>
+<a href="../books/sre.html" class="title listing-title">Site Reliability Engineering</a>
 </td>
-<td class="listing-subtitle">
-Darren Hardy, 2012, The Compound Effect: Jumpstart Your Income, Your Life, Your Success
+<td>
+<span class="listing-subtitle">Betsy Beyer, Chris Jones, Jennifer Petoff and Niall Richard Murphy, 2016, How Google runs production systems</span>
 </td>
-<td class="listing-categories">
-strategy
+<td>
+<span class="listing-categories">devops</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="16" data-categories="agile" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914590" data-listing-reading-time-sort="1.315" data-listing-title-sort="Scrum" data-listing-filename-sort="scrum.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="16" data-categories="agile" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254497" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="2" data-listing-word-count-sort="263" data-listing-title-sort="Scrum" data-listing-filename-sort="scrum.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/scrum.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\scrum.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/scrum.html" class="title">Scrum</a>
+<td>
+<a href="../books/scrum.html" class="title listing-title">Scrum</a>
 </td>
-<td class="listing-subtitle">
-J.J. shuterland, 2014, Scrum: The Art of Doing Twice the Work in Half the Time
+<td>
+<span class="listing-subtitle">J.J. shuterland, 2014, Scrum: The Art of Doing Twice the Work in Half the Time</span>
 </td>
-<td class="listing-categories">
-agile
+<td>
+<span class="listing-categories">agile</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="17" data-categories="assay" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914590" data-listing-reading-time-sort="0.065" data-listing-title-sort="Skin in the Game" data-listing-filename-sort="skinInTheGame.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="17" data-categories="assay" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254497" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="13" data-listing-title-sort="Skin in the Game" data-listing-filename-sort="skinInTheGame.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/skinInTheGame.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\skinInTheGame.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/skinInTheGame.html" class="title">Skin in the Game</a>
+<td>
+<a href="../books/skinInTheGame.html" class="title listing-title">Skin in the Game</a>
 </td>
-<td class="listing-subtitle">
-Nassim Nicholas Taleb, 2018, Skin in the Game: Hidden Asymmetries in Daily Life (Incerto)
+<td>
+<span class="listing-subtitle">Nassim Nicholas Taleb, 2018, Skin in the Game: Hidden Asymmetries in Daily Life (Incerto)</span>
 </td>
-<td class="listing-categories">
-assay
+<td>
+<span class="listing-categories">assay</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="18" data-categories="design" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914590" data-listing-reading-time-sort="0.92" data-listing-title-sort="Modern Java EE Design Patterns" data-listing-filename-sort="modern-java-ee-design-patterns.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="18" data-categories="java" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254496" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="104" data-listing-title-sort="Quarkus for Spring Developers" data-listing-filename-sort="quarkusSpringDevelopers.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/modern-java-ee-design-patterns.png" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\quarkusSpringDevelopers.png" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/modern-java-ee-design-patterns.html" class="title">Modern Java EE Design Patterns</a>
+<td>
+<a href="../books/quarkusSpringDevelopers.html" class="title listing-title">Quarkus for Spring Developers</a>
 </td>
-<td class="listing-subtitle">
-Markus Eisele, 2016, Modern Java EE Design Patterns: Building Scalable Architecture for Sustainable Enterprise Development
+<td>
+<span class="listing-subtitle">Eric Deandrea, August 31, 2021, Quarkus for Spring Developers</span>
 </td>
-<td class="listing-categories">
-design
+<td>
+<span class="listing-categories">java</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="19" data-categories="devops" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914590" data-listing-reading-time-sort="2.29" data-listing-title-sort="Site Reliability Engineering" data-listing-filename-sort="sre.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="19" data-categories="self-management" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254496" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="2" data-listing-word-count-sort="243" data-listing-title-sort="The Relaxation Revolution" data-listing-filename-sort="relaxationrevolution.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/sre.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\relaxationrevolution.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/sre.html" class="title">Site Reliability Engineering</a>
+<td>
+<a href="../books/relaxationrevolution.html" class="title listing-title">The Relaxation Revolution</a>
 </td>
-<td class="listing-subtitle">
-Betsy Beyer, Chris Jones, Jennifer Petoff and Niall Richard Murphy, 2016, How Google runs production systems
+<td>
+<span class="listing-subtitle">William Proctor, Herbert Benson, 2010, The Relaxation Revolution: Enhancing Your Personal Health Through the Science and Genetics of Mind Body Healing</span>
 </td>
-<td class="listing-categories">
-devops
+<td>
+<span class="listing-categories">self-management</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="20" data-categories="java" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914590" data-listing-reading-time-sort="0.695" data-listing-title-sort="Quarkus Cookbook" data-listing-filename-sort="quarkusCookBook.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="20" data-categories="java" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254494" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="139" data-listing-title-sort="Quarkus Cookbook" data-listing-filename-sort="quarkusCookBook.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/quarkusCookBook.jpeg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\quarkusCookBook.jpeg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/quarkusCookBook.html" class="title">Quarkus Cookbook</a>
+<td>
+<a href="../books/quarkusCookBook.html" class="title listing-title">Quarkus Cookbook</a>
 </td>
-<td class="listing-subtitle">
-Alex Soto Bueno, Jason Porter, February 9, 2021, Quarkus Cookbook: Developing Cloud-Native Applications with Java
+<td>
+<span class="listing-subtitle">Alex Soto Bueno, Jason Porter, February 9, 2021, Quarkus Cookbook: Developing Cloud-Native Applications with Java</span>
 </td>
-<td class="listing-categories">
-java
+<td>
+<span class="listing-categories">java</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="21" data-categories="java" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914590" data-listing-reading-time-sort="0.52" data-listing-title-sort="Quarkus for Spring Developers" data-listing-filename-sort="quarkusSpringDevelopers.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="21" data-categories="design" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254492" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="184" data-listing-title-sort="Modern Java EE Design Patterns" data-listing-filename-sort="modern-java-ee-design-patterns.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/quarkusSpringDevelopers.png" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\modern-java-ee-design-patterns.png" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/quarkusSpringDevelopers.html" class="title">Quarkus for Spring Developers</a>
+<td>
+<a href="../books/modern-java-ee-design-patterns.html" class="title listing-title">Modern Java EE Design Patterns</a>
 </td>
-<td class="listing-subtitle">
-Eric Deandrea, August 31, 2021, Quarkus for Spring Developers
+<td>
+<span class="listing-subtitle">Markus Eisele, 2016, Modern Java EE Design Patterns: Building Scalable Architecture for Sustainable Enterprise Development</span>
 </td>
-<td class="listing-categories">
-java
+<td>
+<span class="listing-categories">design</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="22" data-categories="mindset" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914590" data-listing-reading-time-sort="1.24" data-listing-title-sort="Mindset" data-listing-filename-sort="mindset.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="22" data-categories="study-case" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1695723254492" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="2" data-listing-word-count-sort="240" data-listing-title-sort="No Rules Rules" data-listing-filename-sort="norulesrules.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/mindset.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\No-Rules-Rules.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/mindset.html" class="title">Mindset</a>
+<td>
+<a href="../books/norulesrules.html" class="title listing-title">No Rules Rules</a>
 </td>
-<td class="listing-subtitle">
-Carol Dweck, 2006, Mindset: The New Psychology of Success
+<td>
+<span class="listing-subtitle"> Reed Hastings, Erin Meyer, 2020, No Rules Rules</span>
 </td>
-<td class="listing-categories">
-mindset
+<td>
+<span class="listing-categories">study-case</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="23" data-categories="self-management" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914590" data-listing-reading-time-sort="1.215" data-listing-title-sort="The Relaxation Revolution" data-listing-filename-sort="relaxationrevolution.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="23" data-categories="mindset" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254490" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="2" data-listing-word-count-sort="248" data-listing-title-sort="Mindset" data-listing-filename-sort="mindset.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/relaxationrevolution.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\mindset.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/relaxationrevolution.html" class="title">The Relaxation Revolution</a>
+<td>
+<a href="../books/mindset.html" class="title listing-title">Mindset</a>
 </td>
-<td class="listing-subtitle">
-William Proctor, Herbert Benson, 2010, The Relaxation Revolution: Enhancing Your Personal Health Through the Science and Genetics of Mind Body Healing
+<td>
+<span class="listing-subtitle">Carol Dweck, 2006, Mindset: The New Psychology of Success</span>
 </td>
-<td class="listing-categories">
-self-management
+<td>
+<span class="listing-categories">mindset</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="24" data-categories="agile" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914586" data-listing-reading-time-sort="2.37" data-listing-title-sort="Getting Things Done" data-listing-filename-sort="gettingthingsdone.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="24" data-categories="java" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254489" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="129" data-listing-title-sort="Microservices for Java Developers" data-listing-filename-sort="microservices-for-java-developers.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/gettingthingsdone.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\microservices-for-java-developers.png" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/gettingthingsdone.html" class="title">Getting Things Done</a>
+<td>
+<a href="../books/microservices-for-java-developers.html" class="title listing-title">Microservices for Java Developers</a>
 </td>
-<td class="listing-subtitle">
-David Allen, 2015, etting Things Done: The Art of Stress-Free Productivity
+<td>
+<span class="listing-subtitle">Rafael Benevides, 2019, Microservices for Java Developers: A Hands-On Introduction to Frameworks and Containers - Java Developers</span>
 </td>
-<td class="listing-categories">
-agile
+<td>
+<span class="listing-categories">java</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="25" data-categories="agile" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914586" data-listing-reading-time-sort="0.015" data-listing-title-sort="How to Measure Anything" data-listing-filename-sort="howToMeasureAnyThing.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="25" data-categories="assay" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254486" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="80" data-listing-title-sort="Incerto" data-listing-filename-sort="incerto.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/howToMeasureAnyThing.jpeg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\incerto.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/howToMeasureAnyThing.html" class="title">How to Measure Anything</a>
+<td>
+<a href="../books/incerto.html" class="title listing-title">Incerto</a>
 </td>
-<td class="listing-subtitle">
-Douglas W. Hubbard, 2010, How to Measure Anything: Finding the Value of Intangibles in Business
+<td>
+<span class="listing-subtitle">Nicholas Taleb, 2020, Incerto: Navigating Uncertainty and the Four Traps of Success</span>
 </td>
-<td class="listing-categories">
-agile
+<td>
+<span class="listing-categories">assay</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="26" data-categories="assay" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914586" data-listing-reading-time-sort="0.09" data-listing-title-sort="Fooled by Randomness" data-listing-filename-sort="fooledByRandomness.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="26" data-categories="agile" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254484" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="3" data-listing-title-sort="How to Measure Anything" data-listing-filename-sort="howToMeasureAnyThing.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/fooledByRandomness.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\howToMeasureAnyThing.jpeg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/fooledByRandomness.html" class="title">Fooled by Randomness</a>
+<td>
+<a href="../books/howToMeasureAnyThing.html" class="title listing-title">How to Measure Anything</a>
 </td>
-<td class="listing-subtitle">
-Nassim Nicholas Taleb, 2001, Fooled by Randomness: The Hidden Role of Chance in Life and in the Markets (Incerto)
+<td>
+<span class="listing-subtitle">Douglas W. Hubbard, 2010, How to Measure Anything: Finding the Value of Intangibles in Business</span>
 </td>
-<td class="listing-categories">
-assay
+<td>
+<span class="listing-categories">agile</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="27" data-categories="assay" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914586" data-listing-reading-time-sort="0.4" data-listing-title-sort="Incerto" data-listing-filename-sort="incerto.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="27" data-categories="agile" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254483" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="3" data-listing-word-count-sort="474" data-listing-title-sort="Getting Things Done" data-listing-filename-sort="gettingthingsdone.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/incerto.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\gettingthingsdone.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/incerto.html" class="title">Incerto</a>
+<td>
+<a href="../books/gettingthingsdone.html" class="title listing-title">Getting Things Done</a>
 </td>
-<td class="listing-subtitle">
-Nicholas Taleb, 2020, Incerto: Navigating Uncertainty and the Four Traps of Success
+<td>
+<span class="listing-subtitle">David Allen, 2015, etting Things Done: The Art of Stress-Free Productivity</span>
 </td>
-<td class="listing-categories">
-assay
+<td>
+<span class="listing-categories">agile</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="28" data-categories="communication" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914586" data-listing-reading-time-sort="0.015" data-listing-title-sort="Elements of Style" data-listing-filename-sort="elements_style.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="28" data-categories="assay" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254482" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="18" data-listing-title-sort="Fooled by Randomness" data-listing-filename-sort="fooledByRandomness.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/elementsStyle.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\fooledByRandomness.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/elements_style.html" class="title">Elements of Style</a>
+<td>
+<a href="../books/fooledByRandomness.html" class="title listing-title">Fooled by Randomness</a>
 </td>
-<td class="listing-subtitle">
-Strunk and White, 1918, The Elements of Style
+<td>
+<span class="listing-subtitle">Nassim Nicholas Taleb, 2001, Fooled by Randomness: The Hidden Role of Chance in Life and in the Markets (Incerto)</span>
 </td>
-<td class="listing-categories">
-communication
+<td>
+<span class="listing-categories">assay</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="29" data-categories="java" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914586" data-listing-reading-time-sort="0.645" data-listing-title-sort="Microservices for Java Developers" data-listing-filename-sort="microservices-for-java-developers.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="29" data-categories="communication" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254481" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="3" data-listing-title-sort="Elements of Style" data-listing-filename-sort="elements_style.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img src="../books/microservices-for-java-developers.png" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img src="..\books\elementsStyle.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/microservices-for-java-developers.html" class="title">Microservices for Java Developers</a>
+<td>
+<a href="../books/elements_style.html" class="title listing-title">Elements of Style</a>
 </td>
-<td class="listing-subtitle">
-Rafael Benevides, 2019, Microservices for Java Developers: A Hands-On Introduction to Frameworks and Containers - Java Developers
+<td>
+<span class="listing-subtitle">Strunk and White, 1918, The Elements of Style</span>
 </td>
-<td class="listing-categories">
-java
+<td>
+<span class="listing-categories">communication</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="30" data-categories="strategy" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914586" data-listing-reading-time-sort="5.425" data-listing-title-sort="Execution" data-listing-filename-sort="execution.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="30" data-categories="strategy" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254481" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1085" data-listing-title-sort="Execution" data-listing-filename-sort="execution.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/execution.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\execution.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/execution.html" class="title">Execution</a>
+<td>
+<a href="../books/execution.html" class="title listing-title">Execution</a>
 </td>
-<td class="listing-subtitle">
-Larry Bossidy, Ram Charan,Charles Burck (with), 2006, Execution: The Discipline of Getting Things Done
+<td>
+<span class="listing-subtitle">Larry Bossidy, Ram Charan,Charles Burck (with), 2006, Execution: The Discipline of Getting Things Done</span>
 </td>
-<td class="listing-categories">
-strategy
+<td>
+<span class="listing-categories">strategy</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="31" data-categories="assay" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914582" data-listing-reading-time-sort="0.015" data-listing-title-sort="Chimpanzee Politics" data-listing-filename-sort="chimpanzeePolitics.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="31" data-categories="design" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254480" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="28" data-listing-title-sort="Dive Into DESIGN PATTERNS" data-listing-filename-sort="diveIntoDesignPatterns.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/chimpanzeePolitics.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\diveIntoDesignPatterns.png" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/chimpanzeePolitics.html" class="title">Chimpanzee Politics</a>
+<td>
+<a href="../books/diveIntoDesignPatterns.html" class="title listing-title">Dive Into DESIGN PATTERNS</a>
 </td>
-<td class="listing-subtitle">
-Frans de Waal, 1982, Chimpanzee Politics: Power and Sex among Apes
+<td>
+<span class="listing-subtitle">Alexander Shvets, 2022, Dive Into DESIGN PATTERNS: An ebook on design patterns and the principles behind them</span>
 </td>
-<td class="listing-categories">
-assay
+<td>
+<span class="listing-categories">design</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="32" data-categories="assay" data-listing-date-sort="925336800000" data-listing-file-modified-sort="1685001914582" data-listing-reading-time-sort="0.04" data-listing-title-sort="Consilience" data-listing-filename-sort="consilience.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="32" data-categories="design" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254480" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="3" data-listing-title-sort="Domain Driven Design" data-listing-filename-sort="domaindrivendesign.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/consilience.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\domaindrivendesign.jpeg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/consilience.html" class="title">Consilience</a>
+<td>
+<a href="../books/domaindrivendesign.html" class="title listing-title">Domain Driven Design</a>
 </td>
-<td class="listing-subtitle">
-Edward O. Wilson, 1999, Consilience: The Unity of Knowledge
+<td>
+<span class="listing-subtitle">Eric Evans, 2003, Domain Driven Design: Tackling Complexity in the Heart of Software</span>
 </td>
-<td class="listing-categories">
-assay
+<td>
+<span class="listing-categories">design</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="33" data-categories="communication" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914582" data-listing-reading-time-sort="0.065" data-listing-title-sort="The Communication Book" data-listing-filename-sort="communicationbook44.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="33" data-categories="devops" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254479" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="141" data-listing-title-sort="DevOps with OpenShift" data-listing-filename-sort="devops_with_openshift_oreilly.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/communicationbook44.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\devops_with_openshift_oreilly.png" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/communicationbook44.html" class="title">The Communication Book</a>
+<td>
+<a href="../books/devops_with_openshift_oreilly.html" class="title listing-title">DevOps with OpenShift</a>
 </td>
-<td class="listing-subtitle">
-Mikal Nielsen, 2018, The Communication Book: 44 Ideas for Better Conversations Every Day
+<td>
+<span class="listing-subtitle">Stefano Picozzi, Mike Hepburn &amp; Noel O’Connor, 2017, DevOps with OpenShift: Cloud Deployments Made Easy</span>
 </td>
-<td class="listing-categories">
-communication
+<td>
+<span class="listing-categories">devops</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="34" data-categories="design" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914582" data-listing-reading-time-sort="0.015" data-listing-title-sort="Design Patterns" data-listing-filename-sort="designPatterns.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="34" data-categories="design" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254477" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="3" data-listing-title-sort="Design Patterns" data-listing-filename-sort="designPatterns.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/designPatterns.jpeg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\designPatterns.jpeg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/designPatterns.html" class="title">Design Patterns</a>
+<td>
+<a href="../books/designPatterns.html" class="title listing-title">Design Patterns</a>
 </td>
-<td class="listing-subtitle">
-Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides, 1994, Design Patterns: Elements of Reusable Object-Oriented Software
+<td>
+<span class="listing-subtitle">Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides, 1994, Design Patterns: Elements of Reusable Object-Oriented Software</span>
 </td>
-<td class="listing-categories">
-design
+<td>
+<span class="listing-categories">design</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="35" data-categories="design" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914582" data-listing-reading-time-sort="0.14" data-listing-title-sort="Dive Into DESIGN PATTERNS" data-listing-filename-sort="diveIntoDesignPatterns.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="35" data-categories="devops" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254476" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="3" data-listing-title-sort="Data Science at the Command Line" data-listing-filename-sort="dataScienceAtCommandLine.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/diveIntoDesignPatterns.png" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\dataScienceAtCommandLine.jpeg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/diveIntoDesignPatterns.html" class="title">Dive Into DESIGN PATTERNS</a>
+<td>
+<a href="../books/dataScienceAtCommandLine.html" class="title listing-title">Data Science at the Command Line</a>
 </td>
-<td class="listing-subtitle">
-Alexander Shvets, 2022, Dive Into DESIGN PATTERNS: An ebook on design patterns and the principles behind them
+<td>
+<span class="listing-subtitle">Jeroen Janssens, 2014, Data Science at the Command Line: Facing the Future with Time-Tested Tools</span>
 </td>
-<td class="listing-categories">
-design
+<td>
+<span class="listing-categories">devops</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="36" data-categories="design" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914582" data-listing-reading-time-sort="0.015" data-listing-title-sort="Domain Driven Design" data-listing-filename-sort="domaindrivendesign.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="36" data-categories="neuroscience" data-listing-date-sort="1125093600000" data-listing-file-modified-sort="1695723254476" data-listing-date-modified-sort="1649714400000" data-listing-reading-time-sort="1" data-listing-word-count-sort="11" data-listing-title-sort="Descartes' Error" data-listing-filename-sort="descartesError.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/domaindrivendesign.jpeg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\descartesError.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/domaindrivendesign.html" class="title">Domain Driven Design</a>
+<td>
+<a href="../books/descartesError.html" class="title listing-title">Descartes’ Error</a>
 </td>
-<td class="listing-subtitle">
-Eric Evans, 2003, Domain Driven Design: Tackling Complexity in the Heart of Software
+<td>
+<span class="listing-subtitle">Antonio Damasio, 2006, Descartes’ Error: Emotion, Reason, and the Human Brain</span>
 </td>
-<td class="listing-categories">
-design
+<td>
+<span class="listing-categories">neuroscience</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="37" data-categories="devops" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914582" data-listing-reading-time-sort="0.015" data-listing-title-sort="Data Science at the Command Line" data-listing-filename-sort="dataScienceAtCommandLine.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="37" data-categories="assay" data-listing-date-sort="925336800000" data-listing-file-modified-sort="1695723254475" data-listing-date-modified-sort="1636066800000" data-listing-reading-time-sort="1" data-listing-word-count-sort="8" data-listing-title-sort="Consilience" data-listing-filename-sort="consilience.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/dataScienceAtCommandLine.jpeg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\consilience.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/dataScienceAtCommandLine.html" class="title">Data Science at the Command Line</a>
+<td>
+<a href="../books/consilience.html" class="title listing-title">Consilience</a>
 </td>
-<td class="listing-subtitle">
-Jeroen Janssens, 2014, Data Science at the Command Line: Facing the Future with Time-Tested Tools
+<td>
+<span class="listing-subtitle">Edward O. Wilson, 1999, Consilience: The Unity of Knowledge</span>
 </td>
-<td class="listing-categories">
-devops
+<td>
+<span class="listing-categories">assay</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="38" data-categories="devops" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914582" data-listing-reading-time-sort="0.705" data-listing-title-sort="DevOps with OpenShift" data-listing-filename-sort="devops_with_openshift_oreilly.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="38" data-categories="assay" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254474" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="3" data-listing-title-sort="Chimpanzee Politics" data-listing-filename-sort="chimpanzeePolitics.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/devops_with_openshift_oreilly.png" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\chimpanzeePolitics.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/devops_with_openshift_oreilly.html" class="title">DevOps with OpenShift</a>
+<td>
+<a href="../books/chimpanzeePolitics.html" class="title listing-title">Chimpanzee Politics</a>
 </td>
-<td class="listing-subtitle">
-Stefano Picozzi, Mike Hepburn &amp; Noel O’Connor, 2017, DevOps with OpenShift: Cloud Deployments Made Easy
+<td>
+<span class="listing-subtitle">Frans de Waal, 1982, Chimpanzee Politics: Power and Sex among Apes</span>
 </td>
-<td class="listing-categories">
-devops
+<td>
+<span class="listing-categories">assay</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="39" data-categories="neuropsychology" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1685001914582" data-listing-reading-time-sort="0.445" data-listing-title-sort="Awekenings" data-listing-filename-sort="awekenings.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="39" data-categories="communication" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254474" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="13" data-listing-title-sort="The Communication Book" data-listing-filename-sort="communicationbook44.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/awekenings.png" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\communicationbook44.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/awekenings.html" class="title">Awekenings</a>
+<td>
+<a href="../books/communicationbook44.html" class="title listing-title">The Communication Book</a>
 </td>
-<td class="listing-subtitle">
-Oliver Sacks, 1973, Awekenings
+<td>
+<span class="listing-subtitle">Mikal Nielsen, 2018, The Communication Book: 44 Ideas for Better Conversations Every Day</span>
 </td>
-<td class="listing-categories">
-neuropsychology
+<td>
+<span class="listing-categories">communication</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="40" data-categories="neuroscience" data-listing-date-sort="1125093600000" data-listing-file-modified-sort="1685001914582" data-listing-reading-time-sort="0.055" data-listing-title-sort="Descartes' Error" data-listing-filename-sort="descartesError.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="40" data-categories="programming" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254473" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="3" data-listing-title-sort="C" data-listing-filename-sort="c.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/descartesError.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\c.jpeg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/descartesError.html" class="title">Descartes’ Error</a>
+<td>
+<a href="../books/c.html" class="title listing-title">C</a>
 </td>
-<td class="listing-subtitle">
-Antonio Damasio, 2006, Descartes’ Error: Emotion, Reason, and the Human Brain
+<td>
+<span class="listing-subtitle">Dennis Ritchie, 1978, C: A Programming Language</span>
 </td>
-<td class="listing-categories">
-neuroscience
+<td>
+<span class="listing-categories">programming</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="41" data-categories="programming" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914582" data-listing-reading-time-sort="0.015" data-listing-title-sort="C" data-listing-filename-sort="c.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="41" data-categories="self-management" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254473" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="2" data-listing-word-count-sort="395" data-listing-title-sort="Burnout" data-listing-filename-sort="burnout.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/c.jpeg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\burnout.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/c.html" class="title">C</a>
+<td>
+<a href="../books/burnout.html" class="title listing-title">Burnout</a>
 </td>
-<td class="listing-subtitle">
-Dennis Ritchie, 1978, C: A Programming Language
+<td>
+<span class="listing-subtitle">Herbert Freudenberger, 1980, Burnout: The High Cost of High Achievement</span>
 </td>
-<td class="listing-categories">
-programming
+<td>
+<span class="listing-categories">self-management</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="42" data-categories="self-management" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914582" data-listing-reading-time-sort="0.09" data-listing-title-sort="Atomic Habits" data-listing-filename-sort="atomicHabits.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="42" data-categories="strategy" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254473" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="2" data-listing-word-count-sort="313" data-listing-title-sort="The Buddha and the Badass" data-listing-filename-sort="budddhaandBadasss.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/atomicHabits.jpeg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\budddhaandBadasss.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/atomicHabits.html" class="title">Atomic Habits</a>
+<td>
+<a href="../books/budddhaandBadasss.html" class="title listing-title">The Buddha and the Badass</a>
 </td>
-<td class="listing-subtitle">
-James Clear, 2016, Atomic Habits: An Easy &amp; Proven Way to Build Good Habits &amp; Break Bad Ones
+<td>
+<span class="listing-subtitle">Vishen Lakhiani, 2020, The Buddha and the Badass: The Secret Spiritual Art of Succeeding at Work</span>
 </td>
-<td class="listing-categories">
-self-management
+<td>
+<span class="listing-categories">strategy</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="43" data-categories="self-management" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914582" data-listing-reading-time-sort="1.975" data-listing-title-sort="Burnout" data-listing-filename-sort="burnout.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="43" data-categories="neuropsychology" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1695723254472" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="89" data-listing-title-sort="Awekenings" data-listing-filename-sort="awekenings.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/burnout.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\awekenings.png" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/burnout.html" class="title">Burnout</a>
+<td>
+<a href="../books/awekenings.html" class="title listing-title">Awekenings</a>
 </td>
-<td class="listing-subtitle">
-Herbert Freudenberger, 1980, Burnout: The High Cost of High Achievement
+<td>
+<span class="listing-subtitle">Oliver Sacks, 1973, Awekenings</span>
 </td>
-<td class="listing-categories">
-self-management
+<td>
+<span class="listing-categories">neuropsychology</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="44" data-categories="strategy" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914582" data-listing-reading-time-sort="1.565" data-listing-title-sort="The Buddha and the Badass" data-listing-filename-sort="budddhaandBadasss.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="44" data-categories="self-management" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254471" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="18" data-listing-title-sort="Atomic Habits" data-listing-filename-sort="atomicHabits.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/budddhaandBadasss.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\atomicHabits.jpeg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/budddhaandBadasss.html" class="title">The Buddha and the Badass</a>
+<td>
+<a href="../books/atomicHabits.html" class="title listing-title">Atomic Habits</a>
 </td>
-<td class="listing-subtitle">
-Vishen Lakhiani, 2020, The Buddha and the Badass: The Secret Spiritual Art of Succeeding at Work
+<td>
+<span class="listing-subtitle">James Clear, 2016, Atomic Habits: An Easy &amp; Proven Way to Build Good Habits &amp; Break Bad Ones</span>
 </td>
-<td class="listing-categories">
-strategy
+<td>
+<span class="listing-categories">self-management</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="45" data-categories="assay" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1685001914578" data-listing-reading-time-sort="0.05" data-listing-title-sort="Antifragile" data-listing-filename-sort="antifragile.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="45" data-categories="assay" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1695723254470" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="10" data-listing-title-sort="Antifragile" data-listing-filename-sort="antifragile.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/antifragile.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\antifragile.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/antifragile.html" class="title">Antifragile</a>
+<td>
+<a href="../books/antifragile.html" class="title listing-title">Antifragile</a>
 </td>
-<td class="listing-subtitle">
-Nassim Nicholas Taleb, 2012, Antifragile: Things That Gain from Disorder (Incerto)
+<td>
+<span class="listing-subtitle">Nassim Nicholas Taleb, 2012, Antifragile: Things That Gain from Disorder (Incerto)</span>
 </td>
-<td class="listing-categories">
-assay
+<td>
+<span class="listing-categories">assay</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="46" data-categories="neuroscience" data-listing-date-sort="915231600000" data-listing-file-modified-sort="1685001914578" data-listing-reading-time-sort="0.66" data-listing-title-sort="The Second Brain" data-listing-filename-sort="TheSecondBrain.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="46" data-categories="strategy" data-listing-date-sort="1598911200000" data-listing-file-modified-sort="1695723254468" data-listing-date-modified-sort="1655848800000" data-listing-reading-time-sort="1" data-listing-word-count-sort="13" data-listing-title-sort="Your Next Five Moves" data-listing-filename-sort="YourNextFiveMoves.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/TheSecondBrain.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\YourNextFiveMoves.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/TheSecondBrain.html" class="title">The Second Brain</a>
+<td>
+<a href="../books/YourNextFiveMoves.html" class="title listing-title">Your Next Five Moves</a>
 </td>
-<td class="listing-subtitle">
-Michael Gershon, 2020, The Second Brain: A Groundbreaking New Understanding Of Nervous Disorders Of The Stomach And Intestine
+<td>
+<span class="listing-subtitle">Patrick Bet-David, 2020, Your Next Five Moves: Master the Art of Business Strategy</span>
 </td>
-<td class="listing-categories">
-neuroscience
+<td>
+<span class="listing-categories">strategy</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="47" data-categories="strategy" data-listing-date-sort="1613343600000" data-listing-file-modified-sort="1685001914578" data-listing-reading-time-sort="0.78" data-listing-title-sort="The Rudest Book Ever" data-listing-filename-sort="TheRudestBookEver.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="47" data-categories="neuroscience" data-listing-date-sort="915231600000" data-listing-file-modified-sort="1695723254467" data-listing-date-modified-sort="1668380400000" data-listing-reading-time-sort="1" data-listing-word-count-sort="132" data-listing-title-sort="The Second Brain" data-listing-filename-sort="TheSecondBrain.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/TheRudestBookEver.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\TheSecondBrain.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/TheRudestBookEver.html" class="title">The Rudest Book Ever</a>
+<td>
+<a href="../books/TheSecondBrain.html" class="title listing-title">The Second Brain</a>
 </td>
-<td class="listing-subtitle">
-Shwetabh Gangwar. 2019, The Rudest Book Ever
+<td>
+<span class="listing-subtitle">Michael Gershon, 2020, The Second Brain: A Groundbreaking New Understanding Of Nervous Disorders Of The Stomach And Intestine</span>
 </td>
-<td class="listing-categories">
-strategy
+<td>
+<span class="listing-categories">neuroscience</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="48" data-categories="strategy" data-listing-date-sort="1598911200000" data-listing-file-modified-sort="1685001914578" data-listing-reading-time-sort="0.065" data-listing-title-sort="Your Next Five Moves" data-listing-filename-sort="YourNextFiveMoves.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="48" data-categories="strategy" data-listing-date-sort="1613343600000" data-listing-file-modified-sort="1695723254466" data-listing-date-modified-sort="1661983200000" data-listing-reading-time-sort="1" data-listing-word-count-sort="156" data-listing-title-sort="The Rudest Book Ever" data-listing-filename-sort="TheRudestBookEver.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/YourNextFiveMoves.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\TheRudestBookEver.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/YourNextFiveMoves.html" class="title">Your Next Five Moves</a>
+<td>
+<a href="../books/TheRudestBookEver.html" class="title listing-title">The Rudest Book Ever</a>
 </td>
-<td class="listing-subtitle">
-Patrick Bet-David, 2020, Your Next Five Moves: Master the Art of Business Strategy
+<td>
+<span class="listing-subtitle">Shwetabh Gangwar. 2019, The Rudest Book Ever</span>
 </td>
-<td class="listing-categories">
-strategy
+<td>
+<span class="listing-categories">strategy</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="49" data-categories="finance" data-listing-date-sort="1599516000000" data-listing-file-modified-sort="1685001914574" data-listing-reading-time-sort="0.07" data-listing-title-sort="The Psychology of Money" data-listing-filename-sort="ThePsychologyofMoney.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="49" data-categories="finance" data-listing-date-sort="1599516000000" data-listing-file-modified-sort="1695723254462" data-listing-date-modified-sort="1657576800000" data-listing-reading-time-sort="1" data-listing-word-count-sort="14" data-listing-title-sort="The Psychology of Money" data-listing-filename-sort="ThePsychologyofMoney.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/ThePsychologyofMoney.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\ThePsychologyofMoney.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/ThePsychologyofMoney.html" class="title">The Psychology of Money</a>
+<td>
+<a href="../books/ThePsychologyofMoney.html" class="title listing-title">The Psychology of Money</a>
 </td>
-<td class="listing-subtitle">
-Morgan Housel, 2020, The Psychology of Money: Timeless lessons on wealth, greed, and happiness
+<td>
+<span class="listing-subtitle">Morgan Housel, 2020, The Psychology of Money: Timeless lessons on wealth, greed, and happiness</span>
 </td>
-<td class="listing-categories">
-finance
+<td>
+<span class="listing-categories">finance</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="50" data-categories="mindset" data-listing-date-sort="1173135600000" data-listing-file-modified-sort="1685001914574" data-listing-reading-time-sort="0.07" data-listing-title-sort="The Joy of Living" data-listing-filename-sort="TheJoyofLiving.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="50" data-categories="neuroscience" data-listing-file-modified-sort="1695723254460" data-listing-reading-time-sort="1" data-listing-word-count-sort="70" data-listing-title-sort="The Molecule of More" data-listing-filename-sort="TheMoleculeofMore.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/TheJoyofLiving.jpeg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\TheMoleculeofMore.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/TheJoyofLiving.html" class="title">The Joy of Living</a>
+<td>
+<a href="../books/TheMoleculeofMore.html" class="title listing-title">The Molecule of More</a>
 </td>
-<td class="listing-subtitle">
-Yongey Mingyur Rinpoche, 2008, The Joy of Living: Unlocking the Secret and Science of Happiness
+<td>
+<span class="listing-subtitle">The Molecule of More: How a Single Chemical in Your Brain Drives Love, Sex, and Creativity―and Will Determine the Fate of the Human</span>
 </td>
-<td class="listing-categories">
-mindset
+<td>
+<span class="listing-categories">neuroscience</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="51" data-categories="neuropsychology" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1685001914574" data-listing-reading-time-sort="1.685" data-listing-title-sort="The Matter With Things" data-listing-filename-sort="TheMatterWithThings.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="51" data-categories="neuropsychology" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1695723254459" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="2" data-listing-word-count-sort="337" data-listing-title-sort="The Matter With Things" data-listing-filename-sort="TheMatterWithThings.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/TheMatterWithThings.jpeg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\TheMatterWithThings.jpeg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/TheMatterWithThings.html" class="title">The Matter With Things</a>
+<td>
+<a href="../books/TheMatterWithThings.html" class="title listing-title">The Matter With Things</a>
 </td>
-<td class="listing-subtitle">
-Ian McGilchrist, 2019, The Matter With Things: Our Brains, Our Delusions, and the Unmaking of the World
+<td>
+<span class="listing-subtitle">Ian McGilchrist, 2019, The Matter With Things: Our Brains, Our Delusions, and the Unmaking of the World</span>
 </td>
-<td class="listing-categories">
-neuropsychology
+<td>
+<span class="listing-categories">neuropsychology</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="52" data-categories="neuroscience" data-listing-file-modified-sort="1685001914574" data-listing-reading-time-sort="0.35" data-listing-title-sort="The Molecule of More" data-listing-filename-sort="TheMoleculeofMore.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="52" data-categories="programming" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254459" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="60" data-listing-title-sort="The Linux command line" data-listing-filename-sort="TheLinuxcommandline.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/TheMoleculeofMore.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\TheLinuxcommandline.png" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/TheMoleculeofMore.html" class="title">The Molecule of More</a>
+<td>
+<a href="../books/TheLinuxcommandline.html" class="title listing-title">The Linux command line</a>
 </td>
-<td class="listing-subtitle">
-The Molecule of More: How a Single Chemical in Your Brain Drives Love, Sex, and Creativity―and Will Determine the Fate of the Human
+<td>
+<span class="listing-subtitle">William Shotts, The Linux command line</span>
 </td>
-<td class="listing-categories">
-neuroscience
+<td>
+<span class="listing-categories">programming</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="53" data-categories="programming" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914574" data-listing-reading-time-sort="0.3" data-listing-title-sort="The Linux command line" data-listing-filename-sort="TheLinuxcommandline.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="53" data-categories="mindset" data-listing-date-sort="1173135600000" data-listing-file-modified-sort="1695723254457" data-listing-date-modified-sort="1676329200000" data-listing-reading-time-sort="1" data-listing-word-count-sort="14" data-listing-title-sort="The Joy of Living" data-listing-filename-sort="TheJoyofLiving.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/TheLinuxcommandline.png" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\TheJoyofLiving.jpeg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/TheLinuxcommandline.html" class="title">The Linux command line</a>
+<td>
+<a href="../books/TheJoyofLiving.html" class="title listing-title">The Joy of Living</a>
 </td>
-<td class="listing-subtitle">
-William Shotts, The Linux command line
+<td>
+<span class="listing-subtitle">Yongey Mingyur Rinpoche, 2008, The Joy of Living: Unlocking the Secret and Science of Happiness</span>
 </td>
-<td class="listing-categories">
-programming
+<td>
+<span class="listing-categories">mindset</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="54" data-categories="self-management" data-listing-date-sort="1135638000000" data-listing-file-modified-sort="1685001914574" data-listing-reading-time-sort="0.785" data-listing-title-sort="The Creative Habit" data-listing-filename-sort="TheCreativeHabit.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="54" data-categories="self-management" data-listing-date-sort="1135638000000" data-listing-file-modified-sort="1695723254457" data-listing-date-modified-sort="1662674400000" data-listing-reading-time-sort="1" data-listing-word-count-sort="157" data-listing-title-sort="The Creative Habit" data-listing-filename-sort="TheCreativeHabit.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/TheCreativeHabit.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\TheCreativeHabit.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/TheCreativeHabit.html" class="title">The Creative Habit</a>
+<td>
+<a href="../books/TheCreativeHabit.html" class="title listing-title">The Creative Habit</a>
 </td>
-<td class="listing-subtitle">
-Twyla Tharp, 2007, The Creative Habit: Learn It and Use It for Life
+<td>
+<span class="listing-subtitle">Twyla Tharp, 2007, The Creative Habit: Learn It and Use It for Life</span>
 </td>
-<td class="listing-categories">
-self-management
+<td>
+<span class="listing-categories">self-management</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="55" data-categories="agile" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914570" data-listing-reading-time-sort="3.2" data-listing-title-sort="Mind Management Not Time Management" data-listing-filename-sort="MindManagementNotTimeManagement.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="55" data-categories="finance" data-listing-date-sort="1634594400000" data-listing-file-modified-sort="1695723254453" data-listing-date-modified-sort="1673132400000" data-listing-reading-time-sort="1" data-listing-word-count-sort="152" data-listing-title-sort="The Changing World Order" data-listing-filename-sort="TheChangingWorldOrder.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/MindManagementNotTimeManagement.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\TheChangingWorldOrder.png" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/MindManagementNotTimeManagement.html" class="title">Mind Management Not Time Management</a>
+<td>
+<a href="../books/TheChangingWorldOrder.html" class="title listing-title">The Changing World Order</a>
 </td>
-<td class="listing-subtitle">
-David Kadavy, 2020, Mind Management Not Time Management: A Guide to Improving Your Productivity and Happiness
+<td>
+<span class="listing-subtitle">Ray Dalio, 2021, The Changing World Order: Why Nations Succeed and Fail</span>
 </td>
-<td class="listing-categories">
-agile
+<td>
+<span class="listing-categories">finance</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="56" data-categories="finance" data-listing-date-sort="1099609200000" data-listing-file-modified-sort="1685001914570" data-listing-reading-time-sort="0.41" data-listing-title-sort="My Life as Quant" data-listing-filename-sort="MyLifeasQuant.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="56" data-categories="finance" data-listing-date-sort="1409781600000" data-listing-file-modified-sort="1695723254261" data-listing-date-modified-sort="1656540000000" data-listing-reading-time-sort="1" data-listing-word-count-sort="14" data-listing-title-sort="Swimming with Sharks" data-listing-filename-sort="SwimmingwithSharks.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/MyLifeasQuant.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\SwimmingwithSharks.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/MyLifeasQuant.html" class="title">My Life as Quant</a>
+<td>
+<a href="../books/SwimmingwithSharks.html" class="title listing-title">Swimming with Sharks</a>
 </td>
-<td class="listing-subtitle">
-Emanuel Derman, 2007, My life as a quant
+<td>
+<span class="listing-subtitle">Joris Luyendijk, 2015, Swimming with Sharks: My Journey into the World of the Bankers</span>
 </td>
-<td class="listing-categories">
-finance
+<td>
+<span class="listing-categories">finance</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="57" data-categories="finance" data-listing-date-sort="1409781600000" data-listing-file-modified-sort="1685001914570" data-listing-reading-time-sort="0.07" data-listing-title-sort="Swimming with Sharks" data-listing-filename-sort="SwimmingwithSharks.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="57" data-categories="neuroscience" data-listing-date-sort="1546297200000" data-listing-file-modified-sort="1695723254255" data-listing-date-modified-sort="1683237600000" data-listing-reading-time-sort="1" data-listing-word-count-sort="114" data-listing-title-sort="My Stroke of Insight" data-listing-filename-sort="MyStrokeofInsight.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/SwimmingwithSharks.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\MyStrokeofInsight.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/SwimmingwithSharks.html" class="title">Swimming with Sharks</a>
+<td>
+<a href="../books/MyStrokeofInsight.html" class="title listing-title">My Stroke of Insight</a>
 </td>
-<td class="listing-subtitle">
-Joris Luyendijk, 2015, Swimming with Sharks: My Journey into the World of the Bankers
+<td>
+<span class="listing-subtitle">Jill Bolte Taylor, 2009, My Stroke of Insight: A Brain Scientist’s Personal Journey</span>
 </td>
-<td class="listing-categories">
-finance
+<td>
+<span class="listing-categories">neuroscience</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="58" data-categories="finance" data-listing-date-sort="1634594400000" data-listing-file-modified-sort="1685001914570" data-listing-reading-time-sort="0.76" data-listing-title-sort="The Changing World Order" data-listing-filename-sort="TheChangingWorldOrder.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="58" data-categories="agile" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254254" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="4" data-listing-word-count-sort="640" data-listing-title-sort="Mind Management Not Time Management" data-listing-filename-sort="MindManagementNotTimeManagement.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/TheChangingWorldOrder.png" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\MindManagementNotTimeManagement.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/TheChangingWorldOrder.html" class="title">The Changing World Order</a>
+<td>
+<a href="../books/MindManagementNotTimeManagement.html" class="title listing-title">Mind Management Not Time Management</a>
 </td>
-<td class="listing-subtitle">
-Ray Dalio, 2021, The Changing World Order: Why Nations Succeed and Fail
+<td>
+<span class="listing-subtitle">David Kadavy, 2020, Mind Management Not Time Management: A Guide to Improving Your Productivity and Happiness</span>
 </td>
-<td class="listing-categories">
-finance
+<td>
+<span class="listing-categories">agile</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="59" data-categories="neuroscience" data-listing-date-sort="1546297200000" data-listing-file-modified-sort="1685001914570" data-listing-reading-time-sort="0.57" data-listing-title-sort="My Stroke of Insight" data-listing-filename-sort="MyStrokeofInsight.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="59" data-categories="finance" data-listing-date-sort="1099609200000" data-listing-file-modified-sort="1695723254254" data-listing-date-modified-sort="1679439600000" data-listing-reading-time-sort="1" data-listing-word-count-sort="82" data-listing-title-sort="My Life as Quant" data-listing-filename-sort="MyLifeasQuant.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/MyStrokeofInsight.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\MyLifeasQuant.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/MyStrokeofInsight.html" class="title">My Stroke of Insight</a>
+<td>
+<a href="../books/MyLifeasQuant.html" class="title listing-title">My Life as Quant</a>
 </td>
-<td class="listing-subtitle">
-Jill Bolte Taylor, 2009, My Stroke of Insight: A Brain Scientist’s Personal Journey
+<td>
+<span class="listing-subtitle">Emanuel Derman, 2007, My life as a quant </span>
 </td>
-<td class="listing-categories">
-neuroscience
+<td>
+<span class="listing-categories">finance</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="60" data-categories="devops" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914566" data-listing-reading-time-sort="0.065" data-listing-title-sort="Kubernetes Native Microservices" data-listing-filename-sort="Kubernetes_Native_Microservices.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="60" data-categories="java" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254249" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="93" data-listing-title-sort="Microservices Patterns" data-listing-filename-sort="MicroservicesPatterns.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/Kubernetes_Native_Microservice.png" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\MicrosserivcesPatterns.png" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/Kubernetes_Native_Microservices.html" class="title">Kubernetes Native Microservices</a>
+<td>
+<a href="../books/MicroservicesPatterns.html" class="title listing-title">Microservices Patterns</a>
 </td>
-<td class="listing-subtitle">
-John Clingan and Ken Finnigan, 2021, Kubernetes Native Microservices with Quarkus and MicroProfile
+<td>
+<span class="listing-subtitle">Chris Richardson, 2020, Microservices Patterns: With examples in Java</span>
 </td>
-<td class="listing-categories">
-devops
+<td>
+<span class="listing-categories">java</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="61" data-categories="java" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914566" data-listing-reading-time-sort="0.465" data-listing-title-sort="Microservices Patterns" data-listing-filename-sort="MicroservicesPatterns.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="61" data-categories="neuropsychology" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254249" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="10" data-listing-title-sort="Maps of Meaning" data-listing-filename-sort="MapsOfMeaning.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/MicrosserivcesPatterns.png" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\MapsOfMeaning.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/MicroservicesPatterns.html" class="title">Microservices Patterns</a>
+<td>
+<a href="../books/MapsOfMeaning.html" class="title listing-title">Maps of Meaning</a>
 </td>
-<td class="listing-subtitle">
-Chris Richardson, 2020, Microservices Patterns: With examples in Java
+<td>
+<span class="listing-subtitle">Jordan B. Peterson, 1999, Maps of Meaning: The Architecture of Belief</span>
 </td>
-<td class="listing-categories">
-java
+<td>
+<span class="listing-categories">neuropsychology</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="62" data-categories="neuropsychology" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914566" data-listing-reading-time-sort="0.05" data-listing-title-sort="Maps of Meaning" data-listing-filename-sort="MapsOfMeaning.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="62" data-categories="psychology" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254248" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="159" data-listing-title-sort="Man's Search for Meaning" data-listing-filename-sort="ManSearchForMeaning.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/MapsOfMeaning.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\ManSearchForMeaning.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/MapsOfMeaning.html" class="title">Maps of Meaning</a>
+<td>
+<a href="../books/ManSearchForMeaning.html" class="title listing-title">Man’s Search for Meaning</a>
 </td>
-<td class="listing-subtitle">
-Jordan B. Peterson, 1999, Maps of Meaning: The Architecture of Belief
+<td>
+<span class="listing-subtitle">Viktor E. Frank, 1947, Man’s Search for Meaning</span>
 </td>
-<td class="listing-categories">
-neuropsychology
+<td>
+<span class="listing-categories">psychology</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="63" data-categories="psychology" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914566" data-listing-reading-time-sort="0.795" data-listing-title-sort="Man's Search for Meaning" data-listing-filename-sort="ManSearchForMeaning.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="63" data-categories="devops" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254247" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="13" data-listing-title-sort="Kubernetes Native Microservices" data-listing-filename-sort="Kubernetes_Native_Microservices.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/ManSearchForMeaning.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\Kubernetes_Native_Microservice.png" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/ManSearchForMeaning.html" class="title">Man’s Search for Meaning</a>
+<td>
+<a href="../books/Kubernetes_Native_Microservices.html" class="title listing-title">Kubernetes Native Microservices</a>
 </td>
-<td class="listing-subtitle">
-Viktor E. Frank, 1947, Man’s Search for Meaning
+<td>
+<span class="listing-subtitle">John Clingan and Ken Finnigan, 2021, Kubernetes Native Microservices with Quarkus and MicroProfile</span>
 </td>
-<td class="listing-categories">
-psychology
+<td>
+<span class="listing-categories">devops</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="64" data-categories="mindset" data-listing-date-sort="1656626400000" data-listing-file-modified-sort="1685001914562" data-listing-reading-time-sort="0.1" data-listing-title-sort="Don't Believe Everything You Think" data-listing-filename-sort="DoNotBelieveEverythingYouThink.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="64" data-categories="self-management" data-listing-date-sort="1503957600000" data-listing-file-modified-sort="1695723254239" data-listing-date-modified-sort="1654466400000" data-listing-reading-time-sort="1" data-listing-word-count-sort="97" data-listing-title-sort="Ikigai" data-listing-filename-sort="Ikigai.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/DoNotBelieveEverythingYouThink.jpeg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\Ikigai.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/DoNotBelieveEverythingYouThink.html" class="title">Don’t Believe Everything You Think</a>
+<td>
+<a href="../books/Ikigai.html" class="title listing-title">Ikigai</a>
 </td>
-<td class="listing-subtitle">
-Joseph Nguyen, 2022, Don’t Believe Everything You Think: Why Your Thinking Is The Beginning &amp; End Of Suffering (Beyond Suffering)
+<td>
+<span class="listing-subtitle">Héctor García and Francesc Miralles, 2017, Ikigai: The Japanese Secret to a Long and Happy Life</span>
 </td>
-<td class="listing-categories">
-mindset
+<td>
+<span class="listing-categories">self-management</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="65" data-categories="neuroscience" data-listing-date-sort="1361833200000" data-listing-file-modified-sort="1685001914562" data-listing-reading-time-sort="0.07" data-listing-title-sort="How to Create a Mind" data-listing-filename-sort="HowtoCreateaMind.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="65" data-categories="strategy" data-listing-date-sort="1382392800000" data-listing-file-modified-sort="1695723254238" data-listing-date-modified-sort="1660773600000" data-listing-reading-time-sort="1" data-listing-word-count-sort="37" data-listing-title-sort="How to Fail at Almost Everything and Still Win Big" data-listing-filename-sort="HowtoFailatAlmostEverything.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/HowtoCreateaMind.jpeg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\HowtoFailatAlmostEverything.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/HowtoCreateaMind.html" class="title">How to Create a Mind</a>
+<td>
+<a href="../books/HowtoFailatAlmostEverything.html" class="title listing-title">How to Fail at Almost Everything and Still Win Big</a>
 </td>
-<td class="listing-subtitle">
-Ray Kurzweil, 2013, How to Create a Mind: The Secret of Human Thought Revealed
+<td>
+<span class="listing-subtitle">Scott Adams, 2013, How to Fail at Almost Everything and Still Win Big: Kind of the Story of My Life</span>
 </td>
-<td class="listing-categories">
-neuroscience
+<td>
+<span class="listing-categories">strategy</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="66" data-categories="self-management" data-listing-date-sort="1503957600000" data-listing-file-modified-sort="1685001914562" data-listing-reading-time-sort="0.485" data-listing-title-sort="Ikigai" data-listing-filename-sort="Ikigai.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="66" data-categories="mindset" data-listing-date-sort="1656626400000" data-listing-file-modified-sort="1695723254235" data-listing-date-modified-sort="1680645600000" data-listing-reading-time-sort="1" data-listing-word-count-sort="20" data-listing-title-sort="Don't Believe Everything You Think" data-listing-filename-sort="DoNotBelieveEverythingYouThink.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/Ikigai.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\DoNotBelieveEverythingYouThink.jpeg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/Ikigai.html" class="title">Ikigai</a>
+<td>
+<a href="../books/DoNotBelieveEverythingYouThink.html" class="title listing-title">Don’t Believe Everything You Think</a>
 </td>
-<td class="listing-subtitle">
-Héctor García and Francesc Miralles, 2017, Ikigai: The Japanese Secret to a Long and Happy Life
+<td>
+<span class="listing-subtitle">Joseph Nguyen, 2022, Don’t Believe Everything You Think: Why Your Thinking Is The Beginning &amp; End Of Suffering (Beyond Suffering)</span>
 </td>
-<td class="listing-categories">
-self-management
+<td>
+<span class="listing-categories">mindset</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="67" data-categories="strategy" data-listing-date-sort="1382392800000" data-listing-file-modified-sort="1685001914562" data-listing-reading-time-sort="0.185" data-listing-title-sort="How to Fail at Almost Everything and Still Win Big" data-listing-filename-sort="HowtoFailatAlmostEverything.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="67" data-categories="neuroscience" data-listing-date-sort="1361833200000" data-listing-file-modified-sort="1695723254235" data-listing-date-modified-sort="1681768800000" data-listing-reading-time-sort="1" data-listing-word-count-sort="14" data-listing-title-sort="How to Create a Mind" data-listing-filename-sort="HowtoCreateaMind.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/HowtoFailatAlmostEverything.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\HowtoCreateaMind.jpeg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/HowtoFailatAlmostEverything.html" class="title">How to Fail at Almost Everything and Still Win Big</a>
+<td>
+<a href="../books/HowtoCreateaMind.html" class="title listing-title">How to Create a Mind</a>
 </td>
-<td class="listing-subtitle">
-Scott Adams, 2013, How to Fail at Almost Everything and Still Win Big: Kind of the Story of My Life
+<td>
+<span class="listing-subtitle">Ray Kurzweil, 2013, How to Create a Mind: The Secret of Human Thought Revealed</span>
 </td>
-<td class="listing-categories">
-strategy
+<td>
+<span class="listing-categories">neuroscience</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="68" data-categories="assay" data-listing-date-sort="1546297200000" data-listing-file-modified-sort="1685001914518" data-listing-reading-time-sort="0.385" data-listing-title-sort="Desànim de lucre" data-listing-filename-sort="Desanimdelucre.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="68" data-categories="assay" data-listing-date-sort="1546297200000" data-listing-file-modified-sort="1695723254180" data-listing-date-modified-sort="1683237600000" data-listing-reading-time-sort="1" data-listing-word-count-sort="77" data-listing-title-sort="Desànim de lucre" data-listing-filename-sort="Desanimdelucre.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/Desanimdelucre.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\Desanimdelucre.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/Desanimdelucre.html" class="title">Desànim de lucre</a>
+<td>
+<a href="../books/Desanimdelucre.html" class="title listing-title">Desànim de lucre</a>
 </td>
-<td class="listing-subtitle">
-Abel Cutillas, 2022, Desànim de lucre
+<td>
+<span class="listing-subtitle">Abel Cutillas, 2022, Desànim de lucre</span>
 </td>
-<td class="listing-categories">
-assay
+<td>
+<span class="listing-categories">assay</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="69" data-categories="neuroscience" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1685001914518" data-listing-reading-time-sort="0.035" data-listing-title-sort="Consciousness Explained" data-listing-filename-sort="ConsciousnessExplained.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="69" data-categories="neuroscience" data-listing-date-sort="1682892000000" data-listing-file-modified-sort="1695723254179" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="7" data-listing-title-sort="Consciousness Explained" data-listing-filename-sort="ConsciousnessExplained.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/ConsciousnessExplained.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\ConsciousnessExplained.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/ConsciousnessExplained.html" class="title">Consciousness Explained</a>
+<td>
+<a href="../books/ConsciousnessExplained.html" class="title listing-title">Consciousness Explained</a>
 </td>
-<td class="listing-subtitle">
-Daniel C. Dennett, 1991, Consciousness Explained
+<td>
+<span class="listing-subtitle">Daniel C. Dennett, 1991, Consciousness Explained</span>
 </td>
-<td class="listing-categories">
-neuroscience
+<td>
+<span class="listing-categories">neuroscience</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="70" data-categories="psychology" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1685001914518" data-listing-reading-time-sort="0.025" data-listing-title-sort="Collective Illusions" data-listing-filename-sort="CollectiveIllusions.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="70" data-categories="psychology" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1695723254178" data-listing-date-modified-sort="1695723254000" data-listing-reading-time-sort="1" data-listing-word-count-sort="5" data-listing-title-sort="Collective Illusions" data-listing-filename-sort="CollectiveIllusions.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/CollectiveIllusions.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\CollectiveIllusions.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/CollectiveIllusions.html" class="title">Collective Illusions</a>
+<td>
+<a href="../books/CollectiveIllusions.html" class="title listing-title">Collective Illusions</a>
 </td>
-<td class="listing-subtitle">
-Todd Rose, 2022, Collective Illusions: Conformity, Complicity, and the Science of Why We Make Bad Decisions
+<td>
+<span class="listing-subtitle">Todd Rose, 2022, Collective Illusions: Conformity, Complicity, and the Science of Why We Make Bad Decisions</span>
 </td>
-<td class="listing-categories">
-psychology
+<td>
+<span class="listing-categories">psychology</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="71" data-categories="programming" data-listing-date-sort="1218405600000" data-listing-file-modified-sort="1685001914514" data-listing-reading-time-sort="0.055" data-listing-title-sort="Clean Code" data-listing-filename-sort="CleanCode.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="71" data-categories="programming" data-listing-date-sort="1218405600000" data-listing-file-modified-sort="1695723254176" data-listing-date-modified-sort="1652997600000" data-listing-reading-time-sort="1" data-listing-word-count-sort="11" data-listing-title-sort="Clean Code" data-listing-filename-sort="CleanCode.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/CleanCode.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\CleanCode.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/CleanCode.html" class="title">Clean Code</a>
+<td>
+<a href="../books/CleanCode.html" class="title listing-title">Clean Code</a>
 </td>
-<td class="listing-subtitle">
-Robert C. Martin, 2008, Clean Code: A Handbook of Agile Software Craftsmanship
+<td>
+<span class="listing-subtitle">Robert C. Martin, 2008, Clean Code: A Handbook of Agile Software Craftsmanship</span>
 </td>
-<td class="listing-categories">
-programming
+<td>
+<span class="listing-categories">programming</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
-<tr data-index="72" data-categories="self-management" data-listing-date-sort="1566856800000" data-listing-file-modified-sort="1685001914514" data-listing-reading-time-sort="0.1" data-listing-title-sort="Building a Second Brain" data-listing-filename-sort="BuildingaSecondBrain.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="72" data-categories="self-management" data-listing-date-sort="1566856800000" data-listing-file-modified-sort="1695723254175" data-listing-date-modified-sort="1646866800000" data-listing-reading-time-sort="1" data-listing-word-count-sort="20" data-listing-title-sort="Building a Second Brain" data-listing-filename-sort="BuildingaSecondBrain.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-image">
-<img data-src="../books/BuildingaSecondBrain.jpg" style="height: 90px;">
+<td>
+<span class="listing-image"><p class="card-img-top"><img data-src="..\books\BuildingaSecondBrain.jpg" style="height: 90px;"  class="thumbnail-image card-img"/></p></span>
 </td>
-<td class="listing-title">
-<a href="../books/BuildingaSecondBrain.html" class="title">Building a Second Brain</a>
+<td>
+<a href="../books/BuildingaSecondBrain.html" class="title listing-title">Building a Second Brain</a>
 </td>
-<td class="listing-subtitle">
-Tiago Forte, 2022, Building a Second Brain: A Proven Method to Organize Your Digital Life and Unlock Your Creative Potential
+<td>
+<span class="listing-subtitle">Tiago Forte, 2022, Building a Second Brain: A Proven Method to Organize Your Digital Life and Unlock Your Creative Potential</span>
 </td>
-<td class="listing-categories">
-self-management
+<td>
+<span class="listing-categories">self-management</span>
 </td>
-<td class="listing-file-modified">
-Thursday, May 25, 2023
+<td>
+<span class="listing-file-modified">Tuesday, September 26, 2023</span>
 </td>
 </tr>
 </tbody>
-
 </table>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
-
 <nav id="books-table-listing-pagination" class="listing-pagination" aria-label="Page Navigation">
   <ul class="pagination"></ul>
 </nav>
@@ -2704,15 +2736,15 @@ No matching items
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../learning/learning-how-auto-evaluate.html"> Auto-Evaluate</a> <br></p>
+<p><br> <a href="../learning/learning-how-auto-evaluate.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> Auto-Evaluate</a> <br></p>
 </div>
 <br>
 <div class="column center">
-<p><br> <a href="#top"> top</a> <br></p>
+<p><br> <a href="#top"><i class="fa-solid fa-arrow-up" aria-label="arrow-up"></i> top</a> <br></p>
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../learning/learning-listing-card-books.html">Books cards </a> <br></p>
+<p><br> <a href="../learning/learning-listing-card-books.html">Books cards <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
 </div>
@@ -2762,6 +2794,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -2830,13 +2889,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -2863,9 +2924,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -2901,10 +2976,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -2914,8 +2988,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2930,6 +3013,241 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        typesetMath(container);
+        return container.innerHTML
+      } else {
+        typesetMath(note);
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      typesetMath(note);
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -2972,8 +3290,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left"><a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0 International (CC BY 4.0)</a></div>   
-      <div class="nav-footer-center">If you want to go far, walk slow / We love dukkha</div>
+    <div class="nav-footer-left">
+<p><a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0 International (CC BY 4.0)</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>If you want to go far, walk slow / We love dukkha</p>
+<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/main/learning/learning-listing-table-books.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -2992,6 +3314,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 

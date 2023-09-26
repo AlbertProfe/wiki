@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.4.383">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,11 +19,12 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -48,43 +49,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -107,6 +78,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -117,6 +90,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -126,7 +105,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -137,24 +117,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <body class="nav-sidebar floating nav-fixed slimcontent">
 
-
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">albertprofe wiki</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-linux-os" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -1183,53 +1163,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
   </li>
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Java SE: Class and Objects</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../javase/se-concepts-objects.html">Java Concepts</a></li><li class="breadcrumb-item"><a href="../javase/se-concepts-objects.html">Java SE: Class and Objects</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
-  Java Standard Edition
+ <span class="menu-text">Java Standard Edition</span>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">What is Java SE</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">What is Java SE</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-what-basics.html" class="sidebar-item-text sidebar-link">Java Standard Edition: Basics</a>
+  <a href="../javase/se-what-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java Standard Edition: Basics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-what-principles.html" class="sidebar-item-text sidebar-link">Java Standard Edition: Principles</a>
+  <a href="../javase/se-what-principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java Standard Edition: Principles</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-what-moochelsinki.html" class="sidebar-item-text sidebar-link">Java MOOC Helsinki</a>
+  <a href="../javase/se-what-moochelsinki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java MOOC Helsinki</span></a>
   </div>
 </li>
       </ul>
@@ -1237,30 +1222,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Java Create Project</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">Java Create Project</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-maven.html" class="sidebar-item-text sidebar-link">Java SE: Maven</a>
+  <a href="../javase/se-concepts-maven.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Maven</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-createproject.html" class="sidebar-item-text sidebar-link">Java SE: Create Maven Project</a>
+  <a href="../javase/se-concepts-createproject.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Create Maven Project</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-projectgit.html" class="sidebar-item-text sidebar-link">Java SE: Project push GitHub</a>
+  <a href="../javase/se-concepts-projectgit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Project push GitHub</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-tdd.html" class="sidebar-item-text sidebar-link">Java SE: JUnit and TDD</a>
+  <a href="../javase/se-concepts-tdd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: JUnit and TDD</span></a>
   </div>
 </li>
       </ul>
@@ -1268,45 +1258,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Java Concepts</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Java Concepts</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-objects.html" class="sidebar-item-text sidebar-link active">Java SE: Class and Objects</a>
+  <a href="../javase/se-concepts-objects.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Java SE: Class and Objects</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-scope.html" class="sidebar-item-text sidebar-link">Java SE: Scope</a>
+  <a href="../javase/se-concepts-scope.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Scope</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-static.html" class="sidebar-item-text sidebar-link">Java SE: static modifier</a>
+  <a href="../javase/se-concepts-static.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: static modifier</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-coupling.html" class="sidebar-item-text sidebar-link">Java SE: Coupling and DDD</a>
+  <a href="../javase/se-concepts-coupling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Coupling and DDD</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-package.html" class="sidebar-item-text sidebar-link">Java SE: Packages</a>
+  <a href="../javase/se-concepts-package.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-interface.html" class="sidebar-item-text sidebar-link">Java SE: Abstract/Interface</a>
+  <a href="../javase/se-concepts-interface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Abstract/Interface</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-java8.html" class="sidebar-item-text sidebar-link">Java SE: Java 8</a>
+  <a href="../javase/se-concepts-java8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Java 8</span></a>
   </div>
 </li>
       </ul>
@@ -1314,30 +1312,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Java Principles</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Java Principles</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-principles-encapsulation.html" class="sidebar-item-text sidebar-link">Java SE: Encapsulation</a>
+  <a href="../javase/se-principles-encapsulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Encapsulation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-principles-abstraction.html" class="sidebar-item-text sidebar-link">Java SE: Abstraction</a>
+  <a href="../javase/se-principles-abstraction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Abstraction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-principles-inheritance.html" class="sidebar-item-text sidebar-link">Java SE: Inherence</a>
+  <a href="../javase/se-principles-inheritance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Inherence</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-principles-polymorphism.html" class="sidebar-item-text sidebar-link">Java SE: Polymorphism</a>
+  <a href="../javase/se-principles-polymorphism.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE: Polymorphism</span></a>
   </div>
 </li>
       </ul>
@@ -1345,89 +1348,104 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Java Design Patterns</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Java Design Patterns</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-uml.html" class="sidebar-item-text sidebar-link">Java Patterns: UML</a>
+  <a href="../javase/se-pattern-uml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java Patterns: UML</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-intro.html" class="sidebar-item-text sidebar-link">Java Patterns: Types</a>
+  <a href="../javase/se-pattern-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java Patterns: Types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
-  <b>Creational</b>
+ <span class="menu-text"><b>Creational</b></span>
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-singleton.html" class="sidebar-item-text sidebar-link">Singleton</a>
+  <a href="../javase/se-pattern-singleton.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Singleton</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-factory.html" class="sidebar-item-text sidebar-link">Factory</a>
+  <a href="../javase/se-pattern-factory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Factory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-abstractfactory.html" class="sidebar-item-text sidebar-link">Abstract Factory</a>
+  <a href="../javase/se-pattern-abstractfactory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Abstract Factory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-builder.html" class="sidebar-item-text sidebar-link">Builder</a>
+  <a href="../javase/se-pattern-builder.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Builder</span></a>
   </div>
 </li>
           <li class="sidebar-item">
-  <b>Structural</b>
+ <span class="menu-text"><b>Structural</b></span>
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-facade.html" class="sidebar-item-text sidebar-link">Facade</a>
+  <a href="../javase/se-pattern-facade.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Facade</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-bridge.html" class="sidebar-item-text sidebar-link">Bridge</a>
+  <a href="../javase/se-pattern-bridge.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bridge</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-decorator.html" class="sidebar-item-text sidebar-link">Decorator</a>
+  <a href="../javase/se-pattern-decorator.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Decorator</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-composite.html" class="sidebar-item-text sidebar-link">Composite</a>
+  <a href="../javase/se-pattern-composite.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Composite</span></a>
   </div>
 </li>
           <li class="sidebar-item">
-  <b>Behavioral</b>
+ <span class="menu-text"><b>Behavioral</b></span>
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-observer.html" class="sidebar-item-text sidebar-link">Observer</a>
+  <a href="../javase/se-pattern-observer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Observer</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-strategy.html" class="sidebar-item-text sidebar-link">Strategy</a>
+  <a href="../javase/se-pattern-strategy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Strategy</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-state.html" class="sidebar-item-text sidebar-link">State</a>
+  <a href="../javase/se-pattern-state.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">State</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-commander.html" class="sidebar-item-text sidebar-link">Commander</a>
+  <a href="../javase/se-pattern-commander.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Commander</span></a>
   </div>
 </li>
       </ul>
@@ -1435,83 +1453,98 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Java SE Laboratories</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text">Java SE Laboratories</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab0-1.html" class="sidebar-item-text sidebar-link">Lab#SE00-1: Maven Person</a>
+  <a href="../javase/selab0-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE00-1: Maven Person</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab0-2.html" class="sidebar-item-text sidebar-link">Lab#SE00-2: Maven Clinic</a>
+  <a href="../javase/selab0-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE00-2: Maven Clinic</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab0-3.html" class="sidebar-item-text sidebar-link">Lab#SE00-3: Library Model</a>
+  <a href="../javase/selab0-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE00-3: Library Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab0-4.html" class="sidebar-item-text sidebar-link">Lab#SE00-4: Abstract/Interface Human</a>
-  </div>
-</li>
-          <li class="px-0"><hr class="sidebar-divider hi "></li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab1-1.html" class="sidebar-item-text sidebar-link">Lab#SE01-1: Maven/Gradle Person and Account</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab1-2.html" class="sidebar-item-text sidebar-link">Lab#SE01-2: Maven/Gradle Person and Account stored in JSON</a>
+  <a href="../javase/selab0-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE00-4: Abstract/Interface Human</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-1.html" class="sidebar-item-text sidebar-link">Lab#SE02-1: Movie/Review, Model</a>
+  <a href="../javase/selab1-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE01-1: Maven/Gradle Person and Account</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-2.html" class="sidebar-item-text sidebar-link">Lab#SE02-2: Movie/Review, CRUD Operations</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-3.html" class="sidebar-item-text sidebar-link">Lab#SE02-3: Movie/Review, factory</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-4.html" class="sidebar-item-text sidebar-link">Lab#SE02-4: Movie/Review, interactivity and coupling</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-5.html" class="sidebar-item-text sidebar-link">Lab#SE02-5: Movie/Review, simulate interactivity by console</a>
+  <a href="../javase/selab1-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE01-2: Maven/Gradle Person and Account stored in JSON</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab3-1.html" class="sidebar-item-text sidebar-link">Lab#SE03-1: Library/Book, Core-Model</a>
+  <a href="../javase/selab2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE02-1: Movie/Review, Model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab3-2.html" class="sidebar-item-text sidebar-link">Lab#SE03-2: Library/Book, Sprint Zero</a>
+  <a href="../javase/selab2-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE02-2: Movie/Review, CRUD Operations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/selab3-3.html" class="sidebar-item-text sidebar-link">Lab#SE03-3: Library/Book, Expand Model</a>
+  <a href="../javase/selab2-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE02-3: Movie/Review, factory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab2-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE02-4: Movie/Review, interactivity and coupling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab2-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE02-5: Movie/Review, simulate interactivity by console</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab3-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE03-1: Library/Book, Core-Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab3-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE03-2: Library/Book, Sprint Zero</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../javase/selab3-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SE03-3: Library/Book, Expand Model</span></a>
   </div>
 </li>
       </ul>
@@ -1519,15 +1552,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">Java SE readings</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+ <span class="menu-text">Java SE readings</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../javase/resources.html" class="sidebar-item-text sidebar-link">Java SE Resources</a>
+  <a href="../javase/resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Java SE Resources</span></a>
   </div>
 </li>
       </ul>
@@ -1535,42 +1570,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#class" id="toc-class" class="nav-link active" data-scroll-target="#class"><span class="toc-section-number">1</span>  Class</a></li>
-  <li><a href="#objects" id="toc-objects" class="nav-link" data-scroll-target="#objects"><span class="toc-section-number">2</span>  Objects</a></li>
-  <li><a href="#creating-objects" id="toc-creating-objects" class="nav-link" data-scroll-target="#creating-objects"><span class="toc-section-number">3</span>  Creating Objects</a>
+  <li><a href="#class" id="toc-class" class="nav-link active" data-scroll-target="#class"><span class="header-section-number">1</span> Class</a></li>
+  <li><a href="#objects" id="toc-objects" class="nav-link" data-scroll-target="#objects"><span class="header-section-number">2</span> Objects</a></li>
+  <li><a href="#creating-objects" id="toc-creating-objects" class="nav-link" data-scroll-target="#creating-objects"><span class="header-section-number">3</span> Creating Objects</a>
   <ul>
-  <li><a href="#declaring-a-variable-to-refer-to-an-object" id="toc-declaring-a-variable-to-refer-to-an-object" class="nav-link" data-scroll-target="#declaring-a-variable-to-refer-to-an-object"><span class="toc-section-number">3.1</span>  Declaring a Variable to Refer to an Object</a></li>
+  <li><a href="#declaring-a-variable-to-refer-to-an-object" id="toc-declaring-a-variable-to-refer-to-an-object" class="nav-link" data-scroll-target="#declaring-a-variable-to-refer-to-an-object"><span class="header-section-number">3.1</span> Declaring a Variable to Refer to an Object</a></li>
   </ul></li>
-  <li><a href="#instantiating-a-class" id="toc-instantiating-a-class" class="nav-link" data-scroll-target="#instantiating-a-class"><span class="toc-section-number">4</span>  Instantiating a Class</a>
+  <li><a href="#instantiating-a-class" id="toc-instantiating-a-class" class="nav-link" data-scroll-target="#instantiating-a-class"><span class="header-section-number">4</span> Instantiating a Class</a>
   <ul>
-  <li><a href="#initializing-an-object" id="toc-initializing-an-object" class="nav-link" data-scroll-target="#initializing-an-object"><span class="toc-section-number">4.1</span>  Initializing an Object</a></li>
-  <li><a href="#example-uml-class-and-object" id="toc-example-uml-class-and-object" class="nav-link" data-scroll-target="#example-uml-class-and-object"><span class="toc-section-number">4.2</span>  Example UML: class and object</a></li>
+  <li><a href="#initializing-an-object" id="toc-initializing-an-object" class="nav-link" data-scroll-target="#initializing-an-object"><span class="header-section-number">4.1</span> Initializing an Object</a></li>
+  <li><a href="#example-uml-class-and-object" id="toc-example-uml-class-and-object" class="nav-link" data-scroll-target="#example-uml-class-and-object"><span class="header-section-number">4.2</span> Example UML: class and object</a></li>
   </ul></li>
-  <li><a href="#ways-to-create-an-object" id="toc-ways-to-create-an-object" class="nav-link" data-scroll-target="#ways-to-create-an-object"><span class="toc-section-number">5</span>  Ways to create an object</a></li>
-  <li><a href="#casting-typecasting" id="toc-casting-typecasting" class="nav-link" data-scroll-target="#casting-typecasting"><span class="toc-section-number">6</span>  Casting (typecasting)</a>
+  <li><a href="#ways-to-create-an-object" id="toc-ways-to-create-an-object" class="nav-link" data-scroll-target="#ways-to-create-an-object"><span class="header-section-number">5</span> Ways to create an object</a></li>
+  <li><a href="#casting-typecasting" id="toc-casting-typecasting" class="nav-link" data-scroll-target="#casting-typecasting"><span class="header-section-number">6</span> Casting (typecasting)</a>
   <ul>
-  <li><a href="#explicit-casting" id="toc-explicit-casting" class="nav-link" data-scroll-target="#explicit-casting"><span class="toc-section-number">6.1</span>  Explicit casting</a></li>
-  <li><a href="#implicit-casting" id="toc-implicit-casting" class="nav-link" data-scroll-target="#implicit-casting"><span class="toc-section-number">6.2</span>  Implicit casting</a></li>
-  <li><a href="#casting-in-compilationexecution-time" id="toc-casting-in-compilationexecution-time" class="nav-link" data-scroll-target="#casting-in-compilationexecution-time"><span class="toc-section-number">6.3</span>  Casting in compilation/execution time</a></li>
-  <li><a href="#upcasting-and-downcasting" id="toc-upcasting-and-downcasting" class="nav-link" data-scroll-target="#upcasting-and-downcasting"><span class="toc-section-number">6.4</span>  Upcasting and downcasting</a></li>
-  <li><a href="#upcasting" id="toc-upcasting" class="nav-link" data-scroll-target="#upcasting"><span class="toc-section-number">6.5</span>  Upcasting</a></li>
-  <li><a href="#downcasting" id="toc-downcasting" class="nav-link" data-scroll-target="#downcasting"><span class="toc-section-number">6.6</span>  Downcasting</a></li>
+  <li><a href="#explicit-casting" id="toc-explicit-casting" class="nav-link" data-scroll-target="#explicit-casting"><span class="header-section-number">6.1</span> Explicit casting</a></li>
+  <li><a href="#implicit-casting" id="toc-implicit-casting" class="nav-link" data-scroll-target="#implicit-casting"><span class="header-section-number">6.2</span> Implicit casting</a></li>
+  <li><a href="#casting-in-compilationexecution-time" id="toc-casting-in-compilationexecution-time" class="nav-link" data-scroll-target="#casting-in-compilationexecution-time"><span class="header-section-number">6.3</span> Casting in compilation/execution time</a></li>
+  <li><a href="#upcasting-and-downcasting" id="toc-upcasting-and-downcasting" class="nav-link" data-scroll-target="#upcasting-and-downcasting"><span class="header-section-number">6.4</span> Upcasting and downcasting</a></li>
+  <li><a href="#upcasting" id="toc-upcasting" class="nav-link" data-scroll-target="#upcasting"><span class="header-section-number">6.5</span> Upcasting</a></li>
+  <li><a href="#downcasting" id="toc-downcasting" class="nav-link" data-scroll-target="#downcasting"><span class="header-section-number">6.6</span> Downcasting</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/se-concepts-objects.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/main/javase/se-concepts-objects.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../javase/se-concepts-objects.html">Java Concepts</a></li><li class="breadcrumb-item"><a href="../javase/se-concepts-objects.html">Java SE: Class and Objects</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Java SE: Class and Objects</h1>
+<h1 class="title">Java SE: Class and Objects</h1>
 <p class="subtitle lead">Java Fundamentals</p>
   <div class="quarto-categories">
     <div class="quarto-category">javase</div>
@@ -1609,14 +1645,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, May 25, 2023</p>
+      <p class="date-modified">Tuesday, September 26, 2023</p>
     </div>
   </div>
     
   </div>
   
 
+
 </header>
+
 
 <div class="summary">
 <p>📘 <strong>What is a Java Class</strong></p>
@@ -1636,17 +1674,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Let’s create a <code>class</code> called <code>Person</code>.</p>
 <p>What would we want to know about a person? What we want to know depends on what problem we are trying to solve. In one situation, perhaps when creating an address book, we might want to know the person’s name and phone number and email.</p>
 <p>Here’s a possible <code>Person</code> class with <code>**instance variables, constructor, and methods.**</code></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/javase/personClassDefn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../images/javase/personClassDefn.png" class="img-fluid figure-img"></a></p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div>
+<a href="..\images/javase/personClassDefn.png" class="lightbox" data-description=": " data-gallery="quarto-lightbox-gallery-1"><img src="..\images/javase/personClassDefn.png" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="img-fluid figure-img"></a>
+</div>
 </figure>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Person class
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1657,80 +1697,80 @@ Person class
 <div class="code-with-filename-file">
 <pre><strong>Person.java</strong></pre>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">public</span> <span class="kw">class</span> Person <span class="op">{</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>  <span class="co">//fields  </span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>  <span class="kw">private</span> <span class="dt">int</span> age<span class="op">;</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="kw">private</span> <span class="bu">String</span> address<span class="op">;</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="kw">private</span> <span class="dt">double</span> salary<span class="op">;</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>  <span class="kw">private</span> <span class="bu">String</span> phoneNumber<span class="op">;</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>  <span class="kw">private</span> <span class="bu">String</span> email<span class="op">;</span> </span>
-<span id="cb1-9"><a href="#cb1-9"></a>  </span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="co">//constructor</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="kw">public</span> <span class="fu">Person</span><span class="op">(</span><span class="dt">int</span> age<span class="op">,</span> <span class="bu">String</span> name<span class="op">,</span> <span class="bu">String</span> address<span class="op">,</span> <span class="dt">double</span> salary<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">age</span> <span class="op">=</span> age<span class="op">;</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">name</span> <span class="op">=</span> name<span class="op">;</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">address</span> <span class="op">=</span> address<span class="op">;</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">salary</span> <span class="op">=</span> salary<span class="op">;</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">email</span> <span class="op">=</span> email<span class="op">;</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">phoneNumber</span> <span class="op">=</span> phoneNumber<span class="op">;</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="op">}</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a></span>
-<span id="cb1-20"><a href="#cb1-20"></a>    <span class="co">//constructor</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>  <span class="kw">public</span> <span class="fu">Person</span><span class="op">(</span><span class="dt">int</span> age<span class="op">,</span> <span class="bu">String</span> name<span class="op">,</span> <span class="bu">String</span> email<span class="op">,</span> <span class="bu">String</span> phoneNumber<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">age</span> <span class="op">=</span> age<span class="op">;</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">name</span> <span class="op">=</span> name<span class="op">;</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">address</span> <span class="op">=</span> address<span class="op">;</span></span>
-<span id="cb1-25"><a href="#cb1-25"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">salary</span> <span class="op">=</span> salary<span class="op">;</span></span>
-<span id="cb1-26"><a href="#cb1-26"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">email</span> <span class="op">=</span> email<span class="op">;</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">phoneNumber</span> <span class="op">=</span> phoneNumber<span class="op">;</span></span>
-<span id="cb1-28"><a href="#cb1-28"></a>  <span class="op">}</span></span>
-<span id="cb1-29"><a href="#cb1-29"></a>  </span>
-<span id="cb1-30"><a href="#cb1-30"></a>  <span class="co">//methods</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getAge</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb1-32"><a href="#cb1-32"></a>    <span class="cf">return</span> age<span class="op">;</span></span>
-<span id="cb1-33"><a href="#cb1-33"></a>  <span class="op">}</span></span>
-<span id="cb1-34"><a href="#cb1-34"></a>  </span>
-<span id="cb1-35"><a href="#cb1-35"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setAge</span><span class="op">(</span><span class="dt">int</span> age<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-36"><a href="#cb1-36"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">age</span> <span class="op">=</span> age<span class="op">;</span></span>
-<span id="cb1-37"><a href="#cb1-37"></a>  <span class="op">}</span></span>
-<span id="cb1-38"><a href="#cb1-38"></a>  </span>
-<span id="cb1-39"><a href="#cb1-39"></a>  <span class="kw">public</span> <span class="bu">String</span> <span class="fu">getName</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb1-40"><a href="#cb1-40"></a>    <span class="cf">return</span> name<span class="op">;</span></span>
-<span id="cb1-41"><a href="#cb1-41"></a>  <span class="op">}</span></span>
-<span id="cb1-42"><a href="#cb1-42"></a>  </span>
-<span id="cb1-43"><a href="#cb1-43"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setName</span><span class="op">(</span><span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-44"><a href="#cb1-44"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">name</span> <span class="op">=</span> name<span class="op">;</span></span>
-<span id="cb1-45"><a href="#cb1-45"></a>  <span class="op">}</span></span>
-<span id="cb1-46"><a href="#cb1-46"></a>  </span>
-<span id="cb1-47"><a href="#cb1-47"></a>  <span class="kw">public</span> <span class="bu">String</span> <span class="fu">getAddress</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb1-48"><a href="#cb1-48"></a>    <span class="cf">return</span> address<span class="op">;</span></span>
-<span id="cb1-49"><a href="#cb1-49"></a>  <span class="op">}</span></span>
-<span id="cb1-50"><a href="#cb1-50"></a>  </span>
-<span id="cb1-51"><a href="#cb1-51"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setAddress</span><span class="op">(</span><span class="bu">String</span> address<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-52"><a href="#cb1-52"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">address</span> <span class="op">=</span> address<span class="op">;</span></span>
-<span id="cb1-53"><a href="#cb1-53"></a>  <span class="op">}</span></span>
-<span id="cb1-54"><a href="#cb1-54"></a>  </span>
-<span id="cb1-55"><a href="#cb1-55"></a>  <span class="kw">public</span> <span class="dt">double</span> <span class="fu">getSalary</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb1-56"><a href="#cb1-56"></a>    <span class="cf">return</span> salary<span class="op">;</span></span>
-<span id="cb1-57"><a href="#cb1-57"></a>  <span class="op">}</span></span>
-<span id="cb1-58"><a href="#cb1-58"></a>  </span>
-<span id="cb1-59"><a href="#cb1-59"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setSalary</span><span class="op">(</span><span class="dt">double</span> salary<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-60"><a href="#cb1-60"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">salary</span> <span class="op">=</span> salary<span class="op">;</span></span>
-<span id="cb1-61"><a href="#cb1-61"></a>  <span class="op">}</span></span>
-<span id="cb1-62"><a href="#cb1-62"></a>  </span>
-<span id="cb1-63"><a href="#cb1-63"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">study</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb1-64"><a href="#cb1-64"></a>    <span class="co">// Do some work here</span></span>
-<span id="cb1-65"><a href="#cb1-65"></a>  <span class="op">}</span></span>
-<span id="cb1-66"><a href="#cb1-66"></a>  </span>
-<span id="cb1-67"><a href="#cb1-67"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">receivePaycheck</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb1-68"><a href="#cb1-68"></a>    <span class="co">// Process salary and distribute paychecks</span></span>
-<span id="cb1-69"><a href="#cb1-69"></a>  <span class="op">}</span></span>
-<span id="cb1-70"><a href="#cb1-70"></a></span>
-<span id="cb1-71"><a href="#cb1-71"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">getOlder</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb1-72"><a href="#cb1-72"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">age</span><span class="op">++;</span></span>
-<span id="cb1-73"><a href="#cb1-73"></a>  <span class="op">}</span></span>
-<span id="cb1-74"><a href="#cb1-74"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-filename="Person.java"><pre class="sourceCode java code-overflow-wrap code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> Person <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">//fields  </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">int</span> age<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">String</span> address<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">double</span> salary<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">String</span> phoneNumber<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">String</span> email<span class="op">;</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">//constructor</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="fu">Person</span><span class="op">(</span><span class="dt">int</span> age<span class="op">,</span> <span class="bu">String</span> name<span class="op">,</span> <span class="bu">String</span> address<span class="op">,</span> <span class="dt">double</span> salary<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">age</span> <span class="op">=</span> age<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">name</span> <span class="op">=</span> name<span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">address</span> <span class="op">=</span> address<span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">salary</span> <span class="op">=</span> salary<span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">email</span> <span class="op">=</span> email<span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">phoneNumber</span> <span class="op">=</span> phoneNumber<span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">//constructor</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="fu">Person</span><span class="op">(</span><span class="dt">int</span> age<span class="op">,</span> <span class="bu">String</span> name<span class="op">,</span> <span class="bu">String</span> email<span class="op">,</span> <span class="bu">String</span> phoneNumber<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">age</span> <span class="op">=</span> age<span class="op">;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">name</span> <span class="op">=</span> name<span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">address</span> <span class="op">=</span> address<span class="op">;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">salary</span> <span class="op">=</span> salary<span class="op">;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">email</span> <span class="op">=</span> email<span class="op">;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">phoneNumber</span> <span class="op">=</span> phoneNumber<span class="op">;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">//methods</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getAge</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> age<span class="op">;</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setAge</span><span class="op">(</span><span class="dt">int</span> age<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">age</span> <span class="op">=</span> age<span class="op">;</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="bu">String</span> <span class="fu">getName</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> name<span class="op">;</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setName</span><span class="op">(</span><span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">name</span> <span class="op">=</span> name<span class="op">;</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="bu">String</span> <span class="fu">getAddress</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> address<span class="op">;</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setAddress</span><span class="op">(</span><span class="bu">String</span> address<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">address</span> <span class="op">=</span> address<span class="op">;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">double</span> <span class="fu">getSalary</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> salary<span class="op">;</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setSalary</span><span class="op">(</span><span class="dt">double</span> salary<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">salary</span> <span class="op">=</span> salary<span class="op">;</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">study</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Do some work here</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">receivePaycheck</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Process salary and distribute paychecks</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">getOlder</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">age</span><span class="op">++;</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1741,8 +1781,8 @@ Person class
 <p><mark>Each object has its own unique identity, and it maintains its own state by storing the values of its attributes. The object’s behavior is defined by the methods that operate on its attributes, and these methods can be invoked by other code to ask the object to perform a specific action<mark>.</mark></mark></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/javase/oop-classobject.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Java SE Basic Principles OOP Class and Object"><img src="../images/javase/oop-classobject.png" class="img-fluid figure-img" style="width:50.0%"></a></p>
-<p></p><figcaption class="figure-caption">Java SE Basic Principles OOP Class and Object</figcaption><p></p>
+<p><a href="..\images/javase/oop-classobject.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-2" title="Java SE Basic Principles OOP Class and Object"><img src="..\images/javase/oop-classobject.png" class="img-fluid figure-img" style="width:50.0%" alt="Java SE Basic Principles OOP Class and Object"></a></p>
+<figcaption>Java SE Basic Principles OOP Class and Object</figcaption>
 </figure>
 </div>
 
@@ -1779,12 +1819,12 @@ Person class
 <p>This notifies the compiler that you will use name to refer to data whose type is type. With a primitive variable, this declaration also reserves the proper amount of memory for the variable.</p>
 <p>You can also declare a reference variable on its own line. For example:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="bu">Point</span> originOne<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Just a reference variable: is empty
 </div>
 </div>
@@ -1797,8 +1837,8 @@ Just a reference variable: is empty
 <p><code>originOne</code> –&gt; <strong>null</strong></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/javase/pointToObject-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="“originOne –> null” figure part 1"><img src="../images/javase/pointToObject-1.png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">“originOne –&gt; null” figure part 1</figcaption><p></p>
+<p><a href="..\images/javase/pointToObject-1.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-3" title="“originOne –> null” figure part 1"><img src="..\images/javase/pointToObject-1.png" class="img-fluid figure-img" alt="“originOne –> null” figure part 1"></a></p>
+<figcaption>“originOne –&gt; null” figure part 1</figcaption>
 </figure>
 </div>
 </section>
@@ -1809,12 +1849,12 @@ Just a reference variable: is empty
 <p>📘 <strong>Instantiating a Class</strong></p>
 <p>The <code>new</code> <strong>operator instantiates a class by allocating memory for a new object and returning a reference to that memory</strong>. The new operator also invokes the object constructor.</p>
 </div>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Instantiating a class
 </div>
 </div>
@@ -1828,8 +1868,8 @@ Instantiating a class
 <p><code>originOne</code> –&gt; <strong>Point object</strong></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/javase/pointToObject-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="“originOne –> Point object” figure part 2"><img src="../images/javase/pointToObject-2.png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">“originOne –&gt; Point object” figure part 2</figcaption><p></p>
+<p><a href="..\images/javase/pointToObject-2.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-4" title="“originOne –> Point object” figure part 2"><img src="..\images/javase/pointToObject-2.png" class="img-fluid figure-img" alt="“originOne –> Point object” figure part 2"></a></p>
+<figcaption>“originOne –&gt; Point object” figure part 2</figcaption>
 </figure>
 </div>
 <p>The reference returned by the new operator does not have to be assigned to a variable. It can also be used directly in an expression. For example:</p>
@@ -1855,8 +1895,8 @@ Instantiating a class
 <h3 data-number="4.2" class="anchored" data-anchor-id="example-uml-class-and-object"><span class="header-section-number">4.2</span> Example UML: class and object</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/javase/UML_ClassInstance.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="The class body may contain member variables, constructors, public methods, private helper methods and others."><img src="../images/javase/UML_ClassInstance.png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">The class body may contain member variables, constructors, public methods, private helper methods and others.</figcaption><p></p>
+<p><a href="..\images/javase/UML_ClassInstance.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-5" title="The class body may contain member variables, constructors, public methods, private helper methods and others."><img src="..\images/javase/UML_ClassInstance.png" class="img-fluid figure-img" alt="The class body may contain member variables, constructors, public methods, private helper methods and others."></a></p>
+<figcaption>The class body may contain member variables, constructors, public methods, private helper methods and others.</figcaption>
 </figure>
 </div>
 </section>
@@ -1871,12 +1911,12 @@ Instantiating a class
 <ol start="2" type="1">
 <li>Using the <code>clone()</code> method: if you want to create a copy of an existing object, you can use the clone() method.</li>
 </ol>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1891,12 +1931,12 @@ Note
 <li><p>Using <code>factory</code> methods: A factory method is a <code>static</code> method that returns an instance of a class. <strong>Factory methods are often used to create objects</strong> when you need more flexibility or control over the object creation process.</p></li>
 <li><p>Using <code>reflection</code>: Reflection is a feature of the Java language that allows you to <strong>inspect and manipulate the structure of a class at runtime</strong>.</p></li>
 </ol>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1910,12 +1950,12 @@ Note
 <ol start="5" type="1">
 <li>Using object <code>deserialization</code>: You can use object deserialization to create an object from its serialized form, which is a stream of bytes that represents the object’s state.</li>
 </ol>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1947,12 +1987,12 @@ Note
 </section>
 <section id="casting-in-compilationexecution-time" class="level3 page-columns page-full" data-number="6.3">
 <h3 data-number="6.3" class="anchored" data-anchor-id="casting-in-compilationexecution-time"><span class="header-section-number">6.3</span> Casting in compilation/execution time</h3>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -1973,12 +2013,12 @@ Note
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Execution time refers to t<strong>he period of time during which the compiled program runs and performs its intended operations</strong>. This is the phase of the program when it’s executed by the <code>CPU</code> and its instructions are executed.</p>
 </div></div><p>On the other hand, if the casting is done properly and the object is compatible with the target type, it can improve the performance and efficiency of the program.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -1992,8 +2032,8 @@ Important
 <p>Before reading this section you <strong>must</strong> read and <strong>understand</strong> <a href="../javase/se-principles-inheritance.html">how does inherence work</a></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/javase/UpcastingVsDowncasting.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="A process of converting one data type to another is known as Casting (typecasting) and Upcasting and Downcasting defines weather it is up or down in a inherence relationship"><img src="../images/javase/UpcastingVsDowncasting.jpg" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">A process of converting one data type to another is known as Casting (typecasting) and Upcasting and Downcasting defines weather it is up or down in a inherence relationship</figcaption><p></p>
+<p><a href="..\images/javase/UpcastingVsDowncasting.jpg" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-6" title="A process of converting one data type to another is known as Casting (typecasting) and Upcasting and Downcasting defines weather it is up or down in a inherence relationship"><img src="..\images/javase/UpcastingVsDowncasting.jpg" class="img-fluid figure-img" alt="A process of converting one data type to another is known as Casting (typecasting) and Upcasting and Downcasting defines weather it is up or down in a inherence relationship"></a></p>
+<figcaption>A process of converting one data type to another is known as Casting (typecasting) and Upcasting and Downcasting defines weather it is up or down in a inherence relationship</figcaption>
 </figure>
 </div>
 </section>
@@ -2004,28 +2044,28 @@ Important
 <div class="code-with-filename-file">
 <pre><strong>TypeCasrting.java</strong></pre>
 </div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">// Base Class</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">public</span> <span class="kw">class</span> Animal</span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="op">{</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">talk</span><span class="op">()</span> <span class="op">{</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"I am talking"</span><span class="op">);</span> <span class="op">}</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="op">}</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="co">// Inherited class</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a><span class="kw">class</span> Cat <span class="kw">extends</span> Animal</span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="op">{</span></span>
-<span id="cb13-9"><a href="#cb13-9"></a>    <span class="co">// This method overrides show() of Parent</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a>    <span class="at">@Override</span></span>
-<span id="cb13-11"><a href="#cb13-11"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">talk</span><span class="op">()</span> <span class="op">{</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Miauuu, miauuuu, miauuu!!!"</span><span class="op">);</span> <span class="op">}</span></span>
-<span id="cb13-12"><a href="#cb13-12"></a><span class="op">}</span></span>
-<span id="cb13-13"><a href="#cb13-13"></a> </span>
-<span id="cb13-14"><a href="#cb13-14"></a><span class="kw">public</span> <span class="kw">class</span> Test</span>
-<span id="cb13-15"><a href="#cb13-15"></a><span class="op">{</span></span>
-<span id="cb13-16"><a href="#cb13-16"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testUpCasting</span><span class="op">(){</span></span>
-<span id="cb13-17"><a href="#cb13-17"></a>    </span>
-<span id="cb13-18"><a href="#cb13-18"></a>        Animal cat <span class="op">=</span> <span class="kw">new</span> <span class="fu">Cat</span><span class="op">();</span></span>
-<span id="cb13-19"><a href="#cb13-19"></a>        cat<span class="op">.</span><span class="fu">talk</span><span class="op">();</span></span>
-<span id="cb13-20"><a href="#cb13-20"></a>        <span class="co">// output: Miauuu, miauuuu, miauuu!!!)</span></span>
-<span id="cb13-21"><a href="#cb13-21"></a>    <span class="op">}</span></span>
-<span id="cb13-22"><a href="#cb13-22"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13" data-filename="TypeCasrting.java"><pre class="sourceCode java code-overflow-wrap code-with-copy"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Base Class</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> Animal</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">talk</span><span class="op">()</span> <span class="op">{</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"I am talking"</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Inherited class</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Cat <span class="kw">extends</span> Animal</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This method overrides show() of Parent</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Override</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">talk</span><span class="op">()</span> <span class="op">{</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Miauuu, miauuuu, miauuu!!!"</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> Test</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testUpCasting</span><span class="op">(){</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        Animal cat <span class="op">=</span> <span class="kw">new</span> <span class="fu">Cat</span><span class="op">();</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        cat<span class="op">.</span><span class="fu">talk</span><span class="op">();</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        <span class="co">// output: Miauuu, miauuuu, miauuu!!!)</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="downcasting" class="level3" data-number="6.6">
@@ -2035,48 +2075,48 @@ Important
 <div class="code-with-filename-file">
 <pre><strong>TypeCasrting.java</strong></pre>
 </div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">// Base Class</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">public</span> <span class="kw">class</span> Animal</span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="op">{</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">talk</span><span class="op">()</span> <span class="op">{</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"I am talking"</span><span class="op">);</span> <span class="op">}</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="op">}</span></span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="co">// Inherited class</span></span>
-<span id="cb14-7"><a href="#cb14-7"></a><span class="kw">class</span> Cat <span class="kw">extends</span> Animal</span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="op">{</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a>    <span class="co">// This method overrides show() of Parent</span></span>
-<span id="cb14-10"><a href="#cb14-10"></a>    <span class="at">@Override</span></span>
-<span id="cb14-11"><a href="#cb14-11"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">talk</span><span class="op">()</span> <span class="op">{</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Miauuu, miauuuu, miauuu!!!"</span><span class="op">);</span> <span class="op">}</span></span>
-<span id="cb14-12"><a href="#cb14-12"></a><span class="op">}</span></span>
-<span id="cb14-13"><a href="#cb14-13"></a> </span>
-<span id="cb14-14"><a href="#cb14-14"></a><span class="kw">public</span> <span class="kw">class</span> Test</span>
-<span id="cb14-15"><a href="#cb14-15"></a><span class="op">{</span></span>
-<span id="cb14-16"><a href="#cb14-16"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testDownCasting</span><span class="op">(){</span></span>
-<span id="cb14-17"><a href="#cb14-17"></a></span>
-<span id="cb14-18"><a href="#cb14-18"></a>        Cat cat <span class="op">=</span> <span class="kw">new</span> <span class="fu">Animal</span><span class="op">();</span></span>
-<span id="cb14-19"><a href="#cb14-19"></a>        <span class="co">// compiling time error, try to cast but it can not</span></span>
-<span id="cb14-20"><a href="#cb14-20"></a>        Animal animal <span class="op">=</span> <span class="kw">new</span> <span class="fu">Animal</span><span class="op">();</span></span>
-<span id="cb14-21"><a href="#cb14-21"></a>        <span class="co">// creatng an object of the superclass is ok</span></span>
-<span id="cb14-22"><a href="#cb14-22"></a>        Cat cat <span class="op">=</span> <span class="op">(</span>Cat<span class="op">)</span> animal<span class="op">;</span></span>
-<span id="cb14-23"><a href="#cb14-23"></a>        <span class="co">// downcasting</span></span>
-<span id="cb14-24"><a href="#cb14-24"></a>        cat<span class="op">.</span><span class="fu">talk</span><span class="op">();</span></span>
-<span id="cb14-25"><a href="#cb14-25"></a>        <span class="co">// output: Miauuu, miauuuu, miauuu!!!)</span></span>
-<span id="cb14-26"><a href="#cb14-26"></a>    <span class="op">}</span></span>
-<span id="cb14-27"><a href="#cb14-27"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14" data-filename="TypeCasrting.java"><pre class="sourceCode java code-overflow-wrap code-with-copy"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Base Class</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> Animal</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">talk</span><span class="op">()</span> <span class="op">{</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"I am talking"</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Inherited class</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Cat <span class="kw">extends</span> Animal</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This method overrides show() of Parent</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Override</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">talk</span><span class="op">()</span> <span class="op">{</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Miauuu, miauuuu, miauuu!!!"</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> Test</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testDownCasting</span><span class="op">(){</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>        Cat cat <span class="op">=</span> <span class="kw">new</span> <span class="fu">Animal</span><span class="op">();</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">// compiling time error, try to cast but it can not</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>        Animal animal <span class="op">=</span> <span class="kw">new</span> <span class="fu">Animal</span><span class="op">();</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>        <span class="co">// creatng an object of the superclass is ok</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>        Cat cat <span class="op">=</span> <span class="op">(</span>Cat<span class="op">)</span> animal<span class="op">;</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>        <span class="co">// downcasting</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>        cat<span class="op">.</span><span class="fu">talk</span><span class="op">();</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>        <span class="co">// output: Miauuu, miauuuu, miauuu!!!)</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!--- navLinks -->
 <br><br>
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../javase/se-concepts-tdd.html"> Java SE: JUnit and TDD</a> <br></p>
+<p><br> <a href="../javase/se-concepts-tdd.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> Java SE: JUnit and TDD</a> <br></p>
 </div>
 <br>
 <div class="column center">
-<p><br> <a href="#top"> top</a> <br></p>
+<p><br> <a href="#top"><i class="fa-solid fa-arrow-up" aria-label="arrow-up"></i> top</a> <br></p>
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../javase/se-concepts-scope.html">Java SE: Scope </a> <br></p>
+<p><br> <a href="../javase/se-concepts-scope.html">Java SE: Scope <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
 </div>
@@ -2127,6 +2167,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -2195,13 +2262,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -2228,9 +2297,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -2266,10 +2349,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -2279,8 +2361,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2295,6 +2386,241 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        typesetMath(container);
+        return container.innerHTML
+      } else {
+        typesetMath(note);
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      typesetMath(note);
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -2337,8 +2663,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left"><a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0 International (CC BY 4.0)</a></div>   
-      <div class="nav-footer-center">If you want to go far, walk slow / We love dukkha</div>
+    <div class="nav-footer-left">
+<p><a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0 International (CC BY 4.0)</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>If you want to go far, walk slow / We love dukkha</p>
+</div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -2357,7 +2687,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":true,"openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":true});</script>
+
 
 
 
