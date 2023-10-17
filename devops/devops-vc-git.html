@@ -280,6 +280,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../devops/devops-vc-github.html">
  <span class="dropdown-text">GitHub</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-vc-ideagithub.html">
+ <span class="dropdown-text">Idea and GitHub 2023</span></a>
+  </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">IDEs</li>
         <li>
@@ -1273,6 +1277,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">GitHub</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../devops/devops-vc-ideagithub.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Idea and GitHub 2023</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -1425,9 +1435,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#what-is-git" id="toc-what-is-git" class="nav-link active" data-scroll-target="#what-is-git"><span class="header-section-number">1</span> What is Git</a></li>
   <li><a href="#key-ideas" id="toc-key-ideas" class="nav-link" data-scroll-target="#key-ideas"><span class="header-section-number">2</span> Key-ideas</a></li>
-  <li><a href="#install-git-linux" id="toc-install-git-linux" class="nav-link" data-scroll-target="#install-git-linux"><span class="header-section-number">3</span> Install git linux</a></li>
-  <li><a href="#git-use" id="toc-git-use" class="nav-link" data-scroll-target="#git-use"><span class="header-section-number">4</span> Git use</a></li>
-  <li><a href="#git-cheat-sheet" id="toc-git-cheat-sheet" class="nav-link" data-scroll-target="#git-cheat-sheet"><span class="header-section-number">5</span> Git cheat-sheet</a></li>
+  <li><a href="#git-is-immutable" id="toc-git-is-immutable" class="nav-link" data-scroll-target="#git-is-immutable"><span class="header-section-number">3</span> git is immutable</a></li>
+  <li><a href="#install-git-linux" id="toc-install-git-linux" class="nav-link" data-scroll-target="#install-git-linux"><span class="header-section-number">4</span> Install git linux</a></li>
+  <li><a href="#git-use" id="toc-git-use" class="nav-link" data-scroll-target="#git-use"><span class="header-section-number">5</span> Git use</a></li>
+  <li><a href="#git-cheat-sheet" id="toc-git-cheat-sheet" class="nav-link" data-scroll-target="#git-cheat-sheet"><span class="header-section-number">6</span> Git cheat-sheet</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/main/devops/devops-vc-git.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1470,7 +1481,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, May 25, 2023</p>
+      <p class="date-modified">Tuesday, October 17, 2023</p>
     </div>
   </div>
     
@@ -1534,8 +1545,29 @@ Linux Torwalds
 </ul>
 <p><a href="https://sites.google.com/view/devopscifo/git">more info on</a></p>
 </section>
-<section id="install-git-linux" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="install-git-linux"><span class="header-section-number">3</span> Install git linux</h2>
+<section id="git-is-immutable" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="git-is-immutable"><span class="header-section-number">3</span> git is immutable</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/devops/dictionary-immutable.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-2" title="In short, immutable means: unchanging over time or unable to change"><img src="../images/devops/dictionary-immutable.png" class="img-fluid figure-img" alt="In short, immutable means: unchanging over time or unable to change"></a></p>
+<figcaption>In short, immutable means: unchanging over time or unable to change</figcaption>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p><strong>Immutable object</strong> In object-oriented and functional programming, an immutable object is an object whose state cannot be modified after it is created. This is in contrast to a mutable object, which can be modified after it is created (from <a href="https://en.wikipedia.org/wiki/Immutable_object?ref=blog.git-init.com">Wikipedia</a>).</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/devops/commit-snapshots.001.jpeg" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-3" title="Commits can never be tampered with or modified once they are created!"><img src="../images/devops/commit-snapshots.001.jpeg" class="img-fluid figure-img" alt="Commits can never be tampered with or modified once they are created!"></a></p>
+<figcaption>Commits can never be tampered with or modified once they are created!</figcaption>
+</figure>
+</div>
+<p>So, what does immutable snapshots refer to? In Git, <strong>all commits are immutable snapshots of your project (ignored files excluded) at a specific point in time</strong>.</p>
+<p>This means that each and <mark>every commit contains a unique representation of your entire project, not just the modified or added files (deltas)</mark>, at the time the commit was created. Apart from the actual files, each commit is also infused with relevant metadata; all of which is immutable!</p>
+<p>check oot this article for more <a href="https://blog.git-init.com/immutable-snapshot-in-git/">info</a> about immutability</p>
+</section>
+<section id="install-git-linux" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="install-git-linux"><span class="header-section-number">4</span> Install git linux</h2>
 <p><strong>Debian / Ubuntu / Mint <code>apt-get</code></strong></p>
 <p>Git packages are available via apt, go to terminal and from your shell, install Git using <code>apt-get</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">$</span> sudo apt-get update</span>
@@ -1547,11 +1579,11 @@ Linux Torwalds
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">$</span> git config <span class="at">--global</span> user.name <span class="st">"Emma Paris"</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="ex">$</span> git config <span class="at">--global</span> user.email <span class="st">"eparis@atlassian.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="git-use" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="git-use"><span class="header-section-number">4</span> Git use</h2>
+<section id="git-use" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="git-use"><span class="header-section-number">5</span> Git use</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://upload.wikimedia.org/wikipedia/commons/d/d8/Git_operations.svg" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-2" title="Diagram showing some common Git operations by Daniel Kinzler wikicommons"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d8/Git_operations.svg" class="img-fluid figure-img" style="width:70.0%" alt="Diagram showing some common Git operations by Daniel Kinzler wikicommons"></a></p>
+<p><a href="https://upload.wikimedia.org/wikipedia/commons/d/d8/Git_operations.svg" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-4" title="Diagram showing some common Git operations by Daniel Kinzler wikicommons"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d8/Git_operations.svg" class="img-fluid figure-img" style="width:70.0%" alt="Diagram showing some common Git operations by Daniel Kinzler wikicommons"></a></p>
 <figcaption>Diagram showing some common Git operations by <a href="https://commons.wikimedia.org/wiki/User:Duesentrieb" title="User:Duesentrieb">Daniel Kinzler wikicommons</a></figcaption>
 </figure>
 </div>
@@ -1570,8 +1602,8 @@ Linux Torwalds
 <li><code>git commit -a</code>: commits all modified files to a local branch (shorthand for “git add” and “git commit”)</li>
 </ul>
 </section>
-<section id="git-cheat-sheet" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="git-cheat-sheet"><span class="header-section-number">5</span> Git cheat-sheet</h2>
+<section id="git-cheat-sheet" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="git-cheat-sheet"><span class="header-section-number">6</span> Git cheat-sheet</h2>
 <p><a href="../images/devops/SGit-cheat-sheet-Red-Hat-Developer.pdf">Git-cheat-sheet-Red-Hat-Developer</a></p>
 <p><a href="../images/devops/SWTM-2088_Atlassian-Git-Cheatsheet (1).pdf">Download Git Cheat-sheet Altassian</a></p>
 <img src="../images/devops/git-cheat-sehhet.png" class="img-fluid" alt="Git Cheat-sheet"> <!--- navLinks --> <br><br>
@@ -2156,7 +2188,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});</script>
 
 
 
