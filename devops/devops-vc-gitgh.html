@@ -9,7 +9,7 @@
 <meta name="author" content="albertprofe">
 <meta name="description" content="GitHub is a software development platform in the cloud. It’s used for storing, tracking, and collaborating on software projects.">
 
-<title>albertprofe wiki - Idea and GitHub 2023</title>
+<title>albertprofe wiki - Git and GitHub 2023 CLI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -46,9 +80,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1162,7 +1193,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../devops/devops-vc-git.html">Version Control</a></li><li class="breadcrumb-item"><a href="../devops/devops-vc-ideagithub.html">Idea and GitHub 2023</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../devops/devops-vc-git.html">Version Control</a></li><li class="breadcrumb-item"><a href="../devops/devops-vc-gitgh.html">Git and GitHub 2023 CLI</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -1249,13 +1280,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../devops/devops-vc-ideagithub.html" class="sidebar-item-text sidebar-link active">
+  <a href="../devops/devops-vc-ideagithub.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Idea and GitHub 2023</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../devops/devops-vc-gitgh.html" class="sidebar-item-text sidebar-link">
+  <a href="../devops/devops-vc-gitgh.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Git and GitHub 2023 CLI</span></a>
   </div>
 </li>
@@ -1409,19 +1440,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview-how-to-connect-local-inteljidea-with-remote-repository-on-github" id="toc-overview-how-to-connect-local-inteljidea-with-remote-repository-on-github" class="nav-link active" data-scroll-target="#overview-how-to-connect-local-inteljidea-with-remote-repository-on-github"><span class="header-section-number">1</span> Overview: how to connect local IntelJIdea with remote repository on GitHub</a></li>
+  <li><a href="#overview-how-with-cli-create-local-and-remote-repo-and-commitpush" id="toc-overview-how-with-cli-create-local-and-remote-repo-and-commitpush" class="nav-link active" data-scroll-target="#overview-how-with-cli-create-local-and-remote-repo-and-commitpush"><span class="header-section-number">1</span> Overview: how with CLI create local and remote repo and commit/push</a></li>
   <li><a href="#set-up-tools" id="toc-set-up-tools" class="nav-link" data-scroll-target="#set-up-tools"><span class="header-section-number">2</span> Set up tools</a></li>
-  <li><a href="#create-localremote-repos-and-first-commitpush" id="toc-create-localremote-repos-and-first-commitpush" class="nav-link" data-scroll-target="#create-localremote-repos-and-first-commitpush"><span class="header-section-number">3</span> Create local/remote repos and first commit/push</a></li>
-  <li><a href="#second-commitpush-and-beyond" id="toc-second-commitpush-and-beyond" class="nav-link" data-scroll-target="#second-commitpush-and-beyond"><span class="header-section-number">4</span> Second commit/push and beyond</a></li>
+  <li><a href="#create-localremote-repos-and-first-commitpush" id="toc-create-localremote-repos-and-first-commitpush" class="nav-link" data-scroll-target="#create-localremote-repos-and-first-commitpush"><span class="header-section-number">3</span> Create local/remote repos and first commit/push</a>
+  <ul>
+  <li><a href="#step1" id="toc-step1" class="nav-link" data-scroll-target="#step1"><span class="header-section-number">3.1</span> Step1</a></li>
+  <li><a href="#step2" id="toc-step2" class="nav-link" data-scroll-target="#step2"><span class="header-section-number">3.2</span> Step2</a></li>
+  <li><a href="#step3" id="toc-step3" class="nav-link" data-scroll-target="#step3"><span class="header-section-number">3.3</span> Step3</a></li>
+  <li><a href="#step4" id="toc-step4" class="nav-link" data-scroll-target="#step4"><span class="header-section-number">3.4</span> Step4</a></li>
+  <li><a href="#step5" id="toc-step5" class="nav-link" data-scroll-target="#step5"><span class="header-section-number">3.5</span> Step5</a></li>
+  <li><a href="#step6" id="toc-step6" class="nav-link" data-scroll-target="#step6"><span class="header-section-number">3.6</span> Step6</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/main/devops/devops-vc-ideagithub.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/main/devops/devops-vc-gitgh.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../devops/devops-vc-git.html">Version Control</a></li><li class="breadcrumb-item"><a href="../devops/devops-vc-ideagithub.html">Idea and GitHub 2023</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../devops/devops-vc-git.html">Version Control</a></li><li class="breadcrumb-item"><a href="../devops/devops-vc-gitgh.html">Git and GitHub 2023 CLI</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Idea and GitHub 2023</h1>
+<h1 class="title">Git and GitHub 2023 CLI</h1>
 <p class="subtitle lead">Software code version control</p>
   <div class="quarto-categories">
     <div class="quarto-category">devops</div>
@@ -1466,227 +1504,76 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="overview-how-to-connect-local-inteljidea-with-remote-repository-on-github" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="overview-how-to-connect-local-inteljidea-with-remote-repository-on-github"><span class="header-section-number">1</span> Overview: how to connect local IntelJIdea with remote repository on GitHub</h2>
+<section id="overview-how-with-cli-create-local-and-remote-repo-and-commitpush" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="overview-how-with-cli-create-local-and-remote-repo-and-commitpush"><span class="header-section-number">1</span> Overview: how with CLI create local and remote repo and commit/push</h2>
 <p>In the fast-paced world of software development, <mark>collaborating with remote teams and utilizing version control systems like GitHub has become an indispensable part of the process of software devolopment</mark>.</p>
-<blockquote class="blockquote">
-<p>Connecting your local IntelliJ IDEA, a popular integrated development environment (IDE), with a remote repository on GitHub is a fundamental skill for developers looking to streamline their workflow and contribute to open-source projects or work with distributed teams.</p>
-</blockquote>
 </section>
 <section id="set-up-tools" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="set-up-tools"><span class="header-section-number">2</span> Set up tools</h2>
 <ul>
 <li>GitHub <a href="https://github.com/">account</a></li>
-<li>Install <a href="../devops/devops-ide-intelljidea.html">IntellJIdea</a> local</li>
 <li>Install <a href="../devops/devops-vc-git.html">git</a>local</li>
-<li><a href="../devops/devops-vc-github.html">Permssion</a> IntellJIdea to write GitHub</li>
+<li><a href="../devops/devops-vc-github.html">Permssion</a> to write GitHub</li>
 <li>CLI <a href="https://cli.github.com/">gh</a></li>
 </ul>
 </section>
 <section id="create-localremote-repos-and-first-commitpush" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="create-localremote-repos-and-first-commitpush"><span class="header-section-number">3</span> Create local/remote repos and first commit/push</h2>
-<p>Open Idea IDE and an empty project</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-description=": "><img src="../images/devops/ghIdea-1.png" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>Create a new file</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-description=": "><img src="../images/devops/ghIdea-2.png" id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>File created</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-description=": "><img src="../images/devops/ghIdea-3.png" id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>Create a local repository with the visual tool Idea git</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-description=": "><img src="../images/devops/ghIdea-4.png" id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>A <strong>local repository created by the visual tool “Idea git” (or IntelliJ IDEA’s built-in Git integration) refers to a version control system repository that exists on your local development machine within the IntelliJ IDEA IDE</strong>.</p>
-<p>It is a <mark>dedicated space where you can store and manage your project’s source code</mark>, track changes, and work on your codebase while benefiting from Git’s version control capabilities.</p>
-<p>Here are some key features and attributes of a local repository created by the Idea Git tool:</p>
+<p>In these six steps, you’re setting up and pushing a project to a remote GitHub repository.</p>
 <ul>
-<li><p><strong>Version Control</strong>: The local repository allows you to track changes made to your project’s source code over time. You can create commits to record modifications, revert to previous states, and manage your project’s history effectively.</p></li>
-<li><p><strong>Isolation</strong>: It’s a self-contained workspace where you can work on your project independently without affecting the code in the remote repository or the work of other collaborators.</p></li>
-<li><p><strong>Branching</strong>: Local repositories support the creation and management of branches. You can develop new features or fix issues in separate branches without altering the main codebase.</p></li>
-<li><p><strong>Commit History</strong>: Idea Git provides a visual representation of your commit history, making it easy to see the changes made to your project and who made them. This is crucial for tracking progress and debugging.</p></li>
-<li><p><strong>Conflict Resolution</strong>: If you’re collaborating with others, you can resolve merge conflicts within the local repository before pushing changes to the remote repository. Idea Git offers tools to help with conflict resolution.</p></li>
-<li><p><strong>Offline Work</strong>: You can continue working on your project and making commits even when you don’t have an internet connection. Once you’re online, you can synchronize your local repository with the remote one.</p></li>
-<li><p><strong>Security and Backup</strong>: Your code is stored securely on your local machine. You can back it up independently from the remote repository, ensuring data safety.</p></li>
+<li>Firstly, you initialize a local Git repository with git init, creating a version control system.</li>
+<li>Then, you stage all changes with git add –all, preparing them for commit.</li>
+<li>In step 3, you use the GitHub CLI to create a new public repository on GitHub.</li>
+<li>Step 4 involves committing your changes with git commit –all, accompanied by a commit message.</li>
+<li>In step 5, you set up a connection to the remote repository using git remote add origin.</li>
+<li>Finally, you push your local changes to GitHub with git push origin master, effectively syncing your local and remote repositories.</li>
 </ul>
-<p>In summary, a local repository created by the visual tool Idea Git in IntelliJ IDEA serves as a critical component in the Git workflow. It allows you to manage your codebase efficiently, experiment with new features, and collaborate with a level of control and isolation that is essential for software development. When you’re satisfied with your changes and ready to share them with others, you can then push your commits to the remote repository on platforms like GitHub, GitLab, or Bitbucket.</p>
-<p>Local repository created</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-5" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" data-description=": "><img src="../images/devops/ghIdea-5.png" id="fig-539a35d47e664c97a50115a146a7f1bd-5" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>Create a remote repository on GitHub</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-6" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" data-description=": "><img src="../images/devops/ghIdea-6.png" id="fig-539a35d47e664c97a50115a146a7f1bd-6" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>Make it public and save the <strong>URL https</strong></p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-7" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-7.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" data-description=": "><img src="../images/devops/ghIdea-7.png" id="fig-539a35d47e664c97a50115a146a7f1bd-7" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>URL new remote repository on GitHub created:</p>
-<p>-https://github.com/AlbertProfe/gitIdea.git</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-8" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-8.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" data-description=": "><img src="../images/devops/ghIdea-8.png" id="fig-539a35d47e664c97a50115a146a7f1bd-8" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>Be careful with <strong>unversioned files</strong>, all this information is in the <strong>Idea Commit Tool.</strong></p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-9" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-10.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" data-description=": "><img src="../images/devops/ghIdea-10.png" id="fig-539a35d47e664c97a50115a146a7f1bd-9" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p><strong>Changes files</strong> are not the same as <strong>unversioned files</strong></p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-10" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-14.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" data-description=": "><img src="../images/devops/ghIdea-14.png" id="fig-539a35d47e664c97a50115a146a7f1bd-10" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>Write down the text for the first commit and the tool will ask you for a <mark>remote repository, created before!</mark></p>
-<blockquote class="blockquote">
-<p>A “commit” in Git is like taking a snapshot of your code at a specific point in time. It records the changes you’ve made to your code, along with a message describing what those changes are. Each commit represents a discrete set of changes and creates a new point in your project’s history. Committing is a way to save your work and create a clear, organized timeline of your project’s development.</p>
-</blockquote>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-11" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-11.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" data-description=": "><img src="../images/devops/ghIdea-11.png" id="fig-539a35d47e664c97a50115a146a7f1bd-11" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>Write dwon (or copy-paste) the remote repository url</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-12" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" data-description=": "><img src="../images/devops/ghIdea-12.png" id="fig-539a35d47e664c97a50115a146a7f1bd-12" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>Now you can <strong>push</strong> the commit to remote repository.</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-13" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-13.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" data-description=": "><img src="../images/devops/ghIdea-13.png" id="fig-539a35d47e664c97a50115a146a7f1bd-13" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>Overall screen a all controls</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-14" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-15.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" data-description=": "><img src="../images/devops/ghIdea-15.png" id="fig-539a35d47e664c97a50115a146a7f1bd-14" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>Commit <strong>pushed</strong> to <strong>remote repository</strong></p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-15" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" data-description=": "><img src="../images/devops/ghIdea-16.png" id="fig-539a35d47e664c97a50115a146a7f1bd-15" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>Let’s chechk on github if the commit is threre:</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-16" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-17.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" data-description=": "><img src="../images/devops/ghIdea-17.png" id="fig-539a35d47e664c97a50115a146a7f1bd-16" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
+<section id="step1" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="step1"><span class="header-section-number">3.1</span> Step1</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a>albert@albert<span class="op">-</span>virtual<span class="op">-</span>machine<span class="op">:~</span><span class="ss">/Desktop/git</span>$ git init</span>
+<span id="cb1-2"><a href="#cb1-2"></a>Initialized empty Git repository <span class="kw">in</span> <span class="ss">/home/albert/Desktop/git/.git/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this initial step, you’re initializing a new Git repository on your local machine. The command git init is used to create an empty Git repository. After executing this command, Git responds with a message indicating that it has successfully initialized an empty repository in the specified directory, which in this case is /home/albert/Desktop/git/.git/. This means you’ve set up a local Git repository on your computer where you can start tracking and versioning your project.</p>
 </section>
-<section id="second-commitpush-and-beyond" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="second-commitpush-and-beyond"><span class="header-section-number">4</span> Second commit/push and beyond</h2>
-<p>Write second commit</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-17" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-18.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" data-description=": "><img src="../images/devops/ghIdea-18.png" id="fig-539a35d47e664c97a50115a146a7f1bd-17" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>Select the changes</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-18" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-19.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" data-description=": "><img src="../images/devops/ghIdea-19.png" id="fig-539a35d47e664c97a50115a146a7f1bd-18" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>Commit and push</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-19" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-20.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" data-description=": "><img src="../images/devops/ghIdea-20.png" id="fig-539a35d47e664c97a50115a146a7f1bd-19" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>Pushed</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-20" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-21.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20" data-description=": "><img src="../images/devops/ghIdea-21.png" id="fig-539a35d47e664c97a50115a146a7f1bd-20" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>Check out the commit on github</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-21" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-22.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21" data-description=": "><img src="../images/devops/ghIdea-22.png" id="fig-539a35d47e664c97a50115a146a7f1bd-21" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
-<p>Watch out the two commits</p>
-<div id="fig-539a35d47e664c97a50115a146a7f1bd-22" class="quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div>
-<a href="../images/devops/ghIdea-23.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22" data-description=": "><img src="../images/devops/ghIdea-23.png" id="fig-539a35d47e664c97a50115a146a7f1bd-22" class="img-fluid figure-img"></a>
-</div>
-</figure>
-</div>
+<section id="step2" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="step2"><span class="header-section-number">3.2</span> Step2</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a>albert@albert<span class="op">-</span>virtual<span class="op">-</span>machine<span class="op">:~</span><span class="ss">/Desktop/git</span>$ git add <span class="op">--</span>all</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this step, you’re using the git add –all command to stage all the changes in your working directory for the next commit. Staging means you’re telling Git which files you want to include in the next commit. By using the –all option, you’re adding all changes, including new files, modifications, and deletions, to the staging area.</p>
+</section>
+<section id="step3" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="step3"><span class="header-section-number">3.3</span> Step3</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a>albert@albert<span class="op">-</span>virtual<span class="op">-</span>machine<span class="op">:~</span><span class="ss">/Desktop/git</span>$ gh repo create testcli <span class="op">--</span><span class="kw">public</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>✓ Created repository AlbertProfe<span class="op">/</span>testcli on GitHub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here, you’re creating a new GitHub repository named “testcli” and making it public using the GitHub CLI (gh). The command gh repo create testcli –public initiates the repository creation process. After successful execution, you receive a confirmation message that the repository “AlbertProfe/testcli” has been created on GitHub.</p>
+</section>
+<section id="step4" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="step4"><span class="header-section-number">3.4</span> Step4</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a>git commit <span class="op">--</span>all</span>
+<span id="cb4-2"><a href="#cb4-2"></a>[<span class="fu">master</span> (<span class="bu">root</span><span class="op">-</span>commit) <span class="dv">0</span><span class="er">afa074</span>] hi</span>
+<span id="cb4-3"><a href="#cb4-3"></a> <span class="dv">1</span> file changed<span class="op">,</span> <span class="dv">2</span> <span class="fu">insertions</span>(<span class="op">+</span>)</span>
+<span id="cb4-4"><a href="#cb4-4"></a> create mode <span class="dv">100644</span> person<span class="op">.</span><span class="at">md</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>With this step, you’ve committed your changes to the local Git repository. The command git commit –all has committed your staged changes with a commit message “hi.” The response from Git shows that one file was changed, adding two insertions, and a new file named “person.md” was created.</p>
+</section>
+<section id="step5" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="step5"><span class="header-section-number">3.5</span> Step5</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a>albert@albert<span class="op">-</span>virtual<span class="op">-</span>machine<span class="op">:~</span><span class="ss">/Desktop/git</span>$ git remote add origin https<span class="op">:</span><span class="co">//github.com/AlbertProfe/testcli.git</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You’re setting the remote repository for your local Git repository. The command git remote add origin https://github.com/AlbertProfe/testcli.git associates your local Git repository with the GitHub repository you created earlier. This allows you to push your local commits to the remote repository on GitHub.</p>
+</section>
+<section id="step6" class="level3" data-number="3.6">
+<h3 data-number="3.6" class="anchored" data-anchor-id="step6"><span class="header-section-number">3.6</span> Step6</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a>albert@albert<span class="op">-</span>virtual<span class="op">-</span>machine<span class="op">:~</span><span class="ss">/Desktop/git</span>$ git push origin master</span>
+<span id="cb6-2"><a href="#cb6-2"></a>Enumerating objects<span class="op">:</span> <span class="dv">3</span><span class="op">,</span> done<span class="op">.</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>Counting objects<span class="op">:</span> <span class="dv">100</span><span class="op">%</span> (<span class="dv">3</span><span class="op">/</span><span class="dv">3</span>)<span class="op">,</span> done<span class="op">.</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>Writing objects<span class="op">:</span> <span class="dv">100</span><span class="op">%</span> (<span class="dv">3</span><span class="op">/</span><span class="dv">3</span>)<span class="op">,</span> <span class="dv">218</span> bytes <span class="op">|</span> <span class="fl">109.00</span> KiB<span class="op">/</span>s<span class="op">,</span> done<span class="op">.</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>Total <span class="dv">3</span> (delta <span class="dv">0</span>)<span class="op">,</span> reused <span class="dv">0</span> (delta <span class="dv">0</span>)<span class="op">,</span> pack<span class="op">-</span>reused <span class="dv">0</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>To https<span class="op">:</span><span class="co">//github.com/AlbertProfe/testcli.git</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a> <span class="op">*</span> [<span class="kw">new</span> branch]      master <span class="op">-&gt;</span> master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In the final step, you’re pushing your local commits to the remote repository on GitHub. The command git push origin master sends your changes to the “master” branch of the remote repository. Git enumerates the objects, counts them, and writes them to the remote repository, effectively updating the GitHub repository with your local changes. The output shows the progress and confirms that the “master” branch on GitHub has been updated with the changes from your local repository.</p>
 <!--- navLinks -->
 <br><br>
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../devops/devops-vc-github.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> GitHub</a> <br></p>
+<p><br> <a href="../devops/devops-vc-ideagithub.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> Idea and GitHub 2023</a> <br></p>
 </div>
 <br>
 <div class="column center">
@@ -1694,12 +1581,13 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../devops/devops-ide-gitgh.qmd">Git-gh CLI <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
+<p><br> <a href="../devops/devops-ide-visualcode.html">IDE: Visual Code <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -2264,7 +2152,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});</script>
 
 
 
