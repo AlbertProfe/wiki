@@ -80,6 +80,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1444,12 +1447,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#set-up-tools" id="toc-set-up-tools" class="nav-link" data-scroll-target="#set-up-tools"><span class="header-section-number">2</span> Set up tools</a></li>
   <li><a href="#create-localremote-repos-and-first-commitpush" id="toc-create-localremote-repos-and-first-commitpush" class="nav-link" data-scroll-target="#create-localremote-repos-and-first-commitpush"><span class="header-section-number">3</span> Create local/remote repos and first commit/push</a>
   <ul>
-  <li><a href="#step1" id="toc-step1" class="nav-link" data-scroll-target="#step1"><span class="header-section-number">3.1</span> Step1</a></li>
-  <li><a href="#step2" id="toc-step2" class="nav-link" data-scroll-target="#step2"><span class="header-section-number">3.2</span> Step2</a></li>
-  <li><a href="#step3" id="toc-step3" class="nav-link" data-scroll-target="#step3"><span class="header-section-number">3.3</span> Step3</a></li>
-  <li><a href="#step4" id="toc-step4" class="nav-link" data-scroll-target="#step4"><span class="header-section-number">3.4</span> Step4</a></li>
-  <li><a href="#step5" id="toc-step5" class="nav-link" data-scroll-target="#step5"><span class="header-section-number">3.5</span> Step5</a></li>
-  <li><a href="#step6" id="toc-step6" class="nav-link" data-scroll-target="#step6"><span class="header-section-number">3.6</span> Step6</a></li>
+  <li><a href="#step1-initialization" id="toc-step1-initialization" class="nav-link" data-scroll-target="#step1-initialization"><span class="header-section-number">3.1</span> Step1: Initialization</a></li>
+  <li><a href="#step2-adding-files" id="toc-step2-adding-files" class="nav-link" data-scroll-target="#step2-adding-files"><span class="header-section-number">3.2</span> Step2: Adding Files</a></li>
+  <li><a href="#step3-github-repo" id="toc-step3-github-repo" class="nav-link" data-scroll-target="#step3-github-repo"><span class="header-section-number">3.3</span> Step3: GitHub Repo</a></li>
+  <li><a href="#step4-commit" id="toc-step4-commit" class="nav-link" data-scroll-target="#step4-commit"><span class="header-section-number">3.4</span> Step4: Commit</a></li>
+  <li><a href="#step5-link-local-to-remote" id="toc-step5-link-local-to-remote" class="nav-link" data-scroll-target="#step5-link-local-to-remote"><span class="header-section-number">3.5</span> Step5: Link Local to Remote</a></li>
+  <li><a href="#step6-push" id="toc-step6-push" class="nav-link" data-scroll-target="#step6-push"><span class="header-section-number">3.6</span> Step6: Push</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/main/devops/devops-vc-gitgh.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -1493,7 +1496,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, October 26, 2023</p>
+      <p class="date-modified">Friday, October 27, 2023</p>
     </div>
   </div>
     
@@ -1507,12 +1510,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="overview-how-with-cli-create-local-and-remote-repo-and-commitpush" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="overview-how-with-cli-create-local-and-remote-repo-and-commitpush"><span class="header-section-number">1</span> Overview: how with CLI create local and remote repo and commit/push</h2>
 <p>In the fast-paced world of software development, <mark>collaborating with remote teams and utilizing version control systems like GitHub has become an indispensable part of the process of software devolopment</mark>.</p>
+<p>Working with a remote repository and daily commits via CLI is vital in modern software development. It fosters collaboration, streamlines version control, and encourages best practices.</p>
+<ol type="1">
+<li><strong>Collaboration</strong>: Remote repos enable seamless teamwork by providing a shared codebase.</li>
+<li><strong>Version Control</strong>: Daily commits maintain a clear history, aiding debugging and change tracking.</li>
+<li><strong>Backup</strong>: The remote repo serves as a backup, safeguarding your work.</li>
+<li><strong>Code Quality</strong>: Regular commits promote modular, well-documented code and best practices.</li>
+<li><strong>CI/CD</strong>: Automated testing and deployment are triggered by code commits.</li>
+<li><strong>Remote Work</strong>: Facilitates remote work and flexible development.</li>
+<li><strong>Documentation</strong>: Commit messages document changes and aid in understanding code history.</li>
+<li><strong>Code Review</strong>: Daily commits simplify code reviews and collaboration.</li>
+<li><strong>Learning</strong>: A consistent opportunity for learning and growth through commit history analysis.</li>
+</ol>
 </section>
 <section id="set-up-tools" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="set-up-tools"><span class="header-section-number">2</span> Set up tools</h2>
 <ul>
 <li>GitHub <a href="https://github.com/">account</a></li>
-<li>Install <a href="../devops/devops-vc-git.html">git</a>local</li>
+<li>Install <a href="../devops/devops-vc-git.html">git</a> local</li>
 <li><a href="../devops/devops-vc-github.html">Permssion</a> to write GitHub</li>
 <li>CLI <a href="https://cli.github.com/">gh</a></li>
 </ul>
@@ -1521,45 +1536,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="3" class="anchored" data-anchor-id="create-localremote-repos-and-first-commitpush"><span class="header-section-number">3</span> Create local/remote repos and first commit/push</h2>
 <p>In these six steps, you’re setting up and pushing a project to a remote GitHub repository.</p>
 <ul>
-<li>Firstly, you initialize a local Git repository with git init, creating a version control system.</li>
-<li>Then, you stage all changes with git add –all, preparing them for commit.</li>
-<li>In step 3, you use the GitHub CLI to create a new public repository on GitHub.</li>
-<li>Step 4 involves committing your changes with git commit –all, accompanied by a commit message.</li>
-<li>In step 5, you set up a connection to the remote repository using git remote add origin.</li>
-<li>Finally, you push your local changes to GitHub with git push origin master, effectively syncing your local and remote repositories.</li>
+<li><strong>Firstly</strong>, you initialize a local Git repository with <strong>git init</strong>, creating a version control system.</li>
+<li>Then, you stage all changes with <strong>git add –all</strong>, preparing them for commit.</li>
+<li>In step 3, you use the <mark>GitHub CLI to create a new public repository on GitHub.</mark></li>
+<li>Step 4 involves committing your changes with <strong>git commit –all</strong>, accompanied by a commit message.</li>
+<li>In step 5, you set up a connection to the remote repository using <strong>git remote add origin</strong>.</li>
+<li><strong>Finally</strong>, you <strong>push</strong> your local changes to GitHub with git push origin master, effectively <strong>syncing</strong> your local and remote repositories.</li>
 </ul>
-<section id="step1" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="step1"><span class="header-section-number">3.1</span> Step1</h3>
+<section id="step1-initialization" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="step1-initialization"><span class="header-section-number">3.1</span> Step1: Initialization</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a>albert@albert<span class="op">-</span>virtual<span class="op">-</span>machine<span class="op">:~</span><span class="ss">/Desktop/git</span>$ git init</span>
 <span id="cb1-2"><a href="#cb1-2"></a>Initialized empty Git repository <span class="kw">in</span> <span class="ss">/home/albert/Desktop/git/.git/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In this initial step, you’re initializing a new Git repository on your local machine. The command git init is used to create an empty Git repository. After executing this command, Git responds with a message indicating that it has successfully initialized an empty repository in the specified directory, which in this case is /home/albert/Desktop/git/.git/. This means you’ve set up a local Git repository on your computer where you can start tracking and versioning your project.</p>
+<p>In this initial step, you’re initializing a new Git repository on your <strong>local machine</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/devops/gitgh1.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-1" title="Initializing a new Git repository"><img src="../images/devops/gitgh1.png" class="img-fluid figure-img" alt="Initializing a new Git repository"></a></p>
+<figcaption>Initializing a new Git repository</figcaption>
+</figure>
+</div>
+<p>The command git init is used to create an empty Git repository. After executing this command, <mark>Git responds with a message indicating that it has successfully initialized an empty repository in the specified directory</mark>, which in this case is <strong>/home/albert/Desktop/git/.git/</strong>.</p>
+<p>This means you’ve set up a local Git repository on your computer where you can start tracking and versioning your project.</p>
 </section>
-<section id="step2" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="step2"><span class="header-section-number">3.2</span> Step2</h3>
+<section id="step2-adding-files" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="step2-adding-files"><span class="header-section-number">3.2</span> Step2: Adding Files</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a>albert@albert<span class="op">-</span>virtual<span class="op">-</span>machine<span class="op">:~</span><span class="ss">/Desktop/git</span>$ git add <span class="op">--</span>all</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In this step, you’re using the git add –all command to stage all the changes in your working directory for the next commit. Staging means you’re telling Git which files you want to include in the next commit. By using the –all option, you’re adding all changes, including new files, modifications, and deletions, to the staging area.</p>
+<p>In this step, you’re using the <strong>git add –all</strong> command to stage all the changes in your working directory for the next commit.</p>
+<p><mark>Staging means you’re telling Git which files you want to include in the next commit.</mark></p>
+<p>By using the <strong>–all</strong> option, you’re adding all changes, including new files, modifications, and deletions, to the <strong>staging area.</strong></p>
 </section>
-<section id="step3" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="step3"><span class="header-section-number">3.3</span> Step3</h3>
+<section id="step3-github-repo" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="step3-github-repo"><span class="header-section-number">3.3</span> Step3: GitHub Repo</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a>albert@albert<span class="op">-</span>virtual<span class="op">-</span>machine<span class="op">:~</span><span class="ss">/Desktop/git</span>$ gh repo create testcli <span class="op">--</span><span class="kw">public</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>✓ Created repository AlbertProfe<span class="op">/</span>testcli on GitHub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Here, you’re creating a new GitHub repository named “testcli” and making it public using the GitHub CLI (gh). The command gh repo create testcli –public initiates the repository creation process. After successful execution, you receive a confirmation message that the repository “AlbertProfe/testcli” has been created on GitHub.</p>
+<p>Here, you’re creating a new <strong>GitHub repository named “testcli”</strong> and making it public using the <mark>GitHub CLI (gh).</mark></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/devops/gitgh2.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-2" title="Creating a new GitHub repository named “testcli”"><img src="../images/devops/gitgh2.png" class="img-fluid figure-img" alt="Creating a new GitHub repository named “testcli”"></a></p>
+<figcaption>Creating a new <strong>GitHub repository named “testcli”</strong></figcaption>
+</figure>
+</div>
+<p>The command <strong>gh repo create testcli –public</strong> initiates the repository creation process.</p>
+<p>After successful execution, you receive a confirmation message that the repository <strong>“AlbertProfe/testcli”</strong> has been created on GitHub.</p>
 </section>
-<section id="step4" class="level3" data-number="3.4">
-<h3 data-number="3.4" class="anchored" data-anchor-id="step4"><span class="header-section-number">3.4</span> Step4</h3>
+<section id="step4-commit" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="step4-commit"><span class="header-section-number">3.4</span> Step4: Commit</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a>git commit <span class="op">--</span>all</span>
 <span id="cb4-2"><a href="#cb4-2"></a>[<span class="fu">master</span> (<span class="bu">root</span><span class="op">-</span>commit) <span class="dv">0</span><span class="er">afa074</span>] hi</span>
 <span id="cb4-3"><a href="#cb4-3"></a> <span class="dv">1</span> file changed<span class="op">,</span> <span class="dv">2</span> <span class="fu">insertions</span>(<span class="op">+</span>)</span>
 <span id="cb4-4"><a href="#cb4-4"></a> create mode <span class="dv">100644</span> person<span class="op">.</span><span class="at">md</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>With this step, you’ve committed your changes to the local Git repository. The command git commit –all has committed your staged changes with a commit message “hi.” The response from Git shows that one file was changed, adding two insertions, and a new file named “person.md” was created.</p>
+<p>With this step, you’ve committed your changes to the local Git repository.</p>
+<p>The command <strong>git commit –all</strong> has committed your staged changes with a commit message <strong>“hi.”</strong></p>
+<p>The response from Git shows that one file was changed, adding two insertions, and a new file named <strong>“person.md”</strong> was created.</p>
 </section>
-<section id="step5" class="level3" data-number="3.5">
-<h3 data-number="3.5" class="anchored" data-anchor-id="step5"><span class="header-section-number">3.5</span> Step5</h3>
+<section id="step5-link-local-to-remote" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="step5-link-local-to-remote"><span class="header-section-number">3.5</span> Step5: Link Local to Remote</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a>albert@albert<span class="op">-</span>virtual<span class="op">-</span>machine<span class="op">:~</span><span class="ss">/Desktop/git</span>$ git remote add origin https<span class="op">:</span><span class="co">//github.com/AlbertProfe/testcli.git</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You’re setting the remote repository for your local Git repository. The command git remote add origin https://github.com/AlbertProfe/testcli.git associates your local Git repository with the GitHub repository you created earlier. This allows you to push your local commits to the remote repository on GitHub.</p>
+<p>You’re setting the <strong>remote repository</strong> for your local Git repository.</p>
+<p>The command git remote add origin <strong>https://github.com/AlbertProfe/testcli.git</strong> associates your local Git repository with the GitHub repository you created earlier.</p>
+<p>This allows you to push your local commits to the remote repository on GitHub.</p>
 </section>
-<section id="step6" class="level3" data-number="3.6">
-<h3 data-number="3.6" class="anchored" data-anchor-id="step6"><span class="header-section-number">3.6</span> Step6</h3>
+<section id="step6-push" class="level3" data-number="3.6">
+<h3 data-number="3.6" class="anchored" data-anchor-id="step6-push"><span class="header-section-number">3.6</span> Step6: Push</h3>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a>albert@albert<span class="op">-</span>virtual<span class="op">-</span>machine<span class="op">:~</span><span class="ss">/Desktop/git</span>$ git push origin master</span>
 <span id="cb6-2"><a href="#cb6-2"></a>Enumerating objects<span class="op">:</span> <span class="dv">3</span><span class="op">,</span> done<span class="op">.</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a>Counting objects<span class="op">:</span> <span class="dv">100</span><span class="op">%</span> (<span class="dv">3</span><span class="op">/</span><span class="dv">3</span>)<span class="op">,</span> done<span class="op">.</span></span>
@@ -1567,7 +1604,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-5"><a href="#cb6-5"></a>Total <span class="dv">3</span> (delta <span class="dv">0</span>)<span class="op">,</span> reused <span class="dv">0</span> (delta <span class="dv">0</span>)<span class="op">,</span> pack<span class="op">-</span>reused <span class="dv">0</span></span>
 <span id="cb6-6"><a href="#cb6-6"></a>To https<span class="op">:</span><span class="co">//github.com/AlbertProfe/testcli.git</span></span>
 <span id="cb6-7"><a href="#cb6-7"></a> <span class="op">*</span> [<span class="kw">new</span> branch]      master <span class="op">-&gt;</span> master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In the final step, you’re pushing your local commits to the remote repository on GitHub. The command git push origin master sends your changes to the “master” branch of the remote repository. Git enumerates the objects, counts them, and writes them to the remote repository, effectively updating the GitHub repository with your local changes. The output shows the progress and confirms that the “master” branch on GitHub has been updated with the changes from your local repository.</p>
+<p>In the final step, you’re pushing your local commits to the remote repository on GitHub. The command <strong>git push origin master</strong> sends your changes to the “master” branch of the remote repository.</p>
+<p>Git enumerates the objects, counts them, and writes them to the remote repository, effectively updating the GitHub repository with your local changes.</p>
+<p>The output shows the progress and confirms that the “master” branch on GitHub has been updated with the changes from your local repository.</p>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -2152,6 +2191,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox"});</script>
 
 
 
