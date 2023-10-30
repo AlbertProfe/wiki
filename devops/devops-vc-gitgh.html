@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -1447,18 +1447,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#set-up-tools" id="toc-set-up-tools" class="nav-link" data-scroll-target="#set-up-tools"><span class="header-section-number">2</span> Set up tools</a></li>
   <li><a href="#create-localremote-repos-and-first-commitpush" id="toc-create-localremote-repos-and-first-commitpush" class="nav-link" data-scroll-target="#create-localremote-repos-and-first-commitpush"><span class="header-section-number">3</span> Create local/remote repos and first commit/push</a>
   <ul>
-  <li><a href="#step1-initialization" id="toc-step1-initialization" class="nav-link" data-scroll-target="#step1-initialization"><span class="header-section-number">3.1</span> Step1: Initialization</a></li>
+  <li><a href="#step1-initialization-local-repo" id="toc-step1-initialization-local-repo" class="nav-link" data-scroll-target="#step1-initialization-local-repo"><span class="header-section-number">3.1</span> Step1: Initialization local repo</a></li>
   <li><a href="#step2-adding-files" id="toc-step2-adding-files" class="nav-link" data-scroll-target="#step2-adding-files"><span class="header-section-number">3.2</span> Step2: Adding Files</a></li>
-  <li><a href="#step3-github-repo" id="toc-step3-github-repo" class="nav-link" data-scroll-target="#step3-github-repo"><span class="header-section-number">3.3</span> Step3: GitHub Repo</a></li>
+  <li><a href="#step3-github-remote-repo" id="toc-step3-github-remote-repo" class="nav-link" data-scroll-target="#step3-github-remote-repo"><span class="header-section-number">3.3</span> Step3: GitHub remote Repo</a></li>
   <li><a href="#step4-commit" id="toc-step4-commit" class="nav-link" data-scroll-target="#step4-commit"><span class="header-section-number">3.4</span> Step4: Commit</a></li>
   <li><a href="#step5-link-local-to-remote" id="toc-step5-link-local-to-remote" class="nav-link" data-scroll-target="#step5-link-local-to-remote"><span class="header-section-number">3.5</span> Step5: Link Local to Remote</a></li>
   <li><a href="#step6-push" id="toc-step6-push" class="nav-link" data-scroll-target="#step6-push"><span class="header-section-number">3.6</span> Step6: Push</a></li>
+  </ul></li>
+  <li><a href="#pullfetch" id="toc-pullfetch" class="nav-link" data-scroll-target="#pullfetch"><span class="header-section-number">4</span> pull/fetch</a>
+  <ul>
+  <li><a href="#git-pull" id="toc-git-pull" class="nav-link" data-scroll-target="#git-pull"><span class="header-section-number">4.1</span> git pull</a></li>
+  <li><a href="#git-fetch" id="toc-git-fetch" class="nav-link" data-scroll-target="#git-fetch"><span class="header-section-number">4.2</span> git fetch</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/main/devops/devops-vc-gitgh.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../devops/devops-vc-git.html">Version Control</a></li><li class="breadcrumb-item"><a href="../devops/devops-vc-gitgh.html">Git and GitHub 2023 CLI</a></li></ol></nav>
 <div class="quarto-title">
@@ -1496,7 +1501,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, October 27, 2023</p>
+      <p class="date-modified">Monday, October 30, 2023</p>
     </div>
   </div>
     
@@ -1531,8 +1536,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="../devops/devops-vc-github.html">Permssion</a> to write GitHub</li>
 <li>CLI <a href="https://cli.github.com/">gh</a></li>
 </ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/devops/git-flow.jpeg" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-1" title="How does git work What makes Git so popular? How does it work?"><img src="../images/devops/git-flow.jpeg" class="img-fluid figure-img" alt="How does git work What makes Git so popular? How does it work?"></a></p>
+<figcaption>How does git work <a href="https://twitter.com/sahnlam/status/1718104645665693906?s=66&amp;t=xbjPqD-fcUFZjmL-Bgbf2Q">What makes Git so popular? How does it work?</a></figcaption>
+</figure>
+</div>
 </section>
-<section id="create-localremote-repos-and-first-commitpush" class="level2" data-number="3">
+<section id="create-localremote-repos-and-first-commitpush" class="level2 page-columns page-full" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="create-localremote-repos-and-first-commitpush"><span class="header-section-number">3</span> Create local/remote repos and first commit/push</h2>
 <p>In these six steps, you’re setting up and pushing a project to a remote GitHub repository.</p>
 <ul>
@@ -1543,35 +1554,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>In step 5, you set up a connection to the remote repository using <strong>git remote add origin</strong>.</li>
 <li><strong>Finally</strong>, you <strong>push</strong> your local changes to GitHub with git push origin master, effectively <strong>syncing</strong> your local and remote repositories.</li>
 </ul>
-<section id="step1-initialization" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="step1-initialization"><span class="header-section-number">3.1</span> Step1: Initialization</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a>albert@albert<span class="op">-</span>virtual<span class="op">-</span>machine<span class="op">:~</span><span class="ss">/Desktop/git</span>$ git init</span>
-<span id="cb1-2"><a href="#cb1-2"></a>Initialized empty Git repository <span class="kw">in</span> <span class="ss">/home/albert/Desktop/git/.git/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="step1-initialization-local-repo" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="step1-initialization-local-repo"><span class="header-section-number">3.1</span> Step1: Initialization local repo</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">albert@albert-virtual-machine:~/Desktop/git$</span> git init</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="ex">Initialized</span> empty Git repository in /home/albert/Desktop/git/.git/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In this initial step, you’re initializing a new Git repository on your <strong>local machine</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/devops/gitgh1.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-1" title="Initializing a new Git repository"><img src="../images/devops/gitgh1.png" class="img-fluid figure-img" alt="Initializing a new Git repository"></a></p>
+<p><a href="../images/devops/gitgh1.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-2" title="Initializing a new Git repository"><img src="../images/devops/gitgh1.png" class="img-fluid figure-img" alt="Initializing a new Git repository"></a></p>
 <figcaption>Initializing a new Git repository</figcaption>
 </figure>
 </div>
 <p>The command git init is used to create an empty Git repository. After executing this command, <mark>Git responds with a message indicating that it has successfully initialized an empty repository in the specified directory</mark>, which in this case is <strong>/home/albert/Desktop/git/.git/</strong>.</p>
 <p>This means you’ve set up a local Git repository on your computer where you can start tracking and versioning your project.</p>
 </section>
-<section id="step2-adding-files" class="level3" data-number="3.2">
+<section id="step2-adding-files" class="level3 page-columns page-full" data-number="3.2">
 <h3 data-number="3.2" class="anchored" data-anchor-id="step2-adding-files"><span class="header-section-number">3.2</span> Step2: Adding Files</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a>albert@albert<span class="op">-</span>virtual<span class="op">-</span>machine<span class="op">:~</span><span class="ss">/Desktop/git</span>$ git add <span class="op">--</span>all</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In this step, you’re using the <strong>git add –all</strong> command to stage all the changes in your working directory for the next commit.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">albert@albert-virtual-machine:~/Desktop/git$</span> git add <span class="at">--all</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><code>--all or dot (.)</code></p>
+<ul>
+<li><p><strong>add . or add </strong>* indexes all the new and modified files and stages them for a commit, except for the files that have been removed.</p></li>
+<li><p><strong>add -u</strong> stages all modified and removed files for a commit, except for the new files created.</p></li>
+<li><p><strong>add -A or add –all</strong> is a combination of both add . &amp; add -u. It will add all new files, modified files and removed files, for staging.</p></li>
+</ul>
+<p><a href="https://stackoverflow.com/questions/26042390/git-add-asterisk-vs-git-add-period">git add * (asterisk) vs git add . (period)</a></p>
+</div></div><p>In this step, you’re using the <strong>git add –all</strong> command to stage all the changes in your working directory for the next commit.</p>
 <p><mark>Staging means you’re telling Git which files you want to include in the next commit.</mark></p>
 <p>By using the <strong>–all</strong> option, you’re adding all changes, including new files, modifications, and deletions, to the <strong>staging area.</strong></p>
 </section>
-<section id="step3-github-repo" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="step3-github-repo"><span class="header-section-number">3.3</span> Step3: GitHub Repo</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a>albert@albert<span class="op">-</span>virtual<span class="op">-</span>machine<span class="op">:~</span><span class="ss">/Desktop/git</span>$ gh repo create testcli <span class="op">--</span><span class="kw">public</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>✓ Created repository AlbertProfe<span class="op">/</span>testcli on GitHub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="step3-github-remote-repo" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="step3-github-remote-repo"><span class="header-section-number">3.3</span> Step3: GitHub remote Repo</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">albert@albert-virtual-machine:~/Desktop/git$</span> gh repo create testcli <span class="at">--public</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">✓</span> Created repository AlbertProfe/testcli on GitHub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here, you’re creating a new <strong>GitHub repository named “testcli”</strong> and making it public using the <mark>GitHub CLI (gh).</mark></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/devops/gitgh2.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-2" title="Creating a new GitHub repository named “testcli”"><img src="../images/devops/gitgh2.png" class="img-fluid figure-img" alt="Creating a new GitHub repository named “testcli”"></a></p>
+<p><a href="../images/devops/gitgh2.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-3" title="Creating a new GitHub repository named “testcli”"><img src="../images/devops/gitgh2.png" class="img-fluid figure-img" alt="Creating a new GitHub repository named “testcli”"></a></p>
 <figcaption>Creating a new <strong>GitHub repository named “testcli”</strong></figcaption>
 </figure>
 </div>
@@ -1580,33 +1600,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="step4-commit" class="level3" data-number="3.4">
 <h3 data-number="3.4" class="anchored" data-anchor-id="step4-commit"><span class="header-section-number">3.4</span> Step4: Commit</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a>git commit <span class="op">--</span>all</span>
-<span id="cb4-2"><a href="#cb4-2"></a>[<span class="fu">master</span> (<span class="bu">root</span><span class="op">-</span>commit) <span class="dv">0</span><span class="er">afa074</span>] hi</span>
-<span id="cb4-3"><a href="#cb4-3"></a> <span class="dv">1</span> file changed<span class="op">,</span> <span class="dv">2</span> <span class="fu">insertions</span>(<span class="op">+</span>)</span>
-<span id="cb4-4"><a href="#cb4-4"></a> create mode <span class="dv">100644</span> person<span class="op">.</span><span class="at">md</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">git</span> commit <span class="at">--all</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">[master</span> <span class="er">(</span><span class="ex">root-commit</span><span class="kw">)</span> <span class="ex">0afa074]</span> hi</span>
+<span id="cb4-3"><a href="#cb4-3"></a> <span class="ex">1</span> file changed, 2 insertions<span class="er">(</span><span class="ex">+</span><span class="kw">)</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a> <span class="ex">create</span> mode 100644 person.md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>With this step, you’ve committed your changes to the local Git repository.</p>
 <p>The command <strong>git commit –all</strong> has committed your staged changes with a commit message <strong>“hi.”</strong></p>
 <p>The response from Git shows that one file was changed, adding two insertions, and a new file named <strong>“person.md”</strong> was created.</p>
 </section>
 <section id="step5-link-local-to-remote" class="level3" data-number="3.5">
 <h3 data-number="3.5" class="anchored" data-anchor-id="step5-link-local-to-remote"><span class="header-section-number">3.5</span> Step5: Link Local to Remote</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a>albert@albert<span class="op">-</span>virtual<span class="op">-</span>machine<span class="op">:~</span><span class="ss">/Desktop/git</span>$ git remote add origin https<span class="op">:</span><span class="co">//github.com/AlbertProfe/testcli.git</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">albert@albert-virtual-machine:~/Desktop/git$</span> git remote add origin https://github.com/AlbertProfe/testcli.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You’re setting the <strong>remote repository</strong> for your local Git repository.</p>
 <p>The command git remote add origin <strong>https://github.com/AlbertProfe/testcli.git</strong> associates your local Git repository with the GitHub repository you created earlier.</p>
 <p>This allows you to push your local commits to the remote repository on GitHub.</p>
 </section>
 <section id="step6-push" class="level3" data-number="3.6">
 <h3 data-number="3.6" class="anchored" data-anchor-id="step6-push"><span class="header-section-number">3.6</span> Step6: Push</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a>albert@albert<span class="op">-</span>virtual<span class="op">-</span>machine<span class="op">:~</span><span class="ss">/Desktop/git</span>$ git push origin master</span>
-<span id="cb6-2"><a href="#cb6-2"></a>Enumerating objects<span class="op">:</span> <span class="dv">3</span><span class="op">,</span> done<span class="op">.</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>Counting objects<span class="op">:</span> <span class="dv">100</span><span class="op">%</span> (<span class="dv">3</span><span class="op">/</span><span class="dv">3</span>)<span class="op">,</span> done<span class="op">.</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>Writing objects<span class="op">:</span> <span class="dv">100</span><span class="op">%</span> (<span class="dv">3</span><span class="op">/</span><span class="dv">3</span>)<span class="op">,</span> <span class="dv">218</span> bytes <span class="op">|</span> <span class="fl">109.00</span> KiB<span class="op">/</span>s<span class="op">,</span> done<span class="op">.</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>Total <span class="dv">3</span> (delta <span class="dv">0</span>)<span class="op">,</span> reused <span class="dv">0</span> (delta <span class="dv">0</span>)<span class="op">,</span> pack<span class="op">-</span>reused <span class="dv">0</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a>To https<span class="op">:</span><span class="co">//github.com/AlbertProfe/testcli.git</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a> <span class="op">*</span> [<span class="kw">new</span> branch]      master <span class="op">-&gt;</span> master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">albert@albert-virtual-machine:~/Desktop/git$</span> git push origin master</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">Enumerating</span> objects: 3, done.</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="ex">Counting</span> objects: 100% <span class="er">(</span><span class="ex">3/3</span><span class="kw">)</span><span class="ex">,</span> done.</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="ex">Writing</span> objects: 100% <span class="er">(</span><span class="ex">3/3</span><span class="kw">)</span><span class="ex">,</span> 218 bytes <span class="kw">|</span> <span class="ex">109.00</span> KiB/s, done.</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="ex">Total</span> 3 <span class="er">(</span><span class="ex">delta</span> 0<span class="kw">)</span><span class="ex">,</span> reused 0 <span class="er">(</span><span class="ex">delta</span> 0<span class="kw">)</span><span class="ex">,</span> pack-reused 0</span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="ex">To</span> https://github.com/AlbertProfe/testcli.git</span>
+<span id="cb6-7"><a href="#cb6-7"></a> <span class="ex">*</span> [new branch]      master <span class="at">-</span><span class="op">&gt;</span> master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In the final step, you’re pushing your local commits to the remote repository on GitHub. The command <strong>git push origin master</strong> sends your changes to the “master” branch of the remote repository.</p>
 <p>Git enumerates the objects, counts them, and writes them to the remote repository, effectively updating the GitHub repository with your local changes.</p>
 <p>The output shows the progress and confirms that the “master” branch on GitHub has been updated with the changes from your local repository.</p>
+</section>
+</section>
+<section id="pullfetch" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="pullfetch"><span class="header-section-number">4</span> pull/fetch</h2>
+<p><strong>git pull</strong> and <strong>git fetch</strong> are two commonly used commands for <mark>updating your local repository with changes from a remote repository</mark>. They serve similar purposes but work in slightly different ways.</p>
+<section id="git-pull" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="git-pull"><span class="header-section-number">4.1</span> git pull</h3>
+<p><strong>git pull</strong> is a combination of two operations: <strong>git fetch</strong> followed by <strong>git merge</strong>.</p>
+<p>When you run git pull, Git fetches the changes from the remote repository and then automatically merges them into your local branch.</p>
+<p>This can be convenient for a quick update but may lead to automatic merges, potentially resulting in conflicts that you need to resolve.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">git</span> pull origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="git-fetch" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="git-fetch"><span class="header-section-number">4.2</span> git fetch</h3>
+<p><strong>git fetch</strong> only fetches changes from the remote repository but does not automatically merge them into your local branch.</p>
+<p>This is useful when you want to inspect the changes before integrating them into your branch. It allows you to review the changes and decide when and how to merge them.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">git</span> fetch origin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -2191,7 +2228,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":false,"descPosition":"bottom"});</script>
 
 
 
