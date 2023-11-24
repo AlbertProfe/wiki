@@ -1,0 +1,2325 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="albertprofe">
+<meta name="description" content="labs">
+
+<title>albertprofe wiki - Lab#RE05-1: chat &amp; websockets</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="..//images/home/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">albertprofe wiki</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-linux-os" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Linux OS</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-linux-os">    
+        <li class="dropdown-header">Linux: concepts</li>
+        <li>
+    <a class="dropdown-item" href="../linux/linux-what-basics.html">
+ <span class="dropdown-text">Linux: basic concepts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-what-bash.html">
+ <span class="dropdown-text">Linux: Bash</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-what-sudo.html">
+ <span class="dropdown-text">Linux: su and sudo</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-what-pipes.html">
+ <span class="dropdown-text">Linux: pipes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-what-fsys.html">
+ <span class="dropdown-text">Linux: File System</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-what-vm.html">
+ <span class="dropdown-text">Linux: Virtual Machines</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Linux: distros</li>
+        <li>
+    <a class="dropdown-item" href="../linux/linux-distros-ubuntu.html">
+ <span class="dropdown-text">Linux Distros: Ubuntu</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-distros-mint.html">
+ <span class="dropdown-text">Linux Distros: Mint</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-distros-debian.html">
+ <span class="dropdown-text">Linux Distros: Debian</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-distros-opensuse.html">
+ <span class="dropdown-text">Linux Distros: openSuse</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-distros-manjaro.html">
+ <span class="dropdown-text">Linux Distros: Manjaro</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-distros-redhat.html">
+ <span class="dropdown-text">Linux Distros: Red Hat Enterprise Linux</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Linux: laboratories</li>
+        <li>
+    <a class="dropdown-item" href="../linux/lilab01-1.html">
+ <span class="dropdown-text">Linux Lab#LI01-1: Choose Linux</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab01-2.html">
+ <span class="dropdown-text">Linux Lab#LI01-2: Install at least three distributions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab01-3.html">
+ <span class="dropdown-text">Linux Lab#LI01-3: Adjust user permissions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab02-1.html">
+ <span class="dropdown-text">Linux Lab#LI02-1: Export env user with grep and pipe</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab03-1.html">
+ <span class="dropdown-text">Linux Lab#LI03-1: Manage users and groups</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab03-2.html">
+ <span class="dropdown-text">Linux Lab#LI03-2: Manage files</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab03-3.html">
+ <span class="dropdown-text">Linux Lab#LI03-3: Manage software</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab03-4.html">
+ <span class="dropdown-text">Linux Lab#LI03-4: Manage hardware</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab04-1.html">
+ <span class="dropdown-text">Linux Lab#LI04-1: Bash scripting, qtool</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab04-2.html">
+ <span class="dropdown-text">Linux Lab#LI04-2: Bash scripts as terminal tool</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab04-3.html">
+ <span class="dropdown-text">Linux Lab#LI04-3: Distribute the terminal app</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Linux readings</li>
+        <li>
+    <a class="dropdown-item" href="../linux/resources.html">
+ <span class="dropdown-text">Linux Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-devops" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">DevOps</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-devops">    
+        <li class="dropdown-header">What is DevOps</li>
+        <li>
+    <a class="dropdown-item" href="../devops/devops-what-intro.html">
+ <span class="dropdown-text">DevOps: Introduction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-what-overview.html">
+ <span class="dropdown-text">DevOps: agile and microservices</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-what-immutable.html">
+ <span class="dropdown-text">Immutable Infrastructure</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Documentation</li>
+        <li>
+    <a class="dropdown-item" href="../devops/devops-doc-quarto.html">
+ <span class="dropdown-text">How to document: Quarto and Obsidian</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Version Control</li>
+        <li>
+    <a class="dropdown-item" href="../devops/devops-vc-git.html">
+ <span class="dropdown-text">Git</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-vc-github.html">
+ <span class="dropdown-text">GitHub</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">IDEs</li>
+        <li>
+    <a class="dropdown-item" href="../devops/devops-ide-visualcode.html">
+ <span class="dropdown-text">IDE: Visual Code</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-ide-intelljidea.html">
+ <span class="dropdown-text">IDE: IntellJIdea</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">DevOps tools</li>
+        <li>
+    <a class="dropdown-item" href="../devops/devops-tools-aws.html">
+ <span class="dropdown-text">Aamanzon Web Sevices AWS</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-tools-docker.html">
+ <span class="dropdown-text">Docker</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-tools-jenkins.html">
+ <span class="dropdown-text">Jenkins pipelines</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-tools-k8s.html">
+ <span class="dropdown-text">Kubernetes k8s</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-tools-digitalocean.html">
+ <span class="dropdown-text">Digital Ocean</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-tools-installjenkins.html">
+ <span class="dropdown-text">Howto install Jenkins</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-tools-installmaven.html">
+ <span class="dropdown-text">Howto install Maven</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">DevOps Laboratories</li>
+        <li>
+    <a class="dropdown-item" href="../devops/devops-lab-chatapp.html">
+ <span class="dropdown-text">Lab 1: chat App</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-lab-springbooksintro.html">
+ <span class="dropdown-text">Lab 2: Spring Boot Intro</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-lab-springbookss3.html">
+ <span class="dropdown-text">Lab 3: Spring Boot and AWS S3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-lab-springbooksdocker.html">
+ <span class="dropdown-text">Lab 4: Spring Boot and Docker</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-lab-k8sdigitalocean.html">
+ <span class="dropdown-text">Lab 5: k8s on Digital Ocean</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">DevOps readings</li>
+        <li>
+    <a class="dropdown-item" href="../devops/resources.html">
+ <span class="dropdown-text">DevOps Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-markup" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">MarkUp</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-markup">    
+        <li class="dropdown-header">MarkUp Languages</li>
+        <li>
+    <a class="dropdown-item" href="../markup/markup-lang-intro.html">
+ <span class="dropdown-text">Introduction Markup</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-lang-html.html">
+ <span class="dropdown-text">HTML Markup</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-lang-md.html">
+ <span class="dropdown-text">Markdown Markup</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-lang-html-md.html">
+ <span class="dropdown-text">Markdown and HTML working together, good idea?</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Quarto Markdown</li>
+        <li>
+    <a class="dropdown-item" href="../markup/markup-quarto-basics.html">
+ <span class="dropdown-text">Quarto Markdown: basics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-quarto-create.html">
+ <span class="dropdown-text">Quarto Markdown: creating</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-quarto-publish.html">
+ <span class="dropdown-text">Quarto Markdown: publishing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-quarto-code.html">
+ <span class="dropdown-text">Quarto Markdown: code &amp; data</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-quarto-api-rest.html">
+ <span class="dropdown-text">Quarto Markdown: api rest call</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-quarto-api-rest-v2.html">
+ <span class="dropdown-text">Quarto Markdown: OJS Cells</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-quarto-cheatsheet.html">
+ <span class="dropdown-text">Quarto Markdown: cheat-sheet</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Styling: CSS</li>
+        <li>
+    <a class="dropdown-item" href="../markup/markup-css-basics.html">
+ <span class="dropdown-text">Cascade Style Sheet</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-css-w3css.html">
+ <span class="dropdown-text">CSS: W3.css</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">MarkUp Languages Laboratories</li>
+        <li>
+    <a class="dropdown-item" href="../markup/mulab1.html">
+ <span class="dropdown-text">Lab#MD01-1: Create and publish by Quarto</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">MarkUp Languages readings</li>
+        <li>
+    <a class="dropdown-item" href="../markup/resources.html">
+ <span class="dropdown-text">MarkUp Languages Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-java-se" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Java SE</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-java-se">    
+        <li class="dropdown-header">What is Java SE</li>
+        <li>
+    <a class="dropdown-item" href="../javase/se-what-basics.html">
+ <span class="dropdown-text">Java Standard Edition: Basics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-what-principles.html">
+ <span class="dropdown-text">Java Standard Edition: Principles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-what-moochelsinki.html">
+ <span class="dropdown-text">Java MOOC Helsinki</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Java Create Project</li>
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-maven.html">
+ <span class="dropdown-text">Java SE: Maven</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-createproject.html">
+ <span class="dropdown-text">Java SE: Create Maven Project</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-projectgit.html">
+ <span class="dropdown-text">Java SE: Project push GitHub</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-tdd.html">
+ <span class="dropdown-text">Java SE: JUnit and TDD</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Java Concepts</li>
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-objects.html">
+ <span class="dropdown-text">Java SE: Class and Objects</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-scope.html">
+ <span class="dropdown-text">Java SE: Scope</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-static.html">
+ <span class="dropdown-text">Java SE: static modifier</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-coupling.html">
+ <span class="dropdown-text">Java SE: Coupling and DDD</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-package.html">
+ <span class="dropdown-text">Java SE: Packages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-interface.html">
+ <span class="dropdown-text">Java SE: Abstract/Interface</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-java8.html">
+ <span class="dropdown-text">Java SE: Java 8</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Java Principles</li>
+        <li>
+    <a class="dropdown-item" href="../javase/se-principles-encapsulation.html">
+ <span class="dropdown-text">Java SE: Encapsulation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-principles-abstraction.html">
+ <span class="dropdown-text">Java SE: Abstraction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-principles-inheritance.html">
+ <span class="dropdown-text">Java SE: Inherence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-principles-polymorphism.html">
+ <span class="dropdown-text">Java SE: Polymorphism</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Java Design Patterns</li>
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-uml.html">
+ <span class="dropdown-text">Java Patterns: UML</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-intro.html">
+ <span class="dropdown-text">Java Patterns: Types</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-singleton.html">
+ <span class="dropdown-text">Singleton</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-factory.html">
+ <span class="dropdown-text">Factory</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-abstractfactory.html">
+ <span class="dropdown-text">Abstract Factory</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-builder.html">
+ <span class="dropdown-text">Builder</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-facade.html">
+ <span class="dropdown-text">Facade</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-bridge.html">
+ <span class="dropdown-text">Bridge</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-decorator.html">
+ <span class="dropdown-text">Decorator</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-composite.html">
+ <span class="dropdown-text">Composite</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-observer.html">
+ <span class="dropdown-text">Observer</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-strategy.html">
+ <span class="dropdown-text">Strategy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-state.html">
+ <span class="dropdown-text">State</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-commander.html">
+ <span class="dropdown-text">Commander</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Java SE Laboratories</li>
+        <li>
+    <a class="dropdown-item" href="../javase/selab0-1.html">
+ <span class="dropdown-text">Lab#SE00-1: Maven Person</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab0-2.html">
+ <span class="dropdown-text">Lab#SE00-2: Maven Clinic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab0-3.html">
+ <span class="dropdown-text">Lab#SE00-3: Library Model</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab0-4.html">
+ <span class="dropdown-text">Lab#SE00-4: Abstract/Interface Human</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab1-1.html">
+ <span class="dropdown-text">Lab#SE01-1: Maven/Gradle Person and Account</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab1-2.html">
+ <span class="dropdown-text">Lab#SE01-2: Maven/Gradle Person and Account stored in JSON</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab2-1.html">
+ <span class="dropdown-text">Lab#SE02-1: Movie/Review, Model</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab2-2.html">
+ <span class="dropdown-text">Lab#SE02-2: Movie/Review, CRUD Operations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab2-3.html">
+ <span class="dropdown-text">Lab#SE02-3: Movie/Review, factory</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab2-4.html">
+ <span class="dropdown-text">Lab#SE02-4: Movie/Review, interactivity and coupling</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab2-5.html">
+ <span class="dropdown-text">Lab#SE02-5: Movie/Review, simulate interactivity by console</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab3-1.html">
+ <span class="dropdown-text">Lab#SE03-1: Library/Book, Core-Model</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab3-2.html">
+ <span class="dropdown-text">Lab#SE03-2: Library/Book, Sprint Zero</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab3-3.html">
+ <span class="dropdown-text">Lab#SE03-3: Library/Book, Expand Model</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Java SE readings</li>
+        <li>
+    <a class="dropdown-item" href="../javase/resources.html">
+ <span class="dropdown-text">Java SE Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-spring" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Spring</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-spring">    
+        <li class="dropdown-header">Spring Legacy</li>
+        <li>
+    <a class="dropdown-item" href="../spring/spring-basics.html">
+ <span class="dropdown-text">Spring Framework</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../spring/spring-mvc.html">
+ <span class="dropdown-text">Spring MVC</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../spring/spring-servlets.html">
+ <span class="dropdown-text">Springs Servlets</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Spring Boot Basics</li>
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-what-basics.html">
+ <span class="dropdown-text">Spring Boot: fundamentals</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-what-create.html">
+ <span class="dropdown-text">Spring Boot: create a Project</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-what-create-th-h2.html">
+ <span class="dropdown-text">Spring Boot: H2 DB and Thymeleaf</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-what-cycle.html">
+ <span class="dropdown-text">Spring Boot: cycle</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Spring Boot Concepts</li>
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-injection.html">
+ <span class="dropdown-text">Spring Boot: Dependency Injection</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-annotations.html">
+ <span class="dropdown-text">Spring Boot: Annotations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-controller.html">
+ <span class="dropdown-text">Spring Boot: Controller</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-view.html">
+ <span class="dropdown-text">Spring Boot: View</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-th.html">
+ <span class="dropdown-text">Spring Boot: Thymeleaf</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-model.html">
+ <span class="dropdown-text">Spring Boot: Model</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-rest.html">
+ <span class="dropdown-text">Spring Boot: Rest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-data.html">
+ <span class="dropdown-text">Spring Boot: Data &amp; DB</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-jpa.html">
+ <span class="dropdown-text">Spring Boot: JPA &amp; DI</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-jpa-2.html">
+ <span class="dropdown-text">Spring Boot: JPA Mappings</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Spring Boot Laboratories</li>
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-1.html">
+ <span class="dropdown-text">Lab#SB00-1: Library UML</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-2.html">
+ <span class="dropdown-text">Lab#SB00-2: CRUD User</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-3.html">
+ <span class="dropdown-text">Lab#SB00-3: LibraryManagement</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-4.html">
+ <span class="dropdown-text">Lab#SB00-4: API Rest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-5.html">
+ <span class="dropdown-text">Lab#SB00-5: Rest &amp; JPA-H2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-6.html">
+ <span class="dropdown-text">Lab#SB00-6: Rest &amp; MongoDB</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-7.html">
+ <span class="dropdown-text">Lab#SB00-7: Styling</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab1.html">
+ <span class="dropdown-text">Lab#SB01-1: DataBase</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab2.html">
+ <span class="dropdown-text">Lab#SB02-1: <code>JPA</code> Relationships</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab3.html">
+ <span class="dropdown-text">Lab#SB03-1: APIs &amp; cloud</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab4.html">
+ <span class="dropdown-text">Lab#SB04-1: <code>JPA</code> Inherence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab5.html">
+ <span class="dropdown-text">Lab#SB05-1: API Rest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab6.html">
+ <span class="dropdown-text">Lab#SB06-1: <code>employeeCourse</code></span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Spring Boot readings</li>
+        <li>
+    <a class="dropdown-item" href="../springboot/resources.html">
+ <span class="dropdown-text">Spring Boot Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-reactjs" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">ReactJS</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-reactjs">    
+        <li class="dropdown-header">ReactJS: Principles</li>
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-principles.html">
+ <span class="dropdown-text">React JS: Introduction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-render-dom.html">
+ <span class="dropdown-text">React JS: render virtual DOM</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-create.html">
+ <span class="dropdown-text">React JS: Create a React project</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-components.html">
+ <span class="dropdown-text">React JS: Components</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-jsx.html">
+ <span class="dropdown-text">React JS: JSX</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-props.html">
+ <span class="dropdown-text">React JS: <code>props</code> and state</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">ES6: ECMAScript 6</li>
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-es6-arrow.html">
+ <span class="dropdown-text">React JS ES6: arrow functions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-es6-import.html">
+ <span class="dropdown-text">React JS ES6: import modules</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-es6-data.html">
+ <span class="dropdown-text">React JS ES6: array, data and key</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-es6-destructuring.html">
+ <span class="dropdown-text">React JS ES6: destructuring</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-es6-spread.html">
+ <span class="dropdown-text">React JS ES6: spread operator</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">ReacJS 18: Hooks</li>
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-rules.html">
+ <span class="dropdown-text">React JS: Rules of Hooks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-state.html">
+ <span class="dropdown-text">ReactJS: useState</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-reducer.html">
+ <span class="dropdown-text">React JS: useReducer</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-ref.html">
+ <span class="dropdown-text">React JS: useRef</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-effect.html">
+ <span class="dropdown-text">React JS: useEffect</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-context.html">
+ <span class="dropdown-text">React JS: useContext</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-custom.html">
+ <span class="dropdown-text">ReactJS: custom hooks</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">ReactJS: Designing an App</li>
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-app-async.html">
+ <span class="dropdown-text">React JS App: async</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-app-events.html">
+ <span class="dropdown-text">React JS App: events</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-app-router.html">
+ <span class="dropdown-text">React JS App: router</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-app-conditional-render.html">
+ <span class="dropdown-text">React JS App: conditional render</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-app-styling.html">
+ <span class="dropdown-text">React JS App: styling</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">React JS: Laboratories</li>
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab1.html">
+ <span class="dropdown-text">Lab#RE01-1: API Rest Axios</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab2.html">
+ <span class="dropdown-text">Lab#RE02-1: Router &amp; Hooks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab3.html">
+ <span class="dropdown-text">Lab#RE03-1: to-do app</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab3-2.html">
+ <span class="dropdown-text">Lab#RE03-2: HighCharts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab3-3.html">
+ <span class="dropdown-text">Lab#RE03-3: API Rest Mono</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab3-4.html">
+ <span class="dropdown-text">Lab#RE03-4: API Rest Domains</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab3-5.html">
+ <span class="dropdown-text">Lab#RE03-5: data management</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab4.html">
+ <span class="dropdown-text">Lab#RE04-1: todo &amp; server</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab5.html">
+ <span class="dropdown-text">Lab#RE05-1: chat &amp; websockets</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">React JS readings</li>
+        <li>
+    <a class="dropdown-item" href="../reactjs/resources.html">
+ <span class="dropdown-text">ReactJS Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-scrum" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">SCRUM</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-scrum">    
+        <li class="dropdown-header">What is SCRUM</li>
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-what-concepts.html">
+ <span class="dropdown-text">SCRUM Agile Methodology</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-what-agile-manifesto.html">
+ <span class="dropdown-text">Agile Manifesto</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-what-guide.html">
+ <span class="dropdown-text">SCRUM Guide</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Weeks</li>
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week1.html">
+ <span class="dropdown-text">Week 1: Meetings and impediments</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week2.html">
+ <span class="dropdown-text">Week 2: User stories, tasks and habits</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week3.html">
+ <span class="dropdown-text">Week 3: Communication and value</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week4.html">
+ <span class="dropdown-text">Week 4: ScrumMaster, how it works</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week5.html">
+ <span class="dropdown-text">Week 5: Mindset, the key to everythng</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week6.html">
+ <span class="dropdown-text">Week 6: Product Owner</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week7.html">
+ <span class="dropdown-text">Week 7: Managing time and mind</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week8.html">
+ <span class="dropdown-text">Week 8: The specialist</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week9.html">
+ <span class="dropdown-text">Week 9: Albertus’ Dylemma</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week10.html">
+ <span class="dropdown-text">Week 10: Beyond SCRUM</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Resources</li>
+        <li>
+    <a class="dropdown-item" href="../scrum/resources.html">
+ <span class="dropdown-text">SCRUM Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-learning" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Learning</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-learning">    
+        <li class="dropdown-header">Vocabulary</li>
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-general.html">
+ <span class="dropdown-text">General Vocabulary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-scrum.html">
+ <span class="dropdown-text">SCRUM Vocabulary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-devops.html">
+ <span class="dropdown-text">DevOps Vocabulary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-java-se.html">
+ <span class="dropdown-text">Java SE Vocabulay</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-spring-boot.html">
+ <span class="dropdown-text">Spring Boot Vocabulary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-data-base.html">
+ <span class="dropdown-text">DataBase Vocabulary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-reactjs.html">
+ <span class="dropdown-text">ReactJS Vocabulary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-web.html">
+ <span class="dropdown-text">Web Vocabulary</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Learning</li>
+        <li>
+    <a class="dropdown-item" href="../learning/learning-how-questions.html">
+ <span class="dropdown-text">Useful Questions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-how-tips.html">
+ <span class="dropdown-text">Learning: tips</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-how-writing.html">
+ <span class="dropdown-text">Writing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-how-take-notes.html">
+ <span class="dropdown-text">Taking Notes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-how-write-comments.html">
+ <span class="dropdown-text">Comments</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-how-auto-evaluate.html">
+ <span class="dropdown-text">Auto-Evaluate</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Books &amp; Articles</li>
+        <li>
+    <a class="dropdown-item" href="../learning/learning-listing-table-books.html">
+ <span class="dropdown-text">Books table</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-listing-card-books.html">
+ <span class="dropdown-text">Books cards</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-listing-table-articles.html">
+ <span class="dropdown-text">Articles table</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-listing-card-articles.html">
+ <span class="dropdown-text">Articles cards</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ifcd0210" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">IFCD0210</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-ifcd0210">    
+        <li class="dropdown-header">IFCD0210 Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifcd0210/ifcd0210.html">
+ <span class="dropdown-text">IFCD0210 Official Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210/ifcd0210initemail.html">
+ <span class="dropdown-text">IFCD0210 Init Mail</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210/ifcd0210deliveries.html">
+ <span class="dropdown-text">IFCD0210 Deliveries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210/ifcd0210calendar.html">
+ <span class="dropdown-text">IFCD0210 Calendar</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">IFCD0210 Backlog</li>
+        <li>
+    <a class="dropdown-item" href="../ifcd0210/ifcd0210backlog-sprint.html">
+ <span class="dropdown-text">IFCD0210 Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210/ifcd0210backlog-product.html">
+ <span class="dropdown-text">IFCD0210 Product Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210/ifcd0210backlog-projects.html">
+ <span class="dropdown-text">IFCD0210 Projects Backlog</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-about">    
+        <li class="dropdown-header">About me and this site</li>
+        <li>
+    <a class="dropdown-item" href="../about/about-this-me.html">
+ <span class="dropdown-text">About me</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../about/about-this-site.html">
+ <span class="dropdown-text">About this site</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../about/about-this-images-credit.html">
+ <span class="dropdown-text">About images credit</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Lab#RE05-1: chat &amp; websockets</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  ReactJS
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">ReactJS: Principles</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-principles.html" class="sidebar-item-text sidebar-link">React JS: Introduction</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-render-dom.html" class="sidebar-item-text sidebar-link">React JS: render virtual DOM</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-create.html" class="sidebar-item-text sidebar-link">React JS: Create a React project</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-components.html" class="sidebar-item-text sidebar-link">React JS: Components</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-jsx.html" class="sidebar-item-text sidebar-link">React JS: JSX</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-props.html" class="sidebar-item-text sidebar-link">React JS: <code>props</code> and state</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">ES6: ECMAScript 6</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-es6-arrow.html" class="sidebar-item-text sidebar-link">React JS ES6: arrow functions</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-es6-import.html" class="sidebar-item-text sidebar-link">React JS ES6: import modules</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-es6-data.html" class="sidebar-item-text sidebar-link">React JS ES6: array, data and key</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-es6-destructuring.html" class="sidebar-item-text sidebar-link">React JS ES6: destructuring</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-es6-spread.html" class="sidebar-item-text sidebar-link">React JS ES6: spread operator</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">ReacJS 18: Hooks</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-rules.html" class="sidebar-item-text sidebar-link">React JS: Rules of Hooks</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-state.html" class="sidebar-item-text sidebar-link">ReactJS: useState</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-reducer.html" class="sidebar-item-text sidebar-link">React JS: useReducer</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-ref.html" class="sidebar-item-text sidebar-link">React JS: useRef</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-effect.html" class="sidebar-item-text sidebar-link">React JS: useEffect</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-context.html" class="sidebar-item-text sidebar-link">React JS: useContext</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-custom.html" class="sidebar-item-text sidebar-link">ReactJS: custom hooks</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">ReactJS: Designing an App</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-app-async.html" class="sidebar-item-text sidebar-link">React JS App: async</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-app-events.html" class="sidebar-item-text sidebar-link">React JS App: events</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-app-router.html" class="sidebar-item-text sidebar-link">React JS App: router</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-app-conditional-render.html" class="sidebar-item-text sidebar-link">React JS App: conditional render</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-app-styling.html" class="sidebar-item-text sidebar-link">React JS App: styling</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">React JS: Laboratories</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab1.html" class="sidebar-item-text sidebar-link">Lab#RE01-1: API Rest Axios</a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab2.html" class="sidebar-item-text sidebar-link">Lab#RE02-1: Router &amp; Hooks</a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab3.html" class="sidebar-item-text sidebar-link">Lab#RE03-1: to-do app</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab3-2.html" class="sidebar-item-text sidebar-link">Lab#RE03-2: HighCharts</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab3-3.html" class="sidebar-item-text sidebar-link">Lab#RE03-3: API Rest Mono</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab3-4.html" class="sidebar-item-text sidebar-link">Lab#RE03-4: API Rest Domains</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab3-5.html" class="sidebar-item-text sidebar-link">Lab#RE03-5: data management</a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab4.html" class="sidebar-item-text sidebar-link">Lab#RE04-1: todo &amp; server</a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab5.html" class="sidebar-item-text sidebar-link active">Lab#RE05-1: chat &amp; websockets</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">React JS readings</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/resources.html" class="sidebar-item-text sidebar-link">ReactJS Resources</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overall" id="toc-overall" class="nav-link active" data-scroll-target="#overall"><span class="toc-section-number">1</span>  Overall</a></li>
+  <li><a href="#project-architecture" id="toc-project-architecture" class="nav-link" data-scroll-target="#project-architecture"><span class="toc-section-number">2</span>  Project Architecture</a></li>
+  <li><a href="#backend-aws" id="toc-backend-aws" class="nav-link" data-scroll-target="#backend-aws"><span class="toc-section-number">3</span>  Backend: AWS</a>
+  <ul>
+  <li><a href="#test-backend" id="toc-test-backend" class="nav-link" data-scroll-target="#test-backend"><span class="toc-section-number">3.1</span>  Test backend</a></li>
+  </ul></li>
+  <li><a href="#frontend-reactjs" id="toc-frontend-reactjs" class="nav-link" data-scroll-target="#frontend-reactjs"><span class="toc-section-number">4</span>  Frontend: ReactJS</a>
+  <ul>
+  <li><a href="#websockets-js" id="toc-websockets-js" class="nav-link" data-scroll-target="#websockets-js"><span class="toc-section-number">4.1</span>  Websockets JS</a></li>
+  <li><a href="#mock-up-and-tree-folder" id="toc-mock-up-and-tree-folder" class="nav-link" data-scroll-target="#mock-up-and-tree-folder"><span class="toc-section-number">4.2</span>  Mock-up and tree-folder</a></li>
+  <li><a href="#step-by-step-code" id="toc-step-by-step-code" class="nav-link" data-scroll-target="#step-by-step-code"><span class="toc-section-number">4.3</span>  Step-by-step code</a>
+  <ul>
+  <li><a href="#socketprovider.js" id="toc-socketprovider.js" class="nav-link" data-scroll-target="#socketprovider.js"><span class="toc-section-number">4.3.1</span>  <code>SocketProvider.js</code></a></li>
+  <li><a href="#chat.jsx" id="toc-chat.jsx" class="nav-link" data-scroll-target="#chat.jsx"><span class="toc-section-number">4.3.2</span>  <code>Chat.jsx</code></a></li>
+  <li><a href="#chatroom.jsx" id="toc-chatroom.jsx" class="nav-link" data-scroll-target="#chatroom.jsx"><span class="toc-section-number">4.3.3</span>  <code>ChatRoom.jsx</code></a></li>
+  <li><a href="#conversation.js" id="toc-conversation.js" class="nav-link" data-scroll-target="#conversation.js"><span class="toc-section-number">4.3.4</span>  <code>Conversation.js</code></a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/rjslab5.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Lab#RE05-1: chat &amp; websockets</h1>
+<p class="subtitle lead">ReactJS labs</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">reactjs</div>
+    <div class="quarto-category">lab</div>
+    <div class="quarto-category">Lab#RE05</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    labs
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>albertprofe </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Tuesday, June 1, 2021</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">Thursday, May 25, 2023</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<div class="labs">
+<p>📘 <strong>React JS Lab#RE05-1: chat &amp; websockets</strong></p>
+<p>In this lab, we will be using:</p>
+<ul>
+<li>the <code>react-router-dom</code>, which is a package with bindings for using React Router in web applications:</li>
+<li><code>websockets</code>, provided by <strong>ReactJS</strong> framework and:
+<ul>
+<li>useState</li>
+<li>useEffect</li>
+<li>useContext</li>
+</ul></li>
+<li><code>AWS</code>, <strong>Amanzon Web Services</strong>, architecture as a server-side:
+<ul>
+<li>Lambda</li>
+<li>DynamoDB</li>
+<li>API Gateway</li>
+<li>Cloudwatch</li>
+</ul></li>
+</ul>
+</div>
+<p><br></p>
+<p>Reference:</p>
+<ul>
+<li><a href="https://codesandbox.io/s/mychat-1-ktru2t?file=/src/chat/SocketProvider.js:1278-1317" class="external">codesanbox myChat</a></li>
+<li><a href="https://sites.google.com/view/devopscifo/labs/1-chat-app" class="external">myChat docs, backend &amp; frontend</a></li>
+</ul>
+<section id="overall" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="overall"><span class="header-section-number">1</span> Overall</h2>
+<p><code>WebSockets</code> is a <mark>communication protocol that enables real-time, bidirectional communication between a client (usually a web browser) and a server</mark>. It provides a persistent connection that allows for efficient data exchange without the need for repeated HTTP requests.</p>
+<p><code>WebSockets</code> are particularly useful for applications that require instant updates, such as real-time chat applications, collaborative editing tools, and live data streaming.</p>
+<p>In React, you can leverage the power of <code>WebSockets</code> by using libraries like <code>Socket.IO</code> or the native <code>WebSocket</code> API. These libraries enable you to establish a WebSocket connection, send and receive messages, and handle events for seamless real-time communication in your React applications.</p>
+</section>
+<section id="project-architecture" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="project-architecture"><span class="header-section-number">2</span> Project Architecture</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/AWS-Lambda-and-DynamoDB-Architecture.png" class="lightbox" title="General architecture" data-gallery="quarto-lightbox-gallery-1"><img src="../images/reactjs/AWS-Lambda-and-DynamoDB-Architecture.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">General architecture</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="backend-aws" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="backend-aws"><span class="header-section-number">3</span> Backend: AWS</h2>
+<p>For a chat app backend architecture using AWS Lambda, DynamoDB, and API Gateway for WebSockets, here’s a high-level overview:</p>
+<ol type="1">
+<li><code>API Gateway Configuration</code>:
+<ul>
+<li>Create an API Gateway WebSocket API to handle incoming WebSocket connections.</li>
+<li>Define routes and integration with Lambda functions to handle various WebSocket events (e.g., connection, disconnection, message sending).</li>
+</ul></li>
+<li><code>Lambda Functions</code>:
+<ul>
+<li>Implement Lambda functions to handle WebSocket events, such as connection, disconnection, and message handling.</li>
+<li>Use the AWS SDK to interact with DynamoDB for storing and retrieving chat messages and user information.</li>
+<li>Implement business logic for handling WebSocket events and updating the chat state in DynamoDB.</li>
+</ul></li>
+<li><code>DynamoDB</code>:
+<ul>
+<li>Create a DynamoDB table to store chat messages and user information.</li>
+<li>Define appropriate table schema to support the chat app requirements.</li>
+<li>Use DynamoDB Streams to capture changes in the chat state for real-time updates.</li>
+</ul></li>
+<li><code>Lambda-DynamoDB Integration</code>:
+<ul>
+<li>Configure Lambda functions to subscribe to the DynamoDB Streams associated with the chat table.</li>
+<li>Use the stream events to capture updates and propagate them to connected WebSocket clients.</li>
+<li>Update the chat state in DynamoDB based on WebSocket events and user interactions.</li>
+</ul></li>
+<li><code>Authentication and Authorization</code>:
+<ul>
+<li>Implement user authentication and authorization mechanisms using AWS Cognito, IAM, or custom solutions.</li>
+<li>Ensure that WebSocket connections are authenticated and authorized to perform specific actions.</li>
+</ul></li>
+<li><code>Additional Services</code>:
+<ul>
+<li>Utilize other AWS services as needed, such as AWS S3 for file storage, AWS CloudFront for content delivery, or AWS CloudWatch for monitoring and logging.</li>
+</ul></li>
+<li><code>Scalability and High Availability</code>:
+<ul>
+<li>Configure auto-scaling settings for Lambda functions and DynamoDB to handle varying chat loads.</li>
+<li>Utilize AWS Elastic Load Balancer or AWS API Gateway’s WebSocket APIs to distribute WebSocket connections across multiple instances.</li>
+</ul></li>
+</ol>
+<p>This architecture leverages AWS Lambda for serverless compute, DynamoDB for storing chat data, API Gateway for WebSocket communication, and additional services for authentication, authorization, and scalability. It provides a scalable, real-time chat backend that can handle WebSocket connections, manage chat messages, and provide a reliable experience to users.</p>
+<section id="test-backend" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="test-backend"><span class="header-section-number">3.1</span> Test backend</h3>
+<ul>
+<li>Web test websocket: <a href="https://websocketking.com/" class="external">Websocket King</a></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/lab-re-5-3.png" class="lightbox" title="Test app with websocketking" data-gallery="quarto-lightbox-gallery-2"><img src="../images/reactjs/lab-re-5-3.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Test app with websocketking</figcaption><p></p>
+</figure>
+</div>
+<p><code>Websocket King</code> is a <mark>web tool used to test the functionality and performance of WebSocket connections<mark>.</mark></mark></p>
+<p>With <code>Websocket King</code>, you can <strong>simulate</strong> <code>WebSocket</code> communication by connecting to the <code>WebSocket</code> <code>endpoint</code> of your AWS backend.</p>
+<p>It provides an intuitive interface to send and receive <code>WebSocket</code> messages, monitor the connection status, and analyze the received data. By using <code>Websocket King</code> to test your AWS backend, you can ensure that the <code>WebSocket</code> communication is working correctly, validate the message handling, and assess the overall performance and reliability of your backend implementation.</p>
+</section>
+</section>
+<section id="frontend-reactjs" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="frontend-reactjs"><span class="header-section-number">4</span> Frontend: ReactJS</h2>
+<p>Let’s now to create the front-end of <code>myChat</code> App with <code>ReactJS</code> and websockets.</p>
+<section id="websockets-js" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="websockets-js"><span class="header-section-number">4.1</span> Websockets JS</h3>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ToDoService.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a>  <span class="kw">const</span> socket <span class="op">=</span> <span class="kw">new</span> <span class="bu">WebSocket</span>(endpoint)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can use the newly created WebSocket *<strong>by utilizing the lifecycle methods and state management provided by the framework.</strong> Here’s a general outline of how you can incorporate WebSockets in a React component:</p>
+<p>Inside your component, initialize the WebSocket connection with the useEffect hook.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ToDoService.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="kw">const</span> socket <span class="op">=</span> <span class="kw">new</span> <span class="bu">WebSocket</span>(endpoint)<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="co">// Add event listeners and handle WebSocket events</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="co">// Clean up the WebSocket connection on component unmount</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>  <span class="cf">return</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb2-8"><a href="#cb2-8"></a>    socket<span class="op">.</span><span class="fu">close</span>()<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>  }<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>}<span class="op">,</span> [])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Add event listeners to handle WebSocket events such as onopen, onmessage, onclose, and onerror. For example:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ToDoService.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a>socket<span class="op">.</span><span class="at">onopen</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"WebSocket connection established."</span>)<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>}<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a>socket<span class="op">.</span><span class="at">onmessage</span> <span class="op">=</span> (<span class="bu">event</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"Received message:"</span><span class="op">,</span> <span class="bu">event</span><span class="op">.</span><span class="at">data</span>)<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  <span class="co">// Update React state or trigger necessary actions based on the received message</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>}<span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a></span>
+<span id="cb3-10"><a href="#cb3-10"></a>socket<span class="op">.</span><span class="at">onclose</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb3-11"><a href="#cb3-11"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"WebSocket connection closed."</span>)<span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>}<span class="op">;</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a></span>
+<span id="cb3-14"><a href="#cb3-14"></a>socket<span class="op">.</span><span class="at">onerror</span> <span class="op">=</span> (error) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-15"><a href="#cb3-15"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"WebSocket error:"</span><span class="op">,</span> error)<span class="op">;</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Inside your component, you can interact with the WebSocket connection as needed. For example, you can send messages using the send method:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ToDoService.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">const</span> sendMessage <span class="op">=</span> (message) <span class="kw">=&gt;</span> {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="cf">if</span> (socket<span class="op">.</span><span class="at">readyState</span> <span class="op">===</span> <span class="bu">WebSocket</span><span class="op">.</span><span class="at">OPEN</span>) {</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    socket<span class="op">.</span><span class="fu">send</span>(message)<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  } <span class="cf">else</span> {</span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"WebSocket connection is not open."</span>)<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>  }</span>
+<span id="cb4-7"><a href="#cb4-7"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Update the component’s state or trigger necessary actions based on the received messages. We can use React’s state management, such as <code>useState</code>, to store and update data in response to <code>WebSocket</code> events or a <code>useContext</code> to manage data.</p>
+</section>
+<section id="mock-up-and-tree-folder" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="mock-up-and-tree-folder"><span class="header-section-number">4.2</span> Mock-up and tree-folder</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/websockets-tree.png" class="lightbox" title="folder-tree" data-gallery="quarto-lightbox-gallery-3"><img src="../images/reactjs/websockets-tree.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
+<p></p><figcaption class="figure-caption">folder-tree</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/lab-re-5-1.png" class="lightbox" title="Mockup to enter room" data-gallery="quarto-lightbox-gallery-4"><img src="../images/reactjs/lab-re-5-1.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Mockup to enter room</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/lab-re-5-2.png" class="lightbox" title="Mockup conversation" data-gallery="quarto-lightbox-gallery-5"><img src="../images/reactjs/lab-re-5-2.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p></p><figcaption class="figure-caption">Mockup conversation</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-by-step-code" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="step-by-step-code"><span class="header-section-number">4.3</span> Step-by-step code</h3>
+<section id="socketprovider.js" class="level4" data-number="4.3.1">
+<h4 data-number="4.3.1" class="anchored" data-anchor-id="socketprovider.js"><span class="header-section-number">4.3.1</span> <code>SocketProvider.js</code></h4>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>SocketProvider.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">import</span> { useState<span class="op">,</span> useRef<span class="op">,</span> useEffect<span class="op">,</span> createContext } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="im">import</span> React <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">//https://developer.mozilla.org/en-US/docs/Web/API/WebSocket</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">//https://reactjs.org/docs/context.html</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">//ceate context we will use as store of websockets</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="im">export</span> <span class="kw">const</span> WebsocketContext <span class="op">=</span> <span class="fu">createContext</span>(<span class="kw">false</span><span class="op">,</span> <span class="kw">null</span><span class="op">,</span> () <span class="kw">=&gt;</span> {})<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">// ..........................................ready...message...send</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">// Make sure to put WebsocketProvider higher up in</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">// the component tree than any consumers</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="kw">const</span> SocketProvider <span class="op">=</span> ({ children }) <span class="kw">=&gt;</span> {</span>
+<span id="cb5-13"><a href="#cb5-13"></a>  <span class="co">//two hooks to control states of connection and getting messages</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>  <span class="kw">const</span> [isReady<span class="op">,</span> setIsReady] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>  <span class="kw">const</span> [message<span class="op">,</span> setMessage] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a></span>
+<span id="cb5-17"><a href="#cb5-17"></a>  <span class="co">//hook to control websocket persistence over re-renders and component tree</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>  <span class="co">// to any consumer</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>  <span class="kw">const</span> websocket <span class="op">=</span> <span class="fu">useRef</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a>  <span class="co">// aws endpoint</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>  <span class="kw">var</span> protocol <span class="op">=</span> <span class="st">"wss://"</span><span class="op">;</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>  <span class="co">//var word = "no-connection";</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>  <span class="kw">var</span> word <span class="op">=</span> <span class="st">"4rytv4evb2"</span><span class="op">;</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a>  <span class="kw">var</span> domain <span class="op">=</span> <span class="st">".execute-api.eu-central-1.amazonaws.com/test"</span><span class="op">;</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a>  <span class="kw">var</span> endpoint <span class="op">=</span> protocol <span class="op">+</span> word <span class="op">+</span> domain<span class="op">;</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a></span>
+<span id="cb5-27"><a href="#cb5-27"></a>  <span class="co">//hook to execute every render () =&gt; { function, how many renders we want}</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a>  <span class="co">// void &gt; just one render at first</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a>  <span class="co">//[] &gt; every new state</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a>  <span class="co">//[dependency] &gt; depends on functions within dependency</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb5-32"><a href="#cb5-32"></a>    <span class="co">//create socket object</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a>    <span class="kw">const</span> socket <span class="op">=</span> <span class="kw">new</span> <span class="bu">WebSocket</span>(endpoint)<span class="op">;</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a>    <span class="co">//if we open, set isReady to true</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a>    socket<span class="op">.</span><span class="at">onopen</span> <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="fu">setIsReady</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb5-36"><a href="#cb5-36"></a>    <span class="co">//if we close, set isReady to false</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a>    socket<span class="op">.</span><span class="at">onclose</span> <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="fu">setIsReady</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a>    <span class="co">//if we get a message, set message on that event (JSON)</span></span>
+<span id="cb5-39"><a href="#cb5-39"></a>    socket<span class="op">.</span><span class="at">onmessage</span> <span class="op">=</span> (<span class="bu">event</span>) <span class="kw">=&gt;</span> <span class="fu">setMessage</span>(<span class="bu">event</span><span class="op">.</span><span class="at">data</span>)<span class="op">;</span></span>
+<span id="cb5-40"><a href="#cb5-40"></a>    websocket<span class="op">.</span><span class="at">current</span> <span class="op">=</span> socket<span class="op">;</span></span>
+<span id="cb5-41"><a href="#cb5-41"></a>    <span class="co">//close socket on return, that is, useEffect may use</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a>    <span class="co">//this feature as optional, in this case we use it</span></span>
+<span id="cb5-43"><a href="#cb5-43"></a>    <span class="co">//to clean-up and close when exit the tab</span></span>
+<span id="cb5-44"><a href="#cb5-44"></a>    <span class="cf">return</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb5-45"><a href="#cb5-45"></a>      socket<span class="op">.</span><span class="fu">close</span>()<span class="op">;</span></span>
+<span id="cb5-46"><a href="#cb5-46"></a>    }<span class="op">;</span></span>
+<span id="cb5-47"><a href="#cb5-47"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
+<span id="cb5-48"><a href="#cb5-48"></a></span>
+<span id="cb5-49"><a href="#cb5-49"></a>  <span class="co">//create  variable JSON with the 3 websocket-states we will use</span></span>
+<span id="cb5-50"><a href="#cb5-50"></a>  <span class="co">//along the component tree: connection (isReady), get messages from server,</span></span>
+<span id="cb5-51"><a href="#cb5-51"></a>  <span class="co">//sendind messages : function</span></span>
+<span id="cb5-52"><a href="#cb5-52"></a>  <span class="kw">const</span> actionsWebSocket <span class="op">=</span> [</span>
+<span id="cb5-53"><a href="#cb5-53"></a>    isReady<span class="op">,</span></span>
+<span id="cb5-54"><a href="#cb5-54"></a>    message<span class="op">,</span></span>
+<span id="cb5-55"><a href="#cb5-55"></a>    <span class="co">//function to send ws WHEN it is called</span></span>
+<span id="cb5-56"><a href="#cb5-56"></a>    websocket<span class="op">.</span><span class="at">current</span><span class="op">?.</span><span class="at">send</span><span class="op">.</span><span class="fu">bind</span>(websocket<span class="op">.</span><span class="at">current</span>)</span>
+<span id="cb5-57"><a href="#cb5-57"></a>  ]<span class="op">;</span></span>
+<span id="cb5-58"><a href="#cb5-58"></a></span>
+<span id="cb5-59"><a href="#cb5-59"></a>  <span class="co">//ending component: we call context =&gt; WebsoockettContext</span></span>
+<span id="cb5-60"><a href="#cb5-60"></a>  <span class="co">//so socket provider is a component which returns a context</span></span>
+<span id="cb5-61"><a href="#cb5-61"></a>  <span class="co">//And this context goes with explicit props: actionsWebSocket</span></span>
+<span id="cb5-62"><a href="#cb5-62"></a>  <span class="cf">return</span> (</span>
+<span id="cb5-63"><a href="#cb5-63"></a>    <span class="op">&lt;</span>WebsocketContext<span class="op">.</span><span class="at">Provider</span> value<span class="op">=</span>{actionsWebSocket}<span class="op">&gt;</span></span>
+<span id="cb5-64"><a href="#cb5-64"></a>      {children}</span>
+<span id="cb5-65"><a href="#cb5-65"></a>    <span class="op">&lt;/</span>WebsocketContext<span class="op">.</span><span class="at">Provider</span><span class="op">&gt;</span></span>
+<span id="cb5-66"><a href="#cb5-66"></a>  )<span class="op">;</span></span>
+<span id="cb5-67"><a href="#cb5-67"></a>}<span class="op">;</span></span>
+<span id="cb5-68"><a href="#cb5-68"></a></span>
+<span id="cb5-69"><a href="#cb5-69"></a><span class="im">export</span> <span class="im">default</span> SocketProvider<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="chat.jsx" class="level4" data-number="4.3.2">
+<h4 data-number="4.3.2" class="anchored" data-anchor-id="chat.jsx"><span class="header-section-number">4.3.2</span> <code>Chat.jsx</code></h4>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Chat.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a><span class="im">import</span> React <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="im">import</span> SocketProvider <span class="im">from</span> <span class="st">"./SocketProvider"</span><span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="im">import</span> ChatRoom <span class="im">from</span> <span class="st">"./ChatRoom"</span><span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Chat</span>() {</span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="cf">return</span> (</span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="op">&lt;&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Chat<span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>      <span class="op">&lt;</span>hr <span class="op">/&gt;</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a>      <span class="op">&lt;</span>SocketProvider<span class="op">&gt;</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>        <span class="op">&lt;</span>ChatRoom <span class="op">/&gt;</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>      <span class="op">&lt;/</span>SocketProvider<span class="op">&gt;</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>    <span class="op">&lt;/&gt;</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a>  )<span class="op">;</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a>}</span>
+<span id="cb6-17"><a href="#cb6-17"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="chatroom.jsx" class="level4" data-number="4.3.3">
+<h4 data-number="4.3.3" class="anchored" data-anchor-id="chatroom.jsx"><span class="header-section-number">4.3.3</span> <code>ChatRoom.jsx</code></h4>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ChatRoom.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">import</span> React <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="im">import</span> { useContext<span class="op">,</span> useState } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="im">import</span> { WebsocketContext } <span class="im">from</span> <span class="st">"./SocketProvider"</span><span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="im">import</span> Conversation <span class="im">from</span> <span class="st">"./Conversation"</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">ChatRoom</span>() {</span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="co">//use it just like a hook: useContext gets as initial value</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="co">//the content WebSocketContext</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>  <span class="kw">const</span> [ready<span class="op">,</span> message<span class="op">,</span> send] <span class="op">=</span> <span class="fu">useContext</span>(WebsocketContext)<span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>  <span class="co">//two useStates to control inpus from user: userId and chatId</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>  <span class="kw">const</span> [chatId<span class="op">,</span> setChatId] <span class="op">=</span> <span class="fu">useState</span>(<span class="st">""</span>)<span class="op">;</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>  <span class="kw">const</span> [userId<span class="op">,</span> setUserId] <span class="op">=</span> <span class="fu">useState</span>(<span class="st">""</span>)<span class="op">;</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a></span>
+<span id="cb7-14"><a href="#cb7-14"></a>  <span class="co">//just to parse message JSON-aws (quasi JSON) from server to JSON and string</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>  <span class="kw">let</span> messageToShow <span class="op">=</span> <span class="st">""</span><span class="op">;</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>  <span class="kw">let</span> messageJSON <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(message)<span class="op">;</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>  <span class="kw">const</span> messageString <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(message)<span class="op">;</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a>  <span class="co">//console.log("messageJSON: " + messageJSON);</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a>  <span class="co">//to print the connection after log in if it exists</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a></span>
+<span id="cb7-21"><a href="#cb7-21"></a>  <span class="kw">let</span> isLogin <span class="op">=</span> messageString<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a>  <span class="cf">if</span> (<span class="op">!</span>isLogin) messageToShow <span class="op">=</span> <span class="st">"not logged-in"</span><span class="op">;</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a>  <span class="cf">else</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a>    messageToShow <span class="op">=</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a>      messageJSON<span class="op">.</span><span class="at">action</span> <span class="op">+</span> <span class="st">" (connectionId: "</span> <span class="op">+</span> messageJSON<span class="op">.</span><span class="at">connectionId</span> <span class="op">+</span> <span class="st">")"</span><span class="op">;</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a></span>
+<span id="cb7-27"><a href="#cb7-27"></a>  <span class="co">//functio to send login data to server</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a>  <span class="kw">const</span> sendLogin <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb7-29"><a href="#cb7-29"></a>    <span class="kw">let</span> data <span class="op">=</span> {</span>
+<span id="cb7-30"><a href="#cb7-30"></a>      <span class="dt">action</span><span class="op">:</span> <span class="st">"login"</span><span class="op">,</span></span>
+<span id="cb7-31"><a href="#cb7-31"></a>      <span class="dt">chatId</span><span class="op">:</span> chatId<span class="op">,</span></span>
+<span id="cb7-32"><a href="#cb7-32"></a>      <span class="dt">userId</span><span class="op">:</span> userId</span>
+<span id="cb7-33"><a href="#cb7-33"></a>    }<span class="op">;</span></span>
+<span id="cb7-34"><a href="#cb7-34"></a>    <span class="cf">if</span> (ready) <span class="fu">send</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(data))<span class="op">;</span></span>
+<span id="cb7-35"><a href="#cb7-35"></a>  }<span class="op">;</span></span>
+<span id="cb7-36"><a href="#cb7-36"></a></span>
+<span id="cb7-37"><a href="#cb7-37"></a>  <span class="co">//props to tree-component downstairs</span></span>
+<span id="cb7-38"><a href="#cb7-38"></a>  <span class="kw">let</span> props <span class="op">=</span> {</span>
+<span id="cb7-39"><a href="#cb7-39"></a>    <span class="dt">userId</span><span class="op">:</span> userId<span class="op">,</span></span>
+<span id="cb7-40"><a href="#cb7-40"></a>    <span class="dt">chatId</span><span class="op">:</span> chatId</span>
+<span id="cb7-41"><a href="#cb7-41"></a>  }<span class="op">;</span></span>
+<span id="cb7-42"><a href="#cb7-42"></a></span>
+<span id="cb7-43"><a href="#cb7-43"></a>  <span class="co">//view.......................................</span></span>
+<span id="cb7-44"><a href="#cb7-44"></a>  <span class="co">//conditional render.........................</span></span>
+<span id="cb7-45"><a href="#cb7-45"></a>  <span class="cf">return</span> (</span>
+<span id="cb7-46"><a href="#cb7-46"></a>    <span class="op">&lt;&gt;</span></span>
+<span id="cb7-47"><a href="#cb7-47"></a>      <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb7-48"><a href="#cb7-48"></a>        <span class="op">&lt;</span>h3<span class="op">&gt;</span>Chat Room<span class="op">&lt;/</span>h3<span class="op">&gt;</span></span>
+<span id="cb7-49"><a href="#cb7-49"></a>        <span class="op">&lt;</span>p<span class="op">&gt;</span></span>
+<span id="cb7-50"><a href="#cb7-50"></a>          Status <span class="dt">connection</span><span class="op">:</span> <span class="op">&lt;</span>b<span class="op">&gt;</span> {<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(ready)}<span class="op">&lt;/</span>b<span class="op">&gt;</span></span>
+<span id="cb7-51"><a href="#cb7-51"></a>        <span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb7-52"><a href="#cb7-52"></a></span>
+<span id="cb7-53"><a href="#cb7-53"></a>        {ready <span class="op">&amp;&amp;</span> <span class="op">!</span>isLogin <span class="op">?</span> (</span>
+<span id="cb7-54"><a href="#cb7-54"></a>          <span class="op">&lt;&gt;</span></span>
+<span id="cb7-55"><a href="#cb7-55"></a>            <span class="op">&lt;</span>label<span class="op">&gt;</span> UserId <span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
+<span id="cb7-56"><a href="#cb7-56"></a>            <span class="op">&lt;</span>input</span>
+<span id="cb7-57"><a href="#cb7-57"></a>              type<span class="op">=</span><span class="st">"text"</span></span>
+<span id="cb7-58"><a href="#cb7-58"></a>              placeholder<span class="op">=</span><span class="st">"Alex"</span></span>
+<span id="cb7-59"><a href="#cb7-59"></a>              onChange<span class="op">=</span>{(e) <span class="kw">=&gt;</span> <span class="fu">setUserId</span>(e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>)}</span>
+<span id="cb7-60"><a href="#cb7-60"></a>            <span class="op">/&gt;</span></span>
+<span id="cb7-61"><a href="#cb7-61"></a>            <span class="op">&lt;</span>label<span class="op">&gt;</span> ChatId <span class="op">&lt;/</span>label<span class="op">&gt;</span></span>
+<span id="cb7-62"><a href="#cb7-62"></a>            <span class="op">&lt;</span>input</span>
+<span id="cb7-63"><a href="#cb7-63"></a>              type<span class="op">=</span><span class="st">"text"</span></span>
+<span id="cb7-64"><a href="#cb7-64"></a>              placeholder<span class="op">=</span><span class="st">"chatReactAWS"</span></span>
+<span id="cb7-65"><a href="#cb7-65"></a>              onChange<span class="op">=</span>{(e) <span class="kw">=&gt;</span> <span class="fu">setChatId</span>(e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>)}</span>
+<span id="cb7-66"><a href="#cb7-66"></a>            <span class="op">/&gt;</span></span>
+<span id="cb7-67"><a href="#cb7-67"></a>            <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb7-68"><a href="#cb7-68"></a></span>
+<span id="cb7-69"><a href="#cb7-69"></a>            <span class="op">&lt;</span>button onClick<span class="op">=</span>{sendLogin}<span class="op">&gt;</span>Enter chat room<span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb7-70"><a href="#cb7-70"></a></span>
+<span id="cb7-71"><a href="#cb7-71"></a>            <span class="op">&lt;</span>p<span class="op">&gt;</span></span>
+<span id="cb7-72"><a href="#cb7-72"></a>              Status log <span class="kw">in</span><span class="op">:</span> <span class="op">&lt;</span>b<span class="op">&gt;</span> {messageToShow}<span class="op">&lt;/</span>b<span class="op">&gt;</span></span>
+<span id="cb7-73"><a href="#cb7-73"></a>            <span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb7-74"><a href="#cb7-74"></a>          <span class="op">&lt;/&gt;</span></span>
+<span id="cb7-75"><a href="#cb7-75"></a>        ) <span class="op">:</span> (</span>
+<span id="cb7-76"><a href="#cb7-76"></a>          <span class="st">""</span></span>
+<span id="cb7-77"><a href="#cb7-77"></a>        )}</span>
+<span id="cb7-78"><a href="#cb7-78"></a></span>
+<span id="cb7-79"><a href="#cb7-79"></a>        {isLogin <span class="op">?</span> <span class="op">&lt;</span>Conversation {<span class="op">...</span>props} <span class="op">/&gt;</span> <span class="op">:</span> <span class="st">""</span>}</span>
+<span id="cb7-80"><a href="#cb7-80"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb7-81"><a href="#cb7-81"></a>    <span class="op">&lt;/&gt;</span></span>
+<span id="cb7-82"><a href="#cb7-82"></a>  )<span class="op">;</span></span>
+<span id="cb7-83"><a href="#cb7-83"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="conversation.js" class="level4" data-number="4.3.4">
+<h4 data-number="4.3.4" class="anchored" data-anchor-id="conversation.js"><span class="header-section-number">4.3.4</span> <code>Conversation.js</code></h4>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Conversation.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> React <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="im">import</span> { useContext<span class="op">,</span> useState<span class="op">,</span> useReducer<span class="op">,</span> useEffect } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="im">import</span> { WebsocketContext } <span class="im">from</span> <span class="st">"./SocketProvider"</span><span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Conversation</span>(props) {</span>
+<span id="cb8-6"><a href="#cb8-6"></a>  <span class="co">// use it just like a hook</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>  <span class="kw">const</span> [ready<span class="op">,</span> message<span class="op">,</span> send] <span class="op">=</span> <span class="fu">useContext</span>(WebsocketContext)<span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>  <span class="kw">const</span> [state<span class="op">,</span> dispatch] <span class="op">=</span> <span class="fu">useReducer</span>(conversationReducer<span class="op">,</span> [])<span class="op">;</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>  <span class="kw">const</span> [text<span class="op">,</span> setText] <span class="op">=</span> <span class="fu">useState</span>(<span class="st">""</span>)<span class="op">;</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a></span>
+<span id="cb8-11"><a href="#cb8-11"></a>  <span class="kw">function</span> <span class="fu">conversationReducer</span>(state<span class="op">,</span> action) {</span>
+<span id="cb8-12"><a href="#cb8-12"></a>    <span class="cf">switch</span> (action<span class="op">.</span><span class="at">type</span>) {</span>
+<span id="cb8-13"><a href="#cb8-13"></a>      <span class="cf">case</span> <span class="st">"send"</span><span class="op">:</span> {</span>
+<span id="cb8-14"><a href="#cb8-14"></a>        <span class="kw">let</span> data <span class="op">=</span> {</span>
+<span id="cb8-15"><a href="#cb8-15"></a>          <span class="dt">action</span><span class="op">:</span> <span class="st">"conversation"</span><span class="op">,</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a>          <span class="dt">chatId</span><span class="op">:</span> props<span class="op">.</span><span class="at">chatId</span><span class="op">,</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a>          <span class="dt">userId</span><span class="op">:</span> props<span class="op">.</span><span class="at">userId</span><span class="op">,</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a>          <span class="dt">text</span><span class="op">:</span> action<span class="op">.</span><span class="at">payload</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a>        }<span class="op">;</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a>        <span class="cf">if</span> (ready) <span class="fu">send</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(data))<span class="op">;</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a></span>
+<span id="cb8-22"><a href="#cb8-22"></a>        <span class="cf">return</span> [</span>
+<span id="cb8-23"><a href="#cb8-23"></a>          <span class="op">...</span>state<span class="op">,</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a>          {</span>
+<span id="cb8-25"><a href="#cb8-25"></a>            <span class="dt">id</span><span class="op">:</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">,</span></span>
+<span id="cb8-26"><a href="#cb8-26"></a>            <span class="dt">time</span><span class="op">:</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">,</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a>            <span class="dt">chatId</span><span class="op">:</span> props<span class="op">.</span><span class="at">chatId</span><span class="op">,</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a>            <span class="dt">userId</span><span class="op">:</span> props<span class="op">.</span><span class="at">userId</span><span class="op">,</span></span>
+<span id="cb8-29"><a href="#cb8-29"></a>            <span class="dt">text</span><span class="op">:</span> action<span class="op">.</span><span class="at">payload</span></span>
+<span id="cb8-30"><a href="#cb8-30"></a>          }</span>
+<span id="cb8-31"><a href="#cb8-31"></a>        ]<span class="op">;</span></span>
+<span id="cb8-32"><a href="#cb8-32"></a>      }</span>
+<span id="cb8-33"><a href="#cb8-33"></a>      <span class="cf">case</span> <span class="st">"receive"</span><span class="op">:</span> {</span>
+<span id="cb8-34"><a href="#cb8-34"></a>        <span class="cf">return</span> [</span>
+<span id="cb8-35"><a href="#cb8-35"></a>          <span class="op">...</span>state<span class="op">,</span></span>
+<span id="cb8-36"><a href="#cb8-36"></a>          {</span>
+<span id="cb8-37"><a href="#cb8-37"></a>            <span class="dt">id</span><span class="op">:</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">,</span></span>
+<span id="cb8-38"><a href="#cb8-38"></a>            <span class="dt">time</span><span class="op">:</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(message)<span class="op">.</span><span class="at">time</span><span class="op">,</span></span>
+<span id="cb8-39"><a href="#cb8-39"></a>            <span class="dt">chatId</span><span class="op">:</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(message)<span class="op">.</span><span class="at">chatId</span><span class="op">,</span></span>
+<span id="cb8-40"><a href="#cb8-40"></a>            <span class="dt">userId</span><span class="op">:</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(message)<span class="op">.</span><span class="at">userId</span><span class="op">,</span></span>
+<span id="cb8-41"><a href="#cb8-41"></a>            <span class="dt">text</span><span class="op">:</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(message)<span class="op">.</span><span class="at">text</span></span>
+<span id="cb8-42"><a href="#cb8-42"></a>          }</span>
+<span id="cb8-43"><a href="#cb8-43"></a>        ]<span class="op">;</span></span>
+<span id="cb8-44"><a href="#cb8-44"></a>      }</span>
+<span id="cb8-45"><a href="#cb8-45"></a>      <span class="cf">case</span> <span class="st">"login"</span><span class="op">:</span> {</span>
+<span id="cb8-46"><a href="#cb8-46"></a>        <span class="cf">return</span> [</span>
+<span id="cb8-47"><a href="#cb8-47"></a>          <span class="op">...</span>state<span class="op">,</span></span>
+<span id="cb8-48"><a href="#cb8-48"></a>          {</span>
+<span id="cb8-49"><a href="#cb8-49"></a>            <span class="dt">id</span><span class="op">:</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">,</span></span>
+<span id="cb8-50"><a href="#cb8-50"></a>            <span class="dt">userId</span><span class="op">:</span> <span class="st">"status"</span><span class="op">,</span></span>
+<span id="cb8-51"><a href="#cb8-51"></a>            <span class="dt">time</span><span class="op">:</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(message)<span class="op">.</span><span class="at">time</span><span class="op">,</span></span>
+<span id="cb8-52"><a href="#cb8-52"></a>            <span class="dt">text</span><span class="op">:</span></span>
+<span id="cb8-53"><a href="#cb8-53"></a>              <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(message)<span class="op">.</span><span class="at">action</span> <span class="op">+</span></span>
+<span id="cb8-54"><a href="#cb8-54"></a>              <span class="st">" at "</span> <span class="op">+</span></span>
+<span id="cb8-55"><a href="#cb8-55"></a>              <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(message)<span class="op">.</span><span class="at">time</span> <span class="op">+</span></span>
+<span id="cb8-56"><a href="#cb8-56"></a>              <span class="st">" with connection:  "</span> <span class="op">+</span></span>
+<span id="cb8-57"><a href="#cb8-57"></a>              <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(message)<span class="op">.</span><span class="at">connectionId</span></span>
+<span id="cb8-58"><a href="#cb8-58"></a>          }</span>
+<span id="cb8-59"><a href="#cb8-59"></a>        ]<span class="op">;</span></span>
+<span id="cb8-60"><a href="#cb8-60"></a>      }</span>
+<span id="cb8-61"><a href="#cb8-61"></a></span>
+<span id="cb8-62"><a href="#cb8-62"></a>      <span class="cf">default</span><span class="op">:</span> {</span>
+<span id="cb8-63"><a href="#cb8-63"></a>        <span class="cf">return</span> state<span class="op">;</span></span>
+<span id="cb8-64"><a href="#cb8-64"></a>      }</span>
+<span id="cb8-65"><a href="#cb8-65"></a>    }</span>
+<span id="cb8-66"><a href="#cb8-66"></a>  }</span>
+<span id="cb8-67"><a href="#cb8-67"></a></span>
+<span id="cb8-68"><a href="#cb8-68"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb8-69"><a href="#cb8-69"></a>    <span class="kw">var</span> isConverastion <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb8-70"><a href="#cb8-70"></a>    <span class="kw">let</span> stringMessage <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(message)<span class="op">;</span></span>
+<span id="cb8-71"><a href="#cb8-71"></a>    <span class="cf">if</span> (<span class="op">!</span>stringMessage<span class="op">.</span><span class="fu">includes</span>(<span class="st">"sent at"</span>)) {</span>
+<span id="cb8-72"><a href="#cb8-72"></a>      isConverastion <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(message)<span class="op">.</span><span class="at">action</span> <span class="op">===</span> <span class="st">"conversation"</span><span class="op">;</span></span>
+<span id="cb8-73"><a href="#cb8-73"></a>      <span class="cf">if</span> (isConverastion) <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"receive"</span><span class="op">,</span> <span class="dt">payload</span><span class="op">:</span> message })<span class="op">;</span></span>
+<span id="cb8-74"><a href="#cb8-74"></a>      <span class="cf">else</span> <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"login"</span><span class="op">,</span> <span class="dt">payload</span><span class="op">:</span> message })<span class="op">;</span></span>
+<span id="cb8-75"><a href="#cb8-75"></a>    }</span>
+<span id="cb8-76"><a href="#cb8-76"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"isConverastion: "</span> <span class="op">+</span> isConverastion <span class="op">+</span> <span class="st">" - message: "</span> <span class="op">+</span> message)<span class="op">;</span></span>
+<span id="cb8-77"><a href="#cb8-77"></a>  }<span class="op">,</span> [message])<span class="op">;</span></span>
+<span id="cb8-78"><a href="#cb8-78"></a></span>
+<span id="cb8-79"><a href="#cb8-79"></a>  <span class="kw">let</span> propsConversationLines <span class="op">=</span> {</span>
+<span id="cb8-80"><a href="#cb8-80"></a>    <span class="dt">state</span><span class="op">:</span> state<span class="op">,</span></span>
+<span id="cb8-81"><a href="#cb8-81"></a>    <span class="dt">userId</span><span class="op">:</span> props<span class="op">.</span><span class="at">userId</span></span>
+<span id="cb8-82"><a href="#cb8-82"></a>  }<span class="op">;</span></span>
+<span id="cb8-83"><a href="#cb8-83"></a></span>
+<span id="cb8-84"><a href="#cb8-84"></a>  <span class="cf">return</span> (</span>
+<span id="cb8-85"><a href="#cb8-85"></a>    <span class="op">&lt;&gt;</span></span>
+<span id="cb8-86"><a href="#cb8-86"></a>      <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb8-87"><a href="#cb8-87"></a>        <span class="op">&lt;</span>h2<span class="op">&gt;</span>Conversation<span class="op">&lt;/</span>h2<span class="op">&gt;</span></span>
+<span id="cb8-88"><a href="#cb8-88"></a>        <span class="op">&lt;</span>hr <span class="op">/&gt;</span></span>
+<span id="cb8-89"><a href="#cb8-89"></a>        <span class="op">&lt;</span>div</span>
+<span id="cb8-90"><a href="#cb8-90"></a>          style<span class="op">=</span>{{</span>
+<span id="cb8-91"><a href="#cb8-91"></a>            <span class="dt">color</span><span class="op">:</span> <span class="st">"black"</span><span class="op">,</span></span>
+<span id="cb8-92"><a href="#cb8-92"></a>            <span class="dt">backgroundColor</span><span class="op">:</span> <span class="st">"azure"</span><span class="op">,</span></span>
+<span id="cb8-93"><a href="#cb8-93"></a>            <span class="dt">padding</span><span class="op">:</span> <span class="st">"10px"</span><span class="op">,</span></span>
+<span id="cb8-94"><a href="#cb8-94"></a>            <span class="dt">width</span><span class="op">:</span> <span class="st">"400px"</span><span class="op">,</span></span>
+<span id="cb8-95"><a href="#cb8-95"></a>            <span class="dt">fontFamily</span><span class="op">:</span> <span class="st">"Helvetica"</span><span class="op">,</span></span>
+<span id="cb8-96"><a href="#cb8-96"></a>            <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"13px"</span></span>
+<span id="cb8-97"><a href="#cb8-97"></a>          }}</span>
+<span id="cb8-98"><a href="#cb8-98"></a>        <span class="op">&gt;</span></span>
+<span id="cb8-99"><a href="#cb8-99"></a>          <span class="op">&lt;</span>ConversationsList {<span class="op">...</span>propsConversationLines} <span class="op">/&gt;</span></span>
+<span id="cb8-100"><a href="#cb8-100"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb8-101"><a href="#cb8-101"></a>        <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb8-102"><a href="#cb8-102"></a>        <span class="op">&lt;</span>input</span>
+<span id="cb8-103"><a href="#cb8-103"></a>          type<span class="op">=</span><span class="st">"text"</span></span>
+<span id="cb8-104"><a href="#cb8-104"></a>          name<span class="op">=</span><span class="st">"content"</span></span>
+<span id="cb8-105"><a href="#cb8-105"></a>          placeholder<span class="op">=</span><span class="st">"say hello"</span></span>
+<span id="cb8-106"><a href="#cb8-106"></a>          onChange<span class="op">=</span>{(e) <span class="kw">=&gt;</span> <span class="fu">setText</span>(e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>)}</span>
+<span id="cb8-107"><a href="#cb8-107"></a>        <span class="op">/&gt;</span></span>
+<span id="cb8-108"><a href="#cb8-108"></a></span>
+<span id="cb8-109"><a href="#cb8-109"></a>        <span class="op">&lt;</span>button onClick<span class="op">=</span>{() <span class="kw">=&gt;</span> <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"send"</span><span class="op">,</span> <span class="dt">payload</span><span class="op">:</span> text })}<span class="op">&gt;</span></span>
+<span id="cb8-110"><a href="#cb8-110"></a>          {<span class="st">" "</span>}</span>
+<span id="cb8-111"><a href="#cb8-111"></a>          Send</span>
+<span id="cb8-112"><a href="#cb8-112"></a>        <span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb8-113"><a href="#cb8-113"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb8-114"><a href="#cb8-114"></a>    <span class="op">&lt;/&gt;</span></span>
+<span id="cb8-115"><a href="#cb8-115"></a>  )<span class="op">;</span></span>
+<span id="cb8-116"><a href="#cb8-116"></a>}</span>
+<span id="cb8-117"><a href="#cb8-117"></a></span>
+<span id="cb8-118"><a href="#cb8-118"></a><span class="kw">function</span> <span class="fu">ConversationsList</span>(propsConversationLines) {</span>
+<span id="cb8-119"><a href="#cb8-119"></a>  <span class="cf">return</span> propsConversationLines<span class="op">.</span><span class="at">state</span><span class="op">.</span><span class="fu">map</span>((item) <span class="kw">=&gt;</span> (</span>
+<span id="cb8-120"><a href="#cb8-120"></a>    <span class="op">&lt;&gt;</span></span>
+<span id="cb8-121"><a href="#cb8-121"></a>      {propsConversationLines<span class="op">.</span><span class="at">userId</span> <span class="op">===</span> item<span class="op">.</span><span class="at">userId</span> <span class="op">?</span> (</span>
+<span id="cb8-122"><a href="#cb8-122"></a>        <span class="op">&lt;</span>p</span>
+<span id="cb8-123"><a href="#cb8-123"></a>          style<span class="op">=</span>{{</span>
+<span id="cb8-124"><a href="#cb8-124"></a>            <span class="dt">textAlign</span><span class="op">:</span> <span class="st">"right"</span></span>
+<span id="cb8-125"><a href="#cb8-125"></a>          }}</span>
+<span id="cb8-126"><a href="#cb8-126"></a>        <span class="op">&gt;</span></span>
+<span id="cb8-127"><a href="#cb8-127"></a>          {item<span class="op">.</span><span class="at">userId</span>}<span class="op">:</span> {item<span class="op">.</span><span class="at">text</span>}</span>
+<span id="cb8-128"><a href="#cb8-128"></a>        <span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb8-129"><a href="#cb8-129"></a>      ) <span class="op">:</span> (</span>
+<span id="cb8-130"><a href="#cb8-130"></a>        <span class="op">&lt;</span>p</span>
+<span id="cb8-131"><a href="#cb8-131"></a>          style<span class="op">=</span>{{</span>
+<span id="cb8-132"><a href="#cb8-132"></a>            <span class="dt">textAlign</span><span class="op">:</span> <span class="st">"left"</span></span>
+<span id="cb8-133"><a href="#cb8-133"></a>          }}</span>
+<span id="cb8-134"><a href="#cb8-134"></a>        <span class="op">&gt;</span></span>
+<span id="cb8-135"><a href="#cb8-135"></a>          {item<span class="op">.</span><span class="at">userId</span>}<span class="op">:</span> {item<span class="op">.</span><span class="at">text</span>}</span>
+<span id="cb8-136"><a href="#cb8-136"></a>        <span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb8-137"><a href="#cb8-137"></a>      )}</span>
+<span id="cb8-138"><a href="#cb8-138"></a>    <span class="op">&lt;/&gt;</span></span>
+<span id="cb8-139"><a href="#cb8-139"></a>  ))<span class="op">;</span></span>
+<span id="cb8-140"><a href="#cb8-140"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!--- navLinks -->
+<br><br>
+<div class="row">
+<br>
+<div class="column left previous">
+<p><br> <a href="../reactjs/rjslab4.html"> React JS: Lab#RE04-1</a> <br></p>
+</div>
+<br>
+<div class="column center">
+<p><br> <a href="#top"> top</a> <br></p>
+</div>
+<br>
+<div class="column right next">
+<p><br> <a href="../reactjs/resources.html">ReactJS Resources </a> <br></p>
+</div>
+<p><br></p>
+</div>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left"><a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0 International (CC BY 4.0)</a></div>   
+      <div class="nav-footer-center">If you want to go far, walk slow / We love dukkha</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/AlbertProfe/">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/">
+      <i class="bi bi-twitter" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"loop":true,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});</script>
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
