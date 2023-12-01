@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.383">
+<meta name="generator" content="quarto-1.4.386">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -1588,7 +1588,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tuesday, September 26, 2023</p>
+      <p class="date-modified">Thursday, May 25, 2023</p>
     </div>
   </div>
     
@@ -1616,7 +1616,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Be careful with <a href="https://hibernate.org/orm/releases/" class="external">this</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="..\images/springboot/ormjava_comp_matrix.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-description="" title="Compatibility matrix Java / JPA / ORM Hibernate / Jakarta"><img src="..\images/springboot/ormjava_comp_matrix.png" class="img-fluid figure-img" alt="Compatibility matrix Java / JPA / ORM Hibernate / Jakarta"></a></p>
+<p><a href="../images/springboot/ormjava_comp_matrix.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-1" title="Compatibility matrix Java / JPA / ORM Hibernate / Jakarta"><img src="../images/springboot/ormjava_comp_matrix.png" class="img-fluid figure-img" alt="Compatibility matrix Java / JPA / ORM Hibernate / Jakarta"></a></p>
 <figcaption>Compatibility matrix Java / JPA / ORM Hibernate / Jakarta</figcaption>
 </figure>
 </div>
@@ -1669,25 +1669,25 @@ Entity definition
 <div class="code-with-filename-file">
 <pre><strong>DemoApplication.java</strong></pre>
 </div>
-<div class="sourceCode" id="cb1" data-filename="DemoApplication.java"><pre class="sourceCode java code-overflow-wrap code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="at">@Getter</span> <span class="at">@Setter</span> <span class="at">@NoArgsConstructor</span> <span class="at">@AllArgsConstructor</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"Book"</span><span class="op">)</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BOOK_TABLE"</span><span class="op">)</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> <span class="bu">Book</span> <span class="op">{</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Id</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">@GeneratedValue</span><span class="op">(</span>strategy <span class="op">=</span> GenerationType<span class="op">.</span><span class="fu">AUTO</span><span class="op">)</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Column</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BOOK_ID"</span><span class="op">)</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">long</span> bookId<span class="op">;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Column</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BOOK_TITLE"</span><span class="op">)</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">String</span> title<span class="op">;</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Column</span><span class="op">(</span>name<span class="op">=</span><span class="st">"AUTHOR"</span><span class="op">)</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">String</span> author<span class="op">;</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> pages<span class="op">;</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Column</span><span class="op">(</span>name<span class="op">=</span><span class="st">"PUBLISHED_YEAR"</span><span class="op">)</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> publishedYear<span class="op">;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Column</span><span class="op">(</span>name<span class="op">=</span><span class="st">"ISBN"</span><span class="op">)</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">String</span> isbn<span class="op">;</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-filename="DemoApplication.java"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="at">@Getter</span> <span class="at">@Setter</span> <span class="at">@NoArgsConstructor</span> <span class="at">@AllArgsConstructor</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"Book"</span><span class="op">)</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BOOK_TABLE"</span><span class="op">)</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">public</span> <span class="kw">class</span> <span class="bu">Book</span> <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>    <span class="at">@Id</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>    <span class="at">@GeneratedValue</span><span class="op">(</span>strategy <span class="op">=</span> GenerationType<span class="op">.</span><span class="fu">AUTO</span><span class="op">)</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>    <span class="at">@Column</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BOOK_ID"</span><span class="op">)</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>    <span class="kw">private</span> <span class="dt">long</span> bookId<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="at">@Column</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BOOK_TITLE"</span><span class="op">)</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>    <span class="kw">private</span> <span class="bu">String</span> title<span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>    <span class="at">@Column</span><span class="op">(</span>name<span class="op">=</span><span class="st">"AUTHOR"</span><span class="op">)</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="kw">private</span> <span class="bu">String</span> author<span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="kw">private</span> <span class="dt">int</span> pages<span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="at">@Column</span><span class="op">(</span>name<span class="op">=</span><span class="st">"PUBLISHED_YEAR"</span><span class="op">)</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="kw">private</span> <span class="dt">int</span> publishedYear<span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>    <span class="at">@Column</span><span class="op">(</span>name<span class="op">=</span><span class="st">"ISBN"</span><span class="op">)</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>    <span class="kw">private</span> <span class="bu">String</span> isbn<span class="op">;</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1724,7 +1724,7 @@ Historical note
 <div class="code-with-filename-file">
 <pre><strong>linux.sh</strong></pre>
 </div>
-<div class="sourceCode" id="cb2" data-filename="linux.sh"><pre class="sourceCode bash code-overflow-wrap code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-zxvf</span> h2-<span class="pp">*</span>.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2" data-filename="linux.sh"><pre class="sourceCode numberSource bash code-overflow-wrap number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">tar</span> <span class="at">-zxvf</span> h2-<span class="pp">*</span>.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="3" type="1">
 <li><strong>Start the H2 database server</strong>: Navigate to the <code>H2 database</code> directory and start the <code>H2 database</code> server by running the following command:</li>
@@ -1733,16 +1733,16 @@ Historical note
 <div class="code-with-filename-file">
 <pre><strong>linux.sh</strong></pre>
 </div>
-<div class="sourceCode" id="cb3" data-filename="linux.sh"><pre class="sourceCode bash code-overflow-wrap code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> h2<span class="pp">*</span>.jar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3" data-filename="linux.sh"><pre class="sourceCode numberSource bash code-overflow-wrap number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">java</span> <span class="at">-jar</span> h2<span class="pp">*</span>.jar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>linux.sh</strong></pre>
 </div>
-<div class="sourceCode" id="cb4" data-filename="linux.sh"><pre class="sourceCode bash code-overflow-wrap code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>download directory<span class="op">&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> h2<span class="pp">*</span>.zip</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> h2/bin</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x h2.s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4" data-filename="linux.sh"><pre class="sourceCode numberSource bash code-overflow-wrap number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>download directory<span class="op">&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">unzip</span> h2<span class="pp">*</span>.zip</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="bu">cd</span> h2/bin</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="fu">chmod</span> +x h2.s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will <strong>start</strong> the <code>H2 database</code> server and display the <strong>URL</strong> where the <code>H2 database</code> can be accessed.</p>
 <ol start="4" type="1">
@@ -1754,21 +1754,21 @@ Historical note
 <div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-center anchored" width="40%">
 <figure class="quarto-float quarto-float-fig figure">
 <div>
-<a href="..\images/springboot/h2Icon.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-description=": "><img src="..\images/springboot/h2Icon.png" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="img-fluid figure-img" style="width:40.0%"></a>
+<a href="../images/springboot/h2Icon.png" class="lightbox" data-description=": " data-gallery="quarto-lightbox-gallery-2"><img src="../images/springboot/h2Icon.png" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="img-fluid figure-img" style="width:40.0%"></a>
 </div>
 </figure>
 </div>
 <div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="quarto-figure quarto-figure-center anchored" width="40%">
 <figure class="quarto-float quarto-float-fig figure">
 <div>
-<a href="..\images/springboot/h2Icon-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-description=": "><img src="..\images/springboot/h2Icon-2.png" id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="img-fluid figure-img" style="width:40.0%"></a>
+<a href="../images/springboot/h2Icon-2.png" class="lightbox" data-description=": " data-gallery="quarto-lightbox-gallery-3"><img src="../images/springboot/h2Icon-2.png" id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="img-fluid figure-img" style="width:40.0%"></a>
 </div>
 </figure>
 </div>
 <div id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="quarto-figure quarto-figure-center anchored" width="40%">
 <figure class="quarto-float quarto-float-fig figure">
 <div>
-<a href="..\images/springboot/h2Icon-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-description=": "><img src="..\images/springboot/h2Icon-3.png" id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="img-fluid figure-img" style="width:40.0%"></a>
+<a href="../images/springboot/h2Icon-3.png" class="lightbox" data-description=": " data-gallery="quarto-lightbox-gallery-4"><img src="../images/springboot/h2Icon-3.png" id="fig-539a35d47e664c97a50115a146a7f1bd-3" class="img-fluid figure-img" style="width:40.0%"></a>
 </div>
 </figure>
 </div>
@@ -1777,25 +1777,25 @@ Historical note
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="..\images/springboot/createH2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" data-description="" title="Create H2 DataBase: define parameters"><img src="..\images/springboot/createH2.png" class="img-fluid figure-img" style="width:80.0%" alt="Create H2 DataBase: define parameters"></a></p>
+<p><a href="../images/springboot/createH2.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-5" title="Create H2 DataBase: define parameters"><img src="../images/springboot/createH2.png" class="img-fluid figure-img" style="width:80.0%" alt="Create H2 DataBase: define parameters"></a></p>
 <figcaption>Create H2 DataBase: define parameters</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="..\images/springboot/createH2-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" data-description="" title="Create H2 DataBase: DB created"><img src="..\images/springboot/createH2-2.png" class="img-fluid figure-img" style="width:80.0%" alt="Create H2 DataBase: DB created"></a></p>
+<p><a href="../images/springboot/createH2-2.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-6" title="Create H2 DataBase: DB created"><img src="../images/springboot/createH2-2.png" class="img-fluid figure-img" style="width:80.0%" alt="Create H2 DataBase: DB created"></a></p>
 <figcaption>Create H2 DataBase: DB created</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="..\images/springboot/createH2-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" data-description="" title="Create H2 DataBase: check it has been created"><img src="..\images/springboot/createH2-3.png" class="img-fluid figure-img" style="width:80.0%" alt="Create H2 DataBase: check it has been created"></a></p>
+<p><a href="../images/springboot/createH2-3.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-7" title="Create H2 DataBase: check it has been created"><img src="../images/springboot/createH2-3.png" class="img-fluid figure-img" style="width:80.0%" alt="Create H2 DataBase: check it has been created"></a></p>
 <figcaption>Create H2 DataBase: check it has been created</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="..\images/springboot/createH2-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" data-description="" title="Create H2 DataBase: connect to DB"><img src="..\images/springboot/createH2-4.png" class="img-fluid figure-img" style="width:80.0%" alt="Create H2 DataBase: connect to DB"></a></p>
+<p><a href="../images/springboot/createH2-4.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-8" title="Create H2 DataBase: connect to DB"><img src="../images/springboot/createH2-4.png" class="img-fluid figure-img" style="width:80.0%" alt="Create H2 DataBase: connect to DB"></a></p>
 <figcaption>Create H2 DataBase: connect to DB</figcaption>
 </figure>
 </div>
@@ -1820,7 +1820,7 @@ Important
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="..\images/springboot/createH2-5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" data-description="" title="Create H2 DataBase"><img src="..\images/springboot/createH2-5.png" class="img-fluid figure-img" style="width:80.0%" alt="Create H2 DataBase"></a></p>
+<p><a href="../images/springboot/createH2-5.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-9" title="Create H2 DataBase"><img src="../images/springboot/createH2-5.png" class="img-fluid figure-img" style="width:80.0%" alt="Create H2 DataBase"></a></p>
 <figcaption>Create H2 DataBase</figcaption>
 </figure>
 </div>
@@ -1854,7 +1854,7 @@ JPA definiton
 <div class="code-with-filename-file">
 <pre><strong>DemoApplication.java</strong></pre>
 </div>
-<div class="sourceCode" id="cb5" data-filename="DemoApplication.java"><pre class="sourceCode java code-overflow-wrap code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> BookRepository <span class="kw">extends</span> CrudRepository<span class="op">&lt;</span><span class="bu">Book</span><span class="op">,</span> <span class="bu">Long</span><span class="op">&gt;</span> <span class="op">{}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5" data-filename="DemoApplication.java"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">public</span> <span class="kw">interface</span> BookRepository <span class="kw">extends</span> CrudRepository<span class="op">&lt;</span><span class="bu">Book</span><span class="op">,</span> <span class="bu">Long</span><span class="op">&gt;</span> <span class="op">{}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This code is defining a Java interface named <code>BookRepository</code> that extends the <code>CrudRepository</code> interface.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -1904,35 +1904,35 @@ Crud Repository
 <div class="code-with-filename-file">
 <pre><strong>DemoApplication.java</strong></pre>
 </div>
-<div class="sourceCode" id="cb7" data-filename="DemoApplication.java"><pre class="sourceCode java code-overflow-wrap code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="at">@Controller</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/library"</span><span class="op">)</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> LibraryWebController <span class="op">{</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Autowired</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    BookService bookService<span class="op">;</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/books"</span><span class="op">)</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">getWeb</span><span class="op">(</span>Model containerToView<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">//</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        containerToView<span class="op">.</span><span class="fu">addAttribute</span><span class="op">(</span><span class="st">"booksfromController"</span><span class="op">,</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                bookService<span class="op">.</span><span class="fu">getAllBooks</span><span class="op">());</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"showBooks"</span><span class="op">;</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7" data-filename="DemoApplication.java"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="at">@Controller</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/library"</span><span class="op">)</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">public</span> <span class="kw">class</span> LibraryWebController <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">@Autowired</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>    BookService bookService<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a></span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/books"</span><span class="op">)</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">getWeb</span><span class="op">(</span>Model containerToView<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>        <span class="co">//</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>        containerToView<span class="op">.</span><span class="fu">addAttribute</span><span class="op">(</span><span class="st">"booksfromController"</span><span class="op">,</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>                bookService<span class="op">.</span><span class="fu">getAllBooks</span><span class="op">());</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>        </span>
+<span id="cb7-14"><a href="#cb7-14"></a></span>
+<span id="cb7-15"><a href="#cb7-15"></a>        <span class="cf">return</span> <span class="st">"showBooks"</span><span class="op">;</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>    <span class="op">}</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br> The method <code>getWeb()</code> is handling a <strong>GET request</strong> to the “<code>/library/books</code>” <strong>URL path</strong> and adding a list of books retrieved from the <code>BookService</code> to the <code>Model</code> attribute “<code>booksfromController</code>”.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="..\images/springboot/view.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" data-description="" title="@controller and View are connected by HTML/ViewResolver/TH"><img src="..\images/springboot/view.png" class="img-fluid figure-img" style="width:80.0%" alt="@controller and View are connected by HTML/ViewResolver/TH"></a></p>
+<p><a href="../images/springboot/view.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-10" title="@controller and View are connected by HTML/ViewResolver/TH"><img src="../images/springboot/view.png" class="img-fluid figure-img" style="width:80.0%" alt="@controller and View are connected by HTML/ViewResolver/TH"></a></p>
 <figcaption><span class="citation" data-cites="controller">@controller</span> and View are connected by HTML/ViewResolver/TH</figcaption>
 </figure>
 </div>
 <p>Finally, it <strong>returns</strong> the name of the view that will be used <strong>to render the response.</strong></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="..\images/springboot/controller.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" data-description="" title="getWeb method"><img src="..\images/springboot/controller.png" class="img-fluid figure-img" style="width:80.0%" alt="getWeb method"></a></p>
+<p><a href="../images/springboot/controller.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-11" title="getWeb method"><img src="../images/springboot/controller.png" class="img-fluid figure-img" style="width:80.0%" alt="getWeb method"></a></p>
 <figcaption>getWeb method</figcaption>
 </figure>
 </div>
@@ -1982,7 +1982,7 @@ Thymeleaf
 <div id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div>
-<a href="..\images/springboot/thymeleaf.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" data-description=": "><img src="..\images/springboot/thymeleaf.png" id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="img-fluid figure-img"></a>
+<a href="../images/springboot/thymeleaf.png" class="lightbox" data-description=": " data-gallery="quarto-lightbox-gallery-12"><img src="../images/springboot/thymeleaf.png" id="fig-539a35d47e664c97a50115a146a7f1bd-4" class="img-fluid figure-img"></a>
 </div>
 </figure>
 </div>
@@ -2018,7 +2018,7 @@ Scope in Thymeleaf
 <div id="fig-539a35d47e664c97a50115a146a7f1bd-5" class="quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div>
-<a href="..\images/springboot/Library5-tree-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" data-description=": "><img src="..\images/springboot/Library5-tree-2.png" id="fig-539a35d47e664c97a50115a146a7f1bd-5" class="img-fluid figure-img"></a>
+<a href="../images/springboot/Library5-tree-2.png" class="lightbox" data-description=": " data-gallery="quarto-lightbox-gallery-13"><img src="../images/springboot/Library5-tree-2.png" id="fig-539a35d47e664c97a50115a146a7f1bd-5" class="img-fluid figure-img"></a>
 </div>
 </figure>
 </div>
@@ -2042,7 +2042,7 @@ Scope in Thymeleaf
 <div id="fig-539a35d47e664c97a50115a146a7f1bd-6" class="quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div>
-<a href="..\images/springboot/Library5-tree.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" data-description=": "><img src="..\images/springboot/Library5-tree.png" id="fig-539a35d47e664c97a50115a146a7f1bd-6" class="img-fluid figure-img"></a>
+<a href="../images/springboot/Library5-tree.png" class="lightbox" data-description=": " data-gallery="quarto-lightbox-gallery-14"><img src="../images/springboot/Library5-tree.png" id="fig-539a35d47e664c97a50115a146a7f1bd-6" class="img-fluid figure-img"></a>
 </div>
 </figure>
 </div>
@@ -2066,13 +2066,13 @@ Scope in Thymeleaf
 <h1 data-number="6"><span class="header-section-number">6</span> Execution</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="..\images/springboot/execution-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" data-description="" title="Web client from Chrome web browser makes a request to Spring Boot Server"><img src="..\images/springboot/execution-1.png" class="img-fluid figure-img" alt="Web client from Chrome web browser makes a request to Spring Boot Server"></a></p>
+<p><a href="../images/springboot/execution-1.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-15" title="Web client from Chrome web browser makes a request to Spring Boot Server"><img src="../images/springboot/execution-1.png" class="img-fluid figure-img" alt="Web client from Chrome web browser makes a request to Spring Boot Server"></a></p>
 <figcaption>Web client from Chrome web browser makes a request to Spring Boot Server</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="..\images/springboot/execution-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" data-description="" title="Spring Boot Server gets the request and manages to create a Response to client in HTML file format"><img src="..\images/springboot/execution-2.png" class="img-fluid figure-img" alt="Spring Boot Server gets the request and manages to create a Response to client in HTML file format"></a></p>
+<p><a href="../images/springboot/execution-2.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-16" title="Spring Boot Server gets the request and manages to create a Response to client in HTML file format"><img src="../images/springboot/execution-2.png" class="img-fluid figure-img" alt="Spring Boot Server gets the request and manages to create a Response to client in HTML file format"></a></p>
 <figcaption>Spring Boot Server gets the request and manages to create a Response to client in HTML file format</figcaption>
 </figure>
 </div>
@@ -2088,19 +2088,19 @@ Scope in Thymeleaf
 <span id="cb8-6"><a href="#cb8-6"></a>&lt;/<span class="kw">dependency</span>&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="..\images/springboot/compiler.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" data-description="" title="Auto-reload compiler: Advanced Settings"><img src="..\images/springboot/compiler.png" class="img-fluid figure-img" style="width:70.0%" alt="Auto-reload compiler: Advanced Settings"></a></p>
+<p><a href="../images/springboot/compiler.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-17" title="Auto-reload compiler: Advanced Settings"><img src="../images/springboot/compiler.png" class="img-fluid figure-img" style="width:70.0%" alt="Auto-reload compiler: Advanced Settings"></a></p>
 <figcaption>Auto-reload compiler: Advanced Settings</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="..\images/springboot/compiller2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" data-description="" title="Auto-reload compiler: build project automatically"><img src="..\images/springboot/compiller2.png" class="img-fluid figure-img" style="width:70.0%" alt="Auto-reload compiler: build project automatically"></a></p>
+<p><a href="../images/springboot/compiller2.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-18" title="Auto-reload compiler: build project automatically"><img src="../images/springboot/compiller2.png" class="img-fluid figure-img" style="width:70.0%" alt="Auto-reload compiler: build project automatically"></a></p>
 <figcaption>Auto-reload compiler: build project automatically</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="..\images/springboot/devtools_registry.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" data-description="" title="Enable this option: compiler.automake.allow.when.app.running"><img src="..\images/springboot/devtools_registry.png" class="img-fluid figure-img" style="width:70.0%" alt="Enable this option: compiler.automake.allow.when.app.running"></a></p>
+<p><a href="../images/springboot/devtools_registry.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-19" title="Enable this option: compiler.automake.allow.when.app.running"><img src="../images/springboot/devtools_registry.png" class="img-fluid figure-img" style="width:70.0%" alt="Enable this option: compiler.automake.allow.when.app.running"></a></p>
 <figcaption>Enable this option: <code>compiler.automake.allow.when.app.running</code></figcaption>
 </figure>
 </div>
@@ -2691,7 +2691,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":true,"closeEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});</script>
 
 
 
