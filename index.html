@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -42,8 +76,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -79,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -227,6 +259,10 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="./devops/devops-what-immutable.html">
  <span class="dropdown-text">Immutable Infrastructure</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./devops/devops-what-lifecycle.html">
+ <span class="dropdown-text">Software Lifecycle</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Documentation</li>
@@ -1211,6 +1247,10 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">About me</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="./about/about-this-developer.html">
+ <span class="dropdown-text">About a developer</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./about/about-this-site.html">
  <span class="dropdown-text">About this site</span></a>
   </li>  
@@ -1232,21 +1272,9 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#skills-needed-as-a-developer-2022" id="toc-skills-needed-as-a-developer-2022" class="nav-link active" data-scroll-target="#skills-needed-as-a-developer-2022">Skills needed as a developer (2022)</a></li>
-  <li><a href="#lifecycle-software-2022" id="toc-lifecycle-software-2022" class="nav-link" data-scroll-target="#lifecycle-software-2022">Lifecycle software (2022)</a></li>
-  <li><a href="#what-is-a-programmer-2022-openai" id="toc-what-is-a-programmer-2022-openai" class="nav-link" data-scroll-target="#what-is-a-programmer-2022-openai">What is a programmer (2022 OpenAI)</a></li>
-  <li><a href="#how-can-we-get-it" id="toc-how-can-we-get-it" class="nav-link" data-scroll-target="#how-can-we-get-it">How can we get it?</a></li>
-  <li><a href="#and-reading-books" id="toc-and-reading-books" class="nav-link" data-scroll-target="#and-reading-books">And reading books?</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -1267,128 +1295,155 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="images/home/frontimagealbertprofeweb.png" class="lightbox" data-description="" data-gallery="quarto-lightbox-gallery-1" title="Technologies programmed and studied in this site"><img src="images/home/frontimagealbertprofeweb.png" class="preview-image img-fluid figure-img" alt="Technologies programmed and studied in this site"></a></p>
-<figcaption>Technologies programmed and studied in this site</figcaption>
+<style>
+
+body {
+  background-image: linear-gradient(0deg, rgba(196,255,14,1) 0%, rgba(126,217,87,1) 72%);
+}
+
+</style>
+<div class="page-columns page-full">
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div class="page-columns page-full">
+<a href="images/home/frontimagealbertprofeweb.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-1" data-description=": "><img src="images/home/frontimagealbertprofeweb.png" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="img-fluid figure-img column-page"></a>
+</div>
 </figure>
 </div>
-<section id="skills-needed-as-a-developer-2022" class="level2">
-<h2 class="anchored" data-anchor-id="skills-needed-as-a-developer-2022">Skills needed as a developer (2022)</h2>
-<div class="summary">
-<p>📘 <strong>Developer skills summary</strong></p>
-<ul>
-<li>Algorithmic, OOP, COP</li>
-<li>Architecture in mind - Systems Design</li>
-<li>Control Version Systems</li>
-<li>DevOps</li>
-<li>SCRUM</li>
-</ul>
 </div>
-<hr>
-<p>This wiki is focused in Web App development and the skills set needed. Nowadays a developer (not a coder) must have this skills set:</p>
-<ul>
-<li><strong>Algorithmic</strong>, (let’s say micro-development vs.&nbsp;architecture and macro-development skills). That is, for example the current most used and modern paradigms:
+<p><br></p>
+<section id="skills-developer" class="level2 column-page">
+<h2 class="anchored" data-anchor-id="skills-developer">Skills developer</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="devskills">
+<p>📘 <strong>Algorithmic</strong></p>
+<p>micro-development and paradigms</p>
 <ul>
 <li>Scripting: BASH</li>
 <li>Structured and Procedural: C</li>
 <li>OOP (Object-Oriented Programming): <a href="https://java-programming.mooc.fi/">Java SE</a></li>
 <li>COP (Components-Oriented Programming): <a href="https://reactjs.org/">React JS</a> and <a href="https://www.typescriptlang.org/docs/handbook/react.html">React TS</a></li>
-</ul></li>
-<li><strong>Architecture in mind</strong>: that it, System Design and Design-Patterns
+</ul>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="devskills">
+<p>📘 <strong>Architecture</strong></p>
+<p>System Design and Design-Patterns</p>
 <ul>
 <li>DDD: Domain-driven design and <a href="https://dotnet.microsoft.com/download/e-book/microservices-architecture/pdf">microservices</a></li>
 <li><a href="https://spring.io/">Spring Boot</a></li>
 <li>Cloud: <a href="https://aws.amazon.com/">AWS</a></li>
-</ul></li>
-<li>Project Management and Team Work:
+</ul>
+</div>
+</div><div class="column" style="width:34%;">
+<div class="devskills">
+<p>📘 <strong>Project Management</strong></p>
 <ul>
-<li><strong>SCRUM</strong> and beyond SCRUM</li>
-</ul></li>
-<li><strong>Control Version Systems</strong>:
+<li>SCRUM and</li>
+<li>beyond SCRUM</li>
+<li>Laas</li>
+<li>and Team Work</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<div class="column-page">
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="devskills">
+<p>📘 <strong>AI</strong></p>
 <ul>
-<li><a href="https://git-scm.com/">Git</a> / <a href="https://github.com/">GitHub</a> / GitLab</li>
+<li>machine learning</li>
+<li>natural language</li>
+<li>prompts</li>
+</ul>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="devskills">
+<p>📘 <strong>Control Version Systems</strong></p>
+<ul>
+<li><a href="https://git-scm.com/">Git</a></li>
+<li><a href="https://github.com/">GitHub</a></li>
+<li>GitLab</li>
 <li>Subversion</li>
-</ul></li>
-<li><strong>DevOps</strong>, from Test to Deploy, through Documentation
+</ul>
+</div>
+</div><div class="column" style="width:34%;">
+<div class="devskills">
+<p>📘<strong>DevOps</strong></p>
+<p>from Test to Deploy, through Documentation</p>
 <ul>
 <li><a href="./about/about-this-site.html">about this site</a>, for documentation example.</li>
 <li><a href="https://junit.org/junit5/">JUnit for Spring Boot</a></li>
 <li><a href="https://jestjs.io/">Jest for JS React</a></li>
 <li>Deploy on Heroku, Netlify, AWS Amplify</li>
 <li><a href="https://www.jenkins.io/">Jenkins</a>, <a href="https://www.docker.com/">Docker</a> and <a href="https://kubernetes.io/">k8s</a></li>
-</ul></li>
 </ul>
-</section>
-<section id="lifecycle-software-2022" class="level2">
-<h2 class="anchored" data-anchor-id="lifecycle-software-2022">Lifecycle software (2022)</h2>
-<p>And a developer needs such a set skill due to the wide and integral software lifecycle that allows to build apps.</p>
-<div class="mermaidContent">
-<iframe frameborder="0" style="width:100%;height:600px;" src="https://viewer.diagrams.net/?highlight=0000ff&amp;nav=1&amp;title=LifeCycleSoftwareProject#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D10HyckoCdwJTJ-PNSEZZKogrvhmSIg3Aw%26export%3Ddownload">
-</iframe>
 </div>
-<p><br></p>
-<p>The <strong>software development lifecycle (SDLC)</strong> is a process that describes the stages involved in creating and deploying software. It typically includes the following six steps:</p>
-<ol type="1">
-<li><p><strong>Planning</strong>: This stage involves identifying the goals and objectives of the software, as well as determining the resources and timelines required to develop it.</p></li>
-<li><p><strong>Design</strong>: In this stage, the software’s architecture and user interface are created, and the functional and non-functional requirements are defined.</p></li>
-<li><p><strong>Test</strong>: This stage involves the implementation of test-driven development (TDD). It starts by writing automated test cases based on the requirements and design of the software. The developer then writes the minimum amount of code needed to pass the test, and repeat this process until all the requirements are met.</p></li>
-<li><p><strong>Develop</strong>: The actual coding of the software takes place during this stage. This may involve writing code in a specific programming language or using certain development tools.</p></li>
-<li><p><strong>Maintain</strong>: Once the software is tested and developed, it will be integrated into the primary source code through developer efforts, usually by leveraging training environments to detect further errors or defects.</p></li>
-<li><p><strong>Deploy</strong>: The final stage is deployment, where the software is made available to users. This may involve installing the software on individual computers or deploying it to a server for multiple users to access.</p></li>
-</ol>
-</section>
-<section id="what-is-a-programmer-2022-openai" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-a-programmer-2022-openai">What is a programmer (2022 OpenAI)</h2>
-<p>A programmer, also known as a software developer, needs a wide range of skills in order to be successful in their role. Some of the most important skills for a programmer include:</p>
-<ul>
-<li><strong>Strong problem-solving skills</strong>: A programmer needs to be able to <code>analyze complex problems and develop</code> effective solutions using code. Logical thinking: Programming involves creating logical structures and processes that a computer can follow, so a programmer needs to have strong logical and analytical skills.</li>
-<li><strong>Knowledge of programming languages and technologies</strong>: A programmer needs to have a deep understanding of the programming languages and technologies that they use, as well as the ability to learn new languages and technologies as needed.</li>
-<li><strong>Attention to detail</strong>: Programming involves <code>working with complex systems and large amounts of data</code>, so a programmer needs to have a keen eye for detail and the ability to spot errors and inconsistencies.</li>
-<li><strong>Communication skills</strong>: A programmer <code>often works as part of a team</code>, so they need to be able to communicate effectively with other developers and stakeholders.</li>
-<li><strong>Time management and organizational skills</strong>: A programmer typically has <code>multiple tasks and deadlines to manage</code>, so they need to be able to prioritize their work and stay organized.</li>
-</ul>
-<p>In addition to these core skills, a programmer may also benefit from having knowledge of software development methodologies, such as Agile or Waterfall, as well as experience with version control systems and other tools commonly used in software development.</p>
-</section>
-<section id="how-can-we-get-it" class="level2">
-<h2 class="anchored" data-anchor-id="how-can-we-get-it">How can we get it?</h2>
-<p>To be a good programmer, you need to have a strong foundation in computer science and software development principles, as well as the ability to learn and adapt to new technologies and languages. Some specific ways that you can improve your skills as a programmer include:</p>
-<ul>
-<li><strong>Practice regularly</strong>: The best way to improve your programming skills is to write code regularly and work on a variety of projects. This will help you develop your problem-solving skills and build your knowledge of different languages and technologies.</li>
-<li><strong>Learn from others</strong>: There are many resources available online, such as tutorials, blogs, and forums, where you can learn from experienced programmers and ask questions. You can also learn by working on open-source projects and collaborating with other developers.</li>
-<li><strong>Stay up-to-date</strong>: The field of software development is constantly evolving, so it is important to stay up-to-date with the latest technologies and best practices. This can help you stay ahead of the curve and keep your skills relevant.</li>
-<li><strong>Take on new challenges</strong>: To continue growing as a programmer, you should strive to take on new and challenging projects that push you to learn and improve. This can help you develop new skills and broaden your expertise.</li>
-<li><strong>Seek feedback</strong>: It can be helpful to seek feedback from experienced programmers, mentors, or peers on your work. This can help you identify areas for improvement and learn from others who have more experience.</li>
-</ul>
-<p>In general, being a good programmer requires a combination of technical skills, problem-solving abilities, and a willingness to learn and grow. By focusing on these areas and continually striving to improve, you can become a successful and effective programmer.</p>
-</section>
-<section id="and-reading-books" class="level2">
-<h2 class="anchored" data-anchor-id="and-reading-books">And reading books?</h2>
-<p>Reading books can help improve your skills as a programmer in several ways. Some specific benefits of reading books for programmers include:</p>
-<ul>
-<li><strong>Expanding your knowledge</strong>: Books can provide a wealth of information on a wide range of topics related to programming. By reading books, you can learn about new technologies, programming languages, and best practices that you may not have been aware of before.</li>
-<li><strong>Improving your problem-solving skills</strong>: Many books on programming include examples and exercises that you can use to practice your problem-solving skills. By working through these exercises, you can improve your ability to analyze complex problems and develop effective solutions using code.</li>
-<li><strong>Broadening your perspective</strong>: Reading books written by other programmers can provide valuable insights into how they approach problems and solve them. This can help you learn new techniques and strategies that you can apply to your own work.</li>
-<li><strong>Building your vocabulary</strong>: Many technical books on programming include specialized terminology and concepts that you may not be familiar with. By reading these books, you can expand your vocabulary and become more fluent in the language of programming.</li>
-<li><strong>Staying up-to-date</strong>: Reading books can help you keep up with the latest trends and developments in the field of software development. This can help you stay ahead of the curve and ensure that your skills remain relevant and in-demand.</li>
-</ul>
-<p>Overall, reading books can be a valuable way to improve your skills as a programmer. By reading books written by experienced programmers, you can learn new techniques and strategies, expand your knowledge, and stay up-to-date with the latest developments in the field.</p>
-<!--- navLinks -->
-<br><br>
-<div class="row">
-<br>
-<div class="column left previous">
-<p><br> <a href="./about/about-this-images-credit.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> About images credit</a> <br></p>
 </div>
-<br>
-<div class="column center">
-<p><br> <a href="#top"><i class="fa-solid fa-arrow-up" aria-label="arrow-up"></i> top</a> <br></p>
 </div>
-<br>
-<div class="column right next">
-<p><br> <a href="./linux/linux-what-basics.html">Linux: basic concepts <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
-<p><br></p>
+<section id="code-spring-boot" class="level2">
+<h2 class="anchored" data-anchor-id="code-spring-boot">Code Spring Boot</h2>
+<p>With Spring Boot in your app, just a few lines of code is all you need to start building services like a boss.</p>
+<p><a href="https://www.ibm.com/topics/java-spring-boot" class="external">Java Spring Framework (Spring Framework)</a> is a popular, open source, enterprise-level framework for creating <strong>standalone</strong>, <strong>production-grade applications</strong> that run on the Java Virtual Machine (JVM).</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>hello.java</strong></pre>
+</div>
+<div class="sourceCode" id="cb1" data-filename="hello.java" data-code-block-background="true"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">package</span><span class="im"> com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">restcontroller</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">model</span><span class="op">.</span><span class="im">Book</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">myFirstSpring</span><span class="op">.</span><span class="im">service</span><span class="op">.</span><span class="im">BookService</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">beans</span><span class="op">.</span><span class="im">factory</span><span class="op">.</span><span class="im">annotation</span><span class="op">.</span><span class="im">Autowired</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">web</span><span class="op">.</span><span class="im">bind</span><span class="op">.</span><span class="im">annotation</span><span class="op">.</span><span class="im">GetMapping</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">web</span><span class="op">.</span><span class="im">bind</span><span class="op">.</span><span class="im">annotation</span><span class="op">.</span><span class="im">RequestMapping</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">web</span><span class="op">.</span><span class="im">bind</span><span class="op">.</span><span class="im">annotation</span><span class="op">.</span><span class="im">RestController</span><span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashMap</span><span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">@RestController</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">@RequestMapping</span><span class="op">(</span><span class="st">"/api/book"</span><span class="op">)</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> BookRestController <span class="op">{</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">@Autowired</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    BookService bookService<span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">@GetMapping</span> <span class="op">(</span><span class="st">"/books"</span><span class="op">)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> <span class="bu">Book</span><span class="op">&gt;</span> <span class="fu">getAllBooks</span><span class="op">(){</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> bookService<span class="op">.</span><span class="fu">getAllBooks</span><span class="op">();</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="code-react" class="level2">
+<h2 class="anchored" data-anchor-id="code-react">Code react</h2>
+<p>React.js is a JavaScript library used for <strong>building user interfaces</strong>. It is maintained by Facebook and a community of individual developers and companies. React allows developers to create <strong>large web applications that use data which can change over time, without reloading the page</strong>.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>MyApp.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb2" data-filename="MyApp.jsx"><pre class="sourceCode js code-overflow-wrap code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">MyButton</span>() {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>button<span class="op">&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      I<span class="st">'m a button</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">MyApp</span>() {</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Welcome to my app<span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      <span class="op">&lt;</span>MyButton <span class="op">/&gt;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -1937,7 +1992,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p>If you want to go far, walk slow / We love dukkha</p>
-</div>
+<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -1956,7 +2011,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":true});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","openEffect":"zoom"});</script>
 
 
 
