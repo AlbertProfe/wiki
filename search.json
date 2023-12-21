@@ -48,7 +48,7 @@
     "href": "springboot/sblab6.html#how-layout-works",
     "title": "Lab#SB06-1: employeeCourse",
     "section": "4 How layout works",
-    "text": "4 How layout works\n\n\n\nHow layout works\n\n\n\n\n\n\n\n  Lab#SB05-1: Advanced strategies \n\n\n\n  top \n\n\n\n Spring Boot Resources",
+    "text": "4 How layout works\n\n\n\nHow layout works\n\n\n\n\n\n\n\n  Lab#SB05-1: Advanced strategies \n\n\n\n  top \n\n\n\n Lab#SB07-1: monitor Book",
     "crumbs": [
       "Spring Boot Laboratories",
       "Lab#SB06-1: `employeeCourse`"
@@ -12223,6 +12223,127 @@
     "crumbs": [
       "IFCD0210-24 Docs",
       "IFCD0210 Sprint Backlog"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab7.html",
+    "href": "springboot/sblab7.html",
+    "title": "Lab#SB07-1: monitor Book",
+    "section": "",
+    "text": "The project involves creating a Spring Boot application with a primary domain focused on “books” and the implementation of a user activity monitoring system through RESTful APIs. The core objective is to develop a platform for managing and tracking user interactions with book-related content.\nThe “book” domain will encompass features for storing, retrieving, and managing book-related data (all basic CRUD operations), including attributes such as title, author, publication date, and genre. This domain will serve as the backbone of the application, facilitating CRUD operations on book records.\nTo monitor user activity, the project will include an activity tracking system that logs and analyzes user interactions with the book domain. This will involve creating RESTful APIs for actions like book views, ratings, reviews, and other user-related activities. These API endpoints will collect and store user activity data, enabling administrators to gain insights into user engagement and behavior.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB07-1: Monitor Book"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab7.html#monitor-book-overview",
+    "href": "springboot/sblab7.html#monitor-book-overview",
+    "title": "Lab#SB07-1: monitor Book",
+    "section": "",
+    "text": "The project involves creating a Spring Boot application with a primary domain focused on “books” and the implementation of a user activity monitoring system through RESTful APIs. The core objective is to develop a platform for managing and tracking user interactions with book-related content.\nThe “book” domain will encompass features for storing, retrieving, and managing book-related data (all basic CRUD operations), including attributes such as title, author, publication date, and genre. This domain will serve as the backbone of the application, facilitating CRUD operations on book records.\nTo monitor user activity, the project will include an activity tracking system that logs and analyzes user interactions with the book domain. This will involve creating RESTful APIs for actions like book views, ratings, reviews, and other user-related activities. These API endpoints will collect and store user activity data, enabling administrators to gain insights into user engagement and behavior.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB07-1: Monitor Book"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab7.html#monitor-book-java-ee-spring-boot-core-documentation",
+    "href": "springboot/sblab7.html#monitor-book-java-ee-spring-boot-core-documentation",
+    "title": "Lab#SB07-1: monitor Book",
+    "section": "2 monitor Book (java-EE spring boot) core documentation",
+    "text": "2 monitor Book (java-EE spring boot) core documentation\n\n2.1 github repo\nAlbertProfe/monitorBook\n\n\n2.2 Project Tree\n\n\n\nmonitorBook tree\n\n\n\n\n2.3 API Rest Postman\n\nmonitorBook Api\n\n\n\n2.4 Model\n\n2.4.1 book\n    private String id; \n    private String title; \n    private int pages; \n    private String language; \n    private String author; \nbook java class\n\n\n2.4.2 activityLog\n    private String id;\n    private String ip;\n    private String operationMethod;\n    private String user;\n    private Timestamp time; // Assuming time is represented as a Unix timestamp (long)\n    private String status;\n    private String endpoint;\n    private String domain;\n    private String version;\nactivityLog java class",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB07-1: Monitor Book"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab7.html#domains",
+    "href": "springboot/sblab7.html#domains",
+    "title": "Lab#SB07-1: monitor Book",
+    "section": "3 Domains",
+    "text": "3 Domains\n\nRestController: In a Spring Boot application, the RestController acts as the presentation layer responsible for handling incoming HTTP requests.\n\nIt receives requests from clients, processes them, and returns responses as RESTful web services. This component typically maps HTTP methods (GET, POST, PUT, DELETE) to specific methods and serves as a bridge between the client and the application’s core logic.\n\nController: The Controller in Spring Boot serves as the intermediary between the user interface (e.g., a web page) and the application’s backend.\n\nIt processes user input, triggers corresponding actions, and orchestrates the flow of data. Controllers often contain business logic and route requests to the appropriate services for further processing.\n\nService:The Service layer encapsulates the application’s core business logic and domain-specific operations.\n\nIt serves as the intermediary between controllers and repositories, handling the application’s high-level functionality. Services are responsible for implementing and managing the business rules and application-specific operations, ensuring separation of concerns within the application.\n\nRepository: The Repository layer in Spring Boot is responsible for data access and database interactions. It abstracts the underlying data source (e.g., a database) and provides methods for CRUD operations.\n\nIt typically uses technologies like JPA, Hibernate, or Spring Data to simplify data access and management, promoting database abstraction and data integrity.\n\nModel: The Model represents the data structure of the application, defining the object’s attributes and relationships. It often corresponds to database entities and is used for data storage and retrieval.\n\nIn Spring Boot, Models are often annotated with JPA or Hibernate annotations to facilitate database mapping and object-relational mapping (ORM).",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB07-1: Monitor Book"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab7.html#restcontroller",
+    "href": "springboot/sblab7.html#restcontroller",
+    "title": "Lab#SB07-1: monitor Book",
+    "section": "4 RestController",
+    "text": "4 RestController\nIn a Spring Boot application, the RestController acts as the presentation layer responsible for handling incoming HTTP requests.\n\nIt receives requests from clients, processes them, and returns responses as RESTful web services. This component typically maps HTTP methods (GET, POST, PUT, DELETE) to specific methods and serves as a bridge between the client and the application’s core logic.\n\n\nController: The Controller in Spring Boot serves as the intermediary between the user interface (e.g., a web page) and the application’s backend.\n\nIt processes user input, triggers corresponding actions, and orchestrates the flow of data. Controllers often contain business logic and route requests to the appropriate services for further processing.\n\nService:The Service layer encapsulates the application’s core business logic and domain-specific operations.\n\nIt serves as the intermediary between controllers and repositories, handling the application’s high-level functionality. Services are responsible for implementing and managing the business rules and application-specific operations, ensuring separation of concerns within the application.\n\nRepository: The Repository layer in Spring Boot is responsible for data access and database interactions. It abstracts the underlying data source (e.g., a database) and provides methods for CRUD operations.\n\nIt typically uses technologies like JPA, Hibernate, or Spring Data to simplify data access and management, promoting database abstraction and data integrity.\n\nModel: The Model represents the data structure of the application, defining the object’s attributes and relationships. It often corresponds to database entities and is used for data storage and retrieval.\n\nIn Spring Boot, Models are often annotated with JPA or Hibernate annotations to facilitate database mapping and object-relational mapping (ORM).",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB07-1: Monitor Book"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab7.html#controller",
+    "href": "springboot/sblab7.html#controller",
+    "title": "Lab#SB07-1: monitor Book",
+    "section": "5 Controller",
+    "text": "5 Controller\nThe Controller in Spring Boot serves as the intermediary between the user interface (e.g., a web page) and the application’s backend.\nIt processes user input, triggers corresponding actions, and orchestrates the flow of data. Controllers often contain business logic and route requests to the appropriate services for further processing.\n\nService The Service layer encapsulates the application’s core business logic and domain-specific operations.\n\nIt serves as the intermediary between controllers and repositories, handling the application’s high-level functionality. Services are responsible for implementing and managing the business rules and application-specific operations, ensuring separation of concerns within the application.\n\nRepository The Repository layer in Spring Boot is responsible for data access and database interactions. It abstracts the underlying data source (e.g., a database) and provides methods for CRUD operations.\n\nIt typically uses technologies like JPA, Hibernate, or Spring Data to simplify data access and management, promoting database abstraction and data integrity.\n\nModel The Model represents the data structure of the application, defining the object’s attributes and relationships. It often corresponds to database entities and is used for data storage and retrieval.\n\nIn Spring Boot, Models are often annotated with JPA or Hibernate annotations to facilitate database mapping and object-relational mapping (ORM).",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB07-1: Monitor Book"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab7.html#service",
+    "href": "springboot/sblab7.html#service",
+    "title": "Lab#SB07-1: monitor Book",
+    "section": "6 Service",
+    "text": "6 Service\nThe Service layer encapsulates the application’s core business logic and domain-specific operations.\nIt serves as the intermediary between controllers and repositories, handling the application’s high-level functionality. Services are responsible for implementing and managing the business rules and application-specific operations, ensuring separation of concerns within the application.\n\nRepository The Repository layer in Spring Boot is responsible for data access and database interactions. It abstracts the underlying data source (e.g., a database) and provides methods for CRUD operations.\n\nIt typically uses technologies like JPA, Hibernate, or Spring Data to simplify data access and management, promoting database abstraction and data integrity.\n\nModel The Model represents the data structure of the application, defining the object’s attributes and relationships. It often corresponds to database entities and is used for data storage and retrieval.\n\nIn Spring Boot, Models are often annotated with JPA or Hibernate annotations to facilitate database mapping and object-relational mapping (ORM).",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB07-1: Monitor Book"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab7.html#repository",
+    "href": "springboot/sblab7.html#repository",
+    "title": "Lab#SB07-1: monitor Book",
+    "section": "7 Repository",
+    "text": "7 Repository\nThe Repository layer in Spring Boot is responsible for data access and database interactions. It abstracts the underlying data source (e.g., a database) and provides methods for CRUD operations.\nIt typically uses technologies like JPA, Hibernate, or Spring Data to simplify data access and management, promoting database abstraction and data integrity.\n\nModel The Model represents the data structure of the application, defining the object’s attributes and relationships. It often corresponds to database entities and is used for data storage and retrieval.\n\nIn Spring Boot, Models are often annotated with JPA or Hibernate annotations to facilitate database mapping and object-relational mapping (ORM).",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB07-1: Monitor Book"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab7.html#model-1",
+    "href": "springboot/sblab7.html#model-1",
+    "title": "Lab#SB07-1: monitor Book",
+    "section": "8 Model",
+    "text": "8 Model\nThe Model represents the data structure of the application, defining the object’s attributes and relationships. It often corresponds to database entities and is used for data storage and retrieval.\nIn Spring Boot, Models are often annotated with JPA or Hibernate annotations to facilitate database mapping and object-relational mapping (ORM).",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB07-1: Monitor Book"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab7.html#iterations",
+    "href": "springboot/sblab7.html#iterations",
+    "title": "Lab#SB07-1: monitor Book",
+    "section": "9 Iterations",
+    "text": "9 Iterations",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB07-1: Monitor Book"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab7.html#versions-management-by-iteration",
+    "href": "springboot/sblab7.html#versions-management-by-iteration",
+    "title": "Lab#SB07-1: monitor Book",
+    "section": "4 Versions management by iteration",
+    "text": "4 Versions management by iteration\n\n\n\n\nVersion\nWhat\nHow\nMuch\nWhen\nProject\n\n\n\n\nVersion0\nsandbox\nJust a project to play with the new tools and really understand the project’s goal\nSpring Boot, TH, API rest, postman, wiki, github, idea\n27/10/2023 25/10/2023\n\n\n\nVersion1\nbook/activity\nimplement book and activity domains with List(Book, Activity)\nTH and API rest\n31/11/2023 26/10/2023\nProject structure, POM\n\n\n\n\n\nCRUD: read, implement log\n27/10/2023\nmonitorBook v1.1 code\n\n\n\n\n\nCRUD: create, implement log & Utilities domain\n30/10/2023\nmonitorBook v1.2 code\n\n\n\n\n\nCRUD: delete and update, implement log\n31/10/2023\nmonitorBook v1.3 code / monitorBook v1.31 code\n\n\nVersion2\ndatabase, JPA-H2\nimplement repository and JPA, install H2, create service and queries\nJPA, H2 just get all books\n02/11/2023\nmonitorBook v2.0 code\n\n\n\n\n\nJPA, H2 all CRUD\n03/11/2023\nmonitorBook v2.1 code\n\n\n\n\n\nJPA, H2 all CRUD minor error checked UPDATE\n03/11/2023\nmonitorBook v2.11 code\n\n\n\n\n\nJPA, H2 all CRUD lombok book\n03/11/2023\nmonitorBook v2.12 code\n\n\nVersion3\nauthor, composition\ndomain author\ncomposition, author-book @oneToMany, @manyToOne (without @Controller and @Service )\n06/11/2023\nmonitorBook v3.0 code -just created, build and structure-\n\n\n\n\n\nJPA, H2\n07/11/2023\nmonitorBook 3.1 code -temptative-\n\n\n\n\n\nJPA, H2 author-book @oneToMany JPA unable to find AUTHOR\n08/11/2023\nmonitorBook 3.2\n\n\n\n\n\nJPA, H2 author-book @oneToMany JPA, authorService\n09/11/2023\nmonitorBook 3.3\n\n\n\n\n\nJPA, H2 author-book-comment @oneToMany JPA\n10/11/2023\nmonitorBook 3.4 / @ManyToOne decommented\n\n\n\n\n\n\n\n\n\n  Lab#SB06-1: employeeCourse \n\n\n\n  top \n\n\n\n Spring Boot Resources",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB07-1: Monitor Book"
     ]
   }
 ]
