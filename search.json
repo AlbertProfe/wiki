@@ -3398,88 +3398,56 @@
     "href": "linux/linux-distros-mint.html",
     "title": "Linux Distros: Mint",
     "section": "",
-    "text": "Linux Mint 21",
-    "crumbs": [
-      "Linux: distros",
-      "Linux Distros: Mint"
-    ]
+    "text": "Linux Mint 21"
   },
   {
     "objectID": "linux/linux-distros-mint.html#what-is-linux-mint",
     "href": "linux/linux-distros-mint.html#what-is-linux-mint",
     "title": "Linux Distros: Mint",
     "section": "1 What is Linux Mint?",
-    "text": "1 What is Linux Mint?\nLinux Mint is an operating system for desktop and laptop computers. It is designed to work ‘out of the box’ and comes fully equipped with the apps most people need.\n\nDownload ISO Linux Mint 21\nLinux Mint Installation Guide\nLinux Mint Installation Guide: step-by-step",
-    "crumbs": [
-      "Linux: distros",
-      "Linux Distros: Mint"
-    ]
+    "text": "1 What is Linux Mint?\nLinux Mint is an operating system for desktop and laptop computers. It is designed to work ‘out of the box’ and comes fully equipped with the apps most people need.\n\nDownload ISO Linux Mint 21\nLinux Mint Installation Guide\nLinux Mint Installation Guide: step-by-step"
   },
   {
     "objectID": "linux/linux-distros-mint.html#keep-your-linux-updated",
     "href": "linux/linux-distros-mint.html#keep-your-linux-updated",
     "title": "Linux Distros: Mint",
     "section": "2 Keep your Linux updated",
-    "text": "2 Keep your Linux updated\nOpen your terminal and execute:\n\nsudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && sudo apt-get autoremove\n\nOr you may go through GUI: Update Manager:\n\n\n\nUpdate Manager",
-    "crumbs": [
-      "Linux: distros",
-      "Linux Distros: Mint"
-    ]
+    "text": "2 Keep your Linux updated\nOpen your terminal and execute:\n\nsudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && sudo apt-get autoremove\n\nOr you may go through GUI: Update Manager:\n\n\n\nUpdate Manager"
   },
   {
     "objectID": "linux/linux-distros-mint.html#install-developer-tools",
     "href": "linux/linux-distros-mint.html#install-developer-tools",
     "title": "Linux Distros: Mint",
     "section": "3 Install Developer Tools",
-    "text": "3 Install Developer Tools\n\n3.1 Make a Bash Script Executable\n\nCreate a new text file with all the software you need with a .sh extension and code it as #!/bin/bash (that is, copy that line to the top of it)\n\ndevtools.sh\n\n\nCode\n\n\n\n\nMake the file executable, open the command line and run: chmod u+x devtools.sh. You are giving permissions to execute this file: it will grant only the owner of that file execution permissions.\nRun it: ./devtools.sh or double-click the icon\nBe careful with certain packages and tools do not work under apt get install, you will need to use snap\n\nsnap\nsudo mv /etc/apt/preferences.d/nosnap.pref ~/Documents/nosnap.backup\nsudo apt update\nsudo apt install snapd\n\nintellij-idea-educational\nvisual code educational\nsudo snap install intellij-idea-educational --classic\n\nchrome\nwget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb\nsudo dpkg -i google-chrome-stable_current_amd64.deb\n\nobsidian\nwget https://github.com/obsidianmd/obsidian-releases/releases/download/v1.0.3/obsidian_1.0.3_amd64.snap\nsudo snap install --dangerous obsidian_1.0.3_amd64.snap --classic\n\nvisual code educational\nwget https://az764295.vo.msecnd.net/stable/1ad8d514439d5077d2b0b7ee64d2ce82a9308e5a/code_1.74.1-1671015296_amd64.deb\nsudo apt install ./code_1.74.1-1671015296_amd64.deb\n\n\n3.2 Create an Installer Bash Script\n#!/bin/bash\n\n# Read the CSV file and install each app\ninstalled=0\nnot_installed=0\nnow=`date`\nsudo apt-get update\necho -e \"\\nInstall execution long\" &gt;&gt; installed_apps.log\necho -e \"$now\\n\" &gt;&gt; installed_apps.log\nwhile IFS=';' read -r app package_manager; do\n    if [ \"$package_manager\" = \"apt\" ]; then\n        if ! command -v \"$app\" &&gt; /dev/null; then\n            sudo apt-get install -y \"$app\"\n            echo -e \"\\t$app installed/error\" &gt;&gt; installed_apps.log\n            ((installed++))\n        else\n            echo -e \"\\t$app already exists\" &gt;&gt; installed_apps.log\n            ((not_installed++))\n        fi\n    elif [ \"$package_manager\" = \"snap\" ]; then\n        if ! command -v \"$app\" &&gt; /dev/null; then\n            sudo snap install \"$app\"\n            echo -e \"\\t$app installed/error\" &gt;&gt; installed_apps.log\n            ((installed++))\n        else\n            echo -e \"\\t$app already exists\" &gt;&gt; installed_apps.log\n            ((not_installed++))\n        fi\n    fi\ndone &lt; apps.csv\n\necho \"Total apps: $((installed + not_installed))\"\necho \"Installed/tried apps: $installed\"\necho \"Existing apps: $not_installed\"\n\necho -e \"\\nTotal apps: $((installed + not_installed))\" &gt;&gt; installed_apps.log\necho \"Installed/tried apps: $installed\" &gt;&gt; installed_apps.log\necho \"Existing apps: $not_installed\" &gt;&gt; installed_apps.log",
-    "crumbs": [
-      "Linux: distros",
-      "Linux Distros: Mint"
-    ]
+    "text": "3 Install Developer Tools\n\n3.1 Make a Bash Script Executable\n\nCreate a new text file with all the software you need with a .sh extension and code it as #!/bin/bash (that is, copy that line to the top of it)\n\ndevtools.sh\n\n\nCode\n\n\n\n\nMake the file executable, open the command line and run: chmod u+x devtools.sh. You are giving permissions to execute this file: it will grant only the owner of that file execution permissions.\nRun it: ./devtools.sh or double-click the icon\nBe careful with certain packages and tools do not work under apt get install, you will need to use snap\n\nsnap\nsudo mv /etc/apt/preferences.d/nosnap.pref ~/Documents/nosnap.backup\nsudo apt update\nsudo apt install snapd\n\nintellij-idea-educational\nvisual code educational\nsudo snap install intellij-idea-educational --classic\n\nchrome\nwget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb\nsudo dpkg -i google-chrome-stable_current_amd64.deb\n\nobsidian\nwget https://github.com/obsidianmd/obsidian-releases/releases/download/v1.0.3/obsidian_1.0.3_amd64.snap\nsudo snap install --dangerous obsidian_1.0.3_amd64.snap --classic\n\nvisual code educational\nwget https://az764295.vo.msecnd.net/stable/1ad8d514439d5077d2b0b7ee64d2ce82a9308e5a/code_1.74.1-1671015296_amd64.deb\nsudo apt install ./code_1.74.1-1671015296_amd64.deb\n\n\n3.2 Create an Installer Bash Script\n#!/bin/bash\n\n# Read the CSV file and install each app\ninstalled=0\nnot_installed=0\nnow=`date`\nsudo apt-get update\necho -e \"\\nInstall execution long\" &gt;&gt; installed_apps.log\necho -e \"$now\\n\" &gt;&gt; installed_apps.log\nwhile IFS=';' read -r app package_manager; do\n    if [ \"$package_manager\" = \"apt\" ]; then\n        if ! command -v \"$app\" &&gt; /dev/null; then\n            sudo apt-get install -y \"$app\"\n            echo -e \"\\t$app installed/error\" &gt;&gt; installed_apps.log\n            ((installed++))\n        else\n            echo -e \"\\t$app already exists\" &gt;&gt; installed_apps.log\n            ((not_installed++))\n        fi\n    elif [ \"$package_manager\" = \"snap\" ]; then\n        if ! command -v \"$app\" &&gt; /dev/null; then\n            sudo snap install \"$app\"\n            echo -e \"\\t$app installed/error\" &gt;&gt; installed_apps.log\n            ((installed++))\n        else\n            echo -e \"\\t$app already exists\" &gt;&gt; installed_apps.log\n            ((not_installed++))\n        fi\n    fi\ndone &lt; apps.csv\n\necho \"Total apps: $((installed + not_installed))\"\necho \"Installed/tried apps: $installed\"\necho \"Existing apps: $not_installed\"\n\necho -e \"\\nTotal apps: $((installed + not_installed))\" &gt;&gt; installed_apps.log\necho \"Installed/tried apps: $installed\" &gt;&gt; installed_apps.log\necho \"Existing apps: $not_installed\" &gt;&gt; installed_apps.log"
   },
   {
     "objectID": "linux/linux-distros-mint.html#timeshift",
     "href": "linux/linux-distros-mint.html#timeshift",
     "title": "Linux Distros: Mint",
     "section": "4 Timeshift",
-    "text": "4 Timeshift\nTimeshift is a system restore utility which takes snapshots of the system at regular intervals. These snapshots can be restored at a later date to undo system changes. Creates incremental snapshots using rsync or BTRFS snapshots using BTRFS tools.\n\n\n\nTimeshift",
-    "crumbs": [
-      "Linux: distros",
-      "Linux Distros: Mint"
-    ]
+    "text": "4 Timeshift\nTimeshift is a system restore utility which takes snapshots of the system at regular intervals. These snapshots can be restored at a later date to undo system changes. Creates incremental snapshots using rsync or BTRFS snapshots using BTRFS tools.\n\n\n\nTimeshift"
   },
   {
     "objectID": "linux/linux-distros-mint.html#tmcbeans-mooc-helsinki-java-2023",
     "href": "linux/linux-distros-mint.html#tmcbeans-mooc-helsinki-java-2023",
     "title": "Linux Distros: Mint",
     "section": "5 TMCBeans MOOC Helsinki Java 2023",
-    "text": "5 TMCBeans MOOC Helsinki Java 2023\n\nYou can install OpenJDK with the following terminal command (works for Ubuntu):\n\n sudo apt-get install openjdk-11-jdk\n\nFrom Linux Mint 20 onwards, a file called nosnap.pref needs to be either moved or removed from /etc/apt/preferences.d/ before Snap can be installed.\n\n sudo mv /etc/apt/preferences.d/nosnap.pref ~/Documents/nosnap.backup\n\nWith the file removed from its original location, the package database needs to be updated next:\n\n sudo apt update\n(previous upgrade)\n\nTo now install snap from the Software Manager application, search for snapd and click Install. Alternatively, snapd can be installed from the command line:\n\n sudo apt install snapd\n\nlog out and then log in\nTo test your system, install the hello-world snap and make sure it runs correctly:\n\n    snap install hello-world\nhello-world 6.4 from Canonical✓ installed\n\nTest if snapd is installed:\n\n  hello-world\n  \nHello World!\n\nEventually, install TMCBeans\n\n  sudo snap install --classic tmcbeans",
-    "crumbs": [
-      "Linux: distros",
-      "Linux Distros: Mint"
-    ]
+    "text": "5 TMCBeans MOOC Helsinki Java 2023\n\nYou can install OpenJDK with the following terminal command (works for Ubuntu):\n\n sudo apt-get install openjdk-11-jdk\n\nFrom Linux Mint 20 onwards, a file called nosnap.pref needs to be either moved or removed from /etc/apt/preferences.d/ before Snap can be installed.\n\n sudo mv /etc/apt/preferences.d/nosnap.pref ~/Documents/nosnap.backup\n\nWith the file removed from its original location, the package database needs to be updated next:\n\n sudo apt update\n(previous upgrade)\n\nTo now install snap from the Software Manager application, search for snapd and click Install. Alternatively, snapd can be installed from the command line:\n\n sudo apt install snapd\n\nlog out and then log in\nTo test your system, install the hello-world snap and make sure it runs correctly:\n\n    snap install hello-world\nhello-world 6.4 from Canonical✓ installed\n\nTest if snapd is installed:\n\n  hello-world\n  \nHello World!\n\nEventually, install TMCBeans\n\n  sudo snap install --classic tmcbeans"
   },
   {
     "objectID": "linux/linux-distros-mint.html#simplescreenrecorder",
     "href": "linux/linux-distros-mint.html#simplescreenrecorder",
     "title": "Linux Distros: Mint",
     "section": "6 simplescreenrecorder",
-    "text": "6 simplescreenrecorder\n\nsimplescreenrecorder\n\nSimple Screen Recorder is, despite its name, an actually feature-rich screen recorder.\nThe name reflects the fact that it is simple to use unlike many other free screen recording applications available. It can be easily configured to start recording from an intuitive wizard-like interface.\nIt can record the entire screen or part of it directly. The recording can be paused and resumed at any time. Many different file formats and codecs are supported. To perform an X11 recording, all it takes is selecting an area on the root window with the mouse, choosing an output file and pressing record, either by using the mouse or using a hotkey.\n\n\n\nFeature-Rich Screen Recorder For X11 And OpenGL",
-    "crumbs": [
-      "Linux: distros",
-      "Linux Distros: Mint"
-    ]
+    "text": "6 simplescreenrecorder\n\nsimplescreenrecorder\n\nSimple Screen Recorder is, despite its name, an actually feature-rich screen recorder.\nThe name reflects the fact that it is simple to use unlike many other free screen recording applications available. It can be easily configured to start recording from an intuitive wizard-like interface.\nIt can record the entire screen or part of it directly. The recording can be paused and resumed at any time. Many different file formats and codecs are supported. To perform an X11 recording, all it takes is selecting an area on the root window with the mouse, choosing an output file and pressing record, either by using the mouse or using a hotkey.\n\n\n\nFeature-Rich Screen Recorder For X11 And OpenGL"
   },
   {
     "objectID": "linux/linux-distros-mint.html#curl",
     "href": "linux/linux-distros-mint.html#curl",
     "title": "Linux Distros: Mint",
     "section": "7 curl",
-    "text": "7 curl\n\ncurl\n\n\n\n\nCommand Line Tool For Transferring Data With URL Syntax\n\n\nCurl is a command line tool for transferring data with URL syntax, supporting DICT, FILE, FTP, FTPS, GOPHER, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3, POP3S, RTMP, RTSP, SCP, SFTP, SMTP, SMTPS, TELNET and TFTP.\ncurl supports SSL certificates, HTTP POST, HTTP PUT, FTP uploading, HTTP form based upload, proxies, cookies, user+password authentication (Basic, Digest, NTLM, Negotiate, kerberos…), file transfer resume, proxy tunneling and a busload of other useful tricks.",
-    "crumbs": [
-      "Linux: distros",
-      "Linux Distros: Mint"
-    ]
+    "text": "7 curl\n\ncurl\n\n\n\n\nCommand Line Tool For Transferring Data With URL Syntax\n\n\nCurl is a command line tool for transferring data with URL syntax, supporting DICT, FILE, FTP, FTPS, GOPHER, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3, POP3S, RTMP, RTSP, SCP, SFTP, SMTP, SMTPS, TELNET and TFTP.\ncurl supports SSL certificates, HTTP POST, HTTP PUT, FTP uploading, HTTP form based upload, proxies, cookies, user+password authentication (Basic, Digest, NTLM, Negotiate, kerberos…), file transfer resume, proxy tunneling and a busload of other useful tricks."
   },
   {
     "objectID": "linux/linux-distros-debian.html",
@@ -10866,7 +10834,7 @@
     "href": "spring/spring-mvc.html",
     "title": "Spring MVC",
     "section": "",
-    "text": "Spring MVC\n\n\n\n\nSpring MVC Numbered\n\nThe Spring Web model-view-controller (MVC) framework is designed around a DispatcherServlet that dispatches requests to handlers, with configurable handler mappings, view resolution, locale and theme resolution as well as support for uploading files.\nThe default handler is based on the @Controller and @RequestMapping annotations, offering a wide range of flexible handling methods.\nWith the introduction of Spring 3.0, the @Controller mechanism also allows you to create RESTful Web sites and applications, through the @PathVariable annotation and other features.\n\n\n\n\n\n  Spring Framework \n\n\n\n  top \n\n\n\n Springs Servlets"
+    "text": "1 Overview\n\n\n\n\n\n\nNote\n\n\n\nMVC (Model-View-Controller) is a pattern in software design commonly used to implement user interfaces, data, and controlling logic.\nIt emphasizes a separation between the software’s business logic and display.\nThis “separation of concerns” provides for a better division of labor and improved maintenance. Some other design patterns are based on MVC, such as MVVM (Model-View-Viewmodel), MVP (Model-View-Presenter), and MVW (Model-View-Whatever).\n\n\n\n\n\nModel View Controller example\n\n\nThe three parts of the MVC software-design pattern can be described as follows:\n\nModel: Manages data and business logic.\nView: Handles layout and display.\nController: Routes commands to the model and view parts.\n\n\n\n2 Spring MVC\n\n\n\nSpring MVC\n\n\n\n\nSpring MVC Numbered\n\nThe Spring Web model-view-controller (MVC) framework is designed around a DispatcherServlet that dispatches requests to handlers, with configurable handler mappings, view resolution, locale and theme resolution as well as support for uploading files.\nThe default handler is based on the @Controller and @RequestMapping annotations, offering a wide range of flexible handling methods.\nWith the introduction of Spring 3.0, the @Controller mechanism also allows you to create RESTful Web sites and applications, through the @PathVariable annotation and other features.\n\n\n3 References\n\nMVC\n\n\n\n\n\n\n  Spring Framework \n\n\n\n  top \n\n\n\n Springs Servlets"
   },
   {
     "objectID": "spring/spring-mvc.html#overview",
@@ -12019,18 +11987,14 @@
     "href": "ifcd0210-24/ifcd0210backlog-sprint-24.html#sprint2-git-uml-january-2024",
     "title": "IFCD0210 Sprint Backlog",
     "section": "Sprint#2: Git-UML (January 2024)",
-    "text": "Sprint#2: Git-UML (January 2024)\n\n\nBacklog Sprint#1 January 2024\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#2\n4\n08/01/2024\n- Linux   - Bash   - Time Management categories:  (1) Mindset/Grow  (2) Execution/Code-Algorithm  (3) Architecture/Programming  (4) Learning/A-Ha-Moment  (5) Personal/Path  - 4 cognitive tempos: Plan - Execute - Revision - Reflection  How does brain learn? Picnic &gt; Mechanism &gt; Consolidate  - Intro API Rest\n- Simple, complicate, complex problem    - Api Rest\n\n\n\n5\n09/01/2024\n- Git  - Quarto  - Intro Architecture: request response cycle, SPA & Server-side rendering, JPA  Time Management Tasks:  (1) Mooc  (2) Notes / Documentation / Reading / Prepare classes & lessons / Vocabulary  (3) Architecture / UML / Domains  (4) Personal Project  (5) Linux Devops  (6) Timetable  - Linux install soft: apt / snap / software manager  Homework: request/response cycle, MVC, SPA versus server-side rendering\n- Request Response Cycle  - MVC    - Spring Boot flow\n\n\n\n6\n11/01/2024\n- UML\n- UML\n\n\n\n7\n12/01/2024\n- UML\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\n- topic planned or pending\n+ topic done in class\n++ new topic not planned\n\n\n\n\n\n\n\n\n  IFCD0210 Deliveries \n\n\n\n  top \n\n\n\n IFCD0210 Product Backlog"
+    "text": "Sprint#2: Git-UML (January 2024)\n\n\nBacklog Sprint#1 January 2024\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#2\n4\n08/01/2024\n- Linux   - Bash   - Time Management categories:  (1) Mindset/Grow  (2) Execution/Code-Algorithm  (3) Architecture/Programming  (4) Learning/A-Ha-Moment  (5) Personal/Path  - 4 cognitive tempos: Plan - Execute - Revision - Reflection  How does brain learn? Picnic &gt; Mechanism &gt; Consolidate  - Intro API Rest\n- Simple, complicate, complex problem    - Api Rest\n\n\n\n5\n09/01/2024\n- Git  - Quarto  - Intro Architecture: request response cycle, SPA & Server-side rendering, JPA  Time Management Tasks:  (1) Mooc  (2) Notes / Documentation / Reading / Prepare classes & lessons / Vocabulary  (3) Architecture / UML / Domains  (4) Personal Project  (5) Linux Devops  (6) Timetable  - Linux install soft: apt / snap / software manager  Homework: request/response cycle, MVC, SPA versus server-side rendering\n- Request Response Cycle  - Spring MVC    - Spring Boot flow\n\n\n\n6\n11/01/2024\n- UML\n- UML\n\n\n\n7\n12/01/2024\n- UML\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\n- topic planned or pending\n+ topic done in class\n++ new topic not planned\n\n\n\n\n\n\n\n\n  IFCD0210 Deliveries \n\n\n\n  top \n\n\n\n IFCD0210 Product Backlog"
   },
   {
     "objectID": "linux/linux-distros-mint.html#references",
     "href": "linux/linux-distros-mint.html#references",
     "title": "Linux Distros: Mint",
     "section": "8 References",
-    "text": "8 References\n\nInstall snapd on Linux Mint 2023\nTMCBeans Helsinki Linux\n\n\n\n\n\n\n  Linux Distros: Ubuntu \n\n\n\n  top \n\n\n\n Linux Distros: Debian",
-    "crumbs": [
-      "Linux: distros",
-      "Linux Distros: Mint"
-    ]
+    "text": "8 References\n\nInstall snapd on Linux Mint 2023\nTMCBeans Helsinki Linux\n\n\n\n\n\n\n  Linux Distros: Ubuntu \n\n\n\n  top \n\n\n\n Linux Distros: Debian"
   },
   {
     "objectID": "learning/learning-how-auto-evaluate.html#purpose",
