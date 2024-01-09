@@ -433,44 +433,28 @@
     "href": "springboot/boot-what-cycle.html",
     "title": "Spring Boot: cycle",
     "section": "",
-    "text": "📘 Request-Response Cycle\nThe flux of data between the client and server is called the request-response cycle.\nThis cycle involves the client making a request to the server for some data or action, the server processing the request and generating a response, and then sending that response back to the client.\nThis process can involve multiple layers of abstraction, such as the controller, service, and repository layers in Spring Boot, and can involve interactions with a database or other external systems.\nThe request-response cycle is fundamental to the functioning of web applications and is critical to understanding how data is exchanged between clients and servers in this context.",
-    "crumbs": [
-      "Spring Boot Basics",
-      "Spring Boot: cycle"
-    ]
+    "text": "📘 Request-Response Cycle\nThe flux of data between the client and server is called the request-response cycle.\nThis cycle involves the client making a request to the server for some data or action, the server processing the request and generating a response, and then sending that response back to the client.\nThis process can involve multiple layers of abstraction, such as the controller, service, and repository layers in Spring Boot, and can involve interactions with a database or other external systems.\nThe request-response cycle is fundamental to the functioning of web applications and is critical to understanding how data is exchanged between clients and servers in this context."
   },
   {
     "objectID": "springboot/boot-what-cycle.html#spring-boot-request-response-cycle",
     "href": "springboot/boot-what-cycle.html#spring-boot-request-response-cycle",
     "title": "Spring Boot: cycle",
     "section": "1 Spring Boot Request-Response Cycle",
-    "text": "1 Spring Boot Request-Response Cycle\n\n\n\n\n\n\n\n\nThe user enters the URL in the address bar of Chrome and presses Enter.\nChrome parses the URL and initiates a request to the Spring Boot server.\nThe request is received by the web server and passed to the DispatcherServlet, which is the front controller for Spring MVC.\nThe DispatcherServlet consults the HandlerMapping to determine the appropriate controller for the request.\nThe selected controller processes the request, interacting with the service layer and the repository layer as necessary.\nThe controller generates a model object that contains the data to be displayed on the page.\nThe model is passed to the ViewResolver, which determines the appropriate view to render the response.\nThe Thymeleaf engine for templates renders the HTML based on the model and returns it to the controller.\nThe controller sends the HTML response back to the DispatcherServlet, which packages it into an HTTP response and sends it back to Chrome.\nChrome receives the response and renders the HTML, displaying the web page to the user.\n\n\n\n\n\n\n\n\n\nThe steps 5-8 may occur multiple times, depending on the complexity of the application and the number of views that need to be rendered. Additionally, the H2 database may be used by the repository layer to retrieve or store data as needed.",
-    "crumbs": [
-      "Spring Boot Basics",
-      "Spring Boot: cycle"
-    ]
+    "text": "1 Spring Boot Request-Response Cycle\n\n\n\n\n\n\nThe user enters the URL in the address bar of Chrome and presses Enter.\nChrome parses the URL and initiates a request to the Spring Boot server.\nThe request is received by the web server and passed to the DispatcherServlet, which is the front controller for Spring MVC.\nThe DispatcherServlet consults the HandlerMapping to determine the appropriate controller for the request.\nThe selected controller processes the request, interacting with the service layer and the repository layer as necessary.\nThe controller generates a model object that contains the data to be displayed on the page.\nThe model is passed to the ViewResolver, which determines the appropriate view to render the response.\nThe Thymeleaf engine for templates renders the HTML based on the model and returns it to the controller.\nThe controller sends the HTML response back to the DispatcherServlet, which packages it into an HTTP response and sends it back to Chrome.\nChrome receives the response and renders the HTML, displaying the web page to the user.\n\n\n\n\n\n\n\nThe steps 5-8 may occur multiple times, depending on the complexity of the application and the number of views that need to be rendered. Additionally, the H2 database may be used by the repository layer to retrieve or store data as needed."
   },
   {
     "objectID": "springboot/boot-what-cycle.html#underlying-request-response-cycle",
     "href": "springboot/boot-what-cycle.html#underlying-request-response-cycle",
     "title": "Spring Boot: cycle",
     "section": "2 Underlying Request-Response Cycle",
-    "text": "2 Underlying Request-Response Cycle\n\n\n\n\n\n\n\nSure, here is the complete process of handling a request from Chrome to rendering HTML using Spring Boot with a controller, service, and repository, JPA, H2 database, and Thymeleaf engine for templates:\n\nThe user enters a URL in the address bar of Chrome and presses Enter.\nChrome parses the URL and initiates an HTTP request to the Spring Boot server.\nThe request is received by the web server and passed to the DispatcherServlet, which is the front controller for Spring MVC.\nThe DispatcherServlet consults the HandlerMapping to determine the appropriate controller for the request.\nThe selected controller calls the appropriate service method to handle the request.\nThe service layer performs any necessary business logic and data validation and uses the repository layer to access the database.\nThe repository layer uses JPA to interact with the H2 database, performing CRUD operations as needed to retrieve or store data.\nThe service layer receives the data from the repository layer and formats it into a model object that can be rendered by the view.\nThe model object is passed to the view resolver, which selects the appropriate view to render the response using the Thymeleaf engine for templates.\nThe Thymeleaf engine for templates renders the HTML based on the model object and returns it to the controller.\nThe controller packages the HTML response into an HTTP response and sends it back to the client, which in this case is Chrome.\nChrome receives the response and renders the HTML, displaying the web page to the user.\n\n\n2.1 Handling errors\nIf an error occurs during any of the above steps, the following additional steps may be taken:\n\nThe error is caught by the appropriate exception handler in the controller.\nThe exception handler generates an error response, which may include a user-friendly error message.\nThe error response is sent back to the client.\n\n\n\n2.2 Auth\nIf authentication or authorization is required for the request, the following additional steps may be taken:\n\nThe request is intercepted by a security filter, which verifies that the user is authenticated and authorized to access the requested resource.\nIf the user is not authenticated, they are redirected to a login page.\nIf the user is not authorized, they are shown an access denied message.\n\n\n\n2.3 File uploads\nIf the request involves file uploads, the following additional steps may be taken:\n\nThe uploaded file(s) are received by the web server and passed to a file upload handler.\nThe file upload handler saves the uploaded file(s) to the file system or a database, as appropriate.\nThe service layer processes the uploaded file(s) as needed and updates the database.\n\n\n\n2.4 Catching\nIf the application uses caching, the following additional steps may be taken:\n\nThe request is intercepted by a caching filter, which checks if the response is already cached.\nIf the response is cached, it is returned to the client without further processing.\nIf the response is not cached, it is processed as described above, and then cached for future requests.\nThe cached response is returned to the client in response to future requests, until the cache expires or is invalidated.\n\nNote that the exact sequence and number of steps may vary depending on the specific implementation of the Spring Boot application and the requirements of the web application.",
-    "crumbs": [
-      "Spring Boot Basics",
-      "Spring Boot: cycle"
-    ]
+    "text": "2 Underlying Request-Response Cycle\n\n\n\n\n\nSure, here is the complete process of handling a request from Chrome to rendering HTML using Spring Boot with a controller, service, and repository, JPA, H2 database, and Thymeleaf engine for templates:\n\nThe user enters a URL in the address bar of Chrome and presses Enter.\nChrome parses the URL and initiates an HTTP request to the Spring Boot server.\nThe request is received by the web server and passed to the DispatcherServlet, which is the front controller for Spring MVC.\nThe DispatcherServlet consults the HandlerMapping to determine the appropriate controller for the request.\nThe selected controller calls the appropriate service method to handle the request.\nThe service layer performs any necessary business logic and data validation and uses the repository layer to access the database.\nThe repository layer uses JPA to interact with the H2 database, performing CRUD operations as needed to retrieve or store data.\nThe service layer receives the data from the repository layer and formats it into a model object that can be rendered by the view.\nThe model object is passed to the view resolver, which selects the appropriate view to render the response using the Thymeleaf engine for templates.\nThe Thymeleaf engine for templates renders the HTML based on the model object and returns it to the controller.\nThe controller packages the HTML response into an HTTP response and sends it back to the client, which in this case is Chrome.\nChrome receives the response and renders the HTML, displaying the web page to the user.\n\n\n2.1 Handling errors\nIf an error occurs during any of the above steps, the following additional steps may be taken:\n\nThe error is caught by the appropriate exception handler in the controller.\nThe exception handler generates an error response, which may include a user-friendly error message.\nThe error response is sent back to the client.\n\n\n\n2.2 Auth\nIf authentication or authorization is required for the request, the following additional steps may be taken:\n\nThe request is intercepted by a security filter, which verifies that the user is authenticated and authorized to access the requested resource.\nIf the user is not authenticated, they are redirected to a login page.\nIf the user is not authorized, they are shown an access denied message.\n\n\n\n2.3 File uploads\nIf the request involves file uploads, the following additional steps may be taken:\n\nThe uploaded file(s) are received by the web server and passed to a file upload handler.\nThe file upload handler saves the uploaded file(s) to the file system or a database, as appropriate.\nThe service layer processes the uploaded file(s) as needed and updates the database.\n\n\n\n2.4 Catching\nIf the application uses caching, the following additional steps may be taken:\n\nThe request is intercepted by a caching filter, which checks if the response is already cached.\nIf the response is cached, it is returned to the client without further processing.\nIf the response is not cached, it is processed as described above, and then cached for future requests.\nThe cached response is returned to the client in response to future requests, until the cache expires or is invalidated.\n\nNote that the exact sequence and number of steps may vary depending on the specific implementation of the Spring Boot application and the requirements of the web application."
   },
   {
     "objectID": "springboot/boot-what-cycle.html#more-scenarios",
     "href": "springboot/boot-what-cycle.html#more-scenarios",
     "title": "Spring Boot: cycle",
     "section": "3 More scenarios",
-    "text": "3 More scenarios\nAdditional scenarios that may be encountered when processing a request using Spring Boot with a controller, service, and repository, JPA, H2 database, and Thymeleaf engine for templates:\n\n3.1 Handling AJAX requests\n\nThe user initiates an AJAX request by clicking a button or link on the web page.\nThe request is received by the controller and passed to the appropriate service method.\nThe service layer performs any necessary business logic and data validation, and uses the repository layer to access the database.\nThe repository layer uses JPA to interact with the H2 database, performing CRUD operations as needed to retrieve or store data.\nThe service layer receives the data from the repository layer and formats it into a JSON object.\nThe JSON object is returned to the client and processed by the JavaScript code.\n\n\n\n3.2 Handling file downloads\n\nThe user initiates a file download request by clicking a button or link on the web page.\nThe request is received by the controller and passed to the appropriate service method.\nThe service layer performs any necessary business logic and data validation, and uses the repository layer to access the database.\nThe repository layer uses JPA to interact with the H2 database, retrieving the requested file(s).\nThe file(s) are sent back to the client in the response body with appropriate headers, such as Content-Type and Content-Disposition.\n\n\n\n3.3 Handling long-running requests\n\nThe user initiates a request that may take a long time to complete, such as generating a report or processing a large dataset.\nThe request is received by the controller and passed to the appropriate service method.\nThe service layer spawns a background thread to perform the long-running task, and returns a response to the client immediately.\nThe client periodically polls the server for updates on the status of the task.\nWhen the background task completes, the result is stored in the database or sent back to the client in a response.\n\n\n\n3.4 Handling complex database queries\n\nThe user initiates a request that requires complex database queries, such as aggregations, subqueries, or joins.\nThe request is received by the controller and passed to the appropriate service method.\nThe service layer uses JPA Criteria API or Querydsl to construct complex database queries.\nThe repository layer uses JPA to execute the queries and retrieve the requested data.\nThe service layer formats the data into a model object that can be rendered by the view.\n\n\n\n\n\n\n  Spring Boot: H2 DB and Thymeleaf \n\n\n\n  top \n\n\n\n Spring Boot: Dependency Injection",
-    "crumbs": [
-      "Spring Boot Basics",
-      "Spring Boot: cycle"
-    ]
+    "text": "3 More scenarios\nAdditional scenarios that may be encountered when processing a request using Spring Boot with a controller, service, and repository, JPA, H2 database, and Thymeleaf engine for templates:\n\n3.1 Handling AJAX requests\n\nThe user initiates an AJAX request by clicking a button or link on the web page.\nThe request is received by the controller and passed to the appropriate service method.\nThe service layer performs any necessary business logic and data validation, and uses the repository layer to access the database.\nThe repository layer uses JPA to interact with the H2 database, performing CRUD operations as needed to retrieve or store data.\nThe service layer receives the data from the repository layer and formats it into a JSON object.\nThe JSON object is returned to the client and processed by the JavaScript code.\n\n\n\n3.2 Handling file downloads\n\nThe user initiates a file download request by clicking a button or link on the web page.\nThe request is received by the controller and passed to the appropriate service method.\nThe service layer performs any necessary business logic and data validation, and uses the repository layer to access the database.\nThe repository layer uses JPA to interact with the H2 database, retrieving the requested file(s).\nThe file(s) are sent back to the client in the response body with appropriate headers, such as Content-Type and Content-Disposition.\n\n\n\n3.3 Handling long-running requests\n\nThe user initiates a request that may take a long time to complete, such as generating a report or processing a large dataset.\nThe request is received by the controller and passed to the appropriate service method.\nThe service layer spawns a background thread to perform the long-running task, and returns a response to the client immediately.\nThe client periodically polls the server for updates on the status of the task.\nWhen the background task completes, the result is stored in the database or sent back to the client in a response.\n\n\n\n3.4 Handling complex database queries\n\nThe user initiates a request that requires complex database queries, such as aggregations, subqueries, or joins.\nThe request is received by the controller and passed to the appropriate service method.\nThe service layer uses JPA Criteria API or Querydsl to construct complex database queries.\nThe repository layer uses JPA to execute the queries and retrieve the requested data.\nThe service layer formats the data into a model object that can be rendered by the view.\n\n\n\n\n\n\n  Spring Boot: H2 DB and Thymeleaf \n\n\n\n  top \n\n\n\n Spring Boot: Dependency Injection"
   },
   {
     "objectID": "springboot/boot-what-create-th-h2.html",
@@ -807,66 +791,42 @@
     "href": "springboot/boot-concepts-injection.html",
     "title": "Spring Boot: Dependency Injection",
     "section": "",
-    "text": "📘 Dependency Injection\nDependency injection (DI) is a design pattern that allows objects to receive their dependencies from external sources rather than creating them internally. In other words, it is a way to manage the dependencies between objects in a software application.",
-    "crumbs": [
-      "Spring Boot Concepts",
-      "Spring Boot: Dependency Injection"
-    ]
+    "text": "📘 Dependency Injection\nDependency injection (DI) is a design pattern that allows objects to receive their dependencies from external sources rather than creating them internally. In other words, it is a way to manage the dependencies between objects in a software application."
   },
   {
     "objectID": "springboot/boot-concepts-injection.html#overview",
     "href": "springboot/boot-concepts-injection.html#overview",
     "title": "Spring Boot: Dependency Injection",
     "section": "1 Overview",
-    "text": "1 Overview\nDependency injection (DI) is a design pattern that allows objects to receive their dependencies from external sources rather than creating them internally. In other words, it is a way to manage the dependencies between objects in a software application.\nIn Spring Boot, the dependency injection is provided by the Spring Framework. The Spring container is responsible for creating and managing the objects in the application, and it uses dependency injection to provide the objects with their dependencies.\nThere are thre types of dependency injection:\n\nConstructor injection: The dependencies are provided to the class through its constructor.\nSetter injection: The dependencies are provided to the class through setter methods.\nMethod Injection: The dependencies are provided to the class through an interface which declares the method(s)\n\nWith dependency injection, objects are no longer responsible for creating or managing their dependencies, which makes the code more maintainable and easier to test (not used in Spring Boot).\nThe @Autowired annotation is used in Spring Boot to automatically wire a bean from the Spring application context into a class field or method.\nThis allows you to use dependency injection to provide objects with their dependencies without having to manually create or manage them.\n\n\n\n\n\n\nDependency Injection\n\n\n\nDependency Injection (DI) is a design pattern that allows objects to receive their dependencies from external sources rather than creating them internally.\nSpring Boot usesDI to manage the dependencies between objects and provide them with their dependencies using Constructor injection and setter injection, the@Autowired annotation is used to wire the bean from the Spring application context.",
-    "crumbs": [
-      "Spring Boot Concepts",
-      "Spring Boot: Dependency Injection"
-    ]
+    "text": "1 Overview\nDependency injection (DI) is a design pattern that allows objects to receive their dependencies from external sources rather than creating them internally. In other words, it is a way to manage the dependencies between objects in a software application.\nIn Spring Boot, the dependency injection is provided by the Spring Framework. The Spring container is responsible for creating and managing the objects in the application, and it uses dependency injection to provide the objects with their dependencies.\nThere are thre types of dependency injection:\n\nConstructor injection: The dependencies are provided to the class through its constructor.\nSetter injection: The dependencies are provided to the class through setter methods.\nMethod Injection: The dependencies are provided to the class through an interface which declares the method(s)\n\nWith dependency injection, objects are no longer responsible for creating or managing their dependencies, which makes the code more maintainable and easier to test (not used in Spring Boot).\nThe @Autowired annotation is used in Spring Boot to automatically wire a bean from the Spring application context into a class field or method.\nThis allows you to use dependency injection to provide objects with their dependencies without having to manually create or manage them.\n\n\n\n\n\n\nDependency Injection\n\n\n\nDependency Injection (DI) is a design pattern that allows objects to receive their dependencies from external sources rather than creating them internally.\nSpring Boot usesDI to manage the dependencies between objects and provide them with their dependencies using Constructor injection and setter injection, the@Autowired annotation is used to wire the bean from the Spring application context."
   },
   {
     "objectID": "springboot/boot-concepts-injection.html#inversion-of-control-ioc",
     "href": "springboot/boot-concepts-injection.html#inversion-of-control-ioc",
     "title": "Spring Boot: Dependency Injection",
     "section": "2 Inversion of Control IoC",
-    "text": "2 Inversion of Control IoC\n\nInversionOfControl\nInversion of Control vs Dependency Injection\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDIP, IoC and DI\n\n\n\nIoC is a design pattern that allows for the inversion of control of object creation and management. DI is the process of providing dependencies to a class, rather than the class creating them itself.\nBoth IoC and DI are related to the DIP, which is a design principle that promotes decoupling and abstraction.\nThe hierarchy between these concepts is that IoC is the pattern that enables DI, and DI is a way of implementing the DIP.\n\n\nInversion of Control (IoC) is a design pattern commonly used in Spring Boot applications, where the framework is responsible for creating and managing objects (beans) and their dependencies.\nThe control of the application flow is inverted, as the framework decides when and how to instantiate objects, rather than the developer having to explicitly create them.\nThis simplifies the development process and makes the code more modular and testable.",
-    "crumbs": [
-      "Spring Boot Concepts",
-      "Spring Boot: Dependency Injection"
-    ]
+    "text": "2 Inversion of Control IoC\n\nInversionOfControl\nInversion of Control vs Dependency Injection\n\n\n\n\n\n\n\n\n\n\n\n\nDIP, IoC and DI\n\n\n\nIoC is a design pattern that allows for the inversion of control of object creation and management. DI is the process of providing dependencies to a class, rather than the class creating them itself.\nBoth IoC and DI are related to the DIP, which is a design principle that promotes decoupling and abstraction.\nThe hierarchy between these concepts is that IoC is the pattern that enables DI, and DI is a way of implementing the DIP.\n\n\nInversion of Control (IoC) is a design pattern commonly used in Spring Boot applications, where the framework is responsible for creating and managing objects (beans) and their dependencies.\nThe control of the application flow is inverted, as the framework decides when and how to instantiate objects, rather than the developer having to explicitly create them.\nThis simplifies the development process and makes the code more modular and testable."
   },
   {
     "objectID": "springboot/boot-concepts-injection.html#dependency-inversion-principle-dip",
     "href": "springboot/boot-concepts-injection.html#dependency-inversion-principle-dip",
     "title": "Spring Boot: Dependency Injection",
     "section": "3 Dependency Inversion Principle DIP",
-    "text": "3 Dependency Inversion Principle DIP\nThe Dependency Inversion Principle (DIP) is a software design principle that states that high-level modules should not depend on low-level modules, but both should depend on abstractions.\nThis allows for decoupling and easier maintenance of the codebase, as changes in low-level modules don’t affect high-level ones.\nThe use of interfaces and abstract classes are common in implementing the DIP.",
-    "crumbs": [
-      "Spring Boot Concepts",
-      "Spring Boot: Dependency Injection"
-    ]
+    "text": "3 Dependency Inversion Principle DIP\nThe Dependency Inversion Principle (DIP) is a software design principle that states that high-level modules should not depend on low-level modules, but both should depend on abstractions.\nThis allows for decoupling and easier maintenance of the codebase, as changes in low-level modules don’t affect high-level ones.\nThe use of interfaces and abstract classes are common in implementing the DIP."
   },
   {
     "objectID": "springboot/boot-concepts-injection.html#dependency-injection-di",
     "href": "springboot/boot-concepts-injection.html#dependency-injection-di",
     "title": "Spring Boot: Dependency Injection",
     "section": "4 Dependency Injection DI",
-    "text": "4 Dependency Injection DI\nDependency Injection (DI) is the process of providing dependencies (objects) to a class, rather than the class creating them itself.\nThis is often done using frameworks like Spring Boot, where dependencies are defined as beans and injected into other beans using annotations.\nThis reduces the amount of boilerplate code and makes the codebase more modular and maintainable.\nThe DI principle is closely related to the DIP, as it allows for the injection of abstractions rather than concrete implementations.",
-    "crumbs": [
-      "Spring Boot Concepts",
-      "Spring Boot: Dependency Injection"
-    ]
+    "text": "4 Dependency Injection DI\nDependency Injection (DI) is the process of providing dependencies (objects) to a class, rather than the class creating them itself.\nThis is often done using frameworks like Spring Boot, where dependencies are defined as beans and injected into other beans using annotations.\nThis reduces the amount of boilerplate code and makes the codebase more modular and maintainable.\nThe DI principle is closely related to the DIP, as it allows for the injection of abstractions rather than concrete implementations."
   },
   {
     "objectID": "springboot/boot-concepts-injection.html#advantages",
     "href": "springboot/boot-concepts-injection.html#advantages",
     "title": "Spring Boot: Dependency Injection",
     "section": "5 Advantages",
-    "text": "5 Advantages\n\nDependency Injection\n\nInversion of Control is a principle in software engineering by which the control of objects or portions of a program is transferred to a container or framework.\nIt’s most often used in the context of object-oriented programming.\nBy contrast with traditional programming, in which our custom code makes calls to a library, IoC enables a framework to take control of the flow of a program and make calls to our custom code.\n\ndecoupling the execution of a task from its implementation\nmaking it easier to switch between different implementations\ngreater modularity of a program\ngreater ease in testing a program by isolating a component or mocking its dependencies and\nallowing components to communicate through contracts\n\n\n\n\n\n\n  Spring Boot: cycle \n\n\n\n  top \n\n\n\n Spring Boot: Annotations",
-    "crumbs": [
-      "Spring Boot Concepts",
-      "Spring Boot: Dependency Injection"
-    ]
+    "text": "5 Advantages\n\nDependency Injection\n\nInversion of Control is a principle in software engineering by which the control of objects or portions of a program is transferred to a container or framework.\nIt’s most often used in the context of object-oriented programming.\nBy contrast with traditional programming, in which our custom code makes calls to a library, IoC enables a framework to take control of the flow of a program and make calls to our custom code.\n\ndecoupling the execution of a task from its implementation\nmaking it easier to switch between different implementations\ngreater modularity of a program\ngreater ease in testing a program by isolating a component or mocking its dependencies and\nallowing components to communicate through contracts\n\n\n\n\n\n\n  Spring Boot: cycle \n\n\n\n  top \n\n\n\n Spring Boot: Annotations"
   },
   {
     "objectID": "springboot/boot-concepts-controller.html",
@@ -1005,44 +965,28 @@
     "href": "spring/spring-basics.html",
     "title": "Spring Framework",
     "section": "",
-    "text": "📘 What is Spring Framework?\nSpring Framework is a powerful lightweight application development framework used for Enterprise Java (JEE).\n\n\nThe Spring Framework is a popular Java framework for building enterprise-level applications.\nThe Spring Framework provides a comprehensive set of tools and libraries for building and maintaining enterprise applications, and is designed to support the “software development principles of modularity, component-based development, and non-invasive programming”.\nThe Spring Framework consists of several modules, each of which provides a different set of functionality and tools. Some of the key modules of the Spring Framework include:\n\nSpring Core: The core module provides the fundamental functionality of the Spring Framework, including dependency injection, inversion of control, and support for aspect-oriented programming.\nSpring MVC: The MVC (Model-View-Controller) module provides a web-oriented framework for building web applications, and supports the development of web applications using a “front controller” pattern.\nSpring Data: The Data module provides tools and libraries for working with data sources and databases, and supports the development of data-oriented applications.\nSpring Security: The Security module provides tools and libraries for implementing authentication and authorization in applications, and supports the development of secure applications.\nSpring Boot: The Boot module provides a way to quickly and easily create stand-alone, production-grade Spring applications. Spring Boot uses an “opinionated” approach to configuration, which means that it provides a set of default configurations that are designed to work well together, and allows developers to get started quickly without having to spend a lot of time configuring the application.\n\nOverall, the Spring Framework is a powerful and popular toolkit for building enterprise-level applications in Java, and provides a wide range of tools and libraries for supporting various aspects of application development. By using the Spring Framework, developers can take advantage of the framework’s modular design, and can choose the specific modules that are most relevant to their needs and goals.",
-    "crumbs": [
-      "Spring Legacy",
-      "Spring Framework"
-    ]
+    "text": "📘 What is Spring Framework?\nSpring Framework is a powerful lightweight application development framework used for Enterprise Java (JEE).\n\n\nThe Spring Framework is a popular Java framework for building enterprise-level applications.\nThe Spring Framework provides a comprehensive set of tools and libraries for building and maintaining enterprise applications, and is designed to support the “software development principles of modularity, component-based development, and non-invasive programming”.\nThe Spring Framework consists of several modules, each of which provides a different set of functionality and tools. Some of the key modules of the Spring Framework include:\n\nSpring Core: The core module provides the fundamental functionality of the Spring Framework, including dependency injection, inversion of control, and support for aspect-oriented programming.\nSpring MVC: The MVC (Model-View-Controller) module provides a web-oriented framework for building web applications, and supports the development of web applications using a “front controller” pattern.\nSpring Data: The Data module provides tools and libraries for working with data sources and databases, and supports the development of data-oriented applications.\nSpring Security: The Security module provides tools and libraries for implementing authentication and authorization in applications, and supports the development of secure applications.\nSpring Boot: The Boot module provides a way to quickly and easily create stand-alone, production-grade Spring applications. Spring Boot uses an “opinionated” approach to configuration, which means that it provides a set of default configurations that are designed to work well together, and allows developers to get started quickly without having to spend a lot of time configuring the application.\n\nOverall, the Spring Framework is a powerful and popular toolkit for building enterprise-level applications in Java, and provides a wide range of tools and libraries for supporting various aspects of application development. By using the Spring Framework, developers can take advantage of the framework’s modular design, and can choose the specific modules that are most relevant to their needs and goals."
   },
   {
     "objectID": "spring/spring-basics.html#overview",
     "href": "spring/spring-basics.html#overview",
     "title": "Spring Framework",
     "section": "",
-    "text": "📘 What is Spring Framework?\nSpring Framework is a powerful lightweight application development framework used for Enterprise Java (JEE).\n\n\nThe Spring Framework is a popular Java framework for building enterprise-level applications.\nThe Spring Framework provides a comprehensive set of tools and libraries for building and maintaining enterprise applications, and is designed to support the “software development principles of modularity, component-based development, and non-invasive programming”.\nThe Spring Framework consists of several modules, each of which provides a different set of functionality and tools. Some of the key modules of the Spring Framework include:\n\nSpring Core: The core module provides the fundamental functionality of the Spring Framework, including dependency injection, inversion of control, and support for aspect-oriented programming.\nSpring MVC: The MVC (Model-View-Controller) module provides a web-oriented framework for building web applications, and supports the development of web applications using a “front controller” pattern.\nSpring Data: The Data module provides tools and libraries for working with data sources and databases, and supports the development of data-oriented applications.\nSpring Security: The Security module provides tools and libraries for implementing authentication and authorization in applications, and supports the development of secure applications.\nSpring Boot: The Boot module provides a way to quickly and easily create stand-alone, production-grade Spring applications. Spring Boot uses an “opinionated” approach to configuration, which means that it provides a set of default configurations that are designed to work well together, and allows developers to get started quickly without having to spend a lot of time configuring the application.\n\nOverall, the Spring Framework is a powerful and popular toolkit for building enterprise-level applications in Java, and provides a wide range of tools and libraries for supporting various aspects of application development. By using the Spring Framework, developers can take advantage of the framework’s modular design, and can choose the specific modules that are most relevant to their needs and goals.",
-    "crumbs": [
-      "Spring Legacy",
-      "Spring Framework"
-    ]
+    "text": "📘 What is Spring Framework?\nSpring Framework is a powerful lightweight application development framework used for Enterprise Java (JEE).\n\n\nThe Spring Framework is a popular Java framework for building enterprise-level applications.\nThe Spring Framework provides a comprehensive set of tools and libraries for building and maintaining enterprise applications, and is designed to support the “software development principles of modularity, component-based development, and non-invasive programming”.\nThe Spring Framework consists of several modules, each of which provides a different set of functionality and tools. Some of the key modules of the Spring Framework include:\n\nSpring Core: The core module provides the fundamental functionality of the Spring Framework, including dependency injection, inversion of control, and support for aspect-oriented programming.\nSpring MVC: The MVC (Model-View-Controller) module provides a web-oriented framework for building web applications, and supports the development of web applications using a “front controller” pattern.\nSpring Data: The Data module provides tools and libraries for working with data sources and databases, and supports the development of data-oriented applications.\nSpring Security: The Security module provides tools and libraries for implementing authentication and authorization in applications, and supports the development of secure applications.\nSpring Boot: The Boot module provides a way to quickly and easily create stand-alone, production-grade Spring applications. Spring Boot uses an “opinionated” approach to configuration, which means that it provides a set of default configurations that are designed to work well together, and allows developers to get started quickly without having to spend a lot of time configuring the application.\n\nOverall, the Spring Framework is a powerful and popular toolkit for building enterprise-level applications in Java, and provides a wide range of tools and libraries for supporting various aspects of application development. By using the Spring Framework, developers can take advantage of the framework’s modular design, and can choose the specific modules that are most relevant to their needs and goals."
   },
   {
     "objectID": "spring/spring-basics.html#timeline",
     "href": "spring/spring-basics.html#timeline",
     "title": "Spring Framework",
     "section": "2 Timeline",
-    "text": "2 Timeline\n\nThe current stable version, as of December 2022, is Spring 6.0.2. You can always find new version announcements on https://github.com/spring-projects/spring-framework/releases.\nThe current stable version, as of December 2022, is Spring Boot 3.0.0. You can always find new version announcements on https://github.com/spring-projects/spring-boot/releases.\nSpring Boot 3.0.0 (and therefore the latest Spring Framework 6.0.2) supports Java 19 while also remaining compatible with Java 11 and 8.\n\n\n\n\nFollowing is the timeline shown about major releases in the history of Spring",
-    "crumbs": [
-      "Spring Legacy",
-      "Spring Framework"
-    ]
+    "text": "2 Timeline\n\nThe current stable version, as of December 2022, is Spring 6.0.2. You can always find new version announcements on https://github.com/spring-projects/spring-framework/releases.\nThe current stable version, as of December 2022, is Spring Boot 3.0.0. You can always find new version announcements on https://github.com/spring-projects/spring-boot/releases.\nSpring Boot 3.0.0 (and therefore the latest Spring Framework 6.0.2) supports Java 19 while also remaining compatible with Java 11 and 8.\n\n\n\n\nFollowing is the timeline shown about major releases in the history of Spring"
   },
   {
     "objectID": "spring/spring-basics.html#differences-between-the-spring-framework-and-spring-boot",
     "href": "spring/spring-basics.html#differences-between-the-spring-framework-and-spring-boot",
     "title": "Spring Framework",
     "section": "3 Differences between the Spring Framework and Spring Boot",
-    "text": "3 Differences between the Spring Framework and Spring Boot\n\nThe Spring Framework is a comprehensive framework for building and maintaining enterprise-level applications in Java, while Spring Boot is focused specifically on simplifying the process of creating and deploying stand-alone, production-grade Spring applications.\nThe Spring Framework provides a flexible and modular approach to configuration, while Spring Boot uses an “opinionated” approach to configuration, which provides a set of default configurations that are designed to work well together.\nThe Spring Framework provides a web-oriented framework called Spring MVC, while Spring Boot provides a more integrated approach to web application development, and includes support for building web applications using a wide range of technologies.\nIn general, the Spring Framework and Spring Boot are both useful frameworks for building enterprise-level applications in Java, but have different scopes, focus, and approaches to configuration, and may be more or less suitable for different types of projects and goals.\n\n\n\n\ntable summarizing the differences between the Spring Framework and Spring Boot\n\n\n\n\n\n\n\n  Java SE Resources \n\n\n\n  top \n\n\n\n Spring MVC",
-    "crumbs": [
-      "Spring Legacy",
-      "Spring Framework"
-    ]
+    "text": "3 Differences between the Spring Framework and Spring Boot\n\nThe Spring Framework is a comprehensive framework for building and maintaining enterprise-level applications in Java, while Spring Boot is focused specifically on simplifying the process of creating and deploying stand-alone, production-grade Spring applications.\nThe Spring Framework provides a flexible and modular approach to configuration, while Spring Boot uses an “opinionated” approach to configuration, which provides a set of default configurations that are designed to work well together.\nThe Spring Framework provides a web-oriented framework called Spring MVC, while Spring Boot provides a more integrated approach to web application development, and includes support for building web applications using a wide range of technologies.\nIn general, the Spring Framework and Spring Boot are both useful frameworks for building enterprise-level applications in Java, but have different scopes, focus, and approaches to configuration, and may be more or less suitable for different types of projects and goals.\n\n\n\n\ntable summarizing the differences between the Spring Framework and Spring Boot\n\n\n\n\n\n\n\n  Java SE Resources \n\n\n\n  top \n\n\n\n Spring MVC"
   },
   {
     "objectID": "scrum/scrumlab4.html",
@@ -3125,33 +3069,21 @@
     "href": "markup/markup-quarto-api-rest.html",
     "title": "Quarto Markdown: api rest call",
     "section": "",
-    "text": "REST (Representational State Transfer)\nRest is an architectural style for building web services.\nIt is based on a client-server model, where a client sends a request to a server and the server sends a response.\nRESTful APIs use HTTP requests to POST (create), PUT (update), GET (read), and DELETE (delete) data.\nA RESTful API is a simple, consistent, and easy-to-use way for applications to communicate with each other over the internet.",
-    "crumbs": [
-      "Quarto Markdown",
-      "Quarto Markdown: api rest call"
-    ]
+    "text": "REST (Representational State Transfer)\nRest is an architectural style for building web services.\nIt is based on a client-server model, where a client sends a request to a server and the server sends a response.\nRESTful APIs use HTTP requests to POST (create), PUT (update), GET (read), and DELETE (delete) data.\nA RESTful API is a simple, consistent, and easy-to-use way for applications to communicate with each other over the internet."
   },
   {
     "objectID": "markup/markup-quarto-api-rest.html#what-is-api-rest",
     "href": "markup/markup-quarto-api-rest.html#what-is-api-rest",
     "title": "Quarto Markdown: api rest call",
     "section": "1 What is API Rest",
-    "text": "1 What is API Rest\n\n\n\n\n\n\n\n\n\nIn other words, if you want to interact with a computer or system to retrieve information or perform a function, an API helps you communicate what you want to that system so it can understand and fulfill the request.\n\nImage from: Why is RESTful API so popular?\n\nAn API is a set of definitions and protocols for building and integrating application software.\nIt’s sometimes referred to as a contract between an information provider and an information user.\nThis contract (API Rest style) establishing the content required from the consumer (the call) and the content required by the producer (the response).\n\n\n\n\n\n\nNote\n\n\n\nFor example, the API design for a weather service could specify that the user supply a zip code and that the producer reply with a 2-part answer, the first being the high temperature, and the second being the low.\n\n\n\n1.1 API Rest examples\nThere are many examples of APIs, but here are a few common ones:\n\nGoogle Maps API: allows developers to integrate Google Maps functionality into their own applications, such as displaying maps, getting directions, and searching for places.\nTwitter API: allows developers to access and interact with tweets, as well as post new tweets, through their own applications.\nFacebook API: allows developers to access and interact with user data, such as posts, photos, and friends, as well as post new content, through their own applications.\nStripe API: allows developers to integrate Stripe’s payment functionality into their own applications, such as processing payments and managing subscriptions.\nOpenWeather API: allows developers to access current weather data, as well as forecast, historical data and more for any location on Earth.\nNASA API: allows developers to access and interact with various datasets from NASA, such as images, videos, and information about space missions and celestial bodies.\n\n\n\n1.2 Example: open weather map London\nOne example of a public API with a URL that can be used to access data is the OpenWeather API.\nhttp://api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}\n\n\nYou can access current weather data for a specific location by making a GET request to the following URL:\nYou need to replace {city name} with the name of the city you want to get weather data for and {your api key} with your own API key, which you can get by signing up for a free account on the OpenWeather website.\nFor example, if you want to get the current weather data for London, you would make a GET request to the following URL:\nhttp://api.openweathermap.org/data/2.5/weather?q=London&appid={your api key}\nIt will return a JSON object with various information such as temperature, humidity, wind, etc.\n\n\n1.3 Example: Nasa Mars\nNASA has several APIs available for developers to access and interact with various datasets, such as images, videos, and information about space missions and celestial bodies.\n\n\n\n\n\n\nTip\n\n\n\nOne example of a NASA API is the NASA Image and Video Library API, which allows you to access NASA’s media assets, including images, videos, and audio files.\n\n\nhttps://images-api.nasa.gov/search?q={your search term}\n\n\nYou can access the NASA Image and Video Library API by making a GET request to the following URL:\nFor example, if you want to search for images of the planet Mars, you would make a GET request to the following URL:\nNasa API for Mars\nThis will return a JSON object with a list of assets, including links to the images and other information such as title and description.\n\n\n1.4 Free Open APIs\n\nBig List of Free Open APIs\nTo create integrations, retpythoncom/collection/list-of-free-apis){.external}\nThis is a collection of different REST APIs that are completley public and do not require any authentication, making it easier for consumers to play with and understand what APIs are all about by seeing the many different ways in which APIs can be used: Public REST APIs\nGet a list of universities in a specified country: Universities List\nFree API – Huge List of Public APIs For Testing [No Key]: Free APIs You Can Use for Testing",
-    "crumbs": [
-      "Quarto Markdown",
-      "Quarto Markdown: api rest call"
-    ]
+    "text": "1 What is API Rest\n\n\n\n\n\n\n\nIn other words, if you want to interact with a computer or system to retrieve information or perform a function, an API helps you communicate what you want to that system so it can understand and fulfill the request.\n\nImage from: Why is RESTful API so popular?\n\nAn API is a set of definitions and protocols for building and integrating application software.\nIt’s sometimes referred to as a contract between an information provider and an information user.\nThis contract (API Rest style) establishing the content required from the consumer (the call) and the content required by the producer (the response).\n\n\n\n\n\n\nNote\n\n\n\nFor example, the API design for a weather service could specify that the user supply a zip code and that the producer reply with a 2-part answer, the first being the high temperature, and the second being the low.\n\n\n\n1.1 API Rest examples\nThere are many examples of APIs, but here are a few common ones:\n\nGoogle Maps API: allows developers to integrate Google Maps functionality into their own applications, such as displaying maps, getting directions, and searching for places.\nTwitter API: allows developers to access and interact with tweets, as well as post new tweets, through their own applications.\nFacebook API: allows developers to access and interact with user data, such as posts, photos, and friends, as well as post new content, through their own applications.\nStripe API: allows developers to integrate Stripe’s payment functionality into their own applications, such as processing payments and managing subscriptions.\nOpenWeather API: allows developers to access current weather data, as well as forecast, historical data and more for any location on Earth.\nNASA API: allows developers to access and interact with various datasets from NASA, such as images, videos, and information about space missions and celestial bodies.\n\n\n\n1.2 Example: open weather map London\nOne example of a public API with a URL that can be used to access data is the OpenWeather API.\nhttp://api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}\n\n\nYou can access current weather data for a specific location by making a GET request to the following URL:\nYou need to replace {city name} with the name of the city you want to get weather data for and {your api key} with your own API key, which you can get by signing up for a free account on the OpenWeather website.\nFor example, if you want to get the current weather data for London, you would make a GET request to the following URL:\nhttp://api.openweathermap.org/data/2.5/weather?q=London&appid={your api key}\nIt will return a JSON object with various information such as temperature, humidity, wind, etc.\n\n\n1.3 Example: Nasa Mars\nNASA has several APIs available for developers to access and interact with various datasets, such as images, videos, and information about space missions and celestial bodies.\n\n\n\n\n\n\nTip\n\n\n\nOne example of a NASA API is the NASA Image and Video Library API, which allows you to access NASA’s media assets, including images, videos, and audio files.\n\n\nhttps://images-api.nasa.gov/search?q={your search term}\n\n\nYou can access the NASA Image and Video Library API by making a GET request to the following URL:\nFor example, if you want to search for images of the planet Mars, you would make a GET request to the following URL:\nNasa API for Mars\nThis will return a JSON object with a list of assets, including links to the images and other information such as title and description.\n\n\n1.4 Free Open APIs\n\nBig List of Free Open APIs\nTo create integrations, retpythoncom/collection/list-of-free-apis){.external}\nThis is a collection of different REST APIs that are completley public and do not require any authentication, making it easier for consumers to play with and understand what APIs are all about by seeing the many different ways in which APIs can be used: Public REST APIs\nGet a list of universities in a specified country: Universities List\nFree API – Huge List of Public APIs For Testing [No Key]: Free APIs You Can Use for Testing"
   },
   {
     "objectID": "markup/markup-quarto-api-rest.html#quarto-web-api",
     "href": "markup/markup-quarto-api-rest.html#quarto-web-api",
     "title": "Quarto Markdown: api rest call",
     "section": "2 Quarto web API",
-    "text": "2 Quarto web API\nWeb APIs Quarto with d3.json and Observable JavaScript\n\nYou can use the d3.json function to read JSON data from web services and data sources.\nWe are using the Observable JavaScript / Explore, analyze, and explain data. As a team to run script cells\n\n\n\nQuarto: Observable JS\nHere we query the GitHub API for data on contributions to the albertprofe wiki:\n\nd3 = require('d3')\n\ncontributors = await d3.json(\n  \"https://api.github.com/repos/albertprofe/wiki/stats/contributors\"\n)\n\ncommits = contributors.map(contributor =&gt; {\n  const author = contributor.author;\n  return {\n    name: author.login,\n    title: author.login,\n    group: author.type,\n    value: contributor.total\n  }\n})\n\n\nInputs.table(commits, { sort: \"value\", reverse: true })\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nJavaScript on Observable is almost — but not entirely — vanilla. This is intentional: by building on the native language of the web, Observable is familiar. And you can use the libraries you know and love, such as D3, Lodash, and Apache Arrow.\n\n\nSee the GitHub API example for the full source code.\n\n\n2.1 Screenshoots\n\n2.1.1 Success\n\n\n\nQuarto Api Rest call to github Rest API\n\n\n\n\n2.1.2 Error\n\n\n\nQuarto Api Rest call to github Rest API ERROR\n\n\n\n\n\n\n\n  Quarto Markdown: code & data \n\n\n\n  top \n\n\n\n Quarto Markdown: OJS Cells",
-    "crumbs": [
-      "Quarto Markdown",
-      "Quarto Markdown: api rest call"
-    ]
+    "text": "2 Quarto web API\nWeb APIs Quarto with d3.json and Observable JavaScript\n\nYou can use the d3.json function to read JSON data from web services and data sources.\nWe are using the Observable JavaScript / Explore, analyze, and explain data. As a team to run script cells\n\n\n\nQuarto: Observable JS\nHere we query the GitHub API for data on contributions to the albertprofe wiki:\n\nd3 = require('d3')\n\ncontributors = await d3.json(\n  \"https://api.github.com/repos/albertprofe/wiki/stats/contributors\"\n)\n\ncommits = contributors.map(contributor =&gt; {\n  const author = contributor.author;\n  return {\n    name: author.login,\n    title: author.login,\n    group: author.type,\n    value: contributor.total\n  }\n})\n\n\nInputs.table(commits, { sort: \"value\", reverse: true })\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nJavaScript on Observable is almost — but not entirely — vanilla. This is intentional: by building on the native language of the web, Observable is familiar. And you can use the libraries you know and love, such as D3, Lodash, and Apache Arrow.\n\n\nSee the GitHub API example for the full source code.\n\n\n2.1 Screenshoots\n\n2.1.1 Success\n\n\n\nQuarto Api Rest call to github Rest API\n\n\n\n\n2.1.2 Error\n\n\n\nQuarto Api Rest call to github Rest API ERROR\n\n\n\n\n\n\n\n  Quarto Markdown: code & data \n\n\n\n  top \n\n\n\n Quarto Markdown: OJS Cells"
   },
   {
     "objectID": "markup/markup-lang-md.html",
@@ -3731,33 +3663,21 @@
     "href": "learning/learning-how-writing.html",
     "title": "Writing",
     "section": "",
-    "text": "William Strunk and E.B. White’s short and famous book, The Elements of Style.\n\nRule 17\nA sentence should contain no unnecessary words, a paragraph no unnecessary sentences, for the same reason that a drawing should have no unnecessary lines and a machine no unnecessary parts.\nThis requires not that the writer make all his sentences short, or that he avoid all details and treat his subjects only in outline, but that every word tell.",
-    "crumbs": [
-      "Learning",
-      "Writing"
-    ]
+    "text": "William Strunk and E.B. White’s short and famous book, The Elements of Style.\n\nRule 17\nA sentence should contain no unnecessary words, a paragraph no unnecessary sentences, for the same reason that a drawing should have no unnecessary lines and a machine no unnecessary parts.\nThis requires not that the writer make all his sentences short, or that he avoid all details and treat his subjects only in outline, but that every word tell."
   },
   {
     "objectID": "learning/learning-how-writing.html#the-elements-of-style",
     "href": "learning/learning-how-writing.html#the-elements-of-style",
     "title": "Writing",
     "section": "",
-    "text": "William Strunk and E.B. White’s short and famous book, The Elements of Style.\n\nRule 17\nA sentence should contain no unnecessary words, a paragraph no unnecessary sentences, for the same reason that a drawing should have no unnecessary lines and a machine no unnecessary parts.\nThis requires not that the writer make all his sentences short, or that he avoid all details and treat his subjects only in outline, but that every word tell.",
-    "crumbs": [
-      "Learning",
-      "Writing"
-    ]
+    "text": "William Strunk and E.B. White’s short and famous book, The Elements of Style.\n\nRule 17\nA sentence should contain no unnecessary words, a paragraph no unnecessary sentences, for the same reason that a drawing should have no unnecessary lines and a machine no unnecessary parts.\nThis requires not that the writer make all his sentences short, or that he avoid all details and treat his subjects only in outline, but that every word tell."
   },
   {
     "objectID": "learning/learning-how-writing.html#making-writing-more-varied",
     "href": "learning/learning-how-writing.html#making-writing-more-varied",
     "title": "Writing",
     "section": "2 Making writing more varied",
-    "text": "2 Making writing more varied\n\n\n\nMaking writing more varied\n\n\n\nMaking writing more varied\nThe Elements of Style\n\n\n2.1 Composition\n\nDesign - choose a structure in advance, when planning what to write, and hold onto it.\n\n\nParagraphs - the primary compositional unit of writing. Each paragraph should be about an individual topic or speech. Begin paragraphs with a sentence that gives the topic or helps with the transition. Break paragraphs apart if it helps the reader, not just for the hell of it.\n\n‘After the paragraph has been written, examine it to see whether division will improve it.’ (Page 32)\n\nActive voice - it’s much better to use the active voice in most cases. E.g.:\n\n\n‘A report was prepared,’ is not as good as;\n‘He prepared a report.’\n\n\nNot - say what things are. Don’t waste your time saying what they are not.\n\n\nBe definite - do not dance around the truth express it in concrete terms.\n\n\nOmit needless words - ‘this is a subject that’ can better be written as ‘this subject’.\n\n\nSummaries and Tenses - in a summary, or anywhere really, pick a tense and stick to it, otherwise you’ll confuse the reader.\n\n\nEmphasis - put the word or words you want to emphasise at the end of a sentence\n\n\n\n\n\n\n  Learning: tips \n\n\n\n  top \n\n\n\n Taking Notes",
-    "crumbs": [
-      "Learning",
-      "Writing"
-    ]
+    "text": "2 Making writing more varied\n\n\n\nMaking writing more varied\n\n\n\nMaking writing more varied\nThe Elements of Style\n\n\n2.1 Composition\n\nDesign - choose a structure in advance, when planning what to write, and hold onto it.\n\n\nParagraphs - the primary compositional unit of writing. Each paragraph should be about an individual topic or speech. Begin paragraphs with a sentence that gives the topic or helps with the transition. Break paragraphs apart if it helps the reader, not just for the hell of it.\n\n‘After the paragraph has been written, examine it to see whether division will improve it.’ (Page 32)\n\nActive voice - it’s much better to use the active voice in most cases. E.g.:\n\n\n‘A report was prepared,’ is not as good as;\n‘He prepared a report.’\n\n\nNot - say what things are. Don’t waste your time saying what they are not.\n\n\nBe definite - do not dance around the truth express it in concrete terms.\n\n\nOmit needless words - ‘this is a subject that’ can better be written as ‘this subject’.\n\n\nSummaries and Tenses - in a summary, or anywhere really, pick a tense and stick to it, otherwise you’ll confuse the reader.\n\n\nEmphasis - put the word or words you want to emphasise at the end of a sentence\n\n\n\n\n\n\n  Learning: tips \n\n\n\n  top \n\n\n\n Taking Notes"
   },
   {
     "objectID": "learning/learning-how-tips.html",
@@ -3819,11 +3739,7 @@
     "href": "learning/learning-how-auto-evaluate.html",
     "title": "Auto-Evaluate",
     "section": "",
-    "text": "Comments \n\n\n\n  top \n\n\n\n Books table",
-    "crumbs": [
-      "Learning",
-      "Auto-Evaluate"
-    ]
+    "text": "Note\n\n\n\nPeer evaluation is an effective collaborative learning strategy that asks students to reflect on contributions made by colleagues in group work.\n\n\n\n\nRelated to self-assessment, peer evaluation encourages students to critically examine the work of peers, and reflect on the meaning of quality work in general, especially when consulting a detailed rubric or checklist as a guide.\n\n\n\nStudents themselves provide feedback to one another, while the instructor focuses on more targeted guidance toward a learning outcome. The key for successful peer feedback is a constructive, honest environment in which students feel safe to share honest, yet helpful criticism. Through peer evaluation, students ultimately learn to better self-assess themselves, a skill which pay dividends throughout their academic and professional career. As additional benefits of peer evaluation, students learn to:\n\napply course concepts and skills to solving problems\ncollaborate with others towards a common goal\nexamine diverse perspectives and ideas\nassume greater responsibility in the learning process\napply (and possibly create) objective criteria to judge the quality of a task or performance\n\nPeer evaluations also resolve the “free rider” problem with group work, that is, the tendency of students to rely on team members to take the initiative in completing group assignments or tasks.\nBy adding an element of accountability and critical review, students will more likely exert effort to ensure a positive review from their peers (and create a good impression).\n\n\n\n\nTo implement an effective peer evaluation, students must fully understand expectations in advance. Set clear goals and expectations for the process.\nA detailed rubric or checklist is critical to ensure evaluations are respectful, constructive and helpful.\nTo avoid emotional complications and hurt feelings, provide examples of effective evaluations/reviews. Be sure to emphasize as required characteristics that evaluations be respectful, constructive and helpful.\nTo encourage self-direction and responsibility, allow students to create their own rubrics or checklists (though you should still approve prior to use as an actual assessment tool).\nAllow students to practice peer evaluations, preferably in the form of a self-assessment or a peer review for a low-stakes activity (e.g. class or online discussion)."
   },
   {
     "objectID": "javase/selab3-2.html",
@@ -5212,99 +5128,63 @@
     "href": "ifcd0210-24/ifcd0210backlog-product-24.html",
     "title": "IFCD0210 Product Backlog",
     "section": "",
-    "text": "Backlog course",
-    "crumbs": [
-      "IFCD0210-24 Docs",
-      "IFCD0210 Product Backlog"
-    ]
+    "text": "Backlog course"
   },
   {
     "objectID": "ifcd0210-24/ifcd0210backlog-product-24.html#december-2023",
     "href": "ifcd0210-24/ifcd0210backlog-product-24.html#december-2023",
     "title": "IFCD0210 Product Backlog",
     "section": "December 2023",
-    "text": "December 2023\n\nBacklog course December 2023 table\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#1\n1\n19/12/2023\n- Course Presentation  - Methodologies introduction: learning, sprints & paths  - Course Syllabus: Java Helsinki MOOC, Full Stack, Front-end, Server, Project, SCRUM, Git & DevOps, Linux and OS  - Set up tools: Linux, Network, Account, IDEs, Git, Documentation\n- Mooc Java  - Deep Dive Into Modern Web Development / Full Stack Web Development, Open Uni: Full Stack Web Development 5 cr / Full Stack - Answering the useful (right?) questions\n\n\n\n2\n21/12/2023\n- Set up tools: Linux, Network, Account, IDEs, Git, Documentation  - IDE: IntelliJ Idea  - Maven & Java SE project ++ IDE: TMC-NetBeans  ++ Manage Time&Mind:  (1) Keep Calm & Walk Away: Negative Logic, Pavoland, One tool JUST TO one problem, Optimal Solution, Give Up, Stress, Burnt out  (2) Plan your energy: match energy with tasks  ++ Bash example scripting\n- Idea  - Pavoland  - Bash executable  - What is Bash?  - TMCBeans MOOC Helsinki Java 2023\n\n\n\n3\n22/12/2023\n- Set up tools: Linux, Network, Account, IDEs, Git, Documentation  - IDE: Visual Code  - Create React App  ++ UML  ++ Documentation: quarto & .md\n- Visual Code  - Quarto Create  -Lab#SE00-1  - UML",
-    "crumbs": [
-      "IFCD0210-24 Docs",
-      "IFCD0210 Product Backlog"
-    ]
+    "text": "December 2023\n\nBacklog course December 2023 table\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#1\n1\n19/12/2023\n- Course Presentation  - Methodologies introduction: learning, sprints & paths  - Course Syllabus: Java Helsinki MOOC, Full Stack, Front-end, Server, Project, SCRUM, Git & DevOps, Linux and OS  - Set up tools: Linux, Network, Account, IDEs, Git, Documentation\n- Mooc Java  - Deep Dive Into Modern Web Development / Full Stack Web Development, Open Uni: Full Stack Web Development 5 cr / Full Stack - Answering the useful (right?) questions\n\n\n\n2\n21/12/2023\n- Set up tools: Linux, Network, Account, IDEs, Git, Documentation  - IDE: IntelliJ Idea  - Maven & Java SE project ++ IDE: TMC-NetBeans  ++ Manage Time&Mind:  (1) Keep Calm & Walk Away: Negative Logic, Pavoland, One tool JUST TO one problem, Optimal Solution, Give Up, Stress, Burnt out  (2) Plan your energy: match energy with tasks  ++ Bash example scripting\n- Idea  - Pavoland  - Bash executable  - What is Bash?  - TMCBeans MOOC Helsinki Java 2023\n\n\n\n3\n22/12/2023\n- Set up tools: Linux, Network, Account, IDEs, Git, Documentation  - IDE: Visual Code  - Create React App  ++ UML  ++ Documentation: quarto & .md\n- Visual Code  - Quarto Create  -Lab#SE00-1  - UML"
   },
   {
     "objectID": "ifcd0210-24/ifcd0210backlog-product-24.html#january-2024",
     "href": "ifcd0210-24/ifcd0210backlog-product-24.html#january-2024",
     "title": "IFCD0210 Product Backlog",
     "section": "January 2024",
-    "text": "January 2024\n\nBacklog course January 2024 table\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#2\n4\n08/01/2024\n\n\n\n\n\n5\n09/01/2024\n\n\n\n\n\n6\n11/01/2024\n\n\n\n\n\n7\n12/01/2024\n\n\n\n\n#3\n8\n15/01/2024\n\n\n\n\n\n9\n16/01/2024\n\n\n\n\n\n10\n18/01/2024\n\n\n\n\n\n11\n19/01/2024\n\n\n\n\n#4\n12\n22/01/2024\n\n\n\n\n\n13\n23/01/2024\n\n\n\n\n\n14\n25/01/2024\n\n\n\n\n\n15\n26/01/2024\n\n\n\n\n#5\n16\n29/01/2024\n\n\n\n\n\n17\n30/01/2024\n\n\n\n\n\n18\n31/01/2024\n\n\n\n\n\n19\n01/02/2024",
-    "crumbs": [
-      "IFCD0210-24 Docs",
-      "IFCD0210 Product Backlog"
-    ]
+    "text": "January 2024\n\nBacklog course January 2024 table\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#2\n4\n08/01/2024\n\n\n\n\n\n5\n09/01/2024\n\n\n\n\n\n6\n11/01/2024\n\n\n\n\n\n7\n12/01/2024\n\n\n\n\n#3\n8\n15/01/2024\n\n\n\n\n\n9\n16/01/2024\n\n\n\n\n\n10\n18/01/2024\n\n\n\n\n\n11\n19/01/2024\n\n\n\n\n#4\n12\n22/01/2024\n\n\n\n\n\n13\n23/01/2024\n\n\n\n\n\n14\n25/01/2024\n\n\n\n\n\n15\n26/01/2024\n\n\n\n\n#5\n16\n29/01/2024\n\n\n\n\n\n17\n30/01/2024\n\n\n\n\n\n18\n31/01/2024\n\n\n\n\n\n19\n01/02/2024"
   },
   {
     "objectID": "ifcd0210-24/ifcd0210backlog-product-24.html#february-2024",
     "href": "ifcd0210-24/ifcd0210backlog-product-24.html#february-2024",
     "title": "IFCD0210 Product Backlog",
     "section": "February 2024",
-    "text": "February 2024\n\nBacklog course February 2024 table\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#6\n20\n05/02/2024\n\n\n\n\n\n21\n06/02/2024\n\n\n\n\n\n22\n08/02/2024\n\n\n\n\n\n23\n09/02/2024\n\n\n\n\n#7\n24\n12/02/2024\n\n\n\n\n\n25\n13/02/2024\n\n\n\n\n\n26\n15/02/2024\n\n\n\n\n\n27\n16/02/2024\n\n\n\n\n#8\n28\n19/02/2024\n\n\n\n\n\n29\n20/02/2024\n\n\n\n\n\n30\n22/02/2024\n\n\n\n\n\n31\n23/02/2024\n\n\n\n\n#9\n32\n26/02/2024\n\n\n\n\n\n33\n27/02/2024\n\n\n\n\n\n34\n29/02/2024\n\n\n\n\n\n35\n01/03/2024",
-    "crumbs": [
-      "IFCD0210-24 Docs",
-      "IFCD0210 Product Backlog"
-    ]
+    "text": "February 2024\n\nBacklog course February 2024 table\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#6\n20\n05/02/2024\n\n\n\n\n\n21\n06/02/2024\n\n\n\n\n\n22\n08/02/2024\n\n\n\n\n\n23\n09/02/2024\n\n\n\n\n#7\n24\n12/02/2024\n\n\n\n\n\n25\n13/02/2024\n\n\n\n\n\n26\n15/02/2024\n\n\n\n\n\n27\n16/02/2024\n\n\n\n\n#8\n28\n19/02/2024\n\n\n\n\n\n29\n20/02/2024\n\n\n\n\n\n30\n22/02/2024\n\n\n\n\n\n31\n23/02/2024\n\n\n\n\n#9\n32\n26/02/2024\n\n\n\n\n\n33\n27/02/2024\n\n\n\n\n\n34\n29/02/2024\n\n\n\n\n\n35\n01/03/2024"
   },
   {
     "objectID": "ifcd0210-24/ifcd0210backlog-product-24.html#march-2024",
     "href": "ifcd0210-24/ifcd0210backlog-product-24.html#march-2024",
     "title": "IFCD0210 Product Backlog",
     "section": "March 2024",
-    "text": "March 2024\n\nBacklog course March 2024 table\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#10\n36\n04/03/2024\n\n\n\n\n\n37\n05/03/2024\n\n\n\n\n\n38\n07/03/2024\n\n\n\n\n\n39\n08/03/2024\n\n\n\n\n#11\n40\n11/03/2024\n\n\n\n\n\n41\n12/03/2024\n\n\n\n\n\n42\n14/03/2024\n\n\n\n\n\n43\n15/03/2024\n\n\n\n\n#12\n44\n18/03/2024\n\n\n\n\n\n45\n19/03/2024\n\n\n\n\n\n46\n21/03/2024\n\n\n\n\n\n47\n22/03/2024",
-    "crumbs": [
-      "IFCD0210-24 Docs",
-      "IFCD0210 Product Backlog"
-    ]
+    "text": "March 2024\n\nBacklog course March 2024 table\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#10\n36\n04/03/2024\n\n\n\n\n\n37\n05/03/2024\n\n\n\n\n\n38\n07/03/2024\n\n\n\n\n\n39\n08/03/2024\n\n\n\n\n#11\n40\n11/03/2024\n\n\n\n\n\n41\n12/03/2024\n\n\n\n\n\n42\n14/03/2024\n\n\n\n\n\n43\n15/03/2024\n\n\n\n\n#12\n44\n18/03/2024\n\n\n\n\n\n45\n19/03/2024\n\n\n\n\n\n46\n21/03/2024\n\n\n\n\n\n47\n22/03/2024"
   },
   {
     "objectID": "ifcd0210-24/ifcd0210backlog-product-24.html#april-2024",
     "href": "ifcd0210-24/ifcd0210backlog-product-24.html#april-2024",
     "title": "IFCD0210 Product Backlog",
     "section": "April 2024",
-    "text": "April 2024\n\nBacklog course April 2024 table\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics",
-    "crumbs": [
-      "IFCD0210-24 Docs",
-      "IFCD0210 Product Backlog"
-    ]
+    "text": "April 2024\n\nBacklog course April 2024 table\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics"
   },
   {
     "objectID": "ifcd0210-24/ifcd0210backlog-product-24.html#may-2024",
     "href": "ifcd0210-24/ifcd0210backlog-product-24.html#may-2024",
     "title": "IFCD0210 Product Backlog",
     "section": "May 2024",
-    "text": "May 2024\n\nBacklog course May 2024 table\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics",
-    "crumbs": [
-      "IFCD0210-24 Docs",
-      "IFCD0210 Product Backlog"
-    ]
+    "text": "May 2024\n\nBacklog course May 2024 table\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics"
   },
   {
     "objectID": "ifcd0210-24/ifcd0210backlog-product-24.html#june-2024",
     "href": "ifcd0210-24/ifcd0210backlog-product-24.html#june-2024",
     "title": "IFCD0210 Product Backlog",
     "section": "June 2024",
-    "text": "June 2024\n\nBacklog course June 2024 table\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n+ Formació Copmplementària\n-\n\n\n\n\n\n+ Formació Copmplementària\n-",
-    "crumbs": [
-      "IFCD0210-24 Docs",
-      "IFCD0210 Product Backlog"
-    ]
+    "text": "June 2024\n\nBacklog course June 2024 table\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n+ Formació Copmplementària\n-\n\n\n\n\n\n+ Formació Copmplementària\n-"
   },
   {
     "objectID": "ifcd0210-24/ifcd0210backlog-product-24.html#july-2024",
     "href": "ifcd0210-24/ifcd0210backlog-product-24.html#july-2024",
     "title": "IFCD0210 Product Backlog",
     "section": "July 2024",
-    "text": "July 2024\nFinishing Pràctiques",
-    "crumbs": [
-      "IFCD0210-24 Docs",
-      "IFCD0210 Product Backlog"
-    ]
+    "text": "July 2024\nFinishing Pràctiques"
   },
   {
     "objectID": "ifcd0210/ifcd0210initemail.html",
@@ -6398,44 +6278,28 @@
     "href": "about/about-this-developer.html",
     "title": "About a developer",
     "section": "",
-    "text": "About",
-    "crumbs": [
-      "About me and this site",
-      "About a developer"
-    ]
+    "text": "About"
   },
   {
     "objectID": "about/about-this-developer.html#what-is-a-developer-2022",
     "href": "about/about-this-developer.html#what-is-a-developer-2022",
     "title": "About a developer",
     "section": "What is a developer (2022)",
-    "text": "What is a developer (2022)\nA developer, also known as a software programmer, needs a wide range of skills in order to be successful in their role. Some of the most important skills for a programmer include:\n\nStrong problem-solving skills: A programmer needs to be able to analyze complex problems and develop effective solutions using code. Logical thinking: Programming involves creating logical structures and processes that a computer can follow, so a programmer needs to have strong logical and analytical skills.\nKnowledge of programming languages and technologies: A programmer needs to have a deep understanding of the programming languages and technologies that they use, as well as the ability to learn new languages and technologies as needed.\nAttention to detail: Programming involves working with complex systems and large amounts of data, so a programmer needs to have a keen eye for detail and the ability to spot errors and inconsistencies.\nCommunication skills: A programmer often works as part of a team, so they need to be able to communicate effectively with other developers and stakeholders.\nTime management and organizational skills: A programmer typically has multiple tasks and deadlines to manage, so they need to be able to prioritize their work and stay organized.\n\nIn addition to these core skills, a programmer may also benefit from having knowledge of software development methodologies, such as Agile or Waterfall, as well as experience with version control systems and other tools commonly used in software development.",
-    "crumbs": [
-      "About me and this site",
-      "About a developer"
-    ]
+    "text": "What is a developer (2022)\nA developer, also known as a software programmer, needs a wide range of skills in order to be successful in their role. Some of the most important skills for a programmer include:\n\nStrong problem-solving skills: A programmer needs to be able to analyze complex problems and develop effective solutions using code. Logical thinking: Programming involves creating logical structures and processes that a computer can follow, so a programmer needs to have strong logical and analytical skills.\nKnowledge of programming languages and technologies: A programmer needs to have a deep understanding of the programming languages and technologies that they use, as well as the ability to learn new languages and technologies as needed.\nAttention to detail: Programming involves working with complex systems and large amounts of data, so a programmer needs to have a keen eye for detail and the ability to spot errors and inconsistencies.\nCommunication skills: A programmer often works as part of a team, so they need to be able to communicate effectively with other developers and stakeholders.\nTime management and organizational skills: A programmer typically has multiple tasks and deadlines to manage, so they need to be able to prioritize their work and stay organized.\n\nIn addition to these core skills, a programmer may also benefit from having knowledge of software development methodologies, such as Agile or Waterfall, as well as experience with version control systems and other tools commonly used in software development."
   },
   {
     "objectID": "about/about-this-developer.html#how-can-we-get-it",
     "href": "about/about-this-developer.html#how-can-we-get-it",
     "title": "About a developer",
     "section": "How can we get it?",
-    "text": "How can we get it?\nTo be a good programmer, you need to have a strong foundation in computer science and software development principles, as well as the ability to learn and adapt to new technologies and languages. Some specific ways that you can improve your skills as a programmer include:\n\nPractice regularly: The best way to improve your programming skills is to write code regularly and work on a variety of projects. This will help you develop your problem-solving skills and build your knowledge of different languages and technologies.\nLearn from others: There are many resources available online, such as tutorials, blogs, and forums, where you can learn from experienced programmers and ask questions. You can also learn by working on open-source projects and collaborating with other developers.\nStay up-to-date: The field of software development is constantly evolving, so it is important to stay up-to-date with the latest technologies and best practices. This can help you stay ahead of the curve and keep your skills relevant.\nTake on new challenges: To continue growing as a programmer, you should strive to take on new and challenging projects that push you to learn and improve. This can help you develop new skills and broaden your expertise.\nSeek feedback: It can be helpful to seek feedback from experienced programmers, mentors, or peers on your work. This can help you identify areas for improvement and learn from others who have more experience.\n\nIn general, being a good programmer requires a combination of technical skills, problem-solving abilities, and a willingness to learn and grow. By focusing on these areas and continually striving to improve, you can become a successful and effective programmer.",
-    "crumbs": [
-      "About me and this site",
-      "About a developer"
-    ]
+    "text": "How can we get it?\nTo be a good programmer, you need to have a strong foundation in computer science and software development principles, as well as the ability to learn and adapt to new technologies and languages. Some specific ways that you can improve your skills as a programmer include:\n\nPractice regularly: The best way to improve your programming skills is to write code regularly and work on a variety of projects. This will help you develop your problem-solving skills and build your knowledge of different languages and technologies.\nLearn from others: There are many resources available online, such as tutorials, blogs, and forums, where you can learn from experienced programmers and ask questions. You can also learn by working on open-source projects and collaborating with other developers.\nStay up-to-date: The field of software development is constantly evolving, so it is important to stay up-to-date with the latest technologies and best practices. This can help you stay ahead of the curve and keep your skills relevant.\nTake on new challenges: To continue growing as a programmer, you should strive to take on new and challenging projects that push you to learn and improve. This can help you develop new skills and broaden your expertise.\nSeek feedback: It can be helpful to seek feedback from experienced programmers, mentors, or peers on your work. This can help you identify areas for improvement and learn from others who have more experience.\n\nIn general, being a good programmer requires a combination of technical skills, problem-solving abilities, and a willingness to learn and grow. By focusing on these areas and continually striving to improve, you can become a successful and effective programmer."
   },
   {
     "objectID": "about/about-this-developer.html#and-reading-books",
     "href": "about/about-this-developer.html#and-reading-books",
     "title": "About a developer",
     "section": "And reading books?",
-    "text": "And reading books?\nReading books can help improve your skills as a programmer in several ways. Some specific benefits of reading books for programmers include:\n\nExpanding your knowledge: Books can provide a wealth of information on a wide range of topics related to programming. By reading books, you can learn about new technologies, programming languages, and best practices that you may not have been aware of before.\nImproving your problem-solving skills: Many books on programming include examples and exercises that you can use to practice your problem-solving skills. By working through these exercises, you can improve your ability to analyze complex problems and develop effective solutions using code.\nBroadening your perspective: Reading books written by other programmers can provide valuable insights into how they approach problems and solve them. This can help you learn new techniques and strategies that you can apply to your own work.\nBuilding your vocabulary: Many technical books on programming include specialized terminology and concepts that you may not be familiar with. By reading these books, you can expand your vocabulary and become more fluent in the language of programming.\nStaying up-to-date: Reading books can help you keep up with the latest trends and developments in the field of software development. This can help you stay ahead of the curve and ensure that your skills remain relevant and in-demand.\n\nOverall, reading books can be a valuable way to improve your skills as a programmer. By reading books written by experienced programmers, you can learn new techniques and strategies, expand your knowledge, and stay up-to-date with the latest developments in the field.\n\n\n\n\n\n  About me \n\n\n\n  top \n\n\n\n About this site",
-    "crumbs": [
-      "About me and this site",
-      "About a developer"
-    ]
+    "text": "And reading books?\nReading books can help improve your skills as a programmer in several ways. Some specific benefits of reading books for programmers include:\n\nExpanding your knowledge: Books can provide a wealth of information on a wide range of topics related to programming. By reading books, you can learn about new technologies, programming languages, and best practices that you may not have been aware of before.\nImproving your problem-solving skills: Many books on programming include examples and exercises that you can use to practice your problem-solving skills. By working through these exercises, you can improve your ability to analyze complex problems and develop effective solutions using code.\nBroadening your perspective: Reading books written by other programmers can provide valuable insights into how they approach problems and solve them. This can help you learn new techniques and strategies that you can apply to your own work.\nBuilding your vocabulary: Many technical books on programming include specialized terminology and concepts that you may not be familiar with. By reading these books, you can expand your vocabulary and become more fluent in the language of programming.\nStaying up-to-date: Reading books can help you keep up with the latest trends and developments in the field of software development. This can help you stay ahead of the curve and ensure that your skills remain relevant and in-demand.\n\nOverall, reading books can be a valuable way to improve your skills as a programmer. By reading books written by experienced programmers, you can learn new techniques and strategies, expand your knowledge, and stay up-to-date with the latest developments in the field.\n\n\n\n\n\n  About me \n\n\n\n  top \n\n\n\n About this site"
   },
   {
     "objectID": "about/about-this-images-credit.html",
@@ -7369,55 +7233,35 @@
     "href": "ifcd0210-24/ifcd0210-24.html",
     "title": "IFCD0210 Official Docs",
     "section": "",
-    "text": "Denominació: Desenvolupament d’aplicacions amb tecnologies web\nCodi: IFCD0210\nHores: 600h\nFamília professional: Informàtica i comunicacions\nÀrea professional: Desenvolupament\nNivell de qualificació professional: 3\nQualificació professional de referència: IFC154_3 - Desenvolupament d’aplicacions amb tecnologies web\n\n\n\n\nIFCD0210 fitxa\n\n\n\nIFCD0210 fitxa-es .pdf\nIFCD0210 fitxa-cat .pdf\nIFCD0210 official document",
-    "crumbs": [
-      "IFCD0210-24 Docs",
-      "IFCD0210 Official Docs"
-    ]
+    "text": "Denominació: Desenvolupament d’aplicacions amb tecnologies web\nCodi: IFCD0210\nHores: 600h\nFamília professional: Informàtica i comunicacions\nÀrea professional: Desenvolupament\nNivell de qualificació professional: 3\nQualificació professional de referència: IFC154_3 - Desenvolupament d’aplicacions amb tecnologies web\n\n\n\n\nIFCD0210 fitxa\n\n\n\nIFCD0210 fitxa-es .pdf\nIFCD0210 fitxa-cat .pdf\nIFCD0210 official document"
   },
   {
     "objectID": "ifcd0210-24/ifcd0210-24.html#identificació-del-certificat-de-professionalitat",
     "href": "ifcd0210-24/ifcd0210-24.html#identificació-del-certificat-de-professionalitat",
     "title": "IFCD0210 Official Docs",
     "section": "",
-    "text": "Denominació: Desenvolupament d’aplicacions amb tecnologies web\nCodi: IFCD0210\nHores: 600h\nFamília professional: Informàtica i comunicacions\nÀrea professional: Desenvolupament\nNivell de qualificació professional: 3\nQualificació professional de referència: IFC154_3 - Desenvolupament d’aplicacions amb tecnologies web\n\n\n\n\nIFCD0210 fitxa\n\n\n\nIFCD0210 fitxa-es .pdf\nIFCD0210 fitxa-cat .pdf\nIFCD0210 official document",
-    "crumbs": [
-      "IFCD0210-24 Docs",
-      "IFCD0210 Official Docs"
-    ]
+    "text": "Denominació: Desenvolupament d’aplicacions amb tecnologies web\nCodi: IFCD0210\nHores: 600h\nFamília professional: Informàtica i comunicacions\nÀrea professional: Desenvolupament\nNivell de qualificació professional: 3\nQualificació professional de referència: IFC154_3 - Desenvolupament d’aplicacions amb tecnologies web\n\n\n\n\nIFCD0210 fitxa\n\n\n\nIFCD0210 fitxa-es .pdf\nIFCD0210 fitxa-cat .pdf\nIFCD0210 official document"
   },
   {
     "objectID": "ifcd0210-24/ifcd0210-24.html#relació-dunitats-de-competència-que-configuren-el-certificat-de-professionalitat",
     "href": "ifcd0210-24/ifcd0210-24.html#relació-dunitats-de-competència-que-configuren-el-certificat-de-professionalitat",
     "title": "IFCD0210 Official Docs",
     "section": "Relació d’unitats de competència que configuren el certificat de professionalitat",
-    "text": "Relació d’unitats de competència que configuren el certificat de professionalitat\n\nUC0491_3: Desenvolupar elements de programari en l’entorn client.\nUC0492_3: Desenvolupar elements de programari en l’entorn servidor.\nUC0493_3: Implementar, verificar i documentar aplicacions web en entorns internet, intranet i extranet.",
-    "crumbs": [
-      "IFCD0210-24 Docs",
-      "IFCD0210 Official Docs"
-    ]
+    "text": "Relació d’unitats de competència que configuren el certificat de professionalitat\n\nUC0491_3: Desenvolupar elements de programari en l’entorn client.\nUC0492_3: Desenvolupar elements de programari en l’entorn servidor.\nUC0493_3: Implementar, verificar i documentar aplicacions web en entorns internet, intranet i extranet."
   },
   {
     "objectID": "ifcd0210-24/ifcd0210-24.html#competència-general",
     "href": "ifcd0210-24/ifcd0210-24.html#competència-general",
     "title": "IFCD0210 Official Docs",
     "section": "Competència general",
-    "text": "Competència general\n\nDesenvolupar documents i components de programari que constitueixin aplicacions informàtiques en entorns distribuïts utilitzant tecnologies web, partint d’un disseny tècnic ja elaborat, i duent a terme la seva verificació, documentació i implantació.\n\n\n\n\n\n\n  Articles cards \n\n\n\n  top \n\n\n\n IFCD0210 Deliveries",
-    "crumbs": [
-      "IFCD0210-24 Docs",
-      "IFCD0210 Official Docs"
-    ]
+    "text": "Competència general\n\nDesenvolupar documents i components de programari que constitueixin aplicacions informàtiques en entorns distribuïts utilitzant tecnologies web, partint d’un disseny tècnic ja elaborat, i duent a terme la seva verificació, documentació i implantació.\n\n\n\n\n\n\n  Articles cards \n\n\n\n  top \n\n\n\n IFCD0210 Deliveries"
   },
   {
     "objectID": "ifcd0210-24/ifcd0210backlog-sprint-24.html",
     "href": "ifcd0210-24/ifcd0210backlog-sprint-24.html",
     "title": "IFCD0210 Sprint Backlog",
     "section": "",
-    "text": "Sprint Backlog",
-    "crumbs": [
-      "IFCD0210-24 Docs",
-      "IFCD0210 Sprint Backlog"
-    ]
+    "text": "Sprint Backlog"
   },
   {
     "objectID": "ifcd0210-24/ifcd0210backlog-sprint-24.html#set-up-toolsmethodologiessubjects-december-2023",
@@ -7490,22 +7334,14 @@
     "href": "ifcd044/ifcd044backlog-sprint.html",
     "title": "IFCD044 Sprint Backlog",
     "section": "",
-    "text": "Sprint Backlog",
-    "crumbs": [
-      "IFCD044 Docs",
-      "IFCD044 Sprint Backlog"
-    ]
+    "text": "Sprint Backlog"
   },
   {
     "objectID": "ifcd044/ifcd044backlog-sprint.html#sprint5-team-dynamics-beforebeyond-scrum-december",
     "href": "ifcd044/ifcd044backlog-sprint.html#sprint5-team-dynamics-beforebeyond-scrum-december",
     "title": "IFCD044 Sprint Backlog",
     "section": "Sprint#5: Team Dynamics & Before/Beyond SCRUM (December)",
-    "text": "Sprint#5: Team Dynamics & Before/Beyond SCRUM (December)\n\n\nSprint Backlog course December 2023 table\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#5\n16\n11/12/2023\n- Before SCRUM  - Team Dynamics: We are not Rationals   - Mindset: survival vs growth  ++ smarter not harder: decision making (0) the illusion of knowledge  (1) agile: impediments, iteration and grow +1%  (3) intuition & creativity\n- Before SCRUM  - The soviet union delusion  - Antifragile  - Mindset matters  - S&P 500: $100 in 1957 → $67,136.47 in 2023 / S&P-1 / S&P-2\n\n\n\n17\n12/12/2023\n- Emotions and Thoughts  - Moral Emotions and Rider/Elephant   - Team Dynamics: We are not Rationals  - What is the illusion of knowledge? There is a unique tool, master-key, to solve all questions: knowing everything  - Debate: the main source of knowledge acquisition\n- Team Dynamics  - The illusion of knowledge II  \n\n\n\n18\n13/12/2023\n- Emotions and Thoughts  - Moral Emotions and Rider/Elephant \nEmotions and Thoughts\n\n\n\n19\n14/12/2023\nFCOO03 Inserció Laboral, sensibilització medi ambiental igualtat de gènere   - Decision Making  ++ Steps to decision making:  (1) info, purpose, mental-energy  (2) place, time, ritual  (3) decision comes to you via intuition  ++ How to create your own Clear Thinking to make good decisions  (1) physical path: nutrition, exercise, stress, mental health  (2) own habits to create context where you make decisions: music, walk, sea or mountain, silence, shower  (3) learn to recognize intuition  - Book: Range & Generalists  - Books presentation: Focus, Master and his Emissary, The Righteous Mind\n- Range: Why Generalists triumph in a specialized world  - Range  - List of emotions  - The zone\n\n\n\n20\n15/12/2023\nFCOO03 Inserció Laboral, sensibilització medi ambiental igualtat de gènere   - Beyond SCRUM  - Recommended books  - Finance: basics  - Mental Energy: basics  ++ We face impediments to understand our client through iterations and goals. This understanding in key to decision making and finding out the proper balances:  (1) mindset: fixed, growth, survival  (2) anti-fragile and lateralization  (3) identity, change and moral emotions (status game and rider/elephant)  (4) productivity vs. creativity\n- SCRUM test  - Books  - Brain Energy  - The Compound Effect\n\n\n\n\n\n\n\n\n\n\nLegend\n\n\n\n\n- &gt; topic planned and done\n- done &gt; topic not done in class (pending)\n++ &gt; not-planned new topic\n\n\n\n\n\n\n\n\n  IFCD044 Docs \n\n\n\n  top \n\n\n\n IFCD044 Product Backlog",
-    "crumbs": [
-      "IFCD044 Docs",
-      "IFCD044 Sprint Backlog"
-    ]
+    "text": "Sprint#5: Team Dynamics & Before/Beyond SCRUM (December)\n\n\nSprint Backlog course December 2023 table\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#5\n16\n11/12/2023\n- Before SCRUM  - Team Dynamics: We are not Rationals   - Mindset: survival vs growth  ++ smarter not harder: decision making (0) the illusion of knowledge  (1) agile: impediments, iteration and grow +1%  (3) intuition & creativity\n- Before SCRUM  - The soviet union delusion  - Antifragile  - Mindset matters  - S&P 500: $100 in 1957 → $67,136.47 in 2023 / S&P-1 / S&P-2\n\n\n\n17\n12/12/2023\n- Emotions and Thoughts  - Moral Emotions and Rider/Elephant   - Team Dynamics: We are not Rationals  - What is the illusion of knowledge? There is a unique tool, master-key, to solve all questions: knowing everything  - Debate: the main source of knowledge acquisition\n- Team Dynamics  - The illusion of knowledge II  \n\n\n\n18\n13/12/2023\n- Emotions and Thoughts  - Moral Emotions and Rider/Elephant \nEmotions and Thoughts\n\n\n\n19\n14/12/2023\nFCOO03 Inserció Laboral, sensibilització medi ambiental igualtat de gènere   - Decision Making  ++ Steps to decision making:  (1) info, purpose, mental-energy  (2) place, time, ritual  (3) decision comes to you via intuition  ++ How to create your own Clear Thinking to make good decisions  (1) physical path: nutrition, exercise, stress, mental health  (2) own habits to create context where you make decisions: music, walk, sea or mountain, silence, shower  (3) learn to recognize intuition  - Book: Range & Generalists  - Books presentation: Focus, Master and his Emissary, The Righteous Mind\n- Range: Why Generalists triumph in a specialized world  - Range  - List of emotions  - The zone\n\n\n\n20\n15/12/2023\nFCOO03 Inserció Laboral, sensibilització medi ambiental igualtat de gènere   - Beyond SCRUM  - Recommended books  - Finance: basics  - Mental Energy: basics  ++ We face impediments to understand our client through iterations and goals. This understanding in key to decision making and finding out the proper balances:  (1) mindset: fixed, growth, survival  (2) anti-fragile and lateralization  (3) identity, change and moral emotions (status game and rider/elephant)  (4) productivity vs. creativity\n- SCRUM test  - Books  - Brain Energy  - The Compound Effect\n\n\n\n\n\n\n\n\n\n\nLegend\n\n\n\n\n- &gt; topic planned and done\n- done &gt; topic not done in class (pending)\n++ &gt; not-planned new topic\n\n\n\n\n\n\n\n\n  IFCD044 Docs \n\n\n\n  top \n\n\n\n IFCD044 Product Backlog"
   },
   {
     "objectID": "ifct034po/ifct034pobacklog-product.html",
@@ -8526,33 +8362,21 @@
     "href": "learning/learning-how-document.html",
     "title": "Document",
     "section": "",
-    "text": "Dilbert, by Scott Adams",
-    "crumbs": [
-      "Learning",
-      "Document"
-    ]
+    "text": "Dilbert, by Scott Adams"
   },
   {
     "objectID": "learning/learning-how-document.html#write",
     "href": "learning/learning-how-document.html#write",
     "title": "Document",
     "section": "1 Write",
-    "text": "1 Write\nBefore starting, write.",
-    "crumbs": [
-      "Learning",
-      "Document"
-    ]
+    "text": "1 Write\nBefore starting, write."
   },
   {
     "objectID": "learning/learning-how-document.html#some-ideas-about-documentation",
     "href": "learning/learning-how-document.html#some-ideas-about-documentation",
     "title": "Document",
     "section": "2 Some ideas about documentation",
-    "text": "2 Some ideas about documentation\n\n2.1 Start\nStart: always start. No matter what. Start small, if necessary. Start bad, if necessary. Start in a piece of paper, if necessary. But start.\n\n\n2.2 Document is paramount\nGood documentation is key: always apply pareto. Good documentation is the basis for everything: learning, coding, communicating and growing. No make a mistake: document is paramout.\n\n\n2.3 Make documenting easy\nChoose the right documentation tools: quarto\n\n\n2.4 It is an habit\nIt is an habit: make it a part of your culture, part of your code, part of your habits. So code and document. Document and code:\n\nTiming: learn the when. Document the right things at the right time is very relevant: it allow you to get in the documenting flow.\nWhen you hare happy with a nice solution: explain it to yourserlf and document.\nWhen you think it is a relevant knowledge: explain it to yourserlf and document.\nExplain the decision-making to get to that solution: explain the why. And how do you get there.\nRegarding that solution, that note, that writing with your context. Remember: Lateralization. Iterate.\nKeep it simple\n\n\n\n\n\n\n  Writing \n\n\n\n  top \n\n\n\n Comments",
-    "crumbs": [
-      "Learning",
-      "Document"
-    ]
+    "text": "2 Some ideas about documentation\n\n2.1 Start\nStart: always start. No matter what. Start small, if necessary. Start bad, if necessary. Start in a piece of paper, if necessary. But start.\n\n\n2.2 Document is paramount\nGood documentation is key: always apply pareto. Good documentation is the basis for everything: learning, coding, communicating and growing. No make a mistake: document is paramout.\n\n\n2.3 Make documenting easy\nChoose the right documentation tools: quarto\n\n\n2.4 It is an habit\nIt is an habit: make it a part of your culture, part of your code, part of your habits. So code and document. Document and code:\n\nTiming: learn the when. Document the right things at the right time is very relevant: it allow you to get in the documenting flow.\nWhen you hare happy with a nice solution: explain it to yourserlf and document.\nWhen you think it is a relevant knowledge: explain it to yourserlf and document.\nExplain the decision-making to get to that solution: explain the why. And how do you get there.\nRegarding that solution, that note, that writing with your context. Remember: Lateralization. Iterate.\nKeep it simple\n\n\n\n\n\n\n  Writing \n\n\n\n  top \n\n\n\n Comments"
   },
   {
     "objectID": "learning/learning-how-take-notes.html",
@@ -8570,55 +8394,35 @@
     "href": "learning/learning-how-write-comments.html",
     "title": "Comments",
     "section": "",
-    "text": "For each line, block of code, method, class, answer in a DIRECT, CLEAR style, no more than 3/5/10 words these three questions:\n\nWhat does this code do?\nFor what use/need/feature/operation is this code?\nHow does this code work, expression by expression?\n\n\n\n\n// find a comment within movie\n// to test a review: test Movie object creation\n// from movie object get Reviews list position 0 and get comment from Review\nString findMyComment = movie.getReviews().get(0).getComment();",
-    "crumbs": [
-      "Learning",
-      "Comments"
-    ]
+    "text": "For each line, block of code, method, class, answer in a DIRECT, CLEAR style, no more than 3/5/10 words these three questions:\n\nWhat does this code do?\nFor what use/need/feature/operation is this code?\nHow does this code work, expression by expression?\n\n\n\n\n// find a comment within movie\n// to test a review: test Movie object creation\n// from movie object get Reviews list position 0 and get comment from Review\nString findMyComment = movie.getReviews().get(0).getComment();"
   },
   {
     "objectID": "learning/learning-how-write-comments.html#overview",
     "href": "learning/learning-how-write-comments.html#overview",
     "title": "Comments",
     "section": "",
-    "text": "For each line, block of code, method, class, answer in a DIRECT, CLEAR style, no more than 3/5/10 words these three questions:\n\nWhat does this code do?\nFor what use/need/feature/operation is this code?\nHow does this code work, expression by expression?",
-    "crumbs": [
-      "Learning",
-      "Comments"
-    ]
+    "text": "For each line, block of code, method, class, answer in a DIRECT, CLEAR style, no more than 3/5/10 words these three questions:\n\nWhat does this code do?\nFor what use/need/feature/operation is this code?\nHow does this code work, expression by expression?"
   },
   {
     "objectID": "learning/learning-how-write-comments.html#example",
     "href": "learning/learning-how-write-comments.html#example",
     "title": "Comments",
     "section": "",
-    "text": "// find a comment within movie\n// to test a review: test Movie object creation\n// from movie object get Reviews list position 0 and get comment from Review\nString findMyComment = movie.getReviews().get(0).getComment();",
-    "crumbs": [
-      "Learning",
-      "Comments"
-    ]
+    "text": "// find a comment within movie\n// to test a review: test Movie object creation\n// from movie object get Reviews list position 0 and get comment from Review\nString findMyComment = movie.getReviews().get(0).getComment();"
   },
   {
     "objectID": "learning/learning-how-write-comments.html#commit",
     "href": "learning/learning-how-write-comments.html#commit",
     "title": "Comments",
     "section": "2.1 Commit",
-    "text": "2.1 Commit\n\n2.1.1 The commit type can include the following:\n\nfeat – a new feature is introduced with the changes\nfix – a bug fix has occurred\nchore – changes that do not relate to a fix or feature and don’t modify source or test files (for example updating dependencies)\nrefactor – refactored code that neither fixes a bug nor adds a feature\ndocs – updates to documentation such as a the README or other markdown files\nstyle – changes that do not affect the meaning of the code, likely related to code formatting such as white-space, missing semi-colons, and so on.\ntest – including new or correcting previous tests\nperf – performance improvements\nci – continuous integration related\nbuild – changes that affect the build system or external dependencies\nrevert – reverts a previous commit\n\n\n\n2.1.2 Style\nAnswer this questions in a DIRECT, CLEAR style, no more than 60 words. No ending in POINT, “.”\n\n\n2.1.3 Example commits\n\n#1 #feat: new css class to restyle\n#12 #chore: minor mistakes typos checked\n#33 #refactor: change components grid and names variables\n\n\n2.1.3.1 add BREAKING CHANGE OR MINOR CHANGE\n\nBREAKING CHANGE: a commit that has a BREAKING CHANGE:, or appends a ! after the type/scope, introduces a breaking API change (correlating with MAJOR in Semantic Versioning). A BREAKING CHANGE can be part of commits of any type.\n\n\n\n\n2.1.4 references\n\nurl: https://semver.org/ title: “Semantic Versioning 2.0.0” description: “Semantic Versioning spec and website” host: semver.org\n\n\nurl: https://commitizen-tools.github.io/commitizen title: “Commitizen” description: “commit rules, semantic version, conventional commits” host: commitizen-tools.github.io favicon: assets/images/favicon.png\n\n\nurl: https://www.conventionalcommits.org/en/v1.0.0/ title: “Conventional Commits” description: “A specification for adding human and machine readable meaning to commit messages” host: www.conventionalcommits.org",
-    "crumbs": [
-      "Learning",
-      "Comments"
-    ]
+    "text": "2.1 Commit\n\n2.1.1 The commit type can include the following:\n\nfeat – a new feature is introduced with the changes\nfix – a bug fix has occurred\nchore – changes that do not relate to a fix or feature and don’t modify source or test files (for example updating dependencies)\nrefactor – refactored code that neither fixes a bug nor adds a feature\ndocs – updates to documentation such as a the README or other markdown files\nstyle – changes that do not affect the meaning of the code, likely related to code formatting such as white-space, missing semi-colons, and so on.\ntest – including new or correcting previous tests\nperf – performance improvements\nci – continuous integration related\nbuild – changes that affect the build system or external dependencies\nrevert – reverts a previous commit\n\n\n\n2.1.2 Style\nAnswer this questions in a DIRECT, CLEAR style, no more than 60 words. No ending in POINT, “.”\n\n\n2.1.3 Example commits\n\n#1 #feat: new css class to restyle\n#12 #chore: minor mistakes typos checked\n#33 #refactor: change components grid and names variables\n\n\n2.1.3.1 add BREAKING CHANGE OR MINOR CHANGE\n\nBREAKING CHANGE: a commit that has a BREAKING CHANGE:, or appends a ! after the type/scope, introduces a breaking API change (correlating with MAJOR in Semantic Versioning). A BREAKING CHANGE can be part of commits of any type.\n\n\n\n\n2.1.4 references\n\nurl: https://semver.org/ title: “Semantic Versioning 2.0.0” description: “Semantic Versioning spec and website” host: semver.org\n\n\nurl: https://commitizen-tools.github.io/commitizen title: “Commitizen” description: “commit rules, semantic version, conventional commits” host: commitizen-tools.github.io favicon: assets/images/favicon.png\n\n\nurl: https://www.conventionalcommits.org/en/v1.0.0/ title: “Conventional Commits” description: “A specification for adding human and machine readable meaning to commit messages” host: www.conventionalcommits.org"
   },
   {
     "objectID": "learning/learning-how-write-comments.html#pull-request",
     "href": "learning/learning-how-write-comments.html#pull-request",
     "title": "Comments",
     "section": "2.2 Pull-request",
-    "text": "2.2 Pull-request\n\n\n\n\n\n  Taking Notes \n\n\n\n  top \n\n\n\n Auto-Evaluate",
-    "crumbs": [
-      "Learning",
-      "Comments"
-    ]
+    "text": "2.2 Pull-request\n\n\n\n\n\n  Taking Notes \n\n\n\n  top \n\n\n\n Auto-Evaluate"
   },
   {
     "objectID": "learning/learning-listing-card-articles.html",
@@ -11062,22 +10866,14 @@
     "href": "spring/spring-mvc.html",
     "title": "Spring MVC",
     "section": "",
-    "text": "Spring MVC\n\n\n\n\n\nSpring MVC Numbered\n\n\nThe Spring Web model-view-controller (MVC) framework is designed around a DispatcherServlet that dispatches requests to handlers, with configurable handler mappings, view resolution, locale and theme resolution as well as support for uploading files.\nThe default handler is based on the @Controller and @RequestMapping annotations, offering a wide range of flexible handling methods.\nWith the introduction of Spring 3.0, the @Controller mechanism also allows you to create RESTful Web sites and applications, through the @PathVariable annotation and other features.\n\n\n\n\n\n  Spring Framework \n\n\n\n  top \n\n\n\n Springs Servlets",
-    "crumbs": [
-      "Spring Legacy",
-      "Spring MVC"
-    ]
+    "text": "Spring MVC\n\n\n\n\nSpring MVC Numbered\n\nThe Spring Web model-view-controller (MVC) framework is designed around a DispatcherServlet that dispatches requests to handlers, with configurable handler mappings, view resolution, locale and theme resolution as well as support for uploading files.\nThe default handler is based on the @Controller and @RequestMapping annotations, offering a wide range of flexible handling methods.\nWith the introduction of Spring 3.0, the @Controller mechanism also allows you to create RESTful Web sites and applications, through the @PathVariable annotation and other features.\n\n\n\n\n\n  Spring Framework \n\n\n\n  top \n\n\n\n Springs Servlets"
   },
   {
     "objectID": "spring/spring-mvc.html#overview",
     "href": "spring/spring-mvc.html#overview",
     "title": "Spring MVC",
     "section": "",
-    "text": "Spring MVC\n\n\n\n\n\nSpring MVC Numbered\n\n\nThe Spring Web model-view-controller (MVC) framework is designed around a DispatcherServlet that dispatches requests to handlers, with configurable handler mappings, view resolution, locale and theme resolution as well as support for uploading files.\nThe default handler is based on the @Controller and @RequestMapping annotations, offering a wide range of flexible handling methods.\nWith the introduction of Spring 3.0, the @Controller mechanism also allows you to create RESTful Web sites and applications, through the @PathVariable annotation and other features.\n\n\n\n\n\n  Spring Framework \n\n\n\n  top \n\n\n\n Springs Servlets",
-    "crumbs": [
-      "Spring Legacy",
-      "Spring MVC"
-    ]
+    "text": "Spring MVC\n\n\n\n\nSpring MVC Numbered\n\nThe Spring Web model-view-controller (MVC) framework is designed around a DispatcherServlet that dispatches requests to handlers, with configurable handler mappings, view resolution, locale and theme resolution as well as support for uploading files.\nThe default handler is based on the @Controller and @RequestMapping annotations, offering a wide range of flexible handling methods.\nWith the introduction of Spring 3.0, the @Controller mechanism also allows you to create RESTful Web sites and applications, through the @PathVariable annotation and other features.\n\n\n\n\n\n  Spring Framework \n\n\n\n  top \n\n\n\n Springs Servlets"
   },
   {
     "objectID": "springboot/boot-concepts-annotations.html",
@@ -11425,33 +11221,21 @@
     "href": "springboot/boot-what-basics.html",
     "title": "Spring Boot: fundamentals",
     "section": "",
-    "text": "📘 Spring Boot\nWhat?\nJava Spring Framework (Spring Framework) is a popular, open source, enterprise-level framework for creating standalone, production-grade applications that run on the Java Virtual Machine (JVM).\nWhy?\nSpring makes programming Java quicker, easier, and safer for everybody.\nSpring’s focus on speed, simplicity, and productivity has made it the world’s most popular Java framework.\nSpring Boot provides a set of pre-configured options and defaults, as well as a set of tools for quickly creating and running an application .\nSpring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can just run.\nWe take an opinionated view of the Spring platform and third-party libraries so you can get started with minimum fuss. Most Spring Boot applications need minimal Spring configuration.\nIf you’re looking for information about a specific version, or instructions about how to upgrade from an earlier release, check out the project release notes section on the wiki.",
-    "crumbs": [
-      "Spring Boot Basics",
-      "Spring Boot: fundamentals"
-    ]
+    "text": "📘 Spring Boot\nWhat?\nJava Spring Framework (Spring Framework) is a popular, open source, enterprise-level framework for creating standalone, production-grade applications that run on the Java Virtual Machine (JVM).\nWhy?\nSpring makes programming Java quicker, easier, and safer for everybody.\nSpring’s focus on speed, simplicity, and productivity has made it the world’s most popular Java framework.\nSpring Boot provides a set of pre-configured options and defaults, as well as a set of tools for quickly creating and running an application .\nSpring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can just run.\nWe take an opinionated view of the Spring platform and third-party libraries so you can get started with minimum fuss. Most Spring Boot applications need minimal Spring configuration.\nIf you’re looking for information about a specific version, or instructions about how to upgrade from an earlier release, check out the project release notes section on the wiki."
   },
   {
     "objectID": "springboot/boot-what-basics.html#basic-concepts",
     "href": "springboot/boot-what-basics.html#basic-concepts",
     "title": "Spring Boot: fundamentals",
     "section": "1 Basic Concepts",
-    "text": "1 Basic Concepts\nSpring Boot is a framework for building applications based on the Spring Framework. It aims to simplify the development process by providing a set of pre-configured options and defaults, as well as a set of tools for quickly creating and running an application. Some key concepts of Spring Boot include:\n\nAuto-configuration: Spring Boot automatically configures your application based on the dependencies that you have added, eliminating the need for manual configuration.\nStarters: Spring Boot provides a set of “starters” that are pre-configured dependencies for common functionality, such as web development, data access, and security.\nActuator: Spring Boot includes an “Actuator” that provides endpoints for monitoring and managing your application, such as health checks, metrics, and trace information.\nCommand Line Interface: Spring Boot provides a command line interface (CLI) for quickly creating and running applications.\nSpring Initializer: Spring Initializer is a web service that provides a simple way to generate a basic structure for a Spring Boot application.\n\nAll of these concepts are designed to make it easy to build and run a Spring-based application, with minimal configuration and setup required.",
-    "crumbs": [
-      "Spring Boot Basics",
-      "Spring Boot: fundamentals"
-    ]
+    "text": "1 Basic Concepts\nSpring Boot is a framework for building applications based on the Spring Framework. It aims to simplify the development process by providing a set of pre-configured options and defaults, as well as a set of tools for quickly creating and running an application. Some key concepts of Spring Boot include:\n\nAuto-configuration: Spring Boot automatically configures your application based on the dependencies that you have added, eliminating the need for manual configuration.\nStarters: Spring Boot provides a set of “starters” that are pre-configured dependencies for common functionality, such as web development, data access, and security.\nActuator: Spring Boot includes an “Actuator” that provides endpoints for monitoring and managing your application, such as health checks, metrics, and trace information.\nCommand Line Interface: Spring Boot provides a command line interface (CLI) for quickly creating and running applications.\nSpring Initializer: Spring Initializer is a web service that provides a simple way to generate a basic structure for a Spring Boot application.\n\nAll of these concepts are designed to make it easy to build and run a Spring-based application, with minimal configuration and setup required."
   },
   {
     "objectID": "springboot/boot-what-basics.html#fundamentals",
     "href": "springboot/boot-what-basics.html#fundamentals",
     "title": "Spring Boot: fundamentals",
     "section": "2 Fundamentals",
-    "text": "2 Fundamentals\n\n\n\nSpring Boot\n\n\nSpring Boot is built on top of the Spring Framework, which is a Java-based framework for building enterprise applications. Some of the key concepts of Spring Boot and how it functions include:\n\nBeans: In Spring, a bean is a Java object that is managed by the Spring container. Beans are typically defined in configuration files, and the Spring container is responsible for instantiating, configuring, and managing the lifecycle of these beans.\nDependency Injection: Spring uses dependency injection to manage the dependencies between beans. This means that instead of instantiating and configuring dependencies manually, you can use annotations or configuration files to tell the Spring container which dependencies a bean has and how they should be instantiated.\nObject-Oriented Programming: Spring is based on object-oriented programming principles, and it uses interfaces and inheritance to create a modular and reusable codebase.\nAspect-Oriented Programming: Spring also provides support for Aspect-Oriented Programming (AOP), which allows you to separate cross-cutting concerns such as logging, security, and transaction management from the core business logic of your application.\nData Access: Spring Boot provides a set of starters and libraries for connecting to databases and performing data access operations. It also provides support for Object-Relational Mapping (ORM) frameworks such as Hibernate and JPA.\nWeb Development: Spring Boot provides a set of starters and libraries for building web applications and RESTful web services. It also provides support for web technologies such as Spring MVC and Thymeleaf.\nAnnotations: Spring Boot uses annotations extensively to configure beans and manage dependencies. Understanding the different annotations available in Spring, such as @Bean, @Autowired, and @Component, can help you effectively use the framework.\nMVC (Model-View-Controller): Spring Boot provides support for the MVC architectural pattern, which separates the application into three layers: the model (data), the view (presentation), and the controller (logic). Understanding how MVC works in Spring Boot can help you structure your application effectively.\nREST (Representational State Transfer): Spring Boot provides support for building RESTful web services. Understanding the principles of REST and how to create RESTful web services using Spring Boot can help you effectively use the framework.\n\nOverall, Spring Boot functions by providing a set of pre-configured options and defaults, as well as a set of tools for quickly creating and running an application using the Spring Framework.\nIt uses concepts such as beans, dependency injection, and OOP to make it easy to build and run a Spring-based application, with minimal configuration and setup required.\n\n\n\n\n\n  Springs Servlets \n\n\n\n  top \n\n\n\n Spring Boot: create a Project",
-    "crumbs": [
-      "Spring Boot Basics",
-      "Spring Boot: fundamentals"
-    ]
+    "text": "2 Fundamentals\n\n\n\nSpring Boot\n\n\nSpring Boot is built on top of the Spring Framework, which is a Java-based framework for building enterprise applications. Some of the key concepts of Spring Boot and how it functions include:\n\nBeans: In Spring, a bean is a Java object that is managed by the Spring container. Beans are typically defined in configuration files, and the Spring container is responsible for instantiating, configuring, and managing the lifecycle of these beans.\nDependency Injection: Spring uses dependency injection to manage the dependencies between beans. This means that instead of instantiating and configuring dependencies manually, you can use annotations or configuration files to tell the Spring container which dependencies a bean has and how they should be instantiated.\nObject-Oriented Programming: Spring is based on object-oriented programming principles, and it uses interfaces and inheritance to create a modular and reusable codebase.\nAspect-Oriented Programming: Spring also provides support for Aspect-Oriented Programming (AOP), which allows you to separate cross-cutting concerns such as logging, security, and transaction management from the core business logic of your application.\nData Access: Spring Boot provides a set of starters and libraries for connecting to databases and performing data access operations. It also provides support for Object-Relational Mapping (ORM) frameworks such as Hibernate and JPA.\nWeb Development: Spring Boot provides a set of starters and libraries for building web applications and RESTful web services. It also provides support for web technologies such as Spring MVC and Thymeleaf.\nAnnotations: Spring Boot uses annotations extensively to configure beans and manage dependencies. Understanding the different annotations available in Spring, such as @Bean, @Autowired, and @Component, can help you effectively use the framework.\nMVC (Model-View-Controller): Spring Boot provides support for the MVC architectural pattern, which separates the application into three layers: the model (data), the view (presentation), and the controller (logic). Understanding how MVC works in Spring Boot can help you structure your application effectively.\nREST (Representational State Transfer): Spring Boot provides support for building RESTful web services. Understanding the principles of REST and how to create RESTful web services using Spring Boot can help you effectively use the framework.\n\nOverall, Spring Boot functions by providing a set of pre-configured options and defaults, as well as a set of tools for quickly creating and running an application using the Spring Framework.\nIt uses concepts such as beans, dependency injection, and OOP to make it easy to build and run a Spring-based application, with minimal configuration and setup required.\n\n\n\n\n\n  Springs Servlets \n\n\n\n  top \n\n\n\n Spring Boot: create a Project"
   },
   {
     "objectID": "springboot/boot-what-create.html",
@@ -12235,11 +12019,7 @@
     "href": "ifcd0210-24/ifcd0210backlog-sprint-24.html#sprint2-git-uml-january-2024",
     "title": "IFCD0210 Sprint Backlog",
     "section": "Sprint#2: Git-UML (January 2024)",
-    "text": "Sprint#2: Git-UML (January 2024)\n\n\nBacklog Sprint#1 January 2024\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#2\n4\n08/01/2024\n- Linux  - Bash\n\n\n\n\n5\n09/01/2024\n- Git  - Quarto\n\n\n\n\n6\n11/01/2024\n- UML\n\n\n\n\n7\n12/01/2024\n- UML\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\n- topic planned or pending\n+ topic done in class\n++ new topic not planned\n\n\n\n\n\n\n\n\n  IFCD0210 Deliveries \n\n\n\n  top \n\n\n\n IFCD0210 Product Backlog",
-    "crumbs": [
-      "IFCD0210-24 Docs",
-      "IFCD0210 Sprint Backlog"
-    ]
+    "text": "Sprint#2: Git-UML (January 2024)\n\n\nBacklog Sprint#1 January 2024\n\n\n\n\n\n\n\n\n\nSprint\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#2\n4\n08/01/2024\n- Linux   - Bash   - Time Management categories:  (1) Mindset/Grow  (2) Execution/Code-Algorithm  (3) Architecture/Programming  (4) Learning/A-Ha-Moment  (5) Personal/Path  - 4 cognitive tempos: Plan - Execute - Revision - Reflection  How does brain learn? Picnic &gt; Mechanism &gt; Consolidate  - Intro API Rest\n- Simple, complicate, complex problem    - Api Rest\n\n\n\n5\n09/01/2024\n- Git  - Quarto  - Intro Architecture: request response cycle, SPA & Server-side rendering, JPA  Time Management Tasks:  (1) Mooc  (2) Notes / Documentation / Reading / Prepare classes & lessons / Vocabulary  (3) Architecture / UML / Domains  (4) Personal Project  (5) Linux Devops  (6) Timetable  - Linux install soft: apt / snap / software manager  Homework: request/response cycle, MVC, SPA versus server-side rendering\n- Request Response Cycle  - MVC    - Spring Boot flow\n\n\n\n6\n11/01/2024\n- UML\n- UML\n\n\n\n7\n12/01/2024\n- UML\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\n- topic planned or pending\n+ topic done in class\n++ new topic not planned\n\n\n\n\n\n\n\n\n  IFCD0210 Deliveries \n\n\n\n  top \n\n\n\n IFCD0210 Product Backlog"
   },
   {
     "objectID": "linux/linux-distros-mint.html#references",
@@ -12251,5 +12031,26 @@
       "Linux: distros",
       "Linux Distros: Mint"
     ]
+  },
+  {
+    "objectID": "learning/learning-how-auto-evaluate.html#purpose",
+    "href": "learning/learning-how-auto-evaluate.html#purpose",
+    "title": "Auto-Evaluate",
+    "section": "",
+    "text": "Students themselves provide feedback to one another, while the instructor focuses on more targeted guidance toward a learning outcome. The key for successful peer feedback is a constructive, honest environment in which students feel safe to share honest, yet helpful criticism. Through peer evaluation, students ultimately learn to better self-assess themselves, a skill which pay dividends throughout their academic and professional career. As additional benefits of peer evaluation, students learn to:\n\napply course concepts and skills to solving problems\ncollaborate with others towards a common goal\nexamine diverse perspectives and ideas\nassume greater responsibility in the learning process\napply (and possibly create) objective criteria to judge the quality of a task or performance\n\nPeer evaluations also resolve the “free rider” problem with group work, that is, the tendency of students to rely on team members to take the initiative in completing group assignments or tasks.\nBy adding an element of accountability and critical review, students will more likely exert effort to ensure a positive review from their peers (and create a good impression)."
+  },
+  {
+    "objectID": "learning/learning-how-auto-evaluate.html#tips-to-implement-effectively",
+    "href": "learning/learning-how-auto-evaluate.html#tips-to-implement-effectively",
+    "title": "Auto-Evaluate",
+    "section": "",
+    "text": "To implement an effective peer evaluation, students must fully understand expectations in advance. Set clear goals and expectations for the process.\nA detailed rubric or checklist is critical to ensure evaluations are respectful, constructive and helpful.\nTo avoid emotional complications and hurt feelings, provide examples of effective evaluations/reviews. Be sure to emphasize as required characteristics that evaluations be respectful, constructive and helpful.\nTo encourage self-direction and responsibility, allow students to create their own rubrics or checklists (though you should still approve prior to use as an actual assessment tool).\nAllow students to practice peer evaluations, preferably in the form of a self-assessment or a peer review for a low-stakes activity (e.g. class or online discussion)."
+  },
+  {
+    "objectID": "learning/learning-how-auto-evaluate.html#peer-evaluation-1",
+    "href": "learning/learning-how-auto-evaluate.html#peer-evaluation-1",
+    "title": "Auto-Evaluate",
+    "section": "",
+    "text": "Related to self-assessment, peer evaluation encourages students to critically examine the work of peers, and reflect on the meaning of quality work in general, especially when consulting a detailed rubric or checklist as a guide."
   }
 ]
