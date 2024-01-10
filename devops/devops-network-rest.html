@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -44,6 +78,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -72,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 
 <div id="quarto-search-results"></div>
@@ -1643,12 +1680,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
+  <li><a href="#what-is-api-rest" id="toc-what-is-api-rest" class="nav-link active" data-scroll-target="#what-is-api-rest"><span class="header-section-number">1</span> What is API Rest</a>
+  <ul>
+  <li><a href="#api-rest-examples" id="toc-api-rest-examples" class="nav-link" data-scroll-target="#api-rest-examples"><span class="header-section-number">1.1</span> API Rest examples</a></li>
+  </ul></li>
+  <li><a href="#rest-api-basics" id="toc-rest-api-basics" class="nav-link" data-scroll-target="#rest-api-basics"><span class="header-section-number">2</span> REST API Basics</a></li>
+  <li><a href="#building-a-restful-api" id="toc-building-a-restful-api" class="nav-link" data-scroll-target="#building-a-restful-api"><span class="header-section-number">3</span> Building a RESTful API</a></li>
+  <li><a href="#consuming-a-restful-api" id="toc-consuming-a-restful-api" class="nav-link" data-scroll-target="#consuming-a-restful-api"><span class="header-section-number">4</span> Consuming a RESTful API</a></li>
+  <li><a href="#json-javascript-object-notation" id="toc-json-javascript-object-notation" class="nav-link" data-scroll-target="#json-javascript-object-notation"><span class="header-section-number">5</span> JSON: JavaScript Object Notation</a>
+  <ul>
+  <li><a href="#key-characteristics" id="toc-key-characteristics" class="nav-link" data-scroll-target="#key-characteristics"><span class="header-section-number">5.1</span> Key Characteristics</a></li>
+  </ul></li>
+  <li><a href="#http-status-messages" id="toc-http-status-messages" class="nav-link" data-scroll-target="#http-status-messages"><span class="header-section-number">6</span> HTTP status messages</a></li>
+  <li><a href="#improving-rest-api-performance-and-efficiency" id="toc-improving-rest-api-performance-and-efficiency" class="nav-link" data-scroll-target="#improving-rest-api-performance-and-efficiency"><span class="header-section-number">7</span> Improving REST API Performance and Efficiency</a></li>
+  <li><a href="#mindmap" id="toc-mindmap" class="nav-link" data-scroll-target="#mindmap"><span class="header-section-number">8</span> MindMap</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">9</span> Resources</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/devops/devops-network-rest.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -1696,8 +1747,264 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="overview" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
+<div class="summary">
+<p><strong>REST (Representational State Transfer)</strong></p>
+<p><code>Rest</code> is an architectural style for building web services.</p>
+<p>It is based on a <strong>client-server</strong> model, where a client sends a <code>request</code> to a server and the server sends a <code>response</code>.</p>
+<p>RESTful APIs use HTTP requests to POST (create), PUT (update), GET (read), and DELETE (delete) data.</p>
+<p>A RESTful API is a simple, consistent, and easy-to-use way for applications to communicate with each other over the internet.</p>
+</div>
+<section id="what-is-api-rest" class="level1 page-columns page-full" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> What is API Rest</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/javase/apirest.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="..\images/javase/apirest.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+</figure>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>In other words, if you want to interact with a computer or system to retrieve information or perform a function, an API helps you communicate what you want to that system so it can understand and fulfill the request.</p>
+</div><div class="">
+<p>Image from: <a href="https://blog.bytebytego.com/p/why-is-restful-api-so-popular" class="external">Why is RESTful API so popular?</a></p>
+</div></div>
+<p><a href="https://www.redhat.com/en/topics/api/what-is-a-rest-api" class="external">An API is a set of definitions and protocols</a> for building and integrating application software.</p>
+<p>It’s sometimes referred to as a <strong>contract</strong> between an <strong>information provider</strong> and an <strong>information user</strong>.</p>
+<p>This contract (API Rest <em>style</em>) establishing the content required from the consumer (the call) and the content required by the producer (the response).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For example, the API design for a weather service could specify that the user supply a zip code and that the producer reply with a 2-part answer, the first being the high temperature, and the second being the low.</p>
+</div>
+</div>
+<section id="api-rest-examples" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="api-rest-examples"><span class="header-section-number">1.1</span> API Rest examples</h2>
+<details>
+<summary>
+API Rest Big Tech
+</summary>
+<p>There are many examples of APIs, but here are a few common ones:</p>
+<ul>
+<li><p><strong>Google Maps API</strong>: allows developers to integrate Google Maps functionality into their own applications, such as displaying maps, getting directions, and searching for places.</p></li>
+<li><p><strong>Twitter API</strong>: allows developers to access and interact with tweets, as well as post new tweets, through their own applications.</p></li>
+<li><p><strong>Facebook API</strong>: allows developers to access and interact with user data, such as posts, photos, and friends, as well as post new content, through their own applications.</p></li>
+<li><p><strong>Stripe API</strong>: allows developers to integrate Stripe’s payment functionality into their own applications, such as processing payments and managing subscriptions.</p></li>
+<li><p><strong>OpenWeather API</strong>: allows developers to access current weather data, as well as forecast, historical data and more for any location on Earth.</p></li>
+<li><p><strong>NASA API</strong>: allows developers to access and interact with various datasets from NASA, such as images, videos, and information about space missions and celestial bodies.</p></li>
+</ul>
+</details>
+<details>
+<summary>
+Example: open weather map London
+</summary>
+<p>One example of a public API with a URL that can be used to access data is the <strong>OpenWeather API.</strong></p>
+<p>You can access current weather data for a specific location by making a GET request to the following URL:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1"></a>http://api.openweathermap.org/data/2.5/weather?q={city name}<span class="er">&amp;</span>appid={your api key}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You need to replace <code>{city name}</code> with the name of the city you want to get weather data for and <code>{your api key}</code> with <strong>your own API key</strong>, which you <strong>can get by signing up for a free account on the OpenWeather website.</strong></p>
+<p>For example, if you want to get the current weather data for <strong>London</strong>, you would make a <code>GET</code> <code>request</code> to the following URL:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1"></a>http://api.openweathermap.org/data/2.5/weather?q=London<span class="er">&amp;</span>appid={your api key}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It will return a <code>JSON</code> object with various information such as temperature, humidity, wind, etc.</p>
+</details>
+<details>
+<summary>
+Example: Nasa Mars
+</summary>
+<p><strong>NASA</strong> has several APIs available for developers to access and interact with various datasets, such as images, videos, and information about space missions and celestial bodies.</p>
+<blockquote class="blockquote">
+<p>One example of a NASA API is the NASA Image and Video Library API, which allows you to access NASA’s media assets, including images, videos, and audio files.</p>
+</blockquote>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1"></a>https://images-api.nasa.gov/search?q={your search term}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can access the NASA Image and Video Library API by making a GET request to the following URL:</p>
+</div>
+</div>
+<p>For example, if you want to search for <strong>images of the planet Mars</strong>, you would make a GET request to the following URL:</p>
+<p><a href="https://images-api.nasa.gov/search?q=mars" class="external">Nasa API for Mars</a></p>
+This will return a <code>JSON</code> object with a list of assets, including links to the images and other information such as title and description.
+</details>
+<details>
+<summary>
+Free Open APIs
+</summary>
+<ul>
+<li><a href="https://mixedanalytics.com/blog/list-actually-free-open-no-auth-needed-apis/" class="external">Big List of Free Open APIs</a></li>
+<li>To create integrations, retpythoncom/collection/list-of-free-apis){.external}</li>
+<li>This is a collection of different REST APIs that are completley public and do not require any authentication, making it easier for consumers to play with and understand what APIs are all about by seeing the many different ways in which APIs can be used: <a href="https://documenter.getpostman.com/view/8854915/Szf7znEe" class="external">Public REST APIs</a></li>
+<li>Get a list of universities in a specified country: <a href="http://universities.hipolabs.com/search?country=United+States" class="external">Universities List</a></li>
+<li>Free API – Huge List of Public APIs For Testing [No Key]: <a href="https://apipheny.io/free-api/" class="external">Free APIs You Can Use for Testing</a></li>
+</ul>
+</details>
+</section>
+</section>
+<section id="rest-api-basics" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> REST API Basics</h1>
+<p><mark>A REST API, or Representational State Transfer Application Programming Interface, is a set of rules and conventions for building and interacting with web services</mark>. It follows a stateless client-server architecture, where the client and server communicate over HTTP (Hypertext Transfer Protocol). Let’s break down the key concepts of REST API.</p>
+<ol type="1">
+<li><p><strong>Resources:</strong> At the core of REST API design are resources, which represent entities or objects in the system. These resources are identified by URIs (Uniform Resource Identifiers). For example, consider a simple blogging platform. Each blog post, user, or comment could be a resource with a unique URI like <code>/posts</code>, <code>/users</code>, and <code>/comments</code>.</p></li>
+<li><p><strong>HTTP Methods:</strong> RESTful APIs use standard HTTP methods to perform operations on resources. The most common methods are:</p>
+<ul>
+<li><strong>GET:</strong> Retrieve a resource’s representation.</li>
+<li><strong>POST:</strong> Create a new resource.</li>
+<li><strong>PUT:</strong> Update an existing resource.</li>
+<li><strong>DELETE:</strong> Remove a resource.</li>
+</ul>
+<p>In our blogging platform example, a <code>GET</code> request to <code>/posts</code> might retrieve all blog posts, while a <code>POST</code> request to <code>/posts</code> would create a new post.</p></li>
+<li><p><strong>Representations:</strong> Resources are <a href="https://jsoncrack.com/editor" class="external">represented in different formats, such as JSON</a> or XML. This allows clients and servers to exchange data in a standardized way. For instance, when retrieving a blog post, the server might respond with a JSON representation containing the post’s title, content, and author.</p>
+<a href="../images/devops/json-structure.png" class="lightbox" title="JSON structure" data-gallery="quarto-lightbox-gallery-2"><img src="..\images/devops/json-structure.png" class="img-fluid" style="width:60.0%" alt="JSON structure"></a></li>
+</ol>
+<ul>
+<li><a href="https://jsoncrack.com/editor" class="external">JSON crack</a></li>
+</ul>
+</section>
+<section id="building-a-restful-api" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Building a RESTful API</h1>
+<p>Now that we understand the basics, let’s explore how to create a simple RESTful API. We’ll use a hypothetical task management system as an example.</p>
+<ol type="1">
+<li><p><strong>Define Resources:</strong> Identify the main resources in your system. In our case, it could be tasks. Each task might have attributes like <code>id</code>, <code>title</code>, <code>description</code>, <code>status</code>, and <code>due_date</code>.</p></li>
+<li><p><strong>Create Endpoints:</strong> Design URIs for each resource and associate them with specific HTTP methods. For tasks, we could have:</p>
+<ul>
+<li><code>GET /tasks</code>: Retrieve all tasks.</li>
+<li><code>GET /tasks/{id}</code>: Retrieve a specific task.</li>
+<li><code>POST /tasks</code>: Create a new task.</li>
+<li><code>PUT /tasks/{id}</code>: Update a task.</li>
+<li><code>DELETE /tasks/{id}</code>: Delete a task.</li>
+</ul></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/devops/what-is-uri.png" class="lightbox" title="What is an URL/URI" data-gallery="quarto-lightbox-gallery-3"><img src="..\images/devops/what-is-uri.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<figcaption class="figure-caption">What is an URL/URI</figcaption>
+</figure>
+</div>
+<ol start="3" type="1">
+<li><strong>Implement CRUD Operations:</strong> Write the server-side logic to handle CRUD operations. Using a programming language and a framework (like Flask for Python or Express for Node.js), you can define functions for each endpoint to perform actions such as querying the database, creating, updating, or deleting tasks.</li>
+</ol>
+</section>
+<section id="consuming-a-restful-api" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Consuming a RESTful API</h1>
+<p>With our RESTful API in place, let’s see how a client can interact with it.</p>
+<ol type="1">
+<li><p><strong>Make HTTP Requests:</strong> Clients, which can be web applications, mobile apps, or other servers, interact with the API by making HTTP requests. For instance, a <code>GET</code> request to <code>/tasks</code> would retrieve a list of tasks.</p></li>
+<li><p><strong>Handling Responses:</strong> Clients receive responses in the form of representations, typically in JSON. They parse these representations to extract relevant data. If a client requests a task, it might receive a JSON object with details like title, description, and status.</p></li>
+<li><p><strong>Authentication and Authorization:</strong> Secure your API by implementing authentication and authorization mechanisms. This ensures that only authorized users can access certain resources or perform specific operations. Common authentication methods include API keys, OAuth, or token-based authentication.</p></li>
+</ol>
+</section>
+<section id="json-javascript-object-notation" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> JSON: JavaScript Object Notation</h1>
+<p>JSON, or JavaScript Object Notation, is a lightweight data interchange format. It is easy for humans to read and write, and easy for machines to parse and generate. JSON is often used for data exchange between a server and a web application, as well as for configuration files.</p>
+<section id="key-characteristics" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="key-characteristics"><span class="header-section-number">5.1</span> Key Characteristics</h2>
+<p><strong>Data Structure:</strong> JSON represents data as key-value pairs, similar to objects in programming languages. For example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"John Doe"</span><span class="fu">,</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">30</span><span class="fu">,</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="dt">"city"</span><span class="fu">:</span> <span class="st">"New York"</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Syntax</strong></p>
+<ul>
+<li>Uses curly braces {} to define objects.</li>
+<li>Key and value pairs are separated by a colon :.</li>
+<li>Items in an object are separated by commas.</li>
+</ul>
+<p><strong>Data Types</strong></p>
+<p>Supports basic data types like strings, numbers, booleans, arrays, objects, and null.</p>
+<p>Example Array:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">{</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="dt">"fruits"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"apple"</span><span class="ot">,</span> <span class="st">"banana"</span><span class="ot">,</span> <span class="st">"orange"</span><span class="ot">]</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="http-status-messages" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> HTTP status messages</h1>
+<ul>
+<li><a href="https://www.w3schools.com/tags/ref_httpmessages.asp" class="external">HTTP status messages</a></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/httpstatus.png" class="lightbox" title="HTTP status messages poster" data-gallery="quarto-lightbox-gallery-4"><img src="..\images/springboot/httpstatus.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
+<figcaption class="figure-caption">HTTP status messages poster</figcaption>
+</figure>
+</div>
+<p><a href="https://www.steveschoger.com/status-code-poster/" class="external">Source-status-code-poster by Steve Schoger</a></p>
+</section>
+<section id="improving-rest-api-performance-and-efficiency" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Improving REST API Performance and Efficiency</h1>
+<p>When building and optimizing a REST API, several strategies can enhance its performance, scalability, and user experience. Here are key considerations implemented in modern APIs:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/devops/apir-rest-improving.png" class="lightbox" title="How to improve API performance?" data-gallery="quarto-lightbox-gallery-5"><img src="..\images/devops/apir-rest-improving.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<figcaption class="figure-caption">How to improve API performance?</figcaption>
+</figure>
+</div>
+<p><strong>Pagination</strong></p>
+<p>Pagination is crucial for managing large datasets efficiently. By limiting the number of results in each API response and providing links or metadata for navigating to the next set of results, pagination improves response times and reduces the load on both the server and client.</p>
+<p>Example Pagination Response:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">{</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="dt">"data"</span><span class="fu">:</span> <span class="ot">[</span><span class="er">...</span><span class="ot">]</span><span class="fu">,</span> <span class="er">//</span> <span class="er">Current</span> <span class="er">set</span> <span class="er">of</span> <span class="er">results</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="dt">"next_page"</span><span class="fu">:</span> <span class="st">"/api/posts?page=2"</span><span class="fu">,</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="dt">"total_pages"</span><span class="fu">:</span> <span class="dv">5</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Asynchronous Logging</strong></p>
+<p>To avoid performance bottlenecks caused by synchronous logging, implementing asynchronous logging allows the API to log events without waiting for a response. This ensures that log entries do not impact the API’s response time, providing a more responsive experience.</p>
+<p>Example Asynchronous Logging:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">import</span> logging</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="im">from</span> concurrent.futures <span class="im">import</span> ThreadPoolExecutor</span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a>logger <span class="op">=</span> logging.getLogger(<span class="va">__name__</span>)</span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">def</span> log_event_async(event):</span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="cf">with</span> ThreadPoolExecutor() <span class="im">as</span> executor:</span>
+<span id="cb7-8"><a href="#cb7-8"></a>        executor.submit(logger.info, event)</span>
+<span id="cb7-9"><a href="#cb7-9"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Caching</strong></p>
+<p>Caching frequently requested data can significantly reduce response times. By storing and serving previously generated responses, caching minimizes redundant computations, enhancing the API’s overall efficiency.</p>
+<p>Example Caching Header:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource http number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a href="#cb8-1"></a>Cache-Control: max-age=3600, public</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Payload Compression</strong></p>
+<p>Compressing API payloads before transmission reduces bandwidth usage and speeds up data transfer. Popular compression algorithms like GZIP or Brotli can be utilized to minimize the size of JSON responses.</p>
+<p>Example Payload Compression Header:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource http number-lines code-with-copy"><code class="sourceCode"><span id="cb9-1"><a href="#cb9-1"></a>Content-Encoding: gzip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Connection Pooling</strong></p>
+<p>Managing database connections efficiently is critical for API performance. Connection pooling allows the API to reuse existing database connections, minimizing the overhead of opening and closing connections for each request.</p>
+<p>Example Connection Pooling (Python with SQLAlchemy):</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="im">from</span> sqlalchemy <span class="im">import</span> create_engine, pool</span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a>engine <span class="op">=</span> create_engine(<span class="st">'database://'</span>, pool_size<span class="op">=</span><span class="dv">20</span>, max_overflow<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="mindmap" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> MindMap</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/devops/REST-API-Mindmap.png" class="lightbox" title="Rest API Mindmap" data-gallery="quarto-lightbox-gallery-6"><img src="..\images/devops/REST-API-Mindmap.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">Rest API Mindmap</figcaption>
+</figure>
+</div>
+</section>
+<section id="resources" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Resources</h1>
+<ul>
+<li><a href="../markup/markup-quarto-api-rest.html">Quarto Markdown: api rest call</a></li>
+<li><a href="../markup/markup-quarto-api-rest-v2.html">Quarto Markdown: OJS Cells</a></li>
+<li><a href="../springboot/boot-concepts-rest.html">Spring Boot: Rest</a></li>
+<li><a href="../reactjs/rjslab1.html">Lab#RE01-1: API Rest Axios</a></li>
+<li><a href="https://www.redhat.com/architect/apis-soap-rest-graphql-grpc" class="external">An architect’s guide to APIs: SOAP, REST, GraphQL, and gRPC</a></li>
+<li><a href="https://blog.postman.com/different-types-of-apis/" class="external">A guide to the different types of APIs</a></li>
+</ul>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -2091,6 +2398,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":true});</script>
 
 
 

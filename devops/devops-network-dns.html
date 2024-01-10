@@ -1643,7 +1643,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> OVerview</a></li>
+  <li><a href="#domain-name-system-dns-in-networking" id="toc-domain-name-system-dns-in-networking" class="nav-link active" data-scroll-target="#domain-name-system-dns-in-networking"><span class="header-section-number">1</span> Domain Name System (DNS) in Networking</a>
+  <ul>
+  <li><a href="#structure-and-hierarchy" id="toc-structure-and-hierarchy" class="nav-link" data-scroll-target="#structure-and-hierarchy"><span class="header-section-number">1.1</span> Structure and Hierarchy</a></li>
+  <li><a href="#dns-resolution-process" id="toc-dns-resolution-process" class="nav-link" data-scroll-target="#dns-resolution-process"><span class="header-section-number">1.2</span> DNS Resolution Process</a></li>
+  <li><a href="#dns-record-types" id="toc-dns-record-types" class="nav-link" data-scroll-target="#dns-record-types"><span class="header-section-number">1.3</span> DNS Record Types</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">1.4</span> Conclusion</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/devops/devops-network-dns.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1696,8 +1702,46 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="overview" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> OVerview</h1>
+<section id="domain-name-system-dns-in-networking" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Domain Name System (DNS) in Networking</h1>
+<p>The <strong>Domain Name System (DNS)</strong> is a fundamental protocol in computer networking that translates human-readable domain names into IP addresses. It acts as a distributed and hierarchical database, providing a crucial service for navigating the vast landscape of the internet. DNS plays a pivotal role in making internet resources accessible by allowing users to use domain names like www.example.com instead of remembering numeric IP addresses like 192.168.1.1.</p>
+<section id="structure-and-hierarchy" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="structure-and-hierarchy"><span class="header-section-number">1.1</span> Structure and Hierarchy</h2>
+<p>DNS operates in a hierarchical structure, organized into zones. The highest level is the root domain, represented by a dot (‘.’). Beneath the root, there are top-level domains (TLDs), such as .com, .org, and .net. Further down, domain names become more specific, leading to fully qualified domain names (FQDNs) like www.example.com.</p>
+<p>Each domain level is separated by a dot, forming a tree-like structure. For instance, the FQDN www.example.com can be broken down into labels: “www” is a subdomain of “example,” which is under the top-level domain “com.”</p>
+</section>
+<section id="dns-resolution-process" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="dns-resolution-process"><span class="header-section-number">1.2</span> DNS Resolution Process</h2>
+<p>When a user enters a domain name in a web browser, the DNS resolution process begins. The following steps illustrate this process:</p>
+<ol type="1">
+<li><p><strong>Local DNS Cache Check:</strong> The user’s device checks its local DNS cache to see if it already knows the corresponding IP address for the requested domain. If found, the process concludes.</p></li>
+<li><p><strong>Recursive DNS Server:</strong> If the IP address is not in the local cache, the device queries a recursive DNS server. This server is responsible for obtaining the information on behalf of the user.</p></li>
+<li><p><strong>Root DNS Server:</strong> If the recursive DNS server doesn’t have the information, it queries the root DNS server. The root server directs the request to the appropriate TLD server based on the top-level domain of the requested domain name.</p></li>
+<li><p><strong>TLD DNS Server:</strong> The TLD server, responsible for the specific top-level domain of the requested domain, directs the recursive server to the authoritative DNS server of the next domain level.</p></li>
+<li><p><strong>Authoritative DNS Server:</strong> The authoritative DNS server holds the specific IP address associated with the requested domain and provides this information to the recursive server.</p></li>
+<li><p><strong>Recursive DNS Server Response:</strong> The recursive server caches the obtained IP address and responds to the user’s device.</p></li>
+<li><p><strong>Local DNS Cache Update:</strong> The user’s device updates its local DNS cache with the resolved IP address for future use.</p></li>
+</ol>
+</section>
+<section id="dns-record-types" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="dns-record-types"><span class="header-section-number">1.3</span> DNS Record Types</h2>
+<p>DNS uses various record types to store different types of information. The most common ones include:</p>
+<ul>
+<li><p><strong>A (Address) Record:</strong> Maps a domain to an IPv4 address.</p>
+<p>Example: <code>www.example.com. IN A 192.168.1.1</code></p></li>
+<li><p><strong>AAAA (IPv6 Address) Record:</strong> Maps a domain to an IPv6 address.</p>
+<p>Example: <code>www.example.com. IN AAAA 2001:0db8:85a3:0000:0000:8a2e:0370:7334</code></p></li>
+<li><p><strong>CNAME (Canonical Name) Record:</strong> Alias of one domain to another.</p>
+<p>Example: <code>www.example.com. IN CNAME example.com</code></p></li>
+<li><p><strong>MX (Mail Exchange) Record:</strong> Specifies mail servers responsible for receiving emails.</p>
+<p>Example: <code>example.com. IN MX 10 mail.example.com</code></p></li>
+<li><p><strong>NS (Name Server) Record:</strong> Indicates authoritative DNS servers for a domain.</p>
+<p>Example: <code>example.com. IN NS ns1.example.com</code></p></li>
+</ul>
+</section>
+<section id="conclusion" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">1.4</span> Conclusion</h2>
+<p>In conclusion, DNS is a critical protocol that simplifies internet navigation by translating human-readable domain names into machine-readable IP addresses. Understanding its hierarchical structure, resolution process, and various record types is essential for anyone working with computer networks. DNS plays a foundational role in making the internet accessible and user-friendly.</p>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1717,6 +1761,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
