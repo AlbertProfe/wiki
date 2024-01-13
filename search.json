@@ -3310,24 +3310,16 @@
   {
     "objectID": "linux/linux-distros-redhat.html",
     "href": "linux/linux-distros-redhat.html",
-    "title": "Linux Distros: Red Hat Enterprise Linux",
+    "title": "Linux Distros: Red Hat Enterprise",
     "section": "",
-    "text": "📘 Red Hat Enterprise Linux (RHEL)\nRed Hat Enterprise Linux (RHEL) is the most developer friendly Linux ever with new developer-centric features like container tools, advanced language support, and application streams.\nRed Hat Enterprise Linux (RHEL):",
-    "crumbs": [
-      "Linux: distros",
-      "Linux Distros: Red Hat Enterprise Linux"
-    ]
+    "text": "📘 Red Hat Enterprise Linux (RHEL)\nRed Hat Enterprise Linux (RHEL) is the most developer friendly Linux ever with new developer-centric features like container tools, advanced language support, and application streams.\nRed Hat Enterprise Linux (RHEL):"
   },
   {
     "objectID": "linux/linux-distros-redhat.html#cheat-sheet",
     "href": "linux/linux-distros-redhat.html#cheat-sheet",
-    "title": "Linux Distros: Red Hat Enterprise Linux",
+    "title": "Linux Distros: Red Hat Enterprise",
     "section": "1 Cheat-sheet",
-    "text": "1 Cheat-sheet\nRHEL8_CheatSheet \n\n\n\n  Linux Distros: Manjaro \n\n\n\n  top \n\n\n\n Linux Lab#LI01-1: Choose Linux",
-    "crumbs": [
-      "Linux: distros",
-      "Linux Distros: Red Hat Enterprise Linux"
-    ]
+    "text": "1 Cheat-sheet\nRHEL8_CheatSheet \n\n\n\n  Linux Distros: Manjaro \n\n\n\n  top \n\n\n\n Linux Lab#LI01-1: Choose Linux"
   },
   {
     "objectID": "linux/linux-distros-mint.html",
@@ -3340,61 +3332,57 @@
     "objectID": "linux/linux-distros-mint.html#what-is-linux-mint",
     "href": "linux/linux-distros-mint.html#what-is-linux-mint",
     "title": "Linux Distros: Mint",
-    "section": "1 What is Linux Mint?",
-    "text": "1 What is Linux Mint?\nLinux Mint is an operating system for desktop and laptop computers. It is designed to work ‘out of the box’ and comes fully equipped with the apps most people need.\n\nDownload ISO Linux Mint 21\nLinux Mint Installation Guide\nLinux Mint Installation Guide: step-by-step"
+    "section": "0.1 What is Linux Mint?",
+    "text": "0.1 What is Linux Mint?\nLinux Mint is an operating system for desktop and laptop computers. It is designed to work ‘out of the box’ and comes fully equipped with the apps most people need.\n\nDownload ISO Linux Mint 21\nLinux Mint Installation Guide\nLinux Mint Installation Guide: step-by-step"
   },
   {
     "objectID": "linux/linux-distros-mint.html#keep-your-linux-updated",
     "href": "linux/linux-distros-mint.html#keep-your-linux-updated",
     "title": "Linux Distros: Mint",
-    "section": "2 Keep your Linux updated",
-    "text": "2 Keep your Linux updated\nOpen your terminal and execute:\n\nsudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && sudo apt-get autoremove\n\nOr you may go through GUI: Update Manager:\n\n\n\nUpdate Manager"
+    "section": "1.5 Keep your Linux updated",
+    "text": "1.5 Keep your Linux updated\nOpen your terminal and execute:\n\nsudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && sudo apt-get autoremove\n\nOr you may go through GUI: Update Manager:\n\n\n\nUpdate Manager"
   },
   {
     "objectID": "linux/linux-distros-mint.html#install-developer-tools",
     "href": "linux/linux-distros-mint.html#install-developer-tools",
     "title": "Linux Distros: Mint",
-    "section": "3 Install Developer Tools",
-    "text": "3 Install Developer Tools\n\n3.1 Make a Bash Script Executable\n\nCreate a new text file with all the software you need with a .sh extension and code it as #!/bin/bash (that is, copy that line to the top of it)\n\ndevtools.sh\n\n\nCode\n\n\n\n\nMake the file executable, open the command line and run: chmod u+x devtools.sh. You are giving permissions to execute this file: it will grant only the owner of that file execution permissions.\nRun it: ./devtools.sh or double-click the icon\nBe careful with certain packages and tools do not work under apt get install, you will need to use snap\n\nsnap\nsudo mv /etc/apt/preferences.d/nosnap.pref ~/Documents/nosnap.backup\nsudo apt update\nsudo apt install snapd\n\nintellij-idea-educational\nvisual code educational\nsudo snap install intellij-idea-educational --classic\n\nchrome\nwget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb\nsudo dpkg -i google-chrome-stable_current_amd64.deb\n\nobsidian\nwget https://github.com/obsidianmd/obsidian-releases/releases/download/v1.0.3/obsidian_1.0.3_amd64.snap\nsudo snap install --dangerous obsidian_1.0.3_amd64.snap --classic\n\nvisual code educational\nwget https://az764295.vo.msecnd.net/stable/1ad8d514439d5077d2b0b7ee64d2ce82a9308e5a/code_1.74.1-1671015296_amd64.deb\nsudo apt install ./code_1.74.1-1671015296_amd64.deb\n\n\n3.2 Create an Installer Bash Script\n#!/bin/bash\n\n# Read the CSV file and install each app\ninstalled=0\nnot_installed=0\nnow=`date`\nsudo apt-get update\necho -e \"\\nInstall execution long\" &gt;&gt; installed_apps.log\necho -e \"$now\\n\" &gt;&gt; installed_apps.log\nwhile IFS=';' read -r app package_manager; do\n    if [ \"$package_manager\" = \"apt\" ]; then\n        if ! command -v \"$app\" &&gt; /dev/null; then\n            sudo apt-get install -y \"$app\"\n            echo -e \"\\t$app installed/error\" &gt;&gt; installed_apps.log\n            ((installed++))\n        else\n            echo -e \"\\t$app already exists\" &gt;&gt; installed_apps.log\n            ((not_installed++))\n        fi\n    elif [ \"$package_manager\" = \"snap\" ]; then\n        if ! command -v \"$app\" &&gt; /dev/null; then\n            sudo snap install \"$app\"\n            echo -e \"\\t$app installed/error\" &gt;&gt; installed_apps.log\n            ((installed++))\n        else\n            echo -e \"\\t$app already exists\" &gt;&gt; installed_apps.log\n            ((not_installed++))\n        fi\n    fi\ndone &lt; apps.csv\n\necho \"Total apps: $((installed + not_installed))\"\necho \"Installed/tried apps: $installed\"\necho \"Existing apps: $not_installed\"\n\necho -e \"\\nTotal apps: $((installed + not_installed))\" &gt;&gt; installed_apps.log\necho \"Installed/tried apps: $installed\" &gt;&gt; installed_apps.log\necho \"Existing apps: $not_installed\" &gt;&gt; installed_apps.log"
+    "section": "2.1 Install Developer Tools",
+    "text": "2.1 Install Developer Tools\n\n2.1.1 Make a Bash Script Executable\n\nCreate a new text file with all the software you need with a .sh extension and code it as #!/bin/bash (that is, copy that line to the top of it)\n\ndevtools.sh\n\n\nCode\n\n\n\n\nMake the file executable, open the command line and run: chmod u+x devtools.sh. You are giving permissions to execute this file: it will grant only the owner of that file execution permissions.\nRun it: ./devtools.sh or double-click the icon\nBe careful with certain packages and tools do not work under apt get install, you will need to use snap\n\nsnap\nsudo mv /etc/apt/preferences.d/nosnap.pref ~/Documents/nosnap.backup\nsudo apt update\nsudo apt install snapd\n\nintellij-idea-educational\nvisual code educational\nsudo snap install intellij-idea-educational --classic\n\nchrome\nwget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb\nsudo dpkg -i google-chrome-stable_current_amd64.deb\n\nobsidian\nwget https://github.com/obsidianmd/obsidian-releases/releases/download/v1.0.3/obsidian_1.0.3_amd64.snap\nsudo snap install --dangerous obsidian_1.0.3_amd64.snap --classic\n\nvisual code educational\nwget https://az764295.vo.msecnd.net/stable/1ad8d514439d5077d2b0b7ee64d2ce82a9308e5a/code_1.74.1-1671015296_amd64.deb\nsudo apt install ./code_1.74.1-1671015296_amd64.deb\n\n\n2.1.2 Create an Installer Bash Script\n#!/bin/bash\n\n# Read the CSV file and install each app\ninstalled=0\nnot_installed=0\nnow=`date`\nsudo apt-get update\necho -e \"\\nInstall execution long\" &gt;&gt; installed_apps.log\necho -e \"$now\\n\" &gt;&gt; installed_apps.log\nwhile IFS=';' read -r app package_manager; do\n    if [ \"$package_manager\" = \"apt\" ]; then\n        if ! command -v \"$app\" &&gt; /dev/null; then\n            sudo apt-get install -y \"$app\"\n            echo -e \"\\t$app installed/error\" &gt;&gt; installed_apps.log\n            ((installed++))\n        else\n            echo -e \"\\t$app already exists\" &gt;&gt; installed_apps.log\n            ((not_installed++))\n        fi\n    elif [ \"$package_manager\" = \"snap\" ]; then\n        if ! command -v \"$app\" &&gt; /dev/null; then\n            sudo snap install \"$app\"\n            echo -e \"\\t$app installed/error\" &gt;&gt; installed_apps.log\n            ((installed++))\n        else\n            echo -e \"\\t$app already exists\" &gt;&gt; installed_apps.log\n            ((not_installed++))\n        fi\n    fi\ndone &lt; apps.csv\n\necho \"Total apps: $((installed + not_installed))\"\necho \"Installed/tried apps: $installed\"\necho \"Existing apps: $not_installed\"\n\necho -e \"\\nTotal apps: $((installed + not_installed))\" &gt;&gt; installed_apps.log\necho \"Installed/tried apps: $installed\" &gt;&gt; installed_apps.log\necho \"Existing apps: $not_installed\" &gt;&gt; installed_apps.log"
   },
   {
     "objectID": "linux/linux-distros-mint.html#timeshift",
     "href": "linux/linux-distros-mint.html#timeshift",
     "title": "Linux Distros: Mint",
-    "section": "4 Timeshift",
-    "text": "4 Timeshift\nTimeshift is a system restore utility which takes snapshots of the system at regular intervals. These snapshots can be restored at a later date to undo system changes. Creates incremental snapshots using rsync or BTRFS snapshots using BTRFS tools.\n\n\n\nTimeshift"
+    "section": "2.2 Timeshift",
+    "text": "2.2 Timeshift\nTimeshift is a system restore utility which takes snapshots of the system at regular intervals. These snapshots can be restored at a later date to undo system changes. Creates incremental snapshots using rsync or BTRFS snapshots using BTRFS tools.\n\n\n\nTimeshift"
   },
   {
     "objectID": "linux/linux-distros-mint.html#tmcbeans-mooc-helsinki-java-2023",
     "href": "linux/linux-distros-mint.html#tmcbeans-mooc-helsinki-java-2023",
     "title": "Linux Distros: Mint",
-    "section": "5 TMCBeans MOOC Helsinki Java 2023",
-    "text": "5 TMCBeans MOOC Helsinki Java 2023\n\nYou can install OpenJDK with the following terminal command (works for Ubuntu):\n\n sudo apt-get install openjdk-11-jdk\n\nFrom Linux Mint 20 onwards, a file called nosnap.pref needs to be either moved or removed from /etc/apt/preferences.d/ before Snap can be installed.\n\n sudo mv /etc/apt/preferences.d/nosnap.pref ~/Documents/nosnap.backup\n\nWith the file removed from its original location, the package database needs to be updated next:\n\n sudo apt update\n(previous upgrade)\n\nTo now install snap from the Software Manager application, search for snapd and click Install. Alternatively, snapd can be installed from the command line:\n\n sudo apt install snapd\n\nlog out and then log in\nTo test your system, install the hello-world snap and make sure it runs correctly:\n\n    snap install hello-world\nhello-world 6.4 from Canonical✓ installed\n\nTest if snapd is installed:\n\n  hello-world\n  \nHello World!\n\nEventually, install TMCBeans\n\n  sudo snap install --classic tmcbeans"
+    "section": "2.3 TMCBeans MOOC Helsinki Java 2023",
+    "text": "2.3 TMCBeans MOOC Helsinki Java 2023\n\nYou can install OpenJDK with the following terminal command (works for Ubuntu):\n\n sudo apt-get install openjdk-11-jdk\n\nFrom Linux Mint 20 onwards, a file called nosnap.pref needs to be either moved or removed from /etc/apt/preferences.d/ before Snap can be installed.\n\n sudo mv /etc/apt/preferences.d/nosnap.pref ~/Documents/nosnap.backup\n\nWith the file removed from its original location, the package database needs to be updated next:\n\n sudo apt update\n(previous upgrade)\n\nTo now install snap from the Software Manager application, search for snapd and click Install. Alternatively, snapd can be installed from the command line:\n\n sudo apt install snapd\n\nlog out and then log in\nTo test your system, install the hello-world snap and make sure it runs correctly:\n\n    snap install hello-world\nhello-world 6.4 from Canonical✓ installed\n\nTest if snapd is installed:\n\n  hello-world\n  \nHello World!\n\nEventually, install TMCBeans\n\n  sudo snap install --classic tmcbeans"
   },
   {
     "objectID": "linux/linux-distros-mint.html#simplescreenrecorder",
     "href": "linux/linux-distros-mint.html#simplescreenrecorder",
     "title": "Linux Distros: Mint",
-    "section": "6 simplescreenrecorder",
-    "text": "6 simplescreenrecorder\n\nsimplescreenrecorder\n\nSimple Screen Recorder is, despite its name, an actually feature-rich screen recorder.\nThe name reflects the fact that it is simple to use unlike many other free screen recording applications available. It can be easily configured to start recording from an intuitive wizard-like interface.\nIt can record the entire screen or part of it directly. The recording can be paused and resumed at any time. Many different file formats and codecs are supported. To perform an X11 recording, all it takes is selecting an area on the root window with the mouse, choosing an output file and pressing record, either by using the mouse or using a hotkey.\n\n\n\nFeature-Rich Screen Recorder For X11 And OpenGL"
+    "section": "2.4 simplescreenrecorder",
+    "text": "2.4 simplescreenrecorder\n\nsimplescreenrecorder\n\nSimple Screen Recorder is, despite its name, an actually feature-rich screen recorder.\nThe name reflects the fact that it is simple to use unlike many other free screen recording applications available. It can be easily configured to start recording from an intuitive wizard-like interface.\nIt can record the entire screen or part of it directly. The recording can be paused and resumed at any time. Many different file formats and codecs are supported. To perform an X11 recording, all it takes is selecting an area on the root window with the mouse, choosing an output file and pressing record, either by using the mouse or using a hotkey.\n\n\n\nFeature-Rich Screen Recorder For X11 And OpenGL"
   },
   {
     "objectID": "linux/linux-distros-mint.html#curl",
     "href": "linux/linux-distros-mint.html#curl",
     "title": "Linux Distros: Mint",
-    "section": "7 curl",
-    "text": "7 curl\n\ncurl\n\n\n\n\nCommand Line Tool For Transferring Data With URL Syntax\n\n\nCurl is a command line tool for transferring data with URL syntax, supporting DICT, FILE, FTP, FTPS, GOPHER, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3, POP3S, RTMP, RTSP, SCP, SFTP, SMTP, SMTPS, TELNET and TFTP.\ncurl supports SSL certificates, HTTP POST, HTTP PUT, FTP uploading, HTTP form based upload, proxies, cookies, user+password authentication (Basic, Digest, NTLM, Negotiate, kerberos…), file transfer resume, proxy tunneling and a busload of other useful tricks."
+    "section": "2.5 curl",
+    "text": "2.5 curl\n\ncurl\n\n\n\n\nCommand Line Tool For Transferring Data With URL Syntax\n\n\nCurl is a command line tool for transferring data with URL syntax, supporting DICT, FILE, FTP, FTPS, GOPHER, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3, POP3S, RTMP, RTSP, SCP, SFTP, SMTP, SMTPS, TELNET and TFTP.\ncurl supports SSL certificates, HTTP POST, HTTP PUT, FTP uploading, HTTP form based upload, proxies, cookies, user+password authentication (Basic, Digest, NTLM, Negotiate, kerberos…), file transfer resume, proxy tunneling and a busload of other useful tricks."
   },
   {
     "objectID": "linux/linux-distros-debian.html",
     "href": "linux/linux-distros-debian.html",
     "title": "Linux Distros: Debian",
     "section": "",
-    "text": "Linux Distros: Mint \n\n\n\n  top \n\n\n\n Linux Distros: openSuse",
-    "crumbs": [
-      "Linux: distros",
-      "Linux Distros: Debian"
-    ]
+    "text": "Linux Distros: Mint \n\n\n\n  top \n\n\n\n Linux Distros: openSuse"
   },
   {
     "objectID": "linux/lilab04-2.html",
@@ -8382,33 +8370,21 @@
     "href": "linux/linux-distros-manjaro.html",
     "title": "Linux Distros: Manjaro",
     "section": "",
-    "text": "Linux Distros: openSuse \n\n\n\n  top \n\n\n\n Linux Distros: Red Hat Enterprise Linux",
-    "crumbs": [
-      "Linux: distros",
-      "Linux Distros: Manjaro"
-    ]
+    "text": "Linux Distros: openSuse \n\n\n\n  top \n\n\n\n Linux Distros: Red Hat Enterprise Linux"
   },
   {
     "objectID": "linux/linux-distros-opensuse.html",
     "href": "linux/linux-distros-opensuse.html",
     "title": "Linux Distros: openSuse",
     "section": "",
-    "text": "Linux Distros: Debian \n\n\n\n  top \n\n\n\n Linux Distros: Manjaro",
-    "crumbs": [
-      "Linux: distros",
-      "Linux Distros: openSuse"
-    ]
+    "text": "Linux Distros: Debian \n\n\n\n  top \n\n\n\n Linux Distros: Manjaro"
   },
   {
     "objectID": "linux/linux-distros-ubuntu.html",
     "href": "linux/linux-distros-ubuntu.html",
     "title": "Linux Distros: Ubuntu",
     "section": "",
-    "text": "Linux: Virtual Machines \n\n\n\n  top \n\n\n\n Linux Distros: Mint",
-    "crumbs": [
-      "Linux: distros",
-      "Linux Distros: Ubuntu"
-    ]
+    "text": "Ubuntu"
   },
   {
     "objectID": "linux/linux-what-basics.html",
@@ -11737,8 +11713,8 @@
     "objectID": "linux/linux-distros-mint.html#references",
     "href": "linux/linux-distros-mint.html#references",
     "title": "Linux Distros: Mint",
-    "section": "8 References",
-    "text": "8 References\n\nInstall snapd on Linux Mint 2023\nTMCBeans Helsinki Linux\n\n\n\n\n\n\n  Linux Distros: Ubuntu \n\n\n\n  top \n\n\n\n Linux Distros: Debian"
+    "section": "2.6 References",
+    "text": "2.6 References\n\nInstall snapd on Linux Mint 2023\nTMCBeans Helsinki Linux\n\n\n\n\n\n\n  Linux Distros: Ubuntu \n\n\n\n  top \n\n\n\n Linux Distros: Debian"
   },
   {
     "objectID": "learning/learning-how-auto-evaluate.html#purpose",
@@ -12110,5 +12086,103 @@
     "title": "Network: DNS",
     "section": "",
     "text": "In conclusion, DNS is a critical protocol that simplifies internet navigation by translating human-readable domain names into machine-readable IP addresses. Understanding its hierarchical structure, resolution process, and various record types is essential for anyone working with computer networks. DNS plays a foundational role in making the internet accessible and user-friendly.\n\n\n\n\n\n  Network protocols \n\n\n\n  top \n\n\n\n API Rest"
+  },
+  {
+    "objectID": "linux/linux-distros-ubuntu.html#basic-software-for-developers",
+    "href": "linux/linux-distros-ubuntu.html#basic-software-for-developers",
+    "title": "Linux Distros: Ubuntu",
+    "section": "1.1 Basic Software for Developers",
+    "text": "1.1 Basic Software for Developers\nUbuntu provides a solid foundation for developers with a vast repository of software tools and programming languages. Here are some essential software packages that cater to the needs of developers working on the Ubuntu platform:\n\nGCC (GNU Compiler Collection)\n\nLink: GCC Official Website\nGCC is a crucial tool for developers as it includes compilers for several programming languages, including C, C++, and Fortran. It plays a vital role in building and compiling software on Ubuntu.\n\nPython\n\nLink: Python Official Website\nUbuntu comes pre-installed with Python, a versatile programming language. Developers can easily use the package manager to install additional Python libraries and frameworks for their projects.\n\nGit\n\nLink: Git Official Website\nGit is a distributed version control system that facilitates collaboration among developers. Ubuntu users can install Git to manage source code repositories efficiently.\n\nVisual Studio Code\n\nLink: VSCode Official Website\nVSCode is a lightweight and powerful code editor that supports various programming languages. Ubuntu users can install it for a seamless development experience.\n\nIntelliJ IDEA\n\nLink: IntelliJ IDEA\nIntelliJ IDEA is a popular Java integrated development environment (IDE) that provides advanced coding assistance and productivity features. Ubuntu users can easily install and use IntelliJ IDEA for Java development.\n\nOpenJDK\n\nLink: OpenJDK Official Website\nOpenJDK is the official reference implementation of the Java Platform, Standard Edition. Ubuntu users can install OpenJDK to develop and run Java applications on their systems.\n\nSublime Text\n\nLink: Sublime Text\nSublime Text is a sophisticated text editor for code, markup, and prose. Ubuntu users can enjoy its minimalist design and powerful features by installing Sublime Text for their development needs.\n\nNode.js and npm\n\nLink: Node.js Official Website\nLink: npm Official Website\nNode.js is a JavaScript runtime, and npm is its package manager. Ubuntu users can easily install Node.js and npm to develop server-side and client-side JavaScript applications."
+  },
+  {
+    "objectID": "linux/linux-distros-ubuntu.html#ubuntu-server",
+    "href": "linux/linux-distros-ubuntu.html#ubuntu-server",
+    "title": "Linux Distros: Ubuntu",
+    "section": "1.2 Ubuntu Server",
+    "text": "1.2 Ubuntu Server\nUbuntu Server is a specialized edition designed for server environments, offering stability, security, and scalability. Whether you are running a small business server or managing a complex data center, Ubuntu Server provides a reliable foundation. Key features include:\n\nLTS (Long Term Support) Releases\n\nLink: Ubuntu LTS Releases\nUbuntu Server follows a predictable release cycle, with LTS versions providing five years of support. This stability is crucial for server environments where continuous uptime is essential.\n\nOpenStack Integration\n\nLink: Ubuntu OpenStack\nUbuntu Server seamlessly integrates with OpenStack, a powerful open-source cloud computing platform. This integration allows users to build and manage private and public clouds efficiently.\n\nSecurity Updates\n\nLink: Ubuntu Security Notices\nUbuntu Server prioritizes security, and users benefit from timely security updates and patches, ensuring a robust defense against potential vulnerabilities.\n\nContainer Support with Docker\n\nLink: Docker on Ubuntu\nUbuntu Server supports Docker, enabling users to deploy and manage containerized applications easily. This facilitates efficient scaling and resource utilization."
+  },
+  {
+    "objectID": "linux/linux-distros-ubuntu.html#forks-from-ubuntu-linux-mint",
+    "href": "linux/linux-distros-ubuntu.html#forks-from-ubuntu-linux-mint",
+    "title": "Linux Distros: Ubuntu",
+    "section": "1.3 Forks from Ubuntu: Linux Mint",
+    "text": "1.3 Forks from Ubuntu: Linux Mint\nLinux Mint is a popular distribution that is based on Ubuntu, sharing its core features while providing a distinct user experience. Here are some highlights of Linux Mint:\n\nCinnamon Desktop Environment\n\nLink: Linux Mint Cinnamon\nLinux Mint features the Cinnamon desktop environment, known for its user-friendly interface and customization options. It offers a familiar desktop experience for users transitioning from other operating systems.\n\nUpdate Manager\n\nLink: Linux Mint Update Manager\nLinux Mint includes a user-friendly update manager that simplifies the process of keeping the system and installed software up to date. Users can choose update policies based on their preferences.\n\nSoftware Manager\n\nLink: Linux Mint Software Manager\nThe Software Manager in Linux Mint provides an intuitive interface for users to discover, install, and manage software applications easily. It offers a curated selection of applications for a seamless user experience.\n\nSystem Snapshots with Timeshift\n\nLink: Timeshift on Linux Mint\nLinux Mint includes Timeshift, a powerful tool for creating and restoring system snapshots. This feature adds an extra layer of security by allowing users to roll back changes in case of unexpected issues.\n\n\n\n\n\n\n\n  Linux: Virtual Machines \n\n\n\n  top \n\n\n\n Linux Distros: Mint"
+  },
+  {
+    "objectID": "linux/linux-distros-mint.html#post-installation",
+    "href": "linux/linux-distros-mint.html#post-installation",
+    "title": "Linux Distros: Mint",
+    "section": "1.2 Post-installation",
+    "text": "1.2 Post-installation\n\nHardware drivers\nMultimedia codecs\nLanguage support\nSystem snapshots"
+  },
+  {
+    "objectID": "linux/linux-distros-ubuntu.html#ubuntu-server-1",
+    "href": "linux/linux-distros-ubuntu.html#ubuntu-server-1",
+    "title": "Linux Distros: Ubuntu",
+    "section": "",
+    "text": "Ubuntu Server is a specialized edition designed for server environments, offering stability, security, and scalability. Whether you are running a small business server or managing a complex data center, Ubuntu Server provides a reliable foundation. Key features include:\n\nLTS (Long Term Support) Releases\n\nLink: Ubuntu LTS Releases\nUbuntu Server follows a predictable release cycle, with LTS versions providing five years of support. This stability is crucial for server environments where continuous uptime is essential.\n\nOpenStack Integration\n\nLink: Ubuntu OpenStack\nUbuntu Server seamlessly integrates with OpenStack, a powerful open-source cloud computing platform. This integration allows users to build and manage private and public clouds efficiently.\n\nSecurity Updates\n\nLink: Ubuntu Security Notices\nUbuntu Server prioritizes security, and users benefit from timely security updates and patches, ensuring a robust defense against potential vulnerabilities.\n\nContainer Support with Docker\n\nLink: Docker on Ubuntu\nUbuntu Server supports Docker, enabling users to deploy and manage containerized applications easily. This facilitates efficient scaling and resource utilization."
+  },
+  {
+    "objectID": "linux/linux-distros-mint.html#system-reports",
+    "href": "linux/linux-distros-mint.html#system-reports",
+    "title": "Linux Distros: Mint",
+    "section": "1.1 System Reports",
+    "text": "1.1 System Reports\nLinux Mint provides users with a powerful diagnostic tool known as “System Reports.” This application assists users in identifying and troubleshooting issues on their system. Whether it’s hardware-related problems, crashes, or performance issues, System Reports gathers relevant data and generates detailed reports to help users and support teams understand and resolve issues efficiently.\n\n\n\nSystem Reports\n\n\n\n1.1.1 Usage and Features:\n\nUsers can access System Reports through the application menu or search bar.\nThe tool collects information on hardware, system logs, and potential conflicts.\nDetailed reports are available for user analysis or can be shared with the community for assistance."
+  },
+  {
+    "objectID": "linux/linux-distros-mint.html#system-manager",
+    "href": "linux/linux-distros-mint.html#system-manager",
+    "title": "Linux Distros: Mint",
+    "section": "1.2 System Manager",
+    "text": "1.2 System Manager\nLinux Mint’s “System Manager” serves as a centralized hub for managing various system settings and configurations. This application consolidates essential system management tools, providing users with a convenient interface to control various aspects of their operating system.\n\n\n\nSystem Manager\n\n\n\n1.2.1 Features:\n\nSystem Manager includes modules for managing software, updates, and system settings.\nUsers can configure user accounts, system startup applications, and power management options.\nThe application simplifies system maintenance and customization, enhancing the user experience."
+  },
+  {
+    "objectID": "linux/linux-distros-mint.html#system-settings",
+    "href": "linux/linux-distros-mint.html#system-settings",
+    "title": "Linux Distros: Mint",
+    "section": "1.3 System Settings",
+    "text": "1.3 System Settings\nThe “System Settings” application in Linux Mint offers a comprehensive set of tools for users to customize and configure their system. From display settings to keyboard shortcuts, users can tailor the Linux Mint environment to suit their preferences.\n\n\n\nSystem Settings\n\n\n\n1.3.1 Highlights:\n\nSystem Settings is accessible through the application menu or system tray.\nUsers can adjust display properties, set up printers, and configure network settings.\nThe intuitive interface makes it easy for both beginners and experienced users to personalize their system."
+  },
+  {
+    "objectID": "linux/linux-distros-mint.html#system-info",
+    "href": "linux/linux-distros-mint.html#system-info",
+    "title": "Linux Distros: Mint",
+    "section": "1.4 System Info",
+    "text": "1.4 System Info\nLinux Mint’s “System Info” application provides users with detailed information about their system’s hardware and software configuration. This tool is invaluable for users seeking to understand their system specifications or troubleshoot compatibility issues.\n\n\n\nSystem Info\n\n\n\n1.4.1 Key Information:\n\nUsers can view details about the processor, memory, graphics, and storage.\nSystem Info also provides information on the Linux Mint version, kernel, and desktop environment.\nThe application is a quick reference for users and support personnel dealing with technical inquiries.\n\nIn conclusion, Linux Mint’s suite of system applications enhances the overall user experience by providing intuitive tools for diagnostics, configuration, and system information. These applications contribute to the user-friendly nature of Linux Mint, making it an attractive choice for users seeking a stable and customizable operating system."
+  },
+  {
+    "objectID": "linux/linux-distros-mint.html#installation",
+    "href": "linux/linux-distros-mint.html#installation",
+    "title": "Linux Distros: Mint",
+    "section": "1.1 Installation",
+    "text": "1.1 Installation\n\nDownload ISO Linux Mint 21\nLinux Mint Installation Guide\nLinux Mint Installation Guide: step-by-step"
+  },
+  {
+    "objectID": "linux/linux-distros-mint.html#linux-mint-system-applications-overview",
+    "href": "linux/linux-distros-mint.html#linux-mint-system-applications-overview",
+    "title": "Linux Distros: Mint",
+    "section": "1.3 Linux Mint System Applications Overview",
+    "text": "1.3 Linux Mint System Applications Overview\nSystem Reports\nLinux Mint provides users with a powerful diagnostic tool known as “System Reports.” This application assists users in identifying and troubleshooting issues on their system. Whether it’s hardware-related problems, crashes, or performance issues, System Reports gathers relevant data and generates detailed reports to help users and support teams understand and resolve issues efficiently.\n\n\n\nSystem Reports\n\n\nUsage and Features:\n\nUsers can access System Reports through the application menu or search bar.\nThe tool collects information on hardware, system logs, and potential conflicts.\nDetailed reports are available for user analysis or can be shared with the community for assistance.\n\nSystem Manager\nLinux Mint’s “System Manager” serves as a centralized hub for managing various system settings and configurations. This application consolidates essential system management tools, providing users with a convenient interface to control various aspects of their operating system.\nFeatures:\n\nSystem Manager includes modules for managing software, updates, and system settings.\nUsers can configure user accounts, system startup applications, and power management options.\nThe application simplifies system maintenance and customization, enhancing the user experience.\n\nSystem Settings\nThe “System Settings” application in Linux Mint offers a comprehensive set of tools for users to customize and configure their system. From display settings to keyboard shortcuts, users can tailor the Linux Mint environment to suit their preferences.\n\n\n\nSystem Settings\n\n\nHighlights:\n\nSystem Settings is accessible through the application menu or system tray.\nUsers can adjust display properties, set up printers, and configure network settings.\nThe intuitive interface makes it easy for both beginners and experienced users to personalize their system.\n\nSystem Info\nLinux Mint’s “System Info” application provides users with detailed information about their system’s hardware and software configuration. This tool is invaluable for users seeking to understand their system specifications or troubleshoot compatibility issues.\n\n\n\nSystem Info\n\n\nKey Information:\n\nUsers can view details about the processor, memory, graphics, and storage.\nSystem Info also provides information on the Linux Mint version, kernel, and desktop environment.\nThe application is a quick reference for users and support personnel dealing with technical inquiries.\n\nSystem monitor\nProcess Viewer And System Resource Monitor For GNOME\n\n\n\nSystem Monitor\n\n\nGParted: A Powerful Disk Partitioning Tool for Linux\nGParted stands as a formidable disk partitioning tool in the Linux ecosystem, offering users a robust and user-friendly solution for managing disk partitions on their systems. With its open-source nature and a wide array of features, GParted has become a go-to tool for both beginners and experienced users seeking efficient disk management.\n\n\n\nGParted\n\n\nFeatures of GParted:\n\nPartition Resizing and Moving\n\nGParted allows users to resize, move, and manipulate partitions effortlessly. Whether you need to expand a partition to accommodate more data or rearrange existing partitions, GParted provides a straightforward interface to carry out these tasks.\n\nFilesystem Support\n\nThe tool supports a variety of filesystems, including ext2, ext3, ext4, FAT16, FAT32, NTFS, and more. This broad compatibility ensures that GParted can be used on a wide range of storage devices and systems.\n\nCreate and Delete Partitions\n\nUsers can create new partitions or delete existing ones as needed. This flexibility is especially valuable when setting up new drives, dual-boot systems, or reorganizing storage configurations.\n\nCheck and Repair Filesystems\n\nGParted includes tools to check and repair filesystems, ensuring the integrity of data on partitions. This feature is essential for maintaining a healthy storage environment and preventing data corruption.\n\n\nUsing GParted:\n\nInstallation\n\nGParted is often available in the software repositories of major Linux distributions. Users can install it using their package manager. For Ubuntu-based systems, the command is:\nsudo apt-get install gparted\n\nLaunching GParted\n\nAfter installation, GParted can be launched from the application menu or by running the command gparted in the terminal.\n\nGUI Interface\n\nGParted provides a graphical user interface that displays a visual representation of the disk partitions, making it easy for users to understand and manage their storage configuration.\n\n\nCommunity and Support\nGParted boasts an active and supportive community, and users can find documentation, tutorials, and forums on the official GParted website. The website serves as a valuable resource for both new and experienced users, offering guidance on using the tool effectively and troubleshooting common issues."
+  },
+  {
+    "objectID": "linux/linux-distros-mint.html#features-of-gparted",
+    "href": "linux/linux-distros-mint.html#features-of-gparted",
+    "title": "Linux Distros: Mint",
+    "section": "2.1 Features of GParted",
+    "text": "2.1 Features of GParted\n\nPartition Resizing and Moving\n\nGParted allows users to resize, move, and manipulate partitions effortlessly. Whether you need to expand a partition to accommodate more data or rearrange existing partitions, GParted provides a straightforward interface to carry out these tasks.\n\nFilesystem Support\n\nThe tool supports a variety of filesystems, including ext2, ext3, ext4, FAT16, FAT32, NTFS, and more. This broad compatibility ensures that GParted can be used on a wide range of storage devices and systems.\n\nCreate and Delete Partitions\n\nUsers can create new partitions or delete existing ones as needed. This flexibility is especially valuable when setting up new drives, dual-boot systems, or reorganizing storage configurations.\n\nCheck and Repair Filesystems\n\nGParted includes tools to check and repair filesystems, ensuring the integrity of data on partitions. This feature is essential for maintaining a healthy storage environment and preventing data corruption."
+  },
+  {
+    "objectID": "linux/linux-distros-mint.html#using-gparted",
+    "href": "linux/linux-distros-mint.html#using-gparted",
+    "title": "Linux Distros: Mint",
+    "section": "2.2 Using GParted",
+    "text": "2.2 Using GParted\nInstallation: - GParted is often available in the software repositories of major Linux distributions. Users can install it using their package manager. For Ubuntu-based systems, the command is: sudo apt-get install gparted\nLaunching GParted: - After installation, GParted can be launched from the application menu or by running the command gparted in the terminal.\nGUI Interface: - GParted provides a graphical user interface that displays a visual representation of the disk partitions, making it easy for users to understand and manage their storage configuration."
+  },
+  {
+    "objectID": "linux/linux-distros-mint.html#community-and-support",
+    "href": "linux/linux-distros-mint.html#community-and-support",
+    "title": "Linux Distros: Mint",
+    "section": "2.3 Community and Support",
+    "text": "2.3 Community and Support\nGParted boasts an active and supportive community, and users can find documentation, tutorials, and forums on the official GParted website. The website serves as a valuable resource for both new and experienced users, offering guidance on using the tool effectively and troubleshooting common issues."
   }
 ]
