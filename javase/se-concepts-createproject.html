@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 
 <div id="quarto-search-results"></div>
@@ -1754,7 +1754,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/se-concepts-createproject.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -1803,40 +1803,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="create-maven-project" class="level2" data-number="1">
+<section id="create-maven-project" class="level2 page-columns page-full" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="create-maven-project"><span class="header-section-number">1</span> Create Maven Project</h2>
 <p>To create a Maven project with a <strong>standard directory structure using IntelliJ IDEA</strong>, you can follow these steps:</p>
 <ol type="1">
-<li>Install the Maven plugin in <strong>IntelliJ IDEA</strong>.</li>
+<li>Install the Maven plugin in <strong>IntelliJ IDEA</strong>.
+<ol type="1">
 <li>Open IntelliJ IDEA and navigate to the <code>Plugins</code> settings.</li>
 <li>Search for <code>Maven</code> and install the plugin.</li>
-<li>In IntelliJ IDEA, click <code>Create New Project</code>.</li>
-<li>In the <code>New Project</code> dialog, select <code>Maven Archetype</code> from the list of Generators.</li>
-<li>Select the <strong><code>maven-archetype-quickstart</code> archetype</strong>. This archetype creates a <mark>standard Maven project with a directory structure for source code and unit tests.<mark>
+</ol></li>
+<li>In IntelliJ IDEA, click <code>Create New Project</code>.
 <ol type="1">
-<li>Remember to use <code>apache</code></li>
-</ol></mark></mark></li>
+<li>In the <code>New Project</code> dialog, select <code>Maven Archetype</code> from the list of Generators.</li>
+<li>Select the <strong><code>maven-archetype-quickstart</code> archetype</strong>. This archetype creates a <mark>standard Maven project with a directory structure for source code and unit tests.<mark></mark></mark></li>
+<li>Remember to use <code>apache</code> archetype (template).</li>
+</ol></li>
+<li>Choose from system or download the <strong>JDK</strong> to use</li>
 <li>Click <code>Advanced Settings</code> and enter the <code>GroupId</code> and <code>ArtifactId</code> for your project. These are used to identify your project uniquely across all projects.</li>
 <li>Click <code>Create</code> to create the project.</li>
 </ol>
-<p>Your project will be created with the following directory structure:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a>my<span class="op">-</span>project</span>
-<span id="cb1-2"><a href="#cb1-2"></a>├── pom<span class="op">.</span><span class="fu">xml</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>└── src</span>
-<span id="cb1-4"><a href="#cb1-4"></a>    ├── main</span>
-<span id="cb1-5"><a href="#cb1-5"></a>    │   └── Person<span class="op">.</span><span class="fu">java</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>    │       Account<span class="op">.</span><span class="fu">java</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>    │       AccountManager<span class="op">.</span><span class="fu">java</span>    </span>
-<span id="cb1-8"><a href="#cb1-8"></a>    └── test</span>
-<span id="cb1-9"><a href="#cb1-9"></a>        └── AccountManagerTest<span class="op">.</span><span class="fu">java</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><a href="https://www.jetbrains.com/guide/java/tutorials/working-with-maven/creating-a-project/" class="external">Creating a Maven project</a></li>
+<li><a href="https://www.jetbrains.com/help/idea/maven-support.html" class="external">Create a new Maven project</a></li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Catalog</strong></p>
+<p>specify which Maven repository you want to use in your project.</p>
+<p>The internal Maven catalog is a default one. You can also select the local repository that is located in the <code>.m2 directory</code>, or you can select <strong>Maven central repository</strong>.</p>
+</div></div><p>Your project will be created with the following <strong>directory structure</strong>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a>  my<span class="op">-</span>project</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  ├── pom<span class="op">.</span><span class="fu">xml</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  └── src</span>
+<span id="cb1-4"><a href="#cb1-4"></a>      ├── main</span>
+<span id="cb1-5"><a href="#cb1-5"></a>      │   └── Person<span class="op">.</span><span class="fu">java</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>      │       Account<span class="op">.</span><span class="fu">java</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>      │       AccountManager<span class="op">.</span><span class="fu">java</span>    </span>
+<span id="cb1-8"><a href="#cb1-8"></a>      └── test</span>
+<span id="cb1-9"><a href="#cb1-9"></a>          └── AccountManagerTest<span class="op">.</span><span class="fu">java</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>          </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>src/main/java</code> directory is where you should put your Java source code, and the <code>src/test/java</code> directory is where you should put your <strong>unit tests</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/javase/se-createproject/createprojectMavenIntellJI_3.png" class="lightbox" title="Maven project folder-tree" data-gallery="quarto-lightbox-gallery-1"><img src="../images/javase/se-createproject/createprojectMavenIntellJI_3.png" class="img-fluid figure-img"></a></p>
+<p><a href="../images/javase/se-createproject/createprojectMavenIntellJI_3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Maven project folder-tree"><img src="../images/javase/se-createproject/createprojectMavenIntellJI_3.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Maven project folder-tree</figcaption>
 </figure>
 </div>
-<p>To specify the version of Maven to use, you can edit the pom.xml file and add a <version> element to the <project> element. For example:</project></version></p>
+<p>To specify the version of Maven to use, you can edit the <code>pom.xml</code> file and add a <code>&lt;version&gt;</code> element to the <code>&lt;project&gt;</code> element. For example:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource xml number-lines code-with-copy"><code class="sourceCode xml"><span id="cb2-1"><a href="#cb2-1"></a>&lt;<span class="kw">project</span>&gt;</span>
 <span id="cb2-2"><a href="#cb2-2"></a>  &lt;<span class="kw">modelVersion</span>&gt;4.0.0&lt;/<span class="kw">modelVersion</span>&gt;</span>
 <span id="cb2-3"><a href="#cb2-3"></a>  &lt;<span class="kw">groupId</span>&gt;com.example&lt;/<span class="kw">groupId</span>&gt;</span>
@@ -1851,10 +1864,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>2022-12-14</strong></p>
 <p><a href="../images/javase/se-createproject/se-presentation-createproject.html">Slider-presentation Create project Java SE Maven</a></p>
 <p><strong>2024-01-14</strong></p>
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-createMavenProject" class="quarto-layout-panel">
 <figure class="figure">
-<p><a href="../images/javase/createProject_2024.png" class="lightbox" title="Create Maven JavaSE Project Idea 2024" data-gallery="quarto-lightbox-gallery-2"><img src="../images/javase/createProject_2024.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
-<figcaption class="figure-caption">Create Maven JavaSE Project Idea 2024</figcaption>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="../images/javase/createMavenProject-2024.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Create Maven JavaSE Project Idea 2024: New Project wizard"><img src="../images/javase/createMavenProject-2024.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">Create Maven JavaSE Project Idea 2024: New Project wizard</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="../images/javase/createProject_2024.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Create Maven JavaSE Project Idea 2024: Project structure"><img src="../images/javase/createProject_2024.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">Create Maven JavaSE Project Idea 2024: Project structure</figcaption>
+</figure>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Create Maven JavaSE Project Idea 2024</figcaption><p></p>
 </figure>
 </div>
 <blockquote class="blockquote">
@@ -1866,25 +1892,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="3" class="anchored" data-anchor-id="idea-configurations"><span class="header-section-number">3</span> Idea configurations</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/javase/idea-files-menu--2024png.png" class="lightbox" title="Create Maven JavaSE Project Idea 2024: Idea configurations, File" data-gallery="quarto-lightbox-gallery-3"><img src="../images/javase/idea-files-menu--2024png.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/javase/idea-files-menu--2024png.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Create Maven JavaSE Project Idea 2024: Idea configurations, File"><img src="../images/javase/idea-files-menu--2024png.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <figcaption class="figure-caption">Create Maven JavaSE Project Idea 2024: Idea configurations, File</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/javase/createProject_2024-1.png" class="lightbox" title="Create Maven JavaSE Project Idea 2024: Project structure,SDK and lenguage level" data-gallery="quarto-lightbox-gallery-4"><img src="../images/javase/createProject_2024-1.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/javase/createProject_2024-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Create Maven JavaSE Project Idea 2024: Project structure,SDK and lenguage level"><img src="../images/javase/createProject_2024-1.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <figcaption class="figure-caption">Create Maven JavaSE Project Idea 2024: Project structure,SDK and lenguage level</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/javase/createProject_2024-2.png" class="lightbox" title="Create Maven JavaSE Project Idea 2024: modules and sources" data-gallery="quarto-lightbox-gallery-5"><img src="../images/javase/createProject_2024-2.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/javase/createProject_2024-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Create Maven JavaSE Project Idea 2024: modules and sources"><img src="../images/javase/createProject_2024-2.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <figcaption class="figure-caption">Create Maven JavaSE Project Idea 2024: modules and sources</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/javase/createProject_2024-3.png" class="lightbox" title="Create Maven JavaSE Project Idea 2024: modules and dependencies" data-gallery="quarto-lightbox-gallery-6"><img src="../images/javase/createProject_2024-3.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/javase/createProject_2024-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Create Maven JavaSE Project Idea 2024: modules and dependencies"><img src="../images/javase/createProject_2024-3.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <figcaption class="figure-caption">Create Maven JavaSE Project Idea 2024: modules and dependencies</figcaption>
 </figure>
 </div>
@@ -1893,7 +1919,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="4" class="anchored" data-anchor-id="what-did-we-create"><span class="header-section-number">4</span> What did we create?</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/javase/classMain.png" class="lightbox" title="Anatomy of our first Class" data-gallery="quarto-lightbox-gallery-7"><img src="../images/javase/classMain.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+<p><a href="../images/javase/classMain.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Anatomy of our first Class"><img src="../images/javase/classMain.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
 <figcaption class="figure-caption">Anatomy of our first Class</figcaption>
 </figure>
 </div>
@@ -2293,7 +2319,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":true,"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":true});</script>
 
 
 
