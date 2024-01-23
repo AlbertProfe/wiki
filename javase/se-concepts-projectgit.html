@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -1723,7 +1757,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/se-concepts-projectgit.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -1764,7 +1798,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Monday, January 22, 2024</p>
+      <p class="date-modified">Tuesday, January 23, 2024</p>
     </div>
   </div>
     
@@ -2007,7 +2041,7 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 </section>
-<section id="maven-project-push-to-github-cli-git" class="level2" data-number="4">
+<section id="maven-project-push-to-github-cli-git" class="level2 page-columns page-full" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="maven-project-push-to-github-cli-git"><span class="header-section-number">4</span> Maven Project push to GitHub: <strong>CLI git</strong></h2>
 <p>Once the <code>Maven Project Java SE</code> is created, <strong>we are going to control its versions with git and upload to GitHub.com by CLI git/gh.</strong></p>
 <ul>
@@ -2074,6 +2108,54 @@ ul.task-list li input[type="checkbox"] {
 <p><a href="../images/javase/mavenGitCLI-gh-9.png" class="lightbox" title="Project pushed" data-gallery="quarto-lightbox-gallery-39"><img src="..\images/javase/mavenGitCLI-gh-9.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Project pushed</figcaption>
 </figure>
+</div>
+<div class="column-page-right">
+<details>
+<summary>
+Code bash linux git/gh
+</summary>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="ex">albert@albert-VirtualBox:~/MyProjects/Sandbox/Hello11$</span> git init</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="ex">hint:</span> Using <span class="st">'master'</span> as the name for the initial branch. This default branch name</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="ex">hint:</span> is subject to change. To configure the initial branch name to use in all</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="ex">hint:</span> of your new repositories, which will suppress this warning, call:</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="ex">hint:</span> </span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="ex">hint:</span>   git config <span class="at">--global</span> init.defaultBranch <span class="op">&lt;</span>name<span class="op">&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="ex">hint:</span> </span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="ex">hint:</span> Names commonly chosen instead of <span class="st">'master'</span> are <span class="st">'main'</span>, <span class="st">'trunk'</span> and</span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="ex">hint:</span> <span class="st">'development'</span>. The just-created branch can be renamed via this command:</span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="ex">hint:</span> </span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="ex">hint:</span>   git branch <span class="at">-m</span> <span class="op">&lt;</span>name<span class="op">&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="ex">Initialized</span> empty Git repository in /home/albert/MyProjects/Sandbox/Hello11/.git/</span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="ex">albert@albert-VirtualBox:~/MyProjects/Sandbox/Hello11$</span> git config user.name <span class="st">"albert"</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="ex">albert@albert-VirtualBox:~/MyProjects/Sandbox/Hello11$</span> git config user.email <span class="st">"albertprofe@gmail.com"</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="ex">albert@albert-VirtualBox:~/MyProjects/Sandbox/Hello11$</span> git add .</span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="ex">albert@albert-VirtualBox:~/MyProjects/Sandbox/Hello11$</span> git commit <span class="at">-m</span> <span class="st">"crete project"</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="ex">[master</span> <span class="er">(</span><span class="ex">root-commit</span><span class="kw">)</span> <span class="ex">4cd7009]</span> crete project</span>
+<span id="cb1-19"><a href="#cb1-19"></a> <span class="ex">7</span> files changed, 171 insertions<span class="er">(</span><span class="ex">+</span><span class="kw">)</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a> <span class="ex">create</span> mode 100644 .gitignore</span>
+<span id="cb1-21"><a href="#cb1-21"></a> <span class="ex">create</span> mode 100644 .idea/.gitignore</span>
+<span id="cb1-22"><a href="#cb1-22"></a> <span class="ex">create</span> mode 100644 .idea/encodings.xml</span>
+<span id="cb1-23"><a href="#cb1-23"></a> <span class="ex">create</span> mode 100644 .idea/misc.xml</span>
+<span id="cb1-24"><a href="#cb1-24"></a> <span class="ex">create</span> mode 100644 pom.xml</span>
+<span id="cb1-25"><a href="#cb1-25"></a> <span class="ex">create</span> mode 100644 src/main/java/org/example/App.java</span>
+<span id="cb1-26"><a href="#cb1-26"></a> <span class="ex">create</span> mode 100644 src/test/java/org/example/AppTest.java</span>
+<span id="cb1-27"><a href="#cb1-27"></a><span class="ex">albert@albert-VirtualBox:~/MyProjects/Sandbox/Hello11$</span> gh repo create hello11 <span class="at">--public</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="ex">✓</span> Created repository AlbertProfe/hello11 on GitHub</span>
+<span id="cb1-29"><a href="#cb1-29"></a><span class="ex">albert@albert-VirtualBox:~/MyProjects/Sandbox/Hello11$</span> git remote add origin https://github.com/AlbertProfe/hello11.git</span>
+<span id="cb1-30"><a href="#cb1-30"></a><span class="ex">albert@albert-VirtualBox:~/MyProjects/Sandbox/Hello11$</span> git push <span class="at">-u</span> origin master</span>
+<span id="cb1-31"><a href="#cb1-31"></a><span class="ex">Enumerating</span> objects: 19, done.</span>
+<span id="cb1-32"><a href="#cb1-32"></a><span class="ex">Counting</span> objects: 100% <span class="er">(</span><span class="ex">19/19</span><span class="kw">)</span><span class="ex">,</span> done.</span>
+<span id="cb1-33"><a href="#cb1-33"></a><span class="ex">Delta</span> compression using up to 4 threads</span>
+<span id="cb1-34"><a href="#cb1-34"></a><span class="ex">Compressing</span> objects: 100% <span class="er">(</span><span class="ex">10/10</span><span class="kw">)</span><span class="ex">,</span> done.</span>
+<span id="cb1-35"><a href="#cb1-35"></a><span class="ex">Writing</span> objects: 100% <span class="er">(</span><span class="ex">19/19</span><span class="kw">)</span><span class="ex">,</span> 2.64 KiB <span class="kw">|</span> <span class="ex">675.00</span> KiB/s, done.</span>
+<span id="cb1-36"><a href="#cb1-36"></a><span class="ex">Total</span> 19 <span class="er">(</span><span class="ex">delta</span> 0<span class="kw">)</span><span class="ex">,</span> reused 0 <span class="er">(</span><span class="ex">delta</span> 0<span class="kw">)</span><span class="ex">,</span> pack-reused 0</span>
+<span id="cb1-37"><a href="#cb1-37"></a><span class="ex">To</span> https://github.com/AlbertProfe/hello11.git</span>
+<span id="cb1-38"><a href="#cb1-38"></a> <span class="ex">*</span> [new branch]      master <span class="at">-</span><span class="op">&gt;</span> master</span>
+<span id="cb1-39"><a href="#cb1-39"></a><span class="ex">Branch</span> <span class="st">'master'</span> set up to track remote branch <span class="st">'master'</span> from <span class="st">'origin'</span>.</span>
+<span id="cb1-40"><a href="#cb1-40"></a><span class="ex">albert@albert-VirtualBox:~/MyProjects/Sandbox/Hello11$</span></span>
+<span id="cb1-41"><a href="#cb1-41"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <!--- navLinks -->
 <br><br>
@@ -2468,7 +2550,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":true});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":true});</script>
 
 
 
