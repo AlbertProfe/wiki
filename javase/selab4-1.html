@@ -78,6 +78,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -109,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 
 <div id="quarto-search-results"></div>
@@ -1783,7 +1786,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/selab4-1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -1837,7 +1840,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li><p>Create a Maven/Gradle <code>Java SE Project</code>.</p>
 <ul>
-<li>Crete from <a href="../javase/se-concepts-createproject.html">wizard</a> the Maven Java SE Project and then work with <a href="../javase/se-concepts-projectgit.html">git</a>, local and remote.</li>
+<li>Crete from <a href="../javase/se-concepts-createproject.html">wizard</a> the Maven Java SE Project and then work with <a href="../javase/se-concepts-projectgit.html">git</a> version control, local and remote (GitHub.com).</li>
 </ul></li>
 <li><p>Add the needed dependencies:</p>
 <ul>
@@ -1848,7 +1851,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Create three <code>Java</code> classes to define the <strong>Model</strong>. Java SE Classes:</p>
 <ul>
 <li>Core Model: Table, Order and Menu</li>
-<li>Managers and Controller: use a fake DataBase like <code>ArrayList</code> or <code>HahsMaps</code></li>
+<li>Managers and Controller: use a fake DataBase like <code>ArrayList</code> or <code>HashMaps</code></li>
 </ul></li>
 <li><p>With <code>Junit</code> dependency create <strong>unitary test</strong> to test objects and operations, and then <strong>integration tests</strong>.</p></li>
 <li><p>From here you should add new features <strong>once all the test are passed.</strong></p>
@@ -2020,8 +2023,26 @@ class Menu{
 <span id="cb6-15"><a href="#cb6-15"></a><span class="ex">Paid?</span></span>
 <span id="cb6-16"><a href="#cb6-16"></a><span class="fu">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="fake-database-hashmaps" class="level1" data-number="4">
+<section id="fake-database-hashmaps" class="level1 page-columns page-full" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Fake DataBase: HashMaps</h1>
+<p>To start and test our UML we are goint to use HashMaps as a fake database.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/javase/hashmap-orders.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../images/javase/hashmap-orders.jpg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> Order<span class="op">&gt;</span> orders</span>
+<span id="cb7-2"><a href="#cb7-2"></a> <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> Order<span class="op">&gt;();</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Keep in mind that in more recent versions of Java, you can use the diamond operator (&lt;&gt;) to infer the generic types, making the declaration more concise:</p>
+<p><code>HashMap&lt;String, Order&gt; orders = new HashMap&lt;&gt;();</code></p>
+</div></div><p>Here’s what each part of the code means:</p>
+<ul>
+<li><p><code>HashMap&lt;String, Order&gt;</code>: This declares a new <code>HashMap</code> with keys of type <code>String</code> and values of type <code>Order</code>. In other words, it’s a mapping from strings to <code>Order</code> objects.</p></li>
+<li><p><code>orders</code>: This is the name of the variable that will reference the <code>HashMap</code>. You can choose any valid identifier as the variable name.</p></li>
+<li><p><code>= new HashMap&lt;String, Order&gt;();</code>: This part of the code creates a new instance of <code>HashMap</code> and assigns it to the variable <code>orders</code>. The <code>new</code> keyword is used to allocate memory for the <code>HashMap</code>, and the <code>&lt;&gt;</code> syntax specifies the types of keys and values for the <code>HashMap</code>. In this case, keys are of type <code>String</code>, and values are of type <code>Order</code>.</p></li>
+</ul>
 <section id="references" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="references"><span class="header-section-number">4.1</span> References</h2>
 <ul>
@@ -2049,27 +2070,29 @@ class Menu{
 <section id="how-to-create-a-hashmap-in-java" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="how-to-create-a-hashmap-in-java"><span class="header-section-number">4.4</span> How to Create a HashMap in Java</h2>
 <p>In order to create and use a HashMap, you must first import the <code>java.util.HashMap</code> package. That is:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashMap</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashMap</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here’s what the syntax looks like for creating a new <code>HashMap</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a><span class="bu">HashMap</span><span class="op">&lt;</span>KeyDataType<span class="op">,</span> ValueDataType<span class="op">&gt;</span> HashMapName <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashMap</span><span class="op">&lt;&gt;();</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a><span class="bu">HashMap</span><span class="op">&lt;</span>KeyDataType<span class="op">,</span> ValueDataType<span class="op">&gt;</span> HashMapName <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashMap</span><span class="op">&lt;&gt;();</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="example" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="example"><span class="header-section-number">4.5</span> Example</h2>
 <p>Create a <code>HashMap</code> object called <strong>capitalCities</strong> that will store <code>String</code> <strong>keys</strong> and <code>String</code> <strong>values</strong>:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashMap</span><span class="op">;</span> <span class="co">// import the HashMap class</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> <span class="bu">String</span><span class="op">&gt;</span> capitalCities <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> <span class="bu">String</span><span class="op">&gt;();</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Create a <code>HashMap</code> object called <strong>capitalCities</strong> that will store <code>String</code> <strong>keys</strong> and <code>String</code> <strong>values</strong>:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashMap</span><span class="op">;</span> <span class="co">// import the HashMap class</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> <span class="bu">String</span><span class="op">&gt;</span> capitalCities <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> <span class="bu">String</span><span class="op">&gt;();</span>javase<span class="op">/</span>selab4<span class="op">-</span><span class="fl">1.</span>qmdjavase<span class="op">/</span>selab4<span class="op">-</span><span class="fl">1.</span>qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> <span class="bu">String</span><span class="op">&gt;</span> capitalCities <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> <span class="bu">String</span><span class="op">&gt;();</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Create a <code>HashMap</code> object called <strong>capitalCities</strong> that will store <code>String</code> <strong>keys</strong> and <code>String</code> <strong>values</strong>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashMap</span><span class="op">;</span> <span class="co">// import the HashMap class</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> <span class="bu">String</span><span class="op">&gt;</span> capitalCities <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> <span class="bu">String</span><span class="op">&gt;();</span>javase<span class="op">/</span>selab4<span class="op">-</span><span class="fl">1.</span>qmdjavase<span class="op">/</span>selab4<span class="op">-</span><span class="fl">1.</span>qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="view-user-menus-and-io" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> View: user menus and I/O</h1>
+<p>to-do</p>
 </section>
 <section id="business-logic-controller" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Business Logic &amp; Controller</h1>
+<p>to-do</p>
 </section>
 <section id="code" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> Code</h1>
@@ -2484,6 +2507,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"loop":true,"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});</script>
 
 
 
