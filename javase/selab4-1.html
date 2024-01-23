@@ -1767,10 +1767,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#core-features-table-order-and-menu" id="toc-core-features-table-order-and-menu" class="nav-link" data-scroll-target="#core-features-table-order-and-menu"><span class="header-section-number">2.1</span> Core features: table, order and menu</a></li>
   </ul></li>
-  <li><a href="#core-mockup-cli" id="toc-core-mockup-cli" class="nav-link" data-scroll-target="#core-mockup-cli"><span class="header-section-number">3</span> Core mockup CLI</a></li>
-  <li><a href="#fake-database-hashmaps-and-manger" id="toc-fake-database-hashmaps-and-manger" class="nav-link" data-scroll-target="#fake-database-hashmaps-and-manger"><span class="header-section-number">4</span> Fake DataBase: HashMaps and Manger</a></li>
+  <li><a href="#core-user-case-mockup-cli" id="toc-core-user-case-mockup-cli" class="nav-link" data-scroll-target="#core-user-case-mockup-cli"><span class="header-section-number">3</span> Core user-case mockup CLI</a></li>
+  <li><a href="#fake-database-hashmaps-manager" id="toc-fake-database-hashmaps-manager" class="nav-link" data-scroll-target="#fake-database-hashmaps-manager"><span class="header-section-number">4</span> Fake DataBase: HashMaps &amp; Manager</a></li>
   <li><a href="#view-user-menus-and-io" id="toc-view-user-menus-and-io" class="nav-link" data-scroll-target="#view-user-menus-and-io"><span class="header-section-number">5</span> View: user menus and I/O</a></li>
-  <li><a href="#busines-logic-and-controller" id="toc-busines-logic-and-controller" class="nav-link" data-scroll-target="#busines-logic-and-controller"><span class="header-section-number">6</span> Busines Logic and Controller</a></li>
+  <li><a href="#business-logic-controller" id="toc-business-logic-controller" class="nav-link" data-scroll-target="#business-logic-controller"><span class="header-section-number">6</span> Business Logic &amp; Controller</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">7</span> Code</a>
+  <ul>
+  <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output"><span class="header-section-number">7.0.1</span> Output</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/selab4-1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1944,38 +1948,99 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="2"><span class="header-section-number">2</span> Solving discussion: UMLs</h1>
 <section id="core-features-table-order-and-menu" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="core-features-table-order-and-menu"><span class="header-section-number">2.1</span> Core features: table, order and menu</h2>
-<div class="mermaidContent">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <div>
 
-<pre class="mermaid mermaid-js">flowchart LR
-  A[I/O loop] --&gt; B(static method)
-  B --&gt; C{Decision}
-  C --&gt; D[Create Table]
-  C --&gt; E[Create Menu]
+<pre class="mermaid mermaid-js">classDiagram
 
+
+
+class Table{
+
+  +String name
+  +String description
+  +int qty
+
+}
+
+class Order{
+
+  +date date
+  +String orderNumber
+  +String waiter
+  +int peopleqty
+  +int totalPayment
+  +bool paid
+  +Table table
+  +Menu[] menus
+
+}
+
+class Menu{
+
+  +String name
+  +String price
+  +int price
+  +string conntent
+
+}
+
+  Table "1" --* "n" Order
+  Menu "1" --* "n" Order
 
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div>
 </section>
 </section>
-<section id="core-mockup-cli" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Core mockup CLI</h1>
+<section id="core-user-case-mockup-cli" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Core user-case mockup CLI</h1>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">Welcome</span> to healtyFood Mananger v0.0</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">Table</span> number<span class="pp">?</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="ex">2</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="ex">People?</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="ex">6</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="ex">Menu</span> qty<span class="pp">?</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="ex">3</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="ex">Menu</span> <span class="co">#1?</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="ex">5</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="ex">Menu</span> <span class="co">#2?</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="ex">3</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="ex">Menu</span> <span class="co">#3?</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="ex">5</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="ex">Total</span> to pay: 80€ <span class="er">(</span><span class="ex">3</span> items<span class="kw">)</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="ex">Paid?</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="fu">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="fake-database-hashmaps-and-manger" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Fake DataBase: HashMaps and Manger</h1>
+<section id="fake-database-hashmaps-manager" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Fake DataBase: HashMaps &amp; Manager</h1>
 </section>
 <section id="view-user-menus-and-io" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> View: user menus and I/O</h1>
 </section>
-<section id="busines-logic-and-controller" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Busines Logic and Controller</h1>
+<section id="business-logic-controller" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Business Logic &amp; Controller</h1>
+</section>
+<section id="code" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Code</h1>
+<ul>
+<li><a href="https://github.com/AlbertProfe/hello11/commit/59000f69fc5ab0d42390c3a9f8a28f0b55cc48c3" class="external">GitHub code v0.0</a></li>
+</ul>
+<section id="output" class="level3" data-number="7.0.1">
+<h3 data-number="7.0.1" class="anchored" data-anchor-id="output"><span class="header-section-number">7.0.1</span> Output</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">/home/albert/.jdks/openjdk-21.0.1/bin/java</span> <span class="at">-javaagent:</span>/app/IDEA-C/lib/idea_rt.jar=35021:/app/IDEA-C/bin <span class="at">-Dfile.encoding</span><span class="op">=</span>UTF-8 <span class="at">-Dsun.stdout.encoding</span><span class="op">=</span>UTF-8 <span class="at">-Dsun.stderr.encoding</span><span class="op">=</span>UTF-8 <span class="at">-classpath</span> /home/albert/MyProjects/Sandbox/Hello11/target/classes org.example.App</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="ex">Hello</span> healthyFood Restaurant!</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="ex">Menu{name=</span><span class="st">'Menu Lisboa'</span><span class="ex">,</span> price=25.0, content=<span class="st">'Meat, Salad, Tuna'</span>, active=true, water=true}</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="ex">Menu{name=</span><span class="st">'Menu New York'</span><span class="ex">,</span> price=23.0, content=<span class="st">'Meat, Salad, Fetaccis'</span>, active=false, water=false}</span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="ex">{M002=Menu{name=</span><span class="st">'Menu New York'</span><span class="ex">,</span> price=23.0, content=<span class="st">'Meat, Salad, Fetaccis'</span>, active=false, water=false}, M001=Menu{name=<span class="st">'Menu Lisboa'</span>, price=25.0, content=<span class="st">'Meat, Salad, Tuna'</span>, active=true, water=true}}</span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="ex">{T01=Table{name=</span><span class="st">'Table1'</span><span class="ex">,</span> description=<span class="st">'Table type Estrella Galicia'</span>, qty=4}, T03=Table{name=<span class="st">'Table3'</span>, description=<span class="st">'Table type Estrella Galicia'</span>, qty=2}, T02=Table{name=<span class="st">'Table2'</span>, description=<span class="st">'Table type Estrella Galicia'</span>, qty=4}, T04=Table{name=<span class="st">'Table4'</span>, description=<span class="st">'Table type Estrella Galicia'</span>, qty=2}}</span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="ex">{43F43WT=Order{date=Tue</span> Jan 23 12:11:14 CET 2024, waiter=<span class="st">'Joan'</span>, peopleQty=4, totalPayment=60.0, paid=true, table=Table{name=<span class="st">'Table1'</span>, description=<span class="st">'Table type Estrella Galicia'</span>, qty=4}, menus=[Menu{name=<span class="st">'Menu Lisboa'</span>, price=25.0, content=<span class="st">'Meat, Salad, Tuna'</span>, active=true, water=true}, Menu{name=<span class="st">'Menu Lisboa'</span>, price=25.0, content=<span class="st">'Meat, Salad, Tuna'</span>, active=true, water=true}, Menu{name=<span class="st">'Menu Lisboa'</span>, price=25.0, content=<span class="st">'Meat, Salad, Tuna'</span>, active=true, water=true}, Menu{name=<span class="st">'Menu New York'</span>, price=23.0, content=<span class="st">'Meat, Salad, Fetaccis'</span>, active=false, water=false}]}}</span>
+<span id="cb7-8"><a href="#cb7-8"></a></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="ex">Process</span> finished with exit code 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1995,6 +2060,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
