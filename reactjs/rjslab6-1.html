@@ -1687,13 +1687,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#mock-up" id="toc-mock-up" class="nav-link active" data-scroll-target="#mock-up"><span class="header-section-number">1</span> Mock-up</a></li>
-  <li><a href="#step-by-step-code" id="toc-step-by-step-code" class="nav-link" data-scroll-target="#step-by-step-code"><span class="header-section-number">2</span> Step-by-step code</a>
+  <li><a href="#general-approach" id="toc-general-approach" class="nav-link active" data-scroll-target="#general-approach"><span class="header-section-number">1</span> General approach</a></li>
+  <li><a href="#mock-up" id="toc-mock-up" class="nav-link" data-scroll-target="#mock-up"><span class="header-section-number">2</span> Mock-up</a></li>
+  <li><a href="#step-by-step-code" id="toc-step-by-step-code" class="nav-link" data-scroll-target="#step-by-step-code"><span class="header-section-number">3</span> Step-by-step code</a>
   <ul>
-  <li><a href="#react-functions" id="toc-react-functions" class="nav-link" data-scroll-target="#react-functions"><span class="header-section-number">2.1</span> React functions</a></li>
-  <li><a href="#react-application" id="toc-react-application" class="nav-link" data-scroll-target="#react-application"><span class="header-section-number">2.2</span> React Application</a></li>
+  <li><a href="#react-functions" id="toc-react-functions" class="nav-link" data-scroll-target="#react-functions"><span class="header-section-number">3.1</span> React functions</a></li>
+  <li><a href="#react-application" id="toc-react-application" class="nav-link" data-scroll-target="#react-application"><span class="header-section-number">3.2</span> React Application</a></li>
   </ul></li>
-  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">3</span> Code</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">4</span> Code</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/reactjs/rjslab6-1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1775,21 +1776,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 <p><br></p>
+<section id="general-approach" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> General approach</h1>
 <p><mark>To craft the React front end for our restaurant management system, we begin by comprehending the UML diagram and backend functionalities.</mark></p>
 <ul>
-<li><strong>Initiating a new React project using tools like Create React App</strong> establishes the foundational structure.</li>
-<li>Component design follows, with <strong>entities from the UML diagram mapped to distinct React components</strong>, such as Orders, Tables, Menus, and a centralized Controller.</li>
+<li><strong>Initiating a new React project using tools like</strong> <code>Create React App</code> establishes the foundational structure.</li>
+<li>Component design follows, with <strong>entities from the UML diagram mapped to distinct React components</strong>, such as Orders, Tables, Menus, and a centralized Controller.
+<ul>
 <li>Connecting to the Spring Boot backend is facilitated through React’s <code>fetch</code> or similar HTTP libraries.</li>
+</ul></li>
 <li><code>Routing</code> is implemented using React Router, establishing distinct paths for functionalities like orders, tables, and menus. State management, accomplished through Redux or React Context API, ensures efficient handling of dynamic data.</li>
 <li><strong>UI components</strong> are designed and implemented, integrating component libraries for consistency. User input is managed via forms with input validation for an enhanced user experience.</li>
-<li><strong>Unit tests using Jest and React Testing Library</strong> validate the correctness of React components.</li>
+<li><strong>Unit tests using Jest and React Testing Library</strong> validate the correctness of React components.
+<ul>
 <li>Integration with design tools maintains a cohesive look, and responsiveness is prioritized for varying screen sizes.</li>
+</ul></li>
 <li>Ultimately, the <strong>React app is deployed</strong> independently using platforms like Netlify or Vercel, ensuring seamless communication with the Spring Boot backend API.</li>
 </ul>
 <p>This systematic approach guarantees the development of a scalable and user-friendly front end, aligning with our grand vision for the restaurant management system’s evolution.</p>
-<p><br></p>
-<section id="mock-up" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Mock-up</h1>
+</section>
+<section id="mock-up" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Mock-up</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="../images/reactjs/healthyfood-mockup.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="healthyFood restaurant mockup"><img src="../images/reactjs/healthyfood-mockup.png" class="img-fluid figure-img"></a></p>
@@ -1797,15 +1804,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </section>
-<section id="step-by-step-code" class="level1 page-columns page-full" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Step-by-step code</h1>
+<section id="step-by-step-code" class="level1 page-columns page-full" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Step-by-step code</h1>
 <p>Reference:</p>
 <ul>
 <li><a href="https://react.dev/learn/describing-the-ui#your-first-component" class="external">Your first component</a></li>
 <li><a href="https://www.w3schools.com/w3css/defaulT.asp" class="external">W3.CSS Tutorial</a></li>
 </ul>
-<section id="react-functions" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="react-functions"><span class="header-section-number">2.1</span> React functions</h2>
+<section id="react-functions" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="react-functions"><span class="header-section-number">3.1</span> React functions</h2>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>index.js</strong></pre>
@@ -1818,8 +1825,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6"></a><span class="bu">root</span><span class="op">.</span><span class="fu">render</span>(<span class="op">&lt;</span>App <span class="op">/&gt;</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="react-application" class="level2 page-columns page-full" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="react-application"><span class="header-section-number">2.2</span> React Application</h2>
+<section id="react-application" class="level2 page-columns page-full" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="react-application"><span class="header-section-number">3.2</span> React Application</h2>
 <p>React application is defined with three instances of the <code>Profile</code> component and one instance of the <code>ProfileData</code> component. The application imports external components and a <strong>CSS framework (“w3-css/w3.css”).</strong></p>
 <p>A <strong>static array</strong> named <code>menus</code> represents different restaurant menus, each containing an id, name, list of contents, price, and flags indicating whether the menu is active and includes water.</p>
 <p>The <code>App</code> function returns a JSX structure representing the main application. The outermost element is a <code>div</code> with the class “w3-container,” containing three instances of the <code>Profile</code> component arranged side by side using the “w3-cell” class. Each <code>Profile</code> component represents a section or module in the application.</p>
@@ -1966,8 +1973,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="code" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Code</h1>
+<section id="code" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Code</h1>
 <table class="table">
 <thead>
 <tr class="header">
@@ -1991,7 +1998,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../reactjs/rjslab5-6.html">React JS: Lab#RE05-6 <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
+<p><br> <a href="../reactjs/rjslab5-6.html">React JS: Lab#RE05-6 <i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i></a> <br></p>
 </div>
 <br>
 <div class="column center">
@@ -2379,7 +2386,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom"});</script>
 
 
 
