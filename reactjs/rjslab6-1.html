@@ -1694,6 +1694,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#react-functions" id="toc-react-functions" class="nav-link" data-scroll-target="#react-functions"><span class="header-section-number">4.1</span> React functions</a></li>
   <li><a href="#react-application" id="toc-react-application" class="nav-link" data-scroll-target="#react-application"><span class="header-section-number">4.2</span> React Application</a></li>
+  <li><a href="#add-json-data-as-model" id="toc-add-json-data-as-model" class="nav-link" data-scroll-target="#add-json-data-as-model"><span class="header-section-number">4.3</span> Add JSON data as model</a></li>
   </ul></li>
   <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">5</span> Code</a></li>
   </ul>
@@ -1752,9 +1753,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>📘 <strong>React JS Lab#RE06-1: healthyFood Restaurant</strong></p>
 <p>In this lab, we will be using:</p>
 <ul>
-<li>the <code>create-react-app</code></li>
-<li>w3 css: <code>cards</code></li>
-<li>components, <code>JSON</code> data</li>
+<li>the <code>create-react-app</code> with <strong>npx</strong></li>
+<li>w3.css framework for css
+<ul>
+<li>install css on React: <code>npm install w3-css</code></li>
+<li>w3 css: <code>cards</code>, <code>button</code>, <code>container</code></li>
+</ul></li>
+<li>JSX components</li>
+<li>array of <code>JSON</code>: <strong>data</strong> as model</li>
 </ul>
 <p>This React project serves as the front-end for a robust Spring Boot back-end, complemented by a well-designed UML. The UML is meticulously crafted in the context of <a href="../javase/selab4-1.html">Lab#SE04-1</a>, ensuring a structured foundation for the restaurant management system.</p>
 <p>Project Overview</p>
@@ -1803,7 +1809,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/createproject.svg" class="lightbox" title="create-react-app" data-gallery="quarto-lightbox-gallery-1"><img src="../images/reactjs/createproject.svg" class="img-fluid figure-img"></a></p>
+<p><a href="../images/reactjs/createproject.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="create-react-app"><img src="../images/reactjs/createproject.svg" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">create-react-app</figcaption>
 </figure>
 </div>
@@ -1812,7 +1818,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="3"><span class="header-section-number">3</span> Mock-up</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/healthyfood-mockup.png" class="lightbox" title="healthyFood restaurant mockup" data-gallery="quarto-lightbox-gallery-2"><img src="../images/reactjs/healthyfood-mockup.png" class="img-fluid figure-img"></a></p>
+<p><a href="../images/reactjs/healthyfood-mockup.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="healthyFood restaurant mockup"><img src="../images/reactjs/healthyfood-mockup.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
 <figcaption class="figure-caption">healthyFood restaurant mockup</figcaption>
 </figure>
 </div>
@@ -1823,6 +1829,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><a href="https://react.dev/learn/describing-the-ui#your-first-component" class="external">Your first component</a></li>
 <li><a href="https://www.w3schools.com/w3css/defaulT.asp" class="external">W3.CSS Tutorial</a></li>
+<li><a href="https://www.npmjs.com/package/w3-css" class="external">npm: W3.CSS is a modern CSS framework with built-in responsiveness</a></li>
 </ul>
 <section id="react-functions" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="react-functions"><span class="header-section-number">4.1</span> React functions</h2>
@@ -1834,155 +1841,195 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> ReactDOM <span class="im">from</span> <span class="st">'react-dom/client'</span><span class="op">;</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="im">import</span> App <span class="im">from</span> <span class="st">'./App'</span><span class="op">;</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">const</span> <span class="bu">root</span> <span class="op">=</span> ReactDOM<span class="op">.</span><span class="fu">createRoot</span>(<span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">'root'</span>))<span class="op">;</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="bu">root</span><span class="op">.</span><span class="fu">render</span>(<span class="op">&lt;</span>App <span class="op">/&gt;</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">const</span> <span class="bu">root</span> <span class="op">=</span> </span>
+<span id="cb1-6"><a href="#cb1-6"></a>ReactDOM<span class="op">.</span><span class="fu">createRoot</span>(<span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">'root'</span>))<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="bu">root</span><span class="op">.</span><span class="fu">render</span>(<span class="op">&lt;</span>App <span class="op">/&gt;</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="react-application" class="level2 page-columns page-full" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="react-application"><span class="header-section-number">4.2</span> React Application</h2>
-<p>React application is defined with three instances of the <code>Profile</code> component and one instance of the <code>ProfileData</code> component. The application imports external components and a <strong>CSS framework (“w3-css/w3.css”).</strong></p>
-<p>A <strong>static array</strong> named <code>menus</code> represents different restaurant menus, each containing an id, name, list of contents, price, and flags indicating whether the menu is active and includes water.</p>
-<p>The <code>App</code> function returns a JSX structure representing the main application. The outermost element is a <code>div</code> with the class “w3-container,” containing three instances of the <code>Profile</code> component arranged side by side using the “w3-cell” class. Each <code>Profile</code> component represents a section or module in the application.</p>
-<p>Below the three <code>Profile</code> components, a <code>ProfileData</code> component is rendered with the <code>menu</code> prop set to the first menu item from the <code>menus</code> array (<code>menus[0]</code>). This implies that the initial data displayed in the <code>ProfileData</code> component corresponds to the “Menu Lisboa.”</p>
+<p>React application is defined with three instances of the <code>MenuList</code> component and one instance of the <code>MenuData</code> component. The application imports external components and a <strong>CSS framework (“w3-css/w3.css”).</strong></p>
+<p>The <code>App</code> function returns a JSX structure representing the main application. The outermost element is a <code>div</code> with the class “w3-container,” containing three instances of the <code>MenuList</code> component arranged side by side using the “w3-cell” class. Each <code>MenuList</code> component represents a section or module in the application.</p>
 <p>The code uses the <code>&lt;&gt;</code> (fragment) syntax to group multiple elements without introducing an additional parent node.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p>There’s a repetition of the <code>Profile</code> component, and the application structure isa <strong>placeholder</strong>. Depending on the actual requirements, you may want to dynamically render components based on the data or user interactions for a more dynamic and scalable application.</p>
+<p>There’s a repetition of the <code>MenuList</code> component, and the application structure isa <strong>placeholder</strong>.</p>
+<p>Depending on the actual requirements, you may want to dynamically render components based on the data or user interactions for a more dynamic and scalable application.</p>
 </div></div><div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>App.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> ProfileData <span class="im">from</span> <span class="st">"./ProfileData.jsx"</span><span class="op">;</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="im">import</span> Profile <span class="im">from</span> <span class="st">"./Profile.jsx"</span><span class="op">;</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> MenuList <span class="im">from</span> <span class="st">"./MenuList.jsx"</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="im">import</span> Order <span class="im">from</span> <span class="st">"./Order.jsx"</span><span class="op">;;</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="im">import</span> <span class="st">"w3-css/w3.css"</span><span class="op">;</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">const</span> menus <span class="op">=</span> [</span>
-<span id="cb2-6"><a href="#cb2-6"></a>  {</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="st">"id"</span><span class="op">:</span> <span class="st">"M001"</span><span class="op">,</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>    <span class="st">"name"</span><span class="op">:</span> <span class="st">"Menu Lisboa"</span><span class="op">,</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>    <span class="st">"contents"</span><span class="op">:</span> [</span>
-<span id="cb2-10"><a href="#cb2-10"></a>      <span class="st">"Meat Balls"</span><span class="op">,</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>      <span class="st">"Salad with tomato"</span><span class="op">,</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>      <span class="st">"Onion and carrot"</span><span class="op">,</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a>      <span class="st">"Fresh Tuna"</span><span class="op">,</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>    ]<span class="op">,</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a>    <span class="st">"price"</span><span class="op">:</span> <span class="fl">80.0</span><span class="op">,</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a>    <span class="st">"active"</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a>    <span class="st">"water"</span><span class="op">:</span> <span class="kw">true</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a>  }<span class="op">,</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>  {</span>
-<span id="cb2-20"><a href="#cb2-20"></a>    <span class="st">"id"</span><span class="op">:</span> <span class="st">"M002"</span><span class="op">,</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a>    <span class="st">"name"</span><span class="op">:</span> <span class="st">"Menu New York"</span><span class="op">,</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a>    <span class="st">"contents"</span><span class="op">:</span> [</span>
-<span id="cb2-23"><a href="#cb2-23"></a>      <span class="st">"Meat Balls with Pulled Steak"</span><span class="op">,</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a>      <span class="st">"Salad with tomato"</span><span class="op">,</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a>      <span class="st">"Brown Rice"</span><span class="op">,</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a>      <span class="st">"Fresh Salmon"</span></span>
-<span id="cb2-27"><a href="#cb2-27"></a>    ]<span class="op">,</span></span>
-<span id="cb2-28"><a href="#cb2-28"></a>    <span class="st">"price"</span><span class="op">:</span> <span class="fl">85.0</span><span class="op">,</span></span>
-<span id="cb2-29"><a href="#cb2-29"></a>    <span class="st">"active"</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb2-30"><a href="#cb2-30"></a>    <span class="st">"water"</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb2-31"><a href="#cb2-31"></a>  }<span class="op">,</span></span>
-<span id="cb2-32"><a href="#cb2-32"></a>  {</span>
-<span id="cb2-33"><a href="#cb2-33"></a>    <span class="st">"id"</span><span class="op">:</span> <span class="st">"M003"</span><span class="op">,</span></span>
-<span id="cb2-34"><a href="#cb2-34"></a>    <span class="st">"name"</span><span class="op">:</span> <span class="st">"Menu Santiago"</span><span class="op">,</span></span>
-<span id="cb2-35"><a href="#cb2-35"></a>    <span class="st">"contents"</span><span class="op">:</span> [</span>
-<span id="cb2-36"><a href="#cb2-36"></a>      <span class="st">"Meat Chicken Curry"</span><span class="op">,</span></span>
-<span id="cb2-37"><a href="#cb2-37"></a>      <span class="st">"Salad with tomato"</span><span class="op">,</span></span>
-<span id="cb2-38"><a href="#cb2-38"></a>      <span class="st">"Carrot with edamame"</span><span class="op">,</span></span>
-<span id="cb2-39"><a href="#cb2-39"></a>      <span class="st">"Fresh Tuna"</span></span>
-<span id="cb2-40"><a href="#cb2-40"></a>    ]<span class="op">,</span></span>
-<span id="cb2-41"><a href="#cb2-41"></a>    <span class="st">"price"</span><span class="op">:</span> <span class="fl">82.0</span><span class="op">,</span></span>
-<span id="cb2-42"><a href="#cb2-42"></a>    <span class="st">"active"</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb2-43"><a href="#cb2-43"></a>    <span class="st">"water"</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb2-44"><a href="#cb2-44"></a>  }</span>
-<span id="cb2-45"><a href="#cb2-45"></a>]<span class="op">;</span></span>
-<span id="cb2-46"><a href="#cb2-46"></a></span>
-<span id="cb2-47"><a href="#cb2-47"></a><span class="kw">function</span> <span class="fu">App</span>() {</span>
-<span id="cb2-48"><a href="#cb2-48"></a>  <span class="cf">return</span> (</span>
-<span id="cb2-49"><a href="#cb2-49"></a>    <span class="op">&lt;&gt;</span></span>
-<span id="cb2-50"><a href="#cb2-50"></a>      <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">"w3-container"</span><span class="op">&gt;</span></span>
-<span id="cb2-51"><a href="#cb2-51"></a>        <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">"w3-container w3-cell"</span><span class="op">&gt;</span></span>
-<span id="cb2-52"><a href="#cb2-52"></a>          <span class="op">&lt;</span>Profile <span class="op">/&gt;</span></span>
-<span id="cb2-53"><a href="#cb2-53"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb2-54"><a href="#cb2-54"></a>        <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">"w3-container w3-cell"</span><span class="op">&gt;</span></span>
-<span id="cb2-55"><a href="#cb2-55"></a>          <span class="op">&lt;</span>Profile <span class="op">/&gt;</span></span>
-<span id="cb2-56"><a href="#cb2-56"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb2-57"><a href="#cb2-57"></a>        <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">"w3-container w3-cell"</span><span class="op">&gt;</span></span>
-<span id="cb2-58"><a href="#cb2-58"></a>          <span class="op">&lt;</span>Profile <span class="op">/&gt;</span></span>
-<span id="cb2-59"><a href="#cb2-59"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb2-60"><a href="#cb2-60"></a>        <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">"w3-container"</span><span class="op">&gt;</span></span>
-<span id="cb2-61"><a href="#cb2-61"></a>         <span class="op">&lt;</span>ProfileData menu<span class="op">=</span>{menus[<span class="dv">0</span>]} <span class="op">/&gt;</span></span>
-<span id="cb2-62"><a href="#cb2-62"></a>         <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb2-63"><a href="#cb2-63"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb2-64"><a href="#cb2-64"></a>     </span>
-<span id="cb2-65"><a href="#cb2-65"></a>    <span class="op">&lt;/&gt;</span></span>
-<span id="cb2-66"><a href="#cb2-66"></a>  )<span class="op">;</span></span>
-<span id="cb2-67"><a href="#cb2-67"></a>}</span>
-<span id="cb2-68"><a href="#cb2-68"></a></span>
-<span id="cb2-69"><a href="#cb2-69"></a><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></span>
-<span id="cb2-70"><a href="#cb2-70"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">App</span>() {</span>
+<span id="cb2-8"><a href="#cb2-8"></a>  <span class="cf">return</span> (</span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="op">&lt;&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>      <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">"w3-container"</span><span class="op">&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>        <span class="op">&lt;</span>h1<span class="op">&gt;</span>healthy food<span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>        <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">"w3-container w3-cell"</span><span class="op">&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>          <span class="op">&lt;</span>MenuList <span class="op">/&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>        <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">"w3-container w3-cell"</span><span class="op">&gt;</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>          <span class="op">&lt;</span>MenuList <span class="op">/&gt;</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>        <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">"w3-container w3-cell"</span><span class="op">&gt;</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>          <span class="op">&lt;</span>MenuList <span class="op">/&gt;</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a>        <span class="op">&lt;</span>MenuList <span class="op">/&gt;</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a>      <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">"w3-container w3-cell"</span><span class="op">&gt;</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a>        <span class="op">&lt;</span>a</span>
+<span id="cb2-25"><a href="#cb2-25"></a>          className<span class="op">=</span><span class="st">"App-link"</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a>          href<span class="op">=</span><span class="st">"https://reactjs.org"</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a>          target<span class="op">=</span><span class="st">"_blank"</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a>          rel<span class="op">=</span><span class="st">"noopener noreferrer"</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a>        <span class="op">&gt;</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a>          Learn React</span>
+<span id="cb2-31"><a href="#cb2-31"></a>        <span class="op">&lt;/</span>a<span class="op">&gt;</span></span>
+<span id="cb2-32"><a href="#cb2-32"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a>      <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb2-34"><a href="#cb2-34"></a>      <span class="op">&lt;</span>Order <span class="op">/&gt;</span></span>
+<span id="cb2-35"><a href="#cb2-35"></a>      <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a>    <span class="op">&lt;/&gt;</span></span>
+<span id="cb2-37"><a href="#cb2-37"></a>  )<span class="op">;</span></span>
+<span id="cb2-38"><a href="#cb2-38"></a>}</span>
+<span id="cb2-39"><a href="#cb2-39"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>ProfileData.jss</strong></pre>
+<pre><strong>MenuList.jss</strong></pre>
 </div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">import</span> <span class="st">"w3-css/w3.css"</span><span class="op">;</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">ProfileData</span>({menu}) {</span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">//console.log(menu);</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a>  <span class="cf">return</span> (</span>
-<span id="cb3-9"><a href="#cb3-9"></a>    <span class="op">&lt;&gt;</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a>      </span>
-<span id="cb3-11"><a href="#cb3-11"></a>       <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">"w3-panel w3-card w3-teal"</span><span class="op">&gt;</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a>        <span class="op">&lt;</span>h1<span class="op">&gt;</span> {menu<span class="op">.</span><span class="at">name</span>} <span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>        <span class="op">&lt;</span>span <span class="kw">class</span><span class="op">=</span><span class="st">"w3-sand"</span><span class="op">&gt;</span>{menu<span class="op">.</span><span class="at">id</span>}<span class="op">&lt;/</span>span<span class="op">&gt;</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a>        <span class="op">&lt;</span>p<span class="op">&gt;&lt;/</span>p<span class="op">&gt;</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a>        <span class="op">&lt;</span>p<span class="op">&gt;</span>{menu<span class="op">.</span><span class="at">contents</span>[<span class="dv">0</span>]}<span class="op">,</span> {menu<span class="op">.</span><span class="at">contents</span>[<span class="dv">1</span>]}<span class="op">,</span> {menu<span class="op">.</span><span class="at">contents</span>[<span class="dv">2</span>]} <span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a>        <span class="op">&lt;</span>p<span class="op">&gt;</span>{menu<span class="op">.</span><span class="at">price</span>} euros<span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a>        <span class="op">&lt;</span>p<span class="op">&gt;</span>Water is {menu<span class="op">.</span><span class="at">water</span> <span class="op">?</span> <span class="st">''</span> <span class="op">:</span> <span class="st">'not'</span>}  <span class="op">&lt;</span>span<span class="op">&gt;</span>included <span class="op">&lt;/</span>span<span class="op">&gt;&lt;/</span>p<span class="op">&gt;</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a>        </span>
-<span id="cb3-19"><a href="#cb3-19"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a>    <span class="op">&lt;/&gt;</span></span>
-<span id="cb3-21"><a href="#cb3-21"></a>  )<span class="op">;</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">MenuList</span>() {</span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="cf">return</span> (</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="op">&lt;&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>      <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">"w3-container"</span><span class="op">&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>        <span class="op">&lt;</span>h2<span class="op">&gt;</span>Menu<span class="op">&lt;/</span>h2<span class="op">&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a>        <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">"w3-panel w3-card w3-sand"</span><span class="op">&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>         </span>
+<span id="cb3-11"><a href="#cb3-11"></a>            <span class="op">&lt;</span>h3<span class="op">&gt;</span>Lisboa<span class="op">&lt;/</span>h3<span class="op">&gt;</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a>            <span class="op">&lt;</span>h5<span class="op">&gt;</span>Gluten Free<span class="op">&lt;/</span>h5<span class="op">&gt;</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>            <span class="op">&lt;</span>ul<span class="op">&gt;</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a>              <span class="op">&lt;</span>li<span class="op">&gt;</span>Meat Balls <span class="cf">with</span> portuguese sauce<span class="op">&lt;/</span>li<span class="op">&gt;</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>              <span class="op">&lt;</span>li<span class="op">&gt;</span>Fresh Tuna<span class="op">&lt;/</span>li<span class="op">&gt;</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>              <span class="op">&lt;</span>li<span class="op">&gt;</span>Onion and rice<span class="op">&lt;/</span>li<span class="op">&gt;</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a></span>
+<span id="cb3-19"><a href="#cb3-19"></a>              <span class="op">&lt;</span>h2<span class="op">&gt;</span><span class="dt">Price</span><span class="op">:</span> <span class="dv">80</span><span class="er">€</span><span class="op">&lt;/</span>h2<span class="op">&gt;</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a>            <span class="op">&lt;/</span>ul<span class="op">&gt;</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a></span>
+<span id="cb3-22"><a href="#cb3-22"></a>      </span>
+<span id="cb3-23"><a href="#cb3-23"></a>              <span class="op">&lt;</span>button <span class="kw">class</span><span class="op">=</span><span class="st">"w3-button w3-pink"</span><span class="op">&gt;</span>Accept<span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a>            <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a>  </span>
+<span id="cb3-27"><a href="#cb3-27"></a>     </span>
+<span id="cb3-28"><a href="#cb3-28"></a>    <span class="op">&lt;/&gt;</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a>  )<span class="op">;</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="add-json-data-as-model" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="add-json-data-as-model"><span class="header-section-number">4.3</span> Add JSON data as model</h2>
+<p>A <strong>static array</strong> named <code>menus</code> represents different restaurant menus, each containing an:</p>
+<ul>
+<li>id,</li>
+<li>name,</li>
+<li>list of contents (foods),</li>
+<li>price,</li>
+<li>and flags indicating whether the menu is
+<ul>
+<li>active and</li>
+<li>includes water.</li>
+</ul></li>
+</ul>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>Profile.jss</strong></pre>
+<pre><strong>Data.json</strong></pre>
 </div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> <span class="st">"w3-css/w3.css"</span><span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="im">import</span> lisboa <span class="im">from</span> <span class="st">'./images/lisboa.jpeg'</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Profile</span>() {</span>
-<span id="cb4-6"><a href="#cb4-6"></a></span>
-<span id="cb4-7"><a href="#cb4-7"></a></span>
-<span id="cb4-8"><a href="#cb4-8"></a>  <span class="cf">return</span> (</span>
-<span id="cb4-9"><a href="#cb4-9"></a>    <span class="op">&lt;&gt;</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a>      <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">"w3-panel w3-card w3-sand"</span><span class="op">&gt;</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a>        <span class="op">&lt;</span>h1<span class="op">&gt;</span> Menu Lisboa <span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a>        <span class="op">&lt;</span>p<span class="op">&gt;</span>This menu is incredible<span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a>        <span class="op">&lt;</span>img src<span class="op">=</span>{lisboa} alt<span class="op">=</span><span class="st">"Menu"</span> style<span class="op">=</span>{{ <span class="dt">height</span><span class="op">:</span> <span class="dv">200</span><span class="op">,</span> <span class="dt">width</span><span class="op">:</span> <span class="dv">200</span> }} <span class="op">/&gt;</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a>        <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a>        <span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"https://reactjs.org"</span> target<span class="op">=</span><span class="st">"_blank"</span> rel<span class="op">=</span><span class="st">"noopener noreferrer"</span><span class="op">&gt;</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a>          Learn more</span>
-<span id="cb4-17"><a href="#cb4-17"></a>        <span class="op">&lt;/</span>a<span class="op">&gt;</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a></span>
-<span id="cb4-19"><a href="#cb4-19"></a>        <span class="op">&lt;</span>ul<span class="op">&gt;</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a>          <span class="op">&lt;</span>li<span class="op">&gt;</span>Meat Balls <span class="cf">with</span> portuguese sauce<span class="op">&lt;/</span>li<span class="op">&gt;</span></span>
-<span id="cb4-21"><a href="#cb4-21"></a>          <span class="op">&lt;</span>li<span class="op">&gt;</span>Fresh Tuna<span class="op">&lt;/</span>li<span class="op">&gt;</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a>          <span class="op">&lt;</span>li<span class="op">&gt;</span>Onion and rice<span class="op">&lt;/</span>li<span class="op">&gt;</span></span>
-<span id="cb4-23"><a href="#cb4-23"></a></span>
-<span id="cb4-24"><a href="#cb4-24"></a>          <span class="op">&lt;</span>h2<span class="op">&gt;</span><span class="dt">Price</span><span class="op">:</span> <span class="dv">80</span><span class="er">€</span><span class="op">&lt;/</span>h2<span class="op">&gt;</span></span>
-<span id="cb4-25"><a href="#cb4-25"></a>        <span class="op">&lt;/</span>ul<span class="op">&gt;</span></span>
-<span id="cb4-26"><a href="#cb4-26"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
-<span id="cb4-27"><a href="#cb4-27"></a>    <span class="op">&lt;/&gt;</span></span>
-<span id="cb4-28"><a href="#cb4-28"></a>  )<span class="op">;</span></span>
-<span id="cb4-29"><a href="#cb4-29"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource json code-overflow-wrap number-lines code-with-copy"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1"></a><span class="er">const</span> <span class="er">menus</span> <span class="er">=</span> <span class="ot">[</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">{</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="dt">"id"</span><span class="fu">:</span> <span class="st">"M001"</span><span class="fu">,</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Menu Lisboa"</span><span class="fu">,</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="dt">"contents"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>      <span class="st">"Meat Balls"</span><span class="ot">,</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>      <span class="st">"Salad with tomato"</span><span class="ot">,</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>      <span class="st">"Onion and carrot"</span><span class="ot">,</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>      <span class="st">"Fresh Tuna"</span><span class="ot">,</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>    <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>    <span class="dt">"price"</span><span class="fu">:</span> <span class="fl">80.0</span><span class="fu">,</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>    <span class="dt">"active"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a>    <span class="dt">"water"</span><span class="fu">:</span> <span class="kw">true</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>  <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>  <span class="fu">{</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>    <span class="dt">"id"</span><span class="fu">:</span> <span class="st">"M002"</span><span class="fu">,</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a>    <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Menu New York"</span><span class="fu">,</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a>    <span class="dt">"contents"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a>      <span class="st">"Meat Balls with Pulled Steak"</span><span class="ot">,</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a>      <span class="st">"Salad with tomato"</span><span class="ot">,</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a>      <span class="st">"Brown Rice"</span><span class="ot">,</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a>      <span class="st">"Fresh Salmon"</span></span>
+<span id="cb4-23"><a href="#cb4-23"></a>    <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a>    <span class="dt">"price"</span><span class="fu">:</span> <span class="fl">85.0</span><span class="fu">,</span></span>
+<span id="cb4-25"><a href="#cb4-25"></a>    <span class="dt">"active"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb4-26"><a href="#cb4-26"></a>    <span class="dt">"water"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb4-27"><a href="#cb4-27"></a>  <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb4-28"><a href="#cb4-28"></a>  <span class="fu">{</span></span>
+<span id="cb4-29"><a href="#cb4-29"></a>    <span class="dt">"id"</span><span class="fu">:</span> <span class="st">"M003"</span><span class="fu">,</span></span>
+<span id="cb4-30"><a href="#cb4-30"></a>    <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Menu Santiago"</span><span class="fu">,</span></span>
+<span id="cb4-31"><a href="#cb4-31"></a>    <span class="dt">"contents"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb4-32"><a href="#cb4-32"></a>      <span class="st">"Meat Chicken Curry"</span><span class="ot">,</span></span>
+<span id="cb4-33"><a href="#cb4-33"></a>      <span class="st">"Salad with tomato"</span><span class="ot">,</span></span>
+<span id="cb4-34"><a href="#cb4-34"></a>      <span class="st">"Carrot with edamame"</span><span class="ot">,</span></span>
+<span id="cb4-35"><a href="#cb4-35"></a>      <span class="st">"Fresh Tuna"</span></span>
+<span id="cb4-36"><a href="#cb4-36"></a>    <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb4-37"><a href="#cb4-37"></a>    <span class="dt">"price"</span><span class="fu">:</span> <span class="fl">82.0</span><span class="fu">,</span></span>
+<span id="cb4-38"><a href="#cb4-38"></a>    <span class="dt">"active"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb4-39"><a href="#cb4-39"></a>    <span class="dt">"water"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb4-40"><a href="#cb4-40"></a>  <span class="fu">}</span></span>
+<span id="cb4-41"><a href="#cb4-41"></a><span class="ot">]</span><span class="er">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Below the three <code>MenuList</code> components, a <code>MenuData</code> component is rendered with the <code>menu</code> prop set to the first menu item from the <code>menus</code> array (<code>menus[0]</code>).</p>
+<p>This implies that the initial data displayed in the <code>MenuData</code> component corresponds to the “Menu Lisboa.”</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>MenuData.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">import</span> <span class="st">"w3-css/w3.css"</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">MenuData</span>({menu}) {</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">//console.log(menu);</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="cf">return</span> (</span>
+<span id="cb5-9"><a href="#cb5-9"></a>    <span class="op">&lt;&gt;</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>      </span>
+<span id="cb5-11"><a href="#cb5-11"></a>       <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">"w3-panel w3-card w3-teal"</span><span class="op">&gt;</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>        <span class="op">&lt;</span>h1<span class="op">&gt;</span> {menu<span class="op">.</span><span class="at">name</span>} <span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>        <span class="op">&lt;</span>span <span class="kw">class</span><span class="op">=</span><span class="st">"w3-sand"</span><span class="op">&gt;</span>{menu<span class="op">.</span><span class="at">id</span>}<span class="op">&lt;/</span>span<span class="op">&gt;</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>        <span class="op">&lt;</span>p<span class="op">&gt;&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>        <span class="op">&lt;</span>p<span class="op">&gt;</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>          {menu<span class="op">.</span><span class="at">contents</span>[<span class="dv">0</span>]}<span class="op">,</span> </span>
+<span id="cb5-17"><a href="#cb5-17"></a>          {menu<span class="op">.</span><span class="at">contents</span>[<span class="dv">1</span>]}<span class="op">,</span> </span>
+<span id="cb5-18"><a href="#cb5-18"></a>          {menu<span class="op">.</span><span class="at">contents</span>[<span class="dv">2</span>]} </span>
+<span id="cb5-19"><a href="#cb5-19"></a>        <span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a></span>
+<span id="cb5-21"><a href="#cb5-21"></a>        <span class="op">&lt;</span>p<span class="op">&gt;</span>{menu<span class="op">.</span><span class="at">price</span>} euros<span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a></span>
+<span id="cb5-23"><a href="#cb5-23"></a>        <span class="op">&lt;</span>p<span class="op">&gt;</span>Water is {menu<span class="op">.</span><span class="at">water</span> <span class="op">?</span> <span class="st">''</span> <span class="op">:</span> <span class="st">'not'</span>} </span>
+<span id="cb5-24"><a href="#cb5-24"></a>        <span class="op">&lt;</span>span<span class="op">&gt;</span>included <span class="op">&lt;/</span>span<span class="op">&gt;&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a>        </span>
+<span id="cb5-26"><a href="#cb5-26"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a>    <span class="op">&lt;/&gt;</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a>  )<span class="op">;</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -1999,10 +2046,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="" class="external">GitHub code v0.0</a></td>
+<td><a href="https://github.com/AlbertProfe/healthyfoodFront/tree/99df8047f57acbae1bf53c9dd777a4d7cdd1b597" class="external">GitHub code v0.0</a></td>
 <td>create project, test to basic cards components</td>
 <td><a href="../images/reactjs/healthyfood-project-v0-0.png" width="80%">Basic Structure</a></td>
-<td><a href="../images/reactjs/healthyfood-mockup.png">output v0.0 render</a></td>
+<td><a href="../images/reactjs/healthyfood-render-v0-0.png">render v0.0 render</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/AlbertProfe/healthyfoodFront/tree/99df8047f57acbae1bf53c9dd777a4d7cdd1b597" class="external">GitHub code v0.1</a></td>
+<td>create JSON array for data, props</td>
+<td>-</td>
+<td><a href="">render v0.1 render</a></td>
 </tr>
 </tbody>
 </table>
@@ -2011,7 +2064,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../reactjs/rjslab5-6.html">React JS: Lab#RE05-6 <i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i></a> <br></p>
+<p><br> <a href="../reactjs/rjslab5-6.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> React JS: Lab#RE05-6</a> <br></p>
 </div>
 <br>
 <div class="column center">
@@ -2399,7 +2452,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":true,"openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":true});</script>
 
 
 
