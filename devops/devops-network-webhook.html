@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -1699,7 +1733,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, January 11, 2024</p>
+      <p class="date-modified">Thursday, January 25, 2024</p>
     </div>
   </div>
     
@@ -1710,6 +1744,44 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="what-is-a-webhook" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> What is a webhook?</h1>
+<p><mark>A webhook is a mechanism for automating the delivery of real-time data from one application to another. It allows applications to communicate with each other by sending HTTP POST requests containing data payloads to a specified URL. Webhooks are commonly used to enable event-driven architectures, where actions in one system trigger responses in another.</mark></p>
+<p>Key characteristics of webhooks include:</p>
+<ul>
+<li><p><strong>Event-Driven:</strong> Webhooks are triggered by specific events or updates in an originating system. When the predefined event occurs, a POST request containing relevant data is sent to the configured webhook URL.</p></li>
+<li><p><strong>HTTP Callbacks:</strong> Webhooks rely on HTTP callbacks to deliver data. The receiving system, often referred to as the webhook endpoint, listens for incoming HTTP POST requests and processes the data payload.</p></li>
+<li><p><strong>Asynchronous:</strong> Webhooks facilitate asynchronous communication between applications. The sender of the webhook doesn’t wait for a response; it simply sends the data and continues its operations.</p></li>
+<li><p><strong>Configurability:</strong> Users can configure webhooks to respond to specific events of interest. This flexibility allows for the customization of integrations between different services.</p></li>
+</ul>
+<p>Consider a scenario where a webhook is used in an e-commerce application. A webhook could be set up to notify an inventory management system whenever a new order is placed. The e-commerce application triggers the webhook by sending a POST request to the specified URL with details about the new order, such as product information and customer details.</p>
+<p><strong>Webhook Example:</strong></p>
+<p>When a new order is placed:</p>
+<ul>
+<li><p>Webhook URL: <code>https://example.com/webhook/inventory</code></p></li>
+<li><p>HTTP Method: POST</p></li>
+<li><p>Payload:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="dt">"event"</span><span class="fu">:</span> <span class="st">"new_order"</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="dt">"order_id"</span><span class="fu">:</span> <span class="st">"12345"</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="dt">"products"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="fu">{</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>      <span class="dt">"id"</span><span class="fu">:</span> <span class="st">"A001"</span><span class="fu">,</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>      <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Product A"</span><span class="fu">,</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>      <span class="dt">"quantity"</span><span class="fu">:</span> <span class="dv">2</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="fu">{</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>      <span class="dt">"id"</span><span class="fu">:</span> <span class="st">"B002"</span><span class="fu">,</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>      <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Product B"</span><span class="fu">,</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>      <span class="dt">"quantity"</span><span class="fu">:</span> <span class="dv">1</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="fu">}</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  <span class="dt">"customer"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>    <span class="dt">"id"</span><span class="fu">:</span> <span class="st">"C567"</span><span class="fu">,</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>    <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"John Doe"</span><span class="fu">,</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>    <span class="dt">"email"</span><span class="fu">:</span> <span class="st">"john@example.com"</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>  <span class="fu">}</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this example, the inventory management system, listening at the specified webhook URL, receives the data payload and processes it to update the inventory based on the new order.</p></li>
+</ul>
 </section>
 <section id="webhook-polling" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Webhook &amp; polling</h1>
@@ -2132,7 +2204,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":true,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox"});</script>
 
 
 
