@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -44,6 +78,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -72,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 
 <div id="quarto-search-results"></div>
@@ -148,7 +185,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="../linux/linux-distros-redhat.html" rel="" target="">
- <span class="dropdown-text">Linux Distros: Red Hat Enterprise Linux</span></a>
+ <span class="dropdown-text">Linux Distros: Red Hat Enterprise</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Linux: laboratories</li>
@@ -654,6 +691,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../javase/selab3-3.html" rel="" target="">
  <span class="dropdown-text">Lab#SE03-3: Library/Book, Expand Model</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab4-1.html" rel="" target="">
+ <span class="dropdown-text">Lab#SE04-1: healthyFood Restaurant, Core Model</span></a>
+  </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Java SE readings</li>
         <li>
@@ -971,6 +1012,10 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="../reactjs/rjslab5-6.html" rel="" target="">
  <span class="dropdown-text">Lab#RE05-6: chat &amp; ws: front</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab6-1.html" rel="" target="">
+ <span class="dropdown-text">Lab#RE06-1: healthyFood Restaurant</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">React JS readings</li>
@@ -1406,7 +1451,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../linux/linux-distros-redhat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Linux Distros: Red Hat Enterprise Linux</span></a>
+ <span class="menu-text">Linux Distros: Red Hat Enterprise</span></a>
   </div>
 </li>
       </ul>
@@ -1513,10 +1558,26 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
+  <ul>
+  <li><a href="#the-debian-ecosystem" id="toc-the-debian-ecosystem" class="nav-link" data-scroll-target="#the-debian-ecosystem"><span class="header-section-number">1.1</span> The Debian Ecosystem</a></li>
+  <li><a href="#reasons-to-use-debian" id="toc-reasons-to-use-debian" class="nav-link" data-scroll-target="#reasons-to-use-debian"><span class="header-section-number">1.2</span> Reasons to use Debian</a></li>
+  </ul></li>
+  <li><a href="#the-debian-installation-process-step-by-step-guide" id="toc-the-debian-installation-process-step-by-step-guide" class="nav-link" data-scroll-target="#the-debian-installation-process-step-by-step-guide"><span class="header-section-number">2</span> The Debian Installation Process: Step-by-Step Guide</a></li>
+  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics"><span class="header-section-number">3</span> Advanced Topics</a>
+  <ul>
+  <li><a href="#package-management-tools" id="toc-package-management-tools" class="nav-link" data-scroll-target="#package-management-tools"><span class="header-section-number">3.1</span> Package Management Tools</a></li>
+  <li><a href="#command-line-interface" id="toc-command-line-interface" class="nav-link" data-scroll-target="#command-line-interface"><span class="header-section-number">3.2</span> Command Line Interface</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/linux/linux-distros-debian.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -1555,7 +1616,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, January 11, 2024</p>
+      <p class="date-modified">Sunday, January 28, 2024</p>
     </div>
   </div>
     
@@ -1564,6 +1625,148 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/devops/debian-log.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="..\images/devops/debian-log.png" class="img-fluid figure-img" style="width:60.0%"></a></p>
+</figure>
+</div>
+<section id="introduction" class="level1 page-columns page-full" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p><a href="https://www.debian.org/index.en.html" class="external">Debian</a>, often referred to as the “universal operating system,” stands as a stalwart in the <strong>open-source community.</strong></p>
+<p><mark>As one of the oldest and most respected Linux distributions, Debian serves as a foundation for numerous other distributions and remains a favorite among users seeking stability, security, and a commitment to free and open-source software.</mark></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Our Philosophy: Why we do it and how we do it
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Our Mission: Creating a Free Operating System</strong></p>
+<p>The Debian Project is an association of individuals, sharing a common goal: We want to create a free operating system, freely available for everyone.</p>
+<p>Now, when we use the word “free”, we’re not talking about money, instead, we are referring to <a href="https://www.debian.org/intro/philosophy" class="external">software freedom.</a></p>
+</div>
+</div>
+<section id="the-debian-ecosystem" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="the-debian-ecosystem"><span class="header-section-number">1.1</span> The Debian Ecosystem</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/devops/Debian_12_Bookworm_GNOME_Desktop_English.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="..\images/devops/Debian_12_Bookworm_GNOME_Desktop_English.png" class="img-fluid figure-img" style="width:40.0%"></a></p>
+</figure>
+</div>
+<p>The Debian ecosystem is vast and diverse, catering to a wide range of user preferences. In this section, we delve into the different Debian releases, understanding the characteristics of each branch, including Stable, Testing, and Unstable.</p>
+<ul>
+<li><a href="https://www.debian.org/intro/people" class="external">People: Who we are and what we do</a></li>
+</ul>
+</section>
+<section id="reasons-to-use-debian" class="level2 page-columns page-full" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="reasons-to-use-debian"><span class="header-section-number">1.2</span> Reasons to use Debian</h2>
+<p>There are a lot of reasons to choose Debian as your operating system – as a user, as a developer, and even in enterprise environments.</p>
+<p><mark>Most users appreciate the stability, and the smooth upgrade processes of both packages and the entire distribution.</mark></p>
+<p>Debian is also widely used by software and hardware developers because it runs on numerous architectures and devices, offers a public bug tracker and other tools for developers. If you plan to use Debian in a professional environment, there are additional benefits like LTS versions and cloud images.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>For me it’s the perfect level of ease of use and stability. I’ve used various different distributions over the years but Debian is the only one that just works.</p>
+<p>NorhamsFinest on Reddit*</p>
+</div></div><p><strong>Debian is Free Software.</strong></p>
+<p>Debian is made of free and open source software and will always be 100% free. Free for anyone to use, modify, and distribute. This is our main promise to our users. It’s also free of cost.</p>
+<p><strong>Debian is stable and secure.</strong></p>
+<p>Debian is a Linux-based operating system for a wide range of devices including laptops, desktops and servers. We provide a reasonable default configuration for every package as well as regular security updates during the packages’ lifetimes.</p>
+<p><strong>Debian has extensive Hardware Support.</strong></p>
+<p>Most hardware is supported by the Linux kernel which means that Debian will support it as well. Proprietary drivers for hardware are available if necessary.</p>
+<p><strong>Debian offers a flexible Installer.</strong></p>
+<p>Our Live CD is for everyone who wants to give Debian a try before installing it. It also includes the Calamares installer which makes it easy to install Debian from the live system. More experienced users can use the Debian installer with more options for fine-tuning, including the possibility to use an automated network installation tool.</p>
+<p><strong>Debian provides smooth Upgrades.</strong></p>
+<p>It’s easy to keep our operating system up-to-date, whether you want to upgrade to a completely new release or just update a single package.</p>
+<p><strong>Debian is the Base for many other Distributions.</strong></p>
+<p>Many popular Linux distributions, like Ubuntu, Knoppix, PureOS or Tails, are based on Debian. We provide all the tools so that everyone can extend the software packages from the Debian archive with their own packages if needed.</p>
+<p><strong>The Debian Project is a Community.</strong></p>
+<p>Everyone can be a part of our community; you don’t have to be a developer or sysadmin. Debian has a democratic governance structure. Since all members of the Debian project have equal rights, Debian cannot be controlled by a single company. Our developers are from more than 60 different countries, and Debian itself is translated into more than 80 languages.</p>
+</section>
+</section>
+<section id="the-debian-installation-process-step-by-step-guide" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> The Debian Installation Process: Step-by-Step Guide</h1>
+<p>Installing Debian might seem intimidating to newcomers, but fear not – our step-by-step guide makes the process a breeze.</p>
+<p>From <a href="https://www.debian.org/distrib/" class="external">downloading</a> the installation image to configuring the system, we break down each step to ensure a smooth installation experience. We discuss the different installation options, such as the graphical and text-based installers, and provide tips on partitioning and selecting software packages.</p>
+<ul>
+<li><a href="https://www.debian.org/releases/stable/amd64/" class="external">Guia d’instal·lació de Debian GNU/Linux</a></li>
+</ul>
+<p><strong>Step 1: Download Debian Installation Image</strong></p>
+<p>Visit the <a href="https://www.debian.org/">official Debian website</a> and navigate to the “Download” section. Choose the appropriate Debian version (Stable, Testing, or Unstable) and download the installation image for your architecture (e.g., amd64, i386).</p>
+<p><strong>Step 2: Create a Bootable USB Drive</strong></p>
+<p>Use a tool like <a href="https://rufus.ie/">Rufus</a> on Windows or <a href="https://linux.die.net/man/1/dd">dd</a> command on Linux to create a bootable USB drive with the Debian installation image.</p>
+<p>Example using dd on Linux:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">sudo</span> dd bs=4M if=/path/to/debian.iso of=/dev/sdX status=progress <span class="kw">&amp;&amp;</span> <span class="fu">sync</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Replace <code>/path/to/debian.iso</code> with the actual path to your Debian ISO file and <code>/dev/sdX</code> with your USB drive identifier.</p>
+<p><strong>Step 3: Boot from USB</strong></p>
+<ul>
+<li>Insert the bootable USB drive into the target system and restart it.</li>
+<li>Enter the BIOS or UEFI settings to set the USB drive as the primary boot device.</li>
+</ul>
+<p><strong>Step 4: Start Debian Installer</strong></p>
+<ul>
+<li>Boot from the USB drive, and you’ll be greeted by the Debian Installer.</li>
+<li>Choose the installation option, such as “Graphical Install” for a user-friendly interface or “Install” for a text-based installation.</li>
+</ul>
+<p><strong>Step 5: Language and Location</strong></p>
+<ul>
+<li>Select your preferred language, country, and keyboard layout when prompted by the installer.</li>
+</ul>
+<p><strong>Step 6: Network Configuration</strong></p>
+<ul>
+<li>Configure your network settings. Choose DHCP for automatic configuration or manually enter network details if needed.</li>
+</ul>
+<p><strong>Step 7: Disk Partitioning</strong></p>
+<ul>
+<li>Choose the disk on which to install Debian. You can either use the entire disk or manually partition it.</li>
+<li>Follow the prompts to set up partitions and file systems.</li>
+</ul>
+<p><strong>Step 8: Install the Base System</strong></p>
+<ul>
+<li>The installer will download the base system and prompt you to set up a root password and create a user account.</li>
+<li>Follow the instructions to complete this step.</li>
+</ul>
+<p><strong>Step 9: Package Installation</strong></p>
+<ul>
+<li>Select the software packages you want to install. You can choose a predefined set or customize your selection.</li>
+</ul>
+<p><strong>Step 10: GRUB Boot Loader Installation</strong></p>
+<ul>
+<li>Install the GRUB boot loader to the master boot record (MBR) or the EFI partition, depending on your system’s architecture.</li>
+</ul>
+<p><strong>Step 11: Complete Installation</strong></p>
+<ul>
+<li>Once the installation is complete, remove the installation media (USB drive) and press “Continue” to reboot your system into the newly installed Debian system.</li>
+</ul>
+<p>Congratulations! You have successfully installed Debian on your system.</p>
+</section>
+<section id="advanced-topics" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Advanced Topics</h1>
+<section id="package-management-tools" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="package-management-tools"><span class="header-section-number">3.1</span> Package Management Tools</h2>
+<ul>
+<li><a href="https://wiki.debian.org/PackageManagementTools" class="external">PackageManagementTools</a></li>
+</ul>
+<p>Many tools available on a Debian system can be used for PackageManagement. Commonly used ones include:</p>
+<p><strong>command-line:</strong></p>
+<ul>
+<li><em>apt</em> - The main command-line package management tool</li>
+<li><em>aptitude</em> - command-line and text-based interface (ncurses) for Apt</li>
+</ul>
+<p><strong>graphical:</strong></p>
+<ul>
+<li><em>Synaptic</em> - Graphical package manager</li>
+<li><em>gdebi</em> - Graphical installer for standalone DebianPackages</li>
+<li><em>gnome-software</em> - Software Center for GNOME</li>
+</ul>
+</section>
+<section id="command-line-interface" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="command-line-interface"><span class="header-section-number">3.2</span> Command Line Interface</h2>
+<ul>
+<li><a href="https://www.debian.org/doc/manuals/debian-reference/ch01.en.html" class="external">CommandLineInterface</a></li>
+</ul>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1583,6 +1786,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1937,7 +2142,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left"><a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0 International (CC BY 4.0)</a></div>   
-    <div class="nav-footer-center">If you want to go far, walk slow / We love dukkha<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/linux/linux-distros-debian.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    <div class="nav-footer-center">If you want to go far, walk slow / We love dukkha</div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -1956,6 +2161,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","selector":".lightbox","loop":true});</script>
 
 
 
