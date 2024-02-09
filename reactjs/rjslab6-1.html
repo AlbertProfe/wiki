@@ -1773,6 +1773,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#react-functions" id="toc-react-functions" class="nav-link" data-scroll-target="#react-functions"><span class="header-section-number">4.1</span> React functions</a></li>
   <li><a href="#react-application" id="toc-react-application" class="nav-link" data-scroll-target="#react-application"><span class="header-section-number">4.2</span> React Application</a></li>
   <li><a href="#add-json-data-as-model" id="toc-add-json-data-as-model" class="nav-link" data-scroll-target="#add-json-data-as-model"><span class="header-section-number">4.3</span> Add JSON data as model</a></li>
+  <li><a href="#rendering-lists" id="toc-rendering-lists" class="nav-link" data-scroll-target="#rendering-lists"><span class="header-section-number">4.4</span> Rendering Lists</a></li>
   </ul></li>
   <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">5</span> Code</a></li>
   </ul>
@@ -1818,7 +1819,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, February 8, 2024</p>
+      <p class="date-modified">Friday, February 9, 2024</p>
     </div>
   </div>
     
@@ -1889,7 +1890,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/createproject.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="create-react-app"><img src="../images/reactjs/createproject.svg" class="img-fluid figure-img" alt="create-react-app"></a></p>
+<p><a href="../images/reactjs/createproject.svg" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="create-react-app"><img src="../images/reactjs/createproject.svg" class="img-fluid figure-img" alt="create-react-app"></a></p>
 <figcaption>create-react-app</figcaption>
 </figure>
 </div>
@@ -1898,7 +1899,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="3"><span class="header-section-number">3</span> Mock-up</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/healthyfood-mockup.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="healthyFood restaurant mockup"><img src="../images/reactjs/healthyfood-mockup.png" class="img-fluid figure-img" style="width:40.0%" alt="healthyFood restaurant mockup"></a></p>
+<p><a href="../images/reactjs/healthyfood-mockup.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="healthyFood restaurant mockup"><img src="../images/reactjs/healthyfood-mockup.png" class="img-fluid figure-img" style="width:40.0%" alt="healthyFood restaurant mockup"></a></p>
 <figcaption>healthyFood restaurant mockup</figcaption>
 </figure>
 </div>
@@ -2141,6 +2142,119 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-27"><a href="#cb6-27"></a>    <span class="op">&lt;/&gt;</span></span>
 <span id="cb6-28"><a href="#cb6-28"></a>  )<span class="op">;</span></span>
 <span id="cb6-29"><a href="#cb6-29"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="rendering-lists" class="level2 page-columns page-full" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="rendering-lists"><span class="header-section-number">4.4</span> Rendering Lists</h2>
+<p>First at all, import the <strong>data from JSON</strong> into an array of literal object JS:</p>
+<ul>
+<li><a href="https://github.com/AlbertProfe/healthyfoodFront/blob/ordersMapping/src/ordersDataJSON.js" class="external" target="_blank">ordersDataJSON</a></li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>OrderList.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb7" data-filename="OrderList.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">import</span> { ordersDataJSON } <span class="im">from</span> <span class="st">"./ordersDataJSON.js"</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a> <span class="kw">{</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="st">"id"</span><span class="ex">:</span> <span class="st">"O505"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3"></a>    <span class="st">"date"</span><span class="ex">:</span> <span class="st">"03/12/2022"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4"></a>    <span class="st">"waiter"</span><span class="ex">:</span> <span class="st">"Pere"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="st">"qtyPeople"</span><span class="ex">:</span> 8,</span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="st">"totalPayment"</span><span class="ex">:</span> 90.33,</span>
+<span id="cb8-7"><a href="#cb8-7"></a>    <span class="st">"paid"</span><span class="ex">:</span> true,</span>
+<span id="cb8-8"><a href="#cb8-8"></a>    <span class="st">"table"</span><span class="ex">:</span> <span class="st">"table6"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9"></a>    <span class="st">"menus"</span><span class="ex">:</span> [</span>
+<span id="cb8-10"><a href="#cb8-10"></a>      <span class="kw">{</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>        <span class="st">"menu"</span><span class="ex">:</span> <span class="st">"Girona"</span>,</span>
+<span id="cb8-12"><a href="#cb8-12"></a>        <span class="st">"qty"</span><span class="ex">:</span> 9</span>
+<span id="cb8-13"><a href="#cb8-13"></a>      <span class="ex">},</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>      <span class="kw">{</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a>        <span class="st">"menu"</span><span class="ex">:</span> <span class="st">"Santiago"</span>,</span>
+<span id="cb8-16"><a href="#cb8-16"></a>        <span class="st">"qty"</span><span class="ex">:</span> 1</span>
+<span id="cb8-17"><a href="#cb8-17"></a>      <span class="kw">}</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a>    <span class="ex">]</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a>  <span class="ex">},</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then, <strong>map</strong> the orders into a new array of JSX nodes, for exemple a list for <code>renderData</code> ids:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>OrderList.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb9" data-filename="OrderList.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb9-1"><a href="#cb9-1"></a></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">OrdersList</span>() {</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="kw">const</span> renderData <span class="op">=</span> ordersDataJSON<span class="op">.</span><span class="fu">map</span>(order <span class="kw">=&gt;</span> </span>
+<span id="cb9-6"><a href="#cb9-6"></a>                    <span class="kw">&lt;li&gt;</span><span class="va">{</span>order<span class="op">.</span><span class="at">id</span><span class="va">}</span><span class="kw">&lt;/li&gt;</span>)<span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a></span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="cf">return </span><span class="kw">&lt;ul&gt;</span><span class="va">{</span>renderData<span class="va">}</span><span class="kw">&lt;/ul&gt;</span><span class="op">;</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a></span>
+<span id="cb9-11"><a href="#cb9-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Array.prototype.map()</strong> The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" class="external" target="_blank">map()</a> method of Array instances creates a new array populated with the results of calling a provided function on every element in the calling array.</p>
+</div></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <mark>map()</mark> method is an <strong>iterative</strong> method.</p>
+<p>It calls a provided <strong>callbackFn</strong> function once for each element in an array and constructs a new array from the results.</p>
+<p>Read the iterative methods section for more information about how these methods work in general.</p>
+</div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>OrderList.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb10" data-filename="OrderList.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb10-1"><a href="#cb10-1"></a><span class="im">import</span> <span class="st">"w3-css/w3.css"</span><span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="im">import</span> { ordersDataJSON } <span class="im">from</span> <span class="st">"./ordersDataJSON.js"</span><span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">OrdersList</span>() {</span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="kw">const</span> renderData <span class="op">=</span> ordersDataJSON<span class="op">.</span><span class="fu">map</span>((order) <span class="kw">=&gt;</span> (</span>
+<span id="cb10-6"><a href="#cb10-6"></a>    <span class="kw">&lt;&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>      <span class="kw">&lt;div</span> <span class="ot">class</span><span class="op">=</span><span class="st">"w3-card-4"</span> <span class="ot">style</span><span class="op">=</span><span class="va">{</span>{ <span class="dt">width</span><span class="op">:</span> <span class="st">"50%"</span> }<span class="va">}</span><span class="kw">&gt;</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>        <span class="kw">&lt;header</span> <span class="ot">class</span><span class="op">=</span><span class="st">"w3-container w3-sand"</span><span class="kw">&gt;</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>          <span class="kw">&lt;h3&gt;</span>Id: <span class="va">{</span>order<span class="op">.</span><span class="at">id</span><span class="va">}</span><span class="kw">&lt;/h3&gt;</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>        <span class="kw">&lt;/header&gt;</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>        <span class="kw">&lt;br</span> <span class="kw">/&gt;</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>        <span class="kw">&lt;div</span> <span class="ot">class</span><span class="op">=</span><span class="st">"w3-container"</span><span class="kw">&gt;</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a>          Waiter: <span class="va">{</span>order<span class="op">.</span><span class="at">waiter</span><span class="va">}</span>, qtyPeople: <span class="va">{</span>order<span class="op">.</span><span class="at">qtyPeople</span><span class="va">}</span>, To pay:<span class="va">{</span><span class="st">" "</span><span class="va">}</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>          <span class="va">{</span>order<span class="op">.</span><span class="at">paid</span> <span class="op">?</span> <span class="st">" ✔"</span> <span class="op">:</span> <span class="st">"X"</span><span class="va">}</span> <span class="va">{</span>order<span class="op">.</span><span class="at">totalPayment</span><span class="va">}</span> $</span>
+<span id="cb10-15"><a href="#cb10-15"></a>        <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a>        <span class="kw">&lt;div</span> <span class="ot">class</span><span class="op">=</span><span class="st">"w3-container"</span><span class="kw">&gt;</span>Date: <span class="va">{</span>order<span class="op">.</span><span class="at">date</span><span class="va">}</span><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a>        <span class="kw">&lt;div</span> <span class="ot">class</span><span class="op">=</span><span class="st">"w3-container"</span><span class="kw">&gt;</span>Table: <span class="va">{</span>order<span class="op">.</span><span class="at">table</span><span class="va">}</span><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a>        <span class="kw">&lt;div</span> <span class="ot">class</span><span class="op">=</span><span class="st">"w3-container"</span><span class="kw">&gt;</span>Menus:<span class="kw">&lt;br/&gt;</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a>         <span class="va">{</span>order<span class="op">.</span><span class="at">menus</span><span class="op">.</span><span class="fu">map</span> ( (menu) <span class="kw">=&gt;</span> ( <span class="kw">&lt;&gt;&lt;span&gt;</span><span class="va">{</span>menu<span class="op">.</span><span class="at">menu</span><span class="va">}</span>:<span class="va">{</span>menu<span class="op">.</span><span class="at">qty</span><span class="va">}</span>, <span class="kw">&lt;/span&gt;&lt;/&gt;</span>))  <span class="va">}</span><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a>        <span class="kw">&lt;br</span> <span class="kw">/&gt;</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a>        <span class="kw">&lt;footer</span> <span class="ot">class</span><span class="op">=</span><span class="st">"w3-container w3-black"</span><span class="kw">&gt;</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a>          <span class="kw">&lt;h5&gt;</span>healthyFood restaurant<span class="kw">&lt;/h5&gt;</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a>        <span class="kw">&lt;/footer&gt;</span></span>
+<span id="cb10-24"><a href="#cb10-24"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb10-25"><a href="#cb10-25"></a>      <span class="kw">&lt;br</span> <span class="kw">/&gt;</span></span>
+<span id="cb10-26"><a href="#cb10-26"></a>    <span class="kw">&lt;/&gt;</span></span>
+<span id="cb10-27"><a href="#cb10-27"></a>  ))<span class="op">;</span></span>
+<span id="cb10-28"><a href="#cb10-28"></a></span>
+<span id="cb10-29"><a href="#cb10-29"></a>  <span class="co">//console.log(ordersDataJSON);</span></span>
+<span id="cb10-30"><a href="#cb10-30"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"renderdata"</span><span class="op">,</span> renderData)<span class="op">;</span></span>
+<span id="cb10-31"><a href="#cb10-31"></a></span>
+<span id="cb10-32"><a href="#cb10-32"></a></span>
+<span id="cb10-33"><a href="#cb10-33"></a>  <span class="cf">return</span> (</span>
+<span id="cb10-34"><a href="#cb10-34"></a>    <span class="kw">&lt;&gt;</span></span>
+<span id="cb10-35"><a href="#cb10-35"></a>      <span class="kw">&lt;div</span> <span class="ot">class</span><span class="op">=</span><span class="st">"w3-container"</span><span class="kw">&gt;</span></span>
+<span id="cb10-36"><a href="#cb10-36"></a>        <span class="kw">&lt;h1&gt;</span>Orders List<span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb10-37"><a href="#cb10-37"></a>        <span class="kw">&lt;div</span> <span class="ot">class</span><span class="op">=</span><span class="st">"w3-container"</span><span class="kw">&gt;</span><span class="va">{</span>renderData<span class="va">}</span><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb10-38"><a href="#cb10-38"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb10-39"><a href="#cb10-39"></a>    <span class="kw">&lt;/&gt;</span></span>
+<span id="cb10-40"><a href="#cb10-40"></a>  )<span class="op">;</span></span>
+<span id="cb10-41"><a href="#cb10-41"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -2768,7 +2882,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"closeEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
