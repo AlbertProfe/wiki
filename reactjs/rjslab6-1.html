@@ -1773,7 +1773,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#react-functions" id="toc-react-functions" class="nav-link" data-scroll-target="#react-functions"><span class="header-section-number">4.1</span> React functions</a></li>
   <li><a href="#react-application" id="toc-react-application" class="nav-link" data-scroll-target="#react-application"><span class="header-section-number">4.2</span> React Application</a></li>
   <li><a href="#add-json-data-as-model" id="toc-add-json-data-as-model" class="nav-link" data-scroll-target="#add-json-data-as-model"><span class="header-section-number">4.3</span> Add JSON data as model</a></li>
-  <li><a href="#rendering-lists" id="toc-rendering-lists" class="nav-link" data-scroll-target="#rendering-lists"><span class="header-section-number">4.4</span> Rendering Lists</a></li>
+  <li><a href="#rendering-order-list" id="toc-rendering-order-list" class="nav-link" data-scroll-target="#rendering-order-list"><span class="header-section-number">4.4</span> Rendering <code>order</code> list</a></li>
   </ul></li>
   <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">5</span> Code</a></li>
   </ul>
@@ -2144,8 +2144,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-29"><a href="#cb6-29"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="rendering-lists" class="level2 page-columns page-full" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="rendering-lists"><span class="header-section-number">4.4</span> Rendering Lists</h2>
+<section id="rendering-order-list" class="level2 page-columns page-full" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="rendering-order-list"><span class="header-section-number">4.4</span> Rendering <code>order</code> list</h2>
+<p>Our restaurant will have in this version three <em>entities</em>:</p>
+<ul>
+<li><code>menu</code></li>
+<li><code>table</code></li>
+<li><code>order</code>, it joins menus and tables</li>
+</ul>
 <p>First at all, import the <strong>data from JSON</strong> into an array of literal object JS:</p>
 <ul>
 <li><a href="https://github.com/AlbertProfe/healthyfoodFront/blob/ordersMapping/src/ordersDataJSON.js" class="external" target="_blank">ordersDataJSON</a></li>
@@ -2192,6 +2198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-10"><a href="#cb9-10"></a></span>
 <span id="cb9-11"><a href="#cb9-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>And eventually render <code>&lt;ul&gt;{renderData}&lt;/ul&gt;</code></p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong>Array.prototype.map()</strong> The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" class="external" target="_blank">map()</a> method of Array instances creates a new array populated with the results of calling a provided function on every element in the calling array.</p>
@@ -2205,11 +2212,19 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The <mark>map()</mark> method is an <strong>iterative</strong> method.</p>
+<p>The <mark>map()</mark> method is an <strong>iterative</strong> method. <mark>map()</mark>:</p>
+<ul>
+<li>creates a new array from calling a function for every array element.</li>
+<li>does not execute the function for empty elements.</li>
+<li>does not change the original array.</li>
+</ul>
 <p>It calls a provided <strong>callbackFn</strong> function once for each element in an array and constructs a new array from the results.</p>
-<p>Read the iterative methods section for more information about how these methods work in general.</p>
 </div>
 </div>
+<ul>
+<li><a href="https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_map3" class="external" target="_blank">Sandbox w3shcool map()</a></li>
+</ul>
+<div class="column-page-right">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>OrderList.jsx</strong></pre>
@@ -2255,6 +2270,7 @@ Note
 <span id="cb10-39"><a href="#cb10-39"></a>    <span class="kw">&lt;/&gt;</span></span>
 <span id="cb10-40"><a href="#cb10-40"></a>  )<span class="op">;</span></span>
 <span id="cb10-41"><a href="#cb10-41"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </section>
 </section>
@@ -2882,7 +2898,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","selector":".lightbox"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
