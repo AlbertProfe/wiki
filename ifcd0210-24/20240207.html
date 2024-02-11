@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="albertprofe">
-<meta name="description" content="Java SE Lab 02 part 4">
 
-<title>albertprofe wiki – Lab#SE02-4: Movie/Review, interactivity and coupling</title>
+<title>albertprofe wiki – quarto-input4d5d92a1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -78,11 +42,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -111,15 +70,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -1371,914 +1327,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../javase/selab0-1.html">Java SE Laboratories</a></li><li class="breadcrumb-item"><a href="../javase/selab2-4.html">Lab#SE02-4: Movie/Review, interactivity and coupling</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
- <span class="menu-text">Java Standard Edition</span>
-  </li>
-        <li class="px-0"><hr class="sidebar-divider hi "></li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
- <span class="menu-text">What is Java SE</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-what-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java Standard Edition: Basics</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-what-principles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java Standard Edition: Principles</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-what-moochelsinki.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java MOOC Helsinki</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-what-moocsyllabus.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java MOOC Helsinki Syllabus</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="px-0"><hr class="sidebar-divider hi "></li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
- <span class="menu-text">Java Create Project</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-maven.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java SE: Maven</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-createproject.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java SE: Create Maven Project</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-projectgit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java SE: Project push GitHub</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-tdd.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java SE: JUnit and TDD</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="px-0"><hr class="sidebar-divider hi "></li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
- <span class="menu-text">Java Concepts</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-objects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java SE: Class and Objects</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-scope.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java SE: Scope</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-static.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java SE: static modifier</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-coupling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java SE: Coupling and DDD</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-package.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java SE: Packages</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-interface.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java SE: Abstract/Interface</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-concepts-java8.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java SE: Java 8</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="px-0"><hr class="sidebar-divider hi "></li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
- <span class="menu-text">Java Principles</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-principles-encapsulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java SE: Encapsulation</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-principles-abstraction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java SE: Abstraction</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-principles-inheritance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java SE: Inherence</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-principles-polymorphism.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java SE: Polymorphism</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="px-0"><hr class="sidebar-divider hi "></li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
- <span class="menu-text">Java Design Patterns</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-uml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java Patterns: UML</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java Patterns: Types</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
- <span class="menu-text"><b>Creational</b></span>
-  </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-singleton.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Singleton</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-factory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Factory</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-abstractfactory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Abstract Factory</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-builder.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Builder</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
- <span class="menu-text"><b>Structural</b></span>
-  </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-facade.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Facade</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-bridge.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bridge</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-decorator.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Decorator</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-composite.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Composite</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
- <span class="menu-text"><b>Behavioral</b></span>
-  </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-observer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Observer</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-strategy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Strategy</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-state.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">State</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/se-pattern-commander.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Commander</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="px-0"><hr class="sidebar-divider hi "></li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
- <span class="menu-text">Java SE Laboratories</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab0-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab#SE00-1: Maven Person</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab0-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab#SE00-2: Maven Clinic</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab0-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab#SE00-3: Library Model</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab0-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab#SE00-4: Abstract/Interface Human</span></a>
-  </div>
-</li>
-          <li class="px-0"><hr class="sidebar-divider hi "></li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab1-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab#SE01-1: Maven/Gradle Person and Account</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab1-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab#SE01-2: Maven/Gradle Person and Account stored in JSON</span></a>
-  </div>
-</li>
-          <li class="px-0"><hr class="sidebar-divider hi "></li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab#SE02-1: Movie/Review, Model</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab#SE02-2: Movie/Review, CRUD Operations</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab#SE02-3: Movie/Review, factory</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-4.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Lab#SE02-4: Movie/Review, interactivity and coupling</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab2-5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab#SE02-5: Movie/Review, simulate interactivity by console</span></a>
-  </div>
-</li>
-          <li class="px-0"><hr class="sidebar-divider hi "></li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab3-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab#SE03-1: Library/Book, Core-Model</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab3-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab#SE03-2: Library/Book, Sprint Zero</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab3-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab#SE03-3: Library/Book, Expand Model</span></a>
-  </div>
-</li>
-          <li class="px-0"><hr class="sidebar-divider hi "></li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/selab4-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab#SE04-1: healthyFood Restaurant, Core Model</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="px-0"><hr class="sidebar-divider hi "></li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
- <span class="menu-text">Java SE readings</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../javase/resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Java SE Resources</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#java-user-input-scanner" id="toc-java-user-input-scanner" class="nav-link active" data-scroll-target="#java-user-input-scanner"><span class="header-section-number">1</span> Java User Input (Scanner)</a></li>
-  <li><a href="#birding" id="toc-birding" class="nav-link" data-scroll-target="#birding"><span class="header-section-number">2</span> Birding</a></li>
-  <li><a href="#core-classes" id="toc-core-classes" class="nav-link" data-scroll-target="#core-classes"><span class="header-section-number">3</span> Core classes</a></li>
-  <li><a href="#create-static-methods" id="toc-create-static-methods" class="nav-link" data-scroll-target="#create-static-methods"><span class="header-section-number">4</span> Create <code>static</code> methods</a></li>
-  <li><a href="#grow-your-code" id="toc-grow-your-code" class="nav-link" data-scroll-target="#grow-your-code"><span class="header-section-number">5</span> Grow your code</a></li>
-  <li><a href="#trycatch-for-wrong-inputs" id="toc-trycatch-for-wrong-inputs" class="nav-link" data-scroll-target="#trycatch-for-wrong-inputs"><span class="header-section-number">6</span> Try/Catch for wrong inputs</a>
-  <ul>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">6.1</span> Example</a></li>
-  </ul></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/javase/selab2-4.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../javase/selab0-1.html">Java SE Laboratories</a></li><li class="breadcrumb-item"><a href="../javase/selab2-4.html">Lab#SE02-4: Movie/Review, interactivity and coupling</a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title">Lab#SE02-4: Movie/Review, interactivity and coupling</h1>
-<p class="subtitle lead">Java SE Lab 02</p>
-  <div class="quarto-categories">
-    <div class="quarto-category">javase</div>
-    <div class="quarto-category">lab</div>
-    <div class="quarto-category">interativity</div>
-    <div class="quarto-category">coupling</div>
-    <div class="quarto-category">controller</div>
-  </div>
-  </div>
+
+
 
 <div>
-  <div class="description">
-    Java SE Lab 02 part 4
-  </div>
+<table data-quarto-postprocess="true" border:'1px="" data-solid';="" padding:="" data-'15px';}="" class="table">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">#</td>
+<td data-quarto-table-cell-role="th">Day</td>
+<td data-quarto-table-cell-role="th">Date</td>
+<td data-quarto-table-cell-role="th">Topics</td>
+<td data-quarto-table-cell-role="th">Topics</td>
+</tr>
+<tr class="even">
+<td>#7</td>
+<td>24</td>
+<td>12/02/2024</td>
+<td>- Adding more CRUD operations to `menuManager`<br> - Designing UML/MockUp ``createOrder``<br> - Adding CRUD operations to model: ``table``<br> - Creating DDD<br></td>
+<td>- <a href="https://react.dev/learn/adding-interactivity">Adding more</a><br> - Designing UML/MockUp ``createOrder``<br></td>
+</tr>
+<tr class="odd">
+<td>#7</td>
+<td>24</td>
+<td>12/02/2024</td>
+<td>- Adding more CRUD operations to `menuManager`<br> - Designing UML/MockUp ``createOrder``<br> - Adding CRUD operations to model: ``table``<br> - Creating DDD<br></td>
+<td>- <a href="https://react.dev/learn/adding-interactivity">Adding more</a><br> - Designing UML/MockUp ``createOrder``<br> - Adding CRUD operations to model: ``table``<br> - Creating DDD<br> - <a href="https://react.dev/learn/adding-interactivity">Adding more</a><br></td>
+</tr>
+<tr class="even">
+<td>#7</td>
+<td>24</td>
+<td>12/02/2024</td>
+<td>- Adding more CRUD operations to `menuManager`<br> - Designing UML/MockUp ``createOrder``<br> - Adding CRUD operations to model: ``table``<br> - Adding more CRUD operations to `menuManager`<br> - Designing UML/MockUp ``createOrder``<br> - Adding CRUD operations to model: ``table``<br> - Creating DDD<br></td>
+<td>- <a href="https://react.dev/learn/adding-interactivity">Adding more</a><br> - Designing UML/MockUp ``createOrder``<br> - Adding CRUD operations to model: ``table``<br> - Creating DDD<br></td>
+</tr>
+<tr class="odd">
+<td>#7</td>
+<td>24</td>
+<td>12/02/2024</td>
+<td>- Adding CRUD operations to model: ``table``<br> - Creating DDD<br></td>
+<td>- <mark><a href="https://react.dev/learn/adding-interactivity">Adding more</a> </mark> <br> - Designing UML/MockUp ``createOrder``<br> - <a href="https://react.dev/learn/adding-interactivity">Adding more</a><br> - Designing UML/MockUp ``createOrder``<br> - Adding CRUD operations to model: ``table``<br> - Creating DDD<br></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>albertprofe </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">Tuesday, June 1, 2021</p>
-    </div>
-  </div>
-  
-    <div>
-    <div class="quarto-title-meta-heading">Modified</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tuesday, September 26, 2023</p>
-    </div>
-  </div>
-    
-  </div>
-  
-
-
-</header>
-
-
-<div class="labs">
-<p>📘 <strong>Linux Lab#LI02-4: interactivity and coupling</strong></p>
-<p>After having a good approach with the labs done previously and from that point, having in mind the <code>core-entity model</code> and some<code>management/controller</code>, let’s step up.</p>
-<p>Add some <strong>interactivity</strong> through console with the user <strong>building on</strong> these new features and classes:</p>
-<ol type="1">
-<li><p>Import class Scanner: <code>Scanner scanner = new Scanner(System.in);</code></p></li>
-<li><p>A <code>while (true)</code> <strong>loop</strong> with the <code>CRUD</code> options would be a nice idea.</p></li>
-<li><p>Work as simple as possible, just 3 classes, let s try to understand the problem:</p>
-<ul>
-<li><code>MovieManager</code></li>
-<li><code>Movie</code> and</li>
-<li><code>MovieController</code></li>
-</ul></li>
-<li><p>Propose some improvements.</p></li>
-<li><p>What about coupling? Is tight or loose coupled, this code?</p></li>
-</ol>
-</div>
-<section id="java-user-input-scanner" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="java-user-input-scanner"><span class="header-section-number">1</span> Java User Input (Scanner)</h2>
-<p>The <code>Scanner</code> class is used to get user input, and it is found in the <code>java.util package.</code></p>
-<p>To use the <code>Scanner</code> class, create an object of the class and use any of the available methods found in the <code>Scanner</code> class documentation.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">Scanner</span> readerObject <span class="op">=</span> <span class="kw">new</span> <span class="bu">Scanner</span><span class="op">(</span><span class="bu">System</span><span class="op">.</span><span class="fu">in</span><span class="op">);</span>  <span class="co">// Create a Scanner object</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="bu">String</span> userName <span class="op">=</span> readerObject<span class="op">.</span><span class="fu">nextLine</span><span class="op">();</span>  <span class="co">// Read user input</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In the example above, we used the <code>nextLine()</code> method, which is used to read <code>Strings</code>. To read other types, look at the table below:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="..\images/javase/inputTypes.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="Input Types"><img src="..\images/javase/inputTypes.png" class="img-fluid figure-img" style="width:80.0%" alt="Input Types"></a></p>
-<figcaption><a href="https://www.w3schools.com/java/java_user_input.asp" class="external">Input Types</a></figcaption>
-</figure>
-</div>
-</section>
-<section id="birding" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="birding"><span class="header-section-number">2</span> Birding</h2>
-<p>Before coding, study this very basic example and <a href="../javase/selab2-4.html#grow-your-code">check how it could grow</a>:</p>
-<ul>
-<li>First Version: <a href="https://github.com/AlbertProfe/cifojava2022-1/tree/branch2test/Birding" class="external">Birding 1.0</a></li>
-</ul>
-</section>
-<section id="core-classes" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="core-classes"><span class="header-section-number">3</span> Core classes</h2>
-<p>You could then use these:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>MovieController.java</strong></pre>
-</div>
-<div class="sourceCode" id="cb2" data-filename="MovieController.java"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Scanner</span><span class="op">;</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">public</span> <span class="kw">class</span> MovieController <span class="op">{</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a></span>
-<span id="cb2-6"><a href="#cb2-6"></a>        <span class="bu">Scanner</span> scanner <span class="op">=</span> <span class="kw">new</span> <span class="bu">Scanner</span><span class="op">(</span><span class="bu">System</span><span class="op">.</span><span class="fu">in</span><span class="op">);</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a></span>
-<span id="cb2-8"><a href="#cb2-8"></a>        <span class="cf">while</span> <span class="op">(</span><span class="kw">true</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>            <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Please select an option:"</span><span class="op">);</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>            <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"1. Add a movie"</span><span class="op">);</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>            <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"2. Update a movie"</span><span class="op">);</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>            <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"3. Delete a movie"</span><span class="op">);</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a>            <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"4. Get a movie by title"</span><span class="op">);</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>            <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"5. Exit"</span><span class="op">);</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a>            <span class="dt">int</span> option <span class="op">=</span> scanner<span class="op">.</span><span class="fu">nextInt</span><span class="op">();</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a></span>
-<span id="cb2-17"><a href="#cb2-17"></a>            <span class="cf">if</span> <span class="op">(</span>option <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a></span>
-<span id="cb2-19"><a href="#cb2-19"></a>              <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Enter the movie title:"</span><span class="op">);</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a>              <span class="bu">String</span> title <span class="op">=</span> scanner<span class="op">.</span><span class="fu">next</span><span class="op">();</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a>              <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Enter the movie director:"</span><span class="op">);</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a>              <span class="bu">String</span> director <span class="op">=</span> scanner<span class="op">.</span><span class="fu">next</span><span class="op">();</span></span>
-<span id="cb2-23"><a href="#cb2-23"></a>              <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Enter the movie genre:"</span><span class="op">);</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a>              <span class="bu">String</span> genre <span class="op">=</span> scanner<span class="op">.</span><span class="fu">next</span><span class="op">();</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a>              <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Enter the movie size:"</span><span class="op">);</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a>              <span class="dt">double</span> size <span class="op">=</span> scanner<span class="op">.</span><span class="fu">nextDouble</span><span class="op">();</span></span>
-<span id="cb2-27"><a href="#cb2-27"></a></span>
-<span id="cb2-28"><a href="#cb2-28"></a>              MovieManager<span class="op">.</span><span class="fu">addMovie</span><span class="op">(</span>title<span class="op">,</span> director<span class="op">,</span> genre<span class="op">,</span> size<span class="op">);</span></span>
-<span id="cb2-29"><a href="#cb2-29"></a>              <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Movie added successfully!"</span><span class="op">);</span></span>
-<span id="cb2-30"><a href="#cb2-30"></a></span>
-<span id="cb2-31"><a href="#cb2-31"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>option <span class="op">==</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-32"><a href="#cb2-32"></a></span>
-<span id="cb2-33"><a href="#cb2-33"></a>              <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Enter the movie title:"</span><span class="op">);</span></span>
-<span id="cb2-34"><a href="#cb2-34"></a>              <span class="bu">String</span> title <span class="op">=</span> scanner<span class="op">.</span><span class="fu">next</span><span class="op">();</span></span>
-<span id="cb2-35"><a href="#cb2-35"></a>              <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Enter the new movie director:"</span><span class="op">);</span></span>
-<span id="cb2-36"><a href="#cb2-36"></a>              <span class="bu">String</span> director <span class="op">=</span> scanner<span class="op">.</span><span class="fu">next</span><span class="op">();</span></span>
-<span id="cb2-37"><a href="#cb2-37"></a>              <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Enter the new movie genre:"</span><span class="op">);</span></span>
-<span id="cb2-38"><a href="#cb2-38"></a>              <span class="bu">String</span> genre <span class="op">=</span> scanner<span class="op">.</span><span class="fu">next</span><span class="op">();</span></span>
-<span id="cb2-39"><a href="#cb2-39"></a>              <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Enter the new movie size:"</span><span class="op">);</span></span>
-<span id="cb2-40"><a href="#cb2-40"></a>              <span class="dt">double</span> size <span class="op">=</span> scanner<span class="op">.</span><span class="fu">nextDouble</span><span class="op">();</span></span>
-<span id="cb2-41"><a href="#cb2-41"></a></span>
-<span id="cb2-42"><a href="#cb2-42"></a>              MovieManager<span class="op">.</span><span class="fu">updateMovie</span><span class="op">(</span>title<span class="op">,</span> director<span class="op">,</span> genre<span class="op">,</span>size<span class="op">);</span></span>
-<span id="cb2-43"><a href="#cb2-43"></a>              <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Movie updated successfully!"</span><span class="op">);</span></span>
-<span id="cb2-44"><a href="#cb2-44"></a></span>
-<span id="cb2-45"><a href="#cb2-45"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>option <span class="op">==</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-46"><a href="#cb2-46"></a></span>
-<span id="cb2-47"><a href="#cb2-47"></a>              <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Enter the movie title:"</span><span class="op">);</span></span>
-<span id="cb2-48"><a href="#cb2-48"></a>              <span class="bu">String</span> title <span class="op">=</span> scanner<span class="op">.</span><span class="fu">next</span><span class="op">();</span></span>
-<span id="cb2-49"><a href="#cb2-49"></a></span>
-<span id="cb2-50"><a href="#cb2-50"></a>              MovieManager<span class="op">.</span><span class="fu">deleteMovie</span><span class="op">(</span>title<span class="op">);</span></span>
-<span id="cb2-51"><a href="#cb2-51"></a>              <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Movie deleted successfully!"</span><span class="op">);</span></span>
-<span id="cb2-52"><a href="#cb2-52"></a></span>
-<span id="cb2-53"><a href="#cb2-53"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>option <span class="op">==</span> <span class="dv">4</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-54"><a href="#cb2-54"></a></span>
-<span id="cb2-55"><a href="#cb2-55"></a>              <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Enter the movie title:"</span><span class="op">);</span></span>
-<span id="cb2-56"><a href="#cb2-56"></a>              <span class="bu">String</span> title <span class="op">=</span> scanner<span class="op">.</span><span class="fu">next</span><span class="op">();</span></span>
-<span id="cb2-57"><a href="#cb2-57"></a></span>
-<span id="cb2-58"><a href="#cb2-58"></a>              Movie movie <span class="op">=</span> MovieManager<span class="op">.</span><span class="fu">getMovie</span><span class="op">(</span>title<span class="op">);</span></span>
-<span id="cb2-59"><a href="#cb2-59"></a></span>
-<span id="cb2-60"><a href="#cb2-60"></a>              <span class="cf">if</span> <span class="op">(</span>movie <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-61"><a href="#cb2-61"></a>                  </span>
-<span id="cb2-62"><a href="#cb2-62"></a>                <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Title: "</span> <span class="op">+</span> movie<span class="op">.</span><span class="fu">getTitle</span><span class="op">());</span></span>
-<span id="cb2-63"><a href="#cb2-63"></a>                <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Director: "</span> <span class="op">+</span> movie<span class="op">.</span><span class="fu">getDirector</span><span class="op">());</span></span>
-<span id="cb2-64"><a href="#cb2-64"></a>                <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Genre: "</span> <span class="op">+</span> movie<span class="op">.</span><span class="fu">getGenre</span><span class="op">());</span></span>
-<span id="cb2-65"><a href="#cb2-65"></a>                <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Size: "</span> <span class="op">+</span> movie<span class="op">.</span><span class="fu">getSize</span><span class="op">());</span></span>
-<span id="cb2-66"><a href="#cb2-66"></a>              </span>
-<span id="cb2-67"><a href="#cb2-67"></a>              <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Movie not found!"</span><span class="op">);}</span></span>
-<span id="cb2-68"><a href="#cb2-68"></a></span>
-<span id="cb2-69"><a href="#cb2-69"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>option <span class="op">==</span> <span class="dv">5</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-70"><a href="#cb2-70"></a>                <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb2-71"><a href="#cb2-71"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb2-72"><a href="#cb2-72"></a>                <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Invalid option!"</span><span class="op">);</span></span>
-<span id="cb2-73"><a href="#cb2-73"></a>            <span class="op">}</span></span>
-<span id="cb2-74"><a href="#cb2-74"></a>        <span class="op">}</span></span>
-<span id="cb2-75"><a href="#cb2-75"></a>    scanner<span class="op">.</span><span class="fu">close</span><span class="op">();</span></span>
-<span id="cb2-76"><a href="#cb2-76"></a>    <span class="op">}</span></span>
-<span id="cb2-77"><a href="#cb2-77"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>In this diagram, the <code>Movie</code> class has the following properties: <code>title</code>, <code>director</code>, <code>genre</code>, and <code>size</code>, each with corresponding getters and setters. It also has a constructor that takes 4 parameters.</p>
-<div class="mermaidContent">
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">classDiagram
-class Movie {
-  - title: String
-  - director: String
-  - genre: String
-  - size: double
-  + Movie(title: String, director: String, genre: String, size: double)
-  + getTitle(): String
-  + getDirector(): String
-  + getGenre(): String
-  + getSize(): double
-  + setDirector(director: String)
-  + setGenre(genre: String)
-  + setSize(size: double)
-}
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</div>
-<hr>
-<p>The <code>MovieManager</code> class has a HashMap of movies that stores <code>Movie</code> objects, an int variable qty that holds the number of movies stored in the manager, a double variable size that holds the total size of all the movies, a variable lastModified of type Date that holds the last date when a movie is added or deleted, and has several <code>static</code> methods which are <code>addMovie</code>, <code>updateMovie</code>, <code>deleteMovie</code>, <code>getMovie</code>, <code>saveToCSV</code>, <code>deleteCSV</code> which are CRUD operation over movies.</p>
-<div class="mermaidContent">
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">classDiagram
-
-class MovieManager {
-  - movies: HashMap&lt;String, Movie&gt;
-  - qty: int
-  - size: double
-  - lastModified: Date
-  + addMovie(title: String, director: String, genre: String, size: double): void
-  + updateMovie(title: String, director: String, genre: String, size: double): void
-  + deleteMovie(title: String): void
-  + getMovie(title: String): Movie
-  + saveToCSV(): void
-  + deleteCSV(): void
-}
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</div>
-<hr>
-<p>The <code>MovieController</code> class has a main method which contains a loop that interacts with the user to perform CRUD operations on the Movie class using the static methods in the MovieManager class.</p>
-<div class="mermaidContent">
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">classDiagram
-
-class MovieController {
-  + main(args: String[]): void
-}
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="create-static-methods" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="create-static-methods"><span class="header-section-number">4</span> Create <code>static</code> methods</h2>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>MovieController.java</strong></pre>
-</div>
-<div class="sourceCode" id="cb3" data-filename="MovieController.java"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Scanner</span><span class="op">;</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">public</span> <span class="kw">class</span> MovieController <span class="op">{</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a>        <span class="bu">Scanner</span> scanner <span class="op">=</span> <span class="kw">new</span> <span class="bu">Scanner</span><span class="op">(</span><span class="bu">System</span><span class="op">.</span><span class="fu">in</span><span class="op">);</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>        MovieManager movieManager <span class="op">=</span> <span class="kw">new</span> <span class="fu">MovieManager</span><span class="op">();</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a></span>
-<span id="cb3-11"><a href="#cb3-11"></a>        <span class="cf">while</span> <span class="op">(</span><span class="kw">true</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a>            <span class="bu">String</span> command <span class="op">=</span> <span class="fu">ask</span><span class="op">(</span>scanner<span class="op">,</span> <span class="st">"Option?"</span><span class="op">);</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>            <span class="cf">if</span> <span class="op">(</span>command<span class="op">.</span><span class="fu">equals</span><span class="op">(</span><span class="st">"Quit"</span><span class="op">))</span> <span class="op">{</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a>                <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>command<span class="op">.</span><span class="fu">equals</span><span class="op">(</span><span class="st">"Add"</span><span class="op">))</span> <span class="op">{</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a>                <span class="fu">add</span><span class="op">(</span>scanner<span class="op">,</span>movieManager<span class="op">);</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>command<span class="op">.</span><span class="fu">equals</span><span class="op">(</span><span class="st">"Delete"</span><span class="op">))</span> <span class="op">{</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a>                <span class="fu">delete</span><span class="op">(</span>scanner<span class="op">,</span>movieManager<span class="op">);</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>command<span class="op">.</span><span class="fu">equals</span><span class="op">(</span><span class="st">"Get"</span><span class="op">))</span> <span class="op">{</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a>                <span class="fu">get</span><span class="op">(</span>scanner<span class="op">,</span>movieManager<span class="op">);</span></span>
-<span id="cb3-21"><a href="#cb3-21"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>command<span class="op">.</span><span class="fu">equals</span><span class="op">(</span><span class="st">"Update"</span><span class="op">))</span> <span class="op">{</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a>                <span class="fu">update</span><span class="op">(</span>scanner<span class="op">,</span>movieManager<span class="op">);</span></span>
-<span id="cb3-23"><a href="#cb3-23"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>command<span class="op">.</span><span class="fu">equals</span><span class="op">(</span><span class="st">"Showall"</span><span class="op">))</span> <span class="op">{</span></span>
-<span id="cb3-24"><a href="#cb3-24"></a>                <span class="fu">showall</span><span class="op">(</span>scanner<span class="op">,</span>movieManager<span class="op">);</span></span>
-<span id="cb3-25"><a href="#cb3-25"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb3-26"><a href="#cb3-26"></a>                <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Unknown command!"</span><span class="op">);</span></span>
-<span id="cb3-27"><a href="#cb3-27"></a>            <span class="op">}</span></span>
-<span id="cb3-28"><a href="#cb3-28"></a>        <span class="op">}</span></span>
-<span id="cb3-29"><a href="#cb3-29"></a>    <span class="op">}</span></span>
-<span id="cb3-30"><a href="#cb3-30"></a></span>
-<span id="cb3-31"><a href="#cb3-31"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="bu">String</span> <span class="fu">ask</span><span class="op">(</span><span class="bu">Scanner</span> input<span class="op">,</span> <span class="bu">String</span> option<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-32"><a href="#cb3-32"></a>        <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb3-33"><a href="#cb3-33"></a>    <span class="op">}</span></span>
-<span id="cb3-34"><a href="#cb3-34"></a></span>
-<span id="cb3-35"><a href="#cb3-35"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">add</span><span class="op">(</span><span class="bu">Scanner</span> input<span class="op">,</span> MovieManager movieManager<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-36"><a href="#cb3-36"></a></span>
-<span id="cb3-37"><a href="#cb3-37"></a>    <span class="op">}</span></span>
-<span id="cb3-38"><a href="#cb3-38"></a></span>
-<span id="cb3-39"><a href="#cb3-39"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">delete</span><span class="op">(</span><span class="bu">Scanner</span> input<span class="op">,</span> MovieManager movieManager<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-40"><a href="#cb3-40"></a></span>
-<span id="cb3-41"><a href="#cb3-41"></a>    <span class="op">}</span></span>
-<span id="cb3-42"><a href="#cb3-42"></a></span>
-<span id="cb3-43"><a href="#cb3-43"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">get</span><span class="op">(</span><span class="bu">Scanner</span> input<span class="op">,</span> MovieManager movieManager<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-44"><a href="#cb3-44"></a></span>
-<span id="cb3-45"><a href="#cb3-45"></a>    <span class="op">}</span></span>
-<span id="cb3-46"><a href="#cb3-46"></a></span>
-<span id="cb3-47"><a href="#cb3-47"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">update</span><span class="op">(</span><span class="bu">Scanner</span> input<span class="op">,</span> MovieManager movieManager<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-48"><a href="#cb3-48"></a></span>
-<span id="cb3-49"><a href="#cb3-49"></a></span>
-<span id="cb3-50"><a href="#cb3-50"></a></span>
-<span id="cb3-51"><a href="#cb3-51"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">showall</span><span class="op">(</span><span class="bu">Scanner</span> input<span class="op">,</span> MovieManager movieManager<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-52"><a href="#cb3-52"></a></span>
-<span id="cb3-53"><a href="#cb3-53"></a>    <span class="op">}</span></span>
-<span id="cb3-54"><a href="#cb3-54"></a></span>
-<span id="cb3-55"><a href="#cb3-55"></a>  <span class="op">}</span></span>
-<span id="cb3-56"><a href="#cb3-56"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="grow-your-code" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="grow-your-code"><span class="header-section-number">5</span> Grow your code</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="..\images/javase/hopeIsNotAStrategy.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="Hope is not a strategy"><img src="..\images/javase/hopeIsNotAStrategy.png" class="img-fluid figure-img" style="width:80.0%" alt="Hope is not a strategy"></a></p>
-<figcaption>Hope is not a strategy</figcaption>
-</figure>
-</div>
-<blockquote class="blockquote">
-<p><a href="https://sre.google/sre-book/introduction/" class="external">Hope is not a strategy</a></p>
-</blockquote>
-<ul>
-<li><strong>Zero</strong> Sprint/Version:
-<ul>
-<li>Meeting rules</li>
-<li>Roles: ScrumMaster, Product Owner, Specialist, Team</li>
-<li>Tech fundamentals: os, git</li>
-<li>Mockup: figma</li>
-<li>Documentation: obsidian, quarto</li>
-<li>Digital tools: github, gitlab, openProject, nextCloud</li>
-<li>UML: use-case, clas diagram, sequencial</li>
-<li>Core Project classes</li>
-<li>Product draft definition</li>
-<li>User stories, epics, tasks</li>
-<li>Product Backlog, Sprint 1 Backlog</li>
-<li>Sprint/Versions calendar</li>
-<li><a href="https://mdalmijn.com/p/why-using-sprint-0-is-a-cardinal-sin-for-all-scrum-masters" class="external">Never, never, ever use Sprint Zero notation: it is a sin</a></li>
-</ul></li>
-<li><strong>First</strong> Sprint/Version:
-<ul>
-<li>Just basic <strong>Core</strong> classes, Model: <a href="https://github.com/AlbertProfe/cifojava2022-1/tree/branch2test/Birding" class="external">Birding v1.0</a></li>
-</ul></li>
-<li><strong>Second</strong> Sprint/Version:
-<ul>
-<li>Starting to work in <code>main</code> and thinking (that is, create some new classes) in <strong>Domains</strong></li>
-</ul></li>
-<li><strong>Third</strong> Sprint/Version:
-<ul>
-<li>Some improvements in organize clases, <code>Menu</code>, <code>MenuOptions</code>, <code>Utils</code>: <a href="https://github.com/AlbertProfe/JAVA_pqtm2019/tree/master/Birding/src" class="external">Birding v3.0</a></li>
-</ul></li>
-<li><strong>Fourth</strong> Sprint/Version:
-<ul>
-<li>Start with MVC pattern: problems with <code>coupling</code></li>
-</ul></li>
-<li><strong>Fifth</strong> Sprint/Version:
-<ul>
-<li>MVC implemented: <a href="https://github.com/AlbertProfe/JAVA_2020/tree/main/BirdingCloud" class="external">Birding v5.0</a></li>
-</ul></li>
-<li><strong>Sixth</strong> Sprint/Version:
-<ul>
-<li>Add singleton and factory pattern</li>
-</ul></li>
-<li><strong>Seventh</strong> Sprint/Version:
-<ul>
-<li>Check security in/within code</li>
-</ul></li>
-<li><strong>Eight</strong> Sprint/Version:
-<ul>
-<li>Implement CRUD operation in local JSON or create mySQL DB o similar</li>
-</ul></li>
-<li><strong>Nineth</strong> Sprint/Version:
-<ul>
-<li>Go to <strong>web</strong> (<code>Spring Boot</code> &amp; <code>React</code>)</li>
-<li>Go to <strong>desktop</strong> <a href="https://openjfx.io/" class="external">Java FX</a></li>
-</ul></li>
-<li><strong>Tenth</strong> Sprint/Version:
-<ul>
-<li>Create extensions and <a href="../linux/lilab04-3.html">publish</a></li>
-</ul></li>
-</ul>
-</section>
-<section id="trycatch-for-wrong-inputs" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="trycatch-for-wrong-inputs"><span class="header-section-number">6</span> Try/Catch for wrong inputs</h2>
-<p><a href="https://www.w3schools.com/java/java_try_catch.asp" class="external">When executing Java code</a>, <strong>different errors may occur</strong>: coding errors made by the programmer, <strong>errors due to wrong input</strong>, or other unforeseeable things.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Definition Exception
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When an error occurs, Java will normally <strong>stop</strong> and <strong>generate an error message</strong>. The technical term for this is: Java will throw an exception (throw an error).</p>
-</div>
-</div>
-<p>The <code>try</code> and <code>catch</code> keywords come in pairs:</p>
-<ul>
-<li>The <code>try</code> statement a<strong>llows you to define a block of code to be tested for errors while it is being executed.</strong></li>
-<li>The <code>catch</code> statement allows you to define a block of code to be executed, if an error occurs in the try block.</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="cf">try</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="co">//  Block of code to try</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="op">}</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="cf">catch</span><span class="op">(</span><span class="bu">Exception</span> e<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="co">//  Block of code to handle errors</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="example" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="example"><span class="header-section-number">6.1</span> Example</h3>
-<p>The <code>finally</code> statement lets you execute code, after<code>try...catch</code>, regardless of the result</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">public</span> <span class="kw">class</span> Main <span class="op">{</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>   <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Hi"</span><span class="op">);</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>    <span class="cf">try</span> <span class="op">{</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>      <span class="dt">int</span><span class="op">[]</span> myNumbers <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">};</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>      <span class="co">// this code will crash: there is NO positin 10 in this array myNumbers</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>      <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>myNumbers<span class="op">[</span><span class="dv">10</span><span class="op">]);</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>    <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">Exception</span> e<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>      <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Something went wrong."</span><span class="op">);</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a>    <span class="op">}</span> <span class="cf">finally</span> <span class="op">{</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a>      <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"The 'try catch' is finished."</span><span class="op">);</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a>    <span class="op">}</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a>     <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Bye"</span><span class="op">);</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a>  <span class="op">}</span></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="op">}</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="co">// Output:</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="co">// Hi</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="co">// Something went wrong.</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="co">// The 'try catch' is finished.</span></span>
-<span id="cb5-21"><a href="#cb5-21"></a><span class="co">// Bye</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a href="https://www.w3schools.com/java/tryjava.asp?filename=demo_try_catch_finally" class="external">Execute this code on w3schools</a></p>
-<!--- navLinks -->
-<br><br>
-<div class="row">
-<br>
-<div class="column left previous">
-<p><br> <a href="../javase/selab2-3.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> Lab#SE02-3: Movie/Review, factory</a> <br></p>
-</div>
-<br>
-<div class="column center">
-<p><br> <a href="#top"><i class="fa-solid fa-arrow-up" aria-label="arrow-up"></i> top</a> <br></p>
-</div>
-<br>
-<div class="column right next">
-<p><br> <a href="../javase/selab2-5.html">Lab#SE02-5: Movie/Review, simulate interactivity by console <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
-</div>
-<p><br></p>
-</div>
-
-
-<div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-1"><a href="https://www.w3schools.com/java/java_user_input.asp" class="external">Input Types</a></span>
-<span class="glightbox-desc lightbox-desc-2">Hope is not a strategy</span>
-</div>
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -2820,7 +1925,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p>If you want to go far, walk slow / We love dukkha</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/javase/selab2-4.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/ifcd0210-24/20240207.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -2839,31 +1944,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","loop":false,"selector":".lightbox"});
-window.onload = () => {
-  lightboxQuarto.on('slide_before_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    const href = trigger.getAttribute('href');
-    if (href !== null) {
-      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-      if (imgEl !== null) {
-        const srcAttr = imgEl.getAttribute("src");
-        if (srcAttr && srcAttr.startsWith("data:")) {
-          slideConfig.href = srcAttr;
-        }
-      }
-    } 
-  });
-
-  lightboxQuarto.on('slide_after_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    if (window.Quarto?.typesetMath) {
-      window.Quarto.typesetMath(slideNode);
-    }
-  });
-
-};
-          </script>
 
 
 
