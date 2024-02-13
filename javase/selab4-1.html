@@ -1837,7 +1837,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#implementation-v0.2" id="toc-implementation-v0.2" class="nav-link" data-scroll-target="#implementation-v0.2"><span class="header-section-number">6.1</span> Implementation v0.2</a></li>
   </ul></li>
-  <li><a href="#code-project-management" id="toc-code-project-management" class="nav-link" data-scroll-target="#code-project-management"><span class="header-section-number">7</span> Code &amp; project Management</a></li>
+  <li><a href="#exploring-domain-driven-design-a-practical-approach" id="toc-exploring-domain-driven-design-a-practical-approach" class="nav-link" data-scroll-target="#exploring-domain-driven-design-a-practical-approach"><span class="header-section-number">7</span> Exploring Domain-Driven Design: a Practical Approach</a></li>
+  <li><a href="#code-project-management" id="toc-code-project-management" class="nav-link" data-scroll-target="#code-project-management"><span class="header-section-number">8</span> Code &amp; project Management</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/javase/selab4-1.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -2468,8 +2469,80 @@ autonumber
 </div>
 </div></div></section>
 </section>
-<section id="code-project-management" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Code &amp; project Management</h1>
+<section id="exploring-domain-driven-design-a-practical-approach" class="level1 page-columns page-full" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Exploring Domain-Driven Design: a Practical Approach</h1>
+<p>Here, we’ll break down DDD concepts into simple, understandable components:</p>
+<ul>
+<li><code>Controllers</code> manage user interactions, while <code>Managers</code> handle business logic.</li>
+<li><code>Models</code> represent domain entities.</li>
+<li><code>Repositories</code> manage data, and</li>
+<li><code>Utils</code> streamline common tasks.</li>
+</ul>
+<p>Using practical examples like <code>Orders</code> and <code>Menus</code>, we’ll see how these concepts play out in real <code>Java SE applications</code>.</p>
+<p>By the end, you’ll grasp how <strong>DDD principles seamlessly integrate with Java SE</strong>, you will build clearer, more maintainable software.</p>
+<p><strong>Code:</strong></p>
+<ul>
+<li><a href="https://github.com/AlbertProfe/hello11/tree/6678eef933a92298b04b74bb78aae76eedc753cd" class="external">GitHub code v0.4</a></li>
+</ul>
+<div class="column-page-right">
+<table class="table">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 45%">
+<col style="width: 35%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+<th>Why</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Controller</td>
+<td>Controls the flow of the application, handling user input and invoking appropriate manager methods.</td>
+<td>Separates user interaction from business logic, promoting modularity and easier maintenance.</td>
+<td><code>HealthyController.java</code></td>
+</tr>
+<tr class="even">
+<td>Manager</td>
+<td>Contains the business logic of the application, coordinating operations between different components and enforcing rules.</td>
+<td>Centralizes and encapsulates business rules, ensuring consistency and facilitating testing.</td>
+<td><code>TableManager.java</code>, <code>MenuManager.java</code></td>
+</tr>
+<tr class="odd">
+<td>Model</td>
+<td>Represents domain entities and data structures used within the application, encapsulating their state and behavior.</td>
+<td>Provides a clear representation of the application’s domain, promoting understanding and reuse.</td>
+<td><code>Order.java</code>, <code>Menu.java</code>, <code>Table.java</code></td>
+</tr>
+<tr class="even">
+<td>Repository</td>
+<td>Manages the persistence of domain objects, abstracting data storage and retrieval details, providing a clean data access layer.</td>
+<td>Separates data access concerns from business logic, enabling flexibility and testability.</td>
+<td><code>TableRepository.java</code>, <code>MenuRepository.java</code></td>
+</tr>
+<tr class="odd">
+<td>Utils</td>
+<td>Contains utility classes and methods providing common functionalities required across the application.</td>
+<td>Encourages code reuse, reduces redundancy, and enhances maintainability.</td>
+<td><code>CommonUtilities.java</code></td>
+</tr>
+<tr class="even">
+<td>View</td>
+<td>Represents the user interface components of the application, presenting data to the user and capturing user interactions.</td>
+<td>Separates presentation logic from other components, improving maintainability and flexibility.</td>
+<td><code>MenuOptions.java</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="code-project-management" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Code &amp; project Management</h1>
 <table class="table">
 <thead>
 <tr class="header">
@@ -3104,7 +3177,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","loop":false,"descPosition":"bottom","closeEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
