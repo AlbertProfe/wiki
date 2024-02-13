@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.5.7">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="albertprofe">
 <meta name="description" content="description">
 
-<title>albertprofe wiki - JavaScript: objects</title>
+<title>albertprofe wiki – JavaScript: objects</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,6 +80,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -895,8 +898,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">JavaScript: objects</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../reactjs/reactjs-js-async.html">
- <span class="dropdown-text">JavaScript: async</span></a>
+    <a class="dropdown-item" href="../reactjs/reactjs-js-variables.html">
+ <span class="dropdown-text">JavaScript: variables</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../reactjs/reactjs-js-api.html">
@@ -1471,8 +1474,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reactjs/reactjs-js-async.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">JavaScript: async</span></a>
+  <a href="../reactjs/reactjs-js-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JavaScript: variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1762,7 +1765,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a>
+  <ul>
+  <li><a href="#dot-notation" id="toc-dot-notation" class="nav-link" data-scroll-target="#dot-notation"><span class="header-section-number">1.1</span> Dot notation</a></li>
+  <li><a href="#what-is-this" id="toc-what-is-this" class="nav-link" data-scroll-target="#what-is-this"><span class="header-section-number">1.2</span> What is “this”</a></li>
+  </ul></li>
+  <li><a href="#objects-are-mutable" id="toc-objects-are-mutable" class="nav-link" data-scroll-target="#objects-are-mutable"><span class="header-section-number">2</span> Objects are Mutable</a></li>
+  <li><a href="#destructuring" id="toc-destructuring" class="nav-link" data-scroll-target="#destructuring"><span class="header-section-number">3</span> Destructuring</a></li>
+  <li><a href="#shorthand-property-name" id="toc-shorthand-property-name" class="nav-link" data-scroll-target="#shorthand-property-name"><span class="header-section-number">4</span> Shorthand property name</a></li>
+  <li><a href="#object-prototypes" id="toc-object-prototypes" class="nav-link" data-scroll-target="#object-prototypes"><span class="header-section-number">5</span> Object prototypes</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">6</span> References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/reactjs/reactjs-js-objects.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1805,7 +1817,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Wednesday, February 7, 2024</p>
+      <p class="date-modified">Tuesday, February 13, 2024</p>
     </div>
   </div>
     
@@ -1816,20 +1828,107 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="overview" class="level2 page-columns page-full" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
 <div class="summary">
-<p>📘 <strong>JavaScript — Dynamic client-side scripting</strong></p>
+<p>📘 <strong>JavaScript: Objects</strong></p>
+<p>An object is a collection of related data and/or functionality. These usually consist of several variables and functions (which are called properties and methods when they are inside objects).</p>
 </div>
 <hr>
+<section id="overview" class="level1 page-columns page-full" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
+<p><mark>An object is a built-in data type for storing key-value pairs. Data inside objects are unordered, and the values can be of any type.</mark></p>
+<p>It is very common to create an object using an <strong>object literal</strong> when you want to transfer a series of structured, related data items in some manner, for example sending a request to the server to be put into a database. Sending a single object is much more efficient than sending several items individually, and it is easier to work with than an array, when you want to identify individual items by name.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>App.js</strong></pre>
 </div>
-<div class="sourceCode" id="cb1" data-filename="App.js"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-filename="App.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">const</span> person <span class="op">=</span> {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="dt">name</span><span class="op">:</span> [<span class="st">"Bob"</span><span class="op">,</span> <span class="st">"Smith"</span>]<span class="op">,</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="dt">age</span><span class="op">:</span> <span class="dv">32</span><span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="dt">bio</span><span class="op">:</span> <span class="kw">function</span> () {</span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">` </span><span class="sc">${</span><span class="kw">this</span><span class="op">.</span><span class="at">name</span>[<span class="dv">0</span>]<span class="sc">}</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="vs">                  </span><span class="sc">${</span><span class="kw">this</span><span class="op">.</span><span class="at">name</span>[<span class="dv">1</span>]<span class="sc">}</span><span class="vs"> is </span><span class="sc">${</span><span class="kw">this</span><span class="op">.</span><span class="at">age</span><span class="sc">}</span><span class="vs"> years old.`</span>)<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>  }<span class="op">,</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="dt">introduceSelf</span><span class="op">:</span> <span class="kw">function</span> () {</span>
+<span id="cb1-9"><a href="#cb1-9"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Hi! I'm </span><span class="sc">${</span><span class="kw">this</span><span class="op">.</span><span class="at">name</span>[<span class="dv">0</span>]<span class="sc">}</span><span class="vs">.`</span>)<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>  }<span class="op">,</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After saving and refreshing, try entering some of the following into the JavaScript console on your browser devtools:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb2" data-filename="App.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a>person<span class="op">.</span><span class="at">name</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>person<span class="op">.</span><span class="at">name</span>[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>person<span class="op">.</span><span class="at">age</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>person<span class="op">.</span><span class="fu">bio</span>()<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">// "Bob Smith is 32 years old."</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>person<span class="op">.</span><span class="fu">introduceSelf</span>()<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">// "Hi! I'm Bob."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Another example of JS object declaration:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb3" data-filename="App.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">const</span> apple <span class="op">=</span> { </span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="dt">color</span><span class="op">:</span> <span class="st">'Green'</span><span class="op">,</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="dt">price</span><span class="op">:</span> {</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="dt">bulk</span><span class="op">:</span> <span class="st">'$3/kg'</span><span class="op">,</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="dt">smallQty</span><span class="op">:</span> <span class="st">'$4/kg'</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  }</span>
+<span id="cb3-7"><a href="#cb3-7"></a>}<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(apple<span class="op">.</span><span class="at">color</span>)<span class="op">;</span> <span class="co">// 'Green'</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(apple<span class="op">.</span><span class="at">price</span><span class="op">.</span><span class="at">bulk</span>)<span class="op">;</span> <span class="co">// '$3/kg'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>An object like this is (<code>apple</code>, <code>person</code>) referred to as an <strong>object literal</strong> — we literally write out the object contents as we’ve come to create it. <strong>This is different compared to objects instantiated from classes</strong>.</p>
+</div></div><section id="dot-notation" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="dot-notation"><span class="header-section-number">1.1</span> Dot notation</h2>
+<p>Above, you <strong>accessed</strong> the object’s properties and methods using <code>dot notation</code>.</p>
+<p>The object name (person) acts as the namespace — it must be entered first to access anything inside the object.</p>
+<p>Next you write a dot, then the item you want to access — this can be the name of a simple property, an item of an array property, or a call to one of the object’s methods.</p>
+</section>
+<section id="what-is-this" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="what-is-this"><span class="header-section-number">1.2</span> What is “this”</h2>
+<p>You may have noticed something slightly strange in our methods. Look at this one for example:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-filename="App.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">introduceSelf</span>() {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Hi! I'm </span><span class="sc">${</span><span class="kw">this</span><span class="op">.</span><span class="at">name</span>[<span class="dv">0</span>]<span class="sc">}</span><span class="vs">.`</span>)<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You are probably wondering what <code>this</code> is. The <code>this</code> keyword refers to the current object the code is being written inside — so in this case <code>this</code> is equivalent to <code>person</code>. So why not just write <code>person</code> instead?</p>
+<p>Well, <strong>when you only have to create a single object literal</strong>, it’s not so useful. But if you create more than one, this enables you to use the same method definition for every object you create.</p>
+</section>
+</section>
+<section id="objects-are-mutable" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Objects are Mutable</h1>
+<p>JavaScript objects are mutable, meaning their contents can be changed, even when they are declared as const. New properties can be added, and existing property values can be changed or deleted.</p>
+<p>It is the reference to the object, bound to the variable, that cannot be changed.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb5" data-filename="App.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">const</span> student <span class="op">=</span> {</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="dt">name</span><span class="op">:</span> <span class="st">'Sheldon'</span><span class="op">,</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="dt">score</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="dt">grade</span><span class="op">:</span> <span class="st">'A'</span><span class="op">,</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>}</span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(student)</span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">// { name: 'Sheldon', score: 100, grade: 'A' }</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="kw">delete</span> student<span class="op">.</span><span class="at">score</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>student<span class="op">.</span><span class="at">grade</span> <span class="op">=</span> <span class="st">'F'</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(student)</span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">// { name: 'Sheldon', grade: 'F' }</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a></span>
+<span id="cb5-15"><a href="#cb5-15"></a>student <span class="op">=</span> {}</span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="co">// TypeError: Assignment to constant variable.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1841,14 +1940,123 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-
+<p><strong>Delete operator</strong></p>
+<p>Once an object is created in JavaScript, it is possible to remove properties from the object using the <code>delete</code> operator.</p>
+<p>The <code>delete</code> keyword deletes both the value of the property and the property itself from the object.</p>
+<p>The <code>delete</code> operator only works on properties, not on variables or functions.</p>
+</div>
+</div>
+</section>
+<section id="destructuring" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Destructuring</h1>
+<p>The JavaScript <strong>destructuring</strong> assignment is a shorthand syntax that allows <mark>object properties to be extracted into specific variable values</mark>.</p>
+<p>It uses a <strong>pair of curly braces <code>({})</code> with property names on the left-hand side of an assignment to extract values from objects</strong></p>
+<p>The number of variables can be less than the total properties of an object.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb6" data-filename="App.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">const</span> rubiksCubeFacts <span class="op">=</span> {</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="dt">possiblePermutations</span><span class="op">:</span> <span class="st">'43,252,003,274,489,856,000'</span><span class="op">,</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="dt">invented</span><span class="op">:</span> <span class="st">'1974'</span><span class="op">,</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="dt">largestCube</span><span class="op">:</span> <span class="st">'17x17x17'</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>}<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="kw">const</span> {possiblePermutations<span class="op">,</span> invented<span class="op">,</span> largestCube} <span class="op">=</span> rubiksCubeFacts<span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(possiblePermutations)<span class="op">;</span> <span class="co">// '43,252,003,274,489,856,000'</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(invented)<span class="op">;</span> <span class="co">// '1974'</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(largestCube)<span class="op">;</span> <span class="co">// '17x17x17'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="shorthand-property-name" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Shorthand property name</h1>
+<p>The <strong>shorthand property name syntax</strong> in JavaScript allows creating objects without explicitly specifying the property names (ie. explicitly declaring the value after the key).</p>
+<p>In this process, an object is created where the property names of that object match variables which already exist in that context.</p>
+<p>Shorthand property names populate an object with a key matching the identifier and a value matching the identifier’s value.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb7" data-filename="App.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">const</span> activity <span class="op">=</span> <span class="st">'Surfing'</span><span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">const</span> beach <span class="op">=</span> { activity }<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(beach)<span class="op">;</span> <span class="co">// { activity: 'Surfing' }</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="object-prototypes" class="level1 page-columns page-full" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Object prototypes</h1>
+<p><a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes">Prototypes</a>{.external .target=’_blank’} are the mechanism by which JavaScript objects inherit features from one another.</p>
+<p>This is an object with one data property, <code>city</code>, and one method, <code>greet()</code>.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb8" data-filename="App.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">const</span> myObject <span class="op">=</span> {</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="dt">city</span><span class="op">:</span> <span class="st">"Girona"</span><span class="op">,</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">greet</span>() {</span>
+<span id="cb8-4"><a href="#cb8-4"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Greetings from </span><span class="sc">${</span><span class="kw">this</span><span class="op">.</span><span class="at">city</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>  }<span class="op">,</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>}<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a></span>
+<span id="cb8-8"><a href="#cb8-8"></a>myObject<span class="op">.</span><span class="fu">greet</span>()<span class="op">;</span> <span class="co">// Greetings from Girona</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>If you type the object’s name followed by a period into the console, like <code>myObject.</code>, then the console will pop up a list of all the properties available to this object. You’ll see that as well as city and greet, there are lots of other properties!</p>
+</blockquote>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb9" data-filename="App.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1"></a>__defineGetter__</span>
+<span id="cb9-2"><a href="#cb9-2"></a>__defineSetter__</span>
+<span id="cb9-3"><a href="#cb9-3"></a>__lookupGetter__</span>
+<span id="cb9-4"><a href="#cb9-4"></a>__lookupSetter__</span>
+<span id="cb9-5"><a href="#cb9-5"></a>__proto__</span>
+<span id="cb9-6"><a href="#cb9-6"></a>city</span>
+<span id="cb9-7"><a href="#cb9-7"></a>constructor</span>
+<span id="cb9-8"><a href="#cb9-8"></a>greet</span>
+<span id="cb9-9"><a href="#cb9-9"></a>hasOwnProperty</span>
+<span id="cb9-10"><a href="#cb9-10"></a>isPrototypeOf</span>
+<span id="cb9-11"><a href="#cb9-11"></a>propertyIsEnumerable</span>
+<span id="cb9-12"><a href="#cb9-12"></a>toLocaleString</span>
+<span id="cb9-13"><a href="#cb9-13"></a>toString</span>
+<span id="cb9-14"><a href="#cb9-14"></a>valueOf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For example:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb10" data-filename="App.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1"></a>myObject<span class="op">.</span><span class="fu">toString</span>()<span class="op">;</span> <span class="co">// "[object Object]"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This is an object called <code>Object.prototype</code>, and it is the most basic prototype, that all objects have by default. The prototype of <code>Object.prototype</code> is <strong>null</strong>, so it’s at the end of the prototype chain:</p>
+<p><a href="..\images/reactjs/myobject-prototype-chain.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="..\images/reactjs/myobject-prototype-chain.svg" class="img-fluid"></a></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every object in JavaScript has a built-in property, which is called its <code>prototype</code>. The <code>prototype</code> is itself an object, so the <code>prototype</code> will have its own <code>prototype</code>, making what’s called a <code>prototype</code> chain. The chain ends when we reach a <code>prototype</code> that has <strong>null</strong> for its own <code>prototype</code>.</p>
 </div>
 </div>
 
-<!--- navLinks -->
 <div class="no-row-height column-margin column-container"><div class="">
-
-</div></div><br><br>
+<p>Note: The property of an object that points to its prototype is not called prototype. Its name is not standard, but in practice all browsers use <code>__proto__</code>.</p>
+<p>The standard way to access an object’s prototype is the <code>Object.getPrototypeOf()</code> method.</p>
+</div></div></section>
+<section id="references" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> References</h1>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="external" target="_blank">mozilla mdn web docs: Object</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics" class="external" target="_blank">JavaScript object basics</a></li>
+<li><a href="https://morioh.com/a/a95ef5b93635/javascript-object-cheatsheet-everything-you-need-to-know" class="external" target="_blank">JavaScript Object Cheatsheet: Everything You Need to Know</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Test_your_skills:_Object_basics" class="external" target="_blank">Test your skills: Object basics</a></li>
+</ul>
+<!--- navLinks -->
+<br><br>
 <div class="row">
 <br>
 <div class="column left previous">
@@ -1860,7 +2068,7 @@ Note
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../reactjs/reactjs-js-async.html">JavaScript: async <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
+<p><br> <a href="../reactjs/reactjs-js-variables.html">JavaScript: variables <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
 </div>
@@ -2427,6 +2635,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
 
