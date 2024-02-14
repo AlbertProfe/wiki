@@ -77,12 +77,15 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -346,12 +349,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Digital Ocean</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../devops/devops-tools-installjenkins.html">
- <span class="dropdown-text">Howto install Jenkins</span></a>
+    <a class="dropdown-item" href="../devops/devops-tools-nagios.html">
+ <span class="dropdown-text">Nagios</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../devops/devops-tools-installmaven.html">
- <span class="dropdown-text">Howto install Maven</span></a>
+    <a class="dropdown-item" href="../devops/devops-tools-ansible.html">
+ <span class="dropdown-text">Ansible</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">DevOps Laboratories</li>
@@ -374,6 +377,10 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="../devops/devops-lab-k8sdigitalocean.html">
  <span class="dropdown-text">Lab 5: k8s on Digital Ocean</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-lab-springawsdeploy.html">
+ <span class="dropdown-text">Lab 3: Spring Boot and AWS S3</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">DevOps readings</li>
@@ -1608,14 +1615,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../devops/devops-tools-installjenkins.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Howto install Jenkins</span></a>
+  <a href="../devops/devops-tools-nagios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nagios</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../devops/devops-tools-installmaven.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Howto install Maven</span></a>
+  <a href="../devops/devops-tools-ansible.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ansible</span></a>
   </div>
 </li>
       </ul>
@@ -1660,6 +1667,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Lab 5: k8s on Digital Ocean</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../devops/devops-lab-springawsdeploy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 3: Spring Boot and AWS S3</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -1694,12 +1707,17 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#why-is-so-popular" id="toc-why-is-so-popular" class="nav-link" data-scroll-target="#why-is-so-popular"><span class="header-section-number">2</span> Why is so popular</a></li>
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">3</span> Overview</a></li>
   <li><a href="#k8s-components" id="toc-k8s-components" class="nav-link" data-scroll-target="#k8s-components"><span class="header-section-number">4</span> k8s components</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">5</span> References</a></li>
+  <li><a href="#kubernetes-networking" id="toc-kubernetes-networking" class="nav-link" data-scroll-target="#kubernetes-networking"><span class="header-section-number">5</span> Kubernetes Networking</a>
+  <ul>
+  <li><a href="#terminology-related-to-ip-addresses-in-kubernetes" id="toc-terminology-related-to-ip-addresses-in-kubernetes" class="nav-link" data-scroll-target="#terminology-related-to-ip-addresses-in-kubernetes"><span class="header-section-number">5.1</span> Terminology related to IP addresses in Kubernetes</a></li>
+  </ul></li>
+  <li><a href="#command-line-tool-kubectl" id="toc-command-line-tool-kubectl" class="nav-link" data-scroll-target="#command-line-tool-kubectl"><span class="header-section-number">6</span> Command line tool (kubectl)</a></li>
+  <li><a href="#sandbox" id="toc-sandbox" class="nav-link" data-scroll-target="#sandbox"><span class="header-section-number">7</span> Sandbox</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/devops/devops-tools-k8s.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../devops/devops-tools-aws.html">DevOps tools</a></li><li class="breadcrumb-item"><a href="../devops/devops-tools-k8s.html">Kubernetes k8s</a></li></ol></nav>
 <div class="quarto-title">
@@ -1758,9 +1776,9 @@ ul.task-list li input[type="checkbox"] {
 <section id="what-kubernetes-is-not" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> What Kubernetes is not</h1>
 <p><a href="https://kubernetes.io/docs/concepts/overview/#what-kubernetes-is-not" class="external" target="_blank">Kubernetes is not a traditional, all-inclusive PaaS (Platform as a Service) system</a>.</p>
-<p>Since Kubernetes operates at the container level rather than at the hardware level, it provides some generally applicable features common to PaaS offerings, such as deployment, scaling, load balancing, and lets users integrate their logging, monitoring, and alerting solutions. However, Kubernetes is not monolithic, and these default solutions are optional and pluggable.</p>
-<p>Kubernetes provides the building blocks for building developer platforms, but preserves user choice and flexibility where it is important.</p>
-<p>Kubernetes:</p>
+<p>Since <strong>Kubernetes</strong> operates at the container level rather than at the hardware level, it provides some generally applicable features common to PaaS offerings, such as deployment, scaling, load balancing, and lets users integrate their logging, monitoring, and alerting solutions.</p>
+<p>However, <strong>Kubernetes</strong> is not monolithic, and these default solutions are optional and pluggable.</p>
+<p><strong>Kubernetes</strong> provides the building blocks for building developer platforms, but preserves user choice and flexibility where it is important:</p>
 <ul>
 <li><mark>Does not limit the types of applications supported</mark>.
 <ul>
@@ -1770,13 +1788,33 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Continuous Integration, Delivery, and Deployment (CI/CD) workflows are determined by organization cultures and preferences as well as technical requirements.</li>
 </ul></li>
-<li><mark>Does not provide application-level services</mark>, such as middleware (for example, message buses), data-processing frameworks (for example, Spark), databases (for example, MySQL), caches, nor cluster storage systems (for example, <code>Ceph</code>) as built-in services. Such components can run on Kubernetes, and/or can be accessed by applications running on Kubernetes through portable mechanisms, such as the Open Service Broker.</li>
+<li><mark>Does not provide application-level services</mark>, such as:
+<ul>
+<li><strong>middleware</strong> (for example, message buses),</li>
+<li><strong>data-processing</strong> frameworks (for example, Spark),</li>
+<li><strong>databases</strong> (for example, MySQL),</li>
+<li><strong>caches</strong>,</li>
+<li>nor cluster storage systems (for example, <code>Ceph</code>) as built-in services.</li>
+<li>Such components can run on Kubernetes, and/or can be accessed by applications running on Kubernetes through portable mechanisms, such as the Open Service Broker.</li>
+</ul></li>
 <li><mark>Does not dictate logging, monitoring, or alerting solutions</mark>. It provides some integrations as proof of concept, and mechanisms to collect and export metrics.</li>
 <li><mark>Does not provide nor mandate a configuration language/system</mark> (for example, <code>Jsonnet</code>). It provides a declarative API that may be targeted by arbitrary forms of declarative specifications.</li>
 <li><mark>Does not provide nor adopt any comprehensive machine configuration</mark>, maintenance, management, or self-healing systems.</li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Additionally, <code>Kubernetes</code> is not a mere orchestration system. In fact, it eliminates the need for orchestration. The technical definition of orchestration is execution of a defined workflow: first do A, then B, then C. In contrast, <code>Kubernetes</code> comprises a set of independent, composable control processes that continuously drive the current state towards the provided desired state. It shouldn’t matter how you get from A to C.</p>
-<p>Centralized control is also not required. This results in a system that is easier to use and more powerful, robust, resilient, and extensible.</p>
+</div>
+</div>
+<p><strong>Centralized control is also not required</strong>. This results in a system that is easier to use and more powerful, robust, resilient, and extensible.</p>
 </section>
 <section id="why-is-so-popular" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Why is so popular</h1>
@@ -1807,17 +1845,114 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Nodes</strong></p>
 <p>Kubernetes runs your workload by placing containers into Pods to run on Nodes. A node may be a virtual or physical machine, depending on the cluster. Each node is managed by the control plane and contains the services necessary to run Pods.</p>
 <p>Typically you have several nodes in a cluster; in a learning or resource-limited environment, you might have only one node.</p>
+<p><strong>Deployments</strong></p>
+<p>A <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/" class="external" target="_blank">Deployment</a> provides declarative updates for <code>Pods</code> and <code>ReplicaSets</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="..\images/devops/k8s-deployments.png" class="lightbox" data-glightbox="description: .lightbox-desc-4" data-gallery="quarto-lightbox-gallery-4" title="A deployment provides declarative updates for pods"><img src="..\images/devops/k8s-deployments.png" class="img-fluid figure-img" alt="A deployment provides declarative updates for pods"></a></p>
+<figcaption>A deployment provides declarative updates for pods</figcaption>
+</figure>
+</div>
+<p><strong>Service</strong></p>
+<p>In Kubernetes, a <a href="https://kubernetes.io/docs/concepts/services-networking/service/" class="external" target="_blank">Service</a> is a method for exposing a network application that is running as one or more Pods in your cluster.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="..\images/devops/k8s-service.png" class="lightbox" data-glightbox="description: .lightbox-desc-5" data-gallery="quarto-lightbox-gallery-5" title="Expose an application in your cluster behind a single endpoint"><img src="..\images/devops/k8s-service.png" class="img-fluid figure-img" alt="Expose an application in your cluster behind a single endpoint"></a></p>
+<figcaption>Expose an application in your cluster behind a single endpoint</figcaption>
+</figure>
+</div>
+<p><strong>Ingress</strong></p>
+<p><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#ingress-v1-networking-k8s-io" class="external" target="_blank">Ingress</a> exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource.</p>
+<p>Here is a simple example where an Ingress sends all its traffic to one Service:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR;
+  client([client])-. Ingress-managed &lt;br&gt; load balancer .-&gt;ingress[Ingress];
+  ingress--&gt;|routing rule|service[Service];
+  subgraph cluster
+  ingress;
+  service--&gt;pod1[Pod];
+  service--&gt;pod2[Pod];
+  end
+  classDef plain fill:#ddd,stroke:#fff,stroke-width:4px,color:#000;
+  classDef k8s fill:#326ce5,stroke:#fff,stroke-width:4px,color:#fff;
+  classDef cluster fill:#fff,stroke:#bbb,stroke-width:2px,color:#326ce5;
+  class ingress,service,pod1,pod2 k8s;
+  class client plain;
+  class cluster cluster;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="..\images/devops/k8s-ingress.png" class="lightbox" data-glightbox="description: .lightbox-desc-6" data-gallery="quarto-lightbox-gallery-6" title="Make your HTTP network service available"><img src="..\images/devops/k8s-ingress.png" class="img-fluid figure-img" alt="Make your HTTP network service available"></a></p>
+<figcaption>Make your HTTP network service available</figcaption>
+</figure>
+</div>
 </section>
-<section id="references" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> References</h1>
+<section id="kubernetes-networking" class="level1 page-columns page-full" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Kubernetes Networking</h1>
+<p>In <strong>Kubernetes</strong>, a Pod is the most basic deployable unit within a <strong>Kubernetes</strong> cluster.</p>
+<p>A Pod runs one or more containers. Zero or more Pods run on a node. Each node in the cluster is part of a node pool. Pods can also attach to external storage volumes and other custom resources.</p>
+<p>This diagram shows a single node running two Pods, each attached to two volumes.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="..\images/devops/networking-overview_single-node.png" class="lightbox" data-glightbox="description: .lightbox-desc-7" data-gallery="quarto-lightbox-gallery-7" title="When Kubernetes schedules a Pod to run on a node,it creates a network namespace for the Pod in the node’s Linux kernel"><img src="..\images/devops/networking-overview_single-node.png" class="img-fluid figure-img" alt="When Kubernetes schedules a Pod to run on a node,it creates a network namespace for the Pod in the node’s Linux kernel"></a></p>
+<figcaption>When Kubernetes schedules a Pod to run on a node,<a href="https://cloud.google.com/kubernetes-engine/docs/concepts/network-overview#pods" class="external" target="_blank">it creates a network</a> namespace for the Pod in the node’s Linux kernel</figcaption>
+</figure>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>When you use <strong>Kubernetes</strong> to orchestrate your applications, it’s important to change how you think about <strong>the network design of your applications and their host</strong>s. With Kubernetes, you think about how Pods, Services, and external clients communicate, rather than thinking about how your hosts or virtual machines (VMs) are connected.</p>
+</div></div><section id="terminology-related-to-ip-addresses-in-kubernetes" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="terminology-related-to-ip-addresses-in-kubernetes"><span class="header-section-number">5.1</span> Terminology related to IP addresses in Kubernetes</h2>
+<p>The <strong>Kubernetes</strong> networking model <mark>relies heavily on IP addresses</mark>.</p>
+<p><code>Services</code>, <code>Pods</code>, <code>containers</code>, and nodes communicate using IP addresses and ports. Kubernetes provides different types of load balancing to direct traffic to the correct Pods.</p>
+<p>Keep the following terms in mind because the are key when we talk about k8s networking:</p>
 <ul>
+<li><strong>ClusterIP</strong>: The IP address assigned to a Service. In other documents, it might be called the “Cluster IP”. This address is stable for the lifetime of the Service, as discussed in Services.</li>
+<li><strong>Pod IP address</strong>: The IP address assigned to a given Pod. This is ephemeral, as discussed in Pods.</li>
+<li><strong>Node IP address</strong>: The IP address assigned to a given node.</li>
+</ul>
+</section>
+</section>
+<section id="command-line-tool-kubectl" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Command line tool (kubectl)</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="..\images/devops/kubectl.png" class="lightbox" data-glightbox="description: .lightbox-desc-8" data-gallery="quarto-lightbox-gallery-8" title="kubectl"><img src="..\images/devops/kubectl.png" class="img-fluid figure-img" alt="kubectl"></a></p>
+<figcaption>kubectl</figcaption>
+</figure>
+</div>
+<p><mark>Kubernetes provides a <a href="https://kubernetes.io/docs/reference/kubectl/" class="external" target="_blank">command line tool</a> for communicating with a Kubernetes cluster’s control plane, using the Kubernetes API.</mark></p>
+<p>This tool is named <code>kubectl</code>.</p>
+<p>For configuration, <code>kubectl</code> looks for a file named <code>config</code> in the <code>$HOME/.kube</code> directory. You can specify other <a href="..\docs/concepts/configuration/organize-cluster-access-kubeconfig/">kubeconfig</a> files by setting the <code>KUBECONFIG</code> environment variable or by setting the <a href="..\docs/concepts/configuration/organize-cluster-access-kubeconfig/"><code>--kubeconfig</code></a> flag.</p>
+<p>This overview covers <code>kubectl</code> syntax, describes the command operations, and provides common examples. For details about each command, including all the supported flags and subcommands, see the <a href="..\docs/reference/kubectl/generated/kubectl/">kubectl</a> reference documentation.</p>
+<p>For installation instructions, see <a href="..\docs/tasks/tools/#kubectl">Installing kubectl</a>; for a quick guide, see the <a href="..\docs/reference/kubectl/quick-reference/">cheat sheet</a>. If you’re used to using the <code>docker</code> command-line tool, <a href="..\docs/reference/kubectl/docker-cli-to-kubectl/"><code>kubectl</code> for Docker Users</a> explains some equivalent commands for Kubernetes.</p>
+</section>
+<section id="sandbox" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Sandbox</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="..\images/devops/k8s-sandbox.png" class="lightbox" data-glightbox="description: .lightbox-desc-9" data-gallery="quarto-lightbox-gallery-9" title="kubectl sanbox"><img src="..\images/devops/k8s-sandbox.png" class="img-fluid figure-img" alt="kubectl sanbox"></a></p>
+<figcaption>kubectl sanbox</figcaption>
+</figure>
+</div>
+<ul>
+<li><a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-strong-getting-started-strong-" class="external" target="_blank">Getting started with kubectl</a></li>
+<li><a href="https://training.play-with-kubernetes.com/" class="external" target="_blank">Play with Kubernetes Classroom</a></li>
+<li><h1 id="references" data-number="8"><span class="header-section-number">8</span> References</h1></li>
 <li><a href="https://sites.google.com/view/devopscifo/devops-tools/k8s" class="external" target="_blank">k8s</a></li>
 <li><a href="https://kubernetes.io/docs/concepts/overview/#what-kubernetes-is-not" class="external" target="_blank">Overview</a></li>
 <li><a href="https://kubernetes.io/" class="external" target="_blank">Production-Grade Container Orchestration</a></li>
-<li><a href="" class="external" target="_blank"></a></li>
-<li><a href="" class="external" target="_blank"></a></li>
-<li><a href="" class="external" target="_blank"></a></li>
-<li><a href="" class="external" target="_blank"></a></li>
+<li><a href="https://www.docker.com/products/docker-desktop/" class="external" target="_blank">The #1 containerization software for developers and teams</a></li>
+<li><a href="https://minikube.sigs.k8s.io/docs/start/" class="external" target="_blank">minikube start</a></li>
 </ul>
 <!--- navLinks -->
 <br><br>
@@ -1838,6 +1973,14 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-4">A deployment provides declarative updates for pods</span>
+<span class="glightbox-desc lightbox-desc-5">Expose an application in your cluster behind a single endpoint</span>
+<span class="glightbox-desc lightbox-desc-6">Make your HTTP network service available</span>
+<span class="glightbox-desc lightbox-desc-7">When Kubernetes schedules a Pod to run on a node,<a href="https://cloud.google.com/kubernetes-engine/docs/concepts/network-overview#pods" class="external" target="_blank">it creates a network</a> namespace for the Pod in the node’s Linux kernel</span>
+<span class="glightbox-desc lightbox-desc-8">kubectl</span>
+<span class="glightbox-desc lightbox-desc-9">kubectl sanbox</span>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -2399,7 +2542,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","closeEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
