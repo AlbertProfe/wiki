@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.5.7">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="albertprofe">
 <meta name="description" content="What is the static modifier in Java">
 
-<title>albertprofe wiki - Java SE: static modifier</title>
+<title>albertprofe wiki – Java SE: static modifier</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -1804,15 +1804,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
-  <li><a href="#static-code-block" id="toc-static-code-block" class="nav-link" data-scroll-target="#static-code-block"><span class="header-section-number">2</span> <code>static</code> code block</a></li>
-  <li><a href="#static-field" id="toc-static-field" class="nav-link" data-scroll-target="#static-field"><span class="header-section-number">3</span> <code>static</code> field</a></li>
-  <li><a href="#static-method" id="toc-static-method" class="nav-link" data-scroll-target="#static-method"><span class="header-section-number">4</span> <code>static</code> method</a></li>
-  <li><a href="#static-class" id="toc-static-class" class="nav-link" data-scroll-target="#static-class"><span class="header-section-number">5</span> <code>static</code> class</a></li>
-  <li><a href="#static-vs.-non-static" id="toc-static-vs.-non-static" class="nav-link" data-scroll-target="#static-vs.-non-static"><span class="header-section-number">6</span> <code>static</code> vs.&nbsp;<code>non-static</code></a>
+  <li><a href="#static-modifier" id="toc-static-modifier" class="nav-link active" data-scroll-target="#static-modifier"><span class="header-section-number">1</span> <code>static</code> modifier</a>
   <ul>
-  <li><a href="#pros-cons-usage-static-methods" id="toc-pros-cons-usage-static-methods" class="nav-link" data-scroll-target="#pros-cons-usage-static-methods"><span class="header-section-number">6.1</span> Pros &amp; cons usage <code>static</code> methods</a></li>
-  <li><a href="#pros-cons-usage-non-static-methods" id="toc-pros-cons-usage-non-static-methods" class="nav-link" data-scroll-target="#pros-cons-usage-non-static-methods"><span class="header-section-number">6.2</span> Pros &amp; cons usage <code>non-static</code> methods</a></li>
+  <li><a href="#static-code-block" id="toc-static-code-block" class="nav-link" data-scroll-target="#static-code-block"><span class="header-section-number">1.1</span> <code>static</code> code block</a></li>
+  <li><a href="#static-field" id="toc-static-field" class="nav-link" data-scroll-target="#static-field"><span class="header-section-number">1.2</span> <code>static</code> field</a></li>
+  <li><a href="#static-method" id="toc-static-method" class="nav-link" data-scroll-target="#static-method"><span class="header-section-number">1.3</span> <code>static</code> method</a></li>
+  <li><a href="#static-class" id="toc-static-class" class="nav-link" data-scroll-target="#static-class"><span class="header-section-number">1.4</span> <code>static</code> class</a></li>
+  </ul></li>
+  <li><a href="#static-scope" id="toc-static-scope" class="nav-link" data-scroll-target="#static-scope"><span class="header-section-number">2</span> <code>static</code> scope</a></li>
+  <li><a href="#static-vs.-non-static" id="toc-static-vs.-non-static" class="nav-link" data-scroll-target="#static-vs.-non-static"><span class="header-section-number">3</span> <code>static</code> vs.&nbsp;<code>non-static</code></a>
+  <ul>
+  <li><a href="#pros-cons-usage-static-methods" id="toc-pros-cons-usage-static-methods" class="nav-link" data-scroll-target="#pros-cons-usage-static-methods"><span class="header-section-number">3.0.1</span> Pros &amp; cons usage <code>static</code> methods</a></li>
+  <li><a href="#pros-cons-usage-non-static-methods" id="toc-pros-cons-usage-non-static-methods" class="nav-link" data-scroll-target="#pros-cons-usage-non-static-methods"><span class="header-section-number">3.0.2</span> Pros &amp; cons usage <code>non-static</code> methods</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/javase/se-concepts-static.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -1856,7 +1859,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, January 11, 2024</p>
+      <p class="date-modified">Tuesday, February 20, 2024</p>
     </div>
   </div>
     
@@ -1867,25 +1870,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="overview" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
 <div class="summary">
 <p>📘 <strong>static modifier</strong></p>
 <p>In Java, the <code>static</code> modifier is used to indicate that a <strong>class or class member belongs to the class itself, rather than to an instance of the class</strong>.</p>
 <p>In other words, the <code>static</code> modifier indicates that the class or class member is associated with the class as a whole, rather than with a specific instance of the class.</p>
 </div>
 <hr>
-<p>Classical use and basic exmaple of <code>static method</code>, we <strong>call within the <code>class</code> our <code>static</code> <code>method</code></strong> just using the name of the method <code>printArea()</code>:</p>
+<section id="static-modifier" class="level1 page-columns page-full" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> <code>static</code> modifier</h1>
+<p>Classical use and basic example of <code>static method</code>, we <strong>call within the <code>class</code> our <code>static</code> <code>method</code></strong> just using the name of the method <code>printArea()</code>:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/javase/staticMethod.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="Two static methods with parameters. Parameters are the variables we use in the method definition whereas arguments are the values we pass in the method call. These two terms are often used interchangeably"><img src="../images/javase/staticMethod.png" class="img-fluid figure-img" alt="Two static methods with parameters. Parameters are the variables we use in the method definition whereas arguments are the values we pass in the method call. These two terms are often used interchangeably"></a></p>
+<p><a href="..\images/javase/staticMethod.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="Two static methods with parameters. Parameters are the variables we use in the method definition whereas arguments are the values we pass in the method call. These two terms are often used interchangeably"><img src="..\images/javase/staticMethod.png" class="img-fluid figure-img" alt="Two static methods with parameters. Parameters are the variables we use in the method definition whereas arguments are the values we pass in the method call. These two terms are often used interchangeably"></a></p>
 <figcaption>Two static methods with parameters. Parameters are the variables we use in the method definition whereas arguments are the values we pass in the method call. These two terms are often used interchangeably</figcaption>
 </figure>
 </div>
 <p>The <code>static</code> modifier has several different uses in Java, depending on where it is applied. Here are some examples of how the <code>static</code> modifier can be used in Java.</p>
-</section>
-<section id="static-code-block" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="static-code-block"><span class="header-section-number">2</span> <code>static</code> code block</h2>
+<section id="static-code-block" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="static-code-block"><span class="header-section-number">1.1</span> <code>static</code> code block</h2>
 <p>In Java, we have a special block known as a<code>Static Initialization Block</code>. A <code>Static Initialization Block</code> is <strong>executed before the <code>main()</code> method</strong>, it will execute once. This block will not return anything and we can not use the <code>this</code> keyword since it does <strong>not have any instance</strong>.</p>
 <p>For example:</p>
 <div class="code-with-filename">
@@ -1899,8 +1901,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="static-field" class="level2 page-columns page-full" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="static-field"><span class="header-section-number">3</span> <code>static</code> field</h2>
+<section id="static-field" class="level2 page-columns page-full" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="static-field"><span class="header-section-number">1.2</span> <code>static</code> field</h2>
 <p><strong>When applied to a field</strong>, the <code>static</code> modifier indicates that the field belongs to the class itself, rather than to an instance of the class. This means that all instances of the class share the same value for the <code>static</code> field.</p>
 <p>For example:</p>
 <div class="code-with-filename">
@@ -1977,8 +1979,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In this example, the <code>Account</code> class defines a <code>nextAccountNumber</code> field that is marked as <code>static</code>. This means that the <code>nextAccountNumber</code> field belongs to the <code>Account</code> class itself, rather than to an instance of the <code>Account</code> class. This means that all instances of the <code>Account</code> class share the same value for the <code>nextAccountNumber</code> field.</p>
 </div></div><p>When a new instance of the <code>Account</code> class is created, the <code>nextAccountNumber</code> field is incremented, and the new value is shared by all instances of the class. This allows each instance of the <code>Account</code> class to have a unique <code>accountNumber</code> field, which is generated automatically using the <code>nextAccountNumber</code> field.</p>
 </section>
-<section id="static-method" class="level2 page-columns page-full" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="static-method"><span class="header-section-number">4</span> <code>static</code> method</h2>
+<section id="static-method" class="level2 page-columns page-full" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="static-method"><span class="header-section-number">1.3</span> <code>static</code> method</h2>
 <p><strong>When applied to a method</strong>, the <code>static</code> modifier indicates that the method belongs to the class itself, rather than to an instance of the class. This means that the <code>static</code> method can be called on the class itself, rather than on an instance of the class.</p>
 <p>For example:</p>
 <div class="code-with-filename">
@@ -2091,8 +2093,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="static-class" class="level2 page-columns page-full" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="static-class"><span class="header-section-number">5</span> <code>static</code> class</h2>
+<section id="static-class" class="level2 page-columns page-full" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="static-class"><span class="header-section-number">1.4</span> <code>static</code> class</h2>
 <p><strong>When applied to a class</strong>, the <code>static</code> modifier indicates that the class is a <strong>nested class</strong>. In other words, the <code>static</code> class is defined inside another class, and is associated with the outer class.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -2165,10 +2167,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Here is an example of how the <code>static</code> modifier can be used when applied to a <code>class</code> in <code>Java</code>, using an <code>Account</code> class and a nested <code>Transaction</code> class as examples:</p>
 </div></div></section>
-<section id="static-vs.-non-static" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="static-vs.-non-static"><span class="header-section-number">6</span> <code>static</code> vs.&nbsp;<code>non-static</code></h2>
-<section id="pros-cons-usage-static-methods" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="pros-cons-usage-static-methods"><span class="header-section-number">6.1</span> Pros &amp; cons usage <code>static</code> methods</h3>
+</section>
+<section id="static-scope" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> <code>static</code> scope</h1>
+<p>In Java SE (Standard Edition), the term <strong>“static scope”</strong> typically refers to <mark>the visibility and accessibility of variables and methods marked with the <code>static</code> keyword within a class or interface.</mark></p>
+<p>When a variable or method is declared as <code>static</code> within a class or interface, it means that it belongs to the class itself rather than to instances of the class. This has <strong>implications</strong> for how these members are accessed:</p>
+<ul>
+<li><p><strong>Visibility within the class:</strong> Static variables and methods can be accessed directly within other static methods or variables of the same class without needing an instance of the class.</p></li>
+<li><p><strong>Access from outside the class:</strong> Static variables and methods can also be accessed directly using the class name, without needing an instance of the class. This access can occur from other classes, as long as the static member is declared with appropriate access modifiers (e.g., <code>public</code>, <code>protected</code>, or <code>private</code>).</p></li>
+<li><p><strong>Lifetime:</strong> Static variables exist for the entire duration of the program’s execution, and there is only one instance of each static variable per class, shared by all instances of the class.</p></li>
+<li><p><strong>Initialization:</strong> Static variables are initialized only once, at the start of the program execution, before any instances of the class are created.</p></li>
+</ul>
+<p>Here’s a basic example to illustrate static scope:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Account.java</strong></pre>
+</div>
+<div class="sourceCode" id="cb7" data-filename="Account.java"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">public</span> <span class="kw">class</span> MyClass <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="co">// Static variable</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> staticVariable <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    </span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="co">// Instance variable</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="kw">public</span> <span class="dt">int</span> instanceVariable<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>    </span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="co">// Static method</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">staticMethod</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"This is a static method."</span><span class="op">);</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>        <span class="co">// Can access static variables directly</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Static variable: "</span> <span class="op">+</span> staticVariable<span class="op">);</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>        <span class="co">// Cannot access instance variables directly</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>        <span class="co">// System.out.println("Instance variable: " + instanceVariable); // This line would cause a compilation error</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>    <span class="op">}</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>    </span>
+<span id="cb7-17"><a href="#cb7-17"></a>    <span class="co">// Instance method</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">instanceMethod</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"This is an instance method."</span><span class="op">);</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a>        <span class="co">// Can access both static and instance variables directly</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Static variable: "</span> <span class="op">+</span> staticVariable<span class="op">);</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Instance variable: "</span> <span class="op">+</span> instanceVariable<span class="op">);</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a>    <span class="op">}</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="op">}</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this example, <code>staticVariable</code> is a static variable that can be accessed directly within both <code>staticMethod()</code> and <code>instanceMethod()</code>, while <code>instanceVariable</code> is an instance variable that can only be accessed within <code>instanceMethod()</code> or other instance methods, requiring an instance of <code>MyClass</code>.</p>
+</section>
+<section id="static-vs.-non-static" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> <code>static</code> vs.&nbsp;<code>non-static</code></h1>
+<section id="pros-cons-usage-static-methods" class="level3" data-number="3.0.1">
+<h3 data-number="3.0.1" class="anchored" data-anchor-id="pros-cons-usage-static-methods"><span class="header-section-number">3.0.1</span> Pros &amp; cons usage <code>static</code> methods</h3>
 <table class="table">
 <colgroup>
 <col style="width: 50%">
@@ -2196,8 +2242,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
-<section id="pros-cons-usage-non-static-methods" class="level3" data-number="6.2">
-<h3 data-number="6.2" class="anchored" data-anchor-id="pros-cons-usage-non-static-methods"><span class="header-section-number">6.2</span> Pros &amp; cons usage <code>non-static</code> methods</h3>
+<section id="pros-cons-usage-non-static-methods" class="level3" data-number="3.0.2">
+<h3 data-number="3.0.2" class="anchored" data-anchor-id="pros-cons-usage-non-static-methods"><span class="header-section-number">3.0.2</span> Pros &amp; cons usage <code>non-static</code> methods</h3>
 <table class="table">
 <colgroup>
 <col style="width: 50%">
@@ -2808,7 +2854,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":false});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":false,"descPosition":"bottom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
