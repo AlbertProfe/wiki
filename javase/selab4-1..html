@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="albertprofe">
-<meta name="description" content="description">
+<meta name="description" content="Java SE Lab 04, part 1 work on the Core-Model">
 
-<title>albertprofe wiki - Network: Client-server</title>
+<title>albertprofe wiki - Lab#SE04-1: healthyFood Restaurant, Core Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -148,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="../linux/linux-distros-redhat.html" rel="" target="">
- <span class="dropdown-text">Linux Distros: Red Hat Enterprise Linux</span></a>
+ <span class="dropdown-text">Linux Distros: Red Hat Enterprise</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Linux: laboratories</li>
@@ -239,6 +239,10 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Network: Basics</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../devops/devops-network-clientserver.html" rel="" target="">
+ <span class="dropdown-text">Network: Client-server</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../devops/devops-network-protocols.html" rel="" target="">
  <span class="dropdown-text">Network Protocols</span></a>
   </li>  
@@ -256,11 +260,11 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="../devops/devops-network-websocket.html" rel="" target="">
- <span class="dropdown-text">Network: SMTP</span></a>
+ <span class="dropdown-text">Network: Websocket</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../devops/devops-network-smtp.html" rel="" target="">
- <span class="dropdown-text">Network: Basics</span></a>
+ <span class="dropdown-text">Network: SMTP</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../devops/devops-network-ping.html" rel="" target="">
@@ -1301,27 +1305,28 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
+  <li><a href="#core-classes-and-dependencies" id="toc-core-classes-and-dependencies" class="nav-link active" data-scroll-target="#core-classes-and-dependencies"><span class="header-section-number">1</span> Core classes and dependencies</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/devops/devops-network-serverclient.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Albertprofe/wiki/edit/main/javase/selab4-1..qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Albertprofe/wiki/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Network: Client-server</h1>
-<p class="subtitle lead">Networking client-sever architecture</p>
+<h1 class="title">Lab#SE04-1: healthyFood Restaurant, Core Model</h1>
+<p class="subtitle lead">Java SE Lab 04 part 1</p>
   <div class="quarto-categories">
-    <div class="quarto-category">devops</div>
-    <div class="quarto-category">network</div>
-    <div class="quarto-category">server-client</div>
+    <div class="quarto-category">javase</div>
+    <div class="quarto-category">lab</div>
+    <div class="quarto-category">composition</div>
+    <div class="quarto-category">model</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    description
+    Java SE Lab 04, part 1 work on the Core-Model
   </div>
 </div>
 
@@ -1345,7 +1350,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Wednesday, January 10, 2024</p>
+      <p class="date-modified">Tuesday, January 23, 2024</p>
     </div>
   </div>
     
@@ -1354,14 +1359,44 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="overview" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
+<div class="labs">
+<p>📘 <strong>Linux Lab#SE04-1: healthyFood Restaurant</strong></p>
+<ol type="1">
+<li><p>Create a Maven/Gradle <code>Java SE Project</code>.</p>
+<ul>
+<li>Crete from <a href="../javase/se-concepts-createproject.html">wizard</a> the Maven Java SE Project and then work with <a href="../javase/se-concepts-projectgit.html">git</a>, local and remote.</li>
+</ul></li>
+<li><p>Add the needed dependencies:</p>
+<ul>
+<li>Lombok</li>
+<li>Junit</li>
+<li>Java Faker</li>
+</ul></li>
+<li><p>Create three <code>Java</code> classes to define the <strong>Model</strong>. Java SE Classes:</p>
+<ul>
+<li>Core Model: Table, Order and Menu</li>
+<li>Managers and Controller: use a fake DataBase like <code>ArrayList</code> or <code>HahsMaps</code></li>
+</ul></li>
+<li><p>With <code>Junit</code> dependency create <strong>unitary test</strong> to test objects and operations, and then <strong>integration tests</strong>.</p></li>
+<li><p>From here you should add new features <strong>once all the test are passed.</strong></p>
+<ul>
+<li>Operations, you could think in a Manager Class o similar</li>
+<li>New fields/attributes and new classes</li>
+<li>New compositions and inherence: expand your model</li>
+<li>Use Factory design pattern to create new objects</li>
+</ul></li>
+</ol>
+</div>
+<hr>
+<section id="core-classes-and-dependencies" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="core-classes-and-dependencies"><span class="header-section-number">1</span> Core classes and dependencies</h2>
+<p>You could then use these classes as follows:</p>
 <!--- navLinks -->
 <br><br>
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../devops/devops-network-basics.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> Network basics</a> <br></p>
+<p><br> <a href="../javase/selab3-3.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> Lab#SE3-3: Library/Book, Expand Model</a> <br></p>
 </div>
 <br>
 <div class="column center">
@@ -1369,7 +1404,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../devops/devops-network-protocols.html">Network protocols <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
+<p><br> <a href="../javase/resources.html">Java Resources <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
 </div>
