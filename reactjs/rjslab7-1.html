@@ -9,7 +9,7 @@
 <meta name="author" content="albertprofe">
 <meta name="description" content="labs">
 
-<title>albertprofe wiki - Lab#RE06-1-PR: create a pull request</title>
+<title>albertprofe wiki - Lab#RE07-1: traffic lights game</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -46,9 +80,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -82,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -1351,7 +1382,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reactjs/rjslab1.html">React JS: Laboratories</a></li><li class="breadcrumb-item"><a href="../reactjs/rjslab6-1-PR.html">Lab#RE06-1-PR: create a pull request</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reactjs/rjslab1.html">React JS: Laboratories</a></li><li class="breadcrumb-item"><a href="../reactjs/rjslab7-1.html">Lab#RE07-1: traffic lights game</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -1715,14 +1746,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reactjs/rjslab6-1-PR.html" class="sidebar-item-text sidebar-link active">
+  <a href="../reactjs/rjslab6-1-PR.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab#RE06-1-PR: create a pull request</span></a>
   </div>
 </li>
           <li class="px-0"><hr class="sidebar-divider hi "></li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reactjs/rjslab7-1.html" class="sidebar-item-text sidebar-link">
+  <a href="../reactjs/rjslab7-1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab#RE07-1: traffic lights game</span></a>
   </div>
 </li>
@@ -1756,26 +1787,38 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#pull-request-ordersmapping-to-master" id="toc-pull-request-ordersmapping-to-master" class="nav-link active" data-scroll-target="#pull-request-ordersmapping-to-master"><span class="header-section-number">1</span> Pull Request: <code>ordersMapping</code> to <code>master</code></a>
+  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references"><span class="header-section-number">1</span> References</a></li>
+  <li><a href="#create-project" id="toc-create-project" class="nav-link" data-scroll-target="#create-project"><span class="header-section-number">2</span> Create project</a>
   <ul>
-  <li><a href="#general-approach" id="toc-general-approach" class="nav-link" data-scroll-target="#general-approach"><span class="header-section-number">1.1</span> General approach</a></li>
-  <li><a href="#step-by-step" id="toc-step-by-step" class="nav-link" data-scroll-target="#step-by-step"><span class="header-section-number">1.2</span> Step by step</a></li>
-  <li><a href="#ways-to-finish-a-pull-request" id="toc-ways-to-finish-a-pull-request" class="nav-link" data-scroll-target="#ways-to-finish-a-pull-request"><span class="header-section-number">1.3</span> Ways to Finish a Pull Request</a></li>
+  <li><a href="#vite" id="toc-vite" class="nav-link" data-scroll-target="#vite"><span class="header-section-number">2.1</span> Vite</a></li>
+  <li><a href="#exposing-port" id="toc-exposing-port" class="nav-link" data-scroll-target="#exposing-port"><span class="header-section-number">2.2</span> exposing port</a></li>
+  <li><a href="#shortcuts" id="toc-shortcuts" class="nav-link" data-scroll-target="#shortcuts"><span class="header-section-number">2.3</span> Shortcuts</a></li>
   </ul></li>
+  <li><a href="#mock-up" id="toc-mock-up" class="nav-link" data-scroll-target="#mock-up"><span class="header-section-number">3</span> Mock-up</a></li>
+  <li><a href="#step-by-step-code" id="toc-step-by-step-code" class="nav-link" data-scroll-target="#step-by-step-code"><span class="header-section-number">4</span> Step-by-step code</a>
+  <ul>
+  <li><a href="#react-functions" id="toc-react-functions" class="nav-link" data-scroll-target="#react-functions"><span class="header-section-number">4.1</span> React functions</a></li>
+  <li><a href="#react-application" id="toc-react-application" class="nav-link" data-scroll-target="#react-application"><span class="header-section-number">4.2</span> React Application</a></li>
+  <li><a href="#adding-graphics" id="toc-adding-graphics" class="nav-link" data-scroll-target="#adding-graphics"><span class="header-section-number">4.3</span> Adding graphics</a></li>
+  <li><a href="#consolidation-and-merge-literal-object" id="toc-consolidation-and-merge-literal-object" class="nav-link" data-scroll-target="#consolidation-and-merge-literal-object"><span class="header-section-number">4.4</span> Consolidation and merge: literal object</a></li>
+  <li><a href="#adding-form" id="toc-adding-form" class="nav-link" data-scroll-target="#adding-form"><span class="header-section-number">4.5</span> Adding form</a></li>
+  <li><a href="#adding-data" id="toc-adding-data" class="nav-link" data-scroll-target="#adding-data"><span class="header-section-number">4.6</span> Adding data</a></li>
+  </ul></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">5</span> Code</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/reactjs/rjslab6-1-PR.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/reactjs/rjslab7-1.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reactjs/rjslab1.html">React JS: Laboratories</a></li><li class="breadcrumb-item"><a href="../reactjs/rjslab6-1-PR.html">Lab#RE06-1-PR: create a pull request</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reactjs/rjslab1.html">React JS: Laboratories</a></li><li class="breadcrumb-item"><a href="../reactjs/rjslab7-1.html">Lab#RE07-1: traffic lights game</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab#RE06-1-PR: create a pull request</h1>
+<h1 class="title">Lab#RE07-1: traffic lights game</h1>
 <p class="subtitle lead">ReactJS labs</p>
   <div class="quarto-categories">
     <div class="quarto-category">reactjs</div>
     <div class="quarto-category">lab</div>
-    <div class="quarto-category">Lab#RE06</div>
+    <div class="quarto-category">Lab#RE07</div>
   </div>
   </div>
 
@@ -1816,100 +1859,230 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="pull-request-ordersmapping-to-master" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Pull Request: <code>ordersMapping</code> to <code>master</code></h1>
-<section id="general-approach" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="general-approach"><span class="header-section-number">1.1</span> General approach</h2>
+<div class="labs">
+<p>📘 <strong>React JS Lab#RE07-1: Traffic Lights Game</strong></p>
+<p>In this lab, we’ll delve into building a traffic lights game using React.js. Here’s an overview of what we’ll cover:</p>
 <ol type="1">
-<li>Navigate to the <strong>repository</strong> on GitHub.</li>
-<li>Switch to the “<code>ordersMapping</code>” branch.</li>
-<li>Click on the “Pull Request” tab.</li>
-<li>Ensure “base” is set to “<code>master</code>” and “compare” is set to “<code>ordersMapping</code>”.</li>
-<li>Review the changes.</li>
-<li>Click on “<strong>Create Pull Request</strong>”.</li>
-<li>Provide a descriptive title and additional context if necessary.</li>
-<li>Review the summary.</li>
-<li>Click on “<strong>Create Pull Request</strong>” again to submit.</li>
-<li>Verify the pull request is created successfully.</li>
-</ol>
-</section>
-<section id="step-by-step" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="step-by-step"><span class="header-section-number">1.2</span> Step by step</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/reactjs/how-to-pull-request-1.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="Create a pull request step#1"><img src="../images/reactjs/how-to-pull-request-1.png" class="img-fluid figure-img" style="width:80.0%" alt="Create a pull request step#1"></a></p>
-<figcaption>Create a pull request step#1</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/reactjs/how-to-pull-request-2.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="Create a pull request step#2"><img src="../images/reactjs/how-to-pull-request-2.png" class="img-fluid figure-img" style="width:80.0%" alt="Create a pull request step#2"></a></p>
-<figcaption>Create a pull request step#2</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/reactjs/how-to-pull-request-3.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3" title="Create a pull request step#3"><img src="../images/reactjs/how-to-pull-request-3.png" class="img-fluid figure-img" style="width:80.0%" alt="Create a pull request step#3"></a></p>
-<figcaption>Create a pull request step#3</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/reactjs/how-to-pull-request-4.png" class="lightbox" data-glightbox="description: .lightbox-desc-4" data-gallery="quarto-lightbox-gallery-4" title="Create a pull request step#4"><img src="../images/reactjs/how-to-pull-request-4.png" class="img-fluid figure-img" style="width:80.0%" alt="Create a pull request step#4"></a></p>
-<figcaption>Create a pull request step#4</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/reactjs/how-to-pull-request-5.png" class="lightbox" data-glightbox="description: .lightbox-desc-5" data-gallery="quarto-lightbox-gallery-5" title="Create a pull request step#5"><img src="../images/reactjs/how-to-pull-request-5.png" class="img-fluid figure-img" style="width:80.0%" alt="Create a pull request step#5"></a></p>
-<figcaption>Create a pull request step#5</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/reactjs/how-to-pull-request-6.png" class="lightbox" data-glightbox="description: .lightbox-desc-6" data-gallery="quarto-lightbox-gallery-6" title="Create a pull request step#6"><img src="../images/reactjs/how-to-pull-request-6.png" class="img-fluid figure-img" style="width:80.0%" alt="Create a pull request step#6"></a></p>
-<figcaption>Create a pull request step#6</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/reactjs/how-to-pull-request-7.png" class="lightbox" data-glightbox="description: .lightbox-desc-7" data-gallery="quarto-lightbox-gallery-7" title="Create a pull request step#7"><img src="../images/reactjs/how-to-pull-request-7.png" class="img-fluid figure-img" style="width:80.0%" alt="Create a pull request step#7"></a></p>
-<figcaption>Create a pull request step#7</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/reactjs/how-to-pull-request-8.png" class="lightbox" data-glightbox="description: .lightbox-desc-8" data-gallery="quarto-lightbox-gallery-8" title="Create a pull request step#8"><img src="../images/reactjs/how-to-pull-request-8.png" class="img-fluid figure-img" style="width:80.0%" alt="Create a pull request step#8"></a></p>
-<figcaption>Create a pull request step#8</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/reactjs/how-to-pull-request-9.png" class="lightbox" data-glightbox="description: .lightbox-desc-9" data-gallery="quarto-lightbox-gallery-9" title="Create a pull request step#9"><img src="../images/reactjs/how-to-pull-request-9.png" class="img-fluid figure-img" style="width:80.0%" alt="Create a pull request step#9"></a></p>
-<figcaption>Create a pull request step#9</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/reactjs/how-to-pull-request-10.png" class="lightbox" data-glightbox="description: .lightbox-desc-10" data-gallery="quarto-lightbox-gallery-10" title="Create a pull request step#10"><img src="../images/reactjs/how-to-pull-request-10.png" class="img-fluid figure-img" style="width:80.0%" alt="Create a pull request step#10"></a></p>
-<figcaption>Create a pull request step#10</figcaption>
-</figure>
-</div>
-</section>
-<section id="ways-to-finish-a-pull-request" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="ways-to-finish-a-pull-request"><span class="header-section-number">1.3</span> Ways to Finish a Pull Request</h2>
+<li><p><strong>Project Setup</strong>: We’ll kick off by creating a new React project using <strong>Vite</strong>, a modern build tool. With Vite’s fast build times, we’ll set up our project environment swiftly.</p></li>
+<li><p><strong>CSS Inline Styling</strong>: Instead of separate CSS files, we’ll utilize inline styling for our components. This approach keeps our styling concise and localized within each component.</p></li>
+<li><p><strong>JSX Components</strong>: We’ll dive into JSX, a syntax extension for JavaScript often used with React. JSX allows us to write HTML-like code within JavaScript, making it seamless to create UI components.</p></li>
+<li><p><strong>Form Management with Hooks and Literal Objects</strong>: We’ll manage our form state using React hooks like (these hooks empower us to handle stateful logic effectively within functional components):</p>
 <ol type="1">
-<li><p><strong>Merger Commit:</strong> Combines all branch changes into a single commit on master, retaining individual commit history.</p></li>
-<li><p><strong>Merge Squash:</strong> Condenses all branch commits into a single commit on master, simplifying commit history.</p></li>
-<li><p><strong>Merge Rebase:</strong> Integrates branch changes by replaying commits on top of master, resulting in a linear commit history.</p></li>
+<li>useState,</li>
+<li>useMemo,</li>
+<li>useContext,</li>
+<li>and useEffect</li>
+</ol></li>
+<li><p>Additionally, we’ll leverage literal objects for organized state management.</p></li>
+<li><p><strong>Timeouts for Game Logic</strong>: We’ll incorporate timeouts to control the game flow. Timeouts allow us to delay certain actions, such as changing traffic light colors or updating pedestrian movements, adding an interactive and dynamic element to our traffic lights game.</p></li>
+<li><p><strong>Forms</strong></p></li>
 </ol>
-<p>Each method offers distinct advantages: merger commit maintains detailed history, merge squash keeps history cleaner, while merge rebase provides a linear timeline. Choose based on project requirements, considering readability, collaboration, and potential conflicts when merging branches into master.</p>
+<p>By the end of this lab, you’ll have gained hands-on experience in React.js development, mastering essential concepts like state management, JSX rendering, component styling, and integrating timeouts for game logic. This project serves as an engaging introduction to building dynamic web applications with React. Let’s get started and create an interactive traffic lights game together!</p>
+</div>
+<p><br></p>
+<section id="references" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> References</h1>
+<ul>
+<li><a href="https://codesandbox.io/p/sandbox/react-dev-mzqnh7?file=%2Fsrc%2FApp.js&amp;utm_medium=sandpack" class="external" target="_blank">codesandbox <strong>walking</strong></a></li>
+<li><a href="https://codesandbox.io/p/sandbox/react-dev-hl8cxc?file=%2Fsrc%2FApp.js&amp;utm_medium=sandpack" class="external" target="_blank">codesandbox <strong>marketplace</strong></a></li>
+<li><a href="https://codesandbox.io/p/sandbox/react-dev-5tfwx3?file=%2Fsrc%2FApp.js&amp;utm_medium=sandpack" class="external" target="_blank">codesandbox <strong>red-point</strong></a></li>
+</ul>
+<p>Coode repository:</p>
+<ul>
+<li><a href="https://github.com/AlbertProfe/trafficlights/tree/master">Github repo</a>{.external target=’’_blank}</li>
+</ul>
+</section>
+<section id="create-project" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Create project</h1>
+<section id="vite" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="vite"><span class="header-section-number">2.1</span> Vite</h2>
+<p>Next Generation Frontend Tooling</p>
+<p>Get ready for a development environment that can finally catch up with you.</p>
+<ul>
+<li><a href="https://vitejs.dev/" class="external" target="_blank">Vite</a></li>
+<li><a href="https://vitejs.dev/guide/">Getting Started | Vite</a></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="#cb1-1"></a>$ node -v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>$ npm create vite@latest &lt;nombre-de-mi-proyecto&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href="#cb3-1"></a>✔ Project name: … vite-project</span>
+<span id="cb3-2"><a href="#cb3-2"></a>? Select a framework: › - Use arrow-keys. Return to submit.</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    Vanilla</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    Vue</span>
+<span id="cb3-5"><a href="#cb3-5"></a>❯   React</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    Preact</span>
+<span id="cb3-7"><a href="#cb3-7"></a>    Lit</span>
+<span id="cb3-8"><a href="#cb3-8"></a>    Svelte</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href="#cb4-1"></a>? Select a variant: › - Use arrow-keys. Return to submit.</span>
+<span id="cb4-2"><a href="#cb4-2"></a>❯   JavaScript</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    TypeScript</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a href="#cb5-1"></a>Scaffolding project in /Users/carlosazaustre/dev/vite-project...</span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a>Done. Now run:</span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  cd vite-project</span>
+<span id="cb5-6"><a href="#cb5-6"></a>  npm install</span>
+<span id="cb5-7"><a href="#cb5-7"></a>  npm run dev</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exposing-port" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="exposing-port"><span class="header-section-number">2.2</span> exposing port</h2>
+<p><a href="https://stackoverflow.com/questions/71939532/npm-run-dev-host-network-not-exposed">npm run dev –host network: not exposed</a></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1"></a> <span class="er">"scripts":</span> <span class="fu">{</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>    <span class="dt">"dev"</span><span class="fu">:</span> <span class="st">"vite --host --port 8888"</span><span class="fu">,</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>   <span class="er">.....</span>  <span class="er">what</span> <span class="er">ever</span> <span class="er">else</span> <span class="er">was</span> <span class="er">here.....</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">}</span><span class="er">,</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="shortcuts" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="shortcuts"><span class="header-section-number">2.3</span> Shortcuts</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb7-1"><a href="#cb7-1"></a> <span class="er">"scripts":</span> <span class="fu">{</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="dt">"dev"</span><span class="fu">:</span> <span class="st">"vite --host --port 8888"</span><span class="fu">,</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>   <span class="er">.....</span>  <span class="er">what</span> <span class="er">ever</span> <span class="er">else</span> <span class="er">was</span> <span class="er">here.....</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">}</span><span class="er">,</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="mock-up" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Mock-up</h1>
+<p>to-do</p>
+</section>
+<section id="step-by-step-code" class="level1 page-columns page-full" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Step-by-step code</h1>
+<p>Reference:</p>
+<section id="react-functions" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="react-functions"><span class="header-section-number">4.1</span> React functions</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>index.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb8" data-filename="index.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> React <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="im">import</span> ReactDOM <span class="im">from</span> <span class="st">'react-dom/client'</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="im">import</span> App <span class="im">from</span> <span class="st">'./App'</span><span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">const</span> <span class="bu">root</span> <span class="op">=</span> </span>
+<span id="cb8-6"><a href="#cb8-6"></a>ReactDOM<span class="op">.</span><span class="fu">createRoot</span>(<span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">'root'</span>))<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="bu">root</span><span class="op">.</span><span class="fu">render</span>(<span class="op">&lt;</span>App <span class="op">/&gt;</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="react-application" class="level2 page-columns page-full" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="react-application"><span class="header-section-number">4.2</span> React Application</h2>
+<p>This first iteration defines a React functional component called <code>RequestTracker</code>, <mark>which simulates a traffic light and tracks pedestrian crossings</mark>.</p>
+<p>It uses the <code>useState</code> hook to manage <strong>four state variables</strong>:</p>
+<ul>
+<li><strong>pending</strong> (number of pedestrians waiting),</li>
+<li><strong>walking</strong> (number of pedestrians crossing),</li>
+<li><strong>completed</strong> (number of completed crossings),</li>
+<li>and <strong>light</strong> (status of the traffic light).</li>
+</ul>
+<p>When the user clicks the “Traffic Light” <code>button</code>, the <code>handleTrafficLightClick</code> function is <strong>triggered</strong>. It decrements pending, increments walking, and sets the light to green. After a <strong>delay of 5 seconds</strong>, it decrements walking, increments completed, and sets the light to red.</p>
+<p>The code uses the <code>&lt;&gt;</code> (fragment) syntax to group multiple elements without introducing an additional parent node.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>The UI displays the current counts of pending, walking, and completed pedestrians, and the color of the text changes based on the status of the traffic light. The button’s color also changes to reflect the traffic light’s color.</p>
+</div></div><div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb9" data-filename="App.jsx"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">RequestTracker</span>() {</span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="kw">const</span> [pending<span class="op">,</span> setPending] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">100</span>)<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="kw">const</span> [walking<span class="op">,</span> setWalking] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="kw">const</span> [completed<span class="op">,</span> setCompleted] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>  <span class="kw">const</span> [light<span class="op">,</span> setLight] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a>  <span class="co">/*</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">  useEffect(() =&gt; {</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">    console.log("pending effect:", pending);</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co">  }, [pending]);</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">  */</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a></span>
+<span id="cb9-15"><a href="#cb9-15"></a>  <span class="kw">function</span> <span class="fu">handleTrafficLightClick</span>() {</span>
+<span id="cb9-16"><a href="#cb9-16"></a>    <span class="co">//console.log("before", pending);</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a>    <span class="fu">setPending</span>((p) <span class="kw">=&gt;</span> p <span class="op">-</span> <span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a>    <span class="co">//console.log("after", pending);</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a>    <span class="fu">setWalking</span>((w) <span class="kw">=&gt;</span> w <span class="op">+</span> <span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a>    <span class="fu">setLight</span>(<span class="kw">true</span>)<span class="op">;</span> <span class="co">// Set light to green when walking starts</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a>    <span class="pp">setTimeout</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb9-22"><a href="#cb9-22"></a>      <span class="fu">setWalking</span>((w) <span class="kw">=&gt;</span> w <span class="op">-</span> <span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a>      <span class="fu">setCompleted</span>((c) <span class="kw">=&gt;</span> c <span class="op">+</span> <span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a>      <span class="fu">setLight</span>(<span class="kw">false</span>)<span class="op">;</span> <span class="co">// Set light to red when walking is completed</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a>    }<span class="op">,</span> <span class="dv">5000</span>)<span class="op">;</span> <span class="co">// Delay for 3000 milliseconds (5 seconds)</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a>  }</span>
+<span id="cb9-27"><a href="#cb9-27"></a></span>
+<span id="cb9-28"><a href="#cb9-28"></a>  <span class="cf">return</span> (</span>
+<span id="cb9-29"><a href="#cb9-29"></a>    <span class="op">&lt;&gt;</span></span>
+<span id="cb9-30"><a href="#cb9-30"></a>      <span class="op">&lt;</span>h3 style<span class="op">=</span>{{ <span class="dt">color</span><span class="op">:</span> light <span class="op">?</span> <span class="st">"grey"</span> <span class="op">:</span> <span class="st">"white"</span> }}<span class="op">&gt;</span> <span class="dt">Pending</span><span class="op">:</span> {pending} <span class="op">&lt;/</span>h3<span class="op">&gt;</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a>      <span class="op">&lt;</span>h3 style<span class="op">=</span>{{ <span class="dt">color</span><span class="op">:</span> light <span class="op">?</span> <span class="st">"white"</span> <span class="op">:</span> <span class="st">"grey"</span> }}<span class="op">&gt;</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a>        <span class="dt">Walking</span><span class="op">:</span> {walking} {light <span class="op">?</span> <span class="st">" . . . . ."</span> <span class="op">:</span> <span class="st">""</span>}</span>
+<span id="cb9-33"><a href="#cb9-33"></a>      <span class="op">&lt;/</span>h3<span class="op">&gt;</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a>      <span class="op">&lt;</span>h3 style<span class="op">=</span>{{ <span class="dt">color</span><span class="op">:</span> light <span class="op">?</span> <span class="st">"green"</span> <span class="op">:</span> <span class="st">"grey"</span> }}<span class="op">&gt;</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a>        <span class="dt">Completed</span><span class="op">:</span> {completed}</span>
+<span id="cb9-36"><a href="#cb9-36"></a>      <span class="op">&lt;/</span>h3<span class="op">&gt;</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a>      <span class="op">&lt;</span>button</span>
+<span id="cb9-38"><a href="#cb9-38"></a>        onClick<span class="op">=</span>{handleTrafficLightClick}</span>
+<span id="cb9-39"><a href="#cb9-39"></a>        style<span class="op">=</span>{{</span>
+<span id="cb9-40"><a href="#cb9-40"></a>          <span class="dt">backgroundColor</span><span class="op">:</span> light <span class="op">?</span> <span class="st">"green"</span> <span class="op">:</span> <span class="st">"red"</span><span class="op">,</span></span>
+<span id="cb9-41"><a href="#cb9-41"></a>          <span class="dt">padding</span><span class="op">:</span> <span class="st">"10px 24px"</span><span class="op">,</span></span>
+<span id="cb9-42"><a href="#cb9-42"></a>          <span class="dt">borderRadius</span><span class="op">:</span> <span class="st">"8px"</span><span class="op">,</span></span>
+<span id="cb9-43"><a href="#cb9-43"></a>          <span class="dt">border</span><span class="op">:</span> <span class="st">"none"</span><span class="op">,</span></span>
+<span id="cb9-44"><a href="#cb9-44"></a>          <span class="dt">color</span><span class="op">:</span> <span class="st">"white"</span><span class="op">,</span></span>
+<span id="cb9-45"><a href="#cb9-45"></a>          <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"20px"</span><span class="op">,</span></span>
+<span id="cb9-46"><a href="#cb9-46"></a>        }}</span>
+<span id="cb9-47"><a href="#cb9-47"></a>      <span class="op">&gt;</span></span>
+<span id="cb9-48"><a href="#cb9-48"></a>        Taffic Light</span>
+<span id="cb9-49"><a href="#cb9-49"></a>      <span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb9-50"><a href="#cb9-50"></a>    <span class="op">&lt;/&gt;</span></span>
+<span id="cb9-51"><a href="#cb9-51"></a>  )<span class="op">;</span></span>
+<span id="cb9-52"><a href="#cb9-52"></a>}</span>
+<span id="cb9-53"><a href="#cb9-53"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="adding-graphics" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="adding-graphics"><span class="header-section-number">4.3</span> Adding graphics</h2>
+<p>to-do</p>
+</section>
+<section id="consolidation-and-merge-literal-object" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="consolidation-and-merge-literal-object"><span class="header-section-number">4.4</span> Consolidation and merge: literal object</h2>
+<p>The operation of consolidating multiple state variables into a single object using the useState hook and the spread operator can be referred to as state consolidation or state merging.</p>
+<p>Here’s a breakdown:</p>
+<ul>
+<li><strong>State Consolidation</strong>: This term emphasizes the process of bringing together multiple individual state variables into a single, cohesive object. It highlights the idea of simplifying state management by grouping related pieces of state.</li>
+<li><strong>State Merging</strong>: This term underscores the use of the spread operator (…) to merge the previous state with the updated state when setting the state. It emphasizes the technique used to update multiple properties of the state object simultaneously.</li>
+</ul>
+</section>
+<section id="adding-form" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="adding-form"><span class="header-section-number">4.5</span> Adding form</h2>
+</section>
+<section id="adding-data" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="adding-data"><span class="header-section-number">4.6</span> Adding data</h2>
+</section>
+</section>
+<section id="code" class="level1 page-columns page-full" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Code</h1>
+<div class="column-page-right">
+<table class="table">
+<thead>
+<tr class="header">
+<th>Code Version</th>
+<th>Commit</th>
+<th>Folder-Tree</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/AlbertProfe/trafficlights/tree/5219b5acb611bd3c7faba7b22b14e0fd49f38b45" class="external">GitHub code v0.0</a></td>
+<td>create project</td>
+<td><a href=".." width="80%">Basic Structure</a></td>
+<td><a href="">render v0.0 render</a></td>
+</tr>
+</tbody>
+</table>
+</div>
 <!--- navLinks -->
 <br><br>
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../reactjs/rjslab6-1.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> React JS: Lab#RE06-1</a> <br></p>
+<p><br> <a href="../reactjs/rjslab6-1-PR.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> React JS: Lab#RE06-1-PR</a> <br></p>
 </div>
 <br>
 <div class="column center">
@@ -1917,25 +2090,12 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../reactjs/rjslab7-1.html">React JS: Lab#RE07-1 <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
+<p><br> <a href="../reactjs/resources.html">ReactJS Resources <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
 </div>
 
 
-<div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-1">Create a pull request step#1</span>
-<span class="glightbox-desc lightbox-desc-2">Create a pull request step#2</span>
-<span class="glightbox-desc lightbox-desc-3">Create a pull request step#3</span>
-<span class="glightbox-desc lightbox-desc-4">Create a pull request step#4</span>
-<span class="glightbox-desc lightbox-desc-5">Create a pull request step#5</span>
-<span class="glightbox-desc lightbox-desc-6">Create a pull request step#6</span>
-<span class="glightbox-desc lightbox-desc-7">Create a pull request step#7</span>
-<span class="glightbox-desc lightbox-desc-8">Create a pull request step#8</span>
-<span class="glightbox-desc lightbox-desc-9">Create a pull request step#9</span>
-<span class="glightbox-desc lightbox-desc-10">Create a pull request step#10</span>
-</div>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -2478,7 +2638,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p>If you want to go far, walk slow / We love dukkha</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/reactjs/rjslab6-1-PR.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/reactjs/rjslab7-1.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -2497,31 +2657,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
-window.onload = () => {
-  lightboxQuarto.on('slide_before_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    const href = trigger.getAttribute('href');
-    if (href !== null) {
-      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-      if (imgEl !== null) {
-        const srcAttr = imgEl.getAttribute("src");
-        if (srcAttr && srcAttr.startsWith("data:")) {
-          slideConfig.href = srcAttr;
-        }
-      }
-    } 
-  });
-
-  lightboxQuarto.on('slide_after_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    if (window.Quarto?.typesetMath) {
-      window.Quarto.typesetMath(slideNode);
-    }
-  });
-
-};
-          </script>
 
 
 
