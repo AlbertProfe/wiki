@@ -1808,8 +1808,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#react-application" id="toc-react-application" class="nav-link" data-scroll-target="#react-application"><span class="header-section-number">4.2</span> React Application</a></li>
   <li><a href="#adding-graphics" id="toc-adding-graphics" class="nav-link" data-scroll-target="#adding-graphics"><span class="header-section-number">4.3</span> Adding graphics</a></li>
   <li><a href="#consolidation-and-merge-literal-object" id="toc-consolidation-and-merge-literal-object" class="nav-link" data-scroll-target="#consolidation-and-merge-literal-object"><span class="header-section-number">4.4</span> Consolidation and merge: <code>literal object</code></a></li>
-  <li><a href="#adding-form" id="toc-adding-form" class="nav-link" data-scroll-target="#adding-form"><span class="header-section-number">4.5</span> Adding form</a></li>
-  <li><a href="#adding-data" id="toc-adding-data" class="nav-link" data-scroll-target="#adding-data"><span class="header-section-number">4.6</span> Adding data</a></li>
+  <li><a href="#adding-domains-router" id="toc-adding-domains-router" class="nav-link" data-scroll-target="#adding-domains-router"><span class="header-section-number">4.5</span> Adding domains: router</a></li>
+  <li><a href="#adding-form" id="toc-adding-form" class="nav-link" data-scroll-target="#adding-form"><span class="header-section-number">4.6</span> Adding form</a></li>
+  <li><a href="#adding-data" id="toc-adding-data" class="nav-link" data-scroll-target="#adding-data"><span class="header-section-number">4.7</span> Adding data</a></li>
   </ul></li>
   <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">5</span> Code</a></li>
   </ul>
@@ -1855,7 +1856,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Wednesday, March 6, 2024</p>
+      <p class="date-modified">Thursday, March 7, 2024</p>
     </div>
   </div>
     
@@ -1903,45 +1904,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="1"><span class="header-section-number">1</span> References</h1>
 <section id="scripts-and-tools" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="scripts-and-tools"><span class="header-section-number">1.1</span> Scripts and tools</h2>
-<p><strong>Implement a traffic light</strong></p>
+<details>
+<summary>
+<strong>Implement a traffic light</strong>
+</summary>
 <p>Here is a crosswalk light component that toggles when the button is pressed:</p>
 <ul>
 <li><a href="https://react.dev/learn/state-as-a-snapshot#challenges" class="external" target="_blank">Implement a traffic light</a></li>
 <li><a href="https://codesandbox.io/p/sandbox/react-dev-mzqnh7?file=%2Fsrc%2FApp.js&amp;utm_medium=sandpack" class="external" target="_blank">codesandbox <strong>walking</strong></a></li>
 </ul>
-<p><strong>Fix a request counter</strong></p>
+</details>
+<details>
+<summary>
+<strong>Fix a request counter</strong>
+</summary>
 <p>You’re working on an art marketplace app that lets the user submit multiple orders for an art item at the same time. Each time the user presses the “Buy” button, the “Pending” counter should increase by one. After three seconds, the “Pending” counter should decrease, and the “Completed” counter should increase.</p>
+<blockquote class="blockquote">
 <p>However, the “Pending” counter does not behave as intended. When you press “Buy”, it decreases to -1 (which should not be possible!). And if you click fast twice, both counters seem to behave unpredictably.</p>
+</blockquote>
 <p>Why does this happen? Fix both counters.</p>
 <ul>
 <li><a href="https://react.dev/learn/queueing-a-series-of-state-updates#fix-a-request-counter" class="external" target="_blank">Implement a traffic light</a></li>
 <li><a href="https://codesandbox.io/p/sandbox/react-dev-hl8cxc?file=%2Fsrc%2FApp.js&amp;utm_medium=sandpack" class="external" target="_blank">codesandbox <strong>marketplace</strong></a></li>
 </ul>
-<p><strong>Treat state as read-only</strong></p>
+</details>
+<details>
+<summary>
+<strong>Treat state as read-only</strong>
+</summary>
 <p>In other words, you should treat any JavaScript object that you put into state as read-only.</p>
 <p>This example holds an object in state to represent the current pointer position. The red dot is supposed to move when you touch or move the cursor over the preview area. But the dot stays in the initial position:</p>
 <ul>
 <li><a href="https://react.dev/learn/updating-objects-in-state#treat-state-as-read-only" class="external" target="_blank">Treat state as read-only</a></li>
 <li><a href="https://codesandbox.io/p/sandbox/react-dev-5tfwx3?file=%2Fsrc%2FApp.js&amp;utm_medium=sandpack" class="external" target="_blank">codesandbox <strong>red-point</strong></a></li>
 </ul>
-<p><strong>Copying objects with the spread syntax</strong></p>
+</details>
+<details>
+<summary>
+<strong>Copying objects with the spread syntax</strong>
+</summary>
 <p>In the previous example, the position object is always created fresh from the current cursor position. But often, you will want to include existing data as a part of the new object you’re creating. For example, you may want to update only one field in a form, but keep the previous values for all other fields.</p>
 <p>These input fields don’t work because the onChange handlers mutate the state:</p>
 <ul>
 <li><a href="https://react.dev/learn/updating-objects-in-state#copying-objects-with-the-spread-syntax" class="external" target="_blank">Copying objects with the spread syntax</a></li>
 <li><a href="https://codesandbox.io/p/sandbox/react-dev-xjd24m?file=%2Fsrc%2FApp.js&amp;utm_medium=sandpack" class="external" target="_blank">codesandbox <strong>form</strong></a></li>
 </ul>
-<p><strong>Updating Arrays in State</strong></p>
+</details>
+<details>
+<summary>
+<strong>Updating Arrays in State</strong>
+</summary>
 <p>Arrays are mutable in JavaScript, but you should treat them as immutable when you store them in state. Just like with objects, when you want to update an array stored in state, you need to create a new one (or make a copy of an existing one), and then set state to use the new array.</p>
 <ul>
 <li><a href="https://react.dev/learn/updating-arrays-in-state" class="external" target="_blank">Updating Arrays in State</a></li>
 <li><a href="https://codesandbox.io/p/sandbox/react-dev-yy44zn?file=%2Fsrc%2FApp.js&amp;utm_medium=sandpack" class="external" target="_blank">codesandbox <strong>sculptors</strong></a></li>
 </ul>
+</details>
 </section>
 <section id="code-repository" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="code-repository"><span class="header-section-number">1.2</span> Code repository</h2>
 <ul>
 <li><a href="https://github.com/AlbertProfe/trafficlights/tree/master" class="external" target="_blank">Github repo</a></li>
+<li><a href="https://codesandbox.io/p/sandbox/beautiful-sea-9j7tn4?file=%2Fsrc%2FApp.js%3A41%2C5" class="external" target="_blank">traffic lights axios SPA: codesanbox</a></li>
 </ul>
 </section>
 </section>
@@ -1949,8 +1973,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="2"><span class="header-section-number">2</span> Create project</h1>
 <section id="vite" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="vite"><span class="header-section-number">2.1</span> Vite</h2>
-<p>Next Generation Frontend Tooling</p>
-<p>Get ready for a development environment that can finally catch up with you.</p>
+<blockquote class="blockquote">
+<p>Next Generation Frontend Tooling: Get ready for a development environment that can finally catch up with you.</p>
+</blockquote>
 <ul>
 <li><a href="https://vitejs.dev/" class="external" target="_blank">Vite</a></li>
 <li><a href="https://vitejs.dev/guide/">Getting Started | Vite</a></li>
@@ -2033,10 +2058,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="mock-up" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Mock-up</h1>
-<p>Two domains: home/simulation and user/mySimulations</p>
+<p>Whe should <a href="https://www.dhiwise.com/post/single-page-application-vs-multi-page-application" class="external" target="_blank">evolve</a> the project from a SPA to multpage <code>react-router-dom</code> site</p>
+<p>Two domains:</p>
+<ul>
+<li>home/<strong>simulation</strong></li>
+<li>and user/<strong>mySimulations</strong></li>
+</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/trafficlights-mockup.drawio.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="Mockup draft"><img src="../images/reactjs/trafficlights-mockup.drawio.png" class="img-fluid figure-img" alt="Mockup draft"></a></p>
+<p><a href="../images/reactjs/trafficlights-mockup.drawio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="Mockup draft"><img src="../images/reactjs/trafficlights-mockup.drawio.png" class="img-fluid figure-img" alt="Mockup draft"></a></p>
 <figcaption>Mockup draft</figcaption>
 </figure>
 </div>
@@ -2135,9 +2165,216 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="adding-graphics" class="level2" data-number="4.3">
+<section id="adding-graphics" class="level2 page-columns page-full" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="adding-graphics"><span class="header-section-number">4.3</span> Adding graphics</h2>
-<p>to-do</p>
+<blockquote class="blockquote">
+<p>React component called <strong>TrafficLightSimulation</strong>: It simulates a pedestrian crossing at a traffic light.</p>
+</blockquote>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>The code provides an interactive simulation of a traffic light pedestrian crossing using React.</p>
+</div></div><p>The component initializes with a random number of people waiting to cross (<code>peopleToWalk</code>) and a random number of people allowed to cross in each group (<code>groupWalking</code>).</p>
+<p>When the traffic light is clicked, it turns <code>green</code>, and pedestrians start crossing in groups according to the <code>groupWalking</code> limit.</p>
+<p>The component visually represents <code>pending</code> pedestrians, <code>walking</code> pedestrians, and <code>completed</code> crossings. When all pedestrians have crossed, a “<code>Play Again</code>” button appears to refresh the page and start the simulation again.</p>
+<p>The <code>useMemo</code> hook ensures that the initial values for <code>peopleToWalk</code> and <code>groupWalking</code> <strong>remain constant throughout the component’s lifecycle.</strong></p>
+<p>The <code>useState</code> hook <strong>manages the state of the crossing simulation</strong>.</p>
+<ul>
+<li><a href="https://github.com/AlbertProfe/trafficlights/tree/f847634752f6109d5575417c8505634451656d6f" class="external" target="_blank">trafficlights: graphics</a></li>
+<li><a href="https://github.com/AlbertProfe/trafficlights/blob/f847634752f6109d5575417c8505634451656d6f/src/App.jsx" class="external" target="_blank">App.jsx</a></li>
+</ul>
+<details class="page-columns page-full">
+<summary>
+App.jsx with graphics
+</summary>
+<div class="column-page-right">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb10" data-filename="App.jsx"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1"></a></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="im">import</span> { useState<span class="op">,</span> useMemo } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="kw">function</span> <span class="fu">getRandomInt</span>(min<span class="op">,</span> max) {</span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="cf">return</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(<span class="bu">Math</span><span class="op">.</span><span class="fu">random</span>() <span class="op">*</span> (max <span class="op">-</span> min <span class="op">+</span> <span class="dv">1</span>)) <span class="op">+</span> min<span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>}</span>
+<span id="cb10-7"><a href="#cb10-7"></a></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="kw">function</span> <span class="fu">getRandomColor</span>() {</span>
+<span id="cb10-9"><a href="#cb10-9"></a>  <span class="kw">const</span> colors <span class="op">=</span> [<span class="st">"red"</span><span class="op">,</span> <span class="st">"blue"</span><span class="op">,</span> <span class="st">"green"</span><span class="op">,</span> <span class="st">"yellow"</span><span class="op">,</span> <span class="st">"purple"</span><span class="op">,</span> <span class="st">"orange"</span>]<span class="op">;</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>  <span class="cf">return</span> colors[<span class="fu">getRandomInt</span>(<span class="dv">0</span><span class="op">,</span> colors<span class="op">.</span><span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>)]<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>}</span>
+<span id="cb10-12"><a href="#cb10-12"></a></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="kw">function</span> <span class="fu">refreshPage</span>() {</span>
+<span id="cb10-14"><a href="#cb10-14"></a>  <span class="bu">window</span><span class="op">.</span><span class="at">location</span><span class="op">.</span><span class="fu">reload</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a>}</span>
+<span id="cb10-16"><a href="#cb10-16"></a></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">TrafficLightSimulation</span>() {</span>
+<span id="cb10-18"><a href="#cb10-18"></a>  <span class="kw">const</span> initPeopleToWalk <span class="op">=</span> <span class="fu">useMemo</span>(() <span class="kw">=&gt;</span> <span class="fu">getRandomInt</span>(<span class="dv">10</span><span class="op">,</span> <span class="dv">20</span>)<span class="op">,</span> [])<span class="op">;</span> <span class="co">// Initialize peopleToWalk with a random value that remains constant</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a></span>
+<span id="cb10-20"><a href="#cb10-20"></a>  <span class="kw">const</span> peopleToWalk <span class="op">=</span> <span class="fu">useMemo</span>(() <span class="kw">=&gt;</span> initPeopleToWalk<span class="op">,</span> [])<span class="op">;</span> <span class="co">// peopleToWalk does not change along all the execution</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a>  <span class="kw">const</span> initGroupWalking <span class="op">=</span> <span class="fu">getRandomInt</span>(<span class="dv">2</span><span class="op">,</span> <span class="dv">6</span>)<span class="op">;</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a></span>
+<span id="cb10-23"><a href="#cb10-23"></a>  <span class="kw">const</span> [crossing<span class="op">,</span> setCrossing] <span class="op">=</span> <span class="fu">useState</span>({</span>
+<span id="cb10-24"><a href="#cb10-24"></a>    <span class="dt">pending</span><span class="op">:</span> peopleToWalk<span class="op">,</span></span>
+<span id="cb10-25"><a href="#cb10-25"></a>    <span class="dt">walking</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb10-26"><a href="#cb10-26"></a>    <span class="dt">completed</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb10-27"><a href="#cb10-27"></a>    <span class="dt">groupWalking</span><span class="op">:</span> initGroupWalking<span class="op">,</span></span>
+<span id="cb10-28"><a href="#cb10-28"></a>    <span class="dt">light</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb10-29"><a href="#cb10-29"></a>  })<span class="op">;</span></span>
+<span id="cb10-30"><a href="#cb10-30"></a></span>
+<span id="cb10-31"><a href="#cb10-31"></a>  <span class="kw">function</span> <span class="fu">handleTrafficLightClick</span>() {</span>
+<span id="cb10-32"><a href="#cb10-32"></a>    <span class="fu">setCrossing</span>((prevState) <span class="kw">=&gt;</span> ({</span>
+<span id="cb10-33"><a href="#cb10-33"></a>      <span class="op">...</span>prevState<span class="op">,</span></span>
+<span id="cb10-34"><a href="#cb10-34"></a>      <span class="dt">light</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb10-35"><a href="#cb10-35"></a>    }))<span class="op">;</span></span>
+<span id="cb10-36"><a href="#cb10-36"></a></span>
+<span id="cb10-37"><a href="#cb10-37"></a>    <span class="kw">let</span> walked <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-38"><a href="#cb10-38"></a>    <span class="kw">let</span> maxToWalk <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-39"><a href="#cb10-39"></a>    <span class="kw">const</span> walkingInterval <span class="op">=</span> <span class="pp">setInterval</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb10-40"><a href="#cb10-40"></a>      <span class="kw">const</span> { pending<span class="op">,</span> groupWalking } <span class="op">=</span> crossing<span class="op">;</span></span>
+<span id="cb10-41"><a href="#cb10-41"></a>      <span class="cf">if</span> (groupWalking <span class="op">&gt;=</span> pending) maxToWalk <span class="op">=</span> pending<span class="op">;</span></span>
+<span id="cb10-42"><a href="#cb10-42"></a>      <span class="cf">else</span> maxToWalk <span class="op">=</span> groupWalking<span class="op">;</span></span>
+<span id="cb10-43"><a href="#cb10-43"></a></span>
+<span id="cb10-44"><a href="#cb10-44"></a>      <span class="cf">if</span> (walked <span class="op">&lt;</span> maxToWalk) {</span>
+<span id="cb10-45"><a href="#cb10-45"></a>        <span class="fu">setCrossing</span>((prevState) <span class="kw">=&gt;</span> ({</span>
+<span id="cb10-46"><a href="#cb10-46"></a>          <span class="op">...</span>prevState<span class="op">,</span></span>
+<span id="cb10-47"><a href="#cb10-47"></a>          <span class="dt">walking</span><span class="op">:</span> prevState<span class="op">.</span><span class="at">walking</span> <span class="op">+</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb10-48"><a href="#cb10-48"></a>          <span class="dt">pending</span><span class="op">:</span> prevState<span class="op">.</span><span class="at">pending</span> <span class="op">-</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb10-49"><a href="#cb10-49"></a>        }))<span class="op">;</span></span>
+<span id="cb10-50"><a href="#cb10-50"></a>        walked<span class="op">++;</span></span>
+<span id="cb10-51"><a href="#cb10-51"></a>      } <span class="cf">else</span> {</span>
+<span id="cb10-52"><a href="#cb10-52"></a>        <span class="pp">clearInterval</span>(walkingInterval)<span class="op">;</span></span>
+<span id="cb10-53"><a href="#cb10-53"></a>        <span class="fu">setCrossing</span>((prevState) <span class="kw">=&gt;</span> ({</span>
+<span id="cb10-54"><a href="#cb10-54"></a>          <span class="op">...</span>prevState<span class="op">,</span></span>
+<span id="cb10-55"><a href="#cb10-55"></a>          <span class="dt">completed</span><span class="op">:</span> prevState<span class="op">.</span><span class="at">completed</span> <span class="op">+</span> walked<span class="op">,</span></span>
+<span id="cb10-56"><a href="#cb10-56"></a>          <span class="dt">walking</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb10-57"><a href="#cb10-57"></a>          <span class="dt">light</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb10-58"><a href="#cb10-58"></a>          <span class="dt">groupWalking</span><span class="op">:</span> initGroupWalking<span class="op">,</span></span>
+<span id="cb10-59"><a href="#cb10-59"></a>        }))<span class="op">;</span></span>
+<span id="cb10-60"><a href="#cb10-60"></a>      }</span>
+<span id="cb10-61"><a href="#cb10-61"></a>    }<span class="op">,</span> <span class="dv">1000</span>)<span class="op">;</span></span>
+<span id="cb10-62"><a href="#cb10-62"></a>  }</span>
+<span id="cb10-63"><a href="#cb10-63"></a></span>
+<span id="cb10-64"><a href="#cb10-64"></a>  <span class="kw">const</span> { pending<span class="op">,</span> walking<span class="op">,</span> completed<span class="op">,</span> groupWalking<span class="op">,</span> light } <span class="op">=</span> crossing<span class="op">;</span></span>
+<span id="cb10-65"><a href="#cb10-65"></a></span>
+<span id="cb10-66"><a href="#cb10-66"></a>  <span class="cf">return</span> (</span>
+<span id="cb10-67"><a href="#cb10-67"></a>    <span class="op">&lt;&gt;</span></span>
+<span id="cb10-68"><a href="#cb10-68"></a>      <span class="op">&lt;</span>div style<span class="op">=</span>{{ <span class="dt">textAlign</span><span class="op">:</span> <span class="st">"center"</span> }}<span class="op">&gt;</span></span>
+<span id="cb10-69"><a href="#cb10-69"></a>        <span class="op">&lt;</span>h1<span class="op">&gt;</span>Traffic Light Crossing Simulation<span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
+<span id="cb10-70"><a href="#cb10-70"></a>        <span class="op">&lt;</span>h4<span class="op">&gt;</span>Help pedestrians cross the street safely<span class="op">!&lt;/</span>h4<span class="op">&gt;</span>{<span class="st">" "</span>}</span>
+<span id="cb10-71"><a href="#cb10-71"></a>        <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">"chip"</span><span class="op">&gt;</span></span>
+<span id="cb10-72"><a href="#cb10-72"></a>         {peopleToWalk} people want to cross the pedestrian<span class="op">/</span>zebra crossing</span>
+<span id="cb10-73"><a href="#cb10-73"></a>         <span class="op">&lt;/</span>div<span class="op">&gt;&lt;</span>p<span class="op">&gt;&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb10-74"><a href="#cb10-74"></a>        {completed <span class="op">===</span> peopleToWalk <span class="op">?</span> (</span>
+<span id="cb10-75"><a href="#cb10-75"></a>          <span class="op">&lt;</span>button</span>
+<span id="cb10-76"><a href="#cb10-76"></a>            onClick<span class="op">=</span>{refreshPage}</span>
+<span id="cb10-77"><a href="#cb10-77"></a>            style<span class="op">=</span>{{</span>
+<span id="cb10-78"><a href="#cb10-78"></a>              <span class="dt">backgroundColor</span><span class="op">:</span> <span class="st">"black"</span><span class="op">,</span></span>
+<span id="cb10-79"><a href="#cb10-79"></a>              <span class="dt">padding</span><span class="op">:</span> <span class="st">"10px 24px"</span><span class="op">,</span></span>
+<span id="cb10-80"><a href="#cb10-80"></a>              <span class="dt">borderRadius</span><span class="op">:</span> <span class="st">"8px"</span><span class="op">,</span></span>
+<span id="cb10-81"><a href="#cb10-81"></a>              <span class="dt">border</span><span class="op">:</span> <span class="st">"none"</span><span class="op">,</span></span>
+<span id="cb10-82"><a href="#cb10-82"></a>              <span class="dt">color</span><span class="op">:</span> <span class="st">"white"</span><span class="op">,</span></span>
+<span id="cb10-83"><a href="#cb10-83"></a>              <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"20px"</span><span class="op">,</span></span>
+<span id="cb10-84"><a href="#cb10-84"></a>              <span class="dt">marginBottom</span><span class="op">:</span> <span class="st">"20px"</span><span class="op">,</span></span>
+<span id="cb10-85"><a href="#cb10-85"></a>            }}</span>
+<span id="cb10-86"><a href="#cb10-86"></a>          <span class="op">&gt;</span></span>
+<span id="cb10-87"><a href="#cb10-87"></a>            Play <span class="fu">Again</span> (refresh page)</span>
+<span id="cb10-88"><a href="#cb10-88"></a>          <span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb10-89"><a href="#cb10-89"></a>        ) <span class="op">:</span> (</span>
+<span id="cb10-90"><a href="#cb10-90"></a>          <span class="op">&lt;&gt;</span></span>
+<span id="cb10-91"><a href="#cb10-91"></a>            <span class="op">&lt;</span>button</span>
+<span id="cb10-92"><a href="#cb10-92"></a>              onClick<span class="op">=</span>{handleTrafficLightClick}</span>
+<span id="cb10-93"><a href="#cb10-93"></a>              style<span class="op">=</span>{{</span>
+<span id="cb10-94"><a href="#cb10-94"></a>                <span class="dt">backgroundColor</span><span class="op">:</span> light <span class="op">?</span> <span class="st">"green"</span> <span class="op">:</span> <span class="st">"red"</span><span class="op">,</span></span>
+<span id="cb10-95"><a href="#cb10-95"></a>                <span class="dt">padding</span><span class="op">:</span> <span class="st">"10px 24px"</span><span class="op">,</span></span>
+<span id="cb10-96"><a href="#cb10-96"></a>                <span class="dt">borderRadius</span><span class="op">:</span> <span class="st">"8px"</span><span class="op">,</span></span>
+<span id="cb10-97"><a href="#cb10-97"></a>                <span class="dt">border</span><span class="op">:</span> <span class="st">"none"</span><span class="op">,</span></span>
+<span id="cb10-98"><a href="#cb10-98"></a>                <span class="dt">color</span><span class="op">:</span> <span class="st">"white"</span><span class="op">,</span></span>
+<span id="cb10-99"><a href="#cb10-99"></a>                <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"20px"</span><span class="op">,</span></span>
+<span id="cb10-100"><a href="#cb10-100"></a>                <span class="dt">marginBottom</span><span class="op">:</span> <span class="st">"20px"</span><span class="op">,</span></span>
+<span id="cb10-101"><a href="#cb10-101"></a>              }}</span>
+<span id="cb10-102"><a href="#cb10-102"></a>            <span class="op">&gt;</span></span>
+<span id="cb10-103"><a href="#cb10-103"></a>              Traffic Light</span>
+<span id="cb10-104"><a href="#cb10-104"></a>            <span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb10-105"><a href="#cb10-105"></a></span>
+<span id="cb10-106"><a href="#cb10-106"></a>            <span class="op">&lt;</span>div</span>
+<span id="cb10-107"><a href="#cb10-107"></a>              style<span class="op">=</span>{{</span>
+<span id="cb10-108"><a href="#cb10-108"></a>                <span class="dt">display</span><span class="op">:</span> <span class="st">"flex"</span><span class="op">,</span></span>
+<span id="cb10-109"><a href="#cb10-109"></a>                <span class="dt">flexDirection</span><span class="op">:</span> <span class="st">"row"</span><span class="op">,</span></span>
+<span id="cb10-110"><a href="#cb10-110"></a>                <span class="dt">justifyContent</span><span class="op">:</span> <span class="st">"center"</span><span class="op">,</span></span>
+<span id="cb10-111"><a href="#cb10-111"></a>              }}</span>
+<span id="cb10-112"><a href="#cb10-112"></a>            <span class="op">&gt;</span></span>
+<span id="cb10-113"><a href="#cb10-113"></a>              <span class="op">&lt;</span>h3<span class="op">&gt;</span>Group <span class="dt">walking</span><span class="op">:</span> {groupWalking} <span class="op">&lt;/</span>h3<span class="op">&gt;</span></span>
+<span id="cb10-114"><a href="#cb10-114"></a>              {<span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({ <span class="dt">length</span><span class="op">:</span> groupWalking })<span class="op">.</span><span class="fu">map</span>((_<span class="op">,</span> index) <span class="kw">=&gt;</span> (</span>
+<span id="cb10-115"><a href="#cb10-115"></a>                <span class="op">&lt;</span>div</span>
+<span id="cb10-116"><a href="#cb10-116"></a>                  key<span class="op">=</span>{index}</span>
+<span id="cb10-117"><a href="#cb10-117"></a>                  style<span class="op">=</span>{{</span>
+<span id="cb10-118"><a href="#cb10-118"></a>                    <span class="dt">backgroundColor</span><span class="op">:</span> <span class="st">"blue"</span><span class="op">,</span></span>
+<span id="cb10-119"><a href="#cb10-119"></a>                    <span class="dt">width</span><span class="op">:</span> <span class="st">"10px"</span><span class="op">,</span></span>
+<span id="cb10-120"><a href="#cb10-120"></a>                    <span class="dt">height</span><span class="op">:</span> <span class="st">"10px"</span><span class="op">,</span></span>
+<span id="cb10-121"><a href="#cb10-121"></a>                    <span class="dt">margin</span><span class="op">:</span> <span class="st">"2px"</span><span class="op">,</span></span>
+<span id="cb10-122"><a href="#cb10-122"></a>                  }}</span>
+<span id="cb10-123"><a href="#cb10-123"></a>                <span class="op">/&gt;</span></span>
+<span id="cb10-124"><a href="#cb10-124"></a>              ))}</span>
+<span id="cb10-125"><a href="#cb10-125"></a>            <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb10-126"><a href="#cb10-126"></a>          <span class="op">&lt;/&gt;</span></span>
+<span id="cb10-127"><a href="#cb10-127"></a>        )}</span>
+<span id="cb10-128"><a href="#cb10-128"></a>        <span class="op">&lt;</span>div style<span class="op">=</span>{{ <span class="dt">display</span><span class="op">:</span> <span class="st">"flex"</span><span class="op">,</span> <span class="dt">justifyContent</span><span class="op">:</span> <span class="st">"space-between"</span> }}<span class="op">&gt;</span></span>
+<span id="cb10-129"><a href="#cb10-129"></a>          <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb10-130"><a href="#cb10-130"></a>            <span class="op">&lt;</span>h3<span class="op">&gt;</span><span class="dt">Pending</span><span class="op">:</span> {pending}<span class="op">&lt;/</span>h3<span class="op">&gt;</span></span>
+<span id="cb10-131"><a href="#cb10-131"></a>            {<span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({ <span class="dt">length</span><span class="op">:</span> pending })<span class="op">.</span><span class="fu">map</span>((_<span class="op">,</span> index) <span class="kw">=&gt;</span> (</span>
+<span id="cb10-132"><a href="#cb10-132"></a>              <span class="op">&lt;</span>div</span>
+<span id="cb10-133"><a href="#cb10-133"></a>                key<span class="op">=</span>{index}</span>
+<span id="cb10-134"><a href="#cb10-134"></a>                style<span class="op">=</span>{{</span>
+<span id="cb10-135"><a href="#cb10-135"></a>                  <span class="dt">backgroundColor</span><span class="op">:</span> <span class="fu">getRandomColor</span>()<span class="op">,</span></span>
+<span id="cb10-136"><a href="#cb10-136"></a>                  <span class="dt">width</span><span class="op">:</span> <span class="st">"10px"</span><span class="op">,</span></span>
+<span id="cb10-137"><a href="#cb10-137"></a>                  <span class="dt">height</span><span class="op">:</span> <span class="st">"10px"</span><span class="op">,</span></span>
+<span id="cb10-138"><a href="#cb10-138"></a>                  <span class="dt">margin</span><span class="op">:</span> <span class="st">"2px"</span><span class="op">,</span></span>
+<span id="cb10-139"><a href="#cb10-139"></a>                }}</span>
+<span id="cb10-140"><a href="#cb10-140"></a>              <span class="op">/&gt;</span></span>
+<span id="cb10-141"><a href="#cb10-141"></a>            ))}</span>
+<span id="cb10-142"><a href="#cb10-142"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb10-143"><a href="#cb10-143"></a>          <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb10-144"><a href="#cb10-144"></a>            <span class="op">&lt;</span>h3<span class="op">&gt;</span><span class="dt">Walking</span><span class="op">:</span> {walking}<span class="op">&lt;/</span>h3<span class="op">&gt;</span></span>
+<span id="cb10-145"><a href="#cb10-145"></a>            {<span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({ <span class="dt">length</span><span class="op">:</span> walking })<span class="op">.</span><span class="fu">map</span>((_<span class="op">,</span> index) <span class="kw">=&gt;</span> (</span>
+<span id="cb10-146"><a href="#cb10-146"></a>              <span class="op">&lt;</span>div</span>
+<span id="cb10-147"><a href="#cb10-147"></a>                key<span class="op">=</span>{index}</span>
+<span id="cb10-148"><a href="#cb10-148"></a>                style<span class="op">=</span>{{</span>
+<span id="cb10-149"><a href="#cb10-149"></a>                  <span class="dt">backgroundColor</span><span class="op">:</span> <span class="st">"blue"</span><span class="op">,</span></span>
+<span id="cb10-150"><a href="#cb10-150"></a>                  <span class="dt">width</span><span class="op">:</span> <span class="st">"10px"</span><span class="op">,</span></span>
+<span id="cb10-151"><a href="#cb10-151"></a>                  <span class="dt">height</span><span class="op">:</span> <span class="st">"10px"</span><span class="op">,</span></span>
+<span id="cb10-152"><a href="#cb10-152"></a>                  <span class="dt">margin</span><span class="op">:</span> <span class="st">"2px"</span><span class="op">,</span></span>
+<span id="cb10-153"><a href="#cb10-153"></a>                }}</span>
+<span id="cb10-154"><a href="#cb10-154"></a>              <span class="op">/&gt;</span></span>
+<span id="cb10-155"><a href="#cb10-155"></a>            ))}</span>
+<span id="cb10-156"><a href="#cb10-156"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb10-157"><a href="#cb10-157"></a>          <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb10-158"><a href="#cb10-158"></a>            <span class="op">&lt;</span>h3<span class="op">&gt;</span><span class="dt">Completed</span><span class="op">:</span> {completed}<span class="op">&lt;/</span>h3<span class="op">&gt;</span></span>
+<span id="cb10-159"><a href="#cb10-159"></a>            {<span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({ <span class="dt">length</span><span class="op">:</span> completed })<span class="op">.</span><span class="fu">map</span>((_<span class="op">,</span> index) <span class="kw">=&gt;</span> (</span>
+<span id="cb10-160"><a href="#cb10-160"></a>              <span class="op">&lt;</span>div</span>
+<span id="cb10-161"><a href="#cb10-161"></a>                key<span class="op">=</span>{index}</span>
+<span id="cb10-162"><a href="#cb10-162"></a>                style<span class="op">=</span>{{</span>
+<span id="cb10-163"><a href="#cb10-163"></a>                  <span class="dt">backgroundColor</span><span class="op">:</span> <span class="st">"green"</span><span class="op">,</span></span>
+<span id="cb10-164"><a href="#cb10-164"></a>                  <span class="dt">width</span><span class="op">:</span> <span class="st">"10px"</span><span class="op">,</span></span>
+<span id="cb10-165"><a href="#cb10-165"></a>                  <span class="dt">height</span><span class="op">:</span> <span class="st">"10px"</span><span class="op">,</span></span>
+<span id="cb10-166"><a href="#cb10-166"></a>                  <span class="dt">margin</span><span class="op">:</span> <span class="st">"2px"</span><span class="op">,</span></span>
+<span id="cb10-167"><a href="#cb10-167"></a>                }}</span>
+<span id="cb10-168"><a href="#cb10-168"></a>              <span class="op">/&gt;</span></span>
+<span id="cb10-169"><a href="#cb10-169"></a>            ))}</span>
+<span id="cb10-170"><a href="#cb10-170"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb10-171"><a href="#cb10-171"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb10-172"><a href="#cb10-172"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb10-173"><a href="#cb10-173"></a>    <span class="op">&lt;/&gt;</span></span>
+<span id="cb10-174"><a href="#cb10-174"></a>  )<span class="op">;</span></span>
+<span id="cb10-175"><a href="#cb10-175"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</details>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/traffic-render-v0.1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2" title="render v0.1 render(1)"><img src="../images/reactjs/traffic-render-v0.1-1.png" class="img-fluid figure-img" alt="render v0.1 render(1)"></a></p>
+<figcaption>render v0.1 render(1)</figcaption>
+</figure>
+</div>
 </section>
 <section id="consolidation-and-merge-literal-object" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="consolidation-and-merge-literal-object"><span class="header-section-number">4.4</span> Consolidation and merge: <code>literal object</code></h2>
@@ -2148,11 +2385,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>State Merging</strong>: This term underscores the use of the spread operator (…) to merge the previous state with the updated state when setting the state. It emphasizes the technique used to update multiple properties of the state object simultaneously.</li>
 </ul>
 </section>
-<section id="adding-form" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="adding-form"><span class="header-section-number">4.5</span> Adding form</h2>
+<section id="adding-domains-router" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="adding-domains-router"><span class="header-section-number">4.5</span> Adding domains: router</h2>
+<p>to-do</p>
 </section>
-<section id="adding-data" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="adding-data"><span class="header-section-number">4.6</span> Adding data</h2>
+<section id="adding-form" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="adding-form"><span class="header-section-number">4.6</span> Adding form</h2>
+<p>to-do</p>
+</section>
+<section id="adding-data" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="adding-data"><span class="header-section-number">4.7</span> Adding data</h2>
+<p>to-do</p>
 </section>
 </section>
 <section id="code" class="level1 page-columns page-full" data-number="5">
@@ -2173,6 +2416,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>create project (React Vite) and core business logic</td>
 <td><a href="../images/reactjs/traffic-project-v0.0-1.png" width="80%">Basic Structure</a></td>
 <td><a href="../images/reactjs/traffic-render-v0.0-1.png">render v0.0 render(1)</a>, <a href="../images/reactjs/traffic-render-v0.0-2.png">render v0.0 render(2)</a>, <a href="../images/reactjs/traffic-render-v0.0-3.png">render v0.0 render(3)</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/AlbertProfe/trafficlights/tree/f847634752f6109d5575417c8505634451656d6f" class="external">GitHub code v0.1</a></td>
+<td>adding graphics</td>
+<td></td>
+<td><a href="../images/reactjs/traffic-render-v0.1-1.png">render v0.1 render(1)</a>, <a href="../images/reactjs/traffic-render-v0.1-2.png">render v0.1 render(2)</a>, <a href="../images/reactjs/traffic-render-v0.1-3.png">render v0.1 render(3)</a>, <a href="../images/reactjs/traffic-render-v0.1-4.png">render v0.1 render(4)</a>,</td>
 </tr>
 </tbody>
 </table>
@@ -2198,6 +2447,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="hidden" aria-hidden="true">
 <span class="glightbox-desc lightbox-desc-1">Mockup draft</span>
+<span class="glightbox-desc lightbox-desc-2">render v0.1 render(1)</span>
 </div>
 </section>
 
@@ -2760,7 +3010,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":false,"selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
