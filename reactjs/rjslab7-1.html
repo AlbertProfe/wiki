@@ -2603,87 +2603,94 @@ DataSimulation.jsx CRUD Axios
 <span id="cb12-3"><a href="#cb12-3"></a><span class="im">import</span> axios <span class="im">from</span> <span class="st">"axios"</span><span class="op">;</span></span>
 <span id="cb12-4"><a href="#cb12-4"></a></span>
 <span id="cb12-5"><a href="#cb12-5"></a><span class="kw">const</span> SimulationsContext <span class="op">=</span> <span class="fu">createContext</span>()<span class="op">;</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="kw">const</span> DataSimulations <span class="op">=</span> ({ children }) <span class="kw">=&gt;</span> {</span>
-<span id="cb12-8"><a href="#cb12-8"></a>  <span class="kw">const</span> [simulations<span class="op">,</span> setSimulations] <span class="op">=</span> <span class="fu">useState</span>([])<span class="op">;</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a>  <span class="kw">const</span> [isLoading<span class="op">,</span> setIsLoading] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">true</span>)<span class="op">;</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a></span>
-<span id="cb12-11"><a href="#cb12-11"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb12-12"><a href="#cb12-12"></a>    <span class="kw">const</span> fetchSimulations <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb12-13"><a href="#cb12-13"></a>      <span class="cf">try</span> {</span>
-<span id="cb12-14"><a href="#cb12-14"></a>        <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> axios<span class="op">.</span><span class="fu">get</span>(</span>
-<span id="cb12-15"><a href="#cb12-15"></a>          <span class="st">"https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo"</span></span>
-<span id="cb12-16"><a href="#cb12-16"></a>        )<span class="op">;</span></span>
-<span id="cb12-17"><a href="#cb12-17"></a>        <span class="fu">setSimulations</span>(response<span class="op">.</span><span class="at">data</span>)<span class="op">;</span></span>
-<span id="cb12-18"><a href="#cb12-18"></a>      } <span class="cf">catch</span> (error) {</span>
-<span id="cb12-19"><a href="#cb12-19"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Error fetching data:"</span><span class="op">,</span> error)<span class="op">;</span></span>
-<span id="cb12-20"><a href="#cb12-20"></a>      } <span class="cf">finally</span> {</span>
-<span id="cb12-21"><a href="#cb12-21"></a>        <span class="fu">setIsLoading</span>(<span class="kw">false</span>)<span class="op">;</span></span>
-<span id="cb12-22"><a href="#cb12-22"></a>      }</span>
-<span id="cb12-23"><a href="#cb12-23"></a>    }<span class="op">;</span></span>
-<span id="cb12-24"><a href="#cb12-24"></a>    <span class="fu">fetchSimulations</span>()<span class="op">;</span></span>
-<span id="cb12-25"><a href="#cb12-25"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
-<span id="cb12-26"><a href="#cb12-26"></a></span>
-<span id="cb12-27"><a href="#cb12-27"></a>  <span class="kw">const</span> deleteSimulation <span class="op">=</span> <span class="kw">async</span> (id) <span class="kw">=&gt;</span> {</span>
-<span id="cb12-28"><a href="#cb12-28"></a>    <span class="cf">try</span> {</span>
-<span id="cb12-29"><a href="#cb12-29"></a>      <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> axios<span class="op">.</span><span class="fu">delete</span>(</span>
-<span id="cb12-30"><a href="#cb12-30"></a>        <span class="vs">`https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo/</span><span class="sc">${</span>id<span class="sc">}</span><span class="vs">`</span></span>
-<span id="cb12-31"><a href="#cb12-31"></a>      )<span class="op">;</span></span>
-<span id="cb12-32"><a href="#cb12-32"></a>      <span class="fu">setSimulations</span>(simulations<span class="op">.</span><span class="fu">filter</span>((simulation) <span class="kw">=&gt;</span> simulation<span class="op">.</span><span class="at">id</span> <span class="op">!==</span> id))<span class="op">;</span></span>
-<span id="cb12-33"><a href="#cb12-33"></a>    } <span class="cf">catch</span> (error) {</span>
-<span id="cb12-34"><a href="#cb12-34"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Error deleting simulation:"</span><span class="op">,</span> error)<span class="op">;</span></span>
-<span id="cb12-35"><a href="#cb12-35"></a>    }</span>
-<span id="cb12-36"><a href="#cb12-36"></a>  }<span class="op">;</span></span>
-<span id="cb12-37"><a href="#cb12-37"></a></span>
-<span id="cb12-38"><a href="#cb12-38"></a>  <span class="kw">const</span> addSimulation <span class="op">=</span> <span class="kw">async</span> (simulation) <span class="kw">=&gt;</span> {</span>
-<span id="cb12-39"><a href="#cb12-39"></a>    <span class="cf">try</span> {</span>
-<span id="cb12-40"><a href="#cb12-40"></a>      <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> axios<span class="op">.</span><span class="fu">post</span>(</span>
-<span id="cb12-41"><a href="#cb12-41"></a>        <span class="st">"https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo"</span><span class="op">,</span></span>
-<span id="cb12-42"><a href="#cb12-42"></a>        simulation</span>
-<span id="cb12-43"><a href="#cb12-43"></a>      )<span class="op">;</span></span>
-<span id="cb12-44"><a href="#cb12-44"></a>      <span class="fu">setSimulations</span>([<span class="op">...</span>simulations<span class="op">,</span> response<span class="op">.</span><span class="at">data</span>])<span class="op">;</span></span>
-<span id="cb12-45"><a href="#cb12-45"></a>    } <span class="cf">catch</span> (error) {</span>
-<span id="cb12-46"><a href="#cb12-46"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Error adding simulation:"</span><span class="op">,</span> error)<span class="op">;</span></span>
-<span id="cb12-47"><a href="#cb12-47"></a>    }</span>
-<span id="cb12-48"><a href="#cb12-48"></a>  }<span class="op">;</span></span>
-<span id="cb12-49"><a href="#cb12-49"></a></span>
-<span id="cb12-50"><a href="#cb12-50"></a>  <span class="kw">const</span> updateSimulation <span class="op">=</span> <span class="kw">async</span> (simulation) <span class="kw">=&gt;</span> {</span>
-<span id="cb12-51"><a href="#cb12-51"></a>    <span class="cf">try</span> {</span>
-<span id="cb12-52"><a href="#cb12-52"></a>      <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> axios<span class="op">.</span><span class="fu">put</span>(</span>
-<span id="cb12-53"><a href="#cb12-53"></a>        <span class="vs">`https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo/</span><span class="sc">${</span>simulation<span class="op">.</span><span class="at">id</span><span class="sc">}</span><span class="vs">`</span><span class="op">,</span></span>
-<span id="cb12-54"><a href="#cb12-54"></a>        simulation</span>
-<span id="cb12-55"><a href="#cb12-55"></a>      )<span class="op">;</span></span>
-<span id="cb12-56"><a href="#cb12-56"></a>      <span class="fu">setSimulations</span>(</span>
-<span id="cb12-57"><a href="#cb12-57"></a>        simulations<span class="op">.</span><span class="fu">map</span>((s) <span class="kw">=&gt;</span> (s<span class="op">.</span><span class="at">id</span> <span class="op">===</span> simulation<span class="op">.</span><span class="at">id</span> <span class="op">?</span> response<span class="op">.</span><span class="at">data</span> <span class="op">:</span> s))</span>
-<span id="cb12-58"><a href="#cb12-58"></a>      )<span class="op">;</span></span>
-<span id="cb12-59"><a href="#cb12-59"></a>    } <span class="cf">catch</span> (error) {</span>
-<span id="cb12-60"><a href="#cb12-60"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Error updating simulation:"</span><span class="op">,</span> error)<span class="op">;</span></span>
-<span id="cb12-61"><a href="#cb12-61"></a>    }</span>
-<span id="cb12-62"><a href="#cb12-62"></a>  }<span class="op">;</span></span>
-<span id="cb12-63"><a href="#cb12-63"></a></span>
-<span id="cb12-64"><a href="#cb12-64"></a>  <span class="cf">return</span> (</span>
-<span id="cb12-65"><a href="#cb12-65"></a>    <span class="op">&lt;</span>SimulationsContext<span class="op">.</span><span class="at">Provider</span></span>
-<span id="cb12-66"><a href="#cb12-66"></a>      value<span class="op">=</span>{{</span>
-<span id="cb12-67"><a href="#cb12-67"></a>        simulations<span class="op">,</span></span>
-<span id="cb12-68"><a href="#cb12-68"></a>        isLoading<span class="op">,</span></span>
-<span id="cb12-69"><a href="#cb12-69"></a>        deleteSimulation<span class="op">,</span></span>
-<span id="cb12-70"><a href="#cb12-70"></a>        addSimulation<span class="op">,</span></span>
-<span id="cb12-71"><a href="#cb12-71"></a>        updateSimulation<span class="op">,</span></span>
-<span id="cb12-72"><a href="#cb12-72"></a>      }}</span>
-<span id="cb12-73"><a href="#cb12-73"></a>    <span class="op">&gt;</span></span>
-<span id="cb12-74"><a href="#cb12-74"></a>      {children}</span>
-<span id="cb12-75"><a href="#cb12-75"></a>    <span class="op">&lt;/</span>SimulationsContext<span class="op">.</span><span class="at">Provider</span><span class="op">&gt;</span></span>
-<span id="cb12-76"><a href="#cb12-76"></a>  )<span class="op">;</span></span>
-<span id="cb12-77"><a href="#cb12-77"></a>}<span class="op">;</span></span>
-<span id="cb12-78"><a href="#cb12-78"></a></span>
-<span id="cb12-79"><a href="#cb12-79"></a><span class="im">export</span> { DataSimulations<span class="op">,</span> SimulationsContext }<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="kw">const</span> API_URL <span class="op">=</span> <span class="st">"https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo"</span><span class="op">;</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="kw">const</span> DataSimulations <span class="op">=</span> ({ children }) <span class="kw">=&gt;</span> {</span>
+<span id="cb12-9"><a href="#cb12-9"></a>  <span class="kw">const</span> [simulations<span class="op">,</span> setSimulations] <span class="op">=</span> <span class="fu">useState</span>([])<span class="op">;</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>  <span class="kw">const</span> [isLoading<span class="op">,</span> setIsLoading] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a></span>
+<span id="cb12-12"><a href="#cb12-12"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb12-13"><a href="#cb12-13"></a>    <span class="kw">const</span> fetchSimulations <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb12-14"><a href="#cb12-14"></a>      <span class="cf">try</span> {</span>
+<span id="cb12-15"><a href="#cb12-15"></a>        <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> axios<span class="op">.</span><span class="fu">get</span>(</span>
+<span id="cb12-16"><a href="#cb12-16"></a>          <span class="st">"https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo"</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a>        )<span class="op">;</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a>        <span class="fu">setSimulations</span>(response<span class="op">.</span><span class="at">data</span>)<span class="op">;</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a>      } <span class="cf">catch</span> (error) {</span>
+<span id="cb12-20"><a href="#cb12-20"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Error fetching data:"</span><span class="op">,</span> error)<span class="op">;</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a>      } <span class="cf">finally</span> {</span>
+<span id="cb12-22"><a href="#cb12-22"></a>        <span class="fu">setIsLoading</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb12-23"><a href="#cb12-23"></a>      }</span>
+<span id="cb12-24"><a href="#cb12-24"></a>    }<span class="op">;</span></span>
+<span id="cb12-25"><a href="#cb12-25"></a>    <span class="fu">fetchSimulations</span>()<span class="op">;</span></span>
+<span id="cb12-26"><a href="#cb12-26"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
+<span id="cb12-27"><a href="#cb12-27"></a></span>
+<span id="cb12-28"><a href="#cb12-28"></a>  <span class="kw">const</span> deleteSimulation <span class="op">=</span> <span class="kw">async</span> (id) <span class="kw">=&gt;</span> {</span>
+<span id="cb12-29"><a href="#cb12-29"></a>    <span class="cf">try</span> {</span>
+<span id="cb12-30"><a href="#cb12-30"></a>      <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> axios<span class="op">.</span><span class="fu">delete</span>(</span>
+<span id="cb12-31"><a href="#cb12-31"></a>        <span class="vs">`https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo/</span><span class="sc">${</span>id<span class="sc">}</span><span class="vs">`</span></span>
+<span id="cb12-32"><a href="#cb12-32"></a>      )<span class="op">;</span></span>
+<span id="cb12-33"><a href="#cb12-33"></a>      <span class="fu">setSimulations</span>(simulations<span class="op">.</span><span class="fu">filter</span>((simulation) <span class="kw">=&gt;</span> simulation<span class="op">.</span><span class="at">id</span> <span class="op">!==</span> id))<span class="op">;</span></span>
+<span id="cb12-34"><a href="#cb12-34"></a>    } <span class="cf">catch</span> (error) {</span>
+<span id="cb12-35"><a href="#cb12-35"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Error deleting simulation:"</span><span class="op">,</span> error)<span class="op">;</span></span>
+<span id="cb12-36"><a href="#cb12-36"></a>    }</span>
+<span id="cb12-37"><a href="#cb12-37"></a>  }<span class="op">;</span></span>
+<span id="cb12-38"><a href="#cb12-38"></a></span>
+<span id="cb12-39"><a href="#cb12-39"></a>  <span class="kw">const</span> addSimulation <span class="op">=</span> <span class="kw">async</span> (simulation) <span class="kw">=&gt;</span> {</span>
+<span id="cb12-40"><a href="#cb12-40"></a>    <span class="cf">try</span> {</span>
+<span id="cb12-41"><a href="#cb12-41"></a>      <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> axios<span class="op">.</span><span class="fu">post</span>(</span>
+<span id="cb12-42"><a href="#cb12-42"></a>        <span class="st">"https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo"</span><span class="op">,</span></span>
+<span id="cb12-43"><a href="#cb12-43"></a>        simulation</span>
+<span id="cb12-44"><a href="#cb12-44"></a>      )<span class="op">;</span></span>
+<span id="cb12-45"><a href="#cb12-45"></a>      <span class="fu">setSimulations</span>([<span class="op">...</span>simulations<span class="op">,</span> response<span class="op">.</span><span class="at">data</span>])<span class="op">;</span></span>
+<span id="cb12-46"><a href="#cb12-46"></a>    } <span class="cf">catch</span> (error) {</span>
+<span id="cb12-47"><a href="#cb12-47"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Error adding simulation:"</span><span class="op">,</span> error)<span class="op">;</span></span>
+<span id="cb12-48"><a href="#cb12-48"></a>    }</span>
+<span id="cb12-49"><a href="#cb12-49"></a>  }<span class="op">;</span></span>
+<span id="cb12-50"><a href="#cb12-50"></a></span>
+<span id="cb12-51"><a href="#cb12-51"></a>  <span class="kw">const</span> updateSimulation <span class="op">=</span> <span class="kw">async</span> (simulation) <span class="kw">=&gt;</span> {</span>
+<span id="cb12-52"><a href="#cb12-52"></a>    <span class="cf">try</span> {</span>
+<span id="cb12-53"><a href="#cb12-53"></a>      <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> axios<span class="op">.</span><span class="fu">put</span>(</span>
+<span id="cb12-54"><a href="#cb12-54"></a>        <span class="vs">`https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo/</span><span class="sc">${</span>simulation<span class="op">.</span><span class="at">id</span><span class="sc">}</span><span class="vs">`</span><span class="op">,</span></span>
+<span id="cb12-55"><a href="#cb12-55"></a>        simulation</span>
+<span id="cb12-56"><a href="#cb12-56"></a>      )<span class="op">;</span></span>
+<span id="cb12-57"><a href="#cb12-57"></a>      <span class="fu">setSimulations</span>(</span>
+<span id="cb12-58"><a href="#cb12-58"></a>        simulations<span class="op">.</span><span class="fu">map</span>((s) <span class="kw">=&gt;</span> (s<span class="op">.</span><span class="at">id</span> <span class="op">===</span> simulation<span class="op">.</span><span class="at">id</span> <span class="op">?</span> response<span class="op">.</span><span class="at">data</span> <span class="op">:</span> s))</span>
+<span id="cb12-59"><a href="#cb12-59"></a>      )<span class="op">;</span></span>
+<span id="cb12-60"><a href="#cb12-60"></a>    } <span class="cf">catch</span> (error) {</span>
+<span id="cb12-61"><a href="#cb12-61"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Error updating simulation:"</span><span class="op">,</span> error)<span class="op">;</span></span>
+<span id="cb12-62"><a href="#cb12-62"></a>    }</span>
+<span id="cb12-63"><a href="#cb12-63"></a>  }<span class="op">;</span></span>
+<span id="cb12-64"><a href="#cb12-64"></a></span>
+<span id="cb12-65"><a href="#cb12-65"></a>  <span class="cf">return</span> (</span>
+<span id="cb12-66"><a href="#cb12-66"></a>    <span class="op">&lt;</span>SimulationsContext<span class="op">.</span><span class="at">Provider</span></span>
+<span id="cb12-67"><a href="#cb12-67"></a>      value<span class="op">=</span>{{</span>
+<span id="cb12-68"><a href="#cb12-68"></a>        simulations<span class="op">,</span></span>
+<span id="cb12-69"><a href="#cb12-69"></a>        isLoading<span class="op">,</span></span>
+<span id="cb12-70"><a href="#cb12-70"></a>        deleteSimulation<span class="op">,</span></span>
+<span id="cb12-71"><a href="#cb12-71"></a>        addSimulation<span class="op">,</span></span>
+<span id="cb12-72"><a href="#cb12-72"></a>        updateSimulation<span class="op">,</span></span>
+<span id="cb12-73"><a href="#cb12-73"></a>      }}</span>
+<span id="cb12-74"><a href="#cb12-74"></a>    <span class="op">&gt;</span></span>
+<span id="cb12-75"><a href="#cb12-75"></a>      {children}</span>
+<span id="cb12-76"><a href="#cb12-76"></a>    <span class="op">&lt;/</span>SimulationsContext<span class="op">.</span><span class="at">Provider</span><span class="op">&gt;</span></span>
+<span id="cb12-77"><a href="#cb12-77"></a>  )<span class="op">;</span></span>
+<span id="cb12-78"><a href="#cb12-78"></a>}<span class="op">;</span></span>
+<span id="cb12-79"><a href="#cb12-79"></a></span>
+<span id="cb12-80"><a href="#cb12-80"></a><span class="im">export</span> { DataSimulations<span class="op">,</span> SimulationsContext }<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </details>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>This code sets up a context provider component for managing simulation data and provides functions for CRUD operations on that data. Other components in the React application can consume this context to access and manipulate simulation data.</p>
-</div></div><p>The code <code>DataSimulations</code> manages <strong>simulation</strong> data.</p>
+</div></div><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/simulation-data-v0.4.png" class="lightbox" data-glightbox="description: .lightbox-desc-9" data-gallery="quarto-lightbox-gallery-9" title="The code DataSimulations manages simulation data"><img src="../images/reactjs/simulation-data-v0.4.png" class="img-fluid figure-img" alt="The code DataSimulations manages simulation data"></a></p>
+<figcaption>The code DataSimulations manages simulation data</figcaption>
+</figure>
+</div>
+<p>The code <code>DataSimulations</code> manages <strong>simulation</strong> data.</p>
 <p>It utilizes React hooks such as <code>useState</code> and <code>useEffect</code> for state management and side effects. Additionally, it creates a context named <code>SimulationsContext</code> <mark>to provide simulation data and related functions to its child components.</mark> Here’s a breakdown of what the code does:</p>
 <ol type="1">
 <li><strong>Import Statements</strong>:
@@ -2717,7 +2724,7 @@ DataSimulation.jsx CRUD Axios
 <ul>
 <li><a href="https://github.com/AlbertProfe/simulations/wiki"><code>simulations</code> Spring Boot: <strong>wiki</strong></a></li>
 </ul>
-<p><a href="../images/reactjs/simulation-architecture-v0.4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="../images/reactjs/simulation-architecture-v0.4.png" class="img-fluid"></a></p>
+<p><a href="../images/reactjs/simulation-architecture-v0.4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="../images/reactjs/simulation-architecture-v0.4.png" class="img-fluid"></a></p>
 </section>
 <section id="adding-form-login-fake-token" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="adding-form-login-fake-token"><span class="header-section-number">4.6</span> Adding form: login &amp; fake-token</h2>
@@ -2751,13 +2758,13 @@ DataSimulation.jsx CRUD Axios
 </tr>
 <tr class="odd">
 <td><a href="" class="external" target="_blank">GitHub code v0.3</a></td>
-<td>adding react-router-dom, two routes: simulation and mySimlations</td>
+<td>adding <code>react-router-dom</code>, two routes: <code>simulation</code> and <code>mySimulations</code></td>
 <td></td>
 <td></td>
 </tr>
 <tr class="even">
 <td><a href="" class="external" target="_blank">GitHub code v0.4</a></td>
-<td>adding data from server: fake &amp; spring boot</td>
+<td>adding data from server: mockapi &amp; spring boot</td>
 <td></td>
 <td></td>
 </tr>
@@ -2792,6 +2799,7 @@ DataSimulation.jsx CRUD Axios
 <span class="glightbox-desc lightbox-desc-6">render v0.1 render(1)</span>
 <span class="glightbox-desc lightbox-desc-7">mockapi creating scheme-model</span>
 <span class="glightbox-desc lightbox-desc-8">Axios example <a href="https://axios-http.com/docs/req_config" class="external">Request Config</a></span>
+<span class="glightbox-desc lightbox-desc-9">The code DataSimulations manages simulation data</span>
 </div>
 </section>
 
@@ -3354,7 +3362,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom","closeEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
