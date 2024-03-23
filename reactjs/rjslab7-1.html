@@ -2800,7 +2800,7 @@ DataSimulation.jsx CRUD Axios
 <li><strong>Export</strong>:
 <ul>
 <li>It exports <code>DataSimulations</code> component and <code>SimulationsContext</code> context.</li>
-<li>Be careful: do not use <code>default</code>. <a href="https://react.dev/learn/importing-and-exporting-components#exporting-and-importing-a-component" class="external" target="_blank">Exporting and importing</a> a component</li>
+<li>Be careful: do not use <code>default</code>. A file <strong>can only have one default export</strong>, but it can have numerous named exports!</li>
 </ul></li>
 </ol>
 <div class="callout callout-style-default callout-caution callout-titled">
@@ -2813,7 +2813,11 @@ Caution
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>What if you want to show just one Profile instead of a gallery? You can export the Profile component, too. But Gallery.js already has a default export, and you can’t have two default exports. You could create a new file with a default export, or you could add a named export for Profile. A file can only have one default export, but it can have numerous named exports!</p>
+<p><strong>Exporting and importing multiple components from the same file</strong></p>
+<ul>
+<li><a href="https://react.dev/learn/importing-and-exporting-components#exporting-and-importing-a-component" class="external" target="_blank">Exporting and importing</a> a component.</li>
+</ul>
+<p>To reduce the potential confusion between <code>default</code> and <code>named</code> exports, <strong>some teams choose to only stick to one style (<code>default</code> or <code>named</code>)</strong>, or avoid mixing them in a single file. Do what works best for you!</p>
 </div>
 </div>
 <p><strong>decoupling <code>MySimulations.jsx</code> CRUD</strong></p>
@@ -2884,7 +2888,7 @@ Caution
 <tr class="even">
 <td><a href="https://github.com/AlbertProfe/trafficlights/tree/bff9bb44cc67536ca3a1c296169c1279bd93d6b9" class="external" target="_blank">GitHub code v0.4 <code>integrationcruddata</code></a></td>
 <td>decoupling <code>mySimulations</code></td>
-<td><a href="../images/reactjs/traffic-tree-v0.3.png">componets tree</a></td>
+<td><a href="../images/reactjs/traffic-tree-v0.3.png">components tree</a></td>
 <td>-</td>
 </tr>
 <tr class="odd">
@@ -3489,7 +3493,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","loop":false});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
