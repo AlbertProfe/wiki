@@ -1804,7 +1804,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#react-functions-components" id="toc-react-functions-components" class="nav-link" data-scroll-target="#react-functions-components"><span class="header-section-number">4.1</span> React functions &amp; components</a></li>
   <li><a href="#core-business-logic-use-case" id="toc-core-business-logic-use-case" class="nav-link" data-scroll-target="#core-business-logic-use-case"><span class="header-section-number">4.2</span> Core Business logic &amp; use case</a></li>
   <li><a href="#adding-graphics-improving-business-logic" id="toc-adding-graphics-improving-business-logic" class="nav-link" data-scroll-target="#adding-graphics-improving-business-logic"><span class="header-section-number">4.3</span> Adding graphics &amp; improving business logic</a></li>
-  <li><a href="#adding-domains-router" id="toc-adding-domains-router" class="nav-link" data-scroll-target="#adding-domains-router"><span class="header-section-number">4.4</span> Adding domains: router</a></li>
+  <li><a href="#adding-domains-react-router-dom" id="toc-adding-domains-react-router-dom" class="nav-link" data-scroll-target="#adding-domains-react-router-dom"><span class="header-section-number">4.4</span> Adding domains: react-router-dom</a></li>
   <li><a href="#adding-server-data" id="toc-adding-server-data" class="nav-link" data-scroll-target="#adding-server-data"><span class="header-section-number">4.5</span> Adding server: data</a></li>
   <li><a href="#adding-form-login-fake-token" id="toc-adding-form-login-fake-token" class="nav-link" data-scroll-target="#adding-form-login-fake-token"><span class="header-section-number">4.6</span> Adding form: login &amp; fake-token</a></li>
   </ul></li>
@@ -1852,7 +1852,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, March 22, 2024</p>
+      <p class="date-modified">Saturday, March 23, 2024</p>
     </div>
   </div>
     
@@ -2551,11 +2551,91 @@ Note
 </figure>
 </div>
 </section>
-<section id="adding-domains-router" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="adding-domains-router"><span class="header-section-number">4.4</span> Adding domains: router</h2>
+<section id="adding-domains-react-router-dom" class="level2 page-columns page-full" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="adding-domains-react-router-dom"><span class="header-section-number">4.4</span> Adding domains: react-router-dom</h2>
 <ul>
 <li><a href="../reactjs/reactjs-app-router.html">react-router-dom</a></li>
+<li><a href="../reactjs/rjslab6-1.html#add-json-data-as-model">DDD with Lab#RE06-1</a></li>
 </ul>
+<p>Remember to install the dependency:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">npm</span> instal react-router-dom</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="column-page-right">
+<details>
+<summary>
+App.jsx with <strong>Routes</strong>
+</summary>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>App.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb13" data-filename="App.jsx"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1"></a></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="im">import</span> { BrowserRouter<span class="op">,</span> Routes<span class="op">,</span> Route } <span class="im">from</span> <span class="st">"react-router-dom"</span><span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="im">import</span> Layout <span class="im">from</span> <span class="st">"./layout/Layout"</span><span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="im">import</span> MySimulations <span class="im">from</span> <span class="st">"./mysimulatons/MySimulations"</span><span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="im">import</span> Simulation <span class="im">from</span> <span class="st">"./simulation/Simulation"</span><span class="op">;</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">App</span>() {</span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="cf">return</span> (</span>
+<span id="cb13-9"><a href="#cb13-9"></a>    <span class="op">&lt;</span>BrowserRouter<span class="op">&gt;</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>      <span class="op">&lt;</span>Routes<span class="op">&gt;</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a>        <span class="op">&lt;</span>Route path<span class="op">=</span><span class="st">"/"</span> element<span class="op">=</span>{<span class="op">&lt;</span>Layout <span class="op">/&gt;</span>}<span class="op">&gt;</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a>          <span class="op">&lt;</span>Route index element<span class="op">=</span>{<span class="op">&lt;</span>Simulation <span class="op">/&gt;</span>} <span class="op">/&gt;</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a>          <span class="op">&lt;</span>Route path<span class="op">=</span><span class="st">"simulation"</span> element<span class="op">=</span>{<span class="op">&lt;</span>Simulation <span class="op">/&gt;</span>} <span class="op">/&gt;</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a>          <span class="op">&lt;</span>Route path<span class="op">=</span><span class="st">"mysimulations"</span> element<span class="op">=</span>{<span class="op">&lt;</span>MySimulations <span class="op">/&gt;</span>} <span class="op">/&gt;</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a>          <span class="op">&lt;</span>Route path<span class="op">=</span><span class="st">"*"</span> element<span class="op">=</span>{<span class="op">&lt;</span>Simulation <span class="op">/&gt;</span>} <span class="op">/&gt;</span></span>
+<span id="cb13-16"><a href="#cb13-16"></a>        <span class="op">&lt;/</span>Route<span class="op">&gt;</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a>      <span class="op">&lt;/</span>Routes<span class="op">&gt;</span></span>
+<span id="cb13-18"><a href="#cb13-18"></a>    <span class="op">&lt;/</span>BrowserRouter<span class="op">&gt;</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a>  )<span class="op">;</span></span>
+<span id="cb13-20"><a href="#cb13-20"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+<ul>
+<li><a href="https://github.com/AlbertProfe/trafficlights/tree/bff9bb44cc67536ca3a1c296169c1279bd93d6b9/src/layout" class="external" target="_blanke">Folder Layout</a></li>
+</ul>
+<details>
+<summary>
+Layout.jsx with <strong>Layout</strong>
+</summary>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>/layout/Layout.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb14" data-filename="/layout/Layout.jsx"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1"></a></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="im">import</span> Footer <span class="im">from</span> <span class="st">'./Footer.jsx'</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="im">import</span> Header <span class="im">from</span> <span class="st">"./Header.jsx"</span><span class="op">;</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="im">import</span> { Outlet<span class="op">,</span> Link } <span class="im">from</span> <span class="st">"react-router-dom"</span><span class="op">;</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Layout</span> () {</span>
+<span id="cb14-7"><a href="#cb14-7"></a></span>
+<span id="cb14-8"><a href="#cb14-8"></a>  <span class="cf">return</span> (</span>
+<span id="cb14-9"><a href="#cb14-9"></a>    <span class="op">&lt;&gt;</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a>      <span class="op">&lt;</span>nav<span class="op">&gt;</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a>        <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a>          <span class="op">&lt;</span>Header <span class="op">/&gt;</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a>        <span class="op">&lt;</span>div <span class="op">&gt;</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a>          <span class="op">&lt;</span>Link to<span class="op">=</span><span class="st">"/simulation"</span><span class="op">&gt;</span>Simulation<span class="op">&lt;/</span>Link<span class="op">&gt;</span></span>
+<span id="cb14-16"><a href="#cb14-16"></a>          <span class="op">&lt;</span>br<span class="op">/&gt;</span></span>
+<span id="cb14-17"><a href="#cb14-17"></a>          <span class="op">&lt;</span>Link to<span class="op">=</span><span class="st">"/mysimulations"</span><span class="op">&gt;</span>MySimulations<span class="op">&lt;/</span>Link<span class="op">&gt;</span></span>
+<span id="cb14-18"><a href="#cb14-18"></a>          <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb14-19"><a href="#cb14-19"></a>          <span class="op">&lt;</span>br <span class="op">/&gt;</span></span>
+<span id="cb14-20"><a href="#cb14-20"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a>      <span class="op">&lt;/</span>nav<span class="op">&gt;</span></span>
+<span id="cb14-22"><a href="#cb14-22"></a></span>
+<span id="cb14-23"><a href="#cb14-23"></a>      <span class="op">&lt;</span>div style<span class="op">=</span>{{ <span class="dt">width</span><span class="op">:</span> <span class="st">"80%"</span> }}<span class="op">&gt;</span></span>
+<span id="cb14-24"><a href="#cb14-24"></a>        <span class="op">&lt;</span>Outlet <span class="op">/&gt;</span></span>
+<span id="cb14-25"><a href="#cb14-25"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb14-26"><a href="#cb14-26"></a></span>
+<span id="cb14-27"><a href="#cb14-27"></a>      <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb14-28"><a href="#cb14-28"></a>        <span class="op">&lt;</span>Footer <span class="op">/&gt;</span></span>
+<span id="cb14-29"><a href="#cb14-29"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb14-30"><a href="#cb14-30"></a>    <span class="op">&lt;/&gt;</span></span>
+<span id="cb14-31"><a href="#cb14-31"></a>  )<span class="op">;</span></span>
+<span id="cb14-32"><a href="#cb14-32"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+</div>
 </section>
 <section id="adding-server-data" class="level2 page-columns page-full" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="adding-server-data"><span class="header-section-number">4.5</span> Adding server: data</h2>
@@ -2600,86 +2680,86 @@ DataSimulation.jsx CRUD Axios
 <div class="code-with-filename-file">
 <pre><strong>DataSimulation.js</strong></pre>
 </div>
-<div class="sourceCode" id="cb12" data-filename="DataSimulation.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1"></a></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="im">import</span> React<span class="op">,</span> { useState<span class="op">,</span> useEffect<span class="op">,</span> createContext } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="im">import</span> axios <span class="im">from</span> <span class="st">"axios"</span><span class="op">;</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="kw">const</span> SimulationsContext <span class="op">=</span> <span class="fu">createContext</span>()<span class="op">;</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="kw">const</span> API_URL <span class="op">=</span> <span class="st">"https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo"</span><span class="op">;</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="kw">const</span> DataSimulations <span class="op">=</span> ({ children }) <span class="kw">=&gt;</span> {</span>
-<span id="cb12-9"><a href="#cb12-9"></a>  <span class="kw">const</span> [simulations<span class="op">,</span> setSimulations] <span class="op">=</span> <span class="fu">useState</span>([])<span class="op">;</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a>  <span class="kw">const</span> [isLoading<span class="op">,</span> setIsLoading] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">true</span>)<span class="op">;</span></span>
-<span id="cb12-11"><a href="#cb12-11"></a></span>
-<span id="cb12-12"><a href="#cb12-12"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
-<span id="cb12-13"><a href="#cb12-13"></a>    <span class="kw">const</span> fetchSimulations <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb12-14"><a href="#cb12-14"></a>      <span class="cf">try</span> {</span>
-<span id="cb12-15"><a href="#cb12-15"></a>        <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> axios<span class="op">.</span><span class="fu">get</span>(</span>
-<span id="cb12-16"><a href="#cb12-16"></a>          <span class="st">"https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo"</span></span>
-<span id="cb12-17"><a href="#cb12-17"></a>        )<span class="op">;</span></span>
-<span id="cb12-18"><a href="#cb12-18"></a>        <span class="fu">setSimulations</span>(response<span class="op">.</span><span class="at">data</span>)<span class="op">;</span></span>
-<span id="cb12-19"><a href="#cb12-19"></a>      } <span class="cf">catch</span> (error) {</span>
-<span id="cb12-20"><a href="#cb12-20"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Error fetching data:"</span><span class="op">,</span> error)<span class="op">;</span></span>
-<span id="cb12-21"><a href="#cb12-21"></a>      } <span class="cf">finally</span> {</span>
-<span id="cb12-22"><a href="#cb12-22"></a>        <span class="fu">setIsLoading</span>(<span class="kw">false</span>)<span class="op">;</span></span>
-<span id="cb12-23"><a href="#cb12-23"></a>      }</span>
-<span id="cb12-24"><a href="#cb12-24"></a>    }<span class="op">;</span></span>
-<span id="cb12-25"><a href="#cb12-25"></a>    <span class="fu">fetchSimulations</span>()<span class="op">;</span></span>
-<span id="cb12-26"><a href="#cb12-26"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
-<span id="cb12-27"><a href="#cb12-27"></a></span>
-<span id="cb12-28"><a href="#cb12-28"></a>  <span class="kw">const</span> deleteSimulation <span class="op">=</span> <span class="kw">async</span> (id) <span class="kw">=&gt;</span> {</span>
-<span id="cb12-29"><a href="#cb12-29"></a>    <span class="cf">try</span> {</span>
-<span id="cb12-30"><a href="#cb12-30"></a>      <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> axios<span class="op">.</span><span class="fu">delete</span>(</span>
-<span id="cb12-31"><a href="#cb12-31"></a>        <span class="vs">`https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo/</span><span class="sc">${</span>id<span class="sc">}</span><span class="vs">`</span></span>
-<span id="cb12-32"><a href="#cb12-32"></a>      )<span class="op">;</span></span>
-<span id="cb12-33"><a href="#cb12-33"></a>      <span class="fu">setSimulations</span>(simulations<span class="op">.</span><span class="fu">filter</span>((simulation) <span class="kw">=&gt;</span> simulation<span class="op">.</span><span class="at">id</span> <span class="op">!==</span> id))<span class="op">;</span></span>
-<span id="cb12-34"><a href="#cb12-34"></a>    } <span class="cf">catch</span> (error) {</span>
-<span id="cb12-35"><a href="#cb12-35"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Error deleting simulation:"</span><span class="op">,</span> error)<span class="op">;</span></span>
-<span id="cb12-36"><a href="#cb12-36"></a>    }</span>
-<span id="cb12-37"><a href="#cb12-37"></a>  }<span class="op">;</span></span>
-<span id="cb12-38"><a href="#cb12-38"></a></span>
-<span id="cb12-39"><a href="#cb12-39"></a>  <span class="kw">const</span> addSimulation <span class="op">=</span> <span class="kw">async</span> (simulation) <span class="kw">=&gt;</span> {</span>
-<span id="cb12-40"><a href="#cb12-40"></a>    <span class="cf">try</span> {</span>
-<span id="cb12-41"><a href="#cb12-41"></a>      <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> axios<span class="op">.</span><span class="fu">post</span>(</span>
-<span id="cb12-42"><a href="#cb12-42"></a>        <span class="st">"https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo"</span><span class="op">,</span></span>
-<span id="cb12-43"><a href="#cb12-43"></a>        simulation</span>
-<span id="cb12-44"><a href="#cb12-44"></a>      )<span class="op">;</span></span>
-<span id="cb12-45"><a href="#cb12-45"></a>      <span class="fu">setSimulations</span>([<span class="op">...</span>simulations<span class="op">,</span> response<span class="op">.</span><span class="at">data</span>])<span class="op">;</span></span>
-<span id="cb12-46"><a href="#cb12-46"></a>    } <span class="cf">catch</span> (error) {</span>
-<span id="cb12-47"><a href="#cb12-47"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Error adding simulation:"</span><span class="op">,</span> error)<span class="op">;</span></span>
-<span id="cb12-48"><a href="#cb12-48"></a>    }</span>
-<span id="cb12-49"><a href="#cb12-49"></a>  }<span class="op">;</span></span>
-<span id="cb12-50"><a href="#cb12-50"></a></span>
-<span id="cb12-51"><a href="#cb12-51"></a>  <span class="kw">const</span> updateSimulation <span class="op">=</span> <span class="kw">async</span> (simulation) <span class="kw">=&gt;</span> {</span>
-<span id="cb12-52"><a href="#cb12-52"></a>    <span class="cf">try</span> {</span>
-<span id="cb12-53"><a href="#cb12-53"></a>      <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> axios<span class="op">.</span><span class="fu">put</span>(</span>
-<span id="cb12-54"><a href="#cb12-54"></a>        <span class="vs">`https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo/</span><span class="sc">${</span>simulation<span class="op">.</span><span class="at">id</span><span class="sc">}</span><span class="vs">`</span><span class="op">,</span></span>
-<span id="cb12-55"><a href="#cb12-55"></a>        simulation</span>
-<span id="cb12-56"><a href="#cb12-56"></a>      )<span class="op">;</span></span>
-<span id="cb12-57"><a href="#cb12-57"></a>      <span class="fu">setSimulations</span>(</span>
-<span id="cb12-58"><a href="#cb12-58"></a>        simulations<span class="op">.</span><span class="fu">map</span>((s) <span class="kw">=&gt;</span> (s<span class="op">.</span><span class="at">id</span> <span class="op">===</span> simulation<span class="op">.</span><span class="at">id</span> <span class="op">?</span> response<span class="op">.</span><span class="at">data</span> <span class="op">:</span> s))</span>
-<span id="cb12-59"><a href="#cb12-59"></a>      )<span class="op">;</span></span>
-<span id="cb12-60"><a href="#cb12-60"></a>    } <span class="cf">catch</span> (error) {</span>
-<span id="cb12-61"><a href="#cb12-61"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Error updating simulation:"</span><span class="op">,</span> error)<span class="op">;</span></span>
-<span id="cb12-62"><a href="#cb12-62"></a>    }</span>
-<span id="cb12-63"><a href="#cb12-63"></a>  }<span class="op">;</span></span>
-<span id="cb12-64"><a href="#cb12-64"></a></span>
-<span id="cb12-65"><a href="#cb12-65"></a>  <span class="cf">return</span> (</span>
-<span id="cb12-66"><a href="#cb12-66"></a>    <span class="op">&lt;</span>SimulationsContext<span class="op">.</span><span class="at">Provider</span></span>
-<span id="cb12-67"><a href="#cb12-67"></a>      value<span class="op">=</span>{{</span>
-<span id="cb12-68"><a href="#cb12-68"></a>        simulations<span class="op">,</span></span>
-<span id="cb12-69"><a href="#cb12-69"></a>        isLoading<span class="op">,</span></span>
-<span id="cb12-70"><a href="#cb12-70"></a>        deleteSimulation<span class="op">,</span></span>
-<span id="cb12-71"><a href="#cb12-71"></a>        addSimulation<span class="op">,</span></span>
-<span id="cb12-72"><a href="#cb12-72"></a>        updateSimulation<span class="op">,</span></span>
-<span id="cb12-73"><a href="#cb12-73"></a>      }}</span>
-<span id="cb12-74"><a href="#cb12-74"></a>    <span class="op">&gt;</span></span>
-<span id="cb12-75"><a href="#cb12-75"></a>      {children}</span>
-<span id="cb12-76"><a href="#cb12-76"></a>    <span class="op">&lt;/</span>SimulationsContext<span class="op">.</span><span class="at">Provider</span><span class="op">&gt;</span></span>
-<span id="cb12-77"><a href="#cb12-77"></a>  )<span class="op">;</span></span>
-<span id="cb12-78"><a href="#cb12-78"></a>}<span class="op">;</span></span>
-<span id="cb12-79"><a href="#cb12-79"></a></span>
-<span id="cb12-80"><a href="#cb12-80"></a><span class="im">export</span> { DataSimulations<span class="op">,</span> SimulationsContext }<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15" data-filename="DataSimulation.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1"></a></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="im">import</span> React<span class="op">,</span> { useState<span class="op">,</span> useEffect<span class="op">,</span> createContext } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="im">import</span> axios <span class="im">from</span> <span class="st">"axios"</span><span class="op">;</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="kw">const</span> SimulationsContext <span class="op">=</span> <span class="fu">createContext</span>()<span class="op">;</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="kw">const</span> API_URL <span class="op">=</span> <span class="st">"https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo"</span><span class="op">;</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="kw">const</span> DataSimulations <span class="op">=</span> ({ children }) <span class="kw">=&gt;</span> {</span>
+<span id="cb15-9"><a href="#cb15-9"></a>  <span class="kw">const</span> [simulations<span class="op">,</span> setSimulations] <span class="op">=</span> <span class="fu">useState</span>([])<span class="op">;</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a>  <span class="kw">const</span> [isLoading<span class="op">,</span> setIsLoading] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a></span>
+<span id="cb15-12"><a href="#cb15-12"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb15-13"><a href="#cb15-13"></a>    <span class="kw">const</span> fetchSimulations <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb15-14"><a href="#cb15-14"></a>      <span class="cf">try</span> {</span>
+<span id="cb15-15"><a href="#cb15-15"></a>        <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> axios<span class="op">.</span><span class="fu">get</span>(</span>
+<span id="cb15-16"><a href="#cb15-16"></a>          <span class="st">"https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo"</span></span>
+<span id="cb15-17"><a href="#cb15-17"></a>        )<span class="op">;</span></span>
+<span id="cb15-18"><a href="#cb15-18"></a>        <span class="fu">setSimulations</span>(response<span class="op">.</span><span class="at">data</span>)<span class="op">;</span></span>
+<span id="cb15-19"><a href="#cb15-19"></a>      } <span class="cf">catch</span> (error) {</span>
+<span id="cb15-20"><a href="#cb15-20"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Error fetching data:"</span><span class="op">,</span> error)<span class="op">;</span></span>
+<span id="cb15-21"><a href="#cb15-21"></a>      } <span class="cf">finally</span> {</span>
+<span id="cb15-22"><a href="#cb15-22"></a>        <span class="fu">setIsLoading</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb15-23"><a href="#cb15-23"></a>      }</span>
+<span id="cb15-24"><a href="#cb15-24"></a>    }<span class="op">;</span></span>
+<span id="cb15-25"><a href="#cb15-25"></a>    <span class="fu">fetchSimulations</span>()<span class="op">;</span></span>
+<span id="cb15-26"><a href="#cb15-26"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
+<span id="cb15-27"><a href="#cb15-27"></a></span>
+<span id="cb15-28"><a href="#cb15-28"></a>  <span class="kw">const</span> deleteSimulation <span class="op">=</span> <span class="kw">async</span> (id) <span class="kw">=&gt;</span> {</span>
+<span id="cb15-29"><a href="#cb15-29"></a>    <span class="cf">try</span> {</span>
+<span id="cb15-30"><a href="#cb15-30"></a>      <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> axios<span class="op">.</span><span class="fu">delete</span>(</span>
+<span id="cb15-31"><a href="#cb15-31"></a>        <span class="vs">`https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo/</span><span class="sc">${</span>id<span class="sc">}</span><span class="vs">`</span></span>
+<span id="cb15-32"><a href="#cb15-32"></a>      )<span class="op">;</span></span>
+<span id="cb15-33"><a href="#cb15-33"></a>      <span class="fu">setSimulations</span>(simulations<span class="op">.</span><span class="fu">filter</span>((simulation) <span class="kw">=&gt;</span> simulation<span class="op">.</span><span class="at">id</span> <span class="op">!==</span> id))<span class="op">;</span></span>
+<span id="cb15-34"><a href="#cb15-34"></a>    } <span class="cf">catch</span> (error) {</span>
+<span id="cb15-35"><a href="#cb15-35"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Error deleting simulation:"</span><span class="op">,</span> error)<span class="op">;</span></span>
+<span id="cb15-36"><a href="#cb15-36"></a>    }</span>
+<span id="cb15-37"><a href="#cb15-37"></a>  }<span class="op">;</span></span>
+<span id="cb15-38"><a href="#cb15-38"></a></span>
+<span id="cb15-39"><a href="#cb15-39"></a>  <span class="kw">const</span> addSimulation <span class="op">=</span> <span class="kw">async</span> (simulation) <span class="kw">=&gt;</span> {</span>
+<span id="cb15-40"><a href="#cb15-40"></a>    <span class="cf">try</span> {</span>
+<span id="cb15-41"><a href="#cb15-41"></a>      <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> axios<span class="op">.</span><span class="fu">post</span>(</span>
+<span id="cb15-42"><a href="#cb15-42"></a>        <span class="st">"https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo"</span><span class="op">,</span></span>
+<span id="cb15-43"><a href="#cb15-43"></a>        simulation</span>
+<span id="cb15-44"><a href="#cb15-44"></a>      )<span class="op">;</span></span>
+<span id="cb15-45"><a href="#cb15-45"></a>      <span class="fu">setSimulations</span>([<span class="op">...</span>simulations<span class="op">,</span> response<span class="op">.</span><span class="at">data</span>])<span class="op">;</span></span>
+<span id="cb15-46"><a href="#cb15-46"></a>    } <span class="cf">catch</span> (error) {</span>
+<span id="cb15-47"><a href="#cb15-47"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Error adding simulation:"</span><span class="op">,</span> error)<span class="op">;</span></span>
+<span id="cb15-48"><a href="#cb15-48"></a>    }</span>
+<span id="cb15-49"><a href="#cb15-49"></a>  }<span class="op">;</span></span>
+<span id="cb15-50"><a href="#cb15-50"></a></span>
+<span id="cb15-51"><a href="#cb15-51"></a>  <span class="kw">const</span> updateSimulation <span class="op">=</span> <span class="kw">async</span> (simulation) <span class="kw">=&gt;</span> {</span>
+<span id="cb15-52"><a href="#cb15-52"></a>    <span class="cf">try</span> {</span>
+<span id="cb15-53"><a href="#cb15-53"></a>      <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> axios<span class="op">.</span><span class="fu">put</span>(</span>
+<span id="cb15-54"><a href="#cb15-54"></a>        <span class="vs">`https://65e82ef64bb72f0a9c4e7caf.mockapi.io/v1/todo/</span><span class="sc">${</span>simulation<span class="op">.</span><span class="at">id</span><span class="sc">}</span><span class="vs">`</span><span class="op">,</span></span>
+<span id="cb15-55"><a href="#cb15-55"></a>        simulation</span>
+<span id="cb15-56"><a href="#cb15-56"></a>      )<span class="op">;</span></span>
+<span id="cb15-57"><a href="#cb15-57"></a>      <span class="fu">setSimulations</span>(</span>
+<span id="cb15-58"><a href="#cb15-58"></a>        simulations<span class="op">.</span><span class="fu">map</span>((s) <span class="kw">=&gt;</span> (s<span class="op">.</span><span class="at">id</span> <span class="op">===</span> simulation<span class="op">.</span><span class="at">id</span> <span class="op">?</span> response<span class="op">.</span><span class="at">data</span> <span class="op">:</span> s))</span>
+<span id="cb15-59"><a href="#cb15-59"></a>      )<span class="op">;</span></span>
+<span id="cb15-60"><a href="#cb15-60"></a>    } <span class="cf">catch</span> (error) {</span>
+<span id="cb15-61"><a href="#cb15-61"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Error updating simulation:"</span><span class="op">,</span> error)<span class="op">;</span></span>
+<span id="cb15-62"><a href="#cb15-62"></a>    }</span>
+<span id="cb15-63"><a href="#cb15-63"></a>  }<span class="op">;</span></span>
+<span id="cb15-64"><a href="#cb15-64"></a></span>
+<span id="cb15-65"><a href="#cb15-65"></a>  <span class="cf">return</span> (</span>
+<span id="cb15-66"><a href="#cb15-66"></a>    <span class="op">&lt;</span>SimulationsContext<span class="op">.</span><span class="at">Provider</span></span>
+<span id="cb15-67"><a href="#cb15-67"></a>      value<span class="op">=</span>{{</span>
+<span id="cb15-68"><a href="#cb15-68"></a>        simulations<span class="op">,</span></span>
+<span id="cb15-69"><a href="#cb15-69"></a>        isLoading<span class="op">,</span></span>
+<span id="cb15-70"><a href="#cb15-70"></a>        deleteSimulation<span class="op">,</span></span>
+<span id="cb15-71"><a href="#cb15-71"></a>        addSimulation<span class="op">,</span></span>
+<span id="cb15-72"><a href="#cb15-72"></a>        updateSimulation<span class="op">,</span></span>
+<span id="cb15-73"><a href="#cb15-73"></a>      }}</span>
+<span id="cb15-74"><a href="#cb15-74"></a>    <span class="op">&gt;</span></span>
+<span id="cb15-75"><a href="#cb15-75"></a>      {children}</span>
+<span id="cb15-76"><a href="#cb15-76"></a>    <span class="op">&lt;/</span>SimulationsContext<span class="op">.</span><span class="at">Provider</span><span class="op">&gt;</span></span>
+<span id="cb15-77"><a href="#cb15-77"></a>  )<span class="op">;</span></span>
+<span id="cb15-78"><a href="#cb15-78"></a>}<span class="op">;</span></span>
+<span id="cb15-79"><a href="#cb15-79"></a></span>
+<span id="cb15-80"><a href="#cb15-80"></a><span class="im">export</span> { DataSimulations<span class="op">,</span> SimulationsContext }<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </details>
 </div>
@@ -2720,13 +2800,50 @@ DataSimulation.jsx CRUD Axios
 <li><strong>Export</strong>:
 <ul>
 <li>It exports <code>DataSimulations</code> component and <code>SimulationsContext</code> context.</li>
+<li>Be careful: do not use <code>default</code>. <a href="https://react.dev/learn/importing-and-exporting-components#exporting-and-importing-a-component" class="external" target="_blank">Exporting and importing</a> a component</li>
 </ul></li>
 </ol>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What if you want to show just one Profile instead of a gallery? You can export the Profile component, too. But Gallery.js already has a default export, and you can’t have two default exports. You could create a new file with a default export, or you could add a named export for Profile. A file can only have one default export, but it can have numerous named exports!</p>
+</div>
+</div>
+<p><strong>decoupling <code>MySimulations.jsx</code> CRUD</strong></p>
+<ul>
+<li><a href="https://github.com/AlbertProfe/trafficlights/tree/bff9bb44cc67536ca3a1c296169c1279bd93d6b9/src/mysimulatons" class="external" target="_blank"><code>mySiulations</code> folder</a></li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Decoupled components CRUD in React promotes modularity, reusability, maintainability, and scalability, making it a preferred choice for building robust and adaptable applications.</p>
+</div></div><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/traffic-tree-v0.3.png" class="lightbox" data-glightbox="description: .lightbox-desc-10" data-gallery="quarto-lightbox-gallery-10" title="component tree project"><img src="../images/reactjs/traffic-tree-v0.3.png" class="img-fluid figure-img" alt="component tree project"></a></p>
+<figcaption>component tree project</figcaption>
+</figure>
+</div>
+<p><mark>Decoupled components CRUD in React offers significant advantages over tightly coupled implementations.</mark></p>
+<p>By breaking down functionality into modular components, developers can achieve: greater <strong>reusability</strong>, <strong>scalability</strong>, <strong>better maintenance</strong> and <strong>flexibility</strong>.</p>
+<p>Each component focuses on a specific task, promoting <strong>separation of concerns and simplifying maintenance</strong>. With decoupled components, testing becomes more straightforward as each unit can be isolated and tested independently.</p>
+<p>Additionally, performance optimizations can be applied at the component level, leading to better overall application performance. This approach fosters cleaner codebases and facilitates collaboration among team members.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/traffic-tree-v0.4.png" class="lightbox" data-glightbox="description: .lightbox-desc-11" data-gallery="quarto-lightbox-gallery-11" title="component tree decoupled"><img src="../images/reactjs/traffic-tree-v0.4.png" class="img-fluid figure-img" alt="component tree decoupled"></a></p>
+<figcaption>component tree decoupled</figcaption>
+</figure>
+</div>
 <p><strong>Backend: Spring Boot</strong></p>
 <ul>
 <li><a href="https://github.com/AlbertProfe/simulations/wiki"><code>simulations</code> Spring Boot: <strong>wiki</strong></a></li>
 </ul>
-<p><a href="../images/reactjs/simulation-architecture-v0.4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="../images/reactjs/simulation-architecture-v0.4.png" class="img-fluid"></a></p>
+<p><a href="../images/reactjs/simulation-architecture-v0.4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="../images/reactjs/simulation-architecture-v0.4.png" class="img-fluid"></a></p>
 </section>
 <section id="adding-form-login-fake-token" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="adding-form-login-fake-token"><span class="header-section-number">4.6</span> Adding form: login &amp; fake-token</h2>
@@ -2760,19 +2877,19 @@ DataSimulation.jsx CRUD Axios
 </tr>
 <tr class="odd">
 <td><a href="https://github.com/AlbertProfe/trafficlights/tree/20e9ee5cb695d8e10ba10c3d867081d7c6285fbc" class="external" target="_blank">GitHub code v0.3 <code>integrationcruddata</code></a></td>
-<td>adding <code>react-router-dom</code>, two routes: <code>simulation</code> and <code>mySimulations</code></td>
+<td><strong>integration</strong>: adding <code>react-router-dom</code>, two routes: <code>simulation</code> and <code>mySimulations</code> and data: axios, <code>DataSimulation</code> &amp; <code>useContext</code></td>
 <td><a href="../images/reactjs/traffic-branches-v0.3-4.png">branch <code>mySimulations</code></a>, <a href="../images/reactjs/traffic-project-v0.3.png">project structure</a></td>
 <td><a href="../images/reactjs/traffic-render-v0.3-1.png" class="external" target="_blank">render v0.3 render(1)</a>, <a href="../images/reactjs/traffic-render-v0.3-2.png" class="external" target="_blank">render v0.3 render(2)</a>, <a href="../images/reactjs/traffic-render-v0.3-3.png" class="external" target="_blank">render v0.3 render(3)</a>,</td>
 </tr>
 <tr class="even">
 <td><a href="https://github.com/AlbertProfe/trafficlights/tree/bff9bb44cc67536ca3a1c296169c1279bd93d6b9" class="external" target="_blank">GitHub code v0.4 <code>integrationcruddata</code></a></td>
 <td>decoupling <code>mySimulations</code></td>
-<td>-</td>
+<td><a href="../images/reactjs/traffic-tree-v0.3.png">componets tree</a></td>
 <td>-</td>
 </tr>
 <tr class="odd">
 <td><a href="" class="external" target="_blank">GitHub code v0.5</a></td>
-<td>adding data from server: mockapi &amp; spring boot</td>
+<td>server: spring boot for mockapi</td>
 <td></td>
 <td></td>
 </tr>
@@ -2808,6 +2925,8 @@ DataSimulation.jsx CRUD Axios
 <span class="glightbox-desc lightbox-desc-7">mockapi creating scheme-model</span>
 <span class="glightbox-desc lightbox-desc-8">Axios example <a href="https://axios-http.com/docs/req_config" class="external">Request Config</a></span>
 <span class="glightbox-desc lightbox-desc-9">The code DataSimulations manages simulation data</span>
+<span class="glightbox-desc lightbox-desc-10">component tree project</span>
+<span class="glightbox-desc lightbox-desc-11">component tree decoupled</span>
 </div>
 </section>
 
@@ -3370,7 +3489,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"openEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
