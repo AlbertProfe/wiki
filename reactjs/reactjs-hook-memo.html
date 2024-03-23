@@ -9,7 +9,7 @@
 <meta name="author" content="albertprofe">
 <meta name="description" content="description">
 
-<title>albertprofe wiki - React JS: useContext</title>
+<title>albertprofe wiki - ReactJS: useMemo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,9 +80,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -116,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed slimcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -1389,7 +1386,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reactjs/reactjs-hook-rules.html">ReacJS 18: Hooks</a></li><li class="breadcrumb-item"><a href="../reactjs/reactjs-hook-context.html">React JS: useContext</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reactjs/reactjs-hook-rules.html">ReacJS 18: Hooks</a></li><li class="breadcrumb-item"><a href="../reactjs/reactjs-hook-memo.html">ReactJS: useMemo</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -1586,13 +1583,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reactjs/reactjs-hook-context.html" class="sidebar-item-text sidebar-link active">
+  <a href="../reactjs/reactjs-hook-context.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">React JS: useContext</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reactjs/reactjs-hook-memo.html" class="sidebar-item-text sidebar-link">
+  <a href="../reactjs/reactjs-hook-memo.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">ReactJS: useMemo</span></a>
   </div>
 </li>
@@ -1800,38 +1797,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#basic-example" id="toc-basic-example" class="nav-link active" data-scroll-target="#basic-example"><span class="header-section-number">1</span> Basic example</a></li>
-  <li><a href="#usecontextsomecontext" id="toc-usecontextsomecontext" class="nav-link" data-scroll-target="#usecontextsomecontext"><span class="header-section-number">2</span> <code>useContext(SomeContext)</code></a>
+  <li><a href="#definition" id="toc-definition" class="nav-link active" data-scroll-target="#definition"><span class="header-section-number">1</span> Definition</a>
   <ul>
-  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters"><span class="header-section-number">2.1</span> Parameters</a></li>
-  <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns"><span class="header-section-number">2.2</span> Returns</a></li>
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters"><span class="header-section-number">1.1</span> Parameters</a></li>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1"><span class="header-section-number">1.2</span> Example 1</a></li>
   </ul></li>
-  <li><a href="#usage-passing-data-deeply-into-the-tree" id="toc-usage-passing-data-deeply-into-the-tree" class="nav-link" data-scroll-target="#usage-passing-data-deeply-into-the-tree"><span class="header-section-number">3</span> Usage: passing data deeply into the tree</a>
-  <ul>
-  <li><a href="#the-problem" id="toc-the-problem" class="nav-link" data-scroll-target="#the-problem"><span class="header-section-number">3.1</span> The Problem</a></li>
-  <li><a href="#the-solution-context" id="toc-the-solution-context" class="nav-link" data-scroll-target="#the-solution-context"><span class="header-section-number">3.2</span> The Solution: context</a></li>
-  </ul></li>
-  <li><a href="#example1" id="toc-example1" class="nav-link" data-scroll-target="#example1"><span class="header-section-number">4</span> Example#1</a></li>
-  <li><a href="#example2" id="toc-example2" class="nav-link" data-scroll-target="#example2"><span class="header-section-number">5</span> Example#2</a>
-  <ul>
-  <li><a href="#provider" id="toc-provider" class="nav-link" data-scroll-target="#provider"><span class="header-section-number">5.1</span> Provider</a></li>
-  <li><a href="#using-the-provider" id="toc-using-the-provider" class="nav-link" data-scroll-target="#using-the-provider"><span class="header-section-number">5.2</span> Using the provider</a></li>
-  <li><a href="#consumer" id="toc-consumer" class="nav-link" data-scroll-target="#consumer"><span class="header-section-number">5.3</span> Consumer</a></li>
-  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">2</span> References</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/reactjs/reactjs-hook-context.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/reactjs/reactjs-hook-memo.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reactjs/reactjs-hook-rules.html">ReacJS 18: Hooks</a></li><li class="breadcrumb-item"><a href="../reactjs/reactjs-hook-context.html">React JS: useContext</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reactjs/reactjs-hook-rules.html">ReacJS 18: Hooks</a></li><li class="breadcrumb-item"><a href="../reactjs/reactjs-hook-memo.html">ReactJS: useMemo</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">React JS: useContext</h1>
+<h1 class="title">ReactJS: useMemo</h1>
 <p class="subtitle lead">ReactJS hooks</p>
   <div class="quarto-categories">
     <div class="quarto-category">reactjs</div>
     <div class="quarto-category">hooks</div>
-    <div class="quarto-category">useContext</div>
+    <div class="quarto-category">memo</div>
   </div>
   </div>
 
@@ -1873,294 +1858,77 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="summary">
-<p>📘 <strong>useContext</strong></p>
-<p><code>useContext</code> is a React Hook that lets you read and subscribe to context from your component.</p>
-<p><code>const value = useContext(SomeContext)</code></p>
+<p>📘 <strong>useMemo</strong></p>
+<p><code>useMemo</code> is a React Hook that lets you cache the result of a calculation between re-renders.</p>
+<p><code>const cachedValue = useMemo(calculateValue, dependencies)</code></p>
 </div>
 <hr>
-<p><code>useContext</code> allows you to <strong>consume context values from a nearest ancestor</strong> <code>Context.Provider</code>. Here’s a brief overview of the three steps to use <code>useContext</code>:</p>
-<ol type="1">
-<li><strong>Create a context</strong>: To use <code>useContext</code>, you <strong>first need to create a context</strong> using the <code>React.createContext</code> function. This function takes in a default value for the context, which will be used if a <code>Context.Provider</code> is not present in the component tree.</li>
-<li><strong>Provide the context value</strong>: To make the context value available to your components, you need to wrap your component tree with a <code>Context.Provider</code> component, and pass the context value as a prop.</li>
-<li><strong>Consume the context value</strong>: To consume the context value in a component, you can use the <code>useContext</code> hook and pass in the context object as an argument. The hook will return the current context value, which you can then use in your component.</li>
-</ol>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/reactjs/context-provider-consumer.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="Create a context > Provide this context > Consume and use this context"><img src="../images/reactjs/context-provider-consumer.png" class="img-fluid figure-img" style="width:100.0%" alt="Create a context > Provide this context > Consume and use this context"></a></p>
-<figcaption>Create a context &gt; Provide this context &gt; Consume and use this context</figcaption>
-</figure>
+<section id="definition" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Definition</h1>
+<p><code>const cachedValue = useMemo(calculateValue, dependencies)</code></p>
+<p><code>useMemo</code> is a React Hook used for memoization, a technique to optimize performance by caching the results of expensive computations.</p>
+<p>It takes a function and an array of dependencies, returning a memoized value. When the dependencies change, <code>useMemo</code> re-runs the function only if necessary, otherwise returning the cached result.</p>
+<blockquote class="blockquote">
+<p>This optimization is particularly useful for avoiding unnecessary re-renders in components. It’s commonly employed for computationally intensive tasks, like complex calculations or data processing, where you want to avoid redundant work. By memoizing values, <code>useMemo</code> helps improve React application efficiency and responsiveness.</p>
+</blockquote>
+<section id="parameters" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="parameters"><span class="header-section-number">1.1</span> Parameters</h2>
+<ul>
+<li><strong>calculateValue</strong>: The function calculating the value that you want to cache. It should be pure, should take no arguments, and should return a value of any type.
+<ul>
+<li>React will call your function during the initial render. On next renders, React will return the same value again if the dependencies have not changed since the last render.</li>
+<li>Otherwise, it will call calculateValue, return its result, and store it so it can be reused later.</li>
+</ul></li>
+<li><strong>dependencies</strong>: The list of all reactive values referenced inside of the calculateValue code.
+<ul>
+<li>Reactive values include props, state, and all the variables and functions declared directly inside your component body.</li>
+<li>If your linter is configured for React, it will verify that every reactive value is correctly specified as a dependency.</li>
+<li>The list of dependencies must have a constant number of items and be written inline like [dep1, dep2, dep3]. React will compare each dependency with its previous value using the Object.is comparison.</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<section id="basic-example" class="level2 page-columns page-full" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="basic-example"><span class="header-section-number">1</span> Basic example</h2>
-<p>In this example, the <code>MyContext</code> context is created using the <code>React.createContext</code> function, with a default value of <code>default value</code>. The <code>MyComponent</code> component consumes the context value using the <code>useContext</code> hook, and <strong>displays the value in the DOM.</strong></p>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You should only rely on <code>useMemo</code> <strong>as a performance optimization.</strong></p>
+<p>If your code doesn’t work without it, find the underlying problem and fix it first. Then you may add <code>useMemo</code> to improve performance.</p>
+</div>
+</div>
+</section>
+<section id="example-1" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="example-1"><span class="header-section-number">1.2</span> Example 1</h2>
+<p>Call <code>useMemo</code> at the top level of your component to <strong>cache</strong> a calculation between re-renders:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>App.js</strong></pre>
+<pre><strong>TodoList.js</strong></pre>
 </div>
-<div class="sourceCode" id="cb1" data-filename="App.js"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">const</span> MyContext <span class="op">=</span> React<span class="op">.</span><span class="fu">createContext</span>(<span class="st">'default value'</span>)<span class="op">;</span></span>
+<div class="sourceCode" id="cb1" data-filename="TodoList.js"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> { useMemo } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">function</span> <span class="fu">MyComponent</span>() {</span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="kw">const</span> value <span class="op">=</span> <span class="fu">useContext</span>(MyContext)<span class="op">;</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="cf">return </span><span class="kw">&lt;div&gt;</span><span class="va">{</span>value<span class="va">}</span><span class="kw">&lt;/div&gt;</span><span class="op">;</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>}</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">function</span> <span class="fu">App</span>() {</span>
-<span id="cb1-9"><a href="#cb1-9"></a>  <span class="cf">return</span> (</span>
-<span id="cb1-10"><a href="#cb1-10"></a>    <span class="fu">&lt;MyContext.Provider</span> <span class="ot">value</span><span class="op">=</span><span class="st">"Hello, world!"</span><span class="fu">&gt;</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>      <span class="fu">&lt;MyComponent</span> <span class="fu">/&gt;</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>    <span class="fu">&lt;/MyContext.Provider&gt;</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>  )<span class="op">;</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">function</span> <span class="fu">TodoList</span>({ todos<span class="op">,</span> tab }) {</span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="kw">const</span> visibleTodos <span class="op">=</span> <span class="fu">useMemo</span>(</span>
+<span id="cb1-5"><a href="#cb1-5"></a>    () <span class="kw">=&gt;</span> <span class="fu">filterTodos</span>(todos<span class="op">,</span> tab)<span class="op">,</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>    [todos<span class="op">,</span> tab]</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  )<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="co">// ...</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>}</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>Using <code>useContext</code> in this way allows you to easily share values between components, without the need to pass props down through multiple levels of the component tree.</p>
-</div></div><p>The App component wraps the <code>MyComponent</code> component with a<code>MyContext.Provider</code> component, and passes the value <em>‘Hello, world!’</em> as a prop.</p>
-<p>This makes the context value available to the <code>MyComponent</code> component, which will use the value passed by the <strong>provider</strong> rather than the default value.</p>
 </section>
-<section id="usecontextsomecontext" class="level2 page-columns page-full" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="usecontextsomecontext"><span class="header-section-number">2</span> <code>useContext(SomeContext)</code></h2>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>App.js</strong></pre>
-</div>
-<div class="sourceCode" id="cb2" data-filename="App.js"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> { useContext } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">function</span> <span class="fu">MyComponent</span>() {</span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="kw">const</span> theme <span class="op">=</span> <span class="fu">useContext</span>(ThemeContext)<span class="op">;</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>  <span class="co">// ..</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>Call <code>useContext</code> at the top level of your component to read and subscribe to context.</p>
-</div></div><section id="parameters" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="parameters"><span class="header-section-number">2.1</span> Parameters</h3>
+</section>
+<section id="references" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> References</h1>
 <ul>
-<li><code>someContext</code>: The context that you’ve previously created with <code>createContext</code>. The context itself does not hold the information, it only represents the kind of information you can provide or read from components.</li>
-</ul>
-</section>
-<section id="returns" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="returns"><span class="header-section-number">2.2</span> Returns</h3>
-<ul>
-<li><code>useContext</code> returns the context value for the calling component. It is determined as the value passed to the closest <code>SomeContext</code>. <code>Provider</code> above the calling component in the tree.</li>
-</ul>
-<blockquote class="blockquote">
-<p>If there is no such <code>provider</code>, then the returned value will be the defaultValue you have passed to <code>createContext</code> for that <code>context</code>. The returned value is always up-to-date. React automatically re-renders components that read some <code>context</code> if it changes.</p>
-</blockquote>
-</section>
-</section>
-<section id="usage-passing-data-deeply-into-the-tree" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="usage-passing-data-deeply-into-the-tree"><span class="header-section-number">3</span> Usage: passing data deeply into the tree</h2>
-<section id="the-problem" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="the-problem"><span class="header-section-number">3.1</span> The Problem</h3>
-<p>The big issue that comes up is figuring out <a href="https://www.javascriptstuff.com/component-communication/#7-global-variables" class="external">how components should communicate with each other</a>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/reactjs/how-com-comp.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="Eight simple strategies for communicating between React components"><img src="../images/reactjs/how-com-comp.png" class="img-fluid figure-img" style="width:80.0%" alt="Eight simple strategies for communicating between React components"></a></p>
-<figcaption>Eight simple strategies for communicating between React components</figcaption>
-</figure>
-</div>
-</section>
-<section id="the-solution-context" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="the-solution-context"><span class="header-section-number">3.2</span> The Solution: context</h3>
-<p><code>Context</code> works similarly to props, but instead of providing data to a single child, it can be used to provide data to an entire subtree.</p>
-<blockquote class="blockquote">
-<p><code>Context</code> <strong>can only send data down the tree (parent to subtree)</strong>. It can be paired with <code>callback</code> functions to pass data back up.</p>
-</blockquote>
-<p><a href="https://beta.reactjs.org/reference/react/useContext" class="external">useContext React documentation</a> and <a href="https://www.w3schools.com/REACT/react_usecontext.asp" class="external">React useContext Hook w3 schools</a></p>
-</section>
-</section>
-<section id="example1" class="level2 page-columns page-full" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="example1"><span class="header-section-number">4</span> Example#1</h2>
-<blockquote class="blockquote">
-<p><strong>createContext, useContext, useState</strong> working together</p>
-</blockquote>
-<p>In this example, there is a <code>currentUser</code> state variable which holds an object.</p>
-<p>We combine <code>{ currentUser, setCurrentUser }</code> into a single object and pass it down through the <code>context</code> inside the <code>value={}</code>.</p>
-<p>This lets any component below, such as <code>LoginButton</code>, read both <code>currentUser</code> and <code>setCurrentUser</code>, and then call <code>setCurrentUser</code> when needed.</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>App.js</strong></pre>
-</div>
-<div class="sourceCode" id="cb3" data-filename="App.js"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">import</span> { createContext<span class="op">,</span> useContext<span class="op">,</span> useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">const</span> CurrentUserContext <span class="op">=</span> <span class="fu">createContext</span>(<span class="kw">null</span>)<span class="op">;</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">MyApp</span>() {</span>
-<span id="cb3-6"><a href="#cb3-6"></a>  <span class="kw">const</span> [currentUser<span class="op">,</span> setCurrentUser] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">null</span>)<span class="op">;</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a>  <span class="cf">return</span> (</span>
-<span id="cb3-8"><a href="#cb3-8"></a>    <span class="fu">&lt;CurrentUserContext.Provider</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>      <span class="ot">value</span><span class="op">=</span><span class="va">{</span>{</span>
-<span id="cb3-10"><a href="#cb3-10"></a>        currentUser<span class="op">,</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a>        setCurrentUser</span>
-<span id="cb3-12"><a href="#cb3-12"></a>      }<span class="va">}</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>    <span class="fu">&gt;</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a>      <span class="fu">&lt;Form</span> <span class="fu">/&gt;</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a>    <span class="fu">&lt;/CurrentUserContext.Provider&gt;</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a>  )<span class="op">;</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a>}</span>
-<span id="cb3-18"><a href="#cb3-18"></a></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="kw">function</span> <span class="fu">Form</span>({ children }) {</span>
-<span id="cb3-20"><a href="#cb3-20"></a>  <span class="cf">return</span> (</span>
-<span id="cb3-21"><a href="#cb3-21"></a>    <span class="fu">&lt;Panel</span> <span class="ot">title</span><span class="op">=</span><span class="st">"Welcome"</span><span class="fu">&gt;</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a>      <span class="fu">&lt;LoginButton</span> <span class="fu">/&gt;</span></span>
-<span id="cb3-23"><a href="#cb3-23"></a>    <span class="fu">&lt;/Panel&gt;</span></span>
-<span id="cb3-24"><a href="#cb3-24"></a>  )<span class="op">;</span></span>
-<span id="cb3-25"><a href="#cb3-25"></a>}</span>
-<span id="cb3-26"><a href="#cb3-26"></a></span>
-<span id="cb3-27"><a href="#cb3-27"></a><span class="kw">function</span> <span class="fu">LoginButton</span>() {</span>
-<span id="cb3-28"><a href="#cb3-28"></a>  <span class="kw">const</span> {</span>
-<span id="cb3-29"><a href="#cb3-29"></a>    currentUser<span class="op">,</span></span>
-<span id="cb3-30"><a href="#cb3-30"></a>    setCurrentUser</span>
-<span id="cb3-31"><a href="#cb3-31"></a>  } <span class="op">=</span> <span class="fu">useContext</span>(CurrentUserContext)<span class="op">;</span></span>
-<span id="cb3-32"><a href="#cb3-32"></a></span>
-<span id="cb3-33"><a href="#cb3-33"></a>  <span class="cf">if</span> (currentUser <span class="op">!==</span> <span class="kw">null</span>) {</span>
-<span id="cb3-34"><a href="#cb3-34"></a>    <span class="cf">return </span><span class="kw">&lt;p&gt;</span>You logged in as <span class="va">{</span>currentUser<span class="op">.</span><span class="at">name</span><span class="va">}</span>.<span class="kw">&lt;/p&gt;</span><span class="op">;</span></span>
-<span id="cb3-35"><a href="#cb3-35"></a>  }</span>
-<span id="cb3-36"><a href="#cb3-36"></a></span>
-<span id="cb3-37"><a href="#cb3-37"></a>  <span class="cf">return</span> (</span>
-<span id="cb3-38"><a href="#cb3-38"></a>    <span class="fu">&lt;Button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> {</span>
-<span id="cb3-39"><a href="#cb3-39"></a>      <span class="fu">setCurrentUser</span>({ <span class="dt">name</span><span class="op">:</span> <span class="st">'Advika'</span> })</span>
-<span id="cb3-40"><a href="#cb3-40"></a>    }<span class="va">}</span><span class="fu">&gt;</span>Log in as Advika<span class="fu">&lt;/Button&gt;</span></span>
-<span id="cb3-41"><a href="#cb3-41"></a>  )<span class="op">;</span></span>
-<span id="cb3-42"><a href="#cb3-42"></a>}</span>
-<span id="cb3-43"><a href="#cb3-43"></a></span>
-<span id="cb3-44"><a href="#cb3-44"></a><span class="kw">function</span> <span class="fu">Panel</span>({ title<span class="op">,</span> children }) {</span>
-<span id="cb3-45"><a href="#cb3-45"></a>  <span class="cf">return</span> (</span>
-<span id="cb3-46"><a href="#cb3-46"></a>    <span class="kw">&lt;section</span> <span class="ot">className</span><span class="op">=</span><span class="st">"panel"</span><span class="kw">&gt;</span></span>
-<span id="cb3-47"><a href="#cb3-47"></a>      <span class="kw">&lt;h1&gt;</span><span class="va">{</span>title<span class="va">}</span><span class="kw">&lt;/h1&gt;</span></span>
-<span id="cb3-48"><a href="#cb3-48"></a>      <span class="va">{</span>children<span class="va">}</span></span>
-<span id="cb3-49"><a href="#cb3-49"></a>    <span class="kw">&lt;/section&gt;</span></span>
-<span id="cb3-50"><a href="#cb3-50"></a>  )</span>
-<span id="cb3-51"><a href="#cb3-51"></a>}</span>
-<span id="cb3-52"><a href="#cb3-52"></a></span>
-<span id="cb3-53"><a href="#cb3-53"></a><span class="kw">function</span> <span class="fu">Button</span>({ children<span class="op">,</span> onClick }) {</span>
-<span id="cb3-54"><a href="#cb3-54"></a>  <span class="cf">return</span> (</span>
-<span id="cb3-55"><a href="#cb3-55"></a>    <span class="kw">&lt;button</span> <span class="ot">className</span><span class="op">=</span><span class="st">"button"</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>onClick<span class="va">}</span><span class="kw">&gt;</span></span>
-<span id="cb3-56"><a href="#cb3-56"></a>      <span class="va">{</span>children<span class="va">}</span></span>
-<span id="cb3-57"><a href="#cb3-57"></a>    <span class="kw">&lt;/button&gt;</span></span>
-<span id="cb3-58"><a href="#cb3-58"></a>  )<span class="op">;</span></span>
-<span id="cb3-59"><a href="#cb3-59"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/reactjs/ex31.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3" title="Initial render"><img src="../images/reactjs/ex31.png" class="img-fluid figure-img" style="width:100.0%" alt="Initial render"></a></p>
-<figcaption>Initial render</figcaption>
-</figure>
-</div>
-</div><div class="">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/reactjs/ex32.png" class="lightbox" data-glightbox="description: .lightbox-desc-4" data-gallery="quarto-lightbox-gallery-4" title="Initial render"><img src="../images/reactjs/ex32.png" class="img-fluid figure-img" style="width:100.0%" alt="Initial render"></a></p>
-<figcaption>Initial render</figcaption>
-</figure>
-</div>
-</div></div>
-<p><a href="https://beta.reactjs.org/reference/react/useContext#examples-basic" class="external">Examples of updating context</a></p>
-</section>
-<section id="example2" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="example2"><span class="header-section-number">5</span> Example#2</h2>
-<p>Reference:</p>
-<ul>
-<li><a href="https://www.digitalocean.com/community/tutorials/react-context-api" class="external">Understanding the React Context API</a></li>
-</ul>
-<p>In this example we’ll explain how to use the new context API in as few words as possible. We’ll create a <strong>simple Locale context that provides the language preference</strong> between <code>English</code> and <code>French</code> to components in the app.</p>
-<p>To <code>create</code> a new context, use React’s new <code>createContext</code> function:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">export</span> <span class="kw">const</span> LocaleContext <span class="op">=</span> React<span class="op">.</span><span class="fu">createContext</span>(<span class="st">'en'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="provider" class="level3" data-number="5.1">
-<h3 data-number="5.1" class="anchored" data-anchor-id="provider"><span class="header-section-number">5.1</span> Provider</h3>
-<p>The <code>Provider</code> component is used to wrap components in the tree that will need access to the value from the context.</p>
-<p>Here let’s create a <code>LocaleProvider</code> component that wraps our <code>LocaleContext’s</code> provider and offers a way to change the context’s locale value:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">import</span> React<span class="op">,</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="im">export</span> <span class="kw">const</span> LocaleContext <span class="op">=</span> React<span class="op">.</span><span class="fu">createContext</span>()<span class="op">;</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">const</span> LocaleProvider <span class="op">=</span> (props) <span class="kw">=&gt;</span> {</span>
-<span id="cb5-6"><a href="#cb5-6"></a>  <span class="kw">const</span> [locale<span class="op">,</span> setLocale] <span class="op">=</span> <span class="fu">useState</span>(<span class="st">'en'</span>)<span class="op">;</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a></span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="kw">const</span> changeLocale <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb5-9"><a href="#cb5-9"></a>    <span class="fu">setLocale</span>(prevLocale <span class="kw">=&gt;</span> </span>
-<span id="cb5-10"><a href="#cb5-10"></a>    prevLocale <span class="op">===</span> <span class="st">'en'</span> <span class="op">?</span> <span class="st">'fr'</span> <span class="op">:</span> <span class="st">'en'</span>)<span class="op">;</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a>  }<span class="op">;</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a></span>
-<span id="cb5-13"><a href="#cb5-13"></a>  <span class="kw">const</span> state <span class="op">=</span> {</span>
-<span id="cb5-14"><a href="#cb5-14"></a>    locale<span class="op">,</span></span>
-<span id="cb5-15"><a href="#cb5-15"></a>    changeLocale</span>
-<span id="cb5-16"><a href="#cb5-16"></a>  }<span class="op">;</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a></span>
-<span id="cb5-18"><a href="#cb5-18"></a>  <span class="cf">return</span> (</span>
-<span id="cb5-19"><a href="#cb5-19"></a>    <span class="op">&lt;</span>LocaleContext<span class="op">.</span><span class="at">Provider</span> value<span class="op">=</span>{state}<span class="op">&gt;</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a>      {props<span class="op">.</span><span class="at">children</span>}</span>
-<span id="cb5-21"><a href="#cb5-21"></a>    <span class="op">&lt;/</span>LocaleContext<span class="op">.</span><span class="at">Provider</span><span class="op">&gt;</span></span>
-<span id="cb5-22"><a href="#cb5-22"></a>  )<span class="op">;</span></span>
-<span id="cb5-23"><a href="#cb5-23"></a>}<span class="op">;</span></span>
-<span id="cb5-24"><a href="#cb5-24"></a></span>
-<span id="cb5-25"><a href="#cb5-25"></a><span class="im">export</span> <span class="im">default</span> LocaleProvider<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="using-the-provider" class="level3" data-number="5.2">
-<h3 data-number="5.2" class="anchored" data-anchor-id="using-the-provider"><span class="header-section-number">5.2</span> Using the provider</h3>
-<p>We can make use of our <code>provider</code> at the top level of our App component:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a><span class="im">import</span> React <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="im">import</span> LocaleProvider <span class="im">from</span> <span class="st">'./context/LocaleContext'</span><span class="op">;</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="im">import</span> Greeting <span class="im">from</span> <span class="st">'./Greeting'</span><span class="op">;</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="im">import</span> ToggleLocale <span class="im">from</span> <span class="st">'./ToggleLocale'</span><span class="op">;</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="kw">const</span> App <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb6-7"><a href="#cb6-7"></a>  <span class="cf">return</span> (</span>
-<span id="cb6-8"><a href="#cb6-8"></a>    <span class="op">&lt;</span>LocaleProvider<span class="op">&gt;</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a>      <span class="op">&lt;</span>Greeting <span class="op">/&gt;</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a>      <span class="op">&lt;</span>ToggleLocale <span class="op">/&gt;</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a>    <span class="op">&lt;/</span>LocaleProvider<span class="op">&gt;</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a>  )<span class="op">;</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a>}<span class="op">;</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="consumer" class="level3" data-number="5.3">
-<h3 data-number="5.3" class="anchored" data-anchor-id="consumer"><span class="header-section-number">5.3</span> Consumer</h3>
-<p>Now all that’s left to do is access the values from the context using the <code>Consumer</code> component.</p>
-<p>Our <code>Greeting</code> component looks like this:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">import</span> React<span class="op">,</span> { useContext } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="im">import</span> { LocaleContext } <span class="im">from</span> <span class="st">'./context/LocaleContext'</span><span class="op">;</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">const</span> Greeting <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="kw">const</span> localeVal <span class="op">=</span> <span class="fu">useContext</span>(LocaleContext)<span class="op">;</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a></span>
-<span id="cb7-7"><a href="#cb7-7"></a>  <span class="cf">return</span> (</span>
-<span id="cb7-8"><a href="#cb7-8"></a>    <span class="op">&lt;&gt;</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a>      {localeVal<span class="op">.</span><span class="at">locale</span> <span class="op">===</span> <span class="st">'en'</span> <span class="op">?</span> </span>
-<span id="cb7-10"><a href="#cb7-10"></a>      <span class="op">&lt;</span>h1<span class="op">&gt;</span>Welcome<span class="op">!&lt;/</span>h1<span class="op">&gt;</span> <span class="op">:</span> <span class="op">&lt;</span>h1<span class="op">&gt;</span>Bienvenue<span class="op">!&lt;/</span>h1<span class="op">&gt;</span>}</span>
-<span id="cb7-11"><a href="#cb7-11"></a>    <span class="op">&lt;/&gt;</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a>  )<span class="op">;</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a>}<span class="op">;</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a></span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="im">export</span> <span class="im">default</span> Greeting<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>And our <code>ToggleLocale</code> component looks like this:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> React<span class="op">,</span> { useContext } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="im">import</span> { LocaleContext } <span class="im">from</span> <span class="st">'./context/LocaleContext'</span><span class="op">;</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">const</span> ToggleLocale <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb8-5"><a href="#cb8-5"></a>  <span class="kw">const</span> localeVal <span class="op">=</span> <span class="fu">useContext</span>(LocaleContext)<span class="op">;</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a></span>
-<span id="cb8-7"><a href="#cb8-7"></a>  <span class="cf">return</span> (</span>
-<span id="cb8-8"><a href="#cb8-8"></a>    <span class="op">&lt;</span>LocaleContext<span class="op">.</span><span class="at">Consumer</span><span class="op">&gt;</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a>      {(localeVal) <span class="kw">=&gt;</span> (</span>
-<span id="cb8-10"><a href="#cb8-10"></a>        <span class="op">&lt;</span>button </span>
-<span id="cb8-11"><a href="#cb8-11"></a>        onClick<span class="op">=</span>{localeVal<span class="op">.</span><span class="at">changeLocale</span>}<span class="op">&gt;</span>Change language<span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a>      )}</span>
-<span id="cb8-13"><a href="#cb8-13"></a>    <span class="op">&lt;/</span>LocaleContext<span class="op">.</span><span class="at">Consumer</span><span class="op">&gt;</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a>  )<span class="op">;</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a>}<span class="op">;</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a></span>
-<span id="cb8-17"><a href="#cb8-17"></a><span class="im">export</span> <span class="im">default</span> ToggleLocale<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<!--- navLinks -->
-<br><br>
+<li><a href="https://www.w3schools.com/react/showreact.asp?filename=demo2_react_usememo" class="external" target="_blank">expensiveCalculation</a> <!--- navLinks --> <br><br>
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../reactjs/reactjs-hook-effect.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> React JS: useEffect</a> <br></p>
+<p><br> <a href="../reactjs/reactjs-hook-context.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> React JS: useContext</a> <br></p>
 </div>
 <br>
 <div class="column center">
@@ -2168,19 +1936,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../reactjs/reactjs-hook-memo.html">ReactJS: useMemo <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
+<p><br> <a href="../reactjs/reactjs-hook-custom.html">React JS: useCustom <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
-</div>
+</div></li>
+</ul>
 
 
-<div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-1">Create a context &gt; Provide this context &gt; Consume and use this context</span>
-<span class="glightbox-desc lightbox-desc-2">Eight simple strategies for communicating between React components</span>
-<span class="glightbox-desc lightbox-desc-3">Initial render</span>
-<span class="glightbox-desc lightbox-desc-4">Initial render</span>
-</div>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -2723,7 +2485,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p>If you want to go far, walk slow / We love dukkha</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/reactjs/reactjs-hook-context.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/reactjs/reactjs-hook-memo.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -2742,31 +2504,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom"});
-window.onload = () => {
-  lightboxQuarto.on('slide_before_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    const href = trigger.getAttribute('href');
-    if (href !== null) {
-      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-      if (imgEl !== null) {
-        const srcAttr = imgEl.getAttribute("src");
-        if (srcAttr && srcAttr.startsWith("data:")) {
-          slideConfig.href = srcAttr;
-        }
-      }
-    } 
-  });
-
-  lightboxQuarto.on('slide_after_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    if (window.Quarto?.typesetMath) {
-      window.Quarto.typesetMath(slideNode);
-    }
-  });
-
-};
-          </script>
 
 
 
