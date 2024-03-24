@@ -1846,7 +1846,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Saturday, March 23, 2024</p>
+      <p class="date-modified">Sunday, March 24, 2024</p>
     </div>
   </div>
     
@@ -1866,7 +1866,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="definition" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Definition</h1>
 <p><code>const cachedValue = useMemo(calculateValue, dependencies)</code></p>
-<p><code>useMemo</code> is a React Hook used for memoization, a technique to optimize performance by caching the results of expensive computations.</p>
+<p><code>useMemo</code> is a <mark>React Hook used for memoization, a technique to optimize performance by caching the results of expensive computations.</mark></p>
 <p>It takes a function and an array of dependencies, returning a memoized value. When the dependencies change, <code>useMemo</code> re-runs the function only if necessary, otherwise returning the cached result.</p>
 <blockquote class="blockquote">
 <p>This optimization is particularly useful for avoiding unnecessary re-renders in components. It’s commonly employed for computationally intensive tasks, like complex calculations or data processing, where you want to avoid redundant work. By memoizing values, <code>useMemo</code> helps improve React application efficiency and responsiveness.</p>
@@ -1874,16 +1874,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="parameters" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="parameters"><span class="header-section-number">1.1</span> Parameters</h2>
 <ul>
-<li><strong>calculateValue</strong>: The function calculating the value that you want to cache. It should be pure, should take no arguments, and should return a value of any type.
+<li><strong>calculateValue</strong>: <mark>The function calculating the value that you want to cache.</mark>
 <ul>
-<li>React will call your function during the initial render. On next renders, React will return the same value again if the dependencies have not changed since the last render.</li>
-<li>Otherwise, it will call calculateValue, return its result, and store it so it can be reused later.</li>
+<li>It should:
+<ul>
+<li>be <strong>pure</strong>,</li>
+<li>take <strong>no arguments</strong>,</li>
+<li>and should <strong>return a value of any type</strong>.</li>
 </ul></li>
-<li><strong>dependencies</strong>: The list of all reactive values referenced inside of the calculateValue code.
+<li>React will call your function during the initial render. On next renders, React will return the same value again <em>if the dependencies have not changed since the last render</em>.</li>
+<li>Otherwise, it will call <code>calculateValue</code>, return its result, and store it so it can be reused later.</li>
+</ul></li>
+<li><strong>dependencies</strong>: <mark>The list of all reactive values referenced inside of the <code>calculateValue</code> code.</mark>
 <ul>
-<li>Reactive values include props, state, and all the variables and functions declared directly inside your component body.</li>
+<li>Reactive values include <code>props</code>, <code>state</code>, and all the <code>variables</code> and functions declared directly inside your component body.</li>
 <li>If your linter is configured for React, it will verify that every reactive value is correctly specified as a dependency.</li>
-<li>The list of dependencies must have a constant number of items and be written inline like [dep1, dep2, dep3]. React will compare each dependency with its previous value using the Object.is comparison.</li>
+<li>The list of dependencies must have a <strong>constant number of items</strong> and be written inline like [dep1, dep2, dep3].</li>
+<li>React will compare each dependency with its previous value using the <code>Object.is</code> comparison.</li>
 </ul></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -1924,7 +1931,12 @@ Note
 <section id="references" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> References</h1>
 <ul>
-<li><a href="https://www.w3schools.com/react/showreact.asp?filename=demo2_react_usememo" class="external" target="_blank">expensiveCalculation</a> <!--- navLinks --> <br><br>
+<li><a href="https://www.w3schools.com/react/showreact.asp?filename=demo2_react_usememo" class="external" target="_blank">expensiveCalculation</a></li>
+<li><a href="https://everyday.codes/javascript/react-usememo-and-when-you-should-use-it/" class="external" target="_blank">React.useMemo and when you should use it</a></li>
+<li><a href="https://www.joshwcomeau.com/react/usememo-and-usecallback/" class="external" target="_blank">Understanding useMemo and useCallback</a></li>
+</ul>
+<!--- navLinks -->
+<br><br>
 <div class="row">
 <br>
 <div class="column left previous">
@@ -1939,8 +1951,7 @@ Note
 <p><br> <a href="../reactjs/reactjs-hook-custom.html">React JS: useCustom <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
-</div></li>
-</ul>
+</div>
 
 
 </section>

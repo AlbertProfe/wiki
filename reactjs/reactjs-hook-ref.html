@@ -958,6 +958,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">React JS: useContext</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-memo.html">
+ <span class="dropdown-text">ReactJS: useMemo</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../reactjs/reactjs-hook-custom.html">
  <span class="dropdown-text">ReactJS: custom hooks</span></a>
   </li>  
@@ -1048,6 +1052,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../reactjs/rjslab6-1.html">
  <span class="dropdown-text">Lab#RE06-1: healthyFood Restaurant</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab6-1-PR.html">
+ <span class="dropdown-text">Lab#RE06-1-PR: create a pull request</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab7-1.html">
+ <span class="dropdown-text">Lab#RE07-1: traffic lights simulation</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">React JS readings</li>
@@ -1580,6 +1592,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-memo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ReactJS: useMemo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../reactjs/reactjs-hook-custom.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ReactJS: custom hooks</span></a>
   </div>
@@ -1739,6 +1757,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Lab#RE06-1: healthyFood Restaurant</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab6-1-PR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE06-1-PR: create a pull request</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab7-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE07-1: traffic lights simulation</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -1776,6 +1807,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1"><span class="header-section-number">2</span> Example 1</a></li>
   <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2"><span class="header-section-number">3</span> Example 2</a></li>
+  <li><a href="#example-3" id="toc-example-3" class="nav-link" data-scroll-target="#example-3"><span class="header-section-number">4</span> Example 3</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/reactjs/reactjs-hook-ref.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1819,7 +1851,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, January 11, 2024</p>
+      <p class="date-modified">Sunday, March 24, 2024</p>
     </div>
   </div>
     
@@ -1966,6 +1998,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div></div>
 <p>This time we use a combination of <code>useState</code>, <code>useEffect</code>, and <code>useRef</code> to keep track of the previous state.</p>
 <p>In the <code>useEffect</code>, we are updating the <code>useRef</code> current value each time the <code>inputValue</code> <strong>is updated by entering text into the input field.</strong></p>
+</section>
+<section id="example-3" class="level2 page-columns page-full" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="example-3"><span class="header-section-number">4</span> Example 3</h2>
+<ul>
+<li><a href="https://react.dev/reference/react/useRef#examples-value" class="external" target="_blank">Examples of referencing a value with useRef</a></li>
+</ul>
+<p>This example uses a combination of <code>state</code> and <code>refs</code>.</p>
+<p>Both <code>startTime</code> and now are state variables because they are used for <strong>rendering</strong>. But we also need to hold an <strong>interval ID so that we can stop the <a href="https://www.w3schools.com/jsref/met_win_setinterval.asp" class="external" target="_blank">interval</a> on button press</strong>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>You may use <code>console.count('counter')</code> to count <strong>how many times React renders.</strong></p>
+</div></div><p>Since the <strong>interval ID</strong> is not used for rendering, it’s appropriate to keep it in a <code>ref</code>, and manually update it</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Stopwatch.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-filename="Stopwatch.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> { useState<span class="op">,</span> useRef } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Stopwatch</span>() {</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="kw">const</span> [startTime<span class="op">,</span> setStartTime] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="kw">const</span> [now<span class="op">,</span> setNow] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="kw">const</span> intervalRef <span class="op">=</span> <span class="fu">useRef</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a>  <span class="kw">function</span> <span class="fu">handleStart</span>() {</span>
+<span id="cb4-9"><a href="#cb4-9"></a>    <span class="fu">setStartTime</span>(<span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>())<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>    <span class="fu">setNow</span>(<span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>())<span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a></span>
+<span id="cb4-12"><a href="#cb4-12"></a>    <span class="pp">clearInterval</span>(intervalRef<span class="op">.</span><span class="at">current</span>)<span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a>    intervalRef<span class="op">.</span><span class="at">current</span> <span class="op">=</span> <span class="pp">setInterval</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb4-14"><a href="#cb4-14"></a>      <span class="fu">setNow</span>(<span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>())<span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>    }<span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>  }</span>
+<span id="cb4-17"><a href="#cb4-17"></a></span>
+<span id="cb4-18"><a href="#cb4-18"></a>  <span class="kw">function</span> <span class="fu">handleStop</span>() {</span>
+<span id="cb4-19"><a href="#cb4-19"></a>    <span class="pp">clearInterval</span>(intervalRef<span class="op">.</span><span class="at">current</span>)<span class="op">;</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a>  }</span>
+<span id="cb4-21"><a href="#cb4-21"></a></span>
+<span id="cb4-22"><a href="#cb4-22"></a>  <span class="kw">let</span> secondsPassed <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-23"><a href="#cb4-23"></a>  <span class="cf">if</span> (startTime <span class="op">!=</span> <span class="kw">null</span> <span class="op">&amp;&amp;</span> now <span class="op">!=</span> <span class="kw">null</span>) {</span>
+<span id="cb4-24"><a href="#cb4-24"></a>    secondsPassed <span class="op">=</span> (now <span class="op">-</span> startTime) <span class="op">/</span> <span class="dv">1000</span><span class="op">;</span></span>
+<span id="cb4-25"><a href="#cb4-25"></a>  }</span>
+<span id="cb4-26"><a href="#cb4-26"></a></span>
+<span id="cb4-27"><a href="#cb4-27"></a>  <span class="cf">return</span> (</span>
+<span id="cb4-28"><a href="#cb4-28"></a>    <span class="kw">&lt;&gt;</span></span>
+<span id="cb4-29"><a href="#cb4-29"></a>      <span class="kw">&lt;h1&gt;</span>Time passed: <span class="va">{</span>secondsPassed<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="va">}</span><span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb4-30"><a href="#cb4-30"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>handleStart<span class="va">}</span><span class="kw">&gt;</span></span>
+<span id="cb4-31"><a href="#cb4-31"></a>        Start</span>
+<span id="cb4-32"><a href="#cb4-32"></a>      <span class="kw">&lt;/button&gt;</span></span>
+<span id="cb4-33"><a href="#cb4-33"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>handleStop<span class="va">}</span><span class="kw">&gt;</span></span>
+<span id="cb4-34"><a href="#cb4-34"></a>        Stop</span>
+<span id="cb4-35"><a href="#cb4-35"></a>      <span class="kw">&lt;/button&gt;</span></span>
+<span id="cb4-36"><a href="#cb4-36"></a>    <span class="kw">&lt;/&gt;</span></span>
+<span id="cb4-37"><a href="#cb4-37"></a>  )<span class="op">;</span></span>
+<span id="cb4-38"><a href="#cb4-38"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -2552,7 +2639,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"openEffect":"zoom","selector":".lightbox","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","loop":false,"openEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
