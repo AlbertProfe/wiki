@@ -5505,8 +5505,8 @@ function extendObservableStdlib(lib) {
 }
 
 class ShinyInspector extends QuartoInspector {
-  constructor(node, cellAst) {
-    super(node, cellAst);
+  constructor(node) {
+    super(node);
   }
   fulfilled(value, name) {
     if (shinyInputVars.has(name) && window.Shiny) {
