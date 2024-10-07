@@ -13868,45 +13868,45 @@
   {
     "objectID": "springboot/sblab8-1.html",
     "href": "springboot/sblab8-1.html",
-    "title": "Lab#SB08-1: Restaurant DDD and UML",
+    "title": "Lab#SB08-1: DDD and UML",
     "section": "",
     "text": "📘 Spring Boot Lab#SB00-1: Restaurant UML We are going to evolve the current Java SE Restaurant project into a Spring Boot RestaurantManagement System with an H2 DB and web interface using Thymeleaf/Vaadin.\nThis Spring Boot version of the RestaurantManagement System would provide a robust, database-backed web application for managing all aspects of a restaurant’s operations, from bookings and menu management to order processing and customer interactions.",
     "crumbs": [
       "Spring Boot Laboratories",
-      "Lab#SB08-1: Restaurant DDD and UML"
+      "Lab#SB08-1: DDD and UML"
     ]
   },
   {
     "objectID": "springboot/sblab8-1.html#create-a-new-spring-boot-project-h2-db",
     "href": "springboot/sblab8-1.html#create-a-new-spring-boot-project-h2-db",
-    "title": "Lab#SB08-1: Restaurant DDD and UML",
+    "title": "Lab#SB08-1: DDD and UML",
     "section": "1.1 Create a new Spring Boot project & H2 DB",
     "text": "1.1 Create a new Spring Boot project & H2 DB\n\nCreate a new Spring Boot project: The first step would be to create a new Spring Boot project in the preferred IDE or text editor.\n\n\n\n\n\n\n\nNote\n\n\n\nThe project can be created using Spring Initializr, which will create the necessary file structure and dependencies.",
     "crumbs": [
       "Spring Boot Laboratories",
-      "Lab#SB08-1: Restaurant DDD and UML"
+      "Lab#SB08-1: DDD and UML"
     ]
   },
   {
     "objectID": "springboot/sblab8-1.html#model-entities",
     "href": "springboot/sblab8-1.html#model-entities",
-    "title": "Lab#SB08-1: Restaurant DDD and UML",
+    "title": "Lab#SB08-1: DDD and UML",
     "section": "1.2 Model & Entities",
     "text": "1.2 Model & Entities\n\nCreate a Menu Entity: To represent a menu item in the restaurant management system, create a Menu @Entity\n\n\n\nIt could include attributes such as name, price, description, category (appetizer, main course, dessert, etc.), and availability status.\n\nCreate a Customer Entity: To represent a customer in the system, create a Customer entity that includes attributes such as customer ID, name, phone number, email, and reservation history.\nCreate Booking Entity: To represent a booking in the system, create a Booking entity that includes attributes such as booking date, time, number of people, tables, and associated customer.\nCreate Staff Entity: To represent staff members in the system, create a Staff entity that includes attributes such as staff ID, name, position, shift schedules, and assigned tables.",
     "crumbs": [
       "Spring Boot Laboratories",
-      "Lab#SB08-1: Restaurant DDD and UML"
+      "Lab#SB08-1: DDD and UML"
     ]
   },
   {
     "objectID": "springboot/sblab8-1.html#domains-controller-service-and-repository",
     "href": "springboot/sblab8-1.html#domains-controller-service-and-repository",
-    "title": "Lab#SB08-1: Restaurant DDD and UML",
+    "title": "Lab#SB08-1: DDD and UML",
     "section": "1.3 Domains: @Controller, @Service and @Repository",
     "text": "1.3 Domains: @Controller, @Service and @Repository\n\nCreate Repositories: To access the data stored in the database, create repositories for each entity. The repositories will provide the methods to create, read, update, and delete the data.\nCreate Services: Create services that will implement the business logic of the system by calling the repository methods.\n\n\n\nThe services will provide the methods to search for available tables, make a reservation, update menu items, process orders, manage staff schedules, handle customer feedback, and generate reports on restaurant performance.\n\nCreate Controllers: Create controllers that will handle the HTTP requests from the web interface by calling the service methods.\n\n\n\nThe controllers will provide the methods to create a customer account, search for available tables, make a reservation, view and update menu items, place an order, manage staff schedules, submit customer feedback, and generate various reports.",
     "crumbs": [
       "Spring Boot Laboratories",
-      "Lab#SB08-1: Restaurant DDD and UML"
+      "Lab#SB08-1: DDD and UML"
     ]
   },
   {
@@ -14112,7 +14112,7 @@
     "href": "springboot/sblab8-3.html",
     "title": "Lab#SB08-3: H2 and API Rest",
     "section": "",
-    "text": "📘 Spring Boot Lab#SB00-3: RestaurantManager We are going to evolve the current Java SE Restaurant project into a Spring Boot Restaurant Management System with an H2 DB and web interface using Thymeleaf.\n\n\n\n\n\n\n\n  Lab#SB08-2: RestaurantManager \n\n\n\n  top \n\n\n\n Lab#SB08-4: RestaurantManager",
+    "text": "📘 Spring Boot Lab#SB00-3: RestaurantManager\nWe are going to evolve the current Java SE Restaurant project into a Spring Boot Restaurant Management System with an H2 DB and API Rest manages by Swagger.",
     "crumbs": [
       "Spring Boot Laboratories",
       "Lab#SB08-3: H2 and API Rest"
@@ -14198,12 +14198,12 @@
   {
     "objectID": "springboot/sblab8-1.html#entities-manager",
     "href": "springboot/sblab8-1.html#entities-manager",
-    "title": "Lab#SB08-1: Restaurant DDD and UML",
+    "title": "Lab#SB08-1: DDD and UML",
     "section": "3.1 Entities Manager",
     "text": "3.1 Entities Manager\nMenuManager\n\n\n\n\n\nmenuManger object\n\n\n\n\n\n\n\nclassDiagram\n\nclass MenuManager {\n  - menus: HashMap&lt;String, Menu&gt;\n  - qty: int\n  - size: double\n  - lastModified: Date\n  + addMenu(menu: Menu, data: String): void\n  + updateMenu(): void\n  + deleteMenu(title: String): void\n  + getMenu(title: String): Menu\n  + getMenus(): List&lt;&gt;\n  + rateMenu(rate: int, menu: Menu): void\n  + saveToCSV(): void\n  + deleteCSV(): void\n}\n\n\n\n\n\n\nThe MenuManager acts as a central hub for menu-related operations, promoting efficient management and systematic handling of menu entities in Java applications.",
     "crumbs": [
       "Spring Boot Laboratories",
-      "Lab#SB08-1: Restaurant DDD and UML"
+      "Lab#SB08-1: DDD and UML"
     ]
   },
   {
@@ -14248,6 +14248,413 @@
     "crumbs": [
       "Spring Boot Laboratories",
       "Lab#SB08-2: Vaadin"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#what-is-responseentity",
+    "href": "springboot/sblab8-3.html#what-is-responseentity",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "1 What is ResponseEntity?",
+    "text": "1 What is ResponseEntity?\nResponseEntity is a class in Spring Framework that represents the entire HTTP response. It allows you to control the following aspects of the HTTP response:\n\nStatus code\nHeaders\nBody\n\n\n\n\ncustom response using springboot Medium",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#key-features",
+    "href": "springboot/sblab8-3.html#key-features",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "5.1 Key Features",
+    "text": "5.1 Key Features\n\nFlexibility: You can customize every part of the HTTP response.\nType Safety: It uses generics to ensure type safety of the response body.\nConvenience Methods: It provides static methods for quickly creating responses.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#basic-usage",
+    "href": "springboot/sblab8-3.html#basic-usage",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "5.2 Basic Usage",
+    "text": "5.2 Basic Usage\n\n\n\nResponseEntity in Spring Framework\n\n\nHere’s a simple example of how to use ResponseEntity:\n@GetMapping(\"/example\")\npublic ResponseEntity&lt;String&gt; example() {\n    return ResponseEntity.ok(\"Hello, World!\");\n}",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#advanced-usage",
+    "href": "springboot/sblab8-3.html#advanced-usage",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "5.3 Advanced Usage",
+    "text": "5.3 Advanced Usage\nYou can set custom status codes, headers, and body:\n@GetMapping(\"/advanced\")\npublic ResponseEntity&lt;MyObject&gt; advanced() {\n    MyObject body = new MyObject(\"data\");\n    return ResponseEntity\n        .status(HttpStatus.CREATED)\n        .header(\"Custom-Header\", \"value\")\n        .body(body);\n}",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#useful-links",
+    "href": "springboot/sblab8-3.html#useful-links",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "5.4 Useful Links",
+    "text": "5.4 Useful Links\n\nOfficial Spring Documentation on ResponseEntity\nSpring.io Guide on Building REST services",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#when-to-use-responseentity",
+    "href": "springboot/sblab8-3.html#when-to-use-responseentity",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "5.5 When to Use ResponseEntity",
+    "text": "5.5 When to Use ResponseEntity\nUse ResponseEntity when you need fine-grained control over the HTTP response, such as:\n\nSetting custom status codes\nAdding or modifying response headers\nConditionally returning different status codes based on some logic\nCreating responses with no body (like for DELETE operations)\n\nBy using ResponseEntity, you can create more flexible and powerful RESTful APIs in your Spring applications.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#customercontroller",
+    "href": "springboot/sblab8-3.html#customercontroller",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "5.6 CustomerController",
+    "text": "5.6 CustomerController\nimport org.springframework.http.HttpStatus;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.web.bind.annotation.*;\nimport io.swagger.annotations.*;\n\n    @RestController\n    @RequestMapping(\"/api/customers\")\n    @Api(value = \"Customer Management System\", description = \"Operations pertaining to customers in the Customer Management System\")\n    public class CustomerController {\n\n        private final CustomerService customerService;\n\n        public CustomerController(CustomerService customerService) {\n            this.customerService = customerService;\n        }\n\n        @ApiOperation(value = \"View a list of available customers\", response = List.class)\n        @ApiResponses(value = {\n                @ApiResponse(code = 200, message = \"Successfully retrieved list\"),\n                @ApiResponse(code = 404, message = \"The resource you were trying to reach is not found\")\n        })\n        @GetMapping(\"/allCustomers\")\n        public ResponseEntity&lt;List&lt;Customer&gt;&gt; getAllCustomers() {\n            List&lt;Customer&gt; customers = customerService.getAllCustomers();\n            return new ResponseEntity&lt;&gt;(customers, HttpStatus.OK);\n        }\n\n        @ApiOperation(value = \"Add a new customer\")\n        @PostMapping\n        public ResponseEntity&lt;Customer&gt; createCustomer(\n                @ApiParam(value = \"Customer object store in database table\", required = true)\n                @RequestBody Customer customer) {\n            Customer createdCustomer = customerService.createCustomer(customer);\n            return new ResponseEntity&lt;&gt;(createdCustomer, HttpStatus.CREATED);\n        }\n\n        @ApiOperation(value = \"Get a customer by Id\")\n        @GetMapping(\"/{id}\")\n        public ResponseEntity&lt;Customer&gt; getCustomerById(\n                @ApiParam(value = \"Customer id from which customer object will retrieve\", required = true)\n                @PathVariable String id) {\n            Customer customer = customerService.getCustomerById(id);\n            return customer != null\n                    ? new ResponseEntity&lt;&gt;(customer, HttpStatus.OK)\n                    : new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);\n        }\n\n        @ApiOperation(value = \"Update a customer\")\n        @PutMapping(\"/{id}\")\n        public ResponseEntity&lt;Customer&gt; updateCustomer(\n                @ApiParam(value = \"ID of the customer to be updated\", required = true)\n                @PathVariable String id,\n                @ApiParam(value = \"Updated customer object\", required = true)\n                @RequestBody Customer customerDetails) {\n            Customer updatedCustomer = customerService.updateCustomer(id, customerDetails);\n            return updatedCustomer != null\n                    ? new ResponseEntity&lt;&gt;(updatedCustomer, HttpStatus.OK)\n                    : new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);\n        }\n\n        @ApiOperation(value = \"Delete a customer\")\n        @DeleteMapping(\"/{id}\")\n        public ResponseEntity&lt;Void&gt; deleteCustomer(\n                @ApiParam(value = \"Customer Id from which customer object will be deleted from database table\", required = true)\n                @PathVariable String id) {\n            customerService.deleteCustomer(id);\n            return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);\n        }\n    }",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#dependency",
+    "href": "springboot/sblab8-3.html#dependency",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "1.2 1 Dependency",
+    "text": "1.2 1 Dependency\nAdd the SpringDoc OpenAPI dependency to your pom.xml (for Maven):\n&lt;dependency&gt;\n    &lt;groupId&gt;org.springdoc&lt;/groupId&gt;\n    &lt;artifactId&gt;springdoc-openapi-starter-webmvc-ui&lt;/artifactId&gt;\n    &lt;version&gt;2.1.0&lt;/version&gt;\n&lt;/dependency&gt;",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#configure",
+    "href": "springboot/sblab8-3.html#configure",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "1.3 Configure",
+    "text": "1.3 Configure\nConfigure SpringDoc OpenAPI in your application.properties or application.yml:\nspringdoc.api-docs.path=/api-docs\nspringdoc.swagger-ui.path=/swagger-ui.html",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#annotate-optional",
+    "href": "springboot/sblab8-3.html#annotate-optional",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "4.4 Annotate (optional)",
+    "text": "4.4 Annotate (optional)\nAnnotate your REST controllers and methods with OpenAPI annotations to provide more details:\nimport io.swagger.v3.oas.annotations.Operation;\nimport io.swagger.v3.oas.annotations.Parameter;\nimport io.swagger.v3.oas.annotations.responses.ApiResponse;\nimport io.swagger.v3.oas.annotations.tags.Tag;\n\n@RestController\n@RequestMapping(\"/api\")\n@Tag(name = \"Example API\", description = \"API for example operations\")\npublic class ExampleController {\n\n    @GetMapping(\"/hello\")\n    @Operation(summary = \"Say hello\", description = \"Returns a greeting message\")\n    @ApiResponse(responseCode = \"200\", description = \"Successful response\")\n    public String hello(@Parameter(description = \"Name to greet\") @RequestParam(required = false) String name) {\n        return \"Hello, \" + (name != null ? name : \"World\") + \"!\";\n    }\n}",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#open-url-browser",
+    "href": "springboot/sblab8-3.html#open-url-browser",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "4.5 Open url browser",
+    "text": "4.5 Open url browser\nRun your Spring Boot application and access the Swagger UI at:\nhttp://localhost:8080/swagger-ui.html\nUnderstanding ResponseEntity in Spring",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#key-components",
+    "href": "springboot/sblab8-3.html#key-components",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "1.1 Key Components",
+    "text": "1.1 Key Components\n\nJava Faker: Library for generating fake data. Java Faker GitHub\n@Bean Annotation: Spring annotation for declaring managed beans.\nH2 Database: In-memory database for testing. H2 Database Engine\nSwagger: Tool for API documentation. Swagger Documentation\nResponseEntity: Spring class for HTTP response control.\nJUnit: Spring Boot uitlity for testing.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#benefits",
+    "href": "springboot/sblab8-3.html#benefits",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "1.1 Benefits**",
+    "text": "1.1 Benefits**\n\nImproves API documentation\nEnables interactive API exploration\nFacilitates API-first development\nSupports automatic code generation\nEnhances collaboration between frontend and backend teams",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#integration",
+    "href": "springboot/sblab8-3.html#integration",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "1.1 Integration:",
+    "text": "1.1 Integration:\nCan be easily integrated with various frameworks, including Spring Boot, through libraries like SpringFox or SpringDoc OpenAPI.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#usage",
+    "href": "springboot/sblab8-3.html#usage",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "1.1 Usage:",
+    "text": "1.1 Usage:\n\nDefine API specifications\nGenerate interactive documentation\nTest API endpoints directly from the UI\nGenerate client SDKs or server stubs\n\nSwagger (now part of the OpenAPI Initiative) has become a de facto standard for RESTful API documentation and development.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#ehat-is-swager",
+    "href": "springboot/sblab8-3.html#ehat-is-swager",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "1.1 Ehat is Swager",
+    "text": "1.1 Ehat is Swager\n\nSwagger is an open-source set of tools for designing, building, documenting, and consuming RESTful web services. It provides a standardized way to describe APIs using JSON or YAML, making it easier for both humans and machines to understand the capabilities of a service without accessing its source code.\n\nKey Components\n\nSwagger Specification: A format for describing RESTful APIs.\nSwagger UI: A web-based UI for exploring and testing APIs.\nSwagger Codegen: A tool for generating client libraries and server stubs.\n\nBenefits\n\nImproves API documentation\nEnables interactive API exploration\nFacilitates API-first development\nSupports automatic code generation\nEnhances collaboration between frontend and backend teams\n\nCan be easily integrated with various frameworks, including Spring Boot, through libraries like SpringFox or SpringDoc OpenAPI.\nUsage\n\nDefine API specifications\nGenerate interactive documentation\nTest API endpoints directly from the UI\nGenerate client SDKs or server stubs\n\nSwagger (now part of the OpenAPI Initiative) has become a de facto standard for RESTful API documentation and development.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#ehat-is-swagger",
+    "href": "springboot/sblab8-3.html#ehat-is-swagger",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "1.1 Ehat is Swagger",
+    "text": "1.1 Ehat is Swagger\n\nSwagger is an open-source set of tools for designing, building, documenting, and consuming RESTful web services. It provides a standardized way to describe APIs using JSON or YAML, making it easier for both humans and machines to understand the capabilities of a service without accessing its source code.\n\nKey Components\n\nSwagger Specification: A format for describing RESTful APIs.\nSwagger UI: A web-based UI for exploring and testing APIs.\nSwagger Codegen: A tool for generating client libraries and server stubs.\n\nBenefits\n\nImproves API documentation\nEnables interactive API exploration\nFacilitates API-first development\nSupports automatic code generation\nEnhances collaboration between frontend and backend teams\n\nCan be easily integrated with various frameworks, including Spring Boot, through libraries like SpringFox or SpringDoc OpenAPI.\nUsage\n\nDefine API specifications\nGenerate interactive documentation\nTest API endpoints directly from the UI\nGenerate client SDKs or server stubs\n\nSwagger (now part of the OpenAPI Initiative) has become a de facto standard for RESTful API documentation and development.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#maven-dependency",
+    "href": "springboot/sblab8-3.html#maven-dependency",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "4.2 Maven Dependency",
+    "text": "4.2 Maven Dependency\nAdd the SpringDoc OpenAPI dependency to your pom.xml (for Maven):\n&lt;dependency&gt;\n    &lt;groupId&gt;org.springdoc&lt;/groupId&gt;\n    &lt;artifactId&gt;springdoc-openapi-starter-webmvc-ui&lt;/artifactId&gt;\n    &lt;version&gt;2.1.0&lt;/version&gt;\n&lt;/dependency&gt;",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#configure-in-spring-boot",
+    "href": "springboot/sblab8-3.html#configure-in-spring-boot",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "4.3 Configure in Spring Boot",
+    "text": "4.3 Configure in Spring Boot\nConfigure SpringDoc OpenAPI in your application.properties or application.yml:\nspringdoc.api-docs.path=/api-docs\nspringdoc.swagger-ui.path=/swagger-ui.html",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#what-is-swagger",
+    "href": "springboot/sblab8-3.html#what-is-swagger",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "4.1 What is Swagger",
+    "text": "4.1 What is Swagger\n\n\nSwagger is an open-source set of tools for designing, building, documenting, and consuming RESTful web services. It provides a standardized way to describe APIs using JSON or YAML, making it easier for both humans and machines to understand the capabilities of a service without accessing its source code.\n\nKey Components\n\nSwagger Specification: A format for describing RESTful APIs.\nSwagger UI: A web-based UI for exploring and testing APIs.\nSwagger Codegen: A tool for generating client libraries and server stubs.\n\nBenefits\n\nImproves API documentation\nEnables interactive API exploration\nFacilitates API-first development\nSupports automatic code generation\nEnhances collaboration between frontend and backend teams\n\nCan be easily integrated with various frameworks, including Spring Boot, through libraries like SpringFox or SpringDoc OpenAPI.\nUsage\n\nDefine API specifications\nGenerate interactive documentation\nTest API endpoints directly from the UI\nGenerate client SDKs or server stubs\n\nSwagger (now part of the OpenAPI Initiative) has become a de facto standard for RESTful API documentation and development.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#java-faker",
+    "href": "springboot/sblab8-3.html#java-faker",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "2.1 Java Faker",
+    "text": "2.1 Java Faker\nJava Faker is a library that generates fake data for various purposes such as testing, development, and demonstration.\n\nJava Faker is a tool that creates realistic-looking fake data, including names, addresses, phone numbers, and much more.\n\nIt’s useful for:\n\nPopulating databases with test data\nCreating mock objects for unit testing\nGenerating sample data for applications\nPrototyping user interfaces\n\nThe library provides a wide range of pre-defined categories (like name, address, phone number) and methods to generate fake data within those categories. It’s easy to use and can generate data in multiple languages and locales.\nFor example, you can create a Faker instance and generate fake data like this:\nFaker faker = new Faker();\nString name = faker.name().fullName(); // Generates a random full name\nString email = faker.internet().emailAddress(); // Generates a random email address\nDependency for maven:\n&lt;dependency&gt;\n    &lt;groupId&gt;com.github.javafaker&lt;/groupId&gt;\n    &lt;artifactId&gt;javafaker&lt;/artifactId&gt;\n    &lt;version&gt;1.0.2&lt;/version&gt;\n&lt;/dependency&gt;",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#approach-1-bean",
+    "href": "springboot/sblab8-3.html#approach-1-bean",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "3.3 Approach #1: @Bean",
+    "text": "3.3 Approach #1: @Bean\nThis CommandLineRunnerdoes the following:\n\nIt checks if the database is empty by counting the number of customers in the repository.\nIf the database is empty, it creates a new Faker instance with the US locale.\nIt then generates 100 fake customers using Faker to create realistic names, email addresses, andphone numbers.\nEach customer is assigned a random UUID as their ID.\nThe fake customers are saved to the CustomerRepository.\nFinally, it prints a message confirming that 100 fake customers have been created and saved.\n\npackage dev.example.restaurant;\n\nimport com.github.javafaker.Faker;\nimport dev.example.restaurant.model.Customer;\nimport dev.example.restaurant.repository.CustomerRepository;\nimport org.springframework.boot.CommandLineRunner;\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\nimport org.springframework.context.annotation.Bean;\n\nimport java.util.Locale;\nimport java.util.UUID;\n\n@SpringBootApplication\npublic class RestaurantVaadinApplication {\n\n    public static void main(String[] args) {\n        SpringApplication.run(RestaurantVaadinApplication.class, args);\n    }\n\n    @Bean\n    public CommandLineRunner loadData(CustomerRepository customerRepository) {\n        return args -&gt; {\n            // Check if the database is empty\n            if (customerRepository.count() == 0) {\n                Faker faker = new Faker(new Locale(\"en-US\"));\n\n                // Create and save 100 fake customers\n                for (int i = 0; i &lt; 100; i++) {\n                    Customer customer = new Customer(\n                            UUID.randomUUID().toString(),\n                            faker.name().fullName(),\n                            faker.internet().emailAddress(),\n                            faker.phoneNumber().cellPhone()\n                    );\n                    customerRepository.save(customer);\n                }\n\n                System.out.println(\"100 fake customers have been created and saved to the database.\");\n            }\n        };\n    }\n}",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#approach-2-static",
+    "href": "springboot/sblab8-3.html#approach-2-static",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "3.3 Approach #2 static",
+    "text": "3.3 Approach #2 static\nIn this approach:\n\nWe’ve removed the @Bean annotation and the CommandLineRunner.\nWe’ve added a static CustomerRepository field with @Autowired annotation.\nWe’ve created a static method createFakeCustomers() that contains the logic for creating and saving fake customers.\nIn the main method, we call createFakeCustomers() after the Spring application context is initialized.\n\n\nThere’s an important caveat with this approach: using static fields with @Autowired is generally not recommended in Spring applications.\nIt can lead to issues with testing and violates the principle of dependency injection.\nA better approach would be to use an ApplicationRunner or CommandLineRunner bean, which allows for proper dependency injection. \n\npackage dev.example.restaurant;\n\nimport com.github.javafaker.Faker;\nimport dev.example.restaurant.model.Customer;\nimport dev.example.restaurant.repository.CustomerRepository;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\nimport java.util.Locale;\nimport java.util.UUID;\n\n@SpringBootApplication\npublic class RestaurantVaadinApplication {\n\n    @Autowired\n    private static CustomerRepository customerRepository;\n\n    public static void main(String[] args) {\n        SpringApplication.run(RestaurantVaadinApplication.class, args);\n        createFakeCustomers();\n    }\n\n    public static void createFakeCustomers() {\n        // Check if the database is empty\n        if (customerRepository.count() == 0) {\n            Faker faker = new Faker(new Locale(\"en-US\"));\n\n            // Create and save 100 fake customers\n            for (int i = 0; i &lt; 100; i++) {\n                Customer customer = new Customer(\n                        UUID.randomUUID().toString(),\n                        faker.name().fullName(),\n                        faker.internet().emailAddress(),\n                        faker.phoneNumber().cellPhone()\n                );\n                customerRepository.save(customer);\n            }\n\n            System.out.println(\"100 fake customers have been created and saved to the database.\");\n        }\n    }\n}",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#approach-3",
+    "href": "springboot/sblab8-3.html#approach-3",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "3.3 Approach #3",
+    "text": "3.3 Approach #3\npackage dev.example.restaurant;\n\nimport com.github.javafaker.Faker;\nimport dev.example.restaurant.model.Customer;\nimport dev.example.restaurant.repository.CustomerRepository;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.boot.ApplicationRunner;\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\nimport org.springframework.context.annotation.Bean;\n\nimport java.util.Locale;\nimport java.util.UUID;\n\n@SpringBootApplication\npublic class RestaurantVaadinApplication {\n\n    public static void main(String[] args) {\n        SpringApplication.run(RestaurantVaadinApplication.class, args);\n    }\n\n    @Bean\n    public ApplicationRunner dataLoader(CustomerRepository customerRepository) {\n        return args -&gt; createFakeCustomers(customerRepository);\n    }\n\n    private void createFakeCustomers(CustomerRepository customerRepository) {\n        // Check if the database is empty\n        if (customerRepository.count() == 0) {\n            Faker faker = new Faker(new Locale(\"en-US\"));\n\n            // Create and save 100 fake customers\n            for (int i = 0; i &lt; 100; i++) {\n                Customer customer = new Customer(\n                        UUID.randomUUID().toString(),\n                        faker.name().fullName(),\n                        faker.internet().emailAddress(),\n                        faker.phoneNumber().cellPhone()\n                );\n                customerRepository.save(customer);\n            }\n\n            System.out.println(\"100 fake customers have been created and saved to the database.\");\n        }\n    }\n}\nThis approach maintains proper dependency injection and is more in line with Spring best practices for a few key reasons:\n\nProper dependency injection: By using an ApplicationRunner bean, we allow Spring to manage the lifecycle and injection of dependencies. The CustomerRepository is properly injected by Spring, rather than being accessed statically.\nSeparation of concerns: The data loading logic is separated from the main application class, improving modularity and maintainability.\nTestability: This approach makes it easier to unit test the data loading logic in isolation, as dependencies can be easily mocked.\nConstructor injection: By passing the CustomerRepository as a parameter to the ApplicationRunner, we’re using constructor injection, which is considered a best practice in Spring.\nAvoiding static dependencies: Static @Autowired fields are generally discouraged as they can lead to issues with testing and violate dependency injection principles.\nFlexibility: This approach allows for easier configuration and potential customization of when and how the data loading occurs.\nAlignment with Spring lifecycle: Using ApplicationRunner ensures the data loading happens at the appropriate time during application startup, after the Spring context is fully initialized. By following these practices, the code becomes more maintainable, testable, and aligned with Spring’s dependency injection principles.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#bean",
+    "href": "springboot/sblab8-3.html#bean",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "2.2 Bean",
+    "text": "2.2 Bean\n@Bean in Spring is:\n\nA method-level annotation\nUsed to declare a Spring bean typically used in @Configuration classes\nTells Spring to:\nmanage the object returned by the method\nand allows you to configure and customize the bean\nJavaBeans - Wikipedia\n\n\n@Bean in Spring is like telling a toy factory to make a special toy for you. When you use @Bean, you are saying,:\n\n“Please create this toy and keep it safe so I can play with it whenever I want.”\n\nJust like the factory remembers how to make your favorite toy, Spring remembers how to create and manage the special object you asked for, so you can use it in your game whenever you need it.\n\nExample:\n@Configuration\npublic class AppConfig {\n\n@Bean\npublic MyService myService() {\nreturn new MyService();\n}\n}\n\n2.2.1 Approach #1: @Bean\nThis CommandLineRunnerdoes the following:\n\nIt checks if the database is empty by counting the number of customers in the repository.\nIf the database is empty, it creates a new Faker instance with the US locale.\nIt then generates 100 fake customers using Faker to create realistic names, email addresses, andphone numbers.\nEach customer is assigned a random UUID as their ID.\nThe fake customers are saved to the CustomerRepository.\nFinally, it prints a message confirming that 100 fake customers have been created and saved.\n\npackage dev.example.restaurant;\n\nimport com.github.javafaker.Faker;\nimport dev.example.restaurant.model.Customer;\nimport dev.example.restaurant.repository.CustomerRepository;\nimport org.springframework.boot.CommandLineRunner;\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\nimport org.springframework.context.annotation.Bean;\n\nimport java.util.Locale;\nimport java.util.UUID;\n\n@SpringBootApplication\npublic class RestaurantVaadinApplication {\n\n    public static void main(String[] args) {\n        SpringApplication.run(RestaurantVaadinApplication.class, args);\n    }\n\n    @Bean\n    public CommandLineRunner loadData(CustomerRepository customerRepository) {\n        return args -&gt; {\n            // Check if the database is empty\n            if (customerRepository.count() == 0) {\n                Faker faker = new Faker(new Locale(\"en-US\"));\n\n                // Create and save 100 fake customers\n                for (int i = 0; i &lt; 100; i++) {\n                    Customer customer = new Customer(\n                            UUID.randomUUID().toString(),\n                            faker.name().fullName(),\n                            faker.internet().emailAddress(),\n                            faker.phoneNumber().cellPhone()\n                    );\n                    customerRepository.save(customer);\n                }\n\n                System.out.println(\"100 fake customers have been created and saved to the database.\");\n            }\n        };\n    }\n}\n\n\n2.2.2 Approach #2 static\nIn this approach:\n\nWe’ve removed the @Bean annotation and the CommandLineRunner.\nWe’ve added a static CustomerRepository field with @Autowired annotation.\nWe’ve created a static method createFakeCustomers() that contains the logic for creating and saving fake customers.\nIn the main method, we call createFakeCustomers() after the Spring application context is initialized.\n\n\nThere’s an important caveat with this approach: using static fields with @Autowired is generally not recommended in Spring applications.\nIt can lead to issues with testing and violates the principle of dependency injection.\nA better approach would be to use an ApplicationRunner or CommandLineRunner bean, which allows for proper dependency injection. \n\npackage dev.example.restaurant;\n\nimport com.github.javafaker.Faker;\nimport dev.example.restaurant.model.Customer;\nimport dev.example.restaurant.repository.CustomerRepository;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\nimport java.util.Locale;\nimport java.util.UUID;\n\n@SpringBootApplication\npublic class RestaurantVaadinApplication {\n\n    @Autowired\n    private static CustomerRepository customerRepository;\n\n    public static void main(String[] args) {\n        SpringApplication.run(RestaurantVaadinApplication.class, args);\n        createFakeCustomers();\n    }\n\n    public static void createFakeCustomers() {\n        // Check if the database is empty\n        if (customerRepository.count() == 0) {\n            Faker faker = new Faker(new Locale(\"en-US\"));\n\n            // Create and save 100 fake customers\n            for (int i = 0; i &lt; 100; i++) {\n                Customer customer = new Customer(\n                        UUID.randomUUID().toString(),\n                        faker.name().fullName(),\n                        faker.internet().emailAddress(),\n                        faker.phoneNumber().cellPhone()\n                );\n                customerRepository.save(customer);\n            }\n\n            System.out.println(\"100 fake customers have been created and saved to the database.\");\n        }\n    }\n}\n\n\n2.2.3 Approach #3\npackage dev.example.restaurant;\n\nimport com.github.javafaker.Faker;\nimport dev.example.restaurant.model.Customer;\nimport dev.example.restaurant.repository.CustomerRepository;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.boot.ApplicationRunner;\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\nimport org.springframework.context.annotation.Bean;\n\nimport java.util.Locale;\nimport java.util.UUID;\n\n@SpringBootApplication\npublic class RestaurantVaadinApplication {\n\n    public static void main(String[] args) {\n        SpringApplication.run(RestaurantVaadinApplication.class, args);\n    }\n\n    @Bean\n    public ApplicationRunner dataLoader(CustomerRepository customerRepository) {\n        return args -&gt; createFakeCustomers(customerRepository);\n    }\n\n    private void createFakeCustomers(CustomerRepository customerRepository) {\n        // Check if the database is empty\n        if (customerRepository.count() == 0) {\n            Faker faker = new Faker(new Locale(\"en-US\"));\n\n            // Create and save 100 fake customers\n            for (int i = 0; i &lt; 100; i++) {\n                Customer customer = new Customer(\n                        UUID.randomUUID().toString(),\n                        faker.name().fullName(),\n                        faker.internet().emailAddress(),\n                        faker.phoneNumber().cellPhone()\n                );\n                customerRepository.save(customer);\n            }\n\n            System.out.println(\"100 fake customers have been created and saved to the database.\");\n        }\n    }\n}\nThis approach maintains proper dependency injection and is more in line with Spring best practices for a few key reasons:\n\nProper dependency injection: By using an ApplicationRunner bean, we allow Spring to manage the lifecycle and injection of dependencies. The CustomerRepository is properly injected by Spring, rather than being accessed statically.\nSeparation of concerns: The data loading logic is separated from the main application class, improving modularity and maintainability.\nTestability: This approach makes it easier to unit test the data loading logic in isolation, as dependencies can be easily mocked.\nConstructor injection: By passing the CustomerRepository as a parameter to the ApplicationRunner, we’re using constructor injection, which is considered a best practice in Spring.\nAvoiding static dependencies: Static @Autowired fields are generally discouraged as they can lead to issues with testing and violate dependency injection principles.\nFlexibility: This approach allows for easier configuration and potential customization of when and how the data loading occurs.\nAlignment with Spring lifecycle: Using ApplicationRunner ensures the data loading happens at the appropriate time during application startup, after the Spring context is fully initialized. By following these practices, the code becomes more maintainable, testable, and aligned with Spring’s dependency injection principles.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#install-and-create-a-h2-db",
+    "href": "springboot/sblab8-3.html#install-and-create-a-h2-db",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "3.2 Install and create a H2 DB",
+    "text": "3.2 Install and create a H2 DB\nReferences:\n\nSpring Boot: H2 DB and Thymeleaf\nSpring Boot: Rest\n\nStep-by-step:\n\nDownload and install Java JDK from the official Oracle website.\nDownload and install Spring Boot from the official Spring website.\nDownload the H2 database from the official H2 website.\nExtract the downloaded file to a location on your Linux machine.\nExecute H2 Desktop app and create a local H2 DB.\n\n\n\n\nCreate a H2 DB\n\n\n\nCreation H2 DB step-by-step",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#section",
+    "href": "springboot/sblab8-3.html#section",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "4.2 ",
+    "text": "4.2 \n\n\n\n\n\n\n  Lab#SB08-2: RestaurantManager \n\n\n\n  top \n\n\n\n Lab#SB08-4: RestaurantManager",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#h2-in",
+    "href": "springboot/sblab8-3.html#h2-in",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "4.2 H2 in",
+    "text": "4.2 H2 in\n\n\n\n\n\n\n  Lab#SB08-2: RestaurantManager \n\n\n\n  top \n\n\n\n Lab#SB08-4: RestaurantManager",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#h2-in-restaurantmang",
+    "href": "springboot/sblab8-3.html#h2-in-restaurantmang",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "4.2 H2 in RestaurantMang",
+    "text": "4.2 H2 in RestaurantMang\n\n\n\n\n\n\n  Lab#SB08-2: RestaurantManager \n\n\n\n  top \n\n\n\n Lab#SB08-4: RestaurantManager",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#h2-in-restaurantmanager-in",
+    "href": "springboot/sblab8-3.html#h2-in-restaurantmanager-in",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "4.2 H2 in RestaurantManager in",
+    "text": "4.2 H2 in RestaurantManager in\n\n\n\n\n\n\n  Lab#SB08-2: RestaurantManager \n\n\n\n  top \n\n\n\n Lab#SB08-4: RestaurantManager",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#h2-in-restaurantmanager-in-me",
+    "href": "springboot/sblab8-3.html#h2-in-restaurantmanager-in-me",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "4.2 H2 in RestaurantManager in me",
+    "text": "4.2 H2 in RestaurantManager in me\n\n\n\n\n\n\n  Lab#SB08-2: RestaurantManager \n\n\n\n  top \n\n\n\n Lab#SB08-4: RestaurantManager",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#h2-in-restaurantmanager-in-memory",
+    "href": "springboot/sblab8-3.html#h2-in-restaurantmanager-in-memory",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "3.1 H2 in RestaurantManager in memory",
+    "text": "3.1 H2 in RestaurantManager in memory",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#approaches-to-create-fake-customers",
+    "href": "springboot/sblab8-3.html#approaches-to-create-fake-customers",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "1.2 Approaches to Create Fake Customers",
+    "text": "1.2 Approaches to Create Fake Customers\n\nUsing @Bean and CommandLineRunner\nUsing static method (not recommended)\nUsing ApplicationRunner (recommended)",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#api-and-controller",
+    "href": "springboot/sblab8-3.html#api-and-controller",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "1.4 API and Controller",
+    "text": "1.4 API and Controller\n\nCustomerController: Implements CRUD operations\nUses Swagger annotations for API documentation\nUtilizes ResponseEntity for flexible HTTP responses",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#additional-resources",
+    "href": "springboot/sblab8-3.html#additional-resources",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "1.6 Additional Resources",
+    "text": "1.6 Additional Resources\n\nSpring Framework Documentation\nSpring Boot Guide\nRESTful Web Services Guide",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#h2-database-configuration",
+    "href": "springboot/sblab8-3.html#h2-database-configuration",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "1.3 H2 Database Configuration",
+    "text": "1.3 H2 Database Configuration\n\nIn-memory: Temporary database, resets on application restart\nLocal: Persistent storage on disk\nMixed: In-memory for development, local for production",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#service-repo-and-junit",
+    "href": "springboot/sblab8-3.html#service-repo-and-junit",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "1.5 Service, Repo and JUnit",
+    "text": "1.5 Service, Repo and JUnit\n\n@Service with all business logic from app\nJpaRepository interface",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
     ]
   }
 ]
