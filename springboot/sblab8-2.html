@@ -9,7 +9,7 @@
 <meta name="author" content="albertprofe">
 <meta name="description" content="Spring Boot">
 
-<title>Lab#SB08-2: RestaurantManager – albertprofe wiki</title>
+<title>Lab#SB08-2: Vaadin – albertprofe wiki</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -46,6 +80,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed slimcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -818,7 +855,19 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="../springboot/sblab8-2.html">
- <span class="dropdown-text">Lab#SB08-2: RestaurantManager</span></a>
+ <span class="dropdown-text">Lab#SB08-2: Vaadin</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab8-3.html">
+ <span class="dropdown-text">Lab#SB08-3: H2 and API Rest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab8-4.html">
+ <span class="dropdown-text">Lab#SB08-4: RestaurantManager</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab8-5.html">
+ <span class="dropdown-text">Lab#SB08-5: RestaurantManager</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Spring Boot readings</li>
@@ -1378,7 +1427,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/sblab0-1.html">Spring Boot Laboratories</a></li><li class="breadcrumb-item"><a href="../springboot/sblab8-2.html">Lab#SB08-2: RestaurantManager</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/sblab0-1.html">Spring Boot Laboratories</a></li><li class="breadcrumb-item"><a href="../springboot/sblab8-2.html">Lab#SB08-2: Vaadin</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -1645,7 +1694,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../springboot/sblab8-2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Lab#SB08-2: RestaurantManager</span></a>
+ <span class="menu-text">Lab#SB08-2: Vaadin</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-3: H2 and API Rest</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-4: RestaurantManager</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-5: RestaurantManager</span></a>
   </div>
 </li>
       </ul>
@@ -1678,33 +1745,30 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#from-restaurantproject-to-restaurantmanagement" id="toc-from-restaurantproject-to-restaurantmanagement" class="nav-link active" data-scroll-target="#from-restaurantproject-to-restaurantmanagement"><span class="header-section-number">1</span> From RestaurantProject to RestaurantManagement</a>
+  <li><a href="#from-restaurantproject-to-restaurantmanagement" id="toc-from-restaurantproject-to-restaurantmanagement" class="nav-link active" data-scroll-target="#from-restaurantproject-to-restaurantmanagement"><span class="header-section-number">1</span> From RestaurantProject to RestaurantManagement</a></li>
+  <li><a href="#create-a-new-spring-boot-project-h2-db" id="toc-create-a-new-spring-boot-project-h2-db" class="nav-link" data-scroll-target="#create-a-new-spring-boot-project-h2-db"><span class="header-section-number">2</span> Create a new Spring Boot project &amp; H2 DB</a>
   <ul>
-  <li><a href="#create-a-new-spring-boot-project-h2-db" id="toc-create-a-new-spring-boot-project-h2-db" class="nav-link" data-scroll-target="#create-a-new-spring-boot-project-h2-db"><span class="header-section-number">1.1</span> Create a new Spring Boot project &amp; H2 DB</a></li>
-  <li><a href="#model-entities" id="toc-model-entities" class="nav-link" data-scroll-target="#model-entities"><span class="header-section-number">1.2</span> Model &amp; Entities</a></li>
-  <li><a href="#domains-controller-service-and-repository" id="toc-domains-controller-service-and-repository" class="nav-link" data-scroll-target="#domains-controller-service-and-repository"><span class="header-section-number">1.3</span> Domains: <span class="citation" data-cites="Controller">@Controller</span>, <span class="citation" data-cites="Service">@Service</span> and <span class="citation" data-cites="Repository">@Repository</span></a></li>
-  <li><a href="#html-thymeleaf" id="toc-html-thymeleaf" class="nav-link" data-scroll-target="#html-thymeleaf"><span class="header-section-number">1.4</span> HTML Thymeleaf</a>
+  <li><a href="#model-entities" id="toc-model-entities" class="nav-link" data-scroll-target="#model-entities"><span class="header-section-number">2.1</span> Model &amp; Entities</a></li>
+  <li><a href="#domains-controller-service-and-repository" id="toc-domains-controller-service-and-repository" class="nav-link" data-scroll-target="#domains-controller-service-and-repository"><span class="header-section-number">2.2</span> Domains: <span class="citation" data-cites="Controller">@Controller</span>, <span class="citation" data-cites="Service">@Service</span> and <span class="citation" data-cites="Repository">@Repository</span></a></li>
+  </ul></li>
+  <li><a href="#vaadin" id="toc-vaadin" class="nav-link" data-scroll-target="#vaadin"><span class="header-section-number">3</span> Vaadin</a>
   <ul>
-  <li><a href="#modern-server-side-java-template-engine" id="toc-modern-server-side-java-template-engine" class="nav-link" data-scroll-target="#modern-server-side-java-template-engine"><span class="header-section-number">1.4.1</span> Modern server-side Java template engine</a></li>
-  <li><a href="#create-thymeleaf" id="toc-create-thymeleaf" class="nav-link" data-scroll-target="#create-thymeleaf"><span class="header-section-number">1.4.2</span> Create Thymeleaf</a></li>
+  <li><a href="#modern-java-framework-for-building-web-applications" id="toc-modern-java-framework-for-building-web-applications" class="nav-link" data-scroll-target="#modern-java-framework-for-building-web-applications"><span class="header-section-number">3.1</span> Modern Java framework for building web applications</a></li>
+  <li><a href="#create-vaadin-views" id="toc-create-vaadin-views" class="nav-link" data-scroll-target="#create-vaadin-views"><span class="header-section-number">3.2</span> Create Vaadin Views</a></li>
+  <li><a href="#key-vaadin-concepts" id="toc-key-vaadin-concepts" class="nav-link" data-scroll-target="#key-vaadin-concepts"><span class="header-section-number">3.3</span> Key Vaadin Concepts</a></li>
   </ul></li>
-  <li><a href="#test" id="toc-test" class="nav-link" data-scroll-target="#test"><span class="header-section-number">1.5</span> Test</a></li>
-  </ul></li>
-  <li><a href="#mockup" id="toc-mockup" class="nav-link" data-scroll-target="#mockup"><span class="header-section-number">2</span> MockUp</a>
-  <ul>
-  <li><a href="#core-use-case-borrowbook-and-returnbook-with-user-and-librarian" id="toc-core-use-case-borrowbook-and-returnbook-with-user-and-librarian" class="nav-link" data-scroll-target="#core-use-case-borrowbook-and-returnbook-with-user-and-librarian"><span class="header-section-number">2.1</span> Core use-case: borrowBook() and returnBook() with user and librarian</a></li>
-  </ul></li>
-  <li><a href="#discussion-solving-uml" id="toc-discussion-solving-uml" class="nav-link" data-scroll-target="#discussion-solving-uml"><span class="header-section-number">3</span> Discussion Solving: UML</a></li>
+  <li><a href="#test" id="toc-test" class="nav-link" data-scroll-target="#test"><span class="header-section-number">4</span> Test</a></li>
+  <li><a href="#code-and-output" id="toc-code-and-output" class="nav-link" data-scroll-target="#code-and-output"><span class="header-section-number">5</span> Code and output</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/sblab8-2.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/sblab0-1.html">Spring Boot Laboratories</a></li><li class="breadcrumb-item"><a href="../springboot/sblab8-2.html">Lab#SB08-2: RestaurantManager</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/sblab0-1.html">Spring Boot Laboratories</a></li><li class="breadcrumb-item"><a href="../springboot/sblab8-2.html">Lab#SB08-2: Vaadin</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab#SB08-2: RestaurantManager</h1>
-<p class="subtitle lead">Spring Boot Restaurant Management</p>
+<h1 class="title">Lab#SB08-2: Vaadin</h1>
+<p class="subtitle lead">Spring Boot Restaurant Management Vaadin</p>
   <div class="quarto-categories">
     <div class="quarto-category">Spring-Boot</div>
     <div class="quarto-category">lab</div>
@@ -1737,7 +1801,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Saturday, October 5, 2024</p>
+      <p class="date-modified">Monday, October 7, 2024</p>
     </div>
   </div>
     
@@ -1749,44 +1813,29 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="labs">
-<p>📘 Spring Boot Lab#SB00-2: RestaurantManager We are going to evolve the current Java SE Restaurant project into a Spring Boot Restaurant Management System with an H2 DB and web interface using Thymeleaf.</p>
+<p>📘 Spring Boot Lab#SB00-2: RestaurantManager Vaadin We are going to evolve the current Java SE Restaurant project into a <code>Spring Boot Restaurant Management System</code> with an <code>H2 DB</code> and web interface using <code>Vaadin</code>.</p>
 </div>
 <p><br></p>
-<blockquote class="blockquote">
-<p>The resulting Spring Boot Project would be similar to the current Java SE Restaurant Project, with the addition of the Spring Boot annotations and the H2 database configuration.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>The classes (such as Booking, Menu, Table, Customer, and the various Order classes) would be annotated with the <span class="citation" data-cites="Entity">@Entity</span> annotation to indicate that they are persistent entities, and the repositories would be annotated with the <span class="citation" data-cites="Repository">@Repository</span> annotation.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>The services would be annotated with the <span class="citation" data-cites="Service">@Service</span> annotation, and the controllers would be annotated with the <span class="citation" data-cites="Controller">@Controller</span> annotation.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>The Thymeleaf templates would be created in the resources/templates folder of the project. These templates would include views for managing bookings, menus, tables, customers, and different types of orders (TakeAway, Shipping, and EatIn).</p>
-</blockquote>
-<p>This Spring Boot version of the Restaurant Management System would provide a robust, database-backed web application for managing all aspects of a restaurant’s operations, from bookings and menu management to order processing and customer interactions.</p>
-<section id="from-restaurantproject-to-restaurantmanagement" class="level1 page-columns page-full" data-number="1">
+<p><a href="../images/springboot/labsb08/lab08-1-vaadin-view-restaurantVaadin2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../images/springboot/labsb08/lab08-1-vaadin-view-restaurantVaadin2.png" class="img-fluid"></a></p>
+<section id="from-restaurantproject-to-restaurantmanagement" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> From RestaurantProject to RestaurantManagement</h1>
-<section id="create-a-new-spring-boot-project-h2-db" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="create-a-new-spring-boot-project-h2-db"><span class="header-section-number">1.1</span> Create a new Spring Boot project &amp; H2 DB</h2>
 <ul>
-<li><code>Create a new Spring Boot project</code>: The first step would be to create a new Spring Boot project in the preferred IDE or text editor.</li>
+<li><a href="../javase/selab4-1.html">Restuarant Java SE Lab</a></li>
+<li><a href="https://github.com/AlbertProfe/restaurant" class="external" target="_blank">Restaurant Java SE Code</a></li>
+<li><a href="https://github.com/AlbertProfe/restaurant/wiki" class="external" target="_blank">Restaurant Java SE Wiki</a></li>
+<li><a href="../springboot/boot-what-create-th-h2.html" class="external" target="_blank">Spring Boot H2 and TH</a></li>
 </ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The project can be created using <strong>Spring Initializr</strong>, which will create the necessary <strong>file structure and dependencies</strong>.</p>
-</div>
-</div>
+</section>
+<section id="create-a-new-spring-boot-project-h2-db" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Create a new Spring Boot project &amp; H2 DB</h1>
 <ul>
-<li><code>Configure the H2 database</code>: In the newly created project, configure the H2 database by adding:
+<li><strong>Create a new Spring Boot project</strong>: The first step would be to create a new Spring Boot project in the preferred IDE or text editor.</li>
+</ul>
+<blockquote class="blockquote">
+<p>The project can be created using <strong>Spring Initializr</strong>, which will create the necessary <strong>file structure and dependencies</strong>.</p>
+</blockquote>
+<ul>
+<li><strong>Configure the H2 database</strong>: In the newly created project, configure the H2 database by adding:
 <ul>
 <li>the H2 dependency in the <code>pom.xml</code> file,</li>
 <li>and also create a new <code>application.properties</code> file</li>
@@ -1798,83 +1847,96 @@ Note
 </ul></li>
 </ul></li>
 </ul>
-</section>
-<section id="model-entities" class="level2 page-columns page-full" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="model-entities"><span class="header-section-number">1.2</span> Model &amp; Entities</h2>
+<section id="model-entities" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="model-entities"><span class="header-section-number">2.1</span> Model &amp; Entities</h2>
 <ul>
-<li><code>Create a Menu Entity</code>: To represent a menu item in the restaurant management system, create a Menu <span class="citation" data-cites="Entity">@Entity</span></li>
+<li><strong>Create a Menu Entity</strong>: To represent a menu item in the restaurant management system, create a Menu <span class="citation" data-cites="Entity">@Entity</span></li>
 </ul>
-
-<div class="no-row-height column-margin column-container"><div class="">
+<blockquote class="blockquote">
 <p>It could include attributes such as name, price, description, category (appetizer, main course, dessert, etc.), and availability status.</p>
-</div></div><ul>
-<li><p><code>Create a Customer Entity</code>: To represent a customer in the system, create a Customer entity that includes attributes such as customer ID, name, phone number, email, and <strong>reservation history.</strong></p></li>
-<li><p><code>Create Booking Entity</code>: To represent a booking in the system, create a Booking entity that includes attributes such as booking date, time, number of people, tables, and associated customer.</p></li>
-<li><p><code>Create Staff Entity</code>: To represent staff members in the system, create a Staff entity that includes attributes such as staff ID, name, position, shift schedules, and assigned tables.</p></li>
+</blockquote>
+<ul>
+<li><p><strong>Create a Customer Entity</strong>: To represent a customer in the system, create a Customer entity that includes attributes such as customer ID, name, phone number, email, and <strong>reservation history.</strong></p></li>
+<li><p><strong>Create Booking Entity</strong>: To represent a booking in the system, create a Booking entity that includes attributes such as booking date, time, number of people, tables, and associated customer.</p></li>
+<li><p><strong>Create Staff Entity</strong>: To represent staff members in the system, create a Staff entity that includes attributes such as staff ID, name, position, shift schedules, and assigned tables.</p></li>
 </ul>
 </section>
-<section id="domains-controller-service-and-repository" class="level2 page-columns page-full" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="domains-controller-service-and-repository"><span class="header-section-number">1.3</span> Domains: <span class="citation" data-cites="Controller">@Controller</span>, <span class="citation" data-cites="Service">@Service</span> and <span class="citation" data-cites="Repository">@Repository</span></h2>
+<section id="domains-controller-service-and-repository" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="domains-controller-service-and-repository"><span class="header-section-number">2.2</span> Domains: <span class="citation" data-cites="Controller">@Controller</span>, <span class="citation" data-cites="Service">@Service</span> and <span class="citation" data-cites="Repository">@Repository</span></h2>
 <ul>
-<li><p><code>Create Repositories</code>: To access the data stored in the database, create repositories for each entity. <strong>The repositories will provide the methods to create, read, update, and delete the data.</strong></p></li>
-<li><p><code>Create Services</code>: Create services that <strong>will implement the business logic of the system by calling the repository methods.</strong></p></li>
+<li><p><strong>Create Repositories</strong>: To access the data stored in the database, create repositories for each entity. <strong>The repositories will provide the methods to create, read, update, and delete the data.</strong></p></li>
+<li><p><strong>Create Services</strong>: Create services that <strong>will implement the business logic of the system by calling the repository methods.</strong></p></li>
 </ul>
-
-<div class="no-row-height column-margin column-container"><div class="">
+<blockquote class="blockquote">
 <p>The <strong>services</strong> will provide the methods to search for available tables, make a reservation, update menu items, process orders, manage staff schedules, handle customer feedback, and generate reports on restaurant performance.</p>
-</div></div><ul>
-<li><code>Create Controllers</code>: Create controllers that <strong>will handle the HTTP requests from the web interface by calling the service methods.</strong></li>
+</blockquote>
+<ul>
+<li><strong>Create Controllers</strong>: Create controllers that <strong>will handle the requests from the Vaadin UI by calling the service methods.</strong></li>
 </ul>
-
-<div class="no-row-height column-margin column-container"><div class="">
+<blockquote class="blockquote">
 <p>The <strong>controllers</strong> will provide the methods to create a customer account, search for available tables, make a reservation, view and update menu items, place an order, manage staff schedules, submit customer feedback, and generate various reports.</p>
-</div></div></section>
-<section id="html-thymeleaf" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="html-thymeleaf"><span class="header-section-number">1.4</span> HTML Thymeleaf</h2>
-<section id="modern-server-side-java-template-engine" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1" class="anchored" data-anchor-id="modern-server-side-java-template-engine"><span class="header-section-number">1.4.1</span> Modern server-side Java template engine</h3>
+</blockquote>
+</section>
+</section>
+<section id="vaadin" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Vaadin</h1>
+<section id="modern-java-framework-for-building-web-applications" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="modern-java-framework-for-building-web-applications"><span class="header-section-number">3.1</span> Modern Java framework for building web applications</h2>
+<p>Vaadin is a web application framework for Java that allows developers to build modern, interactive web applications using Java without having to write HTML, CSS, or JavaScript. Here are some key points about Vaadin:</p>
 <ul>
-<li><a href="https://www.thymeleaf.org/" class="external">ThymeLeaf</a></li>
-<li><a href="https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html" class="external">Tutorial: Using Thymeleaf</a></li>
-<li><a href="https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html" class="external">Tutorial: Thymeleaf + Spring</a></li>
+<li><a href="https://vaadin.com/">Vaadin Official Website</a></li>
+<li><a href="https://vaadin.com/docs/latest/">Vaadin Documentation</a></li>
+<li><a href="https://vaadin.com/docs/latest/flow/integrations/spring/">Vaadin Spring Boot Integration</a></li>
 </ul>
 </section>
-<section id="create-thymeleaf" class="level3" data-number="1.4.2">
-<h3 data-number="1.4.2" class="anchored" data-anchor-id="create-thymeleaf"><span class="header-section-number">1.4.2</span> Create Thymeleaf</h3>
+<section id="create-vaadin-views" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="create-vaadin-views"><span class="header-section-number">3.2</span> Create Vaadin Views</h2>
 <ul>
-<li><code>Create Thymeleaf templates</code>: To create the web interface of the system, create Thymeleaf templates for each of the controller methods. <strong>The templates will be used to display the data and also to handle the user input.</strong></li>
+<li><strong>Create Vaadin Views</strong>: To create the web interface of the system, create Vaadin views for each of the main functionalities. <strong>The views will be used to display the data and handle user interactions.</strong></li>
 </ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Thymeleaf is a <strong>modern server-side Java template engine</strong> for both web and standalone environments.</p>
-<p>Thymeleaf’s main goal is to bring elegant natural templates to your development workflow — HTML that can be correctly displayed in browsers and also work as static prototypes, allowing for stronger collaboration in development teams.</p>
-</div>
-</div>
+<blockquote class="blockquote">
+<p>Vaadin allows you to create rich, interactive UIs using Java code. It provides a wide range of UI components and layouts that you can use to build your application’s interface.</p>
+</blockquote>
+<p>Example of a simple Vaadin view:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="at">@Route</span><span class="op">(</span><span class="st">"menu"</span><span class="op">)</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">public</span> <span class="kw">class</span> MenuView <span class="kw">extends</span> VerticalLayout <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="kw">private</span> <span class="dt">final</span> MenuService menuService<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="kw">public</span> <span class="fu">MenuView</span><span class="op">(</span>MenuService menuService<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">menuService</span> <span class="op">=</span> menuService<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>        </span>
+<span id="cb1-8"><a href="#cb1-8"></a>        H1 title <span class="op">=</span> <span class="kw">new</span> <span class="fu">H1</span><span class="op">(</span><span class="st">"Restaurant Menu"</span><span class="op">);</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>        Grid<span class="op">&lt;</span><span class="bu">Menu</span><span class="op">&gt;</span> grid <span class="op">=</span> <span class="kw">new</span> Grid<span class="op">&lt;&gt;(</span><span class="bu">Menu</span><span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>        grid<span class="op">.</span><span class="fu">setItems</span><span class="op">(</span>menuService<span class="op">.</span><span class="fu">getAllMenuItems</span><span class="op">());</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>        </span>
+<span id="cb1-12"><a href="#cb1-12"></a>        <span class="fu">add</span><span class="op">(</span>title<span class="op">,</span> grid<span class="op">);</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="op">}</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This view creates a page with a title and a grid showing all menu items.</p>
+</section>
+<section id="key-vaadin-concepts" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="key-vaadin-concepts"><span class="header-section-number">3.3</span> Key Vaadin Concepts</h2>
+<ol type="1">
+<li><p><strong>Server-side Architecture</strong>: Vaadin primarily runs on the server, which means your business logic stays secure and you can leverage the full power of Java.</p></li>
+<li><p><strong>Component-based UI</strong>: Build UIs by combining and customizing existing components or creating your own.</p></li>
+<li><p><strong>Data Binding</strong>: Easily bind UI components to data sources, including JPA entities.</p></li>
+<li><p><strong>Themes and Styling</strong>: Customize the look and feel of your application using CSS and Vaadin’s theming capabilities.</p></li>
+<li><p><strong>Integration with Spring Boot</strong>: Vaadin integrates seamlessly with Spring Boot, allowing you to use Spring’s dependency injection and other features.</p></li>
+</ol>
 </section>
 </section>
-<section id="test" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="test"><span class="header-section-number">1.5</span> Test</h2>
+<section id="test" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Test</h1>
 <ul>
 <li>Test the system: Test the system by running it and making sure that all the functionalities work as expected. This includes testing reservation creation, menu management, order processing, staff scheduling, and report generation.</li>
 </ul>
 </section>
-</section>
-<section id="mockup" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> MockUp</h1>
-<section id="core-use-case-borrowbook-and-returnbook-with-user-and-librarian" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="core-use-case-borrowbook-and-returnbook-with-user-and-librarian"><span class="header-section-number">2.1</span> Core use-case: borrowBook() and returnBook() with user and librarian</h2>
-</section>
-</section>
-<section id="discussion-solving-uml" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Discussion Solving: UML</h1>
+<section id="code-and-output" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Code and output</h1>
+<p><a href="../images/springboot/labsb08/lab08-1-vaadin-view.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="../images/springboot/labsb08/lab08-1-vaadin-view.png" class="img-fluid"></a></p>
+<ul>
+<li><a href="https://github.com/AlbertProfe/restaurantVaadin" class="external" target="_blank">GitHub code</a></li>
+</ul>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -1888,7 +1950,7 @@ Note
 </div>
 <br>
 <div class="column right next">
-<p><br> <a href="../springboot/resources.html">Spring Boot Resources <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
+<p><br> <a href="../springboot/sblab8-3.html">Lab#SB08-3: RestaurantManager <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i></a> <br></p>
 </div>
 <p><br></p>
 </div>
@@ -2488,6 +2550,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

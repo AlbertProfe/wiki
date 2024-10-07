@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -46,6 +80,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -74,6 +111,9 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -818,7 +858,19 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="../springboot/sblab8-2.html">
- <span class="dropdown-text">Lab#SB08-2: RestaurantManager</span></a>
+ <span class="dropdown-text">Lab#SB08-2: Vaadin</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab8-3.html">
+ <span class="dropdown-text">Lab#SB08-3: RestaurantManager</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab8-4.html">
+ <span class="dropdown-text">Lab#SB08-4: RestaurantManager</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab8-5.html">
+ <span class="dropdown-text">Lab#SB08-5: RestaurantManager</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Spring Boot readings</li>
@@ -1645,7 +1697,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../springboot/sblab8-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab#SB08-2: RestaurantManager</span></a>
+ <span class="menu-text">Lab#SB08-2: Vaadin</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-3: RestaurantManager</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-4: RestaurantManager</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-5: RestaurantManager</span></a>
   </div>
 </li>
       </ul>
@@ -1685,7 +1755,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#domains-controller-service-and-repository" id="toc-domains-controller-service-and-repository" class="nav-link" data-scroll-target="#domains-controller-service-and-repository"><span class="header-section-number">1.3</span> Domains: <span class="citation" data-cites="Controller">@Controller</span>, <span class="citation" data-cites="Service">@Service</span> and <span class="citation" data-cites="Repository">@Repository</span></a></li>
   </ul></li>
   <li><a href="#mockup" id="toc-mockup" class="nav-link" data-scroll-target="#mockup"><span class="header-section-number">2</span> MockUp</a></li>
-  <li><a href="#discussion-solving-uml" id="toc-discussion-solving-uml" class="nav-link" data-scroll-target="#discussion-solving-uml"><span class="header-section-number">3</span> Discussion Solving: UML</a></li>
+  <li><a href="#fake-database-hashmaps" id="toc-fake-database-hashmaps" class="nav-link" data-scroll-target="#fake-database-hashmaps"><span class="header-section-number">3</span> Fake DataBase: HashMaps</a>
+  <ul>
+  <li><a href="#entities-manager" id="toc-entities-manager" class="nav-link" data-scroll-target="#entities-manager"><span class="header-section-number">3.1</span> Entities Manager</a></li>
+  </ul></li>
+  <li><a href="#discussion-solving-uml" id="toc-discussion-solving-uml" class="nav-link" data-scroll-target="#discussion-solving-uml"><span class="header-section-number">4</span> Discussion Solving: UML</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/sblab8-1.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1728,7 +1802,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Saturday, October 5, 2024</p>
+      <p class="date-modified">Monday, October 7, 2024</p>
     </div>
   </div>
     
@@ -1740,24 +1814,30 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="labs">
-<p>📘 Spring Boot Lab#SB00-1: Restaurant UML We are going to evolve the current Java SE Restaurant project into a Spring Boot Restaurant Management System with an H2 DB and web interface using Thymeleaf.</p>
+<p>📘 Spring Boot Lab#SB00-1: Restaurant UML We are going to evolve the current Java SE Restaurant project into a Spring Boot <code>RestaurantManagement</code> System with an <code>H2 DB</code> and web interface using <code>Thymeleaf/Vaadin.</code></p>
 </div>
 <p><br></p>
 <blockquote class="blockquote">
-<p>The resulting Spring Boot Project would be similar to the current Java SE Restaurant Project, with the addition of the Spring Boot annotations and the H2 database configuration.</p>
+<p>The resulting <code>Spring Boot Project</code> would be similar to the current <code>Java SE Restaurant Project</code>, with the addition of the Spring Boot <code>annotations</code> and the <code>H2 database</code> configuration.</p>
 </blockquote>
 <blockquote class="blockquote">
-<p>The classes (such as Booking, Menu, Table, Customer, and the various Order classes) would be annotated with the <span class="citation" data-cites="Entity">@Entity</span> annotation to indicate that they are persistent entities, and the repositories would be annotated with the <span class="citation" data-cites="Repository">@Repository</span> annotation.</p>
+<p>The classes (such as <code>Booking</code>, <code>Menu</code>, <code>Table</code>, <code>Customer</code>, and the various <code>Order</code> classes) would be annotated with the <span class="citation" data-cites="Entity">@Entity</span> annotation to indicate that they are persistent <strong>entities</strong>, and the repositories would be annotated with the <span class="citation" data-cites="Repository">@Repository</span> annotation.</p>
 </blockquote>
 <blockquote class="blockquote">
-<p>The services would be annotated with the <span class="citation" data-cites="Service">@Service</span> annotation, and the controllers would be annotated with the <span class="citation" data-cites="Controller">@Controller</span> annotation.</p>
+<p>The services would be annotated with the <span class="citation" data-cites="Service">@Service</span> <code>annotation</code>, and the controllers would be annotated with the <span class="citation" data-cites="Controller">@Controller</span> annotation.</p>
 </blockquote>
 <blockquote class="blockquote">
-<p>The Thymeleaf templates would be created in the resources/templates folder of the project. These templates would include views for managing bookings, menus, tables, customers, and different types of orders (TakeAway, Shipping, and EatIn).</p>
+<p>The <code>Thymeleaf</code> templates would be created in the <code>resources/templates</code> folder of the project. These templates would include views for managing bookings, menus, tables, customers, and different types of orders (TakeAway, Shipping, and EatIn).</p>
 </blockquote>
-<p>This Spring Boot version of the Restaurant Management System would provide a robust, database-backed web application for managing all aspects of a restaurant’s operations, from bookings and menu management to order processing and customer interactions.</p>
+<p>This Spring Boot version of the <code>RestaurantManagement</code> System would provide a robust, database-backed web application for managing all aspects of a restaurant’s operations, from bookings and menu management to order processing and customer interactions.</p>
 <section id="from-restaurantproject-to-restaurantmanagement" class="level1 page-columns page-full" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> From RestaurantProject to RestaurantManagement</h1>
+<ul>
+<li><a href="../javase/selab4-1.html">Restuarant Java SE Lab</a></li>
+<li><a href="https://github.com/AlbertProfe/restaurant" class="external" target="_blank">Restaurant Java SE Code</a></li>
+<li><a href="https://github.com/AlbertProfe/restaurant/wiki" class="external" target="_blank">Restaurant Java SE Wiki</a></li>
+<li><a href="../springboot/boot-what-create-th-h2.html" class="external" target="_blank">Spring Boot H2 and TH</a></li>
+</ul>
 <section id="create-a-new-spring-boot-project-h2-db" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="create-a-new-spring-boot-project-h2-db"><span class="header-section-number">1.1</span> Create a new Spring Boot project &amp; H2 DB</h2>
 <ul>
@@ -1776,6 +1856,7 @@ Note
 <p>The project can be created using <strong>Spring Initializr</strong>, which will create the necessary <strong>file structure and dependencies</strong>.</p>
 </div>
 </div>
+<p><a href="../images/springboot/labsb08/lab08-1-boot-init.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../images/springboot/labsb08/lab08-1-boot-init.png" class="img-fluid" style="width:80.0%"></a></p>
 </section>
 <section id="model-entities" class="level2 page-columns page-full" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="model-entities"><span class="header-section-number">1.2</span> Model &amp; Entities</h2>
@@ -1810,15 +1891,93 @@ Note
 </section>
 <section id="mockup" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> MockUp</h1>
+<ul>
+<li><a href="../javase/selab4-1.html">Restuarant Java SE</a></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">Welcome</span> to healtyFood Mananger v0.0</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="ex">Table</span> number<span class="pp">?</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="ex">2</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="ex">People?</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="ex">6</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="ex">Menu</span> qty<span class="pp">?</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="ex">3</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="ex">Menu</span> <span class="co">#1?</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="ex">5</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="ex">Menu</span> <span class="co">#2?</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="ex">3</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="ex">Menu</span> <span class="co">#3?</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="ex">5</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="ex">Total</span> to pay: 80€ <span class="er">(</span><span class="ex">3</span> items<span class="kw">)</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="ex">Paid?</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="fu">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="discussion-solving-uml" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Discussion Solving: UML</h1>
+<section id="fake-database-hashmaps" class="level1 page-columns page-full" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Fake DataBase: HashMaps</h1>
+<p>To start and test our UML we are goint to use HashMaps as a fake database.</p>
+<p><a href="../images/javase/hashmap-orders.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="../images/javase/hashmap-orders.jpg" class="img-fluid"></a></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> Order<span class="op">&gt;</span> orders</span>
+<span id="cb2-2"><a href="#cb2-2"></a> <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashMap</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> Order<span class="op">&gt;();</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Keep in mind that in more recent versions of Java, you can use the diamond operator (&lt;&gt;) to infer the generic types, making the declaration more concise:</p>
+<p><code>HashMap&lt;String, Order&gt; orders = new HashMap&lt;&gt;();</code></p>
+</div></div><p>Here’s what each part of the code means:</p>
+<ul>
+<li><p><code>HashMap&lt;String, Order&gt;</code>: This declares a new <code>HashMap</code> with keys of type <code>String</code> and values of type <code>Order</code>. In other words, it’s a mapping from strings to <code>Order</code> objects.</p></li>
+<li><p><code>orders</code>: This is the name of the variable that will reference the <code>HashMap</code>. You can choose any valid identifier as the variable name.</p></li>
+<li><p><code>= new HashMap&lt;String, Order&gt;();</code>: This part of the code creates a new instance of <code>HashMap</code> and assigns it to the variable <code>orders</code>. The <code>new</code> keyword is used to allocate memory for the <code>HashMap</code>, and the <code>&lt;&gt;</code> syntax specifies the types of keys and values for the <code>HashMap</code>. In this case, keys are of type <code>String</code>, and values are of type <code>Order</code>.</p></li>
+</ul>
+<section id="entities-manager" class="level2 page-columns page-full" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="entities-manager"><span class="header-section-number">3.1</span> Entities Manager</h2>
+<p><strong>MenuManager</strong></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/javase/menuManager-object.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="menuManger object"><img src="../images/javase/menuManager-object.png" class="img-fluid figure-img" alt="menuManger object"></a></p>
+<figcaption>menuManger object</figcaption>
+</figure>
+</div>
+</div></div><div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+
+class MenuManager {
+  - menus: HashMap&lt;String, Menu&gt;
+  - qty: int
+  - size: double
+  - lastModified: Date
+  + addMenu(menu: Menu, data: String): void
+  + updateMenu(): void
+  + deleteMenu(title: String): void
+  + getMenu(title: String): Menu
+  + getMenus(): List&lt;&gt;
+  + rateMenu(rate: int, menu: Menu): void
+  + saveToCSV(): void
+  + deleteCSV(): void
+}
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>The <strong>MenuManager</strong> acts as a central hub for menu-related operations, promoting efficient management and systematic handling of menu entities in Java applications.</p>
+</section>
+</section>
+<section id="discussion-solving-uml" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Discussion Solving: UML</h1>
+<p><a href="../images/springboot/labsb08/lab08-1-uml.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="../images/springboot/labsb08/lab08-1-uml.png" class="img-fluid" style="width:80.0%"></a></p>
+<p><a href="../images/springboot/labsb08/mermaid-diagram-2024-09-30-133021.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="../images/springboot/labsb08/mermaid-diagram-2024-09-30-133021.png" class="img-fluid" style="width:100.0%"></a></p>
 <!--- navLinks -->
 <br><br>
 <div class="row">
 <br>
 <div class="column left previous">
-<p><br> <a href="../springboot/sblab6.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> Lab#SB06-1: <code>employeeCourse</code></a> <br></p>
+<p><br> <a href="../springboot/sblab7.html"><i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> Lab#SB07-1: <code>monitorBook</code></a> <br></p>
 </div>
 <br>
 <div class="column center">
@@ -2426,6 +2585,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","loop":false,"selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
