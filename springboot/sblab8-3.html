@@ -1773,7 +1773,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#annotate-optional" id="toc-annotate-optional" class="nav-link" data-scroll-target="#annotate-optional"><span class="header-section-number">4.4</span> Annotate (optional)</a></li>
   <li><a href="#open-url-browser" id="toc-open-url-browser" class="nav-link" data-scroll-target="#open-url-browser"><span class="header-section-number">4.5</span> Open url browser</a></li>
   </ul></li>
-  <li><a href="#what-is-responseentity" id="toc-what-is-responseentity" class="nav-link" data-scroll-target="#what-is-responseentity"><span class="header-section-number">5</span> What is ResponseEntity?</a>
+  <li><a href="#responseentity" id="toc-responseentity" class="nav-link" data-scroll-target="#responseentity"><span class="header-section-number">5</span> <code>ResponseEntity</code></a>
   <ul>
   <li><a href="#key-features" id="toc-key-features" class="nav-link" data-scroll-target="#key-features"><span class="header-section-number">5.1</span> Key Features</a></li>
   <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage"><span class="header-section-number">5.2</span> Basic Usage</a></li>
@@ -1782,7 +1782,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#when-to-use-responseentity" id="toc-when-to-use-responseentity" class="nav-link" data-scroll-target="#when-to-use-responseentity"><span class="header-section-number">5.5</span> When to Use ResponseEntity</a></li>
   <li><a href="#customercontroller" id="toc-customercontroller" class="nav-link" data-scroll-target="#customercontroller"><span class="header-section-number">5.6</span> CustomerController</a></li>
   </ul></li>
-  <li><a href="#service-and-repository" id="toc-service-and-repository" class="nav-link" data-scroll-target="#service-and-repository"><span class="header-section-number">6</span> Service and Repository</a></li>
+  <li><a href="#service-and-repository" id="toc-service-and-repository" class="nav-link" data-scroll-target="#service-and-repository"><span class="header-section-number">6</span> Service and Repository</a>
+  <ul>
+  <li><a href="#customerservice-interface-and-implementation" id="toc-customerservice-interface-and-implementation" class="nav-link" data-scroll-target="#customerservice-interface-and-implementation"><span class="header-section-number">6.1</span> <code>CustomerService</code> interface and implementation</a>
+  <ul>
+  <li><a href="#customerservice" id="toc-customerservice" class="nav-link" data-scroll-target="#customerservice"><span class="header-section-number">6.1.1</span> <code>CustomerService</code></a></li>
+  </ul></li>
+  <li><a href="#two-impplementations" id="toc-two-impplementations" class="nav-link" data-scroll-target="#two-impplementations"><span class="header-section-number">6.2</span> Two impplementations</a>
+  <ul>
+  <li><a href="#implementation-1-database-backed-customerservice" id="toc-implementation-1-database-backed-customerservice" class="nav-link" data-scroll-target="#implementation-1-database-backed-customerservice"><span class="header-section-number">6.2.1</span> Implementation 1: Database-backed CustomerService</a></li>
+  <li><a href="#implementation-2-in-memory-customerservice" id="toc-implementation-2-in-memory-customerservice" class="nav-link" data-scroll-target="#implementation-2-in-memory-customerservice"><span class="header-section-number">6.2.2</span> Implementation 2: In-Memory CustomerService</a></li>
+  </ul></li>
+  </ul></li>
   <li><a href="#spring-boot-jpa-query-methods" id="toc-spring-boot-jpa-query-methods" class="nav-link" data-scroll-target="#spring-boot-jpa-query-methods"><span class="header-section-number">7</span> Spring Boot JPA Query Methods</a>
   <ul>
   <li><a href="#jpa-derived-query-methods" id="toc-jpa-derived-query-methods" class="nav-link" data-scroll-target="#jpa-derived-query-methods"><span class="header-section-number">7.1</span> 1. JPA Derived Query Methods</a></li>
@@ -2373,8 +2384,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Understanding ResponseEntity in Spring</p>
 </section>
 </section>
-<section id="what-is-responseentity" class="level1 page-columns page-full" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> What is ResponseEntity?</h1>
+<section id="responseentity" class="level1 page-columns page-full" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> <code>ResponseEntity</code></h1>
 <p><code>ResponseEntity</code> is a class in <code>Spring Framework</code> that represents the entire <code>HTTP</code> response. It allows you to control the following aspects of the <code>HTTP</code> response:</p>
 <ul>
 <li>Status code</li>
@@ -2529,7 +2540,179 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="service-and-repository" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Service and Repository</h1>
-<p>// to-do</p>
+<ul>
+<li><a href="../springboot/boot-concepts-data.html">Spring Data</a></li>
+<li><a href="https://github.com/AlbertProfe/restaurantManager/tree/319b94239321dde826d78b7cbe00e29895065b53/src/main/java/dev/example/restaurantManager/service" class="external" target="_blank">RestaurantManager customerService</a></li>
+</ul>
+<section id="customerservice-interface-and-implementation" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="customerservice-interface-and-implementation"><span class="header-section-number">6.1</span> <code>CustomerService</code> interface and implementation</h2>
+<blockquote class="blockquote">
+<p>Why Use <code>Interfaces</code> for Services in Spring Boot? Because using <code>interfaces</code> for services in Spring Boot is a best practice that offers several advantages from <code>Loose Coupling</code> to having a <strong>clear contract</strong>.</p>
+</blockquote>
+<p><strong>Loose Coupling</strong></p>
+<p>Interfaces promote loose coupling between components. The code that depends on the service only knows about the interface, not the implementation. This makes it easier to change the implementation without affecting the rest of the application.</p>
+<p><strong>Easier Testing</strong></p>
+<p>Interfaces facilitate easier unit testing through mocking. You can create mock implementations of the interface for testing purposes, allowing you to isolate the component under test.</p>
+<p><strong>Multiple Implementations</strong></p>
+<p>Interfaces allow for multiple implementations of the same service. This is useful when you need different implementations for different scenarios (e.g., production vs.&nbsp;testing, or different business logic for different clients).</p>
+<p><strong>Dependency Injection</strong></p>
+<p>Spring’s dependency injection works well with interfaces. You can easily switch implementations by changing the configuration, without modifying the code that uses the service.</p>
+<p><strong>Clear Contract</strong></p>
+<p>Interfaces serve as a clear contract for what operations a service provides. This improves code readability and helps in understanding the system’s architecture.</p>
+<p><strong>Aspect-Oriented Programming (AOP)</strong></p>
+<p>Spring’s AOP features work more smoothly with interfaces, allowing you to add cross-cutting concerns like logging or transaction management more easily.</p>
+<p><strong>Design by Contract</strong></p>
+<p>Interfaces encourage “design by contract” principles, where you define what a service does rather than how it does it, leading to more robust and maintainable code.</p>
+<section id="customerservice" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="customerservice"><span class="header-section-number">6.1.1</span> <code>CustomerService</code></h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">package</span><span class="im"> dev</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">restaurantManager</span><span class="op">.</span><span class="im">service</span><span class="op">;</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">import</span> <span class="im">dev</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">restaurantManager</span><span class="op">.</span><span class="im">model</span><span class="op">.</span><span class="im">Customer</span><span class="op">;</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">List</span><span class="op">;</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="kw">public</span> <span class="kw">interface</span> CustomerService <span class="op">{</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>    <span class="bu">List</span><span class="op">&lt;</span>Customer<span class="op">&gt;</span> <span class="fu">getAllCustomers</span><span class="op">();</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a>    Customer <span class="fu">createCustomer</span><span class="op">(</span>Customer customer<span class="op">);</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a>    Customer <span class="fu">getCustomerById</span><span class="op">(</span><span class="bu">String</span> id<span class="op">);</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a>    Customer <span class="fu">updateCustomer</span><span class="op">(</span><span class="bu">String</span> id<span class="op">,</span> Customer customerDetails<span class="op">);</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a>    <span class="dt">boolean</span> <span class="fu">deleteCustomer</span><span class="op">(</span><span class="bu">String</span> id<span class="op">);</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a>    <span class="dt">long</span> <span class="fu">countCustomers</span><span class="op">();</span></span>
+<span id="cb18-13"><a href="#cb18-13"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>By using this interface, you define a clear contract for customer-related operations.</p>
+</blockquote>
+</section>
+</section>
+<section id="two-impplementations" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="two-impplementations"><span class="header-section-number">6.2</span> Two impplementations</h2>
+<p>Two very different implementations of the <code>CustomerService</code> interface:</p>
+<ul>
+<li>One will be a standard implementation using a database,</li>
+<li>and the other will be an in-memory implementation for testing or prototyping purposes.</li>
+</ul>
+<section id="implementation-1-database-backed-customerservice" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="implementation-1-database-backed-customerservice"><span class="header-section-number">6.2.1</span> Implementation 1: Database-backed CustomerService</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">package</span><span class="im"> dev</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">restaurantManager</span><span class="op">.</span><span class="im">service</span><span class="op">;</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="kw">import</span> <span class="im">dev</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">restaurantManager</span><span class="op">.</span><span class="im">model</span><span class="op">.</span><span class="im">Customer</span><span class="op">;</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="kw">import</span> <span class="im">dev</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">restaurantManager</span><span class="op">.</span><span class="im">repository</span><span class="op">.</span><span class="im">CustomerRepository</span><span class="op">;</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">beans</span><span class="op">.</span><span class="im">factory</span><span class="op">.</span><span class="im">annotation</span><span class="op">.</span><span class="im">Autowired</span><span class="op">;</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">stereotype</span><span class="op">.</span><span class="im">Service</span><span class="op">;</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">List</span><span class="op">;</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Optional</span><span class="op">;</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a></span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="at">@Service</span></span>
+<span id="cb19-11"><a href="#cb19-11"></a><span class="kw">public</span> <span class="kw">class</span> DatabaseCustomerService <span class="kw">implements</span> CustomerService <span class="op">{</span></span>
+<span id="cb19-12"><a href="#cb19-12"></a></span>
+<span id="cb19-13"><a href="#cb19-13"></a>    <span class="at">@Autowired</span></span>
+<span id="cb19-14"><a href="#cb19-14"></a>    <span class="kw">private</span> CustomerRepository customerRepository<span class="op">;</span></span>
+<span id="cb19-15"><a href="#cb19-15"></a></span>
+<span id="cb19-16"><a href="#cb19-16"></a>    <span class="at">@Override</span></span>
+<span id="cb19-17"><a href="#cb19-17"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Customer<span class="op">&gt;</span> <span class="fu">getAllCustomers</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb19-18"><a href="#cb19-18"></a>        <span class="cf">return</span> customerRepository<span class="op">.</span><span class="fu">findAll</span><span class="op">();</span></span>
+<span id="cb19-19"><a href="#cb19-19"></a>    <span class="op">}</span></span>
+<span id="cb19-20"><a href="#cb19-20"></a></span>
+<span id="cb19-21"><a href="#cb19-21"></a>    <span class="at">@Override</span></span>
+<span id="cb19-22"><a href="#cb19-22"></a>    <span class="kw">public</span> Customer <span class="fu">createCustomer</span><span class="op">(</span>Customer customer<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb19-23"><a href="#cb19-23"></a>        <span class="cf">return</span> customerRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>customer<span class="op">);</span></span>
+<span id="cb19-24"><a href="#cb19-24"></a>    <span class="op">}</span></span>
+<span id="cb19-25"><a href="#cb19-25"></a></span>
+<span id="cb19-26"><a href="#cb19-26"></a>    <span class="at">@Override</span></span>
+<span id="cb19-27"><a href="#cb19-27"></a>    <span class="kw">public</span> Customer <span class="fu">getCustomerById</span><span class="op">(</span><span class="bu">String</span> id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb19-28"><a href="#cb19-28"></a>        Optional<span class="op">&lt;</span>Customer<span class="op">&gt;</span> customer <span class="op">=</span> customerRepository<span class="op">.</span><span class="fu">findById</span><span class="op">(</span>id<span class="op">);</span></span>
+<span id="cb19-29"><a href="#cb19-29"></a>        <span class="cf">return</span> customer<span class="op">.</span><span class="fu">orElseThrow</span><span class="op">(()</span> <span class="op">-&gt;</span> <span class="kw">new</span> <span class="bu">RuntimeException</span><span class="op">(</span><span class="st">"Customer not found"</span><span class="op">));</span></span>
+<span id="cb19-30"><a href="#cb19-30"></a>    <span class="op">}</span></span>
+<span id="cb19-31"><a href="#cb19-31"></a></span>
+<span id="cb19-32"><a href="#cb19-32"></a>    <span class="at">@Override</span></span>
+<span id="cb19-33"><a href="#cb19-33"></a>    <span class="kw">public</span> Customer <span class="fu">updateCustomer</span><span class="op">(</span><span class="bu">String</span> id<span class="op">,</span> Customer customerDetails<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb19-34"><a href="#cb19-34"></a>        Customer customer <span class="op">=</span> <span class="fu">getCustomerById</span><span class="op">(</span>id<span class="op">);</span></span>
+<span id="cb19-35"><a href="#cb19-35"></a>        customer<span class="op">.</span><span class="fu">setName</span><span class="op">(</span>customerDetails<span class="op">.</span><span class="fu">getName</span><span class="op">());</span></span>
+<span id="cb19-36"><a href="#cb19-36"></a>        customer<span class="op">.</span><span class="fu">setEmail</span><span class="op">(</span>customerDetails<span class="op">.</span><span class="fu">getEmail</span><span class="op">());</span></span>
+<span id="cb19-37"><a href="#cb19-37"></a>        <span class="co">// Update other fields as necessary</span></span>
+<span id="cb19-38"><a href="#cb19-38"></a>        <span class="cf">return</span> customerRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>customer<span class="op">);</span></span>
+<span id="cb19-39"><a href="#cb19-39"></a>    <span class="op">}</span></span>
+<span id="cb19-40"><a href="#cb19-40"></a></span>
+<span id="cb19-41"><a href="#cb19-41"></a>    <span class="at">@Override</span></span>
+<span id="cb19-42"><a href="#cb19-42"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">deleteCustomer</span><span class="op">(</span><span class="bu">String</span> id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb19-43"><a href="#cb19-43"></a>        <span class="cf">if</span> <span class="op">(</span>customerRepository<span class="op">.</span><span class="fu">existsById</span><span class="op">(</span>id<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb19-44"><a href="#cb19-44"></a>            customerRepository<span class="op">.</span><span class="fu">deleteById</span><span class="op">(</span>id<span class="op">);</span></span>
+<span id="cb19-45"><a href="#cb19-45"></a>            <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb19-46"><a href="#cb19-46"></a>        <span class="op">}</span></span>
+<span id="cb19-47"><a href="#cb19-47"></a>        <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb19-48"><a href="#cb19-48"></a>    <span class="op">}</span></span>
+<span id="cb19-49"><a href="#cb19-49"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="implementation-2-in-memory-customerservice" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="implementation-2-in-memory-customerservice"><span class="header-section-number">6.2.2</span> Implementation 2: In-Memory CustomerService</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">package</span><span class="im"> dev</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">restaurantManager</span><span class="op">.</span><span class="im">service</span><span class="op">;</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="kw">import</span> <span class="im">dev</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">restaurantManager</span><span class="op">.</span><span class="im">model</span><span class="op">.</span><span class="im">Customer</span><span class="op">;</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">springframework</span><span class="op">.</span><span class="im">stereotype</span><span class="op">.</span><span class="im">Service</span><span class="op">;</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.*;</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">concurrent</span><span class="op">.</span><span class="im">ConcurrentHashMap</span><span class="op">;</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">stream</span><span class="op">.</span><span class="im">Collectors</span><span class="op">;</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="at">@Service</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="kw">public</span> <span class="kw">class</span> InMemoryCustomerService <span class="kw">implements</span> CustomerService <span class="op">{</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a></span>
+<span id="cb20-12"><a href="#cb20-12"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">Map</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">,</span> Customer<span class="op">&gt;</span> customerStore <span class="op">=</span> <span class="kw">new</span> <span class="bu">ConcurrentHashMap</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a></span>
+<span id="cb20-14"><a href="#cb20-14"></a>    <span class="at">@Override</span></span>
+<span id="cb20-15"><a href="#cb20-15"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Customer<span class="op">&gt;</span> <span class="fu">getAllCustomers</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb20-16"><a href="#cb20-16"></a>        <span class="cf">return</span> <span class="kw">new</span> <span class="bu">ArrayList</span><span class="op">&lt;&gt;(</span>customerStore<span class="op">.</span><span class="fu">values</span><span class="op">());</span></span>
+<span id="cb20-17"><a href="#cb20-17"></a>    <span class="op">}</span></span>
+<span id="cb20-18"><a href="#cb20-18"></a></span>
+<span id="cb20-19"><a href="#cb20-19"></a>    <span class="at">@Override</span></span>
+<span id="cb20-20"><a href="#cb20-20"></a>    <span class="kw">public</span> Customer <span class="fu">createCustomer</span><span class="op">(</span>Customer customer<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-21"><a href="#cb20-21"></a>        <span class="bu">String</span> id <span class="op">=</span> <span class="bu">UUID</span><span class="op">.</span><span class="fu">randomUUID</span><span class="op">().</span><span class="fu">toString</span><span class="op">();</span></span>
+<span id="cb20-22"><a href="#cb20-22"></a>        customer<span class="op">.</span><span class="fu">setId</span><span class="op">(</span>id<span class="op">);</span></span>
+<span id="cb20-23"><a href="#cb20-23"></a>        customerStore<span class="op">.</span><span class="fu">put</span><span class="op">(</span>id<span class="op">,</span> customer<span class="op">);</span></span>
+<span id="cb20-24"><a href="#cb20-24"></a>        <span class="cf">return</span> customer<span class="op">;</span></span>
+<span id="cb20-25"><a href="#cb20-25"></a>    <span class="op">}</span></span>
+<span id="cb20-26"><a href="#cb20-26"></a></span>
+<span id="cb20-27"><a href="#cb20-27"></a>    <span class="at">@Override</span></span>
+<span id="cb20-28"><a href="#cb20-28"></a>    <span class="kw">public</span> Customer <span class="fu">getCustomerById</span><span class="op">(</span><span class="bu">String</span> id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-29"><a href="#cb20-29"></a>        Customer customer <span class="op">=</span> customerStore<span class="op">.</span><span class="fu">get</span><span class="op">(</span>id<span class="op">);</span></span>
+<span id="cb20-30"><a href="#cb20-30"></a>        <span class="cf">if</span> <span class="op">(</span>customer <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-31"><a href="#cb20-31"></a>            <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">RuntimeException</span><span class="op">(</span><span class="st">"Customer not found"</span><span class="op">);</span></span>
+<span id="cb20-32"><a href="#cb20-32"></a>        <span class="op">}</span></span>
+<span id="cb20-33"><a href="#cb20-33"></a>        <span class="cf">return</span> customer<span class="op">;</span></span>
+<span id="cb20-34"><a href="#cb20-34"></a>    <span class="op">}</span></span>
+<span id="cb20-35"><a href="#cb20-35"></a></span>
+<span id="cb20-36"><a href="#cb20-36"></a>    <span class="at">@Override</span></span>
+<span id="cb20-37"><a href="#cb20-37"></a>    <span class="kw">public</span> Customer <span class="fu">updateCustomer</span><span class="op">(</span><span class="bu">String</span> id<span class="op">,</span> Customer customerDetails<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-38"><a href="#cb20-38"></a>        <span class="cf">if</span> <span class="op">(!</span>customerStore<span class="op">.</span><span class="fu">containsKey</span><span class="op">(</span>id<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb20-39"><a href="#cb20-39"></a>            <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">RuntimeException</span><span class="op">(</span><span class="st">"Customer not found"</span><span class="op">);</span></span>
+<span id="cb20-40"><a href="#cb20-40"></a>        <span class="op">}</span></span>
+<span id="cb20-41"><a href="#cb20-41"></a>        customerDetails<span class="op">.</span><span class="fu">setId</span><span class="op">(</span>id<span class="op">);</span></span>
+<span id="cb20-42"><a href="#cb20-42"></a>        customerStore<span class="op">.</span><span class="fu">put</span><span class="op">(</span>id<span class="op">,</span> customerDetails<span class="op">);</span></span>
+<span id="cb20-43"><a href="#cb20-43"></a>        <span class="cf">return</span> customerDetails<span class="op">;</span></span>
+<span id="cb20-44"><a href="#cb20-44"></a>    <span class="op">}</span></span>
+<span id="cb20-45"><a href="#cb20-45"></a></span>
+<span id="cb20-46"><a href="#cb20-46"></a>    <span class="at">@Override</span></span>
+<span id="cb20-47"><a href="#cb20-47"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">deleteCustomer</span><span class="op">(</span><span class="bu">String</span> id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-48"><a href="#cb20-48"></a>        <span class="cf">return</span> customerStore<span class="op">.</span><span class="fu">remove</span><span class="op">(</span>id<span class="op">)</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb20-49"><a href="#cb20-49"></a>    <span class="op">}</span></span>
+<span id="cb20-50"><a href="#cb20-50"></a></span>
+<span id="cb20-51"><a href="#cb20-51"></a>    <span class="co">// Additional methods for demonstration</span></span>
+<span id="cb20-52"><a href="#cb20-52"></a>    <span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Customer<span class="op">&gt;</span> <span class="fu">searchCustomersByName</span><span class="op">(</span><span class="bu">String</span> name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-53"><a href="#cb20-53"></a>        <span class="cf">return</span> customerStore<span class="op">.</span><span class="fu">values</span><span class="op">().</span><span class="fu">stream</span><span class="op">()</span></span>
+<span id="cb20-54"><a href="#cb20-54"></a>                <span class="op">.</span><span class="fu">filter</span><span class="op">(</span>customer <span class="op">-&gt;</span> customer<span class="op">.</span><span class="fu">getName</span><span class="op">().</span><span class="fu">toLowerCase</span><span class="op">().</span><span class="fu">contains</span><span class="op">(</span>name<span class="op">.</span><span class="fu">toLowerCase</span><span class="op">()))</span></span>
+<span id="cb20-55"><a href="#cb20-55"></a>                <span class="op">.</span><span class="fu">collect</span><span class="op">(</span>Collectors<span class="op">.</span><span class="fu">toList</span><span class="op">());</span></span>
+<span id="cb20-56"><a href="#cb20-56"></a>    <span class="op">}</span></span>
+<span id="cb20-57"><a href="#cb20-57"></a></span>
+<span id="cb20-58"><a href="#cb20-58"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">clearAllCustomers</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb20-59"><a href="#cb20-59"></a>        customerStore<span class="op">.</span><span class="fu">clear</span><span class="op">();</span></span>
+<span id="cb20-60"><a href="#cb20-60"></a>    <span class="op">}</span></span>
+<span id="cb20-61"><a href="#cb20-61"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>These two implementations showcase different approaches:</p>
+<ol type="1">
+<li><p><strong>DatabaseCustomerService</strong>: This implementation uses a CustomerRepository, likely backed by a database. It’s suitable for production environments where data persistence is required.</p></li>
+<li><p><strong>InMemoryCustomerService</strong>: This implementation stores customers in a ConcurrentHashMap. It’s useful for testing, prototyping, or scenarios where a lightweight, non-persistent solution is needed.</p></li>
+</ol>
+<p>Both implementations adhere to the CustomerService interface, demonstrating how the same contract can be fulfilled in very different ways. This flexibility is one of the key advantages of using interfaces in Spring Boot services.</p>
+</section>
+</section>
 </section>
 <section id="spring-boot-jpa-query-methods" class="level1 page-columns page-full" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> Spring Boot JPA Query Methods</h1>
@@ -2543,42 +2726,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="jpa-derived-query-methods" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="jpa-derived-query-methods"><span class="header-section-number">7.1</span> 1. JPA Derived Query Methods</h2>
 <p><code>Spring Data JPA</code> can automatically create queries <mark>based on method names in your repository interface.</mark></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">public</span> <span class="kw">interface</span> UserRepository <span class="kw">extends</span> JpaRepository<span class="op">&lt;</span>User<span class="op">,</span> <span class="bu">Long</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a>    <span class="bu">List</span><span class="op">&lt;</span>User<span class="op">&gt;</span> <span class="fu">findByLastNameAndAge</span><span class="op">(</span><span class="bu">String</span> lastName<span class="op">,</span> <span class="dt">int</span> age<span class="op">);</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">public</span> <span class="kw">interface</span> UserRepository <span class="kw">extends</span> JpaRepository<span class="op">&lt;</span>User<span class="op">,</span> <span class="bu">Long</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>    <span class="bu">List</span><span class="op">&lt;</span>User<span class="op">&gt;</span> <span class="fu">findByLastNameAndAge</span><span class="op">(</span><span class="bu">String</span> lastName<span class="op">,</span> <span class="dt">int</span> age<span class="op">);</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="query-annotation" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="query-annotation"><span class="header-section-number">7.2</span> 2. <span class="citation" data-cites="Query">@Query</span> Annotation</h2>
 <p>You can use the <code>@Query</code> annotation to define <mark>custom JPQL queries.</mark></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">public</span> <span class="kw">interface</span> UserRepository <span class="kw">extends</span> JpaRepository<span class="op">&lt;</span>User<span class="op">,</span> <span class="bu">Long</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>    <span class="at">@Query</span><span class="op">(</span><span class="st">"SELECT u FROM User u WHERE u.emailAddress = ?1"</span><span class="op">)</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>    User <span class="fu">findByEmailAddress</span><span class="op">(</span><span class="bu">String</span> emailAddress<span class="op">);</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">public</span> <span class="kw">interface</span> UserRepository <span class="kw">extends</span> JpaRepository<span class="op">&lt;</span>User<span class="op">,</span> <span class="bu">Long</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>    <span class="at">@Query</span><span class="op">(</span><span class="st">"SELECT u FROM User u WHERE u.emailAddress = ?1"</span><span class="op">)</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>    User <span class="fu">findByEmailAddress</span><span class="op">(</span><span class="bu">String</span> emailAddress<span class="op">);</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="entitymanager-with-jpql" class="level2 page-columns page-full" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="entitymanager-with-jpql"><span class="header-section-number">7.3</span> 3. EntityManager with JPQL</h2>
 <p>For more complex queries, you can use the <code>EntityManager</code> directly with <mark>JPQL.</mark></p>
 <div class="column-page-right">
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb20-1"><a href="#cb20-1"></a><span class="at">@PersistenceContext</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">private</span> EntityManager entityManager<span class="op">;</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a></span>
-<span id="cb20-4"><a href="#cb20-4"></a><span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>User<span class="op">&gt;</span> <span class="fu">findUsersByAgeRange</span><span class="op">(</span><span class="dt">int</span> minAge<span class="op">,</span> <span class="dt">int</span> maxAge<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a>    <span class="bu">String</span> jpql <span class="op">=</span> <span class="st">"SELECT u FROM User u WHERE u.age BETWEEN :minAge AND :maxAge"</span><span class="op">;</span></span>
-<span id="cb20-6"><a href="#cb20-6"></a>    <span class="cf">return</span> entityManager<span class="op">.</span><span class="fu">createQuery</span><span class="op">(</span>jpql<span class="op">,</span> User<span class="op">.</span><span class="fu">class</span><span class="op">)</span></span>
-<span id="cb20-7"><a href="#cb20-7"></a>            <span class="op">.</span><span class="fu">setParameter</span><span class="op">(</span><span class="st">"minAge"</span><span class="op">,</span> minAge<span class="op">)</span></span>
-<span id="cb20-8"><a href="#cb20-8"></a>            <span class="op">.</span><span class="fu">setParameter</span><span class="op">(</span><span class="st">"maxAge"</span><span class="op">,</span> maxAge<span class="op">)</span></span>
-<span id="cb20-9"><a href="#cb20-9"></a>            <span class="op">.</span><span class="fu">getResultList</span><span class="op">();</span></span>
-<span id="cb20-10"><a href="#cb20-10"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb23-1"><a href="#cb23-1"></a><span class="at">@PersistenceContext</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="kw">private</span> EntityManager entityManager<span class="op">;</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>User<span class="op">&gt;</span> <span class="fu">findUsersByAgeRange</span><span class="op">(</span><span class="dt">int</span> minAge<span class="op">,</span> <span class="dt">int</span> maxAge<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a>    <span class="bu">String</span> jpql <span class="op">=</span> <span class="st">"SELECT u FROM User u WHERE u.age BETWEEN :minAge AND :maxAge"</span><span class="op">;</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a>    <span class="cf">return</span> entityManager<span class="op">.</span><span class="fu">createQuery</span><span class="op">(</span>jpql<span class="op">,</span> User<span class="op">.</span><span class="fu">class</span><span class="op">)</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a>            <span class="op">.</span><span class="fu">setParameter</span><span class="op">(</span><span class="st">"minAge"</span><span class="op">,</span> minAge<span class="op">)</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a>            <span class="op">.</span><span class="fu">setParameter</span><span class="op">(</span><span class="st">"maxAge"</span><span class="op">,</span> maxAge<span class="op">)</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a>            <span class="op">.</span><span class="fu">getResultList</span><span class="op">();</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="native-sql-queries" class="level2 page-columns page-full" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="native-sql-queries"><span class="header-section-number">7.4</span> 4. Native SQL Queries</h2>
 <p>When you need to use database-specific features, you can write <mark>native SQL queries.</mark></p>
 <div class="column-page-right">
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">public</span> <span class="kw">interface</span> UserRepository <span class="kw">extends</span> JpaRepository<span class="op">&lt;</span>User<span class="op">,</span> <span class="bu">Long</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>    <span class="at">@Query</span><span class="op">(</span>value <span class="op">=</span> <span class="st">"SELECT * FROM users WHERE status = ?1"</span><span class="op">,</span> nativeQuery <span class="op">=</span> <span class="kw">true</span><span class="op">)</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>    <span class="bu">List</span><span class="op">&lt;</span>User<span class="op">&gt;</span> <span class="fu">findUsersByStatus</span><span class="op">(</span><span class="dt">int</span> status<span class="op">);</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">public</span> <span class="kw">interface</span> UserRepository <span class="kw">extends</span> JpaRepository<span class="op">&lt;</span>User<span class="op">,</span> <span class="bu">Long</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>    <span class="at">@Query</span><span class="op">(</span>value <span class="op">=</span> <span class="st">"SELECT * FROM users WHERE status = ?1"</span><span class="op">,</span> nativeQuery <span class="op">=</span> <span class="kw">true</span><span class="op">)</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>    <span class="bu">List</span><span class="op">&lt;</span>User<span class="op">&gt;</span> <span class="fu">findUsersByStatus</span><span class="op">(</span><span class="dt">int</span> status<span class="op">);</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="jpql-java-persistence-query-language" class="level2 page-columns page-full" data-number="7.5">
@@ -2638,19 +2821,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Basic Select Query:</li>
 </ol>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb22-1"><a href="#cb22-1"></a>SELECT u FROM User u WHERE u.age &gt; 18</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb25-1"><a href="#cb25-1"></a>SELECT u FROM User u WHERE u.age &gt; 18</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="2" type="1">
 <li>Join Query:</li>
 </ol>
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb23-1"><a href="#cb23-1"></a>SELECT o FROM Order o JOIN o.customer c WHERE c.country = 'USA'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb26-1"><a href="#cb26-1"></a>SELECT o FROM Order o JOIN o.customer c WHERE c.country = 'USA'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="3" type="1">
 <li>Aggregate Function:</li>
 </ol>
-<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb24-1"><a href="#cb24-1"></a>SELECT AVG(e.salary) FROM Employee e WHERE e.department.name = 'IT'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb27-1"><a href="#cb27-1"></a>SELECT AVG(e.salary) FROM Employee e WHERE e.department.name = 'IT'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="4" type="1">
 <li>Subquery:</li>
 </ol>
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb25-1"><a href="#cb25-1"></a>SELECT e FROM Employee e WHERE e.salary &gt; (SELECT AVG(emp.salary) FROM Employee emp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb28-1"><a href="#cb28-1"></a>SELECT e FROM Employee e WHERE e.salary &gt; (SELECT AVG(emp.salary) FROM Employee emp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="using-jpql-in-spring-data-jpa" class="level3 page-columns page-full" data-number="7.5.4">
 <h3 data-number="7.5.4" class="anchored" data-anchor-id="using-jpql-in-spring-data-jpa"><span class="header-section-number">7.5.4</span> Using JPQL in Spring Data JPA</h3>
@@ -2658,17 +2841,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>With <code>@Query</code> annotation:</li>
 </ol>
 <div class="column-page-right">
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb26-1"><a href="#cb26-1"></a><span class="at">@Query</span><span class="op">(</span><span class="st">"SELECT u FROM User u WHERE u.email = ?1 AND u.active = true"</span><span class="op">)</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>User <span class="fu">findActiveUserByEmail</span><span class="op">(</span><span class="bu">String</span> email<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb29-1"><a href="#cb29-1"></a><span class="at">@Query</span><span class="op">(</span><span class="st">"SELECT u FROM User u WHERE u.email = ?1 AND u.active = true"</span><span class="op">)</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>User <span class="fu">findActiveUserByEmail</span><span class="op">(</span><span class="bu">String</span> email<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
 <li>With <code>EntityManager</code>:</li>
 </ol>
 <div class="column-page-right">
-<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb27-1"><a href="#cb27-1"></a><span class="bu">String</span> jpql <span class="op">=</span> <span class="st">"SELECT p FROM Product p WHERE p.category.name = :categoryName"</span><span class="op">;</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="bu">List</span><span class="op">&lt;</span>Product<span class="op">&gt;</span> products <span class="op">=</span> entityManager<span class="op">.</span><span class="fu">createQuery</span><span class="op">(</span>jpql<span class="op">,</span> Product<span class="op">.</span><span class="fu">class</span><span class="op">)</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a>    <span class="op">.</span><span class="fu">setParameter</span><span class="op">(</span><span class="st">"categoryName"</span><span class="op">,</span> <span class="st">"Electronics"</span><span class="op">)</span></span>
-<span id="cb27-4"><a href="#cb27-4"></a>    <span class="op">.</span><span class="fu">getResultList</span><span class="op">();</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb30-1"><a href="#cb30-1"></a><span class="bu">String</span> jpql <span class="op">=</span> <span class="st">"SELECT p FROM Product p WHERE p.category.name = :categoryName"</span><span class="op">;</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="bu">List</span><span class="op">&lt;</span>Product<span class="op">&gt;</span> products <span class="op">=</span> entityManager<span class="op">.</span><span class="fu">createQuery</span><span class="op">(</span>jpql<span class="op">,</span> Product<span class="op">.</span><span class="fu">class</span><span class="op">)</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a>    <span class="op">.</span><span class="fu">setParameter</span><span class="op">(</span><span class="st">"categoryName"</span><span class="op">,</span> <span class="st">"Electronics"</span><span class="op">)</span></span>
+<span id="cb30-4"><a href="#cb30-4"></a>    <span class="op">.</span><span class="fu">getResultList</span><span class="op">();</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="benefits-of-jpql" class="level3" data-number="7.5.5">
@@ -2706,7 +2889,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="junit-5-tests" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> JUnit 5 tests</h1>
-<p>//to-do</p>
+<ul>
+<li><a href="../javase/se-concepts-tdd.html">JUnit and TDD</a></li>
+</ul>
 </section>
 <section id="code" class="level1" data-number="9">
 <h1 data-number="9"><span class="header-section-number">9</span> Code</h1>
@@ -3327,7 +3512,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
