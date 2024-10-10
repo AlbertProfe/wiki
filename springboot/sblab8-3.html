@@ -1875,6 +1875,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We are going to evolve the current <strong>Java SE Restaurant</strong> project into a <strong>Spring Boot Restaurant Management System</strong> with an <code>H2 DB</code> and <code>API Rest</code> manages by <code>Swagger</code>.</p>
 </div>
 <p><br></p>
+<ul>
+<li><a href="https://github.com/AlbertProfe/restaurantManager/commits/master/" class="external" target="_blank">Commits</a></li>
+</ul>
 <section id="restaurantmanager-project-summary" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> RestaurantManager Project Summary</h1>
 <p><code>Key Components</code></p>
@@ -1917,6 +1920,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="project-structrue" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Project structrue</h1>
+<p><code>RestaurantManager</code> directory structure represents a <mark>typical Java Spring Boot project for a restaurant management application</mark>.</p>
+<p>Here’s a basic explanation of the <strong>main</strong> components:</p>
+<p><strong>Root Directory</strong></p>
+<ul>
+<li><code>HELP.md</code>: contains project general information about <code>RestaurantManager</code>.</li>
+<li><code>mvnw</code> and <code>mvnw.cmd</code>: <code>Maven wrapper</code> scripts for <code>Unix-like</code> systems and <code>Windows</code>, respectively.</li>
+<li><code>pom.xml</code>: The <code>Maven</code> project configuration file.</li>
+</ul>
+<p><strong>Source Code (<code>src</code>)</strong></p>
+<p>The <code>src</code> directory contains the main application code and test code.</p>
+<p><strong>Main Application Code (<code>src/main</code>)</strong></p>
+<ul>
+<li><code>java/dev/example/restaurantManager</code>: The root package for the application.
+<ul>
+<li><code>controller</code>: Contains controller classes for handling HTTP requests.</li>
+<li><code>model</code>: Defines the data models (entities) for the application.</li>
+<li><code>repository</code>: Interfaces for database operations.</li>
+<li><code>service</code>: Service layer implementation.</li>
+<li><code>utilities</code>: Utility classes, such as data loaders.</li>
+<li><code>RestaurantManagerApplication.java</code>: The main class to run the Spring Boot application.</li>
+</ul></li>
+</ul>
+<p><strong>Resources (<code>src/main/resources</code>)</strong></p>
+<ul>
+<li>Configuration files (<code>application*.properties</code>)</li>
+<li>Static resources and templates (.js, .css, etc..)</li>
+</ul>
+<p><strong>Test Code (<code>src/test</code>)</strong></p>
+<p>Contains test classes for the application.</p>
+<p><strong>Build Output (<code>target</code>)</strong></p>
+<p>This directory contains compiled classes, JAR files, and other build artifacts.</p>
+<p><strong>Project Structure</strong></p>
+<p>The project follows a typical MVC (Model-View-Controller) structure with additional layers:</p>
+<ol type="1">
+<li>Models (in <code>model</code> package)</li>
+<li>Views (in <code>resources/templates</code>)</li>
+<li>Controllers (in <code>controller</code> package)</li>
+<li>Services (in <code>service</code> package)</li>
+<li>Repositories (in <code>repository</code> package)</li>
+</ol>
+<p>This structure allows for a clean separation of concerns and promotes maintainability and scalability of the application.</p>
+<p><a href="../images/springboot/labsb08/lab08-3-tree.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../images/springboot/labsb08/lab08-3-tree.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-3-tree-scr.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="../images/springboot/labsb08/lab08-3-tree-scr.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-3-tree-scr-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="../images/springboot/labsb08/lab08-3-tree-scr-2.png" class="img-fluid"></a></p>
+<details>
+<summary>
+Code
+</summary>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">.</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>├── HELP<span class="op">.</span><span class="fu">md</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a>├── mvnw</span>
@@ -2015,50 +2066,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-96"><a href="#cb1-96"></a>                └── restaurantManager</span>
 <span id="cb1-97"><a href="#cb1-97"></a>                    ├── CustomerRepositoryTest<span class="op">.</span><span class="fu">class</span></span>
 <span id="cb1-98"><a href="#cb1-98"></a>                    └── RestaurantManagerApplicationTests<span class="op">.</span><span class="fu">class</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>RestaurantManager</code> directory structure represents a <mark>typical Java Spring Boot project for a restaurant management application</mark>.</p>
-<p>Here’s a basic explanation of the <strong>main</strong> components:</p>
-<p><strong>Root Directory</strong></p>
-<ul>
-<li><code>HELP.md</code>: contains project general information about <code>RestaurantManager</code>.</li>
-<li><code>mvnw</code> and <code>mvnw.cmd</code>: <code>Maven wrapper</code> scripts for <code>Unix-like</code> systems and <code>Windows</code>, respectively.</li>
-<li><code>pom.xml</code>: The <code>Maven</code> project configuration file.</li>
-</ul>
-<p><strong>Source Code (<code>src</code>)</strong></p>
-<p>The <code>src</code> directory contains the main application code and test code.</p>
-<p><strong>Main Application Code (<code>src/main</code>)</strong></p>
-<ul>
-<li><code>java/dev/example/restaurantManager</code>: The root package for the application.
-<ul>
-<li><code>controller</code>: Contains controller classes for handling HTTP requests.</li>
-<li><code>model</code>: Defines the data models (entities) for the application.</li>
-<li><code>repository</code>: Interfaces for database operations.</li>
-<li><code>service</code>: Service layer implementation.</li>
-<li><code>utilities</code>: Utility classes, such as data loaders.</li>
-<li><code>RestaurantManagerApplication.java</code>: The main class to run the Spring Boot application.</li>
-</ul></li>
-</ul>
-<p><strong>Resources (<code>src/main/resources</code>)</strong></p>
-<ul>
-<li>Configuration files (<code>application*.properties</code>)</li>
-<li>Static resources and templates (.js, .css, etc..)</li>
-</ul>
-<p><strong>Test Code (<code>src/test</code>)</strong></p>
-<p>Contains test classes for the application.</p>
-<p><strong>Build Output (<code>target</code>)</strong></p>
-<p>This directory contains compiled classes, JAR files, and other build artifacts.</p>
-<p><strong>Project Structure</strong></p>
-<p>The project follows a typical MVC (Model-View-Controller) structure with additional layers:</p>
-<ol type="1">
-<li>Models (in <code>model</code> package)</li>
-<li>Views (in <code>resources/templates</code>)</li>
-<li>Controllers (in <code>controller</code> package)</li>
-<li>Services (in <code>service</code> package)</li>
-<li>Repositories (in <code>repository</code> package)</li>
-</ol>
-<p>This structure allows for a clean separation of concerns and promotes maintainability and scalability of the application.</p>
-<p><a href="../images/springboot/labsb08/lab08-3-tree.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../images/springboot/labsb08/lab08-3-tree.png" class="img-fluid"></a></p>
-<p><a href="../images/springboot/labsb08/lab08-3-tree-scr.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="../images/springboot/labsb08/lab08-3-tree-scr.png" class="img-fluid"></a></p>
-<p><a href="../images/springboot/labsb08/lab08-3-tree-scr-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="../images/springboot/labsb08/lab08-3-tree-scr-2.png" class="img-fluid"></a></p>
+</details>
 </section>
 <section id="fake-customer-restaurantmanager" class="level1 page-columns page-full" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Fake customer RestaurantManager</h1>
@@ -3658,7 +3666,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
