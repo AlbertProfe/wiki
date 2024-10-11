@@ -13969,7 +13969,7 @@
     "href": "ifcd0021-24/ifcd0021backlog-sprint-24.html#sprint05-spring-boot-restaurantmanager-2-october-2024",
     "title": "IFCD0021 Sprint Backlog",
     "section": "Sprint#05 Spring Boot RestaurantManager (2) (October 2024)",
-    "text": "Sprint#05 Spring Boot RestaurantManager (2) (October 2024)\n\nBacklog course October 2024 table\n\n\n\n\n\n\n\n\n\n#\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#05\n19\n07/10/2024\n- Lab#SB08-3 Spring Boot RestaurantManager:  (1) Model @Entity Customer (& Order)  (2) API Rest: @RestController with Swagger  (3) @CustomerService and @CustomerServiceImpl  (4) application.properties (5) JPA and H2  ++ Spring MVC, Boot, JEE and Jakarta  ++ ResponseEntity\n  - Lab#SB08-3  - Transition from Java EE to Jakarta EE  - Spring MVC\n\n\n\n20\n08/10/2024\n- Lab#SB08-3 Spring Boot RestaurantManager:  (1) Model @Entity Customer & Order  (2) API Rest: @RestController with Swagger  (3) @OrderService and @OrderServiceImpl  (4) application.properties with local H2 DB  (5) JPA and H2    HW: @Table, @Menu RestController, Interface Service and ServiceImpl, Repository with UUID \n- Lab#SB08-3 \n\n\n\n21\n09/10/2024\n- Lab#SB08-3 Spring Boot RestaurantManager:  (1) Model @Entity Customer & Order  (2) API Rest: @RestController with Swagger  (3) @OrderService and @OrderServiceImpl   (4) application.properties with local H2 DB  (5) JPA and H2: JUnit to test DB  (6) Query methods JPA - ResponseEntity\n- Lab#SB08-3  - Defining Query Methods  - Query by Example  - JPA Query Methods  - Spring Boot: JPA & DI\n\n\n\n22\n10/10/2024\n- Lab#SB08-3 Spring Boot RestaurantManager:  (1) Model @Entitiy Table and Menu  (2) Inherence: Order (3) application.properties memory/local   - Git: gitTutorial project \n- Lab#SB08-3  - gitTutorial  - Git\n\n\n\n23\n11/10/2024\n- Lab#SB08-3 Spring Boot RestaurantManager:  (1) Model @Entitiy Table and Menu  (2) Inherence: Order   - Git \n- Lab#SB08-3",
+    "text": "Sprint#05 Spring Boot RestaurantManager (2) (October 2024)\n\nBacklog course October 2024 table\n\n\n\n\n\n\n\n\n\n#\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#05\n19\n07/10/2024\n- Lab#SB08-3 Spring Boot RestaurantManager:  (1) Model @Entity Customer (& Order)  (2) API Rest: @RestController with Swagger  (3) @CustomerService and @CustomerServiceImpl  (4) application.properties (5) JPA and H2  ++ Spring MVC, Boot, JEE and Jakarta  ++ ResponseEntity\n  - Lab#SB08-3  - Transition from Java EE to Jakarta EE  - Spring MVC\n\n\n\n20\n08/10/2024\n- Lab#SB08-3 Spring Boot RestaurantManager:  (1) Model @Entity Customer & Order  (2) API Rest: @RestController with Swagger  (3) @OrderService and @OrderServiceImpl  (4) application.properties with local H2 DB  (5) JPA and H2    HW: @Table, @Menu RestController, Interface Service and ServiceImpl, Repository with UUID \n- Lab#SB08-3 \n\n\n\n21\n09/10/2024\n- Lab#SB08-3 Spring Boot RestaurantManager:  (1) Model @Entity Customer & Order  (2) API Rest: @RestController with Swagger  (3) @OrderService and @OrderServiceImpl   (4) application.properties with local H2 DB  (5) JPA and H2: JUnit to test DB  (6) Query methods JPA - ResponseEntity\n- Lab#SB08-3  - Defining Query Methods  - Query by Example  - JPA Query Methods  - Spring Boot: JPA & DI\n\n\n\n22\n10/10/2024\n- Lab#SB08-3 Spring Boot RestaurantManager:  (1) Model @Entitiy Table and Menu  (2) Inherence: Order (3) application.properties profiling: memory/local   - Git: gitTutorial project \n- Lab#SB08-3  - gitTutorial  - Git\n\n\n\n23\n11/10/2024\n- Lab#SB08-3 Spring Boot RestaurantManager:  (1) Model @Entitiy Table and Menu  (2) Inherence: Order  (3) .env   - Git: gitTutorial project \n- Lab#SB08-3",
     "crumbs": [
       "IFCD0021-24 Docs",
       "IFCD0021 Sprint Backlog"
@@ -14872,6 +14872,61 @@
     "title": "Lab#SB08-3: H2 and API Rest",
     "section": "7.2 Two impplementations",
     "text": "7.2 Two impplementations\nTwo very different implementations of the CustomerService interface:\n\nOne will be a standard implementation using a database,\nand the other will be an in-memory implementation for testing or prototyping purposes.\n\n\n7.2.1 Implementation 1: Database-backed CustomerService\npackage dev.example.restaurantManager.service;\n\nimport dev.example.restaurantManager.model.Customer;\nimport dev.example.restaurantManager.repository.CustomerRepository;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.stereotype.Service;\nimport java.util.List;\nimport java.util.Optional;\n\n@Service\npublic class DatabaseCustomerService implements CustomerService {\n\n    @Autowired\n    private CustomerRepository customerRepository;\n\n    @Override\n    public List&lt;Customer&gt; getAllCustomers() {\n        return customerRepository.findAll();\n    }\n\n    @Override\n    public Customer createCustomer(Customer customer) {\n        return customerRepository.save(customer);\n    }\n\n    @Override\n    public Customer getCustomerById(String id) {\n        Optional&lt;Customer&gt; customer = customerRepository.findById(id);\n        return customer.orElseThrow(() -&gt; new RuntimeException(\"Customer not found\"));\n    }\n\n    @Override\n    public Customer updateCustomer(String id, Customer customerDetails) {\n        Customer customer = getCustomerById(id);\n        customer.setName(customerDetails.getName());\n        customer.setEmail(customerDetails.getEmail());\n        // Update other fields as necessary\n        return customerRepository.save(customer);\n    }\n\n    @Override\n    public boolean deleteCustomer(String id) {\n        if (customerRepository.existsById(id)) {\n            customerRepository.deleteById(id);\n            return true;\n        }\n        return false;\n    }\n}\n\n\n7.2.2 Implementation 2: In-Memory CustomerService\npackage dev.example.restaurantManager.service;\n\nimport dev.example.restaurantManager.model.Customer;\nimport org.springframework.stereotype.Service;\nimport java.util.*;\nimport java.util.concurrent.ConcurrentHashMap;\nimport java.util.stream.Collectors;\n\n@Service\npublic class InMemoryCustomerService implements CustomerService {\n\n    private final Map&lt;String, Customer&gt; customerStore = new ConcurrentHashMap&lt;&gt;();\n\n    @Override\n    public List&lt;Customer&gt; getAllCustomers() {\n        return new ArrayList&lt;&gt;(customerStore.values());\n    }\n\n    @Override\n    public Customer createCustomer(Customer customer) {\n        String id = UUID.randomUUID().toString();\n        customer.setId(id);\n        customerStore.put(id, customer);\n        return customer;\n    }\n\n    @Override\n    public Customer getCustomerById(String id) {\n        Customer customer = customerStore.get(id);\n        if (customer == null) {\n            throw new RuntimeException(\"Customer not found\");\n        }\n        return customer;\n    }\n\n    @Override\n    public Customer updateCustomer(String id, Customer customerDetails) {\n        if (!customerStore.containsKey(id)) {\n            throw new RuntimeException(\"Customer not found\");\n        }\n        customerDetails.setId(id);\n        customerStore.put(id, customerDetails);\n        return customerDetails;\n    }\n\n    @Override\n    public boolean deleteCustomer(String id) {\n        return customerStore.remove(id) != null;\n    }\n\n    // Additional methods for demonstration\n    public List&lt;Customer&gt; searchCustomersByName(String name) {\n        return customerStore.values().stream()\n                .filter(customer -&gt; customer.getName().toLowerCase().contains(name.toLowerCase()))\n                .collect(Collectors.toList());\n    }\n\n    public void clearAllCustomers() {\n        customerStore.clear();\n    }\n}\nThese two implementations showcase different approaches:\n\nDatabaseCustomerService: This implementation uses a CustomerRepository, likely backed by a database. It’s suitable for production environments where data persistence is required.\nInMemoryCustomerService: This implementation stores customers in a ConcurrentHashMap. It’s useful for testing, prototyping, or scenarios where a lightweight, non-persistent solution is needed.\n\nBoth implementations adhere to the CustomerService interface, demonstrating how the same contract can be fulfilled in very different ways. This flexibility is one of the key advantages of using interfaces in Spring Boot services.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#creasting-a-excutable-.jar",
+    "href": "springboot/sblab8-3.html#creasting-a-excutable-.jar",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "10.1 Creasting a excutable .jar",
+    "text": "10.1 Creasting a excutable .jar\n// to-do",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#working-on-different-enviromments",
+    "href": "springboot/sblab8-3.html#working-on-different-enviromments",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "10.2 Working on different enviromments",
+    "text": "10.2 Working on different enviromments\n// to-do\nWhen a property like spring.jpa.hibernate.ddl-auto is defined in both application.properties and a profile-specific properties file (e.g., application-dev.properties), the value from the active profile will override the one in application.properties.\nTherefore, if the profile is active and specifies ddl-auto=create, it will take precedence over ddl-auto=update in application.properties.\n\nThe order of execution is determined by the active profiles and their precedence over the default properties.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#env",
+    "href": "springboot/sblab8-3.html#env",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "10.3 .env",
+    "text": "10.3 .env\n// to-do",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#creating-a-excutable-.jar",
+    "href": "springboot/sblab8-3.html#creating-a-excutable-.jar",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "10.1 Creating a excutable .jar",
+    "text": "10.1 Creating a excutable .jar\n// to-do",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-3: H2 and API Rest"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-3.html#working-on-different-environments",
+    "href": "springboot/sblab8-3.html#working-on-different-environments",
+    "title": "Lab#SB08-3: H2 and API Rest",
+    "section": "10.2 Working on different environments",
+    "text": "10.2 Working on different environments\n// to-do\nWhen a property like spring.jpa.hibernate.ddl-auto is defined in both application.properties and a profile-specific properties file (e.g., application-dev.properties), the value from the active profile will override the one in application.properties.\nTherefore, if the profile is active and specifies ddl-auto=create, it will take precedence over ddl-auto=update in application.properties.\n\nThe order of execution is determined by the active profiles and their precedence over the default properties.",
     "crumbs": [
       "Spring Boot Laboratories",
       "Lab#SB08-3: H2 and API Rest"
