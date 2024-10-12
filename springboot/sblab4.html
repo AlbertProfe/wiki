@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -1725,7 +1759,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/sblab4.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/sblab0-1.html">Spring Boot Laboratories</a></li><li class="breadcrumb-item"><a href="../springboot/sblab4.html">Lab#SB04-1: <code>JPA</code> Inherence</a></li></ol></nav>
 <div class="quarto-title">
@@ -1775,8 +1809,9 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Welcome to the cifojava2022-6 wiki!</p>
-<section id="spring-boot-projects-jpa-inherence-strategies" class="level1" data-number="1">
+<section id="spring-boot-projects-jpa-inherence-strategies" class="level1 page-columns page-full" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Spring Boot Projects <code>JPA Inherence</code> strategies</h1>
+<div class="column-page-right">
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1825,18 +1860,19 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
+</div>
 <ul>
-<li>there is no <span class="citation" data-cites="Service">@Service</span> neither <span class="citation" data-cites="Controller">@Controller</span></li>
+<li>there is no <code>@Service</code> neither <code>@Controller</code></li>
 <li>so, they are basically back-end projects</li>
-<li>all work with <span class="citation" data-cites="CrudRepository">@CrudRepository</span></li>
+<li>all work with <code>@CrudRepository</code></li>
 </ul>
 <hr>
 </section>
 <section id="inhrence-with-jpa-and-uml" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Inhrence with <code>JPA</code> and <code>UML</code></h1>
-<p><strong>Inheritance</strong> is a fundamental concept of POO, but Relational databases <strong>have no concept of inheritance</strong> neither NoSQL (MongoDB, DymamoDB), so persisting <a href="https://en.wikibooks.org/wiki/Java_Persistence/Inheritance">inheritance</a> in a SQL and NoSQL database <em>has its own particular way.</em></p>
+<p><strong>Inheritance</strong> is a fundamental concept of POO, <mark>but <code>Relational databases</code> <strong>have no concept of inheritance</strong> neither NoSQL (MongoDB, DymamoDB), so persisting <a href="https://en.wikibooks.org/wiki/Java_Persistence/Inheritance">inheritance</a> in a SQL and NoSQL database _has its own particular way</mark>.</p>
 <blockquote class="blockquote">
-<p>Because relational databases have no concept of inheritance, there is no standard way of implementing inheritance in database, <em>so the hardest part of persisting inheritance is choosing how to represent the inheritance in the database.</em></p>
+<p>Because relational databases have no concept of inheritance, there is no standard way of implementing inheritance in database, so the hardest part of persisting inheritance is choosing how to represent the inheritance in the database.</p>
 </blockquote>
 <p>JPA defines several inheritance mechanisms, mainly defined though the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/Inheritance.html"><span class="citation" data-cites="Inheritance">@Inheritance</span></a> annotation or the <code>&lt;inheritance&gt;</code> element.</p>
 <p>There are <strong>three inheritance strategies</strong> defined from the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/InheritanceType.html">InheritanceType</a> <code>enum</code>:</p>
@@ -1857,7 +1893,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/labsb04-1-entity-inherence-.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Entity Inheritance"><img src="../images/springboot/labsb04-1-entity-inherence-.png" class="img-fluid figure-img" alt="Entity Inheritance"></a></p>
+<p><a href="../images/springboot/labsb04-1-entity-inherence-.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Entity Inheritance"><img src="../images/springboot/labsb04-1-entity-inherence-.png" class="img-fluid figure-img" style="width:60.0%" alt="Entity Inheritance"></a></p>
 <figcaption>Entity Inheritance</figcaption>
 </figure>
 </div>
@@ -1880,30 +1916,32 @@ JpaInherenceLibrary0
 </ul></li>
 <li>New Topics
 <ul>
-<li><p>How to code <code>inherence</code> and JPA uses <strong>SINGLE_TABLE strategy by default</strong></p>
-<pre><code>  @Entity
-  public class Book {}
-
-
-  @Entity(name="BookItem")
-  public class ItemBook extends Book {
-
-     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-     @JoinTable(name = "AUTHOR_BOOK_JOIN_TABLE",
-               joinColumns = { @JoinColumn(name = "AUTHOR_FK" )},
-               inverseJoinColumns = { @JoinColumn(name = "BOOK_FK" )})
-     private Set&lt;Author&gt;authors = new HashSet&lt;Author&gt;();
-  }
-
-
-  @Entity(name="RareItem")
-  public class RareItem extends Book {}
-
-
-  @Entity(name="Author")
-  @Table(name="AUTHOR_TABLE")
-  public class Author {}</code></pre></li>
+<li>How to code <code>inherence</code> and JPA uses <strong>SINGLE_TABLE strategy by default</strong></li>
 </ul></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a>          <span class="at">@Entity</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>          <span class="kw">public</span> <span class="kw">class</span> <span class="bu">Book</span> <span class="op">{}</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>          <span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BookItem"</span><span class="op">)</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>          <span class="kw">public</span> <span class="kw">class</span> ItemBook <span class="kw">extends</span> <span class="bu">Book</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>          </span>
+<span id="cb1-8"><a href="#cb1-8"></a>             <span class="at">@ManyToMany</span><span class="op">(</span>cascade <span class="op">=</span> CascadeType<span class="op">.</span><span class="fu">ALL</span><span class="op">,</span> fetch <span class="op">=</span> FetchType<span class="op">.</span><span class="fu">EAGER</span><span class="op">)</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>             <span class="at">@JoinTable</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"AUTHOR_BOOK_JOIN_TABLE"</span><span class="op">,</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>                       joinColumns <span class="op">=</span> <span class="op">{</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"AUTHOR_FK"</span> <span class="op">)},</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>                       inverseJoinColumns <span class="op">=</span> <span class="op">{</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"BOOK_FK"</span> <span class="op">)})</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>             <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Author<span class="op">&gt;</span>authors <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashSet</span><span class="op">&lt;</span>Author<span class="op">&gt;();</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>          <span class="op">}</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a> </span>
+<span id="cb1-16"><a href="#cb1-16"></a>          <span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"RareItem"</span><span class="op">)</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>          <span class="kw">public</span> <span class="kw">class</span> RareItem <span class="kw">extends</span> <span class="bu">Book</span> <span class="op">{}</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a></span>
+<span id="cb1-20"><a href="#cb1-20"></a>          <span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"Author"</span><span class="op">)</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>          <span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"AUTHOR_TABLE"</span><span class="op">)</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>          <span class="kw">public</span> <span class="kw">class</span> Author <span class="op">{}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
 <li>Versions
 <ul>
 <li><a href="https://github.com/AlbertProfe/cifojava2022-6/tree/main/jpainherencelibrary">JpaInherenceLibrary v 1.1</a> : without <span class="citation" data-cites="MappedSuperClass">@MappedSuperClass</span> and <span class="citation" data-cites="Entity">@Entity</span> superclass, <strong>Single Table strategy is applied BY DEFAULT</strong></li>
@@ -1929,31 +1967,34 @@ JpaInherenceLibrary1
 </ul></li>
 <li>New Topics
 <ul>
-<li><p>How <strong>can not</strong> we code <code>@MappedSuperclass</code> and <code>@ManyToMany</code> <strong>author</strong></p>
-<pre><code>  @MappedSuperclass
-  public abstract class Book {}
-
-
-  @Entity(name="BookItem")
-  @Table(name="ITEM_BOOK_TABLE")
-  public class ItemBook extends Book {
-
-     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-     @JoinTable(name = "AUTHOR_BOOK_JOIN_TABLE",
-                 joinColumns = { @JoinColumn(name = "AUTHOR_FK" )},
-                 inverseJoinColumns = { @JoinColumn(name = "BOOK_FK" )})
-     private Set&lt;Author&gt;authors = new HashSet&lt;Author&gt;();
-  }
-
-
-  @Entity(name="RareItem")
-  @Table(name="RARE_ITEM_TABLE")
-  public class RareItem extends Book {}
-
-
-  @Entity(name="Author")
-  @Table(name="AUTHOR_TABLE")
-  public class Author {}</code></pre></li>
+<li>How <strong>can not</strong> we code <code>@MappedSuperclass</code> and <code>@ManyToMany</code> <strong>author</strong></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a>          <span class="at">@MappedSuperclass</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>          <span class="kw">public</span> <span class="kw">abstract</span> <span class="kw">class</span> <span class="bu">Book</span> <span class="op">{}</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a>          <span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BookItem"</span><span class="op">)</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>          <span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"ITEM_BOOK_TABLE"</span><span class="op">)</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>          <span class="kw">public</span> <span class="kw">class</span> ItemBook <span class="kw">extends</span> <span class="bu">Book</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>          </span>
+<span id="cb2-9"><a href="#cb2-9"></a>             <span class="at">@ManyToMany</span><span class="op">(</span>cascade <span class="op">=</span> CascadeType<span class="op">.</span><span class="fu">ALL</span><span class="op">,</span> fetch <span class="op">=</span> FetchType<span class="op">.</span><span class="fu">EAGER</span><span class="op">)</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>             <span class="at">@JoinTable</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"AUTHOR_BOOK_JOIN_TABLE"</span><span class="op">,</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>                         joinColumns <span class="op">=</span> <span class="op">{</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"AUTHOR_FK"</span> <span class="op">)},</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>                         inverseJoinColumns <span class="op">=</span> <span class="op">{</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"BOOK_FK"</span> <span class="op">)})</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>             <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Author<span class="op">&gt;</span>authors <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashSet</span><span class="op">&lt;</span>Author<span class="op">&gt;();</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>          <span class="op">}</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a></span>
+<span id="cb2-16"><a href="#cb2-16"></a> </span>
+<span id="cb2-17"><a href="#cb2-17"></a>          <span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"RareItem"</span><span class="op">)</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>          <span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"RARE_ITEM_TABLE"</span><span class="op">)</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>          <span class="kw">public</span> <span class="kw">class</span> RareItem <span class="kw">extends</span> <span class="bu">Book</span> <span class="op">{}</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a></span>
+<span id="cb2-21"><a href="#cb2-21"></a></span>
+<span id="cb2-22"><a href="#cb2-22"></a>          <span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"Author"</span><span class="op">)</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a>          <span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"AUTHOR_TABLE"</span><span class="op">)</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a>          <span class="kw">public</span> <span class="kw">class</span> Author <span class="op">{}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
 <li><p>With <span class="citation" data-cites="MappedSuperclass">@MappedSuperclass</span> <strong>any relationship can’t be done</strong></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1968,8 +2009,7 @@ JpaInherenceLibrary1
 <figcaption>With <span class="citation" data-cites="MappedSuperclass">@MappedSuperclass</span></figcaption>
 </figure>
 </div></li>
-</ul></li>
-<li>Versions
+<li><p>Versions</p>
 <ul>
 <li><a href="https://github.com/AlbertProfe/cifojava2022-6/tree/main/jpainherencelibrary1">JpaInherenceLibrary1 v 1.0</a> : not using <code>author</code> just inherence without relatonship <span class="citation" data-cites="ManyToMany">@ManyToMany</span></li>
 </ul></li>
@@ -1983,7 +2023,7 @@ JpaInherenceLibrary1
 JpaInherenceLibrary2
 </summary>
 <ul>
-<li><p>Base project:</p>
+<li>Base project:
 <ul>
 <li>POM</li>
 <li><span class="citation" data-cites="Entity">@Entity</span>: <code>Book</code> (SuperClass), <code>ItemBook</code>, <code>RareBook</code> and <code>Auhtor</code></li>
@@ -1992,38 +2032,40 @@ JpaInherenceLibrary2
 <li>Command Line Runner with methods to test</li>
 <li><span class="citation" data-cites="CrudRepository">@CrudRepository</span> JPA 2.0, <span class="citation" data-cites="Component">@Component</span> (<code>CommandLineRunner</code>) and <span class="citation" data-cites="Test">@Test</span> (<code>Jupiter</code>)</li>
 </ul></li>
-<li><p>New Topics</p>
+<li>New Topics
 <ul>
-<li><p>How to code <code>@Inheritance(strategy = InheritanceType.SINGLE_TABLE)</code></p>
-<pre><code>   @Entity
-   @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-   @DiscriminatorColumn(name="BOOK_TYPE", 
-         discriminatorType = DiscriminatorType.STRING)
-   public class Book {}
-
-
-  @Entity(name="BookItem")
-  @Table(name="BOOK_ITEM_TABLE")
-  @DiscriminatorValue(value= "ITEMBOOK")
-  public class BookItem extends Book {
-
-  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  @JoinTable(name = "AUTHOR_BOOK_JOIN_TABLE",
-         joinColumns = { @JoinColumn(name = "AUTHOR_FK" )},
-         inverseJoinColumns = { @JoinColumn(name = "BOOK_FK" )})
-  private Set&lt;Author&gt;authors = new HashSet&lt;Author&gt;();}
-
-
-  @Entity(name="RareItem")
-  @Table(name="RARE_ITEM_TABLE")
-  @DiscriminatorValue(value= "REAREBOOK")
-  public class RareItem extends Book {}
-
-
-  @Entity(name="Author")
-  @Table(name="AUTHOR_TABLE")
-  public class Author {}</code></pre></li>
+<li>How to code <code>@Inheritance(strategy = InheritanceType.SINGLE_TABLE)</code></li>
 </ul></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a>           <span class="at">@Entity</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>           <span class="at">@Inheritance</span><span class="op">(</span>strategy <span class="op">=</span> InheritanceType<span class="op">.</span><span class="fu">SINGLE_TABLE</span><span class="op">)</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>           <span class="at">@DiscriminatorColumn</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BOOK_TYPE"</span><span class="op">,</span> </span>
+<span id="cb3-4"><a href="#cb3-4"></a>                 discriminatorType <span class="op">=</span> DiscriminatorType<span class="op">.</span><span class="fu">STRING</span><span class="op">)</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>           <span class="kw">public</span> <span class="kw">class</span> <span class="bu">Book</span> <span class="op">{}</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a>          <span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BookItem"</span><span class="op">)</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>          <span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BOOK_ITEM_TABLE"</span><span class="op">)</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>          <span class="at">@DiscriminatorValue</span><span class="op">(</span>value<span class="op">=</span> <span class="st">"ITEMBOOK"</span><span class="op">)</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>          <span class="kw">public</span> <span class="kw">class</span> BookItem <span class="kw">extends</span> <span class="bu">Book</span> <span class="op">{</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>          </span>
+<span id="cb3-13"><a href="#cb3-13"></a>          <span class="at">@ManyToMany</span><span class="op">(</span>cascade <span class="op">=</span> CascadeType<span class="op">.</span><span class="fu">ALL</span><span class="op">,</span> fetch <span class="op">=</span> FetchType<span class="op">.</span><span class="fu">EAGER</span><span class="op">)</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>          <span class="at">@JoinTable</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"AUTHOR_BOOK_JOIN_TABLE"</span><span class="op">,</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a>                 joinColumns <span class="op">=</span> <span class="op">{</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"AUTHOR_FK"</span> <span class="op">)},</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>                 inverseJoinColumns <span class="op">=</span> <span class="op">{</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"BOOK_FK"</span> <span class="op">)})</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>          <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Author<span class="op">&gt;</span>authors <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashSet</span><span class="op">&lt;</span>Author<span class="op">&gt;();}</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a> </span>
+<span id="cb3-19"><a href="#cb3-19"></a></span>
+<span id="cb3-20"><a href="#cb3-20"></a>          <span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"RareItem"</span><span class="op">)</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a>          <span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"RARE_ITEM_TABLE"</span><span class="op">)</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a>          <span class="at">@DiscriminatorValue</span><span class="op">(</span>value<span class="op">=</span> <span class="st">"REAREBOOK"</span><span class="op">)</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a>          <span class="kw">public</span> <span class="kw">class</span> RareItem <span class="kw">extends</span> <span class="bu">Book</span> <span class="op">{}</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a></span>
+<span id="cb3-25"><a href="#cb3-25"></a></span>
+<span id="cb3-26"><a href="#cb3-26"></a>          <span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"Author"</span><span class="op">)</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a>          <span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"AUTHOR_TABLE"</span><span class="op">)</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a>          <span class="kw">public</span> <span class="kw">class</span> Author <span class="op">{}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
 <li><p>With <span class="citation" data-cites="Inheritance">@Inheritance</span> and <strong>SINGLE_TABLE</strong></p>
 <pre><code>![@Inheritance ]( https://drive.google.com/uc?id=18nfiKnQaim4-lTD21iBwy313Daxtv73H)</code></pre></li>
 </ul>
@@ -2037,7 +2079,7 @@ JpaInherenceLibrary2
 JpaInherenceLibrary3
 </summary>
 <ul>
-<li><p>Base project:</p>
+<li>Base project:
 <ul>
 <li>POM</li>
 <li><span class="citation" data-cites="Entity">@Entity</span>: <code>Book</code> (SuperClass), <code>ItemBook</code>, <code>RareBook</code> and <code>Auhtor</code></li>
@@ -2046,41 +2088,43 @@ JpaInherenceLibrary3
 <li>Command Line Runner with methods to test</li>
 <li><span class="citation" data-cites="CrudRepository">@CrudRepository</span> JPA 2.0, <span class="citation" data-cites="Component">@Component</span> (<code>CommandLineRunner</code>) and <span class="citation" data-cites="Test">@Test</span> (<code>Jupiter</code>)</li>
 </ul></li>
-<li><p>New Topics</p>
+<li>New Topics
 <ul>
-<li><p>How to code <code>@Inheritance(strategy = InheritanceType.JOINED)</code></p>
-<pre><code>  @Entity
-  @Table(name="BOOK_TABLE")
-  @Inheritance(strategy = InheritanceType.JOINED)
-  @DiscriminatorColumn(name="BOOK_TYPE",
-         discriminatorType = DiscriminatorType.STRING)
-  public class Book {}
-
-
-  @Entity(name="BookItem")
-  @Table(name="BOOK_ITEM_TABLE")
-  @PrimaryKeyJoinColumn(name = "bookItemId")
-  @DiscriminatorValue(value= "ITEMBOOK")
-  public class BookItem extends Book {
-
-  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  @JoinTable(name = "AUTHOR_BOOK_JOIN_TABLE",
-         joinColumns = { @JoinColumn(name = "AUTHOR_FK" )},
-         inverseJoinColumns = { @JoinColumn(name = "BOOK_FK" )})
-  private Set&lt;Author&gt;authors = new HashSet&lt;Author&gt;();}
-
-
-  @Entity(name="RareItem")
-  @Table(name="RARE_ITEM_TABLE")
-  @PrimaryKeyJoinColumn(name = "rareItemId")
-  @DiscriminatorValue(value= "RAREBOOK")
-  public class RareItem extends Book {}
-
-
-  @Entity(name="Author")
-  @Table(name="AUTHOR_TABLE")
-  public class Author {}</code></pre></li>
+<li>How to code <code>@Inheritance(strategy = InheritanceType.JOINED)</code></li>
 </ul></li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a>          <span class="at">@Entity</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>          <span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BOOK_TABLE"</span><span class="op">)</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>          <span class="at">@Inheritance</span><span class="op">(</span>strategy <span class="op">=</span> InheritanceType<span class="op">.</span><span class="fu">JOINED</span><span class="op">)</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>          <span class="at">@DiscriminatorColumn</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BOOK_TYPE"</span><span class="op">,</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>                 discriminatorType <span class="op">=</span> DiscriminatorType<span class="op">.</span><span class="fu">STRING</span><span class="op">)</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>          <span class="kw">public</span> <span class="kw">class</span> <span class="bu">Book</span> <span class="op">{}</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a>          <span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BookItem"</span><span class="op">)</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>          <span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BOOK_ITEM_TABLE"</span><span class="op">)</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>          <span class="at">@PrimaryKeyJoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"bookItemId"</span><span class="op">)</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>          <span class="at">@DiscriminatorValue</span><span class="op">(</span>value<span class="op">=</span> <span class="st">"ITEMBOOK"</span><span class="op">)</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>          <span class="kw">public</span> <span class="kw">class</span> BookItem <span class="kw">extends</span> <span class="bu">Book</span> <span class="op">{</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>          </span>
+<span id="cb5-15"><a href="#cb5-15"></a>          <span class="at">@ManyToMany</span><span class="op">(</span>cascade <span class="op">=</span> CascadeType<span class="op">.</span><span class="fu">ALL</span><span class="op">,</span> fetch <span class="op">=</span> FetchType<span class="op">.</span><span class="fu">EAGER</span><span class="op">)</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>          <span class="at">@JoinTable</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"AUTHOR_BOOK_JOIN_TABLE"</span><span class="op">,</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>                 joinColumns <span class="op">=</span> <span class="op">{</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"AUTHOR_FK"</span> <span class="op">)},</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>                 inverseJoinColumns <span class="op">=</span> <span class="op">{</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"BOOK_FK"</span> <span class="op">)})</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>          <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Author<span class="op">&gt;</span>authors <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashSet</span><span class="op">&lt;</span>Author<span class="op">&gt;();}</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a> </span>
+<span id="cb5-21"><a href="#cb5-21"></a></span>
+<span id="cb5-22"><a href="#cb5-22"></a>          <span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"RareItem"</span><span class="op">)</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>          <span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"RARE_ITEM_TABLE"</span><span class="op">)</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a>          <span class="at">@PrimaryKeyJoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"rareItemId"</span><span class="op">)</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a>          <span class="at">@DiscriminatorValue</span><span class="op">(</span>value<span class="op">=</span> <span class="st">"RAREBOOK"</span><span class="op">)</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a>          <span class="kw">public</span> <span class="kw">class</span> RareItem <span class="kw">extends</span> <span class="bu">Book</span> <span class="op">{}</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a></span>
+<span id="cb5-28"><a href="#cb5-28"></a></span>
+<span id="cb5-29"><a href="#cb5-29"></a>          <span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"Author"</span><span class="op">)</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a>          <span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"AUTHOR_TABLE"</span><span class="op">)</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a>          <span class="kw">public</span> <span class="kw">class</span> Author <span class="op">{}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
 <li><p>With <span class="citation" data-cites="Inheritance">@Inheritance</span> and <strong>JOINED</strong></p>
 <pre><code>![@Inheritance JOINED](https://drive.google.com/uc?id=1BpxaW7fV_kh4PyFWn3i49nG4SqnKYpAE)</code></pre></li>
 </ul>
@@ -2105,33 +2149,36 @@ JpaInherenceLibrary4
 </ul></li>
 <li>New Topics
 <ul>
-<li><p>How to code <code>@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)</code></p>
-<pre><code>  @Entity
-  @Table(name="BOOK_TABLE")
-  @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-  public class Book {}
-
-
-  @Entity(name="BookItem")
-  @Table(name="BOOK_ITEM_TABLE")
-  public class BookItem extends Book {
-
-  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  @JoinTable(name = "AUTHOR_BOOK_JOIN_TABLE",
-       joinColumns = { @JoinColumn(name = "AUTHOR_FK" )},
-       inverseJoinColumns = { @JoinColumn(name = "BOOK_FK" )})
-  private Set&lt;Author&gt;authors = new HashSet&lt;Author&gt;();}
-
-
-  @Entity(name="RareItem")
-  @Table(name="RARE_ITEM_TABLE")
-  public class RareItem extends Book {}
-
-
-  @Entity(name="Author")
-  @Table(name="AUTHOR_TABLE")
-  public class Author {}</code></pre></li>
+<li>How to code <code>@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)</code></li>
 </ul></li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2"></a>          <span class="at">@Entity</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>          <span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BOOK_TABLE"</span><span class="op">)</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>          <span class="at">@Inheritance</span><span class="op">(</span>strategy <span class="op">=</span> InheritanceType<span class="op">.</span><span class="fu">TABLE_PER_CLASS</span><span class="op">)</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>          <span class="kw">public</span> <span class="kw">class</span> <span class="bu">Book</span> <span class="op">{}</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a></span>
+<span id="cb7-8"><a href="#cb7-8"></a>          <span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BookItem"</span><span class="op">)</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>          <span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"BOOK_ITEM_TABLE"</span><span class="op">)</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>          <span class="kw">public</span> <span class="kw">class</span> BookItem <span class="kw">extends</span> <span class="bu">Book</span> <span class="op">{</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>          </span>
+<span id="cb7-12"><a href="#cb7-12"></a>          <span class="at">@ManyToMany</span><span class="op">(</span>cascade <span class="op">=</span> CascadeType<span class="op">.</span><span class="fu">ALL</span><span class="op">,</span> fetch <span class="op">=</span> FetchType<span class="op">.</span><span class="fu">EAGER</span><span class="op">)</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>          <span class="at">@JoinTable</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"AUTHOR_BOOK_JOIN_TABLE"</span><span class="op">,</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>               joinColumns <span class="op">=</span> <span class="op">{</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"AUTHOR_FK"</span> <span class="op">)},</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>               inverseJoinColumns <span class="op">=</span> <span class="op">{</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"BOOK_FK"</span> <span class="op">)})</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>          <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Author<span class="op">&gt;</span>authors <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashSet</span><span class="op">&lt;</span>Author<span class="op">&gt;();}</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a> </span>
+<span id="cb7-18"><a href="#cb7-18"></a></span>
+<span id="cb7-19"><a href="#cb7-19"></a>          <span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"RareItem"</span><span class="op">)</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a>          <span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"RARE_ITEM_TABLE"</span><span class="op">)</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a>          <span class="kw">public</span> <span class="kw">class</span> RareItem <span class="kw">extends</span> <span class="bu">Book</span> <span class="op">{}</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a></span>
+<span id="cb7-23"><a href="#cb7-23"></a></span>
+<span id="cb7-24"><a href="#cb7-24"></a>          <span class="at">@Entity</span><span class="op">(</span>name<span class="op">=</span><span class="st">"Author"</span><span class="op">)</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a>          <span class="at">@Table</span><span class="op">(</span>name<span class="op">=</span><span class="st">"AUTHOR_TABLE"</span><span class="op">)</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a>          <span class="kw">public</span> <span class="kw">class</span> Author <span class="op">{}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
 <li>With <span class="citation" data-cites="Inheritance">@Inheritance</span> and <strong>TABLE_PER_CLASS</strong></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
@@ -2772,7 +2819,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","loop":false,"descPosition":"bottom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
