@@ -1795,7 +1795,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#implementation-2-in-memory-customerservice" id="toc-implementation-2-in-memory-customerservice" class="nav-link" data-scroll-target="#implementation-2-in-memory-customerservice"><span class="header-section-number">7.2.2</span> Implementation 2: In-Memory CustomerService</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#spring-boot-jpa-query-methods" id="toc-spring-boot-jpa-query-methods" class="nav-link" data-scroll-target="#spring-boot-jpa-query-methods"><span class="header-section-number">8</span> Spring Boot JPA Query Methods</a>
+  <li><a href="#jpa-query-methods" id="toc-jpa-query-methods" class="nav-link" data-scroll-target="#jpa-query-methods"><span class="header-section-number">8</span> JPA Query Methods</a>
   <ul>
   <li><a href="#jpa-derived-query-methods" id="toc-jpa-derived-query-methods" class="nav-link" data-scroll-target="#jpa-derived-query-methods"><span class="header-section-number">8.1</span> 1. JPA Derived Query Methods</a></li>
   <li><a href="#query-annotation" id="toc-query-annotation" class="nav-link" data-scroll-target="#query-annotation"><span class="header-section-number">8.2</span> 2. <span class="citation" data-cites="Query">@Query</span> Annotation</a></li>
@@ -1803,16 +1803,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#native-sql-queries" id="toc-native-sql-queries" class="nav-link" data-scroll-target="#native-sql-queries"><span class="header-section-number">8.4</span> 4. Native SQL Queries</a></li>
   <li><a href="#jpql-java-persistence-query-language" id="toc-jpql-java-persistence-query-language" class="nav-link" data-scroll-target="#jpql-java-persistence-query-language"><span class="header-section-number">8.5</span> JPQL (Java Persistence Query Language)</a>
   <ul>
-  <li><a href="#key-characteristics-of-jpql" id="toc-key-characteristics-of-jpql" class="nav-link" data-scroll-target="#key-characteristics-of-jpql"><span class="header-section-number">8.5.1</span> Key Characteristics of JPQL</a></li>
-  <li><a href="#jpql-vs-sql" id="toc-jpql-vs-sql" class="nav-link" data-scroll-target="#jpql-vs-sql"><span class="header-section-number">8.5.2</span> JPQL vs SQL</a></li>
-  <li><a href="#jpql-syntax-examples" id="toc-jpql-syntax-examples" class="nav-link" data-scroll-target="#jpql-syntax-examples"><span class="header-section-number">8.5.3</span> JPQL Syntax Examples</a></li>
-  <li><a href="#using-jpql-in-spring-data-jpa" id="toc-using-jpql-in-spring-data-jpa" class="nav-link" data-scroll-target="#using-jpql-in-spring-data-jpa"><span class="header-section-number">8.5.4</span> Using JPQL in Spring Data JPA</a></li>
-  <li><a href="#benefits-of-jpql" id="toc-benefits-of-jpql" class="nav-link" data-scroll-target="#benefits-of-jpql"><span class="header-section-number">8.5.5</span> Benefits of JPQL</a></li>
-  </ul></li>
-  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"><span class="header-section-number">8.6</span> Additional Resources</a>
-  <ul>
-  <li><a href="#jpql" id="toc-jpql" class="nav-link" data-scroll-target="#jpql"><span class="header-section-number">8.6.1</span> JPQL</a></li>
-  <li><a href="#jpa-queries" id="toc-jpa-queries" class="nav-link" data-scroll-target="#jpa-queries"><span class="header-section-number">8.6.2</span> JPA Queries</a></li>
+  <li><a href="#jpql-vs-sql" id="toc-jpql-vs-sql" class="nav-link" data-scroll-target="#jpql-vs-sql"><span class="header-section-number">8.5.1</span> JPQL vs SQL</a></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"><span class="header-section-number">8.5.2</span> Additional Resources</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#junit-5-tests" id="toc-junit-5-tests" class="nav-link" data-scroll-target="#junit-5-tests"><span class="header-section-number">9</span> JUnit 5 tests</a></li>
@@ -1821,9 +1813,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#creating-a-executable-.jar" id="toc-creating-a-executable-.jar" class="nav-link" data-scroll-target="#creating-a-executable-.jar"><span class="header-section-number">10.1</span> Creating a executable .jar</a></li>
   <li><a href="#working-on-different-environments" id="toc-working-on-different-environments" class="nav-link" data-scroll-target="#working-on-different-environments"><span class="header-section-number">10.2</span> Working on different environments</a>
   <ul>
-  <li><a href="#application.properties" id="toc-application.properties" class="nav-link" data-scroll-target="#application.properties"><span class="header-section-number">10.2.1</span> <code>application.properties</code></a></li>
+  <li><a href="#application.properties" id="toc-application.properties" class="nav-link" data-scroll-target="#application.properties"><span class="header-section-number">10.2.1</span> <code>application.properties</code></a>
+  <ul class="collapse">
+  <li><a href="#how-to-use-these-profiles" id="toc-how-to-use-these-profiles" class="nav-link" data-scroll-target="#how-to-use-these-profiles"><span class="header-section-number">10.2.1.1</span> How to Use These Profiles</a></li>
+  <li><a href="#precedence" id="toc-precedence" class="nav-link" data-scroll-target="#precedence"><span class="header-section-number">10.2.1.2</span> Precedence</a></li>
   </ul></li>
-  <li><a href="#env" id="toc-env" class="nav-link" data-scroll-target="#env"><span class="header-section-number">10.3</span> <code>.env</code></a></li>
+  </ul></li>
+  <li><a href="#env" id="toc-env" class="nav-link" data-scroll-target="#env"><span class="header-section-number">10.3</span> <code>.env</code></a>
+  <ul>
+  <li><a href="#intellijidea-ide-settings-2024" id="toc-intellijidea-ide-settings-2024" class="nav-link" data-scroll-target="#intellijidea-ide-settings-2024"><span class="header-section-number">10.3.0.1</span> IntelliJIdea IDE settings 2024</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">11</span> Code</a></li>
   </ul>
@@ -1868,7 +1867,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, October 11, 2024</p>
+      <p class="date-modified">Saturday, October 12, 2024</p>
     </div>
   </div>
     
@@ -2889,15 +2888,15 @@ Code
 </div>
 <p>These two implementations showcase different approaches:</p>
 <ol type="1">
-<li><p><strong>DatabaseCustomerService</strong>: This implementation uses a CustomerRepository, likely backed by a database. It’s suitable for production environments where data persistence is required.</p></li>
-<li><p><strong>InMemoryCustomerService</strong>: This implementation stores customers in a ConcurrentHashMap. It’s useful for testing, prototyping, or scenarios where a lightweight, non-persistent solution is needed.</p></li>
+<li><p><strong>DatabaseCustomerService</strong>: This implementation uses a <code>CustomerRepository</code>, likely backed by a database. It’s suitable for production environments where data persistence is required.</p></li>
+<li><p><strong>InMemoryCustomerService</strong>: This implementation stores customers in a <code>ConcurrentHashMap</code>. It’s useful for testing, prototyping, or scenarios where a lightweight, non-persistent solution is needed.</p></li>
 </ol>
-<p>Both implementations adhere to the CustomerService interface, demonstrating how the same contract can be fulfilled in very different ways. This flexibility is one of the key advantages of using interfaces in Spring Boot services.</p>
+<p>Both implementations adhere to the <code>CustomerService</code> <code>interface</code>, demonstrating how the same contract can be fulfilled in very different ways. This flexibility is one of the key advantages of using <code>interfaces</code> in <code>Spring Boot services</code>.</p>
 </section>
 </section>
 </section>
-<section id="spring-boot-jpa-query-methods" class="level1 page-columns page-full" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Spring Boot JPA Query Methods</h1>
+<section id="jpa-query-methods" class="level1 page-columns page-full" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> JPA Query Methods</h1>
 <p><code>Spring Boot and JPA</code> offer several ways to create queries. Here are the <mark>four most relevant methods:</mark></p>
 <ol type="1">
 <li>JPA Derived Query Methods</li>
@@ -2950,18 +2949,18 @@ Code
 </section>
 <section id="jpql-java-persistence-query-language" class="level2 page-columns page-full" data-number="8.5">
 <h2 data-number="8.5" class="anchored" data-anchor-id="jpql-java-persistence-query-language"><span class="header-section-number">8.5</span> JPQL (Java Persistence Query Language)</h2>
+<blockquote class="blockquote">
 <p>JPQL (Java Persistence Query Language) is an object-oriented query language used to define queries for entities and their relationships in JPA (Java Persistence API). It’s similar to SQL but operates on JPA entity objects rather than database tables.</p>
-<section id="key-characteristics-of-jpql" class="level3" data-number="8.5.1">
-<h3 data-number="8.5.1" class="anchored" data-anchor-id="key-characteristics-of-jpql"><span class="header-section-number">8.5.1</span> Key Characteristics of JPQL</h3>
+</blockquote>
+<p><strong>Key Characteristics of JPQL</strong></p>
 <ol type="1">
-<li>Object-Oriented: Works with Java objects and their properties, not database tables and columns.</li>
-<li>Database-Independent: Queries can work across different database systems without modification.</li>
-<li>Supports JPA Relationships: Can easily navigate entity relationships.</li>
-<li>Powerful: Supports complex operations like joins, aggregations, and subqueries.</li>
+<li><strong>Object-Oriented</strong>: Works with Java objects and their properties, not database tables and columns.</li>
+<li><strong>Database-Independen</strong>t: Queries can work across different database systems without modification.</li>
+<li>Supports <strong>JPA Relationships</strong>: Can easily navigate entity relationships.</li>
+<li><strong>Powerful</strong>: Supports complex operations like joins, aggregations, and subqueries.</li>
 </ol>
-</section>
-<section id="jpql-vs-sql" class="level3" data-number="8.5.2">
-<h3 data-number="8.5.2" class="anchored" data-anchor-id="jpql-vs-sql"><span class="header-section-number">8.5.2</span> JPQL vs SQL</h3>
+<section id="jpql-vs-sql" class="level3 page-columns page-full" data-number="8.5.1">
+<h3 data-number="8.5.1" class="anchored" data-anchor-id="jpql-vs-sql"><span class="header-section-number">8.5.1</span> JPQL vs SQL</h3>
 <p>Here’s a comparison between JPQL and SQL:</p>
 <table class="caption-top table">
 <colgroup>
@@ -2999,9 +2998,7 @@ Code
 </tr>
 </tbody>
 </table>
-</section>
-<section id="jpql-syntax-examples" class="level3" data-number="8.5.3">
-<h3 data-number="8.5.3" class="anchored" data-anchor-id="jpql-syntax-examples"><span class="header-section-number">8.5.3</span> JPQL Syntax Examples</h3>
+<p><strong>JPQL Syntax Examples</strong></p>
 <ol type="1">
 <li>Basic Select Query:</li>
 </ol>
@@ -3018,9 +3015,7 @@ Code
 <li>Subquery:</li>
 </ol>
 <div class="sourceCode" id="cb30"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb30-1"><a href="#cb30-1"></a>SELECT e FROM Employee e WHERE e.salary &gt; (SELECT AVG(emp.salary) FROM Employee emp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="using-jpql-in-spring-data-jpa" class="level3 page-columns page-full" data-number="8.5.4">
-<h3 data-number="8.5.4" class="anchored" data-anchor-id="using-jpql-in-spring-data-jpa"><span class="header-section-number">8.5.4</span> Using JPQL in Spring Data JPA</h3>
+<p><strong>Using JPQL</strong></p>
 <ol type="1">
 <li>With <code>@Query</code> annotation:</li>
 </ol>
@@ -3037,30 +3032,24 @@ Code
 <span id="cb32-3"><a href="#cb32-3"></a>    <span class="op">.</span><span class="fu">setParameter</span><span class="op">(</span><span class="st">"categoryName"</span><span class="op">,</span> <span class="st">"Electronics"</span><span class="op">)</span></span>
 <span id="cb32-4"><a href="#cb32-4"></a>    <span class="op">.</span><span class="fu">getResultList</span><span class="op">();</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="benefits-of-jpql" class="level3" data-number="8.5.5">
-<h3 data-number="8.5.5" class="anchored" data-anchor-id="benefits-of-jpql"><span class="header-section-number">8.5.5</span> Benefits of JPQL</h3>
+<p>Benefits of JPQL</p>
 <ol type="1">
-<li>Type-safety: Works with Java types, reducing runtime errors.</li>
-<li>Abstraction: Shields developers from database-specific details.</li>
-<li>Optimization: JPA providers can optimize JPQL queries for better performance.</li>
-<li>Flexibility: Allows for complex queries while maintaining database independence.</li>
+<li><strong>Type-safety</strong>: Works with Java types, reducing runtime errors.</li>
+<li><strong>Abstraction</strong>: Shields developers from database-specific details.</li>
+<li><strong>Optimization</strong>: JPA providers can optimize JPQL queries for better performance.</li>
+<li><strong>Flexibility</strong>: Allows for complex queries while maintaining database independence.</li>
 </ol>
 </section>
-</section>
-<section id="additional-resources" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">8.6</span> Additional Resources</h2>
-<section id="jpql" class="level3" data-number="8.6.1">
-<h3 data-number="8.6.1" class="anchored" data-anchor-id="jpql"><span class="header-section-number">8.6.1</span> JPQL</h3>
+<section id="additional-resources" class="level3" data-number="8.5.2">
+<h3 data-number="8.5.2" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">8.5.2</span> Additional Resources</h3>
+<p><strong>JPQL</strong></p>
 <ul>
 <li><a href="https://docs.oracle.com/javaee/6/tutorial/doc/bnbtg.html" class="external" target="_blank">JPQL - Java Persistence Query Language</a> <br></li>
 <li><a href="https://docs.oracle.com/javaee/7/tutorial/persistence-querylanguage.htm" class="external" target="_blank">JPA Query Language</a> <br></li>
 <li><a href="https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#hql" class="external" target="_blank">JPQL Reference</a> <br></li>
 <li><a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation" class="external" target="_blank">Spring Data JPA - Query Creation</a></li>
 </ul>
-</section>
-<section id="jpa-queries" class="level3" data-number="8.6.2">
-<h3 data-number="8.6.2" class="anchored" data-anchor-id="jpa-queries"><span class="header-section-number">8.6.2</span> JPA Queries</h3>
+<p><strong>JPA Queries</strong></p>
 <p>For more information on Spring Boot JPA query methods, check out these resources:</p>
 <ul>
 <li><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html" class="external" target="_blank">Defining Query Methods</a> <br></li>
@@ -3120,6 +3109,121 @@ Code
 <span id="cb34-2"><a href="#cb34-2"></a><span class="co">#---</span></span>
 <span id="cb34-3"><a href="#cb34-3"></a><span class="at">spring.config.activate.on-profile=prod</span></span>
 <span id="cb34-4"><a href="#cb34-4"></a><span class="at">spring.profiles.active=metrics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a href="../images/springboot/labsb08/lab08-3-app-properties-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="../images/springboot/labsb08/lab08-3-app-properties-1.png" class="img-fluid"></a></p>
+<p>In RestaurantManger we have three <code>application.properties</code> docs:</p>
+<ol type="1">
+<li><strong>Default profile</strong> (<code>application.properties</code>)</li>
+<li><strong>In-memory profile</strong> (<code>application-memory.properties</code>)</li>
+<li><strong>Local profile</strong> (<code>application-local.properties</code>)</li>
+</ol>
+<p>These profiles allow you to run your application in different <code>environments</code> with specific configurations.</p>
+<p><strong>Default Profile (<code>application.properties</code>)</strong></p>
+<p>This is the base configuration file that sets up common properties for all profiles:</p>
+<ul>
+<li>Sets the application name to “restaurantManager”</li>
+<li>Activates the “local” profile by default</li>
+<li>Configures H2 database and JPA settings</li>
+<li>Sets up Swagger documentation paths</li>
+<li>Imports environment variables from a .env file</li>
+<li>Configures an endpoint URL for customers</li>
+</ul>
+<div class="sourceCode" id="cb35" name="application.properties"><pre class="sourceCode numberSource yml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb35-1"><a href="#cb35-1"></a></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="at">spring.application.name=restaurantManager</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a></span>
+<span id="cb35-4"><a href="#cb35-4"></a><span class="co"># application.properties</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a><span class="at">spring.profiles.active=local</span></span>
+<span id="cb35-6"><a href="#cb35-6"></a></span>
+<span id="cb35-7"><a href="#cb35-7"></a></span>
+<span id="cb35-8"><a href="#cb35-8"></a></span>
+<span id="cb35-9"><a href="#cb35-9"></a><span class="co"># H2 DATABASE SERVER</span></span>
+<span id="cb35-10"><a href="#cb35-10"></a><span class="at">spring.datasource.driverClassName=org.h2.Driver</span></span>
+<span id="cb35-11"><a href="#cb35-11"></a><span class="at">spring.jpa.database-platform=org.hibernate.dialect.H2Dialect</span></span>
+<span id="cb35-12"><a href="#cb35-12"></a><span class="at">spring.h2.console.enabled=true</span></span>
+<span id="cb35-13"><a href="#cb35-13"></a></span>
+<span id="cb35-14"><a href="#cb35-14"></a><span class="co"># DDL OPTIONS: create-drop, create, update, none, validate</span></span>
+<span id="cb35-15"><a href="#cb35-15"></a><span class="co">#spring.jpa.hibernate.ddl-auto=create-drop</span></span>
+<span id="cb35-16"><a href="#cb35-16"></a></span>
+<span id="cb35-17"><a href="#cb35-17"></a></span>
+<span id="cb35-18"><a href="#cb35-18"></a><span class="co"># SWAGGER</span></span>
+<span id="cb35-19"><a href="#cb35-19"></a><span class="at">springdoc.api-docs.path=/api-docs</span></span>
+<span id="cb35-20"><a href="#cb35-20"></a><span class="at">springdoc.swagger-ui.path=/swagger-ui.html</span></span>
+<span id="cb35-21"><a href="#cb35-21"></a></span>
+<span id="cb35-22"><a href="#cb35-22"></a></span>
+<span id="cb35-23"><a href="#cb35-23"></a><span class="co"># ENDPOINTS</span></span>
+<span id="cb35-24"><a href="#cb35-24"></a><span class="co"># Import .env file</span></span>
+<span id="cb35-25"><a href="#cb35-25"></a><span class="at">spring.config.import=optional:file:.env</span></span>
+<span id="cb35-26"><a href="#cb35-26"></a><span class="co"># import from environment variables</span></span>
+<span id="cb35-27"><a href="#cb35-27"></a><span class="at">endpoint.url.customers=${ENDPOINT_URL_CUSTOMERS}</span></span>
+<span id="cb35-28"><a href="#cb35-28"></a><span class="co">#endpoint.url.customers=/api/v1/customers/</span></span>
+<span id="cb35-29"><a href="#cb35-29"></a></span>
+<span id="cb35-30"><a href="#cb35-30"></a><span class="co"># Enable debug logging</span></span>
+<span id="cb35-31"><a href="#cb35-31"></a><span class="co">#logging.level.org.springframework=DEBUG</span></span>
+<span id="cb35-32"><a href="#cb35-32"></a><span class="co">#logging.level.dev.example.restaurantManager=DEBUG</span></span>
+<span id="cb35-33"><a href="#cb35-33"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>In-Memory Profile (<code>application-memory.properties</code>)</strong></p>
+<p>This profile is designed for running the application with an in-memory H2 database:</p>
+<ul>
+<li>Configures the H2 database to run in-memory</li>
+<li>Sets database username and password</li>
+<li>Uses “create-drop” as the DDL auto option, which is suitable for testing as it recreates the schema each time the application starts</li>
+<li></li>
+</ul>
+<div class="sourceCode" id="cb36" name="application-memory.properties"><pre class="sourceCode numberSource yml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb36-1"><a href="#cb36-1"></a></span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="co"># H2 IN MEMORY</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="at">spring.datasource.url=jdbc:h2:mem:testdb</span></span>
+<span id="cb36-4"><a href="#cb36-4"></a><span class="at">spring.datasource.username=sa</span></span>
+<span id="cb36-5"><a href="#cb36-5"></a><span class="at">spring.datasource.password=</span></span>
+<span id="cb36-6"><a href="#cb36-6"></a></span>
+<span id="cb36-7"><a href="#cb36-7"></a></span>
+<span id="cb36-8"><a href="#cb36-8"></a><span class="co"># DDL OPTIONS: create-drop, create, update, none, validate</span></span>
+<span id="cb36-9"><a href="#cb36-9"></a><span class="at">spring.jpa.hibernate.ddl-auto=create-drop</span></span>
+<span id="cb36-10"><a href="#cb36-10"></a><span class="co"># create ? Hibernate first drops existing tables and then creates new tables.</span></span>
+<span id="cb36-11"><a href="#cb36-11"></a><span class="co"># create-drop ? similar to create, with the addition that</span></span>
+<span id="cb36-12"><a href="#cb36-12"></a><span class="co"># Hibernate will drop the database after all operations are completed;</span></span>
+<span id="cb36-13"><a href="#cb36-13"></a><span class="co"># typically used for unit testing</span></span>
+<span id="cb36-14"><a href="#cb36-14"></a><span class="co">#https://albertprofe.dev/springboot/sblab0-5.html#ddl</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Local Profile (<code>application-local.properties</code>)</strong></p>
+<p>This profile is for running the application with a local H2 database file:</p>
+<ul>
+<li>Configures the H2 database to use a file-based storage</li>
+<li>Sets database username and password</li>
+<li>Uses “update” as the DDL auto option, which updates the schema without dropping existing tables</li>
+</ul>
+<div class="sourceCode" id="cb37" name="application-local.properties"><pre class="sourceCode numberSource yml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb37-1"><a href="#cb37-1"></a></span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="co"># H2 LOCAL DB SERVER</span></span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="at">spring.datasource.url=jdbc:h2:/home/albert/MyProjects/DataBase/customerdb</span></span>
+<span id="cb37-4"><a href="#cb37-4"></a><span class="at">spring.datasource.username=albert</span></span>
+<span id="cb37-5"><a href="#cb37-5"></a><span class="at">spring.datasource.password=1234</span></span>
+<span id="cb37-6"><a href="#cb37-6"></a></span>
+<span id="cb37-7"><a href="#cb37-7"></a><span class="co"># DDL OPTIONS: create-drop, create, update, none, validate</span></span>
+<span id="cb37-8"><a href="#cb37-8"></a><span class="at">spring.jpa.hibernate.ddl-auto=update</span></span>
+<span id="cb37-9"><a href="#cb37-9"></a><span class="co"># create ? Hibernate first drops existing tables and then creates new tables.</span></span>
+<span id="cb37-10"><a href="#cb37-10"></a><span class="co"># update ? The object model created based on the mappings</span></span>
+<span id="cb37-11"><a href="#cb37-11"></a><span class="co"># (annotations or XML) is compared with the existing schema,</span></span>
+<span id="cb37-12"><a href="#cb37-12"></a><span class="co"># and then Hibernate updates the schema according to the diff.</span></span>
+<span id="cb37-13"><a href="#cb37-13"></a><span class="co"># It never deletes the existing tables or columns</span></span>
+<span id="cb37-14"><a href="#cb37-14"></a><span class="co"># even if they are no longer required by the application.</span></span>
+<span id="cb37-15"><a href="#cb37-15"></a><span class="co"># https://albertprofe.dev/springboot/sblab0-5.html#ddl</span></span>
+<span id="cb37-16"><a href="#cb37-16"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="how-to-use-these-profiles" class="level4" data-number="10.2.1.1">
+<h4 data-number="10.2.1.1" class="anchored" data-anchor-id="how-to-use-these-profiles"><span class="header-section-number">10.2.1.1</span> How to Use These Profiles</h4>
+<ol type="1">
+<li><p><strong>Default Behavior</strong>: By default, the application will use the “local” profile as specified in <code>application.properties</code>:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource properties number-lines code-with-copy"><code class="sourceCode"><span id="cb38-1"><a href="#cb38-1"></a>spring.profiles.active=local</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><strong>Switching Profiles</strong>: To use a different profile, you can:</p>
+<ol type="a">
+<li><p>Change the <code>spring.profiles.active</code> property in <code>application.properties</code>.</p></li>
+<li><p>Set it as a command-line argument:</p>
+<pre><code>java -jar your-app.jar --spring.profiles.active=memory</code></pre></li>
+<li><p>Set it as an environment variable:</p>
+<pre><code>export SPRING_PROFILES_ACTIVE=memory</code></pre></li>
+</ol></li>
+<li><p><strong>Profile-Specific Properties</strong>: Spring Boot will load properties from <code>application.properties</code> and then override/add properties from the active profile-specific file (e.g., <code>application-memory.properties</code> or <code>application-local.properties</code>).</p></li>
+</ol>
+<p>This setup allows you to easily switch between running your application with an in-memory database (useful for testing) and a local file-based database (useful for development or production) without changing your code. It also provides a flexible way to manage different configurations for various environments.</p>
+</section>
+<section id="precedence" class="level4" data-number="10.2.1.2">
+<h4 data-number="10.2.1.2" class="anchored" data-anchor-id="precedence"><span class="header-section-number">10.2.1.2</span> Precedence</h4>
 <p>When a property like s<code>pring.jpa.hibernate.ddl-auto</code> is defined in both <code>application.properties</code> and a profile-specific properties file (e.g., <code>application-dev.properties</code>), the <mark>value from the active profile will override the one in application.properties</mark>.</p>
 <p>Therefore, if the profile is active and specifies <code>ddl-auto=create</code>, it will take precedence over <code>ddl-auto=update</code> in <code>application.properties</code>.</p>
 <blockquote class="blockquote">
@@ -3127,14 +3231,61 @@ Code
 </blockquote>
 </section>
 </section>
+</section>
 <section id="env" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="env"><span class="header-section-number">10.3</span> <code>.env</code></h2>
-<p>// explain how devops helps to manage CRITICAL variables like endpoints, passwords, etcc</p>
+<p><a href="../images/springboot/labsb08/lab08-3-env.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="../images/springboot/labsb08/lab08-3-env.png" class="img-fluid"></a></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource yml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb41-1"><a href="#cb41-1"></a></span>
+<span id="cb41-2"><a href="#cb41-2"></a><span class="at">ENDPOINT_URL_CUSTOMERS=/api/v1/customers/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The process loading <code>environment variables</code> from a <code>.env</code> file into <code>application.properties</code>, and then using those variables in your <code>Spring Boot</code> application works like this:</p>
+<ol type="1">
+<li><p>Loading from <code>.env</code> file: In your <code>application.properties</code>, you have the following line:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource properties number-lines code-with-copy"><code class="sourceCode"><span id="cb42-1"><a href="#cb42-1"></a>spring.config.import=optional:file:.env</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This instructs <code>Spring Boot</code> to import variables from a <code>.env</code> file if it exists. The “optional:” prefix means the <mark>application won’t fail if the file is missing</mark>.</p></li>
+<li><p>Defining the property: In <code>application.properties</code>, you have:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource properties number-lines code-with-copy"><code class="sourceCode"><span id="cb43-1"><a href="#cb43-1"></a>endpoint.url.customers=${ENDPOINT_URL_CUSTOMERS}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This sets the <code>endpoint.url.customers</code> property to the value of the <code>ENDPOINT_URL_CUSTOMERS</code> environment variable.</p></li>
+<li><p>Using the property in the <strong>controller</strong>: In <strong>CustomerController</strong>, we’re injecting this property:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb44-1"><a href="#cb44-1"></a><span class="at">@Value</span><span class="op">(</span><span class="st">"${endpoint.url.customers}"</span><span class="op">)</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="kw">private</span> <span class="bu">String</span> endpointUrlCustomers<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This injects the value of <code>endpoint.url.customers</code> into the <code>endpointUrlCustomers</code> variable.</p></li>
+<li><p>Accessing the property: In <code>showEndpointCustomers()</code> method, we’re returning the value of <code>endpointUrlCustomers</code>.</p></li>
+</ol>
+<p>Here’s how it all comes together:</p>
+<ol type="1">
+<li>When the application starts, it looks for a <code>.env</code> file and loads any variables defined there.</li>
+<li>The <code>ENDPOINT_URL_CUSTOMERS</code> variable from <code>.env</code> (or from the system environment if not in <code>.env</code>) is used to set the <code>endpoint.url.customers</code> property in application.properties.</li>
+<li><code>Spring Boot</code> <mark>injects this property value into the controller</mark>.</li>
+<li>The <code>controller</code> can now use this value, as demonstrated in the <code>showEndpointCustomers()</code> method.</li>
+</ol>
+<p>This approach allows to keep <strong>sensitive or critical environment-specific information</strong> (like API endpoints, passwords, users names, roles, etc) out of source code, making it easier to manage different configurations for various environments (development, staging, production, etc.).</p>
+<section id="intellijidea-ide-settings-2024" class="level4" data-number="10.3.0.1">
+<h4 data-number="10.3.0.1" class="anchored" data-anchor-id="intellijidea-ide-settings-2024"><span class="header-section-number">10.3.0.1</span> IntelliJIdea IDE settings 2024</h4>
+<p><a href="../images/springboot/labsb08/labsb08-3-env-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="../images/springboot/labsb08/labsb08-3-env-1.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/labsb08-3-env-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="../images/springboot/labsb08/labsb08-3-env-2.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/labsb08-3-env-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="../images/springboot/labsb08/labsb08-3-env-3.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/labsb08-3-env-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img src="../images/springboot/labsb08/labsb08-3-env-4.png" class="img-fluid"></a></p>
+<p>Check these settings at <code>IntelliJIdea IDE</code>:</p>
+<ul>
+<li>Install the correct plugins: Make sure you have both the “EnvFile” and “.env files support” plugins installed16. These plugins provide better support for .env files in IntelliJ IDEA.</li>
+<li>Configure file type associations: Go to Settings | Editor | File Types and ensure that both *.env and .env patterns are assigned to the “DotEnv” file type3. This will help IntelliJ recognize the file correctly.</li>
+<li>Set up run configurations: For each run configuration where you need to use the .env file: Open Run | Edit Configurations
+<ul>
+<li>Select your configuration: Go to the EnvFile tab</li>
+<li>Enable EnvFile support and add your .env file to the list</li>
+<li>Select directory .env</li>
+</ul></li>
+<li>Restart IntelliJ: After making these changes, restart IntelliJ IDEA to ensure all settings are applied correctly.</li>
+<li>Check file location: Ensure your .env file is in the correct location, typically the root of your project.</li>
+<li>Verify file content: Make sure your .env file is formatted correctly, with each variable on a new line in the format KEY=VALUE.</li>
+<li>Use absolute paths: If IntelliJ still can’t find your .env file, try using an absolute path in your run configuration</li>
+</ul>
+</section>
 </section>
 </section>
 <section id="code" class="level1" data-number="11">
 <h1 data-number="11"><span class="header-section-number">11</span> Code</h1>
-<p><a href="../images/springboot/labsb08/lab08-1-v0.0.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="../images/springboot/labsb08/lab08-1-v0.0.png" class="img-fluid" style="width:50.0%"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-1-v0.0.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="../images/springboot/labsb08/lab08-1-v0.0.png" class="img-fluid" style="width:50.0%"></a></p>
 <ul>
 <li><a href="https://github.com/AlbertProfe/restaurantManager/commits/master/" class="external" target="_blank">Commits</a></li>
 </ul>
@@ -3751,7 +3902,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
