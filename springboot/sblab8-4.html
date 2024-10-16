@@ -1752,7 +1752,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#updated-uml" id="toc-updated-uml" class="nav-link" data-scroll-target="#updated-uml"><span class="header-section-number">2</span> Updated UML</a></li>
   <li><a href="#jpa-relationships" id="toc-jpa-relationships" class="nav-link" data-scroll-target="#jpa-relationships"><span class="header-section-number">3</span> JPA Relationships</a>
   <ul>
-  <li><a href="#onetomany-and-manytoone" id="toc-onetomany-and-manytoone" class="nav-link" data-scroll-target="#onetomany-and-manytoone"><span class="header-section-number">3.1</span> OneToMany and ManyToOne</a></li>
+  <li><a href="#onetomany-and-manytoone" id="toc-onetomany-and-manytoone" class="nav-link" data-scroll-target="#onetomany-and-manytoone"><span class="header-section-number">3.1</span> OneToMany and ManyToOne</a>
+  <ul>
+  <li><a href="#casting" id="toc-casting" class="nav-link" data-scroll-target="#casting"><span class="header-section-number">3.1.1</span> Casting</a></li>
+  </ul></li>
   <li><a href="#manytomany" id="toc-manytomany" class="nav-link" data-scroll-target="#manytomany"><span class="header-section-number">3.2</span> ManyToMany</a></li>
   </ul></li>
   <li><a href="#inherence-and-jpa" id="toc-inherence-and-jpa" class="nav-link" data-scroll-target="#inherence-and-jpa"><span class="header-section-number">4</span> Inherence and JPA</a></li>
@@ -2049,7 +2052,8 @@ Example Sample OrderRepository:
 <p><strong>Bidirectional Relationships</strong></p>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p>Bidirectional Relationships example: <a href="https://github.com/AlbertProfe/cifojava2022-3/wiki/Library2:-API-Rest-Author-Book-@OneToMany-CRUD-with-Swagger" class="external" target="_blank">Library2: API Rest Author Book <span class="citation" data-cites="OneToMany">@OneToMany</span> CRUD with Swagger</a></p>
+<p>Bidirectional Relationships example:</p>
+<p>-<a href="https://github.com/AlbertProfe/cifojava2022-3/wiki/Library2:-API-Rest-Author-Book-@OneToMany-CRUD-with-Swagger" class="external" target="_blank">Library2: API Rest Author Book <span class="citation" data-cites="OneToMany">@OneToMany</span> CRUD with Swagger</a> - <a href="https://github.com/AlbertProfe/restaurantManager/tree/c562d8da650da2f758754312c0e1ecea2d8909af" class="external" target="_blank">TestCreateBookingTable() with JPA, TableRestaurant 1:n Booking bidirectional relationship</a></p>
 </div></div><ul>
 <li>Both entities have references to each other</li>
 <li>The “Many” side is usually the owning side</li>
@@ -2085,6 +2089,41 @@ Why Serialization is Needed?
 <p>Implementing <code>Serializable</code> is <strong>not always the best solution</strong>. In some cases, it might be better to adjust your entity relationships (<code>@OneToMany</code>) or use different mapping strategies (<code>@ElementCollection</code> for simple collections).</p>
 </div>
 </div>
+<section id="casting" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="casting"><span class="header-section-number">3.1.1</span> Casting</h3>
+<p>The <a href="https://github.com/AlbertProfe/restaurantManager/blob/c562d8da650da2f758754312c0e1ecea2d8909af/src/test/java/dev/example/restaurantManager/RelationshipsOrderRestaurantTest.java#L80" class="external" target="_blank">original</a> code avoids these issues by declaring orderToSave directly as TakeAwayOrder, eliminating the need for casting. This approach is generally preferred when possible, as it’s safer and more straightforward.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">// Assume OrderRestaurant is a superclass of TakeAwayOrder</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>OrderRestaurant orderToSave <span class="op">=</span> <span class="kw">new</span> <span class="fu">TakeAwayOrder</span><span class="op">(</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="st">"T11"</span><span class="op">,</span> <span class="kw">new</span> <span class="bu">Date</span><span class="op">(),</span> <span class="st">"Alice"</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="fl">10.99</span><span class="op">,</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="kw">true</span><span class="op">,</span> <span class="kw">new</span> <span class="bu">ArrayList</span><span class="op">&lt;&gt;(</span><span class="bu">Arrays</span><span class="op">.</span><span class="fu">asList</span><span class="op">(</span>menu1<span class="op">)),</span> <span class="kw">null</span> <span class="op">);</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">// We need to cast here</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="op">((</span>TakeAwayOrder<span class="op">)</span> orderToSave<span class="op">).</span><span class="fu">setCustomerTakeAway</span><span class="op">(</span>customer1<span class="op">);</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">// We might need to cast here too, depending on the repository's type parameter</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>takeAwayOrderRepository<span class="op">.</span><span class="fu">save</span><span class="op">((</span>TakeAwayOrder<span class="op">)</span> orderToSave<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>Upcasting</strong>: When we assigned a TakeAwayOrder object to an OrderRestaurant variable, we performed an implicit upcast. This is always safe because a TakeAwayOrder is an OrderRestaurant.</li>
+<li><strong>Downcasting</strong>: When we cast orderToSave back to TakeAwayOrder, we’re performing a downcast. This is potentially risky because not all OrderRestaurant objects are TakeAwayOrder objects.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why casting can be problematic?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Type safety: Downcasting can lead to runtime errors if the object isn’t actually of the type you’re casting to.</li>
+<li>Code readability: Excessive casting can make code harder to read and understand.</li>
+<li>Performance: While minor, casting does involve a runtime check.</li>
+</ul>
+</div>
+</div>
+</section>
 </section>
 <section id="manytomany" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="manytomany"><span class="header-section-number">3.2</span> ManyToMany</h2>
@@ -2093,25 +2132,6 @@ Why Serialization is Needed?
 <li>Multiple entities are associated with multiple entities of another type</li>
 <li>Only one side has a reference to the other entity</li>
 <li>Example: Many Students can enroll in many Courses</li>
-</ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="at">@Entity</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">public</span> <span class="kw">class</span> Student <span class="op">{</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>    <span class="at">@ManyToMany</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>    <span class="at">@JoinTable</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"student_course"</span><span class="op">,</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>               joinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"student_id"</span><span class="op">),</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a>               inverseJoinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"course_id"</span><span class="op">))</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Course<span class="op">&gt;</span> courses<span class="op">;</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="op">}</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="at">@Entity</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="kw">public</span> <span class="kw">class</span> Course <span class="op">{</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a>    <span class="co">// No reference to Student</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>ManyToMany Bidirectional</strong></p>
-<ul>
-<li>Both entities have references to each other</li>
-<li>One side is designated as the owning side</li>
-<li>Example: Many Students can enroll in many Courses, and each Course can have many Students</li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="at">@Entity</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="kw">public</span> <span class="kw">class</span> Student <span class="op">{</span></span>
@@ -2124,9 +2144,28 @@ Why Serialization is Needed?
 <span id="cb7-9"><a href="#cb7-9"></a></span>
 <span id="cb7-10"><a href="#cb7-10"></a><span class="at">@Entity</span></span>
 <span id="cb7-11"><a href="#cb7-11"></a><span class="kw">public</span> <span class="kw">class</span> Course <span class="op">{</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a>    <span class="at">@ManyToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"courses"</span><span class="op">)</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Student<span class="op">&gt;</span> students<span class="op">;</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-12"><a href="#cb7-12"></a>    <span class="co">// No reference to Student</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>ManyToMany Bidirectional</strong></p>
+<ul>
+<li>Both entities have references to each other</li>
+<li>One side is designated as the owning side</li>
+<li>Example: Many Students can enroll in many Courses, and each Course can have many Students</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a><span class="at">@Entity</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">public</span> <span class="kw">class</span> Student <span class="op">{</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>    <span class="at">@ManyToMany</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>    <span class="at">@JoinTable</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"student_course"</span><span class="op">,</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>               joinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"student_id"</span><span class="op">),</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>               inverseJoinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"course_id"</span><span class="op">))</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Course<span class="op">&gt;</span> courses<span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="op">}</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="at">@Entity</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="kw">public</span> <span class="kw">class</span> Course <span class="op">{</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>    <span class="at">@ManyToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"courses"</span><span class="op">)</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Student<span class="op">&gt;</span> students<span class="op">;</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <blockquote class="blockquote">
 <p>In bidirectional ManyToMany relationships, use <code>mappedBy</code> on the non-owning side to indicate the owning side’s field name. The <code>@JoinTable</code> annotation is used to specify the join table details.</p>
 </blockquote>
@@ -2775,7 +2814,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
