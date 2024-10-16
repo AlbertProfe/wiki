@@ -111,6 +111,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -1746,12 +1749,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#restaurantmanager-project-summary" id="toc-restaurantmanager-project-summary" class="nav-link active" data-scroll-target="#restaurantmanager-project-summary"><span class="header-section-number">1</span> RestaurantManager Project Summary</a></li>
-  <li><a href="#jpa-relationships" id="toc-jpa-relationships" class="nav-link" data-scroll-target="#jpa-relationships"><span class="header-section-number">2</span> JPA Relationships</a>
+  <li><a href="#updated-uml" id="toc-updated-uml" class="nav-link" data-scroll-target="#updated-uml"><span class="header-section-number">2</span> Updated UML</a></li>
+  <li><a href="#jpa-relationships" id="toc-jpa-relationships" class="nav-link" data-scroll-target="#jpa-relationships"><span class="header-section-number">3</span> JPA Relationships</a>
   <ul>
-  <li><a href="#onetomany-and-manytoone" id="toc-onetomany-and-manytoone" class="nav-link" data-scroll-target="#onetomany-and-manytoone"><span class="header-section-number">2.1</span> OneToMany and ManyToOne</a></li>
+  <li><a href="#onetomany-and-manytoone" id="toc-onetomany-and-manytoone" class="nav-link" data-scroll-target="#onetomany-and-manytoone"><span class="header-section-number">3.1</span> OneToMany and ManyToOne</a></li>
+  <li><a href="#manytomany" id="toc-manytomany" class="nav-link" data-scroll-target="#manytomany"><span class="header-section-number">3.2</span> ManyToMany</a></li>
   </ul></li>
-  <li><a href="#inherence-and-jpa" id="toc-inherence-and-jpa" class="nav-link" data-scroll-target="#inherence-and-jpa"><span class="header-section-number">3</span> Inherence and JPA</a></li>
-  <li><a href="#queries" id="toc-queries" class="nav-link" data-scroll-target="#queries"><span class="header-section-number">4</span> Queries</a></li>
+  <li><a href="#inherence-and-jpa" id="toc-inherence-and-jpa" class="nav-link" data-scroll-target="#inherence-and-jpa"><span class="header-section-number">4</span> Inherence and JPA</a></li>
+  <li><a href="#queries" id="toc-queries" class="nav-link" data-scroll-target="#queries"><span class="header-section-number">5</span> Queries</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">6</span> Code</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/sblab8-4.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1794,7 +1800,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tuesday, October 15, 2024</p>
+      <p class="date-modified">Wednesday, October 16, 2024</p>
     </div>
   </div>
     
@@ -1893,8 +1899,95 @@ Example Sample OrderRepository:
 </ul>
 <p>This structure allows for efficient querying and management of restaurant data using Spring Data JPA.</p>
 </section>
-<section id="jpa-relationships" class="level1 page-columns page-full" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> JPA Relationships</h1>
+<section id="updated-uml" class="level1 page-columns page-full" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Updated UML</h1>
+<p>This is the updated UML from <a href="../springboot/sblab8-1.html#discussion-solving-uml" class="external" target="_blank">Lab#SB08-1 UML and DDD</a> correspoing to this <mark>commit</mark>: <a href="https://github.com/AlbertProfe/restaurantManager/tree/51b172d69b9f04196dbd52d3abdf9c50a05a3ff9" class="external" target="_blank">TestCreateOrder() with JPA, Customer 1:n TakeAwayOrder unidirectional relationship</a></p>
+<div class="column-page-right">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class OrderRestaurant {
+        &lt;&lt;Entity&gt;&gt;
+        -String id
+        -Date date
+        -String waiter
+        -int peopleQty
+        -double totalPayment
+        -boolean paid
+        -ArrayList&lt;Menu&gt; menus
+        +toString()
+    }
+    class TakeAwayOrder {
+        &lt;&lt;Entity&gt;&gt;
+        -Customer customerTakeAway
+        +toString()
+    }
+    class TableRestaurant {
+        -String name
+        -String description
+        -int qty
+        -boolean busy
+        +toString()
+    }
+    class ShippingOrderRestaurant {
+        -String address
+        -String city
+        -String riderName
+        +toString()
+    }
+    class Customer {
+        &lt;&lt;Entity&gt;&gt;
+        -String id
+        -String name
+        -String email
+        -String phoneNumber
+        -int age
+        -boolean vipCustomer
+        -boolean deleted
+    }
+    class EatInOrderRestaurant {
+        -ArrayList&lt;TableRestaurant&gt; tableRestaurants
+        +toString()
+    }
+    class Menu {
+        &lt;&lt;Serializable&gt;&gt;
+        -String name
+        -Double price
+        -String content
+        -boolean active
+        -boolean water
+    }
+    class Booking {
+        -String name
+        -String phoneNumber
+        -int peopleQty
+        -LocalDateTime date
+        -TableRestaurant tableRestaurant
+        -boolean confirmed
+        +toString()
+    }
+
+    OrderRestaurant &lt;|-- TakeAwayOrder
+    OrderRestaurant &lt;|-- ShippingOrderRestaurant
+    OrderRestaurant &lt;|-- EatInOrderRestaurant
+    OrderRestaurant "1" *-- "*" Menu
+    TakeAwayOrder "*" -- "1" Customer
+    EatInOrderRestaurant "1" *-- "*" TableRestaurant
+    Booking "1" -- "1" TableRestaurant
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="jpa-relationships" class="level1 page-columns page-full" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> JPA Relationships</h1>
 <p><code>JPA (Java Persistence API)</code> provides several types of relationships to <mark>model associations between entities </mark>:</p>
 <ol type="1">
 <li><p><strong>OneToOne</strong>: Represents a single-valued association where an instance of one entity is related to a single instance of another entity.</p></li>
@@ -1910,8 +2003,8 @@ Example Sample OrderRepository:
 <blockquote class="blockquote">
 <p>Relationships are typically annotated in entity classes using <code>@OneToOne</code>, <code>@OneToMany</code>, <code>@ManyToOne</code>, or <code>@ManyToMany</code>. Additional annotations like <code>@JoinColumn</code> and <code>mappedBy</code> are used to specify the joining strategy and the owning side of the relationship.</p>
 </blockquote>
-<section id="onetomany-and-manytoone" class="level2 page-columns page-full" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="onetomany-and-manytoone"><span class="header-section-number">2.1</span> OneToMany and ManyToOne</h2>
+<section id="onetomany-and-manytoone" class="level2 page-columns page-full" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="onetomany-and-manytoone"><span class="header-section-number">3.1</span> OneToMany and ManyToOne</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="../images/springboot/labsb08/labsb08-4-onetomay.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Entity @oneToMany"><img src="../images/springboot/labsb08/labsb08-4-onetomay.png" class="img-fluid figure-img" alt="Entity @oneToMany"></a></p>
@@ -1993,12 +2086,82 @@ Why Serialization is Needed?
 </div>
 </div>
 </section>
+<section id="manytomany" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="manytomany"><span class="header-section-number">3.2</span> ManyToMany</h2>
+<p><strong>ManyToMany Unidirectional</strong></p>
+<ul>
+<li>Multiple entities are associated with multiple entities of another type</li>
+<li>Only one side has a reference to the other entity</li>
+<li>Example: Many Students can enroll in many Courses</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="at">@Entity</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">public</span> <span class="kw">class</span> Student <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="at">@ManyToMany</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="at">@JoinTable</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"student_course"</span><span class="op">,</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>               joinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"student_id"</span><span class="op">),</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>               inverseJoinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"course_id"</span><span class="op">))</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Course<span class="op">&gt;</span> courses<span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="op">}</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="at">@Entity</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="kw">public</span> <span class="kw">class</span> Course <span class="op">{</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>    <span class="co">// No reference to Student</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>ManyToMany Bidirectional</strong></p>
+<ul>
+<li>Both entities have references to each other</li>
+<li>One side is designated as the owning side</li>
+<li>Example: Many Students can enroll in many Courses, and each Course can have many Students</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="at">@Entity</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">public</span> <span class="kw">class</span> Student <span class="op">{</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="at">@ManyToMany</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="at">@JoinTable</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"student_course"</span><span class="op">,</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>               joinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"student_id"</span><span class="op">),</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>               inverseJoinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"course_id"</span><span class="op">))</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Course<span class="op">&gt;</span> courses<span class="op">;</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="op">}</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="at">@Entity</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="kw">public</span> <span class="kw">class</span> Course <span class="op">{</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>    <span class="at">@ManyToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"courses"</span><span class="op">)</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Student<span class="op">&gt;</span> students<span class="op">;</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>In bidirectional ManyToMany relationships, use <code>mappedBy</code> on the non-owning side to indicate the owning side’s field name. The <code>@JoinTable</code> annotation is used to specify the join table details.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+ManyToMany Considerations
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>ManyToMany relationships often require a join table in the database</li>
+<li>Consider using an intermediate entity for complex relationships or when additional attributes are needed for the relationship</li>
+<li>Be cautious of performance implications with large datasets</li>
+</ul>
+</div>
+</div>
 </section>
-<section id="inherence-and-jpa" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Inherence and JPA</h1>
 </section>
-<section id="queries" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Queries</h1>
+<section id="inherence-and-jpa" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Inherence and JPA</h1>
+<p>// to do</p>
+</section>
+<section id="queries" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Queries</h1>
+<p>// to do</p>
+</section>
+<section id="code" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Code</h1>
+<ul>
+<li><a href="https://github.com/AlbertProfe/restaurantManager/commits/master/" class="external" target="_blank">Commits</a></li>
+</ul>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -2612,7 +2775,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
