@@ -1803,7 +1803,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Wednesday, October 16, 2024</p>
+      <p class="date-modified">Thursday, October 17, 2024</p>
     </div>
   </div>
     
@@ -1904,8 +1904,17 @@ Example Sample OrderRepository:
 </section>
 <section id="updated-uml" class="level1 page-columns page-full" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Updated UML</h1>
-<p>This is the updated UML from <a href="../springboot/sblab8-1.html#discussion-solving-uml" class="external" target="_blank">Lab#SB08-1 UML and DDD</a> correspoing to this <mark>commit</mark>: <a href="https://github.com/AlbertProfe/restaurantManager/tree/51b172d69b9f04196dbd52d3abdf9c50a05a3ff9" class="external" target="_blank">TestCreateOrder() with JPA, Customer 1:n TakeAwayOrder unidirectional relationship</a></p>
-<div class="column-page-right">
+<p>This is the updated UML from <a href="../springboot/sblab8-1.html#discussion-solving-uml" class="external" target="_blank">Lab#SB08-1 UML and DDD</a> correspond to this <mark>commit</mark>: <a href="https://github.com/AlbertProfe/restaurantManager/tree/51b172d69b9f04196dbd52d3abdf9c50a05a3ff9" class="external" target="_blank">TestCreateOrder() with JPA, Customer 1:n TakeAwayOrder unidirectional relationship</a></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>This Lab#SB08-4 will implement this entities relationships:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/labsb08/lab08-4-uml-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="RestaurantManager UML"><img src="../images/springboot/labsb08/lab08-4-uml-2.png" class="img-fluid figure-img" alt="RestaurantManager UML"></a></p>
+<figcaption>RestaurantManager UML</figcaption>
+</figure>
+</div>
+</div></div><div class="column-page-right">
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -2010,7 +2019,7 @@ Example Sample OrderRepository:
 <h2 data-number="3.1" class="anchored" data-anchor-id="onetomany-and-manytoone"><span class="header-section-number">3.1</span> OneToMany and ManyToOne</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/labsb08/labsb08-4-onetomay.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Entity @oneToMany"><img src="../images/springboot/labsb08/labsb08-4-onetomay.png" class="img-fluid figure-img" alt="Entity @oneToMany"></a></p>
+<p><a href="../images/springboot/labsb08/labsb08-4-onetomay.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Entity @oneToMany"><img src="../images/springboot/labsb08/labsb08-4-onetomay.png" class="img-fluid figure-img" alt="Entity @oneToMany"></a></p>
 <figcaption>Entity <span class="citation" data-cites="oneToMany">@oneToMany</span></figcaption>
 </figure>
 </div>
@@ -2053,7 +2062,10 @@ Example Sample OrderRepository:
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Bidirectional Relationships example:</p>
-<p>-<a href="https://github.com/AlbertProfe/cifojava2022-3/wiki/Library2:-API-Rest-Author-Book-@OneToMany-CRUD-with-Swagger" class="external" target="_blank">Library2: API Rest Author Book <span class="citation" data-cites="OneToMany">@OneToMany</span> CRUD with Swagger</a> - <a href="https://github.com/AlbertProfe/restaurantManager/tree/c562d8da650da2f758754312c0e1ecea2d8909af" class="external" target="_blank">TestCreateBookingTable() with JPA, TableRestaurant 1:n Booking bidirectional relationship</a></p>
+<ul>
+<li><a href="https://github.com/AlbertProfe/cifojava2022-3/wiki/Library2:-API-Rest-Author-Book-@OneToMany-CRUD-with-Swagger" class="external" target="_blank">Library2: API Rest Author Book <span class="citation" data-cites="OneToMany">@OneToMany</span> CRUD with Swagger</a></li>
+<li><a href="https://github.com/AlbertProfe/restaurantManager/tree/c562d8da650da2f758754312c0e1ecea2d8909af" class="external" target="_blank">TestCreateBookingTable() with JPA, TableRestaurant 1:n Booking bidirectional relationship</a></li>
+</ul>
 </div></div><ul>
 <li>Both entities have references to each other</li>
 <li>The “Many” side is usually the owning side</li>
@@ -2149,8 +2161,10 @@ Why casting can be problematic?
 <p><strong>ManyToMany Bidirectional</strong></p>
 <ul>
 <li>Both entities have references to each other</li>
-<li>One side is designated as the owning side</li>
-<li>Example: Many Students can enroll in many Courses, and each Course can have many Students</li>
+<li>One side is designated as the <mark>owning side, the other the inverse side</mark>
+<ul>
+<li><strong>Example</strong>: Many Students can enroll in many Courses, and each Course can have many Students</li>
+</ul></li>
 </ul>
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a><span class="at">@Entity</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="kw">public</span> <span class="kw">class</span> Student <span class="op">{</span></span>
@@ -2180,9 +2194,9 @@ ManyToMany Considerations
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>ManyToMany relationships often require a join table in the database</li>
-<li>Consider using an intermediate entity for complex relationships or when additional attributes are needed for the relationship</li>
-<li>Be cautious of performance implications with large datasets</li>
+<li><code>ManyToMany</code> relationships often require a <mark>join table in the database</mark></li>
+<li>Consider using an <mark>intermediate entity for complex relationships</mark> or when additional attributes are needed for the relationship</li>
+<li>Be cautious of <strong>performance</strong> implications with large datasets</li>
 </ul>
 </div>
 </div>
@@ -2814,7 +2828,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
