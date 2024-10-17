@@ -1749,7 +1749,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#restaurantmanager-project-summary" id="toc-restaurantmanager-project-summary" class="nav-link active" data-scroll-target="#restaurantmanager-project-summary"><span class="header-section-number">1</span> RestaurantManager Project Summary</a></li>
-  <li><a href="#updated-uml" id="toc-updated-uml" class="nav-link" data-scroll-target="#updated-uml"><span class="header-section-number">2</span> Updated UML</a></li>
+  <li><a href="#updated-uml" id="toc-updated-uml" class="nav-link" data-scroll-target="#updated-uml"><span class="header-section-number">2</span> Updated UML</a>
+  <ul>
+  <li><a href="#final-uml" id="toc-final-uml" class="nav-link" data-scroll-target="#final-uml"><span class="header-section-number">2.1</span> Final UML</a></li>
+  </ul></li>
   <li><a href="#jpa-relationships" id="toc-jpa-relationships" class="nav-link" data-scroll-target="#jpa-relationships"><span class="header-section-number">3</span> JPA Relationships</a>
   <ul>
   <li><a href="#onetomany-and-manytoone" id="toc-onetomany-and-manytoone" class="nav-link" data-scroll-target="#onetomany-and-manytoone"><span class="header-section-number">3.1</span> OneToMany and ManyToOne</a>
@@ -2001,6 +2004,109 @@ Example Sample OrderRepository:
 </div>
 </div>
 </div>
+<section id="final-uml" class="level2 page-columns page-full" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="final-uml"><span class="header-section-number">2.1</span> Final UML</h2>
+<p>This UML would fit the final version of our project:</p>
+<div class="column-page-right">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class OrderRestaurant {
+        &lt;&lt;Entity&gt;&gt;
+        -String id
+        -Date date
+        -String waiter
+        -int peopleQty
+        -double totalPayment
+        -boolean paid
+        -ArrayList&lt;MenuRestaurant&gt; menusRestaurant
+        +toString()
+    }
+    class TakeAwayOrder {
+        &lt;&lt;Entity&gt;&gt;
+        -Customer customerTakeAway
+        +toString()
+    }
+    class TableRestaurant {
+        &lt;&lt;Entity&gt;&gt;
+        -String name
+        -String description
+        -int qty
+        -boolean busy
+        -ArrayList&lt;Booking&gt; Bookings
+        +toString()
+    }
+    class ShippingOrderRestaurant {
+         &lt;&lt;Entity&gt;&gt;
+        -String address
+        -String city
+        -String riderName
+        +toString()
+    }
+    class Customer {
+        &lt;&lt;Entity&gt;&gt;
+        -String id
+        -String name
+        -String email
+        -String phoneNumber
+        -int age
+        -boolean vipCustomer
+        -boolean deleted
+    }
+    class EatInOrderRestaurant {
+        &lt;&lt;Entity&gt;&gt;
+        -ArrayList&lt;TableRestaurant&gt; tablesRestaurant
+        +toString()
+    }
+    class MenuRestaurant {
+        &lt;&lt;Entity&gt;&gt;
+        -String name
+        -Double price
+        -String content
+        -boolean active
+        -boolean water
+        -ArrayList&lt;OrderRestaurant&gt; ordersRestaurant
+        -ArrayList&lt;MenuItemRestaurant&gt; MenusItemsRestaurant
+    }
+      class MenuItemRestaurant {
+        &lt;&lt;Entity&gt;&gt;
+        -String name
+        -String content
+        -boolean active
+        -ArrayList&lt;MenuRestaurant&gt; MenusRestaurant
+    }
+    class Booking {
+        &lt;&lt;Entity&gt;&gt;
+        -String name
+        -String phoneNumber
+        -int peopleQty
+        -LocalDateTime date
+        -TableRestaurant tableRestaurant
+        -boolean confirmed
+        +toString()
+    }
+
+    OrderRestaurant &lt;|-- TakeAwayOrder
+    OrderRestaurant &lt;|-- ShippingOrderRestaurant
+    OrderRestaurant &lt;|-- EatInOrderRestaurant
+    OrderRestaurant "n" *--* "m" MenuRestaurant
+    MenuRestaurant "n" *--* "m" MenuItemRestaurant
+    TakeAwayOrder "n" -- "1" Customer
+    EatInOrderRestaurant "1" *-- "n" TableRestaurant
+    Booking "1" *-- "n" TableRestaurant
+   
+  
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="jpa-relationships" class="level1 page-columns page-full" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> JPA Relationships</h1>
@@ -2860,7 +2966,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
