@@ -15014,7 +15014,18 @@
     "href": "springboot/sblab8-4.html#commit-85a23ab",
     "title": "Lab#SB08-4: JPA",
     "section": "6.1 commit 85a23ab",
-    "text": "6.1 commit 85a23ab\n\nmanytomany menu n:m order\n\n\n\n\nWhen iterating on a project and introducing new relationships, such as a many-to-many relationship between orders and menus, existing tests may fail due to outdated assumptions and data setup. In this case, the test TestCreateOrder needs to be updated to reflect the new relationship structure.\n\nThe main issue is that the test is creating MenuRestaurant objects in memory but not persisting them to the database. With a many-to-many relationship, both entities (Order and Menu) need to exist in the database before they can be associated.\nTo fix this, the test should be refactored to:\n\nSave MenuRestaurant entities to the database using a repository before creating orders.\nFetch the saved menus from the database when creating orders.\nUpdate the order creation process to use the new relationship structure.\nAdjust assertions to verify the new relationship.\n\nThis refactoring ensures that the test accurately reflects the new data model and relationships.\nIt also helps maintain the integrity of the test suite as the project evolves, ensuring that tests remain valid and useful for catching potential issues in the updated codebase.\n\n\n\n\n\n  Lab#SB08-3: RestaurantManager \n\n\n\n  top \n\n\n\n Lab#SB08-5: RestaurantManager",
+    "text": "6.1 commit 85a23ab\n\nmanytomany menu n:m order\n\n\n\n\nWhen iterating on a project and introducing new relationships, such as a many-to-many relationship between orders and menus, existing tests may fail due to outdated assumptions and data setup. In this case, the test TestCreateOrder needs to be updated to reflect the new relationship structure.\n\nThe main issue is that the test is creating MenuRestaurant objects in memory but not persisting them to the database. With a many-to-many relationship, both entities (Order and Menu) need to exist in the database before they can be associated.\nTo fix this, the test should be refactored to:\n\nSave MenuRestaurant entities to the database using a repository before creating orders.\nFetch the saved menus from the database when creating orders.\nUpdate the order creation process to use the new relationship structure.\nAdjust assertions to verify the new relationship.\n\nThis refactoring ensures that the test accurately reflects the new data model and relationships.\nIt also helps maintain the integrity of the test suite as the project evolves, ensuring that tests remain valid and useful for catching potential issues in the updated codebase.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-4: JPA"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-4.html#commit-d65b4a9",
+    "href": "springboot/sblab8-4.html#commit-d65b4a9",
+    "title": "Lab#SB08-4: JPA",
+    "section": "6.2 commit d65b4a9",
+    "text": "6.2 commit d65b4a9\nIn this commit we update TestCreateOrder() to reflect the new relationship structure and create a new test.\n\nTestCreateOrderMenu() and update TestCreateOrder()\n\n\n\n\n\n\n  Lab#SB08-3: RestaurantManager \n\n\n\n  top \n\n\n\n Lab#SB08-5: RestaurantManager",
     "crumbs": [
       "Spring Boot Laboratories",
       "Lab#SB08-4: JPA"
