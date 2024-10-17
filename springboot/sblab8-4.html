@@ -1760,7 +1760,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#inherence-and-jpa" id="toc-inherence-and-jpa" class="nav-link" data-scroll-target="#inherence-and-jpa"><span class="header-section-number">4</span> Inherence and JPA</a></li>
   <li><a href="#queries" id="toc-queries" class="nav-link" data-scroll-target="#queries"><span class="header-section-number">5</span> Queries</a></li>
-  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">6</span> Code</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">6</span> Code</a>
+  <ul>
+  <li><a href="#commit-85a23ab" id="toc-commit-85a23ab" class="nav-link" data-scroll-target="#commit-85a23ab"><span class="header-section-number">6.1</span> commit <code>85a23ab</code></a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/sblab8-4.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -2215,6 +2218,26 @@ ManyToMany Considerations
 <ul>
 <li><a href="https://github.com/AlbertProfe/restaurantManager/commits/master/" class="external" target="_blank">Commits</a></li>
 </ul>
+<section id="commit-85a23ab" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="commit-85a23ab"><span class="header-section-number">6.1</span> commit <code>85a23ab</code></h2>
+<ul>
+<li><a href="https://github.com/AlbertProfe/restaurantManager/tree/85a23abcf1d3e7a4818d7e374f2cbb1f81709371" class="external" target="_blank">manytomany menu n:m order</a></li>
+</ul>
+<p><a href="../images/springboot/labsb08/85a23ab-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="../images/springboot/labsb08/85a23ab-1.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/85a23ab-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="../images/springboot/labsb08/85a23ab-2.png" class="img-fluid"></a></p>
+<blockquote class="blockquote">
+<p><mark>When iterating on a project and introducing new relationships</mark>, such as a <strong>many-to-many</strong> relationship between <strong>orders</strong> and <strong>menus</strong>, existing tests m<strong>ay fail due to outdated assumptions and data setup</strong>. In this case, the test <code>TestCreateOrder</code> needs to be updated to reflect the new relationship structure.</p>
+</blockquote>
+<p>The main issue is that the test is creating <code>MenuRestaurant</code> objects in memory but not persisting them to the database. With a <strong>many-to-many</strong> relationship, both entities (<strong>Order</strong> and <strong>Menu</strong>) need to exist in the database before they can be associated.</p>
+<p>To fix this, the test should be refactored to:</p>
+<ol type="1">
+<li>Save <code>MenuRestaurant</code> entities to the database using a repository before creating <code>orders</code>.</li>
+<li>Fetch the saved <code>menus</code> from the database when creating <code>orders</code>.</li>
+<li>Update the <code>order</code> creation process to use the new relationship structure.</li>
+<li>Adjust <code>assertions</code> to verify the new relationship.</li>
+</ol>
+<p>This <strong>refactoring</strong> ensures that the test <mark>accurately reflects the new data model and relationships</mark>.</p>
+<p>It also helps maintain the integrity of the test suite as the project evolves, ensuring that tests remain valid and useful for catching potential issues in the updated codebase.</p>
 <!--- navLinks -->
 <br><br>
 <div class="row">
@@ -2234,6 +2257,7 @@ ManyToMany Considerations
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -2828,7 +2852,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
