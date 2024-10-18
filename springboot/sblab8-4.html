@@ -1753,6 +1753,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#final-uml" id="toc-final-uml" class="nav-link" data-scroll-target="#final-uml"><span class="header-section-number">2.1</span> Final UML</a></li>
   </ul></li>
+  <li><a href="#jpa-relationships" id="toc-jpa-relationships" class="nav-link" data-scroll-target="#jpa-relationships"><span class="header-section-number">3</span> JPA Relationships</a>
+  <ul>
+  <li><a href="#onetomany-and-manytoone" id="toc-onetomany-and-manytoone" class="nav-link" data-scroll-target="#onetomany-and-manytoone"><span class="header-section-number">3.1</span> OneToMany and ManyToOne</a>
+  <ul>
+  <li><a href="#casting" id="toc-casting" class="nav-link" data-scroll-target="#casting"><span class="header-section-number">3.1.1</span> Casting</a></li>
+  </ul></li>
+  <li><a href="#manytomany" id="toc-manytomany" class="nav-link" data-scroll-target="#manytomany"><span class="header-section-number">3.2</span> ManyToMany</a></li>
+  </ul></li>
+  <li><a href="#inherence-and-jpa" id="toc-inherence-and-jpa" class="nav-link" data-scroll-target="#inherence-and-jpa"><span class="header-section-number">4</span> Inherence and JPA</a></li>
+  <li><a href="#queries" id="toc-queries" class="nav-link" data-scroll-target="#queries"><span class="header-section-number">5</span> Queries</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">6</span> Code</a>
+  <ul>
+  <li><a href="#commit-85a23ab" id="toc-commit-85a23ab" class="nav-link" data-scroll-target="#commit-85a23ab"><span class="header-section-number">6.1</span> commit <code>85a23ab</code></a></li>
+  <li><a href="#commit-d65b4a9" id="toc-commit-d65b4a9" class="nav-link" data-scroll-target="#commit-d65b4a9"><span class="header-section-number">6.2</span> commit <code>d65b4a9</code></a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/sblab8-4.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -2092,7 +2107,7 @@ Example Sample OrderRepository:
 </div>
 </div>
 <p>With the <span class="citation" data-cites="ManyToMany">@ManyToMany</span> <code>Customer 1-n Booking n-1 TableRestaurant</code> relationship:</p>
-<div class="page-columns page-full">
+<div class="column-page-right">
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -2195,7 +2210,9 @@ Example Sample OrderRepository:
 </div>
 </div>
 </div>
-<div class="page-columns page-full">
+</div>
+</section>
+</section>
 <section id="jpa-relationships" class="level1 page-columns page-full" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> JPA Relationships</h1>
 <p><code>JPA (Java Persistence API)</code> provides several types of relationships to <mark>model associations between entities </mark>:</p>
@@ -2215,9 +2232,9 @@ Example Sample OrderRepository:
 </blockquote>
 <section id="onetomany-and-manytoone" class="level2 page-columns page-full" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="onetomany-and-manytoone"><span class="header-section-number">3.1</span> OneToMany and ManyToOne</h2>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><a href="../images/springboot/labsb08/labsb08-4-onetomay.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-2" title="Entity @oneToMany"><img src="../images/springboot/labsb08/labsb08-4-onetomay.png" class="img-fluid figure-img column-page-right" alt="Entity @oneToMany"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/labsb08/labsb08-4-onetomay.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Entity @oneToMany"><img src="../images/springboot/labsb08/labsb08-4-onetomay.png" class="img-fluid figure-img" alt="Entity @oneToMany"></a></p>
 <figcaption>Entity <span class="citation" data-cites="oneToMany">@oneToMany</span></figcaption>
 </figure>
 </div>
@@ -2238,10 +2255,10 @@ Example Sample OrderRepository:
 <span id="cb3-9"><a href="#cb3-9"></a>    <span class="co">// No reference to Department</span></span>
 <span id="cb3-10"><a href="#cb3-10"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>ManyToOne Unidirectional</strong></p>
-<div class="">
+
+<div class="no-row-height column-margin column-container"><div class="">
 <p>ManyToOne Unidirectional example: <a href="https://github.com/AlbertProfe/restaurantManager/blob/51b172d69b9f04196dbd52d3abdf9c50a05a3ff9/src/test/java/dev/example/restaurantManager/TestsRelationshipsOrderRestaurant.java" class="external" target="_blank">Order and Customer</a></p>
-</div>
-<ul>
+</div></div><ul>
 <li>Many entities are associated with one entity</li>
 <li>Only the <strong>owning</strong> side (the “Many” side) has a reference to the other entity</li>
 <li>Example: Many Employees belong to one Department</li>
@@ -2257,14 +2274,14 @@ Example Sample OrderRepository:
 <span id="cb4-9"><a href="#cb4-9"></a>    <span class="co">// No reference to Employee</span></span>
 <span id="cb4-10"><a href="#cb4-10"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Bidirectional Relationships</strong></p>
-<div class="">
+
+<div class="no-row-height column-margin column-container"><div class="">
 <p>Bidirectional Relationships example:</p>
 <ul>
 <li><a href="https://github.com/AlbertProfe/cifojava2022-3/wiki/Library2:-API-Rest-Author-Book-@OneToMany-CRUD-with-Swagger" class="external" target="_blank">Library2: API Rest Author Book <span class="citation" data-cites="OneToMany">@OneToMany</span> CRUD with Swagger</a></li>
 <li><a href="https://github.com/AlbertProfe/restaurantManager/tree/c562d8da650da2f758754312c0e1ecea2d8909af" class="external" target="_blank">TestCreateBookingTable() with JPA, TableRestaurant 1:n Booking bidirectional relationship</a></li>
 </ul>
-</div>
-<ul>
+</div></div><ul>
 <li>Both entities have references to each other</li>
 <li>The “Many” side is usually the owning side</li>
 <li>Example: One Department has many Employees, and each Employee belongs to one Department</li>
@@ -2506,10 +2523,6 @@ ManyToMany Considerations
 </div>
 
 
-</section>
-</section>
-</div>
-</div>
 </section>
 </section>
 
@@ -3105,7 +3118,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
