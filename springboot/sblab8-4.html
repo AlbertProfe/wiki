@@ -1921,23 +1921,28 @@ Example Sample OrderRepository:
 <ul>
 <li><code>TakeAwayOrder</code>, <code>ShippingOrderRestaurant</code>, and <code>EatInOrderRestaurant</code> all <mark>inherit</mark> from <code>OrderRestaurant</code>.</li>
 </ul></li>
-<li><strong>One-to-Many associations:</strong>
+<li><strong>One-to-Many/Many-to-One associations:</strong>
+<ul>
+<li>One-to-Many
 <ul>
 <li>A <code>Customer</code> can have multiple <code>TakeAwayOrders</code>.</li>
 <li>An <code>EatInOrderRestaurant</code> can be associated with multiple <code>TableRestaurants</code>.</li>
 <li>A <code>Booking</code> can be associated with multiple <code>TableRestaurants</code>.</li>
 </ul></li>
-<li><strong>Many-to-One associations:</strong>
+<li>Many-to-One
 <ul>
 <li>Multiple <code>TakeAwayOrders</code> can be associated with a single <code>Customer</code>.</li>
 <li>Multiple <code>Customers</code> can be associated with a single <code>Booking</code>.</li>
 </ul></li>
+</ul></li>
 <li><strong>Many-to-Many associations:</strong>
+<ul>
+<li>Many-to-Many
 <ul>
 <li><code>OrderRestaurant</code> and <code>MenuRestaurant</code> have a many-to-many relationship.</li>
 <li><code>MenuRestaurant</code> and <code>MenuItemRestaurant</code> have a many-to-many relationship.</li>
 </ul></li>
-<li><strong>Many-to-Many with join table:</strong>
+<li>Many-to-Many with join table as entity
 <ul>
 <li>The relationship between <code>Customer</code> and <code>TableRestaurant</code> is effectively a many-to-many relationship, with <code>Booking</code> <mark>serving as a join table entity</mark>.</li>
 <li>This is implemented as two one-to-many relationships:
@@ -1946,6 +1951,7 @@ Example Sample OrderRepository:
 <li>One <code>Booking</code> can have many <code>TableRestaurants</code> (one-to-many)</li>
 </ol></li>
 <li>This structure allows for additional attributes on the <code>Booking</code> entity (such as date, time, etc.) while maintaining the many-to-many relationship between <code>Customer</code> and <code>TableRestaurant</code>.</li>
+</ul></li>
 </ul></li>
 </ol>
 
@@ -2434,9 +2440,10 @@ Why Serialization is Needed?
 <p>Implementing <code>Serializable</code> is <strong>not always the best solution</strong>. In some cases, it might be better to adjust your entity relationships (<code>@OneToMany</code>) or use different mapping strategies (<code>@ElementCollection</code> for simple collections).</p>
 </div>
 </div>
-<section id="casting" class="level3" data-number="3.1.1">
+<section id="casting" class="level3 page-columns page-full" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="casting"><span class="header-section-number">3.1.1</span> Casting</h3>
 <p>The <a href="https://github.com/AlbertProfe/restaurantManager/blob/c562d8da650da2f758754312c0e1ecea2d8909af/src/test/java/dev/example/restaurantManager/RelationshipsOrderRestaurantTest.java#L80" class="external" target="_blank">original</a> code avoids these issues by declaring orderToSave directly as TakeAwayOrder, eliminating the need for casting. This approach is generally preferred when possible, as it’s safer and more straightforward.</p>
+<div class="column-page-right">
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">// Assume OrderRestaurant is a superclass of TakeAwayOrder</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>OrderRestaurant orderToSave <span class="op">=</span> <span class="kw">new</span> <span class="fu">TakeAwayOrder</span><span class="op">(</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a>    <span class="st">"T11"</span><span class="op">,</span> <span class="kw">new</span> <span class="bu">Date</span><span class="op">(),</span> <span class="st">"Alice"</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="fl">10.99</span><span class="op">,</span></span>
@@ -2447,6 +2454,7 @@ Why Serialization is Needed?
 <span id="cb6-8"><a href="#cb6-8"></a></span>
 <span id="cb6-9"><a href="#cb6-9"></a><span class="co">// We might need to cast here too, depending on the repository's type parameter</span></span>
 <span id="cb6-10"><a href="#cb6-10"></a>takeAwayOrderRepository<span class="op">.</span><span class="fu">save</span><span class="op">((</span>TakeAwayOrder<span class="op">)</span> orderToSave<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li><strong>Upcasting</strong>: When we assigned a TakeAwayOrder object to an OrderRestaurant variable, we performed an implicit upcast. This is always safe because a TakeAwayOrder is an OrderRestaurant.</li>
 <li><strong>Downcasting</strong>: When we cast orderToSave back to TakeAwayOrder, we’re performing a downcast. This is potentially risky because not all OrderRestaurant objects are TakeAwayOrder objects.</li>
@@ -2481,9 +2489,9 @@ Why casting can be problematic?
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="at">@Entity</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="kw">public</span> <span class="kw">class</span> Student <span class="op">{</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a>    <span class="at">@ManyToMany</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>    <span class="at">@JoinTable</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"student_course"</span><span class="op">,</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>               joinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"student_id"</span><span class="op">),</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>               inverseJoinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"course_id"</span><span class="op">))</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="at">@JoinTable</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"STUDENT_COURSE"</span><span class="op">,</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>        joinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"STUDENT_ID"</span><span class="op">),</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>        inverseJoinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"COURSE_ID"</span><span class="op">))</span></span>
 <span id="cb7-7"><a href="#cb7-7"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Course<span class="op">&gt;</span> courses<span class="op">;</span></span>
 <span id="cb7-8"><a href="#cb7-8"></a><span class="op">}</span></span>
 <span id="cb7-9"><a href="#cb7-9"></a></span>
@@ -2502,15 +2510,15 @@ Why casting can be problematic?
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a><span class="at">@Entity</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="kw">public</span> <span class="kw">class</span> Student <span class="op">{</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a>    <span class="at">@ManyToMany</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>    <span class="at">@JoinTable</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"student_course"</span><span class="op">,</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>               joinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"student_id"</span><span class="op">),</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a>               inverseJoinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"course_id"</span><span class="op">))</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>    <span class="at">@JoinTable</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"STUDENT_COURSE"</span><span class="op">,</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>        joinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"STUDENT_ID"</span><span class="op">),</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>        inverseJoinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"COURSE_ID"</span><span class="op">))</span></span>
 <span id="cb8-7"><a href="#cb8-7"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Course<span class="op">&gt;</span> courses<span class="op">;</span></span>
 <span id="cb8-8"><a href="#cb8-8"></a><span class="op">}</span></span>
 <span id="cb8-9"><a href="#cb8-9"></a></span>
 <span id="cb8-10"><a href="#cb8-10"></a><span class="at">@Entity</span></span>
 <span id="cb8-11"><a href="#cb8-11"></a><span class="kw">public</span> <span class="kw">class</span> Course <span class="op">{</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a>    <span class="at">@ManyToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"courses"</span><span class="op">)</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>    <span class="at">@ManyToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"COURSES"</span><span class="op">)</span></span>
 <span id="cb8-13"><a href="#cb8-13"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Student<span class="op">&gt;</span> students<span class="op">;</span></span>
 <span id="cb8-14"><a href="#cb8-14"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <blockquote class="blockquote">
@@ -3236,7 +3244,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
