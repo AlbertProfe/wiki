@@ -1751,7 +1751,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#restaurantmanager-project-summary" id="toc-restaurantmanager-project-summary" class="nav-link active" data-scroll-target="#restaurantmanager-project-summary"><span class="header-section-number">1</span> RestaurantManager Project Summary</a></li>
   <li><a href="#uml" id="toc-uml" class="nav-link" data-scroll-target="#uml"><span class="header-section-number">2</span> UML</a>
   <ul>
-  <li><a href="#restaurantmanager-relationships" id="toc-restaurantmanager-relationships" class="nav-link" data-scroll-target="#restaurantmanager-relationships"><span class="header-section-number">2.1</span> <code>RestaurantManager</code> Relationships</a></li>
+  <li><a href="#restaurantmanager-relationships-goal" id="toc-restaurantmanager-relationships-goal" class="nav-link" data-scroll-target="#restaurantmanager-relationships-goal"><span class="header-section-number">2.1</span> <code>RestaurantManager</code> relationships goal</a></li>
   <li><a href="#updated-uml" id="toc-updated-uml" class="nav-link" data-scroll-target="#updated-uml"><span class="header-section-number">2.2</span> Updated UML</a></li>
   <li><a href="#uml-with-menuitemsrestaurant" id="toc-uml-with-menuitemsrestaurant" class="nav-link" data-scroll-target="#uml-with-menuitemsrestaurant"><span class="header-section-number">2.3</span> UML with <code>MenuItemsRestaurant</code></a></li>
   <li><a href="#uml-with-manytomany-join-table-entity" id="toc-uml-with-manytomany-join-table-entity" class="nav-link" data-scroll-target="#uml-with-manytomany-join-table-entity"><span class="header-section-number">2.4</span> UML with <code>ManyToMany</code> join table entity</a></li>
@@ -1914,8 +1914,9 @@ Example Sample OrderRepository:
 </section>
 <section id="uml" class="level1 page-columns page-full" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> UML</h1>
-<section id="restaurantmanager-relationships" class="level2 page-columns page-full" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="restaurantmanager-relationships"><span class="header-section-number">2.1</span> <code>RestaurantManager</code> Relationships</h2>
+<p><mark>The <strong>work-in-progress</strong> laboratory gaol is transform all model classes to <strong>entities</strong> and relate them by JPA.</mark></p>
+<section id="restaurantmanager-relationships-goal" class="level2 page-columns page-full" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="restaurantmanager-relationships-goal"><span class="header-section-number">2.1</span> <code>RestaurantManager</code> relationships goal</h2>
 <ol type="1">
 <li><strong>Inheritance:</strong>
 <ul>
@@ -1925,14 +1926,13 @@ Example Sample OrderRepository:
 <ul>
 <li>One-to-Many
 <ul>
-<li>A <code>Customer</code> can have multiple <code>TakeAwayOrders</code>.</li>
-<li>An <code>TableRestaurant</code> can be associated with multiple <code>EatInOrderRestaurant</code>, <mark>we do not allow to group tables</mark> .</li>
+<li>A <code>Customer</code> can have multiple <code>TakeAwayOrder</code>.</li>
+<li>A <code>TableRestaurant</code> can be associated with multiple <code>EatInOrderRestaurant</code>, <mark>we do not allow to group tables</mark> .</li>
 <li>A <code>Booking</code> can be associated with multiple <code>TableRestaurant</code>.</li>
 </ul></li>
 <li>Many-to-One
 <ul>
 <li>Multiple <code>TakeAwayOrders</code> can be associated with a single <code>Customer</code>.</li>
-<li>Multiple <code>Customers</code> can be associated with a single <code>Booking</code>.</li>
 </ul></li>
 </ul></li>
 <li><strong>Many-to-Many associations:</strong>
@@ -1963,7 +1963,8 @@ Example Sample OrderRepository:
 <figcaption>RestaurantManager UML</figcaption>
 </figure>
 </div>
-</div></div><div class="cell" data-layout-align="default">
+</div></div><p>Many-to-Many with join table as entity <code>Customer 1-n Booking n-1 TableRestaurant</code> relationship:</p>
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
@@ -2111,6 +2112,9 @@ Updated UML from Lab#SB08-1 UML and DDD
 </section>
 <section id="uml-with-menuitemsrestaurant" class="level2 page-columns page-full" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="uml-with-menuitemsrestaurant"><span class="header-section-number">2.3</span> UML with <code>MenuItemsRestaurant</code></h2>
+<blockquote class="blockquote">
+<p>All model classes now are <code>@Entity.</code></p>
+</blockquote>
 <p>This UML would fit <em>almost</em> the final version (with <code>MenuItemsRestaurant</code>) of our project (without the <span class="citation" data-cites="ManyToMany">@ManyToMany</span> <code>Customer 1-n Booking n-1 TableRestaurant</code> relationship:</p>
 <div class="column-page-right">
 <details>
@@ -3244,7 +3248,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
