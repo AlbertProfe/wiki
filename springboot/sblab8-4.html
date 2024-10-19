@@ -1749,12 +1749,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#restaurantmanager-project-summary" id="toc-restaurantmanager-project-summary" class="nav-link active" data-scroll-target="#restaurantmanager-project-summary"><span class="header-section-number">1</span> RestaurantManager Project Summary</a></li>
-  <li><a href="#updated-uml" id="toc-updated-uml" class="nav-link" data-scroll-target="#updated-uml"><span class="header-section-number">2</span> Updated UML</a>
+  <li><a href="#uml" id="toc-uml" class="nav-link" data-scroll-target="#uml"><span class="header-section-number">2</span> UML</a>
   <ul>
-  <li><a href="#final-uml" id="toc-final-uml" class="nav-link" data-scroll-target="#final-uml"><span class="header-section-number">2.1</span> Final UML</a>
-  <ul>
-  <li><a href="#restaurantmanger-relationships" id="toc-restaurantmanger-relationships" class="nav-link" data-scroll-target="#restaurantmanger-relationships"><span class="header-section-number">2.1.1</span> RestaurantManger Relationships</a></li>
-  </ul></li>
+  <li><a href="#restaurantmanager-relationships" id="toc-restaurantmanager-relationships" class="nav-link" data-scroll-target="#restaurantmanager-relationships"><span class="header-section-number">2.1</span> <code>RestaurantManager</code> Relationships</a></li>
+  <li><a href="#updated-uml" id="toc-updated-uml" class="nav-link" data-scroll-target="#updated-uml"><span class="header-section-number">2.2</span> Updated UML</a></li>
+  <li><a href="#uml-with-menuitemsrestaurant" id="toc-uml-with-menuitemsrestaurant" class="nav-link" data-scroll-target="#uml-with-menuitemsrestaurant"><span class="header-section-number">2.3</span> UML with <code>MenuItemsRestaurant</code></a></li>
+  <li><a href="#uml-with-manytomany-join-table-entity" id="toc-uml-with-manytomany-join-table-entity" class="nav-link" data-scroll-target="#uml-with-manytomany-join-table-entity"><span class="header-section-number">2.4</span> UML with <code>ManyToMany</code> join table entity</a></li>
   </ul></li>
   <li><a href="#jpa-relationships" id="toc-jpa-relationships" class="nav-link" data-scroll-target="#jpa-relationships"><span class="header-section-number">3</span> JPA Relationships</a>
   <ul>
@@ -1813,7 +1813,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, October 18, 2024</p>
+      <p class="date-modified">Saturday, October 19, 2024</p>
     </div>
   </div>
     
@@ -1870,14 +1870,14 @@ Example Menu entity:
 <span id="cb1-2"><a href="#cb1-2"></a><span class="at">@Entity</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="kw">public</span> <span class="kw">class</span> <span class="bu">Menu</span> <span class="op">{</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="at">@Id</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="co">//@GeneratedValue</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>  <span class="kw">private</span> <span class="bu">String</span> id<span class="op">;</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>  </span>
-<span id="cb1-9"><a href="#cb1-9"></a>  <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="at">@Id</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>    <span class="co">//@GeneratedValue</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>    <span class="kw">private</span> <span class="bu">String</span> id<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a>    <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
 <span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="at">@OneToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"menu"</span><span class="op">,</span> cascade <span class="op">=</span> CascadeType<span class="op">.</span><span class="fu">ALL</span><span class="op">)</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>  <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span><span class="bu">MenuItem</span><span class="op">&gt;</span> items<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>    <span class="at">@OneToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"menu"</span><span class="op">,</span> cascade <span class="op">=</span> CascadeType<span class="op">.</span><span class="fu">ALL</span><span class="op">)</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>    <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span><span class="bu">MenuItem</span><span class="op">&gt;</span> items<span class="op">;</span></span>
 <span id="cb1-13"><a href="#cb1-13"></a></span>
 <span id="cb1-14"><a href="#cb1-14"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1895,10 +1895,10 @@ Example Sample OrderRepository:
 <span id="cb2-2"><a href="#cb2-2"></a><span class="at">@Repository</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw">public</span> <span class="kw">interface</span> OrderRepository <span class="kw">extends</span> JpaRepository<span class="op">&lt;</span>Order<span class="op">,</span> <span class="bu">Long</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a>  <span class="bu">List</span><span class="op">&lt;</span>Order<span class="op">&gt;</span> <span class="fu">findByCustomer</span><span class="op">(</span>Customer customer<span class="op">);</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>  </span>
-<span id="cb2-7"><a href="#cb2-7"></a>  <span class="at">@Query</span><span class="op">(</span><span class="st">"SELECT o FROM Order o WHERE o.orderDate &gt; :date"</span><span class="op">)</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>  <span class="bu">List</span><span class="op">&lt;</span>Order<span class="op">&gt;</span> <span class="fu">findRecentOrders</span><span class="op">(</span><span class="at">@Param</span><span class="op">(</span><span class="st">"date"</span><span class="op">)</span> LocalDate date<span class="op">);</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="bu">List</span><span class="op">&lt;</span>Order<span class="op">&gt;</span> <span class="fu">findByCustomer</span><span class="op">(</span>Customer customer<span class="op">);</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="at">@Query</span><span class="op">(</span><span class="st">"SELECT o FROM Order o WHERE o.orderDate &gt; :date"</span><span class="op">)</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="bu">List</span><span class="op">&lt;</span>Order<span class="op">&gt;</span> <span class="fu">findRecentOrders</span><span class="op">(</span><span class="at">@Param</span><span class="op">(</span><span class="st">"date"</span><span class="op">)</span> LocalDate date<span class="op">);</span></span>
 <span id="cb2-9"><a href="#cb2-9"></a></span>
 <span id="cb2-10"><a href="#cb2-10"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1912,8 +1912,42 @@ Example Sample OrderRepository:
 </ul>
 <p>This structure allows for efficient querying and management of restaurant data using Spring Data JPA.</p>
 </section>
-<section id="updated-uml" class="level1 page-columns page-full" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Updated UML</h1>
+<section id="uml" class="level1 page-columns page-full" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> UML</h1>
+<section id="restaurantmanager-relationships" class="level2 page-columns page-full" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="restaurantmanager-relationships"><span class="header-section-number">2.1</span> <code>RestaurantManager</code> Relationships</h2>
+<ol type="1">
+<li><strong>Inheritance:</strong>
+<ul>
+<li><code>TakeAwayOrder</code>, <code>ShippingOrderRestaurant</code>, and <code>EatInOrderRestaurant</code> all <mark>inherit</mark> from <code>OrderRestaurant</code>.</li>
+</ul></li>
+<li><strong>One-to-Many associations:</strong>
+<ul>
+<li>A <code>Customer</code> can have multiple <code>TakeAwayOrders</code>.</li>
+<li>An <code>EatInOrderRestaurant</code> can be associated with multiple <code>TableRestaurants</code>.</li>
+<li>A <code>Booking</code> can be associated with multiple <code>TableRestaurants</code>.</li>
+</ul></li>
+<li><strong>Many-to-One associations:</strong>
+<ul>
+<li>Multiple <code>TakeAwayOrders</code> can be associated with a single <code>Customer</code>.</li>
+<li>Multiple <code>Customers</code> can be associated with a single <code>Booking</code>.</li>
+</ul></li>
+<li><strong>Many-to-Many associations:</strong>
+<ul>
+<li><code>OrderRestaurant</code> and <code>MenuRestaurant</code> have a many-to-many relationship.</li>
+<li><code>MenuRestaurant</code> and <code>MenuItemRestaurant</code> have a many-to-many relationship.</li>
+</ul></li>
+<li><strong>Many-to-Many with join table:</strong>
+<ul>
+<li>The relationship between <code>Customer</code> and <code>TableRestaurant</code> is effectively a many-to-many relationship, with <code>Booking</code> <mark>serving as a join table entity</mark>.</li>
+<li>This is implemented as two one-to-many relationships:
+<ol type="a">
+<li>One <code>Customer</code> can have many <code>Bookings</code> (one-to-many)</li>
+<li>One <code>Booking</code> can have many <code>TableRestaurants</code> (one-to-many)</li>
+</ol></li>
+<li>This structure allows for additional attributes on the <code>Booking</code> entity (such as date, time, etc.) while maintaining the many-to-many relationship between <code>Customer</code> and <code>TableRestaurant</code>.</li>
+</ul></li>
+</ol>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>This Lab#SB08-4 will implement this entities relationships:</p>
@@ -1923,8 +1957,68 @@ Example Sample OrderRepository:
 <figcaption>RestaurantManager UML</figcaption>
 </figure>
 </div>
-</div></div><p>This is the updated UML from <a href="../springboot/sblab8-1.html#discussion-solving-uml" class="external" target="_blank">Lab#SB08-1 UML and DDD</a> correspond to this <mark>commit</mark>: <a href="https://github.com/AlbertProfe/restaurantManager/tree/51b172d69b9f04196dbd52d3abdf9c50a05a3ff9" class="external" target="_blank">TestCreateOrder() with JPA, Customer 1:n TakeAwayOrder unidirectional relationship</a></p>
+</div></div><div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+direction LR
+    class TableRestaurant {
+        &lt;&lt;Entity&gt;&gt;
+        -String name
+        -String description
+        -int qty
+        -boolean busy
+        -ArrayList&lt;Booking&gt; Bookings
+        +toString()
+    }
+    
+    class Customer {
+        &lt;&lt;Entity&gt;&gt;
+        -String id
+        -String name
+        -String email
+        -String phoneNumber
+        -int age
+        -boolean vipCustomer
+        -boolean deleted
+        -ArrayList&lt;Booking&gt; Bookings
+        +toString()
+    }
+
+    class Booking {
+        &lt;&lt;Entity&gt;&gt;
+        -String name
+        -String phoneNumber
+        -int peopleQty
+        -LocalDateTime date
+        -LocalDateTime SlotDate
+        -String service
+        -boolean confirmed
+        -TableRestaurant tableRestaurant
+        -Customer customer
+        +toString()
+    }
+
+    Booking "n" *-- "1" TableRestaurant
+    Customer  "1" --* "n" Booking
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="updated-uml" class="level2 page-columns page-full" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="updated-uml"><span class="header-section-number">2.2</span> Updated UML</h2>
+<p>This is the updated UML from <a href="../springboot/sblab8-1.html#discussion-solving-uml" class="external" target="_blank">Lab#SB08-1 UML and DDD</a> correspond to this <mark>commit</mark>: <a href="https://github.com/AlbertProfe/restaurantManager/tree/51b172d69b9f04196dbd52d3abdf9c50a05a3ff9" class="external" target="_blank">TestCreateOrder() with JPA, Customer 1:n TakeAwayOrder unidirectional relationship</a></p>
 <div class="column-page-right">
+<details>
+<summary>
+Updated UML from Lab#SB08-1 UML and DDD
+</summary>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -2006,11 +2100,17 @@ Example Sample OrderRepository:
 </div>
 </div>
 </div>
+</details>
 </div>
-<section id="final-uml" class="level2 page-columns page-full" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="final-uml"><span class="header-section-number">2.1</span> Final UML</h2>
-<p>This UML would fit the final version of our project (without the <span class="citation" data-cites="ManyToMany">@ManyToMany</span> <code>Customer 1-n Booking n-1 TableRestaurant</code> relationship:):</p>
+</section>
+<section id="uml-with-menuitemsrestaurant" class="level2 page-columns page-full" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="uml-with-menuitemsrestaurant"><span class="header-section-number">2.3</span> UML with <code>MenuItemsRestaurant</code></h2>
+<p>This UML would fit <em>almost</em> the final version (with <code>MenuItemsRestaurant</code>) of our project (without the <span class="citation" data-cites="ManyToMany">@ManyToMany</span> <code>Customer 1-n Booking n-1 TableRestaurant</code> relationship:</p>
 <div class="column-page-right">
+<details>
+<summary>
+UML without the Many-To-Many <code>Customer 1-n Booking n-1 TableRestaurant</code> relationship:
+</summary>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -2043,7 +2143,7 @@ Example Sample OrderRepository:
         +toString()
     }
     class ShippingOrderRestaurant {
-         &lt;&lt;Entity&gt;&gt;
+        &lt;&lt;Entity&gt;&gt;
         -String address
         -String city
         -String riderName
@@ -2074,7 +2174,7 @@ Example Sample OrderRepository:
         -ArrayList&lt;OrderRestaurant&gt; ordersRestaurant
         -ArrayList&lt;MenuItemRestaurant&gt; MenusItemsRestaurant
     }
-      class MenuItemRestaurant {
+    class MenuItemRestaurant {
         &lt;&lt;Entity&gt;&gt;
         -String name
         -String content
@@ -2100,24 +2200,32 @@ Example Sample OrderRepository:
     TakeAwayOrder "n" *-- "1" Customer
     EatInOrderRestaurant "1" *-- "n" TableRestaurant
     Booking "1" *-- "n" TableRestaurant
-   
-  
+
+
 </pre>
 </div>
 <p></p></figure><p></p>
 </div>
 </div>
 </div>
+</details>
 </div>
-<p>With the <span class="citation" data-cites="ManyToMany">@ManyToMany</span> <code>Customer 1-n Booking n-1 TableRestaurant</code> relationship:</p>
+</section>
+<section id="uml-with-manytomany-join-table-entity" class="level2 page-columns page-full" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="uml-with-manytomany-join-table-entity"><span class="header-section-number">2.4</span> UML with <code>ManyToMany</code> join table entity</h2>
+<p>With the Many-To-Many <code>Customer 1-n Booking n-1 TableRestaurant</code> relationship:</p>
 <div class="column-page-right">
+<details>
+<summary>
+UML with Many-To-Many <code>Customer 1-n Booking n-1 TableRestaurant</code> relationship:
+</summary>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">classDiagram
- direction LR
+direction LR
     class OrderRestaurant {
         &lt;&lt;Entity&gt;&gt;
         -String id
@@ -2135,9 +2243,9 @@ Example Sample OrderRepository:
         -Customer customerTakeAway
         +toString()
     }
-  
+
     class ShippingOrderRestaurant {
-         &lt;&lt;Entity&gt;&gt;
+        &lt;&lt;Entity&gt;&gt;
         -String address
         -String city
         -String riderName
@@ -2159,7 +2267,7 @@ Example Sample OrderRepository:
         -ArrayList&lt;OrderRestaurant&gt; ordersRestaurant
         -ArrayList&lt;MenuItemRestaurant&gt; MenusItemsRestaurant
     }
-      class MenuItemRestaurant {
+    class MenuItemRestaurant {
         &lt;&lt;Entity&gt;&gt;
         -String name
         -String content
@@ -2193,7 +2301,7 @@ Example Sample OrderRepository:
         
     }
 
-      class TableRestaurant {
+    class TableRestaurant {
         &lt;&lt;Entity&gt;&gt;
         -String name
         -String description
@@ -2202,7 +2310,7 @@ Example Sample OrderRepository:
         -ArrayList&lt;Booking&gt; Bookings
         +toString()
     }
-   
+
     OrderRestaurant &lt;|-- TakeAwayOrder
     OrderRestaurant &lt;|-- ShippingOrderRestaurant
     OrderRestaurant &lt;|-- EatInOrderRestaurant
@@ -2213,102 +2321,14 @@ Example Sample OrderRepository:
     Booking "n" *-- "1" TableRestaurant
     Customer  "1" --* "n" Booking
 
-   
 </pre>
 </div>
 <p></p></figure><p></p>
 </div>
 </div>
 </div>
+</details>
 </div>
-<section id="restaurantmanger-relationships" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="restaurantmanger-relationships"><span class="header-section-number">2.1.1</span> RestaurantManger Relationships</h3>
-<ol type="1">
-<li><strong>Inheritance:</strong>
-<ul>
-<li><code>TakeAwayOrder</code>, <code>ShippingOrderRestaurant</code>, and <code>EatInOrderRestaurant</code> all inherit from <code>OrderRestaurant</code>.</li>
-</ul></li>
-<li><strong>Many-to-Many associations:</strong>
-<ul>
-<li><code>OrderRestaurant</code> and <code>MenuRestaurant</code> have a many-to-many relationship.</li>
-<li><code>MenuRestaurant</code> and <code>MenuItemRestaurant</code> have a many-to-many relationship.</li>
-</ul></li>
-<li><strong>One-to-Many associations:</strong>
-<ul>
-<li>A <code>Customer</code> can have multiple <code>TakeAwayOrders</code>.</li>
-<li>An <code>EatInOrderRestaurant</code> can be associated with multiple <code>TableRestaurants</code>.</li>
-<li>A <code>Booking</code> can be associated with multiple <code>TableRestaurants</code>.</li>
-</ul></li>
-<li><strong>Many-to-One associations:</strong>
-<ul>
-<li>Multiple <code>TakeAwayOrders</code> can be associated with a single <code>Customer</code>.</li>
-<li>Multiple <code>Customers</code> can be associated with a single <code>Booking</code>.</li>
-</ul></li>
-<li><strong>Many-to-Many with join table:</strong>
-<ul>
-<li>The relationship between <code>Customer</code> and <code>TableRestaurant</code> is effectively a many-to-many relationship, with <code>Booking</code> serving as a join table entity.</li>
-<li>This is implemented as two one-to-many relationships:
-<ol type="a">
-<li>One <code>Customer</code> can have many <code>Bookings</code> (one-to-many)</li>
-<li>One <code>Booking</code> can have many <code>TableRestaurants</code> (one-to-many)</li>
-</ol></li>
-<li>This structure allows for additional attributes on the <code>Booking</code> entity (such as date, time, etc.) while maintaining the many-to-many relationship between <code>Customer</code> and <code>TableRestaurant</code>.</li>
-</ul></li>
-</ol>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">classDiagram
-   direction LR
-    class TableRestaurant {
-        &lt;&lt;Entity&gt;&gt;
-        -String name
-        -String description
-        -int qty
-        -boolean busy
-        -ArrayList&lt;Booking&gt; Bookings
-        +toString()
-    }
-    
-    class Customer {
-        &lt;&lt;Entity&gt;&gt;
-        -String id
-        -String name
-        -String email
-        -String phoneNumber
-        -int age
-        -boolean vipCustomer
-        -boolean deleted
-        -ArrayList&lt;Booking&gt; Bookings
-        +toString()
-    }
-
-    class Booking {
-        &lt;&lt;Entity&gt;&gt;
-        -String name
-        -String phoneNumber
-        -int peopleQty
-        -LocalDateTime date
-        -LocalDateTime SlotDate
-        -String service
-        -boolean confirmed
-        -TableRestaurant tableRestaurant
-        -Customer customer
-        +toString()
-    }
-   
-    Booking "n" *-- "1" TableRestaurant
-    Customer  "1" --* "n" Booking
-
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
 </section>
 </section>
 <section id="jpa-relationships" class="level1 page-columns page-full" data-number="3">
@@ -3216,7 +3236,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
