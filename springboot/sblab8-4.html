@@ -1766,6 +1766,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#manytomany" id="toc-manytomany" class="nav-link" data-scroll-target="#manytomany"><span class="header-section-number">3.2</span> ManyToMany</a>
   <ul>
   <li><a href="#manytomany-with-join-table-entity" id="toc-manytomany-with-join-table-entity" class="nav-link" data-scroll-target="#manytomany-with-join-table-entity"><span class="header-section-number">3.2.1</span> ManyToMany with Join Table <span class="citation" data-cites="Entity">@Entity</span></a></li>
+  <li><a href="#when-two-objects-are-equal-object-identity" id="toc-when-two-objects-are-equal-object-identity" class="nav-link" data-scroll-target="#when-two-objects-are-equal-object-identity"><span class="header-section-number">3.2.2</span> When two objects are equal? <strong>Object Identity</strong></a></li>
+  <li><a href="#using-assertj-with-comparator" id="toc-using-assertj-with-comparator" class="nav-link" data-scroll-target="#using-assertj-with-comparator"><span class="header-section-number">3.2.3</span> Using AssertJ with Comparator</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#inherence-and-jpa" id="toc-inherence-and-jpa" class="nav-link" data-scroll-target="#inherence-and-jpa"><span class="header-section-number">4</span> Inherence and JPA</a></li>
@@ -2649,6 +2651,88 @@ ManyToMany Considerations
 <li>Maintain better control over the <code>lifecycle</code> of the relationship</li>
 </ul>
 </section>
+<section id="when-two-objects-are-equal-object-identity" class="level3 page-columns page-full" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="when-two-objects-are-equal-object-identity"><span class="header-section-number">3.2.2</span> When two objects are equal? <strong>Object Identity</strong></h3>
+<blockquote class="blockquote">
+<p>The difference between comparing objects based on object identity and comparing them based on field values lies in how equality is determined:</p>
+<ul>
+<li>by identity, that is, <mark>by using their memory addresses</mark></li>
+<li>by their field values</li>
+</ul>
+</blockquote>
+<p><strong>Object Identity</strong></p>
+<ul>
+<li><strong>Object Identity</strong> refers to comparing objects using their memory addresses (i.e., whether they are the same instance in memory).</li>
+<li>In Java, this is done using the <code>==</code> operator.</li>
+<li>Two objects are considered equal based on object identity if they refer to the same memory location.</li>
+</ul>
+<p><strong>Field Values</strong></p>
+<ul>
+<li><strong>Field Values</strong> refer to comparing objects based on the values of their fields.</li>
+<li>In Java, this is typically done using the <code>equals</code> method.</li>
+<li>Two objects are considered equal based on field values if their corresponding fields have the same values, even if they are different instances in memory.</li>
+</ul>
+<p>Example:</p>
+<p>Consider the following <code>MenuRestaurant</code> class:</p>
+<div class="column-page-right">
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">public</span> <span class="kw">class</span> MenuRestaurant <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>    <span class="kw">private</span> <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>    <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a>    <span class="co">// Constructors, getters, and setters</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a>    <span class="at">@Override</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">equals</span><span class="op">(</span><span class="bu">Object</span> o<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>        <span class="cf">if</span> <span class="op">(</span><span class="kw">this</span> <span class="op">==</span> o<span class="op">)</span> <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>        <span class="cf">if</span> <span class="op">(</span>o <span class="op">==</span> <span class="kw">null</span> <span class="op">||</span> <span class="fu">getClass</span><span class="op">()</span> <span class="op">!=</span> o<span class="op">.</span><span class="fu">getClass</span><span class="op">())</span> <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>        MenuRestaurant that <span class="op">=</span> <span class="op">(</span>MenuRestaurant<span class="op">)</span> o<span class="op">;</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>        <span class="cf">return</span> id <span class="op">==</span> that<span class="op">.</span><span class="fu">id</span> <span class="op">&amp;&amp;</span> Objects<span class="op">.</span><span class="fu">equals</span><span class="op">(</span>name<span class="op">,</span> that<span class="op">.</span><span class="fu">name</span><span class="op">);</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a>    <span class="op">}</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a></span>
+<span id="cb10-15"><a href="#cb10-15"></a>    <span class="at">@Override</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">hashCode</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a>        <span class="cf">return</span> Objects<span class="op">.</span><span class="fu">hash</span><span class="op">(</span>id<span class="op">,</span> name<span class="op">);</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a>    <span class="op">}</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Comparing Based on Object Identity</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1"></a>MenuRestaurant menu1 <span class="op">=</span> </span>
+<span id="cb11-2"><a href="#cb11-2"></a>    <span class="kw">new</span> <span class="fu">MenuRestaurant</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Pizza"</span><span class="op">);</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>MenuRestaurant menu2 <span class="op">=</span> </span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="kw">new</span> <span class="fu">MenuRestaurant</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Pizza"</span><span class="op">);</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>menu1 <span class="op">==</span> menu2<span class="op">);</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co">// false, because they are different instances</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Comparing Based on Field Values</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1"></a>MenuRestaurant menu1 <span class="op">=</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>    <span class="kw">new</span> <span class="fu">MenuRestaurant</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Pizza"</span><span class="op">);</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>MenuRestaurant menu2 <span class="op">=</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="kw">new</span> <span class="fu">MenuRestaurant</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Pizza"</span><span class="op">);</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>menu1<span class="op">.</span><span class="fu">equals</span><span class="op">(</span>menu2<span class="op">));</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">// true, because their fields are equal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="using-assertj-with-comparator" class="level3 page-columns page-full" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="using-assertj-with-comparator"><span class="header-section-number">3.2.3</span> Using AssertJ with Comparator</h3>
+<ul>
+<li><a href="https://github.com/AlbertProfe/restaurantManager/blob/bc75ce39d75158ee0e30f287e3d5b030fb8d9591/src/test/java/dev/example/restaurantManager/RelationshipsOrderRestaurantTest.java#L222" class="external" target="_blank">public void testAddingMenusToOrder()</a></li>
+<li><a href="https://nus-cs2030s.github.io/2223-s2/10-heap-stack.html" class="external" target="_blank">Heap and Stack</a></li>
+</ul>
+<div class="column-page-right">
+<p><code>usingElementComparator(Comparator.comparing(MenuRestaurant::getId))</code></p>
+</div>
+<p>When you use the above expression, you are specifying that the comparison should be based on the <code>id</code> field of the <code>MenuRestaurant</code> objects:</p>
+<div class="column-page-right">
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">assertj</span><span class="op">.</span><span class="im">core</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.</span><span class="im">assertThat</span><span class="op">;</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="bu">List</span><span class="op">&lt;</span>MenuRestaurant<span class="op">&gt;</span> menuList <span class="op">=</span> <span class="bu">Arrays</span><span class="op">.</span><span class="fu">asList</span><span class="op">(</span>menu1<span class="op">,</span> menu2<span class="op">,</span> menu3<span class="op">);</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="fu">assertThat</span><span class="op">(</span>menuList<span class="op">)</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="op">.</span><span class="fu">usingElementComparator</span><span class="op">(</span><span class="bu">Comparator</span><span class="op">.</span><span class="fu">comparing</span><span class="op">(</span>MenuRestaurant<span class="op">::</span>getId<span class="op">))</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>    <span class="op">.</span><span class="fu">containsExactlyInAnyOrder</span><span class="op">(</span>menu1<span class="op">,</span> menu2<span class="op">,</span> menu3<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this case, the comparison is based on the <code>id</code> field, not the object identity or the default <code>equals</code> method. This allows you to verify that the collection contains the expected elements based on their IDs, regardless of their memory addresses.</p>
+</section>
 </section>
 </section>
 <section id="inherence-and-jpa" class="level1" data-number="4">
@@ -3305,7 +3389,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
