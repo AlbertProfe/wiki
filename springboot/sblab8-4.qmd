@@ -818,6 +818,100 @@ This structure allows you to:
 - Easily `query` the relationship from both sides
 - Maintain better control over the `lifecycle` of the relationship
 
+### When two objects are equal? **Object Identity**
+
+> The difference between comparing objects based on object identity and comparing them based on field values lies in how equality is determined:
+>
+>  - by identity, that is, <mark>by using their memory addresses</mark>
+>  - by their field values
+
+**Object Identity**
+
+- **Object Identity** refers to comparing objects using their memory addresses (i.e., whether they are the same instance in memory).
+- In Java, this is done using the `==` operator.
+- Two objects are considered equal based on object identity if they refer to the same memory location.
+
+**Field Values**
+
+- **Field Values** refer to comparing objects based on the values of their fields.
+- In Java, this is typically done using the `equals` method.
+- Two objects are considered equal based on field values if their corresponding fields have the same values, even if they are different instances in memory.
+
+Example:
+
+Consider the following `MenuRestaurant` class:
+
+::: {.column-page-right}
+```java
+public class MenuRestaurant {
+    private int id;
+    private String name;
+
+    // Constructors, getters, and setters
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MenuRestaurant that = (MenuRestaurant) o;
+        return id == that.id && Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+}
+```
+:::
+
+**Comparing Based on Object Identity**
+
+```java
+MenuRestaurant menu1 = 
+    new MenuRestaurant(1, "Pizza");
+MenuRestaurant menu2 = 
+    new MenuRestaurant(1, "Pizza");
+
+System.out.println(menu1 == menu2);
+// false, because they are different instances
+```
+
+**Comparing Based on Field Values**
+
+```java
+MenuRestaurant menu1 =
+    new MenuRestaurant(1, "Pizza");
+MenuRestaurant menu2 =
+    new MenuRestaurant(1, "Pizza");
+
+System.out.println(menu1.equals(menu2));
+// true, because their fields are equal
+```
+
+### Using AssertJ with Comparator
+
+- [public void testAddingMenusToOrder() ](https://github.com/AlbertProfe/restaurantManager/blob/bc75ce39d75158ee0e30f287e3d5b030fb8d9591/src/test/java/dev/example/restaurantManager/RelationshipsOrderRestaurantTest.java#L222){.external target='_blank'}
+- [Heap and Stack](https://nus-cs2030s.github.io/2223-s2/10-heap-stack.html){.external target='_blank'}
+
+::: {.column-page-right}
+`usingElementComparator(Comparator.comparing(MenuRestaurant::getId))`
+:::
+When you use the above expression, you are specifying that the comparison should be based on the `id` field of the `MenuRestaurant` objects:
+
+::: {.column-page-right}
+```java
+import static org.assertj.core.api.Assertions.assertThat;
+
+List<MenuRestaurant> menuList = Arrays.asList(menu1, menu2, menu3);
+
+assertThat(menuList)
+    .usingElementComparator(Comparator.comparing(MenuRestaurant::getId))
+    .containsExactlyInAnyOrder(menu1, menu2, menu3);
+```
+:::
+
+In this case, the comparison is based on the `id` field, not the object identity or the default `equals` method. This allows you to verify that the collection contains the expected elements based on their IDs, regardless of their memory addresses.
 
 # Inherence and JPA
 
