@@ -552,6 +552,48 @@ public class Employee {
 }
 ```
 
+### @OneToMany attributes
+
+::: {.column-margin}
+**Eager** loading fetches all required data upfront when an object is first loaded. It immediately initializes and loads related entities or resources, ensuring everything is readily available.
+
+<mark>This approach can improve performance for frequently accessed data but may increase initial load times and memory usage.</mark>
+
+:::
+
+::: {.column-margin}
+**Lazy** loading, conversely, defers data loading until it's explicitly requested. It retrieves only the essential data initially, loading related entities or resources on-demand when accessed.
+
+This method can <mark>enhance initial performance and reduce memory consumption, particularly for large datasets or infrequently used resources.</mark>
+
+However, it may introduce slight delays when accessing lazy-loaded data for the first time
+
+:::
+
+
+- **fetch**: Specifies whether to lazily or eagerly load the related entities. Default is FetchType.`LAZY`.
+- **cascade**: Specifies which operations should cascade to child entities. Options include `ALL`, `PERSIST`, `MERGE`, `REMOVE`, etc.
+- **orphanRemoval**: If true, removes child entities when they are removed from the collection. Default is `false`.
+- **mappedBy**: Specifies the field that **owns** the relationship in the child entity.
+- **optional**:  If `false`, a non-null relationship must always exist.
+
+::: {.callout-note}
+# Eager vs Lazy
+
+**Eager** loading fetches all related data immediately, making everything available upfront. It can be faster for frequent access but may use more memory.
+
+**Lazy** loading, on the other hand, loads related data only when requested, initializing it on-demand. This approach saves memory but might cause slight delays on first access.
+:::
+
+
+**Key Points**
+
+- For @OneToMany and @ManyToMany, the default fetch type is `LAZY`.
+- For @ManyToOne and @OneToOne, the default fetch type is `EAGER5`.
+- Using FetchType.`LAZY` is generally recommended to avoid performance issues, especially for collections.
+- The `cascade` attribute determines which operations should be cascaded from parent to child entities.
+- The `orphanRemoval` attribute is useful for <mark>automatically removing child entities when they are no longer referenced by the parent</mark>.
+
 
 **ManyToOne Unidirectional**
 
@@ -666,6 +708,12 @@ takeAwayOrderRepository.save((TakeAwayOrder) orderToSave);
 - Only one side has a reference to the other entity
 - Example: Many Students can enroll in many Courses
 
+::: {.column-margin}
+
+- [@ManyToMany RestaurantManger: ORDER](https://github.com/AlbertProfe/restaurantManager/blob/f4d3326cb7938abed678f3831289d4be4c8c069a/src/main/java/dev/example/restaurantManager/model/OrderRestaurant.java#L27){.external target='_blank'}
+- [@ManyToMany RestaurantManger: MENU](https://github.com/AlbertProfe/restaurantManager/blob/f4d3326cb7938abed678f3831289d4be4c8c069a/src/main/java/dev/example/restaurantManager/model/MenuRestaurant.java#L27){.external target='_blank'}
+:::
+
 ```java
 @Entity
 public class Student {
@@ -716,9 +764,9 @@ public class Course {
 :::
 
 
-**ManyToMany with Join Table Entity**
+### ManyToMany with Join Table @Entity
 
-Entity @ManyToMany with Join Table
+> @Entity @ManyToMany with Join Table: in this particular case we will use two @OneToMany relationships to create a many-to-many, centered and owned by the join table.
 
 
 - Represents a `many-to-many` relationship <mark>using an intermediate entity</mark>
@@ -760,15 +808,15 @@ In this approach:
 - Both `Student` and `Course` have `@OneToMany` relationships to `Enrollment`
 - The mappedBy attribute in @OneToMany indicates the owning side of the relationship
 
-This structure allows for more detailed modeling of the relationship between students and courses, enabling the storage of relationship-specific data and easier querying of the association.
+> This structure allows for more detailed modeling of the relationship between students and courses, enabling the storage of relationship-specific data and easier querying of the association.
 
 **Key Points**
 
 This structure allows you to:
 
 - Add additional fields to the relationship (e.g., enrollmentDate)
-- Easily query the relationship from both sides
-- Maintain better control over the lifecycle of the relationship
+- Easily `query` the relationship from both sides
+- Maintain better control over the `lifecycle` of the relationship
 
 
 # Inherence and JPA
