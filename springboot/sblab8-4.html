@@ -1760,9 +1760,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#onetomany-and-manytoone" id="toc-onetomany-and-manytoone" class="nav-link" data-scroll-target="#onetomany-and-manytoone"><span class="header-section-number">3.1</span> OneToMany and ManyToOne</a>
   <ul>
-  <li><a href="#casting" id="toc-casting" class="nav-link" data-scroll-target="#casting"><span class="header-section-number">3.1.1</span> Casting</a></li>
+  <li><a href="#onetomany-attributes" id="toc-onetomany-attributes" class="nav-link" data-scroll-target="#onetomany-attributes"><span class="header-section-number">3.1.1</span> <span class="citation" data-cites="OneToMany">@OneToMany</span> attributes</a></li>
+  <li><a href="#casting" id="toc-casting" class="nav-link" data-scroll-target="#casting"><span class="header-section-number">3.1.2</span> Casting</a></li>
   </ul></li>
-  <li><a href="#manytomany" id="toc-manytomany" class="nav-link" data-scroll-target="#manytomany"><span class="header-section-number">3.2</span> ManyToMany</a></li>
+  <li><a href="#manytomany" id="toc-manytomany" class="nav-link" data-scroll-target="#manytomany"><span class="header-section-number">3.2</span> ManyToMany</a>
+  <ul>
+  <li><a href="#manytomany-with-join-table-entity" id="toc-manytomany-with-join-table-entity" class="nav-link" data-scroll-target="#manytomany-with-join-table-entity"><span class="header-section-number">3.2.1</span> ManyToMany with Join Table <span class="citation" data-cites="Entity">@Entity</span></a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#inherence-and-jpa" id="toc-inherence-and-jpa" class="nav-link" data-scroll-target="#inherence-and-jpa"><span class="header-section-number">4</span> Inherence and JPA</a></li>
   <li><a href="#queries" id="toc-queries" class="nav-link" data-scroll-target="#queries"><span class="header-section-number">5</span> Queries</a></li>
@@ -1813,7 +1817,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Saturday, October 19, 2024</p>
+      <p class="date-modified">Tuesday, October 22, 2024</p>
     </div>
   </div>
     
@@ -2382,6 +2386,46 @@ direction LR
 <span id="cb3-8"><a href="#cb3-8"></a><span class="kw">public</span> <span class="kw">class</span> Employee <span class="op">{</span></span>
 <span id="cb3-9"><a href="#cb3-9"></a>    <span class="co">// No reference to Department</span></span>
 <span id="cb3-10"><a href="#cb3-10"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="onetomany-attributes" class="level3 page-columns page-full" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="onetomany-attributes"><span class="header-section-number">3.1.1</span> <span class="citation" data-cites="OneToMany">@OneToMany</span> attributes</h3>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Eager</strong> loading fetches all required data upfront when an object is first loaded. It immediately initializes and loads related entities or resources, ensuring everything is readily available.</p>
+<p><mark>This approach can improve performance for frequently accessed data but may increase initial load times and memory usage.</mark></p>
+</div><div class="">
+<p><strong>Lazy</strong> loading, conversely, defers data loading until it’s explicitly requested. It retrieves only the essential data initially, loading related entities or resources on-demand when accessed.</p>
+<p>This method can <mark>enhance initial performance and reduce memory consumption, particularly for large datasets or infrequently used resources.</mark></p>
+<p>However, it may introduce slight delays when accessing lazy-loaded data for the first time</p>
+</div></div>
+<ul>
+<li><strong>fetch</strong>: Specifies whether to lazily or eagerly load the related entities. Default is FetchType.<code>LAZY</code>.</li>
+<li><strong>cascade</strong>: Specifies which operations should cascade to child entities. Options include <code>ALL</code>, <code>PERSIST</code>, <code>MERGE</code>, <code>REMOVE</code>, etc.</li>
+<li><strong>orphanRemoval</strong>: If true, removes child entities when they are removed from the collection. Default is <code>false</code>.</li>
+<li><strong>mappedBy</strong>: Specifies the field that <strong>owns</strong> the relationship in the child entity.</li>
+<li><strong>optional</strong>: If <code>false</code>, a non-null relationship must always exist.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Eager vs Lazy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Eager</strong> loading fetches all related data immediately, making everything available upfront. It can be faster for frequent access but may use more memory.</p>
+<p><strong>Lazy</strong> loading, on the other hand, loads related data only when requested, initializing it on-demand. This approach saves memory but might cause slight delays on first access.</p>
+</div>
+</div>
+<p><strong>Key Points</strong></p>
+<ul>
+<li>For <span class="citation" data-cites="OneToMany">@OneToMany</span> and <span class="citation" data-cites="ManyToMany">@ManyToMany</span>, the default fetch type is <code>LAZY</code>.</li>
+<li>For <span class="citation" data-cites="ManyToOne">@ManyToOne</span> and <span class="citation" data-cites="OneToOne">@OneToOne</span>, the default fetch type is <code>EAGER5</code>.</li>
+<li>Using FetchType.<code>LAZY</code> is generally recommended to avoid performance issues, especially for collections.</li>
+<li>The <code>cascade</code> attribute determines which operations should be cascaded from parent to child entities.</li>
+<li>The <code>orphanRemoval</code> attribute is useful for <mark>automatically removing child entities when they are no longer referenced by the parent</mark>.</li>
+</ul>
 <p><strong>ManyToOne Unidirectional</strong></p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -2444,8 +2488,9 @@ Why Serialization is Needed?
 <p>Implementing <code>Serializable</code> is <strong>not always the best solution</strong>. In some cases, it might be better to adjust your entity relationships (<code>@OneToMany</code>) or use different mapping strategies (<code>@ElementCollection</code> for simple collections).</p>
 </div>
 </div>
-<section id="casting" class="level3 page-columns page-full" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="casting"><span class="header-section-number">3.1.1</span> Casting</h3>
+</section>
+<section id="casting" class="level3 page-columns page-full" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="casting"><span class="header-section-number">3.1.2</span> Casting</h3>
 <p>The <a href="https://github.com/AlbertProfe/restaurantManager/blob/c562d8da650da2f758754312c0e1ecea2d8909af/src/test/java/dev/example/restaurantManager/RelationshipsOrderRestaurantTest.java#L80" class="external" target="_blank">original</a> code avoids these issues by declaring orderToSave directly as TakeAwayOrder, eliminating the need for casting. This approach is generally preferred when possible, as it’s safer and more straightforward.</p>
 <div class="column-page-right">
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">// Assume OrderRestaurant is a superclass of TakeAwayOrder</span></span>
@@ -2482,7 +2527,7 @@ Why casting can be problematic?
 </div>
 </section>
 </section>
-<section id="manytomany" class="level2" data-number="3.2">
+<section id="manytomany" class="level2 page-columns page-full" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="manytomany"><span class="header-section-number">3.2</span> ManyToMany</h2>
 <p><strong>ManyToMany Unidirectional</strong></p>
 <ul>
@@ -2490,7 +2535,13 @@ Why casting can be problematic?
 <li>Only one side has a reference to the other entity</li>
 <li>Example: Many Students can enroll in many Courses</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="at">@Entity</span></span>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<ul>
+<li><a href="https://github.com/AlbertProfe/restaurantManager/blob/f4d3326cb7938abed678f3831289d4be4c8c069a/src/main/java/dev/example/restaurantManager/model/OrderRestaurant.java#L27" class="external" target="_blank"><span class="citation" data-cites="ManyToMany">@ManyToMany</span> RestaurantManger: ORDER</a></li>
+<li><a href="https://github.com/AlbertProfe/restaurantManager/blob/f4d3326cb7938abed678f3831289d4be4c8c069a/src/main/java/dev/example/restaurantManager/model/MenuRestaurant.java#L27" class="external" target="_blank"><span class="citation" data-cites="ManyToMany">@ManyToMany</span> RestaurantManger: MENU</a></li>
+</ul>
+</div></div><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="at">@Entity</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="kw">public</span> <span class="kw">class</span> Student <span class="op">{</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a>    <span class="at">@ManyToMany</span></span>
 <span id="cb7-4"><a href="#cb7-4"></a>    <span class="at">@JoinTable</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"STUDENT_COURSE"</span><span class="op">,</span></span>
@@ -2545,8 +2596,11 @@ ManyToMany Considerations
 </ul>
 </div>
 </div>
-<p><strong>ManyToMany with Join Table Entity</strong></p>
-<p>Entity <span class="citation" data-cites="ManyToMany">@ManyToMany</span> with Join Table</p>
+<section id="manytomany-with-join-table-entity" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="manytomany-with-join-table-entity"><span class="header-section-number">3.2.1</span> ManyToMany with Join Table <span class="citation" data-cites="Entity">@Entity</span></h3>
+<blockquote class="blockquote">
+<p><span class="citation" data-cites="Entity">@Entity</span> <span class="citation" data-cites="ManyToMany">@ManyToMany</span> with Join Table: in this particular case we will use two <span class="citation" data-cites="OneToMany">@OneToMany</span> relationships to create a many-to-many, centered and owned by the join table.</p>
+</blockquote>
 <ul>
 <li>Represents a <code>many-to-many</code> relationship <mark>using an intermediate entity</mark></li>
 <li>The <code>join table</code> becomes an <strong>entity itself</strong>, with two <code>one-to-many</code> relationships</li>
@@ -2584,14 +2638,17 @@ ManyToMany Considerations
 <li>Both <code>Student</code> and <code>Course</code> have <code>@OneToMany</code> relationships to <code>Enrollment</code></li>
 <li>The mappedBy attribute in <span class="citation" data-cites="OneToMany">@OneToMany</span> indicates the owning side of the relationship</li>
 </ul>
+<blockquote class="blockquote">
 <p>This structure allows for more detailed modeling of the relationship between students and courses, enabling the storage of relationship-specific data and easier querying of the association.</p>
+</blockquote>
 <p><strong>Key Points</strong></p>
 <p>This structure allows you to:</p>
 <ul>
 <li>Add additional fields to the relationship (e.g., enrollmentDate)</li>
-<li>Easily query the relationship from both sides</li>
-<li>Maintain better control over the lifecycle of the relationship</li>
+<li>Easily <code>query</code> the relationship from both sides</li>
+<li>Maintain better control over the <code>lifecycle</code> of the relationship</li>
 </ul>
+</section>
 </section>
 </section>
 <section id="inherence-and-jpa" class="level1" data-number="4">
@@ -3248,7 +3305,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
+<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
