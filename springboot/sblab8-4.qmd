@@ -763,6 +763,43 @@ public class Course {
 - Be cautious of **performance** implications with large datasets
 :::
 
+### OrphanRemoval and Cascade
+
+> `Cascade` **propagates operations from parent to child** entities, while `orphanRemoval` **automatically deletes child entities** no longer associated with a parent.
+
+`Cascade` affects specified actions (e.g., `PERSIST`, `REMOVE`), whereas `orphanRemoval` only deals with removing disassociated children.
+
+
+::: {.callout-tip .column-page-right}
+# Cascade vs OrphanRemoval
+
+The main differences between `cascade` and `orphanRemoval` in JPA are:
+
+1. **Scope** of operation:
+
+   - <mark>`Cascade` applies to all operations specified (e.g. `PERSIST`, `MERGE`, RE`MOVE, etc.) and propagates them from parent to child entities<</mark>.
+   - `OrphanRemoval` only deals with <mark>removing child entities that are no longer associated with the parent </mark>.
+
+2. **When** they take effect:
+
+   - `Cascade` operations occur when the specified action is performed on <mark>the parent entity </mark>.
+   - `OrphanRemoval` occurs when a child entity <mark>is disassociated from its parent</mark>, even without explicitly calling remove.
+
+3. Use cases:
+
+   - `Cascade` is useful for propagating operations like persist or remove from parent to children.
+   - `OrphanRemoval` is useful for <mark>automatically deleting child entities that are no longer referenced by a parent.</mark>
+
+4. **Behavior**:
+
+   - `CascadeType.REMOVE` will only delete child entities when the parent is explicitly removed.
+   - `OrphanRemoval` will <mark>delete child entities as soon as they are disassociated from the parent, even if the parent is not removed</mark>
+
+5. Combining them:
+
+   - They can be used together. `CascadeType.ALL` with `orphanRemoval=true` provides the most comprehensive cascading behavior.
+
+:::
 
 ### ManyToMany with Join Table @Entity
 
