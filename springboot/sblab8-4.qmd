@@ -802,11 +802,43 @@ The main differences between `cascade` and `orphanRemoval` in JPA are:
 :::
 
 
-**Example: Student and Course Entities**
+#### Example: `Student` and `Course` Entities
+
+```{mermaid}
+classDiagram
+direction RL
+    class Student {
+        -Long id
+        -String name
+        -Set<Course> courses
+        +enrollInCourse(Course course)
+        +dropCourse(Course course)
+    }
+    class Course {
+        -Long id
+        -String title
+        -Set<Student> students
+    }
+    class SchoolService {
+        -StudentRepository studentRepository
+        -CourseRepository courseRepository
+        +manageEnrollment()
+    }
+
+    Student "*" -- "*" Course : enrolls in
+    SchoolService --> Student : uses
+    SchoolService --> Course : uses
+    SchoolService <-- StudentRepository : uses
+    SchoolService <-- CourseRepository : uses
+
+    
+    
+
+```
 
 Let's see an example involving `Student` and `Course` entities in a school system, where **orphan removal** is meaningful.
 
-`Student @Entity`
+`Student @Entity` **owner-side**
 
 ```java
 import javax.persistence.*;
@@ -846,7 +878,7 @@ public class Student {
 }
 ```
 
-`Course @Entity`
+`Course @Entity`  **inverse-side**
 
 ```java
 import javax.persistence.*;
@@ -869,7 +901,7 @@ public class Course {
 ```
 
 
-Here's how you we use these `entities` in a service or test:
+Here's how we use these `entities` in a service or test:
 
 ```java
 public class SchoolService {
