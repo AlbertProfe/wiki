@@ -801,6 +801,131 @@ The main differences between `cascade` and `orphanRemoval` in JPA are:
 
 :::
 
+
+**Example: Student and Course Entities**
+
+Let's see an example involving `Student` and `Course` entities in a school system, where **orphan removal** is meaningful.
+
+`Student @Entity`
+
+```java
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String name;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
+    orphanRemoval = true)
+    @JoinTable(
+        name = "student_course",
+        joinColumns = @JoinColumn(name = "STUDENT_ID"),
+        inverseJoinColumns = @JoinColumn(name = "COURSE_ID")
+    )
+    private Set<Course> courses = new HashSet<>();
+
+    // Constructors, getters, setters, and utility methods
+
+    public void enrollInCourse(Course course) {
+        courses.add(course);
+        course.getStudents().add(this); 
+        // Maintain bidirectional relationship
+    }
+
+    public void dropCourse(Course course) {
+        courses.remove(course);
+        course.getStudents().remove(this); 
+        // Maintain bidirectional relationship
+    }
+}
+```
+
+`Course @Entity`
+
+```java
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+public class Course {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String title;
+
+    @ManyToMany(mappedBy = "COURSES")
+    private Set<Student> students = new HashSet<>();
+
+    // Constructors, getters, setters, and utility methods
+}
+```
+
+
+Here's how you we use these `entities` in a service or test:
+
+```java
+public class SchoolService {
+
+    @Autowired
+    private StudentRepository studentRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
+
+    public void manageEnrollment() {
+        // Create some courses
+        Course math = new Course("Mathematics");
+        Course science = new Course("Science");
+
+        // Save courses
+        courseRepository.save(math);
+        courseRepository.save(science);
+
+        // Create a student and enroll in courses
+        Student issac = new Student("Isaac Boncodi");
+        issac.enrollInCourse(math);
+        issac.enrollInCourse(science);
+
+        // Save the student (this will also
+        // save the relationships)
+        studentRepository.save(issac);
+
+        // Drop the Science course
+        issac.dropCourse(science);
+
+        // Now if we save issac again, the Science course
+        // will be removed from the database
+        // if no other students are enrolled in it.
+        studentRepository.save(issac);
+        
+        // The Science course will be removed
+        // if it's no longer associated with any students.
+    }
+}
+```
+
+
+1. **Entities**: `Student` and `Course` are related through a many-to-many relationship with a join table (`student_course`).
+
+2. **Orphan Removal**: The `orphanRemoval = true` attribute in the `Student` class means that if a `Student` drops a `Course`, and no other students are enrolled in that course, it will be removed from the database.
+
+3. **Methods**: 
+   - `enrollInCourse`: Adds a course to a student's list and maintains the bidirectional relationship.
+   - `dropCourse`: Removes a course from a student's list and maintains the bidirectional relationship.
+
+4. **Usage**: When you drop a course and save the `Student`, if that course is no longer associated with any other students, it will be deleted from the database.
+
+
+
+
 ### ManyToMany with Join Table @Entity
 
 > @Entity @ManyToMany with Join Table: in this particular case we will use two @OneToMany relationships to create a many-to-many, centered and owned by the join table.
