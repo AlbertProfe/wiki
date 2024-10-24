@@ -1765,9 +1765,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#manytomany" id="toc-manytomany" class="nav-link" data-scroll-target="#manytomany"><span class="header-section-number">3.2</span> ManyToMany</a>
   <ul>
-  <li><a href="#manytomany-with-join-table-entity" id="toc-manytomany-with-join-table-entity" class="nav-link" data-scroll-target="#manytomany-with-join-table-entity"><span class="header-section-number">3.2.1</span> ManyToMany with Join Table <span class="citation" data-cites="Entity">@Entity</span></a></li>
-  <li><a href="#when-two-objects-are-equal-object-identity" id="toc-when-two-objects-are-equal-object-identity" class="nav-link" data-scroll-target="#when-two-objects-are-equal-object-identity"><span class="header-section-number">3.2.2</span> When two objects are equal? <strong>Object Identity</strong></a></li>
-  <li><a href="#using-assertj-with-comparator" id="toc-using-assertj-with-comparator" class="nav-link" data-scroll-target="#using-assertj-with-comparator"><span class="header-section-number">3.2.3</span> Using AssertJ with Comparator</a></li>
+  <li><a href="#orphanremoval-and-cascade" id="toc-orphanremoval-and-cascade" class="nav-link" data-scroll-target="#orphanremoval-and-cascade"><span class="header-section-number">3.2.1</span> OrphanRemoval and Cascade</a></li>
+  <li><a href="#manytomany-with-join-table-entity" id="toc-manytomany-with-join-table-entity" class="nav-link" data-scroll-target="#manytomany-with-join-table-entity"><span class="header-section-number">3.2.2</span> ManyToMany with Join Table <span class="citation" data-cites="Entity">@Entity</span></a></li>
+  <li><a href="#when-two-objects-are-equal-object-identity" id="toc-when-two-objects-are-equal-object-identity" class="nav-link" data-scroll-target="#when-two-objects-are-equal-object-identity"><span class="header-section-number">3.2.3</span> When two objects are equal? <strong>Object Identity</strong></a></li>
+  <li><a href="#using-assertj-with-comparator" id="toc-using-assertj-with-comparator" class="nav-link" data-scroll-target="#using-assertj-with-comparator"><span class="header-section-number">3.2.4</span> Using AssertJ with Comparator</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#inherence-and-jpa" id="toc-inherence-and-jpa" class="nav-link" data-scroll-target="#inherence-and-jpa"><span class="header-section-number">4</span> Inherence and JPA</a></li>
@@ -1819,7 +1820,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tuesday, October 22, 2024</p>
+      <p class="date-modified">Thursday, October 24, 2024</p>
     </div>
   </div>
     
@@ -2598,8 +2599,54 @@ ManyToMany Considerations
 </ul>
 </div>
 </div>
-<section id="manytomany-with-join-table-entity" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="manytomany-with-join-table-entity"><span class="header-section-number">3.2.1</span> ManyToMany with Join Table <span class="citation" data-cites="Entity">@Entity</span></h3>
+<section id="orphanremoval-and-cascade" class="level3 page-columns page-full" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="orphanremoval-and-cascade"><span class="header-section-number">3.2.1</span> OrphanRemoval and Cascade</h3>
+<blockquote class="blockquote">
+<p><code>Cascade</code> <strong>propagates operations from parent to child</strong> entities, while <code>orphanRemoval</code> <strong>automatically deletes child entities</strong> no longer associated with a parent.</p>
+</blockquote>
+<p><code>Cascade</code> affects specified actions (e.g., <code>PERSIST</code>, <code>REMOVE</code>), whereas <code>orphanRemoval</code> only deals with removing disassociated children.</p>
+<div class="column-page-right callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cascade vs OrphanRemoval
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The main differences between <code>cascade</code> and <code>orphanRemoval</code> in JPA are:</p>
+<ol type="1">
+<li><p><strong>Scope</strong> of operation:</p>
+<ul>
+<li><mark><code>Cascade</code> applies to all operations specified (e.g.&nbsp;<code>PERSIST</code>, <code>MERGE</code>, RE`MOVE, etc.) and propagates them from parent to child entities&lt;</mark>.</li>
+<li><code>OrphanRemoval</code> only deals with <mark>removing child entities that are no longer associated with the parent </mark>.</li>
+</ul></li>
+<li><p><strong>When</strong> they take effect:</p>
+<ul>
+<li><code>Cascade</code> operations occur when the specified action is performed on <mark>the parent entity </mark>.</li>
+<li><code>OrphanRemoval</code> occurs when a child entity <mark>is disassociated from its parent</mark>, even without explicitly calling remove.</li>
+</ul></li>
+<li><p>Use cases:</p>
+<ul>
+<li><code>Cascade</code> is useful for propagating operations like persist or remove from parent to children.</li>
+<li><code>OrphanRemoval</code> is useful for <mark>automatically deleting child entities that are no longer referenced by a parent.</mark></li>
+</ul></li>
+<li><p><strong>Behavior</strong>:</p>
+<ul>
+<li><code>CascadeType.REMOVE</code> will only delete child entities when the parent is explicitly removed.</li>
+<li><code>OrphanRemoval</code> will <mark>delete child entities as soon as they are disassociated from the parent, even if the parent is not removed</mark></li>
+</ul></li>
+<li><p>Combining them:</p>
+<ul>
+<li>They can be used together. <code>CascadeType.ALL</code> with <code>orphanRemoval=true</code> provides the most comprehensive cascading behavior.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="manytomany-with-join-table-entity" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="manytomany-with-join-table-entity"><span class="header-section-number">3.2.2</span> ManyToMany with Join Table <span class="citation" data-cites="Entity">@Entity</span></h3>
 <blockquote class="blockquote">
 <p><span class="citation" data-cites="Entity">@Entity</span> <span class="citation" data-cites="ManyToMany">@ManyToMany</span> with Join Table: in this particular case we will use two <span class="citation" data-cites="OneToMany">@OneToMany</span> relationships to create a many-to-many, centered and owned by the join table.</p>
 </blockquote>
@@ -2651,8 +2698,8 @@ ManyToMany Considerations
 <li>Maintain better control over the <code>lifecycle</code> of the relationship</li>
 </ul>
 </section>
-<section id="when-two-objects-are-equal-object-identity" class="level3 page-columns page-full" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="when-two-objects-are-equal-object-identity"><span class="header-section-number">3.2.2</span> When two objects are equal? <strong>Object Identity</strong></h3>
+<section id="when-two-objects-are-equal-object-identity" class="level3 page-columns page-full" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="when-two-objects-are-equal-object-identity"><span class="header-section-number">3.2.3</span> When two objects are equal? <strong>Object Identity</strong></h3>
 <blockquote class="blockquote">
 <p>The difference between comparing objects based on object identity and comparing them based on field values lies in how equality is determined:</p>
 <ul>
@@ -2712,8 +2759,8 @@ ManyToMany Considerations
 <span id="cb12-6"><a href="#cb12-6"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>menu1<span class="op">.</span><span class="fu">equals</span><span class="op">(</span>menu2<span class="op">));</span></span>
 <span id="cb12-7"><a href="#cb12-7"></a><span class="co">// true, because their fields are equal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="using-assertj-with-comparator" class="level3 page-columns page-full" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="using-assertj-with-comparator"><span class="header-section-number">3.2.3</span> Using AssertJ with Comparator</h3>
+<section id="using-assertj-with-comparator" class="level3 page-columns page-full" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="using-assertj-with-comparator"><span class="header-section-number">3.2.4</span> Using AssertJ with Comparator</h3>
 <ul>
 <li><a href="https://github.com/AlbertProfe/restaurantManager/blob/bc75ce39d75158ee0e30f287e3d5b030fb8d9591/src/test/java/dev/example/restaurantManager/RelationshipsOrderRestaurantTest.java#L222" class="external" target="_blank">public void testAddingMenusToOrder()</a></li>
 <li><a href="https://nus-cs2030s.github.io/2223-s2/10-heap-stack.html" class="external" target="_blank">Heap and Stack</a></li>
@@ -3389,7 +3436,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
