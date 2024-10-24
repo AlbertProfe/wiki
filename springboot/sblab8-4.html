@@ -2644,6 +2644,111 @@ Cascade vs OrphanRemoval
 </ol>
 </div>
 </div>
+<p><strong>Example: Student and Course Entities</strong></p>
+<p>Let’s see an example involving <code>Student</code> and <code>Course</code> entities in a school system, where <strong>orphan removal</strong> is meaningful.</p>
+<p><code>Student @Entity</code></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">import</span> <span class="im">javax</span><span class="op">.</span><span class="im">persistence</span><span class="op">.*;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashSet</span><span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Set</span><span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="at">@Entity</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="kw">public</span> <span class="kw">class</span> Student <span class="op">{</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="at">@Id</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>    <span class="at">@GeneratedValue</span><span class="op">(</span>strategy <span class="op">=</span> GenerationType<span class="op">.</span><span class="fu">IDENTITY</span><span class="op">)</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="kw">private</span> <span class="bu">Long</span> id<span class="op">;</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>    </span>
+<span id="cb9-11"><a href="#cb9-11"></a>    <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a></span>
+<span id="cb9-13"><a href="#cb9-13"></a>    <span class="at">@ManyToMany</span><span class="op">(</span>cascade <span class="op">=</span> <span class="op">{</span>CascadeType<span class="op">.</span><span class="fu">PERSIST</span><span class="op">,</span> CascadeType<span class="op">.</span><span class="fu">MERGE</span><span class="op">},</span> </span>
+<span id="cb9-14"><a href="#cb9-14"></a>    orphanRemoval <span class="op">=</span> <span class="kw">true</span><span class="op">)</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="at">@JoinTable</span><span class="op">(</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>        name <span class="op">=</span> <span class="st">"student_course"</span><span class="op">,</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a>        joinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"STUDENT_ID"</span><span class="op">),</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a>        inverseJoinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"COURSE_ID"</span><span class="op">)</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a>    <span class="op">)</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Course<span class="op">&gt;</span> courses <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashSet</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a></span>
+<span id="cb9-22"><a href="#cb9-22"></a>    <span class="co">// Constructors, getters, setters, and utility methods</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a></span>
+<span id="cb9-24"><a href="#cb9-24"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">enrollInCourse</span><span class="op">(</span>Course course<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a>        courses<span class="op">.</span><span class="fu">add</span><span class="op">(</span>course<span class="op">);</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a>        course<span class="op">.</span><span class="fu">getStudents</span><span class="op">().</span><span class="fu">add</span><span class="op">(</span><span class="kw">this</span><span class="op">);</span> </span>
+<span id="cb9-27"><a href="#cb9-27"></a>        <span class="co">// Maintain bidirectional relationship</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a>    <span class="op">}</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a></span>
+<span id="cb9-30"><a href="#cb9-30"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">dropCourse</span><span class="op">(</span>Course course<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a>        courses<span class="op">.</span><span class="fu">remove</span><span class="op">(</span>course<span class="op">);</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a>        course<span class="op">.</span><span class="fu">getStudents</span><span class="op">().</span><span class="fu">remove</span><span class="op">(</span><span class="kw">this</span><span class="op">);</span> </span>
+<span id="cb9-33"><a href="#cb9-33"></a>        <span class="co">// Maintain bidirectional relationship</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a>    <span class="op">}</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>Course @Entity</code></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">import</span> <span class="im">javax</span><span class="op">.</span><span class="im">persistence</span><span class="op">.*;</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashSet</span><span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Set</span><span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="at">@Entity</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="kw">public</span> <span class="kw">class</span> Course <span class="op">{</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>    <span class="at">@Id</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>    <span class="at">@GeneratedValue</span><span class="op">(</span>strategy <span class="op">=</span> GenerationType<span class="op">.</span><span class="fu">IDENTITY</span><span class="op">)</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>    <span class="kw">private</span> <span class="bu">Long</span> id<span class="op">;</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>    </span>
+<span id="cb10-11"><a href="#cb10-11"></a>    <span class="kw">private</span> <span class="bu">String</span> title<span class="op">;</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a></span>
+<span id="cb10-13"><a href="#cb10-13"></a>    <span class="at">@ManyToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"COURSES"</span><span class="op">)</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Student<span class="op">&gt;</span> students <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashSet</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a></span>
+<span id="cb10-16"><a href="#cb10-16"></a>    <span class="co">// Constructors, getters, setters, and utility methods</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here’s how you we use these <code>entities</code> in a service or test:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">public</span> <span class="kw">class</span> SchoolService <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="at">@Autowired</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="kw">private</span> StudentRepository studentRepository<span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="at">@Autowired</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>    <span class="kw">private</span> CourseRepository courseRepository<span class="op">;</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a></span>
+<span id="cb11-9"><a href="#cb11-9"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">manageEnrollment</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>        <span class="co">// Create some courses</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>        Course math <span class="op">=</span> <span class="kw">new</span> <span class="fu">Course</span><span class="op">(</span><span class="st">"Mathematics"</span><span class="op">);</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a>        Course science <span class="op">=</span> <span class="kw">new</span> <span class="fu">Course</span><span class="op">(</span><span class="st">"Science"</span><span class="op">);</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a></span>
+<span id="cb11-14"><a href="#cb11-14"></a>        <span class="co">// Save courses</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a>        courseRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>math<span class="op">);</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a>        courseRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>science<span class="op">);</span></span>
+<span id="cb11-17"><a href="#cb11-17"></a></span>
+<span id="cb11-18"><a href="#cb11-18"></a>        <span class="co">// Create a student and enroll in courses</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a>        Student issac <span class="op">=</span> <span class="kw">new</span> <span class="fu">Student</span><span class="op">(</span><span class="st">"Isaac Boncodi"</span><span class="op">);</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a>        issac<span class="op">.</span><span class="fu">enrollInCourse</span><span class="op">(</span>math<span class="op">);</span></span>
+<span id="cb11-21"><a href="#cb11-21"></a>        issac<span class="op">.</span><span class="fu">enrollInCourse</span><span class="op">(</span>science<span class="op">);</span></span>
+<span id="cb11-22"><a href="#cb11-22"></a></span>
+<span id="cb11-23"><a href="#cb11-23"></a>        <span class="co">// Save the student (this will also</span></span>
+<span id="cb11-24"><a href="#cb11-24"></a>        <span class="co">// save the relationships)</span></span>
+<span id="cb11-25"><a href="#cb11-25"></a>        studentRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>issac<span class="op">);</span></span>
+<span id="cb11-26"><a href="#cb11-26"></a></span>
+<span id="cb11-27"><a href="#cb11-27"></a>        <span class="co">// Drop the Science course</span></span>
+<span id="cb11-28"><a href="#cb11-28"></a>        issac<span class="op">.</span><span class="fu">dropCourse</span><span class="op">(</span>science<span class="op">);</span></span>
+<span id="cb11-29"><a href="#cb11-29"></a></span>
+<span id="cb11-30"><a href="#cb11-30"></a>        <span class="co">// Now if we save issac again, the Science course</span></span>
+<span id="cb11-31"><a href="#cb11-31"></a>        <span class="co">// will be removed from the database</span></span>
+<span id="cb11-32"><a href="#cb11-32"></a>        <span class="co">// if no other students are enrolled in it.</span></span>
+<span id="cb11-33"><a href="#cb11-33"></a>        studentRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>issac<span class="op">);</span></span>
+<span id="cb11-34"><a href="#cb11-34"></a>        </span>
+<span id="cb11-35"><a href="#cb11-35"></a>        <span class="co">// The Science course will be removed</span></span>
+<span id="cb11-36"><a href="#cb11-36"></a>        <span class="co">// if it's no longer associated with any students.</span></span>
+<span id="cb11-37"><a href="#cb11-37"></a>    <span class="op">}</span></span>
+<span id="cb11-38"><a href="#cb11-38"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="1">
+<li><p><strong>Entities</strong>: <code>Student</code> and <code>Course</code> are related through a many-to-many relationship with a join table (<code>student_course</code>).</p></li>
+<li><p><strong>Orphan Removal</strong>: The <code>orphanRemoval = true</code> attribute in the <code>Student</code> class means that if a <code>Student</code> drops a <code>Course</code>, and no other students are enrolled in that course, it will be removed from the database.</p></li>
+<li><p><strong>Methods</strong>:</p>
+<ul>
+<li><code>enrollInCourse</code>: Adds a course to a student’s list and maintains the bidirectional relationship.</li>
+<li><code>dropCourse</code>: Removes a course from a student’s list and maintains the bidirectional relationship.</li>
+</ul></li>
+<li><p><strong>Usage</strong>: When you drop a course and save the <code>Student</code>, if that course is no longer associated with any other students, it will be deleted from the database.</p></li>
+</ol>
 </section>
 <section id="manytomany-with-join-table-entity" class="level3" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="manytomany-with-join-table-entity"><span class="header-section-number">3.2.2</span> ManyToMany with Join Table <span class="citation" data-cites="Entity">@Entity</span></h3>
@@ -2656,29 +2761,29 @@ Cascade vs OrphanRemoval
 <li>Provides more flexibility and allows additional attributes on the relationship</li>
 <li><strong>Example</strong>: Students enrolled in Courses, with additional enrollment information</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a><span class="at">@Entity</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">public</span> <span class="kw">class</span> Student <span class="op">{</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>    <span class="at">@OneToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"student"</span><span class="op">)</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>    <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span>Enrollment<span class="op">&gt;</span> enrollments<span class="op">;</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="op">}</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="at">@Entity</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="kw">public</span> <span class="kw">class</span> Course <span class="op">{</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a>    <span class="at">@OneToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"course"</span><span class="op">)</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a>    <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span>Enrollment<span class="op">&gt;</span> enrollments<span class="op">;</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="op">}</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="at">@Entity</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a><span class="kw">public</span> <span class="kw">class</span> Enrollment <span class="op">{</span></span>
-<span id="cb9-15"><a href="#cb9-15"></a>    <span class="at">@ManyToOne</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a>    <span class="kw">private</span> Student student<span class="op">;</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a></span>
-<span id="cb9-18"><a href="#cb9-18"></a>    <span class="at">@ManyToOne</span></span>
-<span id="cb9-19"><a href="#cb9-19"></a>    <span class="kw">private</span> Course course<span class="op">;</span></span>
-<span id="cb9-20"><a href="#cb9-20"></a></span>
-<span id="cb9-21"><a href="#cb9-21"></a>    <span class="kw">private</span> LocalDate enrollmentDate<span class="op">;</span></span>
-<span id="cb9-22"><a href="#cb9-22"></a>    <span class="kw">private</span> <span class="bu">String</span> grade<span class="op">;</span></span>
-<span id="cb9-23"><a href="#cb9-23"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1"></a><span class="at">@Entity</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">public</span> <span class="kw">class</span> Student <span class="op">{</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>    <span class="at">@OneToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"student"</span><span class="op">)</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span>Enrollment<span class="op">&gt;</span> enrollments<span class="op">;</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="op">}</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="at">@Entity</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="kw">public</span> <span class="kw">class</span> Course <span class="op">{</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>    <span class="at">@OneToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"course"</span><span class="op">)</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>    <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span>Enrollment<span class="op">&gt;</span> enrollments<span class="op">;</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="op">}</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="at">@Entity</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="kw">public</span> <span class="kw">class</span> Enrollment <span class="op">{</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a>    <span class="at">@ManyToOne</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a>    <span class="kw">private</span> Student student<span class="op">;</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a></span>
+<span id="cb12-18"><a href="#cb12-18"></a>    <span class="at">@ManyToOne</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a>    <span class="kw">private</span> Course course<span class="op">;</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a></span>
+<span id="cb12-21"><a href="#cb12-21"></a>    <span class="kw">private</span> LocalDate enrollmentDate<span class="op">;</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a>    <span class="kw">private</span> <span class="bu">String</span> grade<span class="op">;</span></span>
+<span id="cb12-23"><a href="#cb12-23"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In this approach:</p>
 <ul>
 <li>The <code>Enrollment</code> entity serves as the join table</li>
@@ -2722,42 +2827,42 @@ Cascade vs OrphanRemoval
 <p>Example:</p>
 <p>Consider the following <code>MenuRestaurant</code> class:</p>
 <div class="column-page-right">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">public</span> <span class="kw">class</span> MenuRestaurant <span class="op">{</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>    <span class="kw">private</span> <span class="dt">int</span> id<span class="op">;</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>    <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a></span>
-<span id="cb10-5"><a href="#cb10-5"></a>    <span class="co">// Constructors, getters, and setters</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a></span>
-<span id="cb10-7"><a href="#cb10-7"></a>    <span class="at">@Override</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">equals</span><span class="op">(</span><span class="bu">Object</span> o<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a>        <span class="cf">if</span> <span class="op">(</span><span class="kw">this</span> <span class="op">==</span> o<span class="op">)</span> <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a>        <span class="cf">if</span> <span class="op">(</span>o <span class="op">==</span> <span class="kw">null</span> <span class="op">||</span> <span class="fu">getClass</span><span class="op">()</span> <span class="op">!=</span> o<span class="op">.</span><span class="fu">getClass</span><span class="op">())</span> <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a>        MenuRestaurant that <span class="op">=</span> <span class="op">(</span>MenuRestaurant<span class="op">)</span> o<span class="op">;</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a>        <span class="cf">return</span> id <span class="op">==</span> that<span class="op">.</span><span class="fu">id</span> <span class="op">&amp;&amp;</span> Objects<span class="op">.</span><span class="fu">equals</span><span class="op">(</span>name<span class="op">,</span> that<span class="op">.</span><span class="fu">name</span><span class="op">);</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a>    <span class="op">}</span></span>
-<span id="cb10-14"><a href="#cb10-14"></a></span>
-<span id="cb10-15"><a href="#cb10-15"></a>    <span class="at">@Override</span></span>
-<span id="cb10-16"><a href="#cb10-16"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">hashCode</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb10-17"><a href="#cb10-17"></a>        <span class="cf">return</span> Objects<span class="op">.</span><span class="fu">hash</span><span class="op">(</span>id<span class="op">,</span> name<span class="op">);</span></span>
-<span id="cb10-18"><a href="#cb10-18"></a>    <span class="op">}</span></span>
-<span id="cb10-19"><a href="#cb10-19"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">public</span> <span class="kw">class</span> MenuRestaurant <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>    <span class="kw">private</span> <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>    <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a>    <span class="co">// Constructors, getters, and setters</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a></span>
+<span id="cb13-7"><a href="#cb13-7"></a>    <span class="at">@Override</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">equals</span><span class="op">(</span><span class="bu">Object</span> o<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>        <span class="cf">if</span> <span class="op">(</span><span class="kw">this</span> <span class="op">==</span> o<span class="op">)</span> <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>        <span class="cf">if</span> <span class="op">(</span>o <span class="op">==</span> <span class="kw">null</span> <span class="op">||</span> <span class="fu">getClass</span><span class="op">()</span> <span class="op">!=</span> o<span class="op">.</span><span class="fu">getClass</span><span class="op">())</span> <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a>        MenuRestaurant that <span class="op">=</span> <span class="op">(</span>MenuRestaurant<span class="op">)</span> o<span class="op">;</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a>        <span class="cf">return</span> id <span class="op">==</span> that<span class="op">.</span><span class="fu">id</span> <span class="op">&amp;&amp;</span> Objects<span class="op">.</span><span class="fu">equals</span><span class="op">(</span>name<span class="op">,</span> that<span class="op">.</span><span class="fu">name</span><span class="op">);</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a>    <span class="op">}</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a></span>
+<span id="cb13-15"><a href="#cb13-15"></a>    <span class="at">@Override</span></span>
+<span id="cb13-16"><a href="#cb13-16"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">hashCode</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a>        <span class="cf">return</span> Objects<span class="op">.</span><span class="fu">hash</span><span class="op">(</span>id<span class="op">,</span> name<span class="op">);</span></span>
+<span id="cb13-18"><a href="#cb13-18"></a>    <span class="op">}</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Comparing Based on Object Identity</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1"></a>MenuRestaurant menu1 <span class="op">=</span> </span>
-<span id="cb11-2"><a href="#cb11-2"></a>    <span class="kw">new</span> <span class="fu">MenuRestaurant</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Pizza"</span><span class="op">);</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>MenuRestaurant menu2 <span class="op">=</span> </span>
-<span id="cb11-4"><a href="#cb11-4"></a>    <span class="kw">new</span> <span class="fu">MenuRestaurant</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Pizza"</span><span class="op">);</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>menu1 <span class="op">==</span> menu2<span class="op">);</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="co">// false, because they are different instances</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1"></a>MenuRestaurant menu1 <span class="op">=</span> </span>
+<span id="cb14-2"><a href="#cb14-2"></a>    <span class="kw">new</span> <span class="fu">MenuRestaurant</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Pizza"</span><span class="op">);</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>MenuRestaurant menu2 <span class="op">=</span> </span>
+<span id="cb14-4"><a href="#cb14-4"></a>    <span class="kw">new</span> <span class="fu">MenuRestaurant</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Pizza"</span><span class="op">);</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>menu1 <span class="op">==</span> menu2<span class="op">);</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co">// false, because they are different instances</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Comparing Based on Field Values</strong></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1"></a>MenuRestaurant menu1 <span class="op">=</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>    <span class="kw">new</span> <span class="fu">MenuRestaurant</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Pizza"</span><span class="op">);</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>MenuRestaurant menu2 <span class="op">=</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a>    <span class="kw">new</span> <span class="fu">MenuRestaurant</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Pizza"</span><span class="op">);</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>menu1<span class="op">.</span><span class="fu">equals</span><span class="op">(</span>menu2<span class="op">));</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="co">// true, because their fields are equal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb15-1"><a href="#cb15-1"></a>MenuRestaurant menu1 <span class="op">=</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>    <span class="kw">new</span> <span class="fu">MenuRestaurant</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Pizza"</span><span class="op">);</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>MenuRestaurant menu2 <span class="op">=</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>    <span class="kw">new</span> <span class="fu">MenuRestaurant</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Pizza"</span><span class="op">);</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>menu1<span class="op">.</span><span class="fu">equals</span><span class="op">(</span>menu2<span class="op">));</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="co">// true, because their fields are equal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="using-assertj-with-comparator" class="level3 page-columns page-full" data-number="3.2.4">
 <h3 data-number="3.2.4" class="anchored" data-anchor-id="using-assertj-with-comparator"><span class="header-section-number">3.2.4</span> Using AssertJ with Comparator</h3>
@@ -2770,13 +2875,13 @@ Cascade vs OrphanRemoval
 </div>
 <p>When you use the above expression, you are specifying that the comparison should be based on the <code>id</code> field of the <code>MenuRestaurant</code> objects:</p>
 <div class="column-page-right">
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">assertj</span><span class="op">.</span><span class="im">core</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.</span><span class="im">assertThat</span><span class="op">;</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="bu">List</span><span class="op">&lt;</span>MenuRestaurant<span class="op">&gt;</span> menuList <span class="op">=</span> <span class="bu">Arrays</span><span class="op">.</span><span class="fu">asList</span><span class="op">(</span>menu1<span class="op">,</span> menu2<span class="op">,</span> menu3<span class="op">);</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="fu">assertThat</span><span class="op">(</span>menuList<span class="op">)</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a>    <span class="op">.</span><span class="fu">usingElementComparator</span><span class="op">(</span><span class="bu">Comparator</span><span class="op">.</span><span class="fu">comparing</span><span class="op">(</span>MenuRestaurant<span class="op">::</span>getId<span class="op">))</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a>    <span class="op">.</span><span class="fu">containsExactlyInAnyOrder</span><span class="op">(</span>menu1<span class="op">,</span> menu2<span class="op">,</span> menu3<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">assertj</span><span class="op">.</span><span class="im">core</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.</span><span class="im">assertThat</span><span class="op">;</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="bu">List</span><span class="op">&lt;</span>MenuRestaurant<span class="op">&gt;</span> menuList <span class="op">=</span> <span class="bu">Arrays</span><span class="op">.</span><span class="fu">asList</span><span class="op">(</span>menu1<span class="op">,</span> menu2<span class="op">,</span> menu3<span class="op">);</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="fu">assertThat</span><span class="op">(</span>menuList<span class="op">)</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a>    <span class="op">.</span><span class="fu">usingElementComparator</span><span class="op">(</span><span class="bu">Comparator</span><span class="op">.</span><span class="fu">comparing</span><span class="op">(</span>MenuRestaurant<span class="op">::</span>getId<span class="op">))</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a>    <span class="op">.</span><span class="fu">containsExactlyInAnyOrder</span><span class="op">(</span>menu1<span class="op">,</span> menu2<span class="op">,</span> menu3<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In this case, the comparison is based on the <code>id</code> field, not the object identity or the default <code>equals</code> method. This allows you to verify that the collection contains the expected elements based on their IDs, regardless of their memory addresses.</p>
 </section>
@@ -3436,7 +3541,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
