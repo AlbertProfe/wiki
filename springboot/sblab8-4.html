@@ -1765,7 +1765,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#manytomany" id="toc-manytomany" class="nav-link" data-scroll-target="#manytomany"><span class="header-section-number">3.2</span> ManyToMany</a>
   <ul>
-  <li><a href="#orphanremoval-and-cascade" id="toc-orphanremoval-and-cascade" class="nav-link" data-scroll-target="#orphanremoval-and-cascade"><span class="header-section-number">3.2.1</span> OrphanRemoval and Cascade</a></li>
+  <li><a href="#orphanremoval-and-cascade" id="toc-orphanremoval-and-cascade" class="nav-link" data-scroll-target="#orphanremoval-and-cascade"><span class="header-section-number">3.2.1</span> OrphanRemoval and Cascade</a>
+  <ul class="collapse">
+  <li><a href="#example-student-and-course-entities" id="toc-example-student-and-course-entities" class="nav-link" data-scroll-target="#example-student-and-course-entities"><span class="header-section-number">3.2.1.1</span> Example: <code>Student</code> and <code>Course</code> Entities</a></li>
+  </ul></li>
   <li><a href="#manytomany-with-join-table-entity" id="toc-manytomany-with-join-table-entity" class="nav-link" data-scroll-target="#manytomany-with-join-table-entity"><span class="header-section-number">3.2.2</span> ManyToMany with Join Table <span class="citation" data-cites="Entity">@Entity</span></a></li>
   <li><a href="#when-two-objects-are-equal-object-identity" id="toc-when-two-objects-are-equal-object-identity" class="nav-link" data-scroll-target="#when-two-objects-are-equal-object-identity"><span class="header-section-number">3.2.3</span> When two objects are equal? <strong>Object Identity</strong></a></li>
   <li><a href="#using-assertj-with-comparator" id="toc-using-assertj-with-comparator" class="nav-link" data-scroll-target="#using-assertj-with-comparator"><span class="header-section-number">3.2.4</span> Using AssertJ with Comparator</a></li>
@@ -2644,9 +2647,50 @@ Cascade vs OrphanRemoval
 </ol>
 </div>
 </div>
-<p><strong>Example: Student and Course Entities</strong></p>
+<section id="example-student-and-course-entities" class="level4" data-number="3.2.1.1">
+<h4 data-number="3.2.1.1" class="anchored" data-anchor-id="example-student-and-course-entities"><span class="header-section-number">3.2.1.1</span> Example: <code>Student</code> and <code>Course</code> Entities</h4>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+direction RL
+    class Student {
+        -Long id
+        -String name
+        -Set&lt;Course&gt; courses
+        +enrollInCourse(Course course)
+        +dropCourse(Course course)
+    }
+    class Course {
+        -Long id
+        -String title
+        -Set&lt;Student&gt; students
+    }
+    class SchoolService {
+        -StudentRepository studentRepository
+        -CourseRepository courseRepository
+        +manageEnrollment()
+    }
+
+    Student "*" -- "*" Course : enrolls in
+    SchoolService --&gt; Student : uses
+    SchoolService --&gt; Course : uses
+    SchoolService &lt;-- StudentRepository : uses
+    SchoolService &lt;-- CourseRepository : uses
+
+    
+    
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <p>Let’s see an example involving <code>Student</code> and <code>Course</code> entities in a school system, where <strong>orphan removal</strong> is meaningful.</p>
-<p><code>Student @Entity</code></p>
+<p><code>Student @Entity</code> <strong>owner-side</strong></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">import</span> <span class="im">javax</span><span class="op">.</span><span class="im">persistence</span><span class="op">.*;</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashSet</span><span class="op">;</span></span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Set</span><span class="op">;</span></span>
@@ -2682,7 +2726,7 @@ Cascade vs OrphanRemoval
 <span id="cb9-33"><a href="#cb9-33"></a>        <span class="co">// Maintain bidirectional relationship</span></span>
 <span id="cb9-34"><a href="#cb9-34"></a>    <span class="op">}</span></span>
 <span id="cb9-35"><a href="#cb9-35"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>Course @Entity</code></p>
+<p><code>Course @Entity</code> <strong>inverse-side</strong></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">import</span> <span class="im">javax</span><span class="op">.</span><span class="im">persistence</span><span class="op">.*;</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashSet</span><span class="op">;</span></span>
 <span id="cb10-3"><a href="#cb10-3"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Set</span><span class="op">;</span></span>
@@ -2700,7 +2744,7 @@ Cascade vs OrphanRemoval
 <span id="cb10-15"><a href="#cb10-15"></a></span>
 <span id="cb10-16"><a href="#cb10-16"></a>    <span class="co">// Constructors, getters, setters, and utility methods</span></span>
 <span id="cb10-17"><a href="#cb10-17"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Here’s how you we use these <code>entities</code> in a service or test:</p>
+<p>Here’s how we use these <code>entities</code> in a service or test:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">public</span> <span class="kw">class</span> SchoolService <span class="op">{</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a></span>
 <span id="cb11-3"><a href="#cb11-3"></a>    <span class="at">@Autowired</span></span>
@@ -2749,6 +2793,7 @@ Cascade vs OrphanRemoval
 </ul></li>
 <li><p><strong>Usage</strong>: When you drop a course and save the <code>Student</code>, if that course is no longer associated with any other students, it will be deleted from the database.</p></li>
 </ol>
+</section>
 </section>
 <section id="manytomany-with-join-table-entity" class="level3" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="manytomany-with-join-table-entity"><span class="header-section-number">3.2.2</span> ManyToMany with Join Table <span class="citation" data-cites="Entity">@Entity</span></h3>
@@ -3541,7 +3586,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
