@@ -1119,14 +1119,167 @@ assertThat(menuList)
 
 In this case, the comparison is based on the `id` field, not the object identity or the default `equals` method. This allows you to verify that the collection contains the expected elements based on their IDs, regardless of their memory addresses.
 
+
+# API Rest: DATA STRUCTURE
+
+- [JSON crack](https://jsoncrack.com/){.external target='_blank'}
+- [Guide to API-first](https://www.postman.com/api-first/){.external target='_blank'}
+
+> The **API-first approach** emphasizes designing APIs before coding, ensuring they serve as the foundation of software development. This paradigm promotes contract-first development, enhancing consistency and reusability across projects.
+> 
+> <mark>By prioritizing API design, teams improve collaboration and developer experience, facilitating faster integration and automation</mark>.
+> 
+> This approach is particularly beneficial in **microservices architectures**, where well-defined APIs enable seamless communication between services.
+
+
+
+Defining a `Spring Boot Controller` based on the API REST URL and JSON data structure is key for several reasons:
+
+**Mapping Requests to Endpoints**: The controller acts as a bridge between the client requests and the application's business logic. By defining endpoints that correspond to specific URLs, you ensure that incoming HTTP requests are properly routed to the appropriate handler methods.
+
+**Data Handling**: The JSON data structure dictates how the controller should process and respond to requests. For instance, in the given examples, the order structure varies:
+
+- With full menu details
+- With menu IDs and quantities
+- With ordered items including menu details and quantities
+
+Each structure requires different request/response handling in the controller.
+
+**Request Validation**: Controllers can validate incoming JSON payloads against expected structures. This ensures data integrity and prevents processing of malformed requests.
+
+**Response Formatting**: The controller determines how data is sent back to the client. It can shape the response to match the expected JSON structure, ensuring consistency in API communication.
+
+**Business Logic Integration**: By understanding the data structure, controllers can efficiently delegate tasks to appropriate service layers, facilitating separation of concerns and maintainable code architecture.
+
+**Versioning and Flexibility**: Different JSON structures might represent different versions of the API. Controllers can be designed to handle multiple versions, ensuring backward compatibility while allowing for future enhancements.
+
+
+## Order with Menus, no qty
+
+```json
+{
+  "id": "ORD123456",
+  "date": "2024-10-29T12:30:00Z",
+  "waiter": "John Doe",
+  "peopleQty": 4,
+  "totalPayment": 120.50,
+  "paid": false,
+  "menus": [
+    {
+      "id": "MENU001",
+      "name": "Lunch Special",
+      "description": "Includes main course, side dish, and drink",
+      "price": 25.99,
+      "category": "LUNCH"
+    },
+    {
+      "id": "MENU002",
+      "name": "Dinner Deluxe",
+      "description": "Three-course meal with appetizer, main course, and dessert",
+      "price": 39.99,
+      "category": "DINNER"
+    },
+    {
+      "id": "MENU003",
+      "name": "Kids Meal",
+      "description": "Child-friendly portion with fun sides",
+      "price": 12.99,
+      "category": "KIDS"
+    }
+  ]
+}
+```
+
+## Order with Menus and qty
+
+```json
+{
+  "id": "ORD123456",
+  "date": "2024-10-29T12:30:00Z",
+  "waiter": "John Doe",
+  "peopleQty": 4,
+  "totalPayment": 120.50,
+  "paid": false,
+  "menus" : {
+    "M01": 0,
+    "M02": 3,
+    "M03": 5,
+    "M04": 0,
+    "M05": 9,
+    "M06": 0
+
+  }
+
+}
+```
+
+```json
+{
+  "id": "ORD123456",
+  "date": "2024-10-29T12:30:00Z",
+  "waiter": "John Doe",
+  "peopleQty": 4,
+  "totalPayment": 120.50,
+  "paid": false,
+  "menus" : [
+    {"M01": 1},
+    {"M02": 2},
+    {"M08": 1}
+  ]
+
+}
+```
+
+```json
+{
+  "id": "ORD123456",
+  "date": "2024-10-29T12:30:00Z",
+  "waiter": "John Doe",
+  "peopleQty": 4,
+  "totalPayment": 120.50,
+  "paid": false,
+  "orderedItems": [
+    {
+      "menu": {
+        "id": "MENU001",
+        "name": "Lunch Special",
+        "description": "Includes main course, side dish, and drink",
+        "price": 25.99,
+        "category": "LUNCH"
+      },
+      "quantity": 2
+    },
+    {
+      "menu": {
+        "id": "MENU002",
+        "name": "Dinner Deluxe",
+        "description": "Three-course meal with appetizer, main course, and dessert",
+        "price": 39.99,
+        "category": "DINNER"
+      },
+      "quantity": 1
+    },
+    {
+      "menu": {
+        "id": "MENU003",
+        "name": "Kids Meal",
+        "description": "Child-friendly portion with fun sides",
+        "price": 12.99,
+        "category": "KIDS"
+      },
+      "quantity": 1
+    }
+  ]
+}
+```
+
+
+
 # Inherence and JPA
 
 // to do
 
-# Queries
 
-
-// to do
 
 
 # Code
