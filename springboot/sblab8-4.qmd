@@ -141,6 +141,7 @@ This structure allows for efficient querying and management of restaurant data u
 3. **Many-to-Many associations:**
     - Many-to-Many
         - `OrderRestaurant` and `MenuRestaurant` have a many-to-many relationship.
+          - To **refactor** with Join Table @Entity: `Order_Menu_Qty`
         - `MenuRestaurant` and `MenuItemRestaurant` have a many-to-many relationship.
     - Many-to-Many with join table as entity
         - The relationship between `Customer` and `TableRestaurant` is effectively a many-to-many relationship, with `Booking` <mark>serving as a join table entity</mark>.
@@ -404,12 +405,15 @@ classDiagram
 
 ## UML with `ManyToMany` join table entity
 
-With the Many-To-Many `Customer 1-n Booking n-1 TableRestaurant` relationship:
+With the Many-To-Many relationship:
+
+   - `Customer 1-n Booking n-1 TableRestaurant`
+   - `OrderRestaurant 1-n OrderMenuQty n-1 MenuRestaurant`
 
 ::: {.column-page-right}
 
 <details>
-<summary>UML with Many-To-Many `Customer 1-n Booking n-1 TableRestaurant` relationship:
+<summary>UML with Many-To-Many relationships:
 </summary>
 
 
@@ -424,7 +428,14 @@ direction LR
         -int peopleQty
         -double totalPayment
         -boolean paid
-        -ArrayList<MenuRestaurant> menusRestaurant
+        -ArrayList<OrderMenuQty> OrderMenuQtys
+        +toString()
+    }
+
+class OrderMenuQty {
+        <<Entity>>
+        -OrderRestaurant orderRestaurant
+        -MenuRestaurant menuRestaurant
         +toString()
     }
 
@@ -454,7 +465,7 @@ direction LR
         -String content
         -boolean active
         -boolean water
-        -ArrayList<OrderRestaurant> ordersRestaurant
+        -ArrayList<OrderMenuQty> OrderMenuQtys
         -ArrayList<MenuItemRestaurant> MenusItemsRestaurant
     }
     class MenuItemRestaurant {
@@ -504,7 +515,8 @@ direction LR
     OrderRestaurant <|-- TakeAwayOrder
     OrderRestaurant <|-- ShippingOrderRestaurant
     OrderRestaurant <|-- EatInOrderRestaurant
-    OrderRestaurant "n" *--* "m" MenuRestaurant
+    OrderRestaurant "1" *--* "m" OrderMenuQty
+    OrderMenuQty "n" *--* "1" MenuRestaurant
     MenuRestaurant "n" *--* "m" MenuItemRestaurant
     TakeAwayOrder "n" *-- "1" Customer
     EatInOrderRestaurant "n" *-- "1" TableRestaurant
@@ -1120,15 +1132,15 @@ assertThat(menuList)
 In this case, the comparison is based on the `id` field, not the object identity or the default `equals` method. This allows you to verify that the collection contains the expected elements based on their IDs, regardless of their memory addresses.
 
 
-# API Rest: DATA STRUCTURE
+# API Rest: DATA structure
 
 - [JSON crack](https://jsoncrack.com/){.external target='_blank'}
 - [Guide to API-first](https://www.postman.com/api-first/){.external target='_blank'}
 
-> The **API-first approach** emphasizes designing APIs before coding, ensuring they serve as the foundation of software development. This paradigm promotes contract-first development, enhancing consistency and reusability across projects.
-> 
+> The **API-first approach** emphasizes <mark>designing APIs before coding</mark>, ensuring they serve as the foundation of software development. This paradigm promotes contract-first development, enhancing consistency and reusability across projects.
+>
 > <mark>By prioritizing API design, teams improve collaboration and developer experience, facilitating faster integration and automation</mark>.
-> 
+>
 > This approach is particularly beneficial in **microservices architectures**, where well-defined APIs enable seamless communication between services.
 
 
@@ -1139,22 +1151,22 @@ Defining a `Spring Boot Controller` based on the API REST URL and JSON data stru
 
 **Data Handling**: The JSON data structure dictates how the controller should process and respond to requests. For instance, in the given examples, the order structure varies:
 
-- With full menu details
-- With menu IDs and quantities
-- With ordered items including menu details and quantities
+- With full `menu` details
+- With `menu` IDs and quantities
+- With ordered items including `menu` details and quantities
 
-Each structure requires different request/response handling in the controller.
+Each structure requires different **request/response** handling in the controller.
 
-**Request Validation**: Controllers can validate incoming JSON payloads against expected structures. This ensures data integrity and prevents processing of malformed requests.
+**Request Validation**: `Controllers` can validate incoming `JSON` payloads against expected structures. This ensures data integrity and prevents processing of malformed requests.
 
-**Response Formatting**: The controller determines how data is sent back to the client. It can shape the response to match the expected JSON structure, ensuring consistency in API communication.
+**Response Formatting**: The `controller` determines how data is sent back to the client. It can shape the response to match the expected JSON structure, ensuring consistency in `API` communication.
 
-**Business Logic Integration**: By understanding the data structure, controllers can efficiently delegate tasks to appropriate service layers, facilitating separation of concerns and maintainable code architecture.
+**Business Logic Integration**: By understanding the data structure, `controllers` can efficiently delegate tasks to appropriate service layers, facilitating separation of concerns and maintainable code architecture.
 
-**Versioning and Flexibility**: Different JSON structures might represent different versions of the API. Controllers can be designed to handle multiple versions, ensuring backward compatibility while allowing for future enhancements.
+**Versioning and Flexibility**: Different `JSON` structures might represent different versions of the `API`. `Controllers` can be designed to handle multiple versions, ensuring backward compatibility while allowing for future enhancements.
 
 
-## Order with Menus, no qty
+## `Order` with `Menus`, no qty
 
 ```json
 {
@@ -1168,21 +1180,24 @@ Each structure requires different request/response handling in the controller.
     {
       "id": "MENU001",
       "name": "Lunch Special",
-      "description": "Includes main course, side dish, and drink",
+      "description": "Includes main course,
+       side dish, and drink",
       "price": 25.99,
       "category": "LUNCH"
     },
     {
       "id": "MENU002",
       "name": "Dinner Deluxe",
-      "description": "Three-course meal with appetizer, main course, and dessert",
+      "description": "Three-course meal with appetizer,
+       main course, and dessert",
       "price": 39.99,
       "category": "DINNER"
     },
     {
       "id": "MENU003",
       "name": "Kids Meal",
-      "description": "Child-friendly portion with fun sides",
+      "description": "Child-friendly portion
+       with fun sides",
       "price": 12.99,
       "category": "KIDS"
     }
@@ -1190,7 +1205,7 @@ Each structure requires different request/response handling in the controller.
 }
 ```
 
-## Order with Menus and qty
+## `Order` with `Menus` and qty
 
 ```json
 {
@@ -1243,7 +1258,8 @@ Each structure requires different request/response handling in the controller.
       "menu": {
         "id": "MENU001",
         "name": "Lunch Special",
-        "description": "Includes main course, side dish, and drink",
+        "description": "Includes main course,
+         side dish, and drink",
         "price": 25.99,
         "category": "LUNCH"
       },
@@ -1253,7 +1269,8 @@ Each structure requires different request/response handling in the controller.
       "menu": {
         "id": "MENU002",
         "name": "Dinner Deluxe",
-        "description": "Three-course meal with appetizer, main course, and dessert",
+        "description": "Three-course meal with
+         appetizer, main course, and dessert",
         "price": 39.99,
         "category": "DINNER"
       },
@@ -1263,7 +1280,8 @@ Each structure requires different request/response handling in the controller.
       "menu": {
         "id": "MENU003",
         "name": "Kids Meal",
-        "description": "Child-friendly portion with fun sides",
+        "description": "Child-friendly portion
+         with fun sides",
         "price": 12.99,
         "category": "KIDS"
       },
