@@ -1308,7 +1308,7 @@ There are **three inheritance strategies** defined from the [InheritanceType](ht
 1. JOINED
 
 * Single table inheritance is the default with discriminator values,
-* and table per class is an optional feature of the JPA spec, **so not all providers may support it**. 
+* and table per class is an optional feature of the JPA spec, **so not all providers may support it**.
 * in joined strategy each class in the hierarchy is mapped to its table.
 
 MAPPED SUPERCLASS
@@ -1316,7 +1316,7 @@ MAPPED SUPERCLASS
 * JPA also defines a mapped superclass concept defined through the [@MappedSuperclass](https://docs.oracle.com/javaee/7/api/javax/persistence/MappedSuperclass.html) annotation or the `<mapped-superclass>` element. 
 * A mapped superclass **is not a persistent class**, but allows common mappings to be defined for its subclasses.
 
-![Entity Inheritance](https://camo.githubusercontent.com/772dac8679c2431f1b9959785004df8c4d8f6b92e6fdad16716deffd271f62e5/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f69643d317a44757052465f652d5372375a70426f387450773575514937395244532d7668)
+![Entity Inheritance](/images/springboot/labsb04-1-entity-inherence-.png)
 
 
 Links: [orientdb](https://orientdb.com/docs/2.2.x/Teleporter-Table-Per-Concrete-Class-Inheritance.html), [logicbig](https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/mapped-super-class.html), [Java Persistence/Inheritance wikibooks](https://en.wikibooks.org/wiki/Java_Persistence/Inheritance) and 
@@ -1328,6 +1328,21 @@ Links: [orientdb](https://orientdb.com/docs/2.2.x/Teleporter-Table-Per-Concrete-
 ![UML](/images/springboot/labsb08/labsb08-4-uml.png)
 
 - [DataLoader](https://github.com/AlbertProfe/restaurantManager/blob/6a5958b74c16a495ac4452b0320756b8a3598e4e/src/main/java/dev/example/restaurantManager/utilities/DataLoader.java){.external target='_blank'}
+- [restaurantManagerDB](/images/springboot/labsb08/restaurantManagerDB.mv.db){.external target='_blank'}
+
+::: {.callout-note}
+# How to import H2-DB
+
+Using the command line, navigate to the directory containing the **H2 jar file**.
+Run the following command:
+
+``` java
+java -cp h2-*.jar org.h2.tools.RunScript -url jdbc:h2:~/restaurantManagerDB -user <username> -password <password> -script path/to/your/restaurantManagerDB_script.sql
+```
+
+Replace <username> and <password> with your chosen credentials, and provide the correct path to your SQL script.
+
+:::
 
 ## DataLoader Class
 
@@ -1365,11 +1380,11 @@ The `@Component` annotation is used <mark>to mark a class as a Spring-managed co
 
 How @Component Works:
 
-1. Class-Level Annotation: `@Component` is applied at the class level[1][2].
+1. Class-Level Annotation: `@Component` is applied at the class level.
 2. `Bean` Creation: When Spring scans the classpath, it detects classes annotated with `@Component` and creates beans for them[1][2].
 3. Default Naming: By default, the bean name is the class name with the first letter in lowercase.
 4. Customizable: You can specify a custom name for the bean using `@Component`("customName").
-5. Specialized Annotations: `@Service`, `@Repositor`y, and `@Controller` are specialized forms of `@Component` for specific use cases.
+5. Specialized Annotations: `@Service`, `@Repository`, and `@Controller` are specialized forms of `@Component` for specific use cases.
 
 ## Usage Example
 
