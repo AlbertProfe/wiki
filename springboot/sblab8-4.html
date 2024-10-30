@@ -1880,6 +1880,18 @@ Commits table
 </thead>
 <tbody>
 <tr class="odd">
+<td><a href="https://github.com/AlbertProfe/restaurantManager/commit/ab8c1e384a14567dd32d353257069b9931f54ee8">ab8c1e3</a></td>
+<td>2024-10-30 11:59 Wednesday</td>
+<td>DataLoader with EatIn, Shipping and TakeAway Orders</td>
+<td><a href="https://github.com/AlbertProfe/restaurantManager/tree/ab8c1e384a14567dd32d353257069b9931f54ee8">&lt;&gt;</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/AlbertProfe/restaurantManager/commit/065608445069ce696b8c778c96ae4570e8f82f7a">0656084</a></td>
+<td>2024-10-30 11:20 Wednesday</td>
+<td>DataLoader polish</td>
+<td><a href="https://github.com/AlbertProfe/restaurantManager/tree/065608445069ce696b8c778c96ae4570e8f82f7a">&lt;&gt;</a></td>
+</tr>
+<tr class="odd">
 <td><a href="https://github.com/AlbertProfe/restaurantManager/commit/6a5958b74c16a495ac4452b0320756b8a3598e4e">6a5958b</a></td>
 <td>2024-10-29 18:04 Tuesday</td>
 <td>DataPopulate controller and DataLoader utility java faker, h2 local</td>
@@ -3424,7 +3436,7 @@ direction RL
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://camo.githubusercontent.com/772dac8679c2431f1b9959785004df8c4d8f6b92e6fdad16716deffd271f62e5/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f69643d317a44757052465f652d5372375a70426f387450773575514937395244532d7668.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Entity Inheritance"><img src="https://camo.githubusercontent.com/772dac8679c2431f1b9959785004df8c4d8f6b92e6fdad16716deffd271f62e5/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f69643d317a44757052465f652d5372375a70426f387450773575514937395244532d7668.png" class="img-fluid figure-img" alt="Entity Inheritance"></a></p>
+<p><a href="../images/springboot/labsb04-1-entity-inherence-.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Entity Inheritance"><img src="../images/springboot/labsb04-1-entity-inherence-.png" class="img-fluid figure-img" alt="Entity Inheritance"></a></p>
 <figcaption>Entity Inheritance</figcaption>
 </figure>
 </div>
@@ -3440,7 +3452,23 @@ direction RL
 </div>
 <ul>
 <li><a href="https://github.com/AlbertProfe/restaurantManager/blob/6a5958b74c16a495ac4452b0320756b8a3598e4e/src/main/java/dev/example/restaurantManager/utilities/DataLoader.java" class="external" target="_blank">DataLoader</a></li>
+<li><a href="../images/springboot/labsb08/restaurantManagerDB.mv.db" class="external" target="_blank">restaurantManagerDB</a></li>
 </ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+How to import H2-DB
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using the command line, navigate to the directory containing the <strong>H2 jar file</strong>. Run the following command:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb21-1"><a href="#cb21-1"></a>java <span class="op">-</span>cp h2<span class="op">-*.</span><span class="fu">jar</span> org<span class="op">.</span><span class="fu">h2</span><span class="op">.</span><span class="fu">tools</span><span class="op">.</span><span class="fu">RunScript</span> <span class="op">-</span>url jdbc<span class="op">:</span>h2<span class="op">:~/</span>restaurantManagerDB <span class="op">-</span>user <span class="op">&lt;</span>username<span class="op">&gt;</span> <span class="op">-</span>password <span class="op">&lt;</span>password<span class="op">&gt;</span> <span class="op">-</span>script path<span class="op">/</span>to<span class="op">/</span>your<span class="op">/</span>restaurantManagerDB_script<span class="op">.</span><span class="fu">sql</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Replace <username> and <password> with your chosen credentials, and provide the correct path to your SQL script.</password></username></p>
+</div>
+</div>
 <section id="dataloader-class" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="dataloader-class"><span class="header-section-number">6.1</span> DataLoader Class</h2>
 <p>The <code>DataLoader</code> class is the Spring <code>component</code> designed to populate an <strong>H2 database</strong> with fake data for a <code>RestaurantManagement</code> project. Key features include:</p>
@@ -3476,21 +3504,21 @@ direction RL
 </ul>
 <p>How <span class="citation" data-cites="Component">@Component</span> Works:</p>
 <ol type="1">
-<li>Class-Level Annotation: <code>@Component</code> is applied at the class level[1][2].</li>
+<li>Class-Level Annotation: <code>@Component</code> is applied at the class level.</li>
 <li><code>Bean</code> Creation: When Spring scans the classpath, it detects classes annotated with <code>@Component</code> and creates beans for them[1][2].</li>
 <li>Default Naming: By default, the bean name is the class name with the first letter in lowercase.</li>
 <li>Customizable: You can specify a custom name for the bean using <code>@Component</code>(“customName”).</li>
-<li>Specialized Annotations: <code>@Service</code>, <code>@Repositor</code>y, and <code>@Controller</code> are specialized forms of <code>@Component</code> for specific use cases.</li>
+<li>Specialized Annotations: <code>@Service</code>, <code>@Repository</code>, and <code>@Controller</code> are specialized forms of <code>@Component</code> for specific use cases.</li>
 </ol>
 </section>
 <section id="usage-example" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="usage-example"><span class="header-section-number">6.3</span> Usage Example</h2>
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb21-1"><a href="#cb21-1"></a><span class="at">@Component</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="kw">public</span> <span class="kw">class</span> MathComponent <span class="op">{</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">add</span><span class="op">(</span><span class="dt">int</span> x<span class="op">,</span> <span class="dt">int</span> y<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a>        <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a>    <span class="op">}</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb22-1"><a href="#cb22-1"></a><span class="at">@Component</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="kw">public</span> <span class="kw">class</span> MathComponent <span class="op">{</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">add</span><span class="op">(</span><span class="dt">int</span> x<span class="op">,</span> <span class="dt">int</span> y<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>        <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>    <span class="op">}</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In this example, Spring will automatically create a <code>bean</code> of <code>MathComponent</code>, which can then be autowired or retrieved from the application context.</p>
 <p><strong>Benefits</strong></p>
 <blockquote class="blockquote">
@@ -3526,6 +3554,18 @@ direction RL
 </tr>
 </thead>
 <tbody>
+<tr class="odd">
+<td><a href="https://github.com/AlbertProfe/restaurantManager/commit/ab8c1e384a14567dd32d353257069b9931f54ee8">ab8c1e3</a></td>
+<td>2024-10-30 11:59 Wednesday</td>
+<td>DataLoader with EatIn, Shipping and TakeAway Orders</td>
+<td><a href="https://github.com/AlbertProfe/restaurantManager/tree/ab8c1e384a14567dd32d353257069b9931f54ee8">&lt;&gt;</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/AlbertProfe/restaurantManager/commit/065608445069ce696b8c778c96ae4570e8f82f7a">0656084</a></td>
+<td>2024-10-30 11:20 Wednesday</td>
+<td>DataLoader polish</td>
+<td><a href="https://github.com/AlbertProfe/restaurantManager/tree/065608445069ce696b8c778c96ae4570e8f82f7a">&lt;&gt;</a></td>
+</tr>
 <tr class="odd">
 <td><a href="https://github.com/AlbertProfe/restaurantManager/commit/6a5958b74c16a495ac4452b0320756b8a3598e4e">6a5958b</a></td>
 <td>2024-10-29 18:04 Tuesday</td>
@@ -4451,7 +4491,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
