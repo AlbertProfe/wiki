@@ -1780,11 +1780,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#order-with-menus-and-qty" id="toc-order-with-menus-and-qty" class="nav-link" data-scroll-target="#order-with-menus-and-qty"><span class="header-section-number">4.2</span> <code>Order</code> with <code>Menus</code> and qty</a></li>
   </ul></li>
   <li><a href="#inherence-and-jpa" id="toc-inherence-and-jpa" class="nav-link" data-scroll-target="#inherence-and-jpa"><span class="header-section-number">5</span> Inherence and JPA</a></li>
-  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">6</span> Code</a>
+  <li><a href="#populate-db" id="toc-populate-db" class="nav-link" data-scroll-target="#populate-db"><span class="header-section-number">6</span> Populate DB</a>
   <ul>
-  <li><a href="#commits" id="toc-commits" class="nav-link" data-scroll-target="#commits"><span class="header-section-number">6.1</span> Commits</a></li>
-  <li><a href="#commit-85a23ab" id="toc-commit-85a23ab" class="nav-link" data-scroll-target="#commit-85a23ab"><span class="header-section-number">6.2</span> commit <code>85a23ab</code></a></li>
-  <li><a href="#commit-d65b4a9" id="toc-commit-d65b4a9" class="nav-link" data-scroll-target="#commit-d65b4a9"><span class="header-section-number">6.3</span> commit <code>d65b4a9</code></a></li>
+  <li><a href="#dataloader-class" id="toc-dataloader-class" class="nav-link" data-scroll-target="#dataloader-class"><span class="header-section-number">6.1</span> DataLoader Class</a></li>
+  <li><a href="#component" id="toc-component" class="nav-link" data-scroll-target="#component"><span class="header-section-number">6.2</span> <span class="citation" data-cites="Component">@Component</span></a></li>
+  <li><a href="#usage-example" id="toc-usage-example" class="nav-link" data-scroll-target="#usage-example"><span class="header-section-number">6.3</span> Usage Example</a></li>
+  </ul></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">7</span> Code</a>
+  <ul>
+  <li><a href="#commits" id="toc-commits" class="nav-link" data-scroll-target="#commits"><span class="header-section-number">7.1</span> Commits</a></li>
+  <li><a href="#commit-85a23ab" id="toc-commit-85a23ab" class="nav-link" data-scroll-target="#commit-85a23ab"><span class="header-section-number">7.2</span> commit <code>85a23ab</code></a></li>
+  <li><a href="#commit-d65b4a9" id="toc-commit-d65b4a9" class="nav-link" data-scroll-target="#commit-d65b4a9"><span class="header-section-number">7.3</span> commit <code>d65b4a9</code></a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/sblab8-4.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -1828,7 +1834,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tuesday, October 29, 2024</p>
+      <p class="date-modified">Wednesday, October 30, 2024</p>
     </div>
   </div>
     
@@ -3400,12 +3406,107 @@ direction RL
 </section>
 <section id="inherence-and-jpa" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Inherence and JPA</h1>
-<p>// to do</p>
+<p><strong>Inheritance</strong> is a fundamental concept of POO, but Relational databases <strong>have no concept of inheritance</strong> neither NoSQL (MongoDB, DymamoDB), so persisting <a href="https://en.wikibooks.org/wiki/Java_Persistence/Inheritance">inheritance</a> in a SQL and NoSQL database <em>has its own particular way.</em></p>
+<blockquote class="blockquote">
+<p>Because relational databases have no concept of inheritance, there is no standard way of implementing inheritance in database, <em>so the hardest part of persisting inheritance is choosing how to represent the inheritance in the database.</em></p>
+</blockquote>
+<p>JPA defines several inheritance mechanisms, mainly defined though the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/Inheritance.html"><span class="citation" data-cites="Inheritance">@Inheritance</span></a> annotation or the <code>&lt;inheritance&gt;</code> element.</p>
+<p>There are <strong>three inheritance strategies</strong> defined from the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/InheritanceType.html">InheritanceType</a> <code>enum</code>: 1. SINGLE_TABLE 1. TABLE_PER_CLASS 1. JOINED</p>
+<ul>
+<li>Single table inheritance is the default with discriminator values,</li>
+<li>and table per class is an optional feature of the JPA spec, <strong>so not all providers may support it</strong>.</li>
+<li>in joined strategy each class in the hierarchy is mapped to its table.</li>
+</ul>
+<p>MAPPED SUPERCLASS</p>
+<ul>
+<li>JPA also defines a mapped superclass concept defined through the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/MappedSuperclass.html"><span class="citation" data-cites="MappedSuperclass">@MappedSuperclass</span></a> annotation or the <code>&lt;mapped-superclass&gt;</code> element.</li>
+<li>A mapped superclass <strong>is not a persistent class</strong>, but allows common mappings to be defined for its subclasses.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://camo.githubusercontent.com/772dac8679c2431f1b9959785004df8c4d8f6b92e6fdad16716deffd271f62e5/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f69643d317a44757052465f652d5372375a70426f387450773575514937395244532d7668.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Entity Inheritance"><img src="https://camo.githubusercontent.com/772dac8679c2431f1b9959785004df8c4d8f6b92e6fdad16716deffd271f62e5/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f69643d317a44757052465f652d5372375a70426f387450773575514937395244532d7668.png" class="img-fluid figure-img" alt="Entity Inheritance"></a></p>
+<figcaption>Entity Inheritance</figcaption>
+</figure>
+</div>
+<p>Links: <a href="https://orientdb.com/docs/2.2.x/Teleporter-Table-Per-Concrete-Class-Inheritance.html">orientdb</a>, <a href="https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/mapped-super-class.html">logicbig</a>, <a href="https://en.wikibooks.org/wiki/Java_Persistence/Inheritance">Java Persistence/Inheritance wikibooks</a> and <a href="https://openjpa.apache.org/builds/2.2.0/apache-openjpa/docs/jpa_overview_mapping_inher.html">apache</a></p>
 </section>
-<section id="code" class="level1 page-columns page-full" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Code</h1>
-<section id="commits" class="level2 page-columns page-full" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="commits"><span class="header-section-number">6.1</span> Commits</h2>
+<section id="populate-db" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Populate DB</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/labsb08/labsb08-4-uml.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="UML"><img src="../images/springboot/labsb08/labsb08-4-uml.png" class="img-fluid figure-img" alt="UML"></a></p>
+<figcaption>UML</figcaption>
+</figure>
+</div>
+<ul>
+<li><a href="https://github.com/AlbertProfe/restaurantManager/blob/6a5958b74c16a495ac4452b0320756b8a3598e4e/src/main/java/dev/example/restaurantManager/utilities/DataLoader.java" class="external" target="_blank">DataLoader</a></li>
+</ul>
+<section id="dataloader-class" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="dataloader-class"><span class="header-section-number">6.1</span> DataLoader Class</h2>
+<p>The <code>DataLoader</code> class is the Spring <code>component</code> designed to populate an <strong>H2 database</strong> with fake data for a <code>RestaurantManagement</code> project. Key features include:</p>
+<ul>
+<li>Uses <code>@Autowired</code> repositories for database interactions</li>
+<li>Employs the <strong>JavaFaker library</strong> to generate realistic mock data</li>
+<li>Main method <code>loadAllData()</code> <mark>orchestrates</mark> the data creation process</li>
+</ul>
+<p><strong>Data Creation Methods</strong></p>
+<ol type="1">
+<li><code>createCustomers()</code>: Generates 25 <code>customer</code> records</li>
+<li><code>createTables()</code>: Creates 10 <code>restaurant table</code> entries</li>
+<li><code>createMenuItems()</code>: Produces 25 <code>menu item</code> records</li>
+<li><code>createMenusAndAssignMenuItems()</code>: Establishes 15 menus, each with 5-10 menu items</li>
+<li><code>createBookingsAndAssignTablesAndCustomers()</code>: Generates 25 <code>bookings</code>, linking <code>customers</code> and <code>tables</code></li>
+<li><code>createOrdersAndAssignMenus()</code>: Creates 45 <code>orders</code> with associated <code>menu</code> quantities</li>
+</ol>
+<p><strong>Key Aspects</strong></p>
+<ul>
+<li>Utilizes <code>UUID</code> for unique identifiers</li>
+<li>Establishes <code>relationships</code> between entities (e.g., many-to-many between menus and menu items)</li>
+<li>Simulates realistic data ranges (e.g., customer ages, table capacities)</li>
+<li>Implements date handling for <code>bookings</code> and <code>orders</code></li>
+</ul>
+</section>
+<section id="component" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="component"><span class="header-section-number">6.2</span> <span class="citation" data-cites="Component">@Component</span></h2>
+<p>The <code>@Component</code> annotation is used <mark>to mark a class as a Spring-managed component</mark>.</p>
+<ul>
+<li><strong>Automatic</strong> <code>Bean</code> Creation: <code>@Component</code> tells Spring to automatically create and manage an instance of the annotated class as a bean in the application context.</li>
+<li><strong>Dependency Injection</strong>: It enables the class to be a candidate for dependency injection, allowing Spring to automatically <mark>wire its dependencies</mark>.</li>
+<li><strong>Component Scanning</strong>: <code>@Component</code> works with Spring’s component scanning feature to detect and register beans without explicit configuration.</li>
+</ul>
+<p>How <span class="citation" data-cites="Component">@Component</span> Works:</p>
+<ol type="1">
+<li>Class-Level Annotation: <code>@Component</code> is applied at the class level[1][2].</li>
+<li><code>Bean</code> Creation: When Spring scans the classpath, it detects classes annotated with <code>@Component</code> and creates beans for them[1][2].</li>
+<li>Default Naming: By default, the bean name is the class name with the first letter in lowercase.</li>
+<li>Customizable: You can specify a custom name for the bean using <code>@Component</code>(“customName”).</li>
+<li>Specialized Annotations: <code>@Service</code>, <code>@Repositor</code>y, and <code>@Controller</code> are specialized forms of <code>@Component</code> for specific use cases.</li>
+</ol>
+</section>
+<section id="usage-example" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="usage-example"><span class="header-section-number">6.3</span> Usage Example</h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb21-1"><a href="#cb21-1"></a><span class="at">@Component</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="kw">public</span> <span class="kw">class</span> MathComponent <span class="op">{</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">add</span><span class="op">(</span><span class="dt">int</span> x<span class="op">,</span> <span class="dt">int</span> y<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>        <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>    <span class="op">}</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this example, Spring will automatically create a <code>bean</code> of <code>MathComponent</code>, which can then be autowired or retrieved from the application context.</p>
+<p><strong>Benefits</strong></p>
+<blockquote class="blockquote">
+<p>By using <span class="citation" data-cites="Component">@Component</span>, we can leverage Spring’s dependency injection and inversion of control features with minimal configuration, leading to more maintainable and modular code.</p>
+</blockquote>
+<ol type="1">
+<li><strong>Simplifies Configuration</strong>: Reduces the need for XML-based bean definitions.</li>
+<li>Promotes <strong>Loose Coupling</strong>: Facilitates dependency injection and easier unit testing.</li>
+<li>Improves Code Organization: Helps in categorizing classes based on their roles in the application.</li>
+</ol>
+</section>
+</section>
+<section id="code" class="level1 page-columns page-full" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Code</h1>
+<section id="commits" class="level2 page-columns page-full" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="commits"><span class="header-section-number">7.1</span> Commits</h2>
 <p>All <a href="https://github.com/AlbertProfe/restaurantManager/commits/master/" class="external" target="_blank">Commits</a> <code>AlbertProfe / restaurantManager</code> (Public) table:</p>
 <div class="column-page-right">
 <table class="caption-top table">
@@ -3714,13 +3815,13 @@ direction RL
 <li><a href="https://github.com/AlbertProfe/restaurantManager/commits/master/" class="external" target="_blank">Commits</a></li>
 </ul>
 </section>
-<section id="commit-85a23ab" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="commit-85a23ab"><span class="header-section-number">6.2</span> commit <code>85a23ab</code></h2>
+<section id="commit-85a23ab" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="commit-85a23ab"><span class="header-section-number">7.2</span> commit <code>85a23ab</code></h2>
 <ul>
 <li><a href="https://github.com/AlbertProfe/restaurantManager/tree/85a23abcf1d3e7a4818d7e374f2cbb1f81709371" class="external" target="_blank">manytomany menu n:m order</a></li>
 </ul>
-<p><a href="../images/springboot/labsb08/85a23ab-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="../images/springboot/labsb08/85a23ab-1.png" class="img-fluid"></a></p>
-<p><a href="../images/springboot/labsb08/85a23ab-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="../images/springboot/labsb08/85a23ab-2.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/85a23ab-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="../images/springboot/labsb08/85a23ab-1.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/85a23ab-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="../images/springboot/labsb08/85a23ab-2.png" class="img-fluid"></a></p>
 <blockquote class="blockquote">
 <p><mark>When iterating on a project and introducing new relationships</mark>, such as a <strong>many-to-many</strong> relationship between <strong>orders</strong> and <strong>menus</strong>, existing tests m<strong>ay fail due to outdated assumptions and data setup</strong>. In this case, the test <code>TestCreateOrder</code> needs to be updated to reflect the new relationship structure.</p>
 </blockquote>
@@ -3735,8 +3836,8 @@ direction RL
 <p>This <strong>refactoring</strong> ensures that the test <mark>accurately reflects the new data model and relationships</mark>.</p>
 <p>It also helps maintain the integrity of the test suite as the project evolves, ensuring that tests remain valid and useful for catching potential issues in the updated codebase.</p>
 </section>
-<section id="commit-d65b4a9" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="commit-d65b4a9"><span class="header-section-number">6.3</span> commit <code>d65b4a9</code></h2>
+<section id="commit-d65b4a9" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="commit-d65b4a9"><span class="header-section-number">7.3</span> commit <code>d65b4a9</code></h2>
 <p>In this commit we update <code>TestCreateOrder()</code> to reflect the new relationship structure and create a new test.</p>
 <ul>
 <li><a href="https://github.com/AlbertProfe/restaurantManager/tree/d65b4a959ffe9b8d489e7ad0ef322b707482bb0c" class="external" target="_blank">TestCreateOrderMenu() and update TestCreateOrder()</a></li>
@@ -4350,7 +4451,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":false,"closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
