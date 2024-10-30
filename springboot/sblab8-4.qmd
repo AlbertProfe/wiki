@@ -1295,7 +1295,102 @@ Each structure requires different **request/response** handling in the controlle
 
 # Inherence and JPA
 
-// to do
+
+**Inheritance** is a fundamental concept of POO, but Relational databases **have no concept of inheritance** neither NoSQL (MongoDB, DymamoDB), so persisting [inheritance](https://en.wikibooks.org/wiki/Java_Persistence/Inheritance) in a SQL and NoSQL database _has its own particular way._  
+
+> Because relational databases have no concept of inheritance, there is no standard way of implementing inheritance in database, _so the hardest part of persisting inheritance is choosing how to represent the inheritance in the database._
+
+JPA defines several inheritance mechanisms, mainly defined though the [@Inheritance](https://docs.oracle.com/javaee/7/api/javax/persistence/Inheritance.html) annotation or the `<inheritance>` element.
+
+There are **three inheritance strategies** defined from the [InheritanceType](https://docs.oracle.com/javaee/7/api/javax/persistence/InheritanceType.html) `enum`:
+1. SINGLE_TABLE
+1. TABLE_PER_CLASS
+1. JOINED
+
+* Single table inheritance is the default with discriminator values,
+* and table per class is an optional feature of the JPA spec, **so not all providers may support it**. 
+* in joined strategy each class in the hierarchy is mapped to its table.
+
+MAPPED SUPERCLASS
+
+* JPA also defines a mapped superclass concept defined through the [@MappedSuperclass](https://docs.oracle.com/javaee/7/api/javax/persistence/MappedSuperclass.html) annotation or the `<mapped-superclass>` element. 
+* A mapped superclass **is not a persistent class**, but allows common mappings to be defined for its subclasses.
+
+![Entity Inheritance](https://camo.githubusercontent.com/772dac8679c2431f1b9959785004df8c4d8f6b92e6fdad16716deffd271f62e5/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f69643d317a44757052465f652d5372375a70426f387450773575514937395244532d7668)
+
+
+Links: [orientdb](https://orientdb.com/docs/2.2.x/Teleporter-Table-Per-Concrete-Class-Inheritance.html), [logicbig](https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/mapped-super-class.html), [Java Persistence/Inheritance wikibooks](https://en.wikibooks.org/wiki/Java_Persistence/Inheritance) and 
+[apache](https://openjpa.apache.org/builds/2.2.0/apache-openjpa/docs/jpa_overview_mapping_inher.html) 
+
+
+# Populate DB
+
+![UML](/images/springboot/labsb08/labsb08-4-uml.png)
+
+- [DataLoader](https://github.com/AlbertProfe/restaurantManager/blob/6a5958b74c16a495ac4452b0320756b8a3598e4e/src/main/java/dev/example/restaurantManager/utilities/DataLoader.java){.external target='_blank'}
+
+## DataLoader Class
+
+The `DataLoader` class is the Spring `component` designed to populate an **H2 database** with fake data for a `RestaurantManagement` project. Key features include:
+
+- Uses `@Autowired` repositories for database interactions
+- Employs the **JavaFaker library** to generate realistic mock data
+- Main method `loadAllData()` <mark>orchestrates</mark> the data creation process
+
+**Data Creation Methods**
+
+1. `createCustomers()`: Generates 25 `customer` records
+2. `createTables()`: Creates 10 `restaurant table` entries
+3. `createMenuItems()`: Produces 25 `menu item` records
+4. `createMenusAndAssignMenuItems()`: Establishes 15 menus, each with 5-10 menu items
+5. `createBookingsAndAssignTablesAndCustomers()`: Generates 25 `bookings`, linking `customers` and `tables`
+6. `createOrdersAndAssignMenus()`: Creates 45 `orders` with associated `menu` quantities
+
+**Key Aspects**
+
+- Utilizes `UUID` for unique identifiers
+- Establishes `relationships` between entities (e.g., many-to-many between menus and menu items)
+- Simulates realistic data ranges (e.g., customer ages, table capacities)
+- Implements date handling for `bookings` and `orders`
+
+
+
+## @Component
+
+The `@Component` annotation is used <mark>to mark a class as a Spring-managed component</mark>.
+
+- **Automatic** `Bean` Creation: `@Component` tells Spring to automatically create and manage an instance of the annotated class as a bean in the application context.
+- **Dependency Injection**: It enables the class to be a candidate for dependency injection, allowing Spring to automatically <mark>wire its dependencies</mark>.
+- **Component Scanning**: `@Component` works with Spring's component scanning feature to detect and register beans without explicit configuration.
+
+How @Component Works:
+
+1. Class-Level Annotation: `@Component` is applied at the class level[1][2].
+2. `Bean` Creation: When Spring scans the classpath, it detects classes annotated with `@Component` and creates beans for them[1][2].
+3. Default Naming: By default, the bean name is the class name with the first letter in lowercase.
+4. Customizable: You can specify a custom name for the bean using `@Component`("customName").
+5. Specialized Annotations: `@Service`, `@Repositor`y, and `@Controller` are specialized forms of `@Component` for specific use cases.
+
+## Usage Example
+
+```java
+@Component
+public class MathComponent {
+    public int add(int x, int y) {
+        return x + y;
+    }
+}
+```
+
+In this example, Spring will automatically create a `bean` of `MathComponent`, which can then be autowired or retrieved from the application context.
+
+**Benefits**
+
+> By using @Component, we can leverage Spring's dependency injection and inversion of control features with minimal configuration, leading to more maintainable and modular code.
+
+1. **Simplifies Configuration**: Reduces the need for XML-based bean definitions.
+2. Promotes **Loose Coupling**: Facilitates dependency injection and easier unit testing.
+3. Improves Code Organization: Helps in categorizing classes based on their roles in the application.
 
 
 
