@@ -1,0 +1,163 @@
+---
+title: "Spring Boot: JPA Inherence"
+subtitle: Spring Boot JPA Inherence
+author: albertprofe
+date: "06/01/2021"
+date-modified: last-modified
+date-format: full
+description:  Spring Boot JPA
+categories: [Spring-Boot, JPA]
+toc: true
+number-sections: true
+format:
+  html
+---
+
+
+::: {.summary}
+
+📘 **JPA Inherence**
+
+Spring Boot provides an implementation of the Java Persistence ``API`` (``JPA``) to simplify database access: ORM (``Object-Relational Mapping``)
+
+In JPA, entity classes represent tables in the database, and relationships between entities are mapped using annotations.
+
+**Inheritance** is a fundamental concept of POO, but Relational databases **have no concept of inheritance** neither NoSQL (MongoDB, DymamoDB), so persisting [inheritance](https://en.wikibooks.org/wiki/Java_Persistence/Inheritance) in a SQL and NoSQL database _has its own particular way.
+
+
+:::
+
+</br>
+
+# Inherence and JPA
+
+
+**Inheritance** is a fundamental concept of POO, but Relational databases **have no concept of inheritance** neither NoSQL (MongoDB, DymamoDB), so persisting [inheritance](https://en.wikibooks.org/wiki/Java_Persistence/Inheritance) in a SQL and NoSQL database _has its own particular way.
+
+> Because relational databases have no concept of inheritance, there is no standard way of implementing inheritance in database, _so the hardest part of persisting inheritance is choosing how to represent the inheritance in the database._
+
+JPA defines several inheritance mechanisms, mainly defined though the [@Inheritance](https://docs.oracle.com/javaee/7/api/javax/persistence/Inheritance.html) annotation or the `<inheritance>` element.
+
+There are **three inheritance strategies** defined from the [InheritanceType](https://docs.oracle.com/javaee/7/api/javax/persistence/InheritanceType.html) `enum`:
+
+1. SINGLE_TABLE
+1. TABLE_PER_CLASS
+1. JOINED
+
+* Single table inheritance is the default with discriminator values,
+* and table per class is an optional feature of the JPA spec, **so not all providers may support it**.
+* in joined strategy each class in the hierarchy is mapped to its table.
+
+MAPPED SUPERCLASS
+
+* JPA also defines a mapped superclass concept defined through the [@MappedSuperclass](https://docs.oracle.com/javaee/7/api/javax/persistence/MappedSuperclass.html) annotation or the `<mapped-superclass>` element. 
+* A mapped superclass **is not a persistent class**, but allows common mappings to be defined for its subclasses.
+
+![Entity Inheritance](/images/springboot/labsb04-1-entity-inherence-.png)
+
+Links:
+
+- [orientdb](https://orientdb.com/docs/2.2.x/Teleporter-Table-Per-Concrete-Class-Inheritance.html)
+- [logicbig](https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/mapped-super-class.html)
+- [Java Persistence/Inheritance wikibooks](https://en.wikibooks.org/wiki/Java_Persistence/Inheritance)
+- [apache](https://openjpa.apache.org/builds/2.2.0/apache-openjpa/docs/jpa_overview_mapping_inher.html)
+
+
+Each strategy has its own advantages and trade-offs in terms of performance, flexibility, and database structure. The choice depends on the specific requirements of our application.
+
+
+## `SINGLE_TABLE`
+
+The **SINGLE_TABLE** strategy maps all classes in the inheritance hierarchy to a single database table. This is the default strategy.
+
+[Oracle Official docs](https://docs.oracle.com/javaee/7/api/javax/persistence/InheritanceType.html#SINGLE_TABLE)
+
+**Simple example:**
+
+```java
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "DTYPE")
+public abstract class Animal { 
+  // ...
+}
+
+@Entity
+@DiscriminatorValue("DOG")
+public class Dog extends Animal {
+  // ...  
+}
+```
+
+## `TABLE_PER_CLASS` 
+
+The **TABLE_PER_CLASS** strategy creates a separate table for each concrete class in the hierarchy.
+
+[Oracle Official docs](https://docs.oracle.com/javaee/7/api/javax/persistence/InheritanceType.html#TABLE_PER_CLASS)
+
+**Simple example:**
+
+```java
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Vehicle {
+  // ...
+}
+
+@Entity
+public class Car extends Vehicle {
+  // ...
+}
+```
+
+## `JOINED`
+
+The **JOINED** strategy creates a table for the base class and separate tables for each subclass, linked by foreign keys.
+
+[Oracle Official docs](https://docs.oracle.com/javaee/7/api/javax/persistence/InheritanceType.html#JOINED)
+
+**Simple example:**
+
+```java
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Employee {
+  // ...
+}
+
+@Entity
+public class Manager extends Employee {
+  // ...
+}
+```
+
+# JPA Inheritance Strategies
+
+> In `Java Persistence API (JPA)`, mapping inheritance hierarchies to relational databases presents unique challenges. JPA offers three main strategies to handle this object-relational impedance mismatch:
+
+1. **SINGLE_TABLE**: <mark>All classes are mapped to one table</mark> in the hierarchy .
+2. **TABLE_PER_CLASS**: <mark>Each concrete class gets its own table</mark>.
+3. **JOINED**: The <mark>base class</mark> and each subclass have their own tables.
+
+The following table summarizes the key aspects of each strategy:
+
+
+::: {.column-page-right}
+| Strategy | Pros | Cons | Use Case |
+|----------|------|------|----------|
+| `SINGLE_TABLE` | - Simple and fast queries<br>- Easy to add new types<br>- Good performance | - Potential for many nullable columns<br>- Table can become large<br>- Limited to 31 subclasses (due to dtype limitation) | Best for hierarchies with few subclasses and little variation in properties |
+| `TABLE_PER_CLASS` | - Data integrity (no null columns)<br>- Easy to add new types<br>- Each table is self-contained | - Complex queries across hierarchy<br>- Potential for duplicate columns<br>- Can be slower for polymorphic queries | Suitable when subclasses have many unique attributes and polymorphic queries are rare |
+| `JOINED` | - Normalized database design<br>- Flexible for future changes<br>- Supports polymorphic queries efficiently | - Requires joins for queries<br>- Inserts and updates affect multiple tables<br>- Can be slower for deep hierarchies | Ideal for complex hierarchies where data integrity and normalization are important |
+: JPA Inheritance Strategies table {tbl-colwidths="[10,30,30,30]"}
+:::
+
+
+The choice of strategy should be based on your specific requirements, including <mark>performance needs, data structure complexity, and anticipated future changes. </mark>
+
+# Labs
+
+
+- [Spring Boot Projects JPA Inherence strategies](/springboot/sblab4.qmd){.external target='_blank'}
+
+
+

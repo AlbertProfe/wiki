@@ -1,0 +1,134 @@
+---
+title: "Spring Boot: JPA Queries"
+subtitle: Spring Boot JPA Queries
+author: albertprofe
+date: "06/01/2021"
+date-modified: last-modified
+date-format: full
+description:  Spring Boot JPA
+categories: [Spring-Boot, JPA]
+toc: true
+number-sections: true
+format:
+  html
+---
+
+
+::: {.summary}
+
+📘 **JPA Queries**
+
+Spring Boot provides an implementation of the Java Persistence ``API`` (``JPA``) to simplify database access: ORM (``Object-Relational Mapping``)
+
+In JPA, entity classes represent tables in the database, and relationships between entities are mapped using annotations.
+
+`JPA (Java Persistence API)` enables efficient data retrieval through various **querying** methods.
+
+It supports `JPQL (Java Persistence Query Language)` for object-oriented queries.
+
+
+:::
+
+</br>
+
+
+
+## JPQL (Java Persistence Query Language)
+
+`JPQL (Java Persistence Query Language)` is an <mark>object-oriented query language used to define queries for entities and their relationships in `JPA (Java Persistence API)`</mark>. It's similar to `SQL` but operates on `JPA entity objects` rather than database tables.
+
+Criteria API for type-safe programmatic queries, and native SQL for database-specific operations. JPA also allows named queries, parameterized queries, and various operations like filtering, sorting, and joining entities.
+
+### Key Characteristics of JPQL
+
+1. **Object-Oriented**: Works with Java objects and their properties, not database tables and columns.
+2. **Database-Independent**: Queries can work across different database systems without modification.
+3. **Supports JPA Relationships**: Can easily navigate entity relationships.
+4. **Powerful**: Supports complex operations like joins, aggregations, and subqueries.
+
+### JPQL vs SQL
+
+Here's a comparison between JPQL and SQL:
+
+| Aspect | JPQL | SQL |
+| --- | --- | --- |
+| Operates on | Entity objects | Database tables |
+| Case sensitivity | Case-sensitive | Generally case-insensitive |
+| Portability | Database-independent | May contain database-specific syntax |
+| Join syntax | Simplified using relationships | Requires explicit join conditions |
+
+### JPQL Syntax Examples
+
+1. Basic Select Query:
+
+```jpql
+SELECT u FROM User u WHERE u.age > 18
+```
+
+2. Join Query:
+
+```jpql
+SELECT o FROM Order o JOIN o.customer c WHERE c.country = 'USA'
+```
+
+3. Aggregate Function:
+
+```jpql
+SELECT AVG(e.salary) FROM Employee e WHERE e.department.name = 'IT'
+```
+
+4. Subquery:
+
+```jpql
+SELECT e FROM Employee e WHERE e.salary > (SELECT AVG(emp.salary) FROM Employee emp)
+```
+
+### Using JPQL in Spring Data JPA
+
+1. With `@Query` annotation:
+
+::: {.column-page-right}
+```java
+@Query("SELECT u FROM User u WHERE u.email = ?1 AND u.active = true")
+User findActiveUserByEmail(String email);
+```
+:::
+
+1. With `EntityManager`:
+
+::: {.column-page-right}
+```java
+String jpql = "SELECT p FROM Product p WHERE p.category.name = :categoryName";
+List<Product> products = entityManager.createQuery(jpql, Product.class)
+    .setParameter("categoryName", "Electronics")
+    .getResultList();
+```
+:::
+
+### Benefits of JPQL
+
+1. Type-safety: Works with Java types, reducing runtime errors.
+2. Abstraction: Shields developers from database-specific details.
+3. Optimization: JPA providers can optimize JPQL queries for better performance.
+4. Flexibility: Allows for complex queries while maintaining database independence.
+
+## Additional Resources
+
+### JPQL
+
+- [JPQL - Java Persistence Query Language](https://docs.oracle.com/javaee/6/tutorial/doc/bnbtg.html){.external target='_blank'} </br>
+- [JPA Query Language](https://docs.oracle.com/javaee/7/tutorial/persistence-querylanguage.htm){.external target='_blank'} </br>
+- [JPQL Reference](https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#hql){.external target='_blank'} </br>
+- [Spring Data JPA - Query Creation](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation){.external target='_blank'}
+
+### JPA Queries
+
+For more information on Spring Boot JPA query methods, check out these resources:
+
+- [Defining Query Methods](https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html){.external target='_blank'} </br>
+- [Query by Example](https://docs.spring.io/spring-data/jpa/reference/repositories/query-by-example.html){.external target='_blank'} </br>
+- [JPA Query Methods](https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html){.external target='_blank'} </br>
+- [Spring Boot: JPA & DI](/springboot/boot-concepts-jpa.qmd){.external target='_blank'}
+
+
+

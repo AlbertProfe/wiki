@@ -30,13 +30,13 @@ They are used to provide ``metadata`` about a class, method, or field, and are u
 
 Here are some examples of common annotations used in Spring Boot:
 
-## App
+# App
 
 - ``@SpringBootApplication``: This annotation is used to enable the default configuration of a Spring Boot application.
 
     - Basically, the ``@SpringBootApplication`` annotation is a combination of the following three Spring annotations: ``@Configuration``, ``@EnableAutoConfiguration`` and ``@ComponentScan``.
 
-## Class
+# Class
 
 - ``@Component`` : This annotation is used to automatically detect the component classes without any need to write any explicit code. Spring framework scans classes with ``@component``, initialize them, and injects the required dependencies.
 - ``@RestController``: This annotation is used to define a class as a RESTful web service controller.
@@ -44,11 +44,11 @@ Here are some examples of common annotations used in Spring Boot:
 - ``@Repository`` : This annotation is used to define a class as a **JPA repository, which can be used to perform CRUD operations on a database.**
 - ``@Service`` : This annotation is used to define a class as a **service class that defines the business logic.**
 
-## Dependence Injection
+# Dependence Injection
 
 - ``@Autowired``: This annotation is used to automatically wire a bean from the Spring application context into a class field or method. When we use this annotation Spring Boot is responsible to create the instance of that variable, **it basically manages the whole life cycle of the object**.
 
-## JPA
+# JPA
 
 - ``@Entity``: This annotation is used to define a class as a **JPA entity**, which can be used to interact with a database.
 
@@ -58,5 +58,43 @@ Here are some examples of common annotations used in Spring Boot:
 - ``@RequestMapping``: This annotation is used to map HTTP requests to specific methods in a controller class.
 - ``@RequestParam``	: This annotation is used to bind request parameters to a method parameter in the controller.					
 - ``@PathVariable`` :	This annotations binds the placeholder from the URI to the method parameter and can be used when the URI is dynamically created or the value of the URI itself acts as a parameter.
+
+
+## @Component
+
+The `@Component` annotation is used <mark>to mark a class as a Spring-managed component</mark>.
+
+- **Automatic** `Bean` Creation: `@Component` tells Spring to automatically create and manage an instance of the annotated class as a bean in the application context.
+- **Dependency Injection**: It enables the class to be a candidate for dependency injection, allowing Spring to automatically <mark>wire its dependencies</mark>.
+- **Component Scanning**: `@Component` works with Spring's component scanning feature to detect and register beans without explicit configuration.
+
+How @Component Works:
+
+1. Class-Level Annotation: `@Component` is applied at the class level.
+2. `Bean` Creation: When Spring scans the classpath, it detects classes annotated with `@Component` and creates beans for them[1][2].
+3. Default Naming: By default, the bean name is the class name with the first letter in lowercase.
+4. Customizable: You can specify a custom name for the bean using `@Component`("customName").
+5. Specialized Annotations: `@Service`, `@Repository`, and `@Controller` are specialized forms of `@Component` for specific use cases.
+
+## Usage Example
+
+```java
+@Component
+public class MathComponent {
+    public int add(int x, int y) {
+        return x + y;
+    }
+}
+```
+
+In this example, Spring will automatically create a `bean` of `MathComponent`, which can then be autowired or retrieved from the application context.
+
+**Benefits**
+
+> By using @Component, we can leverage Spring's dependency injection and inversion of control features with minimal configuration, leading to more maintainable and modular code.
+
+1. **Simplifies Configuration**: Reduces the need for XML-based bean definitions.
+2. Promotes **Loose Coupling**: Facilitates dependency injection and easier unit testing.
+3. Improves Code Organization: Helps in categorizing classes based on their roles in the application.
 
 

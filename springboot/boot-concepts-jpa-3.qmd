@@ -1,0 +1,688 @@
+---
+title: "Spring Boot: JPA Relationships"
+subtitle: Spring Boot JPA Relationships
+author: albertprofe
+date: "06/01/2021"
+date-modified: last-modified
+date-format: full
+description:  Spring Boot JPA
+categories: [Spring-Boot, JPA]
+toc: true
+number-sections: true
+format:
+  html
+---
+
+
+::: {.summary}
+
+📘 **JPA Relationships**
+
+Spring Boot provides an implementation of the Java Persistence ``API`` (``JPA``) to simplify database access: ORM (``Object-Relational Mapping``)
+
+In JPA, entity classes represent tables in the database, and relationships between entities are mapped using annotations.
+
+There are three basic relationships:
+
+- **OneToOne**: Represents a single-valued association
+- **OneToMany** / **ManyToOne**: Represents a multi-valued association
+- **ManyToMany**: Represents a multi-valued association where multiple instances
+
+:::
+
+</br>
+
+# JPA Relationships
+
+
+`JPA (Java Persistence API)` provides several types of relationships to <mark>model associations between entities </mark>:
+
+1. **OneToOne**: Represents a single-valued association where an instance of one entity is related to a single instance of another entity.
+
+2. **OneToMany**: Represents a multi-valued association where an instance of one entity can be related to multiple instances of another entity.
+
+3. **ManyToOne**: The inverse of `OneToMany`, where multiple instances of an entity can be related to a single instance of another entity.
+
+4. **ManyToMany**: Represents a multi-valued association where multiple instances of one entity can be related to multiple instances of another entity.
+
+These relationships can be either `unidirectional` or `bidirectional`:
+
+- **Unidirectional**: Only one entity has a reference to the other.
+- **Bidirectional**: Both entities have references to each other.
+
+> Relationships are typically annotated in entity classes using `@OneToOne`, `@OneToMany`, `@ManyToOne`, or `@ManyToMany`. Additional annotations like `@JoinColumn` and `mappedBy` are used to specify the joining strategy and the owning side of the relationship.
+
+
+
+## OneToMany and ManyToOne
+
+
+![Entity @oneToMany](/images/springboot/labsb08/labsb08-4-onetomay.png)
+
+**`OneToMany` Unidirectional**
+
+- One entity has a collection of another entity
+- Only the *owning* side (the "One" side) has a reference to the other entity
+- Example: One Department has many Employees
+
+```java
+@Entity
+public class Department {
+    @OneToMany
+    private List<Employee> employees;
+}
+
+@Entity
+public class Employee {
+    // No reference to Department
+}
+```
+
+### @OneToMany attributes
+
+::: {.column-margin}
+**Eager** loading fetches all required data upfront when an object is first loaded. It immediately initializes and loads related entities or resources, ensuring everything is readily available.
+
+<mark>This approach can improve performance for frequently accessed data but may increase initial load times and memory usage.</mark>
+
+:::
+
+::: {.column-margin}
+**Lazy** loading, conversely, defers data loading until it's explicitly requested. It retrieves only the essential data initially, loading related entities or resources on-demand when accessed.
+
+This method can <mark>enhance initial performance and reduce memory consumption, particularly for large datasets or infrequently used resources.</mark>
+
+However, it may introduce slight delays when accessing lazy-loaded data for the first time
+
+:::
+
+
+- **fetch**: Specifies whether to lazily or eagerly load the related entities. Default is FetchType.`LAZY`.
+- **cascade**: Specifies which operations should cascade to child entities. Options include `ALL`, `PERSIST`, `MERGE`, `REMOVE`, etc.
+- **orphanRemoval**: If true, removes child entities when they are removed from the collection. Default is `false`.
+- **mappedBy**: Specifies the field that **owns** the relationship in the child entity.
+- **optional**:  If `false`, a non-null relationship must always exist.
+
+::: {.callout-note}
+# Eager vs Lazy
+
+**Eager** loading fetches all related data immediately, making everything available upfront. It can be faster for frequent access but may use more memory.
+
+**Lazy** loading, on the other hand, loads related data only when requested, initializing it on-demand. This approach saves memory but might cause slight delays on first access.
+:::
+
+
+**Key Points**
+
+- For @OneToMany and @ManyToMany, the default fetch type is `LAZY`.
+- For @ManyToOne and @OneToOne, the default fetch type is `EAGER5`.
+- Using FetchType.`LAZY` is generally recommended to avoid performance issues, especially for collections.
+- The `cascade` attribute determines which operations should be cascaded from parent to child entities.
+- The `orphanRemoval` attribute is useful for <mark>automatically removing child entities when they are no longer referenced by the parent</mark>.
+
+
+**ManyToOne Unidirectional**
+
+
+::: {.column-margin}
+ManyToOne Unidirectional example:  [Order and Customer](https://github.com/AlbertProfe/restaurantManager/blob/51b172d69b9f04196dbd52d3abdf9c50a05a3ff9/src/test/java/dev/example/restaurantManager/TestsRelationshipsOrderRestaurant.java){.external target='_blank'}
+:::
+
+
+- Many entities are associated with one entity
+- Only the **owning** side (the "Many" side) has a reference to the other entity
+- Example: Many Employees belong to one Department
+
+```java
+@Entity
+public class Employee {
+    @ManyToOne
+    private Department department;
+}
+
+@Entity
+public class Department {
+    // No reference to Employee
+}
+```
+
+
+**Bidirectional Relationships**
+
+
+::: {.column-margin}
+Bidirectional Relationships example:
+
+- [Library2: API Rest Author Book @OneToMany CRUD with Swagger](https://github.com/AlbertProfe/cifojava2022-3/wiki/Library2:-API-Rest-Author-Book-@OneToMany-CRUD-with-Swagger){.external target='_blank'}
+- [TestCreateBookingTable() with JPA, TableRestaurant 1:n Booking bidirectional relationship](https://github.com/AlbertProfe/restaurantManager/tree/c562d8da650da2f758754312c0e1ecea2d8909af){.external target='_blank'}
+:::
+
+- Both entities have references to each other
+- The "Many" side is usually the owning side
+- Example: One Department has many Employees, and each Employee belongs to one Department
+
+```java
+@Entity
+public class Department {
+    @OneToMany(mappedBy = "department")
+    private List<Employee> employees;
+}
+
+@Entity
+public class Employee {
+    @ManyToOne
+    private Department department;
+}
+```
+
+> In bidirectional relationships, use `mappedBy` on the <mark>non-owning side to indicate the owning side's field name</mark>.
+
+
+::: {.callout-note}
+# Why Serialization is Needed?
+
+**Serialization** is <mark>the process of converting an object or class into a byte stream</mark>. This byte stream can then be easily saved to a file, sent over a network, or stored in a database.
+
+`Hibernate` uses serialization to <mark>create deep copies of entity objects</mark> for various purposes, such as **detached** entities, Session Management or **caching**.
+
+For example: Collections within entities (like an `ArrayList<Menu> menus` within a `Order` entity ) are often **serialized** to store them efficiently in the database or to manage state changes.
+
+Implementing `Serializable` is **not always the best solution**. In some cases, it might be better to adjust your entity relationships (`@OneToMany`) or use different mapping strategies (`@ElementCollection` for simple collections).
+
+:::
+
+### Casting
+
+The [original](https://github.com/AlbertProfe/restaurantManager/blob/c562d8da650da2f758754312c0e1ecea2d8909af/src/test/java/dev/example/restaurantManager/RelationshipsOrderRestaurantTest.java#L80){.external target='_blank'} code avoids these issues by declaring orderToSave directly as TakeAwayOrder, eliminating the need for casting. This approach is generally preferred when possible, as it's safer and more straightforward.
+
+::: {.column-page-right}
+
+``` java
+// Assume OrderRestaurant is a superclass of TakeAwayOrder
+OrderRestaurant orderToSave = new TakeAwayOrder(
+    "T11", new Date(), "Alice", 1, 10.99,
+    true, new ArrayList<>(Arrays.asList(menu1)), null );
+
+// We need to cast here
+((TakeAwayOrder) orderToSave).setCustomerTakeAway(customer1);
+
+// We might need to cast here too, depending on the repository's type parameter
+takeAwayOrderRepository.save((TakeAwayOrder) orderToSave);
+```
+:::
+
+
+- **Upcasting**: When we assigned a TakeAwayOrder object to an OrderRestaurant variable, we performed an implicit upcast. This is always safe because a TakeAwayOrder is an OrderRestaurant.
+- **Downcasting**: When we cast orderToSave back to TakeAwayOrder, we're performing a downcast. This is potentially risky because not all OrderRestaurant objects are TakeAwayOrder objects.
+
+::: {.callout-note}
+# Why casting can be problematic?
+
+- Type safety: Downcasting can lead to runtime errors if the object isn't actually of the type you're casting to.
+- Code readability: Excessive casting can make code harder to read and understand.
+- Performance: While minor, casting does involve a runtime check.
+
+
+:::
+
+## ManyToMany
+
+
+**ManyToMany Unidirectional**
+
+- Multiple entities are associated with multiple entities of another type
+- Only one side has a reference to the other entity
+- Example: Many Students can enroll in many Courses
+
+::: {.column-margin}
+
+- [@ManyToMany RestaurantManger: ORDER](https://github.com/AlbertProfe/restaurantManager/blob/f4d3326cb7938abed678f3831289d4be4c8c069a/src/main/java/dev/example/restaurantManager/model/OrderRestaurant.java#L27){.external target='_blank'}
+- [@ManyToMany RestaurantManger: MENU](https://github.com/AlbertProfe/restaurantManager/blob/f4d3326cb7938abed678f3831289d4be4c8c069a/src/main/java/dev/example/restaurantManager/model/MenuRestaurant.java#L27){.external target='_blank'}
+:::
+
+```java
+@Entity
+public class Student {
+    @ManyToMany
+    @JoinTable(name = "STUDENT_COURSE",
+        joinColumns = @JoinColumn(name = "STUDENT_ID"),
+        inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
+    private Set<Course> courses;
+}
+
+@Entity
+public class Course {
+    // No reference to Student
+}
+```
+
+**ManyToMany Bidirectional**
+
+- Both entities have references to each other
+- One side is designated as the <mark>owning side, the other the inverse side</mark>
+  - **Example**: Many Students can enroll in many Courses, and each Course can have many Students
+
+```java
+@Entity
+public class Student {
+    @ManyToMany
+    @JoinTable(name = "STUDENT_COURSE",
+        joinColumns = @JoinColumn(name = "STUDENT_ID"),
+        inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
+    private Set<Course> courses;
+}
+
+@Entity
+public class Course {
+    @ManyToMany(mappedBy = "COURSES")
+    private Set<Student> students;
+}
+```
+
+> In bidirectional ManyToMany relationships, use `mappedBy` on the non-owning side to indicate the owning side's field name. The `@JoinTable` annotation is used to specify the join table details.
+
+::: {.callout-note}
+# ManyToMany Considerations
+
+- `ManyToMany` relationships often require a <mark>join table in the database</mark>
+- Consider using an <mark>intermediate entity for complex relationships</mark> or when additional attributes are needed for the relationship
+- Be cautious of **performance** implications with large datasets
+:::
+
+### OrphanRemoval and Cascade
+
+> `Cascade` **propagates operations from parent to child** entities, while `orphanRemoval` **automatically deletes child entities** no longer associated with a parent.
+
+`Cascade` affects specified actions (e.g., `PERSIST`, `REMOVE`), whereas `orphanRemoval` only deals with removing disassociated children.
+
+
+::: {.callout-tip .column-page-right}
+# Cascade vs OrphanRemoval
+
+The main differences between `cascade` and `orphanRemoval` in JPA are:
+
+1. **Scope** of operation:
+
+   - <mark>`Cascade` applies to all operations specified (e.g. `PERSIST`, `MERGE`, RE`MOVE, etc.) and propagates them from parent to child entities<</mark>.
+   - `OrphanRemoval` only deals with <mark>removing child entities that are no longer associated with the parent </mark>.
+
+2. **When** they take effect:
+
+   - `Cascade` operations occur when the specified action is performed on <mark>the parent entity </mark>.
+   - `OrphanRemoval` occurs when a child entity <mark>is disassociated from its parent</mark>, even without explicitly calling remove.
+
+3. Use cases:
+
+   - `Cascade` is useful for propagating operations like persist or remove from parent to children.
+   - `OrphanRemoval` is useful for <mark>automatically deleting child entities that are no longer referenced by a parent.</mark>
+
+4. **Behavior**:
+
+   - `CascadeType.REMOVE` will only delete child entities when the parent is explicitly removed.
+   - `OrphanRemoval` will <mark>delete child entities as soon as they are disassociated from the parent, even if the parent is not removed</mark>
+
+5. Combining them:
+
+   - They can be used together. `CascadeType.ALL` with `orphanRemoval=true` provides the most comprehensive cascading behavior.
+
+:::
+
+
+#### Example: `Student` and `Course` Entities
+
+```{mermaid}
+classDiagram
+direction RL
+    class Student {
+        -Long id
+        -String name
+        -Set<Course> courses
+        +enrollInCourse(Course course)
+        +dropCourse(Course course)
+    }
+    class Course {
+        -Long id
+        -String title
+        -Set<Student> students
+    }
+    class SchoolService {
+        -StudentRepository studentRepository
+        -CourseRepository courseRepository
+        +manageEnrollment()
+    }
+
+    Student "*" -- "*" Course : enrolls in
+    SchoolService --> Student : uses
+    SchoolService --> Course : uses
+    SchoolService <-- StudentRepository : uses
+    SchoolService <-- CourseRepository : uses
+
+    
+    
+
+```
+
+Let's see an example involving `Student` and `Course` entities in a school system, where **orphan removal** is meaningful.
+
+`Student @Entity` **owner-side**
+
+```java
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String name;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
+    orphanRemoval = true)
+    @JoinTable(
+        name = "student_course",
+        joinColumns = @JoinColumn(name = "STUDENT_ID"),
+        inverseJoinColumns = @JoinColumn(name = "COURSE_ID")
+    )
+    private Set<Course> courses = new HashSet<>();
+
+    // Constructors, getters, setters, and utility methods
+
+    public void enrollInCourse(Course course) {
+        courses.add(course);
+        course.getStudents().add(this); 
+        // Maintain bidirectional relationship
+    }
+
+    public void dropCourse(Course course) {
+        courses.remove(course);
+        course.getStudents().remove(this); 
+        // Maintain bidirectional relationship
+    }
+}
+```
+
+`Course @Entity`  **inverse-side**
+
+```java
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+public class Course {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String title;
+
+    @ManyToMany(mappedBy = "COURSES")
+    private Set<Student> students = new HashSet<>();
+
+    // Constructors, getters, setters, and utility methods
+}
+```
+
+
+Here's how we use these `entities` in a service or test:
+
+```java
+public class SchoolService {
+
+    @Autowired
+    private StudentRepository studentRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
+
+    public void manageEnrollment() {
+        // Create some courses
+        Course math = new Course("Mathematics");
+        Course science = new Course("Science");
+
+        // Save courses
+        courseRepository.save(math);
+        courseRepository.save(science);
+
+        // Create a student and enroll in courses
+        Student issac = new Student("Isaac Boncodi");
+        issac.enrollInCourse(math);
+        issac.enrollInCourse(science);
+
+        // Save the student (this will also
+        // save the relationships)
+        studentRepository.save(issac);
+
+        // Drop the Science course
+        issac.dropCourse(science);
+
+        // Now if we save issac again, the Science course
+        // will be removed from the database
+        // if no other students are enrolled in it.
+        studentRepository.save(issac);
+        
+        // The Science course will be removed
+        // if it's no longer associated with any students.
+    }
+}
+```
+
+
+1. **Entities**: `Student` and `Course` are related through a many-to-many relationship with a join table (`student_course`).
+
+2. **Orphan Removal**: The `orphanRemoval = true` attribute in the `Student` class means that if a `Student` drops a `Course`, and no other students are enrolled in that course, it will be removed from the database.
+
+3. **Methods**: 
+   - `enrollInCourse`: Adds a course to a student's list and maintains the bidirectional relationship.
+   - `dropCourse`: Removes a course from a student's list and maintains the bidirectional relationship.
+
+4. **Usage**: When you drop a course and save the `Student`, if that course is no longer associated with any other students, it will be deleted from the database.
+
+
+
+
+### ManyToMany with Join Table @Entity
+
+> @Entity @ManyToMany with Join Table: in this particular case we will use two @OneToMany relationships to create a many-to-many, centered and owned by the join table.
+
+
+- Represents a `many-to-many` relationship <mark>using an intermediate entity</mark>
+- The `join table` becomes an **entity itself**, with two `one-to-many` relationships
+- Provides more flexibility and allows additional attributes on the relationship
+- **Example**: Students enrolled in Courses, with additional enrollment information
+
+```java
+@Entity
+public class Student {
+    @OneToMany(mappedBy = "student")
+    private List<Enrollment> enrollments;
+}
+
+@Entity
+public class Course {
+    @OneToMany(mappedBy = "course")
+    private List<Enrollment> enrollments;
+}
+
+@Entity
+public class Enrollment {
+    @ManyToOne
+    private Student student;
+
+    @ManyToOne
+    private Course course;
+
+    private LocalDate enrollmentDate;
+    private String grade;
+}
+```
+
+In this approach:
+
+- The `Enrollment` entity serves as the join table
+- It has two `@ManyToOne` relationships: one to `Student` and one to `Course`
+- Additional fields like `enrollmentDate` and `grade` can be added to the `Enrollment` entity
+- Both `Student` and `Course` have `@OneToMany` relationships to `Enrollment`
+- The mappedBy attribute in @OneToMany indicates the owning side of the relationship
+
+> This structure allows for more detailed modeling of the relationship between students and courses, enabling the storage of relationship-specific data and easier querying of the association.
+
+**Key Points**
+
+This structure allows you to:
+
+- Add additional fields to the relationship (e.g., enrollmentDate)
+- Easily `query` the relationship from both sides
+- Maintain better control over the `lifecycle` of the relationship
+
+### When two objects are equal? **Object Identity**
+
+> The difference between comparing objects based on object identity and comparing them based on field values lies in how equality is determined:
+>
+>  - by identity, that is, <mark>by using their memory addresses</mark>
+>  - by their field values
+
+**Object Identity**
+
+- **Object Identity** refers to comparing objects using their memory addresses (i.e., whether they are the same instance in memory).
+- In Java, this is done using the `==` operator.
+- Two objects are considered equal based on object identity if they refer to the same memory location.
+
+**Field Values**
+
+- **Field Values** refer to comparing objects based on the values of their fields.
+- In Java, this is typically done using the `equals` method.
+- Two objects are considered equal based on field values if their corresponding fields have the same values, even if they are different instances in memory.
+
+Example:
+
+Consider the following `MenuRestaurant` class:
+
+::: {.column-page-right}
+```java
+public class MenuRestaurant {
+    private int id;
+    private String name;
+
+    // Constructors, getters, and setters
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MenuRestaurant that = (MenuRestaurant) o;
+        return id == that.id && Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+}
+```
+:::
+
+**Comparing Based on Object Identity**
+
+```java
+MenuRestaurant menu1 = 
+    new MenuRestaurant(1, "Pizza");
+MenuRestaurant menu2 = 
+    new MenuRestaurant(1, "Pizza");
+
+System.out.println(menu1 == menu2);
+// false, because they are different instances
+```
+
+**Comparing Based on Field Values**
+
+```java
+MenuRestaurant menu1 =
+    new MenuRestaurant(1, "Pizza");
+MenuRestaurant menu2 =
+    new MenuRestaurant(1, "Pizza");
+
+System.out.println(menu1.equals(menu2));
+// true, because their fields are equal
+```
+
+### Using AssertJ with Comparator
+
+- [public void testAddingMenusToOrder() ](https://github.com/AlbertProfe/restaurantManager/blob/bc75ce39d75158ee0e30f287e3d5b030fb8d9591/src/test/java/dev/example/restaurantManager/RelationshipsOrderRestaurantTest.java#L222){.external target='_blank'}
+- [Heap and Stack](https://nus-cs2030s.github.io/2223-s2/10-heap-stack.html){.external target='_blank'}
+
+::: {.column-page-right}
+`usingElementComparator(Comparator.comparing(MenuRestaurant::getId))`
+:::
+When you use the above expression, you are specifying that the comparison should be based on the `id` field of the `MenuRestaurant` objects:
+
+::: {.column-page-right}
+```java
+import static org.assertj.core.api.Assertions.assertThat;
+
+List<MenuRestaurant> menuList = Arrays.asList(menu1, menu2, menu3);
+
+assertThat(menuList)
+    .usingElementComparator(Comparator.comparing(MenuRestaurant::getId))
+    .containsExactlyInAnyOrder(menu1, menu2, menu3);
+```
+:::
+
+In this case, the comparison is based on the `id` field, not the object identity or the default `equals` method. This allows you to verify that the collection contains the expected elements based on their IDs, regardless of their memory addresses.
+
+# Labs
+
+Here are some of the most common JPA mappings and relationships used in Spring Boot
+
+## `@OneToMany`
+
+
+``@OneToMany``: This annotation is used to represent a one-to-many relationship between two entities.
+
+::: {.column-margin}
+For example, if a customer can have multiple orders, you can define a @OneToMany relationship between the Customer entity and the Order entity.
+:::
+
+::: {.callout-tip}
+
+Example:
+
+[API Rest Author-Book @OneToMany CRUD with Swagger](/springboot/sblab2.qmd#api-rest-author-book-onetomany-crud-with-swagger)
+:::
+
+## `@ManyToOne`
+
+
+``@ManyToOne``: This annotation is used to represent a many-to-one relationship between two entities.
+
+::: {.column-margin}
+For example, if an order belongs to a customer, you can define a @ManyToOne relationship between the Order entity and the Customer entity.
+:::
+  
+::: {.callout-tip}
+
+Example:
+
+[Library-Book @ManyToMany and @OneToOne CRUD](/springboot/sblab2.qmd#library-book-manytomany-and-onetoone-crud)
+:::
+
+
+## `@ManyToMany`
+
+
+``@ManyToMany``: This annotation is used to represent a many-to-many relationship between two entities.
+
+::: {.column-margin}
+For example, if a book can have multiple authors and an author can have written multiple books, you can define a @ManyToMany relationship between the Book entity and the Author entity.
+:::
+
+::: {.callout-tip}
+
+# Example:
+
+[API Rest Library-Book-Author @ManyToMany @OneToMany CRUD with Swagger and Inherence](/springboot/sblab2.qmd#api-rest-library-book-author-manytomany-onetomany-crud-with-swagger-and-inherence)
+:::
+
