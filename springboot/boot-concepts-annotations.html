@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -756,6 +790,18 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="../springboot/boot-concepts-jpa-2.html">
  <span class="dropdown-text">Spring Boot: JPA Mappings</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-jpa-3.html">
+ <span class="dropdown-text">Spring Boot: JPA Relationships</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-jpa-4.html">
+ <span class="dropdown-text">Spring Boot: JPA Queries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-jpa-5.html">
+ <span class="dropdown-text">Spring Boot: JPA Inherence</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Spring Boot Laboratories</li>
@@ -1552,6 +1598,24 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Spring Boot: JPA Mappings</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA Relationships</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA Queries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA Inherence</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -1714,8 +1778,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#app" id="toc-app" class="nav-link active" data-scroll-target="#app"><span class="header-section-number">1</span> App</a></li>
   <li><a href="#class" id="toc-class" class="nav-link" data-scroll-target="#class"><span class="header-section-number">2</span> Class</a></li>
   <li><a href="#dependence-injection" id="toc-dependence-injection" class="nav-link" data-scroll-target="#dependence-injection"><span class="header-section-number">3</span> Dependence Injection</a></li>
-  <li><a href="#jpa" id="toc-jpa" class="nav-link" data-scroll-target="#jpa"><span class="header-section-number">4</span> JPA</a></li>
-  <li><a href="#mapping-and-parameters" id="toc-mapping-and-parameters" class="nav-link" data-scroll-target="#mapping-and-parameters"><span class="header-section-number">5</span> Mapping and parameters</a></li>
+  <li><a href="#jpa" id="toc-jpa" class="nav-link" data-scroll-target="#jpa"><span class="header-section-number">4</span> JPA</a>
+  <ul>
+  <li><a href="#mapping-and-parameters" id="toc-mapping-and-parameters" class="nav-link" data-scroll-target="#mapping-and-parameters"><span class="header-section-number">4.1</span> Mapping and parameters</a></li>
+  <li><a href="#component" id="toc-component" class="nav-link" data-scroll-target="#component"><span class="header-section-number">4.2</span> <span class="citation" data-cites="Component">@Component</span></a></li>
+  <li><a href="#usage-example" id="toc-usage-example" class="nav-link" data-scroll-target="#usage-example"><span class="header-section-number">4.3</span> Usage Example</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/boot-concepts-annotations.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1758,7 +1826,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Monday, October 28, 2024</p>
+      <p class="date-modified">Thursday, October 31, 2024</p>
     </div>
   </div>
     
@@ -1782,8 +1850,8 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 <p>Here are some examples of common annotations used in Spring Boot:</p>
-<section id="app" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="app"><span class="header-section-number">1</span> App</h2>
+<section id="app" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> App</h1>
 <ul>
 <li><p><code>@SpringBootApplication</code>: This annotation is used to enable the default configuration of a Spring Boot application.</p>
 <ul>
@@ -1791,8 +1859,8 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 </ul>
 </section>
-<section id="class" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="class"><span class="header-section-number">2</span> Class</h2>
+<section id="class" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Class</h1>
 <ul>
 <li><code>@Component</code> : This annotation is used to automatically detect the component classes without any need to write any explicit code. Spring framework scans classes with <code>@component</code>, initialize them, and injects the required dependencies.</li>
 <li><code>@RestController</code>: This annotation is used to define a class as a RESTful web service controller.</li>
@@ -1801,28 +1869,64 @@ ul.task-list li input[type="checkbox"] {
 <li><code>@Service</code> : This annotation is used to define a class as a <strong>service class that defines the business logic.</strong></li>
 </ul>
 </section>
-<section id="dependence-injection" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="dependence-injection"><span class="header-section-number">3</span> Dependence Injection</h2>
+<section id="dependence-injection" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Dependence Injection</h1>
 <ul>
 <li><code>@Autowired</code>: This annotation is used to automatically wire a bean from the Spring application context into a class field or method. When we use this annotation Spring Boot is responsible to create the instance of that variable, <strong>it basically manages the whole life cycle of the object</strong>.</li>
 </ul>
 </section>
-<section id="jpa" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="jpa"><span class="header-section-number">4</span> JPA</h2>
+<section id="jpa" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> JPA</h1>
 <ul>
 <li><code>@Entity</code>: This annotation is used to define a class as a <strong>JPA entity</strong>, which can be used to interact with a database.</li>
 </ul>
-</section>
-<section id="mapping-and-parameters" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="mapping-and-parameters"><span class="header-section-number">5</span> Mapping and parameters</h2>
+<section id="mapping-and-parameters" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="mapping-and-parameters"><span class="header-section-number">4.1</span> Mapping and parameters</h2>
 <ul>
 <li><code>@RequestMapping</code>: This annotation is used to map HTTP requests to specific methods in a controller class.</li>
 <li><code>@RequestParam</code> : This annotation is used to bind request parameters to a method parameter in the controller.<br>
 </li>
 <li><code>@PathVariable</code> : This annotations binds the placeholder from the URI to the method parameter and can be used when the URI is dynamically created or the value of the URI itself acts as a parameter.</li>
 </ul>
+</section>
+<section id="component" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="component"><span class="header-section-number">4.2</span> <span class="citation" data-cites="Component">@Component</span></h2>
+<p>The <code>@Component</code> annotation is used <mark>to mark a class as a Spring-managed component</mark>.</p>
+<ul>
+<li><strong>Automatic</strong> <code>Bean</code> Creation: <code>@Component</code> tells Spring to automatically create and manage an instance of the annotated class as a bean in the application context.</li>
+<li><strong>Dependency Injection</strong>: It enables the class to be a candidate for dependency injection, allowing Spring to automatically <mark>wire its dependencies</mark>.</li>
+<li><strong>Component Scanning</strong>: <code>@Component</code> works with Spring’s component scanning feature to detect and register beans without explicit configuration.</li>
+</ul>
+<p>How <span class="citation" data-cites="Component">@Component</span> Works:</p>
+<ol type="1">
+<li>Class-Level Annotation: <code>@Component</code> is applied at the class level.</li>
+<li><code>Bean</code> Creation: When Spring scans the classpath, it detects classes annotated with <code>@Component</code> and creates beans for them[1][2].</li>
+<li>Default Naming: By default, the bean name is the class name with the first letter in lowercase.</li>
+<li>Customizable: You can specify a custom name for the bean using <code>@Component</code>(“customName”).</li>
+<li>Specialized Annotations: <code>@Service</code>, <code>@Repository</code>, and <code>@Controller</code> are specialized forms of <code>@Component</code> for specific use cases.</li>
+</ol>
+</section>
+<section id="usage-example" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="usage-example"><span class="header-section-number">4.3</span> Usage Example</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="at">@Component</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">public</span> <span class="kw">class</span> MathComponent <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">add</span><span class="op">(</span><span class="dt">int</span> x<span class="op">,</span> <span class="dt">int</span> y<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>        <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="op">}</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this example, Spring will automatically create a <code>bean</code> of <code>MathComponent</code>, which can then be autowired or retrieved from the application context.</p>
+<p><strong>Benefits</strong></p>
+<blockquote class="blockquote">
+<p>By using <span class="citation" data-cites="Component">@Component</span>, we can leverage Spring’s dependency injection and inversion of control features with minimal configuration, leading to more maintainable and modular code.</p>
+</blockquote>
+<ol type="1">
+<li><strong>Simplifies Configuration</strong>: Reduces the need for XML-based bean definitions.</li>
+<li>Promotes <strong>Loose Coupling</strong>: Facilitates dependency injection and easier unit testing.</li>
+<li>Improves Code Organization: Helps in categorizing classes based on their roles in the application.</li>
+</ol>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
@@ -2429,7 +2533,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"openEffect":"zoom","descPosition":"bottom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

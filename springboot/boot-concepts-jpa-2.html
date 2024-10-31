@@ -22,40 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -66,6 +32,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../springboot/boot-concepts-jpa-3.html" rel="next">
 <link href="../springboot/boot-concepts-jpa.html" rel="prev">
 <link href="..//images/home/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js"></script>
@@ -789,6 +756,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../springboot/boot-concepts-jpa-2.html">
  <span class="dropdown-text">Spring Boot: JPA Mappings</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-jpa-3.html">
+ <span class="dropdown-text">Spring Boot: JPA Relationships</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-jpa-4.html">
+ <span class="dropdown-text">Spring Boot: JPA Queries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-jpa-5.html">
+ <span class="dropdown-text">Spring Boot: JPA Inherence</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Spring Boot Laboratories</li>
@@ -1585,6 +1564,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Spring Boot: JPA Mappings</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA Relationships</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA Queries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA Inherence</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -1747,26 +1744,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#jpa-implementations-orm" id="toc-jpa-implementations-orm" class="nav-link active" data-scroll-target="#jpa-implementations-orm"><span class="header-section-number">1</span> JPA Implementations: ORM</a></li>
   <li><a href="#orm-hibernate" id="toc-orm-hibernate" class="nav-link" data-scroll-target="#orm-hibernate"><span class="header-section-number">2</span> ORM: Hibernate</a></li>
   <li><a href="#annotations" id="toc-annotations" class="nav-link" data-scroll-target="#annotations"><span class="header-section-number">3</span> Annotations</a></li>
-  <li><a href="#relationships" id="toc-relationships" class="nav-link" data-scroll-target="#relationships"><span class="header-section-number">4</span> Relationships</a>
-  <ul>
-  <li><a href="#onetomany" id="toc-onetomany" class="nav-link" data-scroll-target="#onetomany"><span class="header-section-number">4.1</span> <code>@OneToMany</code></a></li>
-  <li><a href="#manytoone" id="toc-manytoone" class="nav-link" data-scroll-target="#manytoone"><span class="header-section-number">4.2</span> <code>@ManyToOne</code></a></li>
-  <li><a href="#manytomany" id="toc-manytomany" class="nav-link" data-scroll-target="#manytomany"><span class="header-section-number">4.3</span> <code>@ManyToMany</code></a></li>
-  </ul></li>
-  <li><a href="#inherence" id="toc-inherence" class="nav-link" data-scroll-target="#inherence"><span class="header-section-number">5</span> Inherence</a></li>
-  <li><a href="#jpql-java-persistence-query-language" id="toc-jpql-java-persistence-query-language" class="nav-link" data-scroll-target="#jpql-java-persistence-query-language"><span class="header-section-number">6</span> JPQL (Java Persistence Query Language)</a>
-  <ul>
-  <li><a href="#key-characteristics-of-jpql" id="toc-key-characteristics-of-jpql" class="nav-link" data-scroll-target="#key-characteristics-of-jpql"><span class="header-section-number">6.1</span> Key Characteristics of JPQL</a></li>
-  <li><a href="#jpql-vs-sql" id="toc-jpql-vs-sql" class="nav-link" data-scroll-target="#jpql-vs-sql"><span class="header-section-number">6.2</span> JPQL vs SQL</a></li>
-  <li><a href="#jpql-syntax-examples" id="toc-jpql-syntax-examples" class="nav-link" data-scroll-target="#jpql-syntax-examples"><span class="header-section-number">6.3</span> JPQL Syntax Examples</a></li>
-  <li><a href="#using-jpql-in-spring-data-jpa" id="toc-using-jpql-in-spring-data-jpa" class="nav-link" data-scroll-target="#using-jpql-in-spring-data-jpa"><span class="header-section-number">6.4</span> Using JPQL in Spring Data JPA</a></li>
-  <li><a href="#benefits-of-jpql" id="toc-benefits-of-jpql" class="nav-link" data-scroll-target="#benefits-of-jpql"><span class="header-section-number">6.5</span> Benefits of JPQL</a></li>
-  </ul></li>
-  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"><span class="header-section-number">7</span> Additional Resources</a>
-  <ul>
-  <li><a href="#jpql" id="toc-jpql" class="nav-link" data-scroll-target="#jpql"><span class="header-section-number">7.1</span> JPQL</a></li>
-  <li><a href="#jpa-queries" id="toc-jpa-queries" class="nav-link" data-scroll-target="#jpa-queries"><span class="header-section-number">7.2</span> JPA Queries</a></li>
-  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/boot-concepts-jpa-2.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1776,7 +1753,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/boot-concepts-injection.html">Spring Boot Concepts</a></li><li class="breadcrumb-item"><a href="../springboot/boot-concepts-jpa-2.html">Spring Boot: JPA Mappings</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Spring Boot: JPA Mappings</h1>
-<p class="subtitle lead">Spring Boot JPA Relationships, Mappings and Queries</p>
+<p class="subtitle lead">Spring Boot JPA Relationships, Mappings, Inherence and Queries</p>
   <div class="quarto-categories">
     <div class="quarto-category">Spring-Boot</div>
     <div class="quarto-category">JPA</div>
@@ -1809,7 +1786,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Monday, October 28, 2024</p>
+      <p class="date-modified">Thursday, October 31, 2024</p>
     </div>
   </div>
     
@@ -1943,211 +1920,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-</section>
-<section id="relationships" class="level2 page-columns page-full" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="relationships"><span class="header-section-number">4</span> Relationships</h2>
-<p>Here are some of the most common JPA mappings and relationships used in Spring Boot</p>
-<section id="onetomany" class="level3 page-columns page-full" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="onetomany"><span class="header-section-number">4.1</span> <code>@OneToMany</code></h3>
-<p><code>@OneToMany</code>: This annotation is used to represent a one-to-many relationship between two entities.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>For example, if a customer can have multiple orders, you can define a <span class="citation" data-cites="OneToMany">@OneToMany</span> relationship between the Customer entity and the Order entity.</p>
-</div></div><div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Example:
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><a href="../springboot/sblab2.html#api-rest-author-book-onetomany-crud-with-swagger">API Rest Author-Book <span class="citation" data-cites="OneToMany">@OneToMany</span> CRUD with Swagger</a></p>
-</div>
-</div>
-</section>
-<section id="manytoone" class="level3 page-columns page-full" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="manytoone"><span class="header-section-number">4.2</span> <code>@ManyToOne</code></h3>
-<p><code>@ManyToOne</code>: This annotation is used to represent a many-to-one relationship between two entities.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>For example, if an order belongs to a customer, you can define a <span class="citation" data-cites="ManyToOne">@ManyToOne</span> relationship between the Order entity and the Customer entity.</p>
-</div></div><div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Example:
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><a href="../springboot/sblab2.html#library-book-manytomany-and-onetoone-crud">Library-Book <span class="citation" data-cites="ManyToMany">@ManyToMany</span> and <span class="citation" data-cites="OneToOne">@OneToOne</span> CRUD</a></p>
-</div>
-</div>
-</section>
-<section id="manytomany" class="level3 page-columns page-full" data-number="4.3">
-<h3 data-number="4.3" class="anchored" data-anchor-id="manytomany"><span class="header-section-number">4.3</span> <code>@ManyToMany</code></h3>
-<p><code>@ManyToMany</code>: This annotation is used to represent a many-to-many relationship between two entities.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>For example, if a book can have multiple authors and an author can have written multiple books, you can define a <span class="citation" data-cites="ManyToMany">@ManyToMany</span> relationship between the Book entity and the Author entity.</p>
-</div></div><div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Example:
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><a href="../springboot/sblab2.html#api-rest-library-book-author-manytomany-onetomany-crud-with-swagger-and-inherence">API Rest Library-Book-Author <span class="citation" data-cites="ManyToMany">@ManyToMany</span> <span class="citation" data-cites="OneToMany">@OneToMany</span> CRUD with Swagger and Inherence</a></p>
-</div>
-</div>
-</section>
-</section>
-<section id="inherence" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="inherence"><span class="header-section-number">5</span> Inherence</h2>
-<p>Here are some of the most common JPA <code>inherence cases</code> used in Spring Boot</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Example:
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><a href="../springboot/sblab0-4.html">Spring Boot Projects JPA Inherence strategies</a></p>
-</div>
-</div>
-</section>
-<section id="jpql-java-persistence-query-language" class="level2 page-columns page-full" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="jpql-java-persistence-query-language"><span class="header-section-number">6</span> JPQL (Java Persistence Query Language)</h2>
-<p>JPQL (Java Persistence Query Language) is an object-oriented query language used to define queries for entities and their relationships in JPA (Java Persistence API). It’s similar to SQL but operates on JPA entity objects rather than database tables.</p>
-<section id="key-characteristics-of-jpql" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="key-characteristics-of-jpql"><span class="header-section-number">6.1</span> Key Characteristics of JPQL</h3>
-<ol type="1">
-<li>Object-Oriented: Works with Java objects and their properties, not database tables and columns.</li>
-<li>Database-Independent: Queries can work across different database systems without modification.</li>
-<li>Supports JPA Relationships: Can easily navigate entity relationships.</li>
-<li>Powerful: Supports complex operations like joins, aggregations, and subqueries.</li>
-</ol>
-</section>
-<section id="jpql-vs-sql" class="level3" data-number="6.2">
-<h3 data-number="6.2" class="anchored" data-anchor-id="jpql-vs-sql"><span class="header-section-number">6.2</span> JPQL vs SQL</h3>
-<p>Here’s a comparison between JPQL and SQL:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Aspect</th>
-<th>JPQL</th>
-<th>SQL</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Operates on</td>
-<td>Entity objects</td>
-<td>Database tables</td>
-</tr>
-<tr class="even">
-<td>Case sensitivity</td>
-<td>Case-sensitive</td>
-<td>Generally case-insensitive</td>
-</tr>
-<tr class="odd">
-<td>Portability</td>
-<td>Database-independent</td>
-<td>May contain database-specific syntax</td>
-</tr>
-<tr class="even">
-<td>Join syntax</td>
-<td>Simplified using relationships</td>
-<td>Requires explicit join conditions</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="jpql-syntax-examples" class="level3" data-number="6.3">
-<h3 data-number="6.3" class="anchored" data-anchor-id="jpql-syntax-examples"><span class="header-section-number">6.3</span> JPQL Syntax Examples</h3>
-<ol type="1">
-<li>Basic Select Query:</li>
-</ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="#cb1-1"></a>SELECT u FROM User u WHERE u.age &gt; 18</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="2" type="1">
-<li>Join Query:</li>
-</ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>SELECT o FROM Order o JOIN o.customer c WHERE c.country = 'USA'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="3" type="1">
-<li>Aggregate Function:</li>
-</ol>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href="#cb3-1"></a>SELECT AVG(e.salary) FROM Employee e WHERE e.department.name = 'IT'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="4" type="1">
-<li>Subquery:</li>
-</ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href="#cb4-1"></a>SELECT e FROM Employee e WHERE e.salary &gt; (SELECT AVG(emp.salary) FROM Employee emp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="using-jpql-in-spring-data-jpa" class="level3 page-columns page-full" data-number="6.4">
-<h3 data-number="6.4" class="anchored" data-anchor-id="using-jpql-in-spring-data-jpa"><span class="header-section-number">6.4</span> Using JPQL in Spring Data JPA</h3>
-<ol type="1">
-<li>With <code>@Query</code> annotation:</li>
-</ol>
-<div class="column-page-right">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="at">@Query</span><span class="op">(</span><span class="st">"SELECT u FROM User u WHERE u.email = ?1 AND u.active = true"</span><span class="op">)</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>User <span class="fu">findActiveUserByEmail</span><span class="op">(</span><span class="bu">String</span> email<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol type="1">
-<li>With <code>EntityManager</code>:</li>
-</ol>
-<div class="column-page-right">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="bu">String</span> jpql <span class="op">=</span> <span class="st">"SELECT p FROM Product p WHERE p.category.name = :categoryName"</span><span class="op">;</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="bu">List</span><span class="op">&lt;</span>Product<span class="op">&gt;</span> products <span class="op">=</span> entityManager<span class="op">.</span><span class="fu">createQuery</span><span class="op">(</span>jpql<span class="op">,</span> Product<span class="op">.</span><span class="fu">class</span><span class="op">)</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>    <span class="op">.</span><span class="fu">setParameter</span><span class="op">(</span><span class="st">"categoryName"</span><span class="op">,</span> <span class="st">"Electronics"</span><span class="op">)</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>    <span class="op">.</span><span class="fu">getResultList</span><span class="op">();</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="benefits-of-jpql" class="level3" data-number="6.5">
-<h3 data-number="6.5" class="anchored" data-anchor-id="benefits-of-jpql"><span class="header-section-number">6.5</span> Benefits of JPQL</h3>
-<ol type="1">
-<li>Type-safety: Works with Java types, reducing runtime errors.</li>
-<li>Abstraction: Shields developers from database-specific details.</li>
-<li>Optimization: JPA providers can optimize JPQL queries for better performance.</li>
-<li>Flexibility: Allows for complex queries while maintaining database independence.</li>
-</ol>
-</section>
-</section>
-<section id="additional-resources" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">7</span> Additional Resources</h2>
-<section id="jpql" class="level3" data-number="7.1">
-<h3 data-number="7.1" class="anchored" data-anchor-id="jpql"><span class="header-section-number">7.1</span> JPQL</h3>
-<ul>
-<li><a href="https://docs.oracle.com/javaee/6/tutorial/doc/bnbtg.html" class="external" target="_blank">JPQL - Java Persistence Query Language</a> <br></li>
-<li><a href="https://docs.oracle.com/javaee/7/tutorial/persistence-querylanguage.htm" class="external" target="_blank">JPA Query Language</a> <br></li>
-<li><a href="https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#hql" class="external" target="_blank">JPQL Reference</a> <br></li>
-<li><a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation" class="external" target="_blank">Spring Data JPA - Query Creation</a></li>
-</ul>
-</section>
-<section id="jpa-queries" class="level3" data-number="7.2">
-<h3 data-number="7.2" class="anchored" data-anchor-id="jpa-queries"><span class="header-section-number">7.2</span> JPA Queries</h3>
-<p>For more information on Spring Boot JPA query methods, check out these resources:</p>
-<ul>
-<li><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html" class="external" target="_blank">Defining Query Methods</a> <br></li>
-<li><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/query-by-example.html" class="external" target="_blank">Query by Example</a> <br></li>
-<li><a href="https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html" class="external" target="_blank">JPA Query Methods</a> <br></li>
-<li><a href="../springboot/boot-concepts-jpa.html" class="external" target="_blank">Spring Boot: JPA &amp; DI</a></li>
-</ul>
 
 
-</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
@@ -2722,6 +2496,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../springboot/boot-concepts-jpa-3.html" class="pagination-link" aria-label="Spring Boot: JPA Relationships">
+        <span class="nav-page-text">Spring Boot: JPA Relationships</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -2751,7 +2528,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

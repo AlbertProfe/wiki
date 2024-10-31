@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="albertprofe">
+<meta name="description" content="Spring Boot JPA">
 
-<title>IFCD0021 Sprint Backlog – albertprofe wiki</title>
+<title>Spring Boot: JPA Queries – albertprofe wiki</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +66,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../ifcd0021-24/ifcd0021backlog-product-24.html" rel="next">
-<link href="../ifcd0021-24/ifcd0021deliveries-24.html" rel="prev">
+<link href="../springboot/boot-concepts-jpa-5.html" rel="next">
+<link href="../springboot/boot-concepts-jpa-3.html" rel="prev">
 <link href="..//images/home/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -44,9 +80,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1403,7 +1436,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ifcd0021-24/ifcd0021-24.html">IFCD0021-24 Docs</a></li><li class="breadcrumb-item"><a href="../ifcd0021-24/ifcd0021backlog-sprint-24.html">IFCD0021 Sprint Backlog</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/boot-concepts-injection.html">Spring Boot Concepts</a></li><li class="breadcrumb-item"><a href="../springboot/boot-concepts-jpa-4.html">Spring Boot: JPA Queries</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -1424,40 +1457,34 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
- <span class="menu-text">Training Courses</span>
+ <span class="menu-text">Spring</span>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">IFCD0021-24 Docs</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Spring Legacy</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0021-24/ifcd0021-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0021 Official Docs</span></a>
+  <a href="../spring/spring-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Framework</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0021-24/ifcd0021deliveries-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0021 Calendar &amp; Deliveries</span></a>
+  <a href="../spring/spring-mvc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring MVC</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0021-24/ifcd0021backlog-sprint-24.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">IFCD0021 Sprint Backlog</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0021-24/ifcd0021backlog-product-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0021 Product Backlog</span></a>
+  <a href="../spring/spring-servlets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Springs Servlets</span></a>
   </div>
 </li>
       </ul>
@@ -1466,7 +1493,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">IFCD0210-24 Docs</span></a>
+ <span class="menu-text">Spring Boot Basics</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -1474,26 +1501,26 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0210-24/ifcd0210-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Official Docs</span></a>
+  <a href="../springboot/boot-what-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: fundamentals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0210-24/ifcd0210deliveries-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Calendar &amp; Deliveries</span></a>
+  <a href="../springboot/boot-what-create.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: create a Project</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0210-24/ifcd0210backlog-sprint-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Sprint Backlog</span></a>
+  <a href="../springboot/boot-what-create-th-h2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: H2 DB and Thymeleaf</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0210-24/ifcd0210backlog-product-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Product Backlog</span></a>
+  <a href="../springboot/boot-what-cycle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: cycle</span></a>
   </div>
 </li>
       </ul>
@@ -1501,29 +1528,89 @@ ul.task-list li input[type="checkbox"] {
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">IFCD044 Docs</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Spring Boot Concepts</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd044/ifcd044.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD044 Docs</span></a>
+  <a href="../springboot/boot-concepts-injection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Dependency Injection</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd044/ifcd044backlog-sprint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD044 Sprint Backlog</span></a>
+  <a href="../springboot/boot-concepts-annotations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Annotations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd044/ifcd044backlog-product.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD044 Product Backlog</span></a>
+  <a href="../springboot/boot-concepts-controller.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Controller</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-view.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: View</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-th.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Thymeleaf</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-rest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Rest</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Data &amp; DB</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA &amp; DI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA Mappings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA Relationships</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-4.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Spring Boot: JPA Queries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA Inherence</span></a>
   </div>
 </li>
       </ul>
@@ -1532,7 +1619,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">IFCT034PO Docs</span></a>
+ <span class="menu-text">Spring Boot Laboratories</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -1540,20 +1627,119 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifct034po/ifct034po.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCT034PO Docs</span></a>
+  <a href="../springboot/sblab0-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-1: Library UML</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifct034po/ifct034pobacklog-sprint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCT034PO Sprint Backlog</span></a>
+  <a href="../springboot/sblab0-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-2: CRUD User</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifct034po/ifct034pobacklog-product.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCT034PO Product Backlog</span></a>
+  <a href="../springboot/sblab0-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-3: LibraryManagement</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-4: API Rest</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-5: Rest &amp; JPA-H2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-6: Rest &amp; MongoDB</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-7: Styling</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB01-1: DataBase</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB02-1: <code>JPA</code> Relationships</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB03-1: APIs &amp; cloud</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB04-1: <code>JPA</code> Inherence</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB05-1: API Rest</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB06-1: <code>employeeCourse</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB07-1: <code>monitor Book</code></span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-1: DDD and UML</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-2: Vaadin</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-3: H2 and API Rest</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-4: JPA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-5: RestaurantManager</span></a>
   </div>
 </li>
       </ul>
@@ -1562,7 +1748,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">IFCD0210 Docs</span></a>
+ <span class="menu-text">Spring Boot readings</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -1570,44 +1756,8 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Official Docs</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210initemail.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Init Mail</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210deliveries.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Deliveries</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210calendar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Calendar</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210backlog-sprint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Sprint Backlog</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210backlog-product.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Product Backlog</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210backlog-projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Projects Backlog</span></a>
+  <a href="../springboot/resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot Resources</span></a>
   </div>
 </li>
       </ul>
@@ -1622,28 +1772,64 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sprint08-jpa-inherence-october-2024" id="toc-sprint08-jpa-inherence-october-2024" class="nav-link active" data-scroll-target="#sprint08-jpa-inherence-october-2024"><code>Sprint#08 JPA: Inherence</code> (October 2024)</a></li>
+  <li><a href="#jpql-java-persistence-query-language" id="toc-jpql-java-persistence-query-language" class="nav-link active" data-scroll-target="#jpql-java-persistence-query-language"><span class="header-section-number">1</span> JPQL (Java Persistence Query Language)</a>
+  <ul>
+  <li><a href="#key-characteristics-of-jpql" id="toc-key-characteristics-of-jpql" class="nav-link" data-scroll-target="#key-characteristics-of-jpql"><span class="header-section-number">1.1</span> Key Characteristics of JPQL</a></li>
+  <li><a href="#jpql-vs-sql" id="toc-jpql-vs-sql" class="nav-link" data-scroll-target="#jpql-vs-sql"><span class="header-section-number">1.2</span> JPQL vs SQL</a></li>
+  <li><a href="#jpql-syntax-examples" id="toc-jpql-syntax-examples" class="nav-link" data-scroll-target="#jpql-syntax-examples"><span class="header-section-number">1.3</span> JPQL Syntax Examples</a></li>
+  <li><a href="#using-jpql-in-spring-data-jpa" id="toc-using-jpql-in-spring-data-jpa" class="nav-link" data-scroll-target="#using-jpql-in-spring-data-jpa"><span class="header-section-number">1.4</span> Using JPQL in Spring Data JPA</a></li>
+  <li><a href="#benefits-of-jpql" id="toc-benefits-of-jpql" class="nav-link" data-scroll-target="#benefits-of-jpql"><span class="header-section-number">1.5</span> Benefits of JPQL</a></li>
+  </ul></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"><span class="header-section-number">2</span> Additional Resources</a>
+  <ul>
+  <li><a href="#jpql" id="toc-jpql" class="nav-link" data-scroll-target="#jpql"><span class="header-section-number">2.1</span> JPQL</a></li>
+  <li><a href="#jpa-queries" id="toc-jpa-queries" class="nav-link" data-scroll-target="#jpa-queries"><span class="header-section-number">2.2</span> JPA Queries</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/ifcd0021-24/ifcd0021backlog-sprint-24.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/boot-concepts-jpa-4.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ifcd0021-24/ifcd0021-24.html">IFCD0021-24 Docs</a></li><li class="breadcrumb-item"><a href="../ifcd0021-24/ifcd0021backlog-sprint-24.html">IFCD0021 Sprint Backlog</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/boot-concepts-injection.html">Spring Boot Concepts</a></li><li class="breadcrumb-item"><a href="../springboot/boot-concepts-jpa-4.html">Spring Boot: JPA Queries</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">IFCD0021 Sprint Backlog</h1>
+<h1 class="title">Spring Boot: JPA Queries</h1>
+<p class="subtitle lead">Spring Boot JPA Queries</p>
   <div class="quarto-categories">
-    <div class="quarto-category">ifcd0021</div>
-    <div class="quarto-category">backlog</div>
+    <div class="quarto-category">Spring-Boot</div>
+    <div class="quarto-category">JPA</div>
   </div>
   </div>
 
+<div>
+  <div class="description">
+    Spring Boot JPA
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>albertprofe </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Tuesday, June 1, 2021</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">Thursday, October 31, 2024</p>
+    </div>
+  </div>
     
   </div>
   
@@ -1652,99 +1838,139 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<style>
-
-.heatMap th { background:  #f4f4f4;}
-tr:nth-child(2) {background-color: #f4f4f4;}
-
-th, td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-tr:hover {background-color:  #f4f4f4;}
-
-</style>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/home/backlog.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Sprint Backlog"><img src="../images/home/backlog.jpg" class="img-fluid figure-img" style="width:30.0%" alt="Sprint Backlog"></a></p>
-<figcaption>Sprint Backlog</figcaption>
-</figure>
+<div class="summary">
+<p>📘 <strong>JPA Queries</strong></p>
+<p>Spring Boot provides an implementation of the Java Persistence <code>API</code> (<code>JPA</code>) to simplify database access: ORM (<code>Object-Relational Mapping</code>)</p>
+<p>In JPA, entity classes represent tables in the database, and relationships between entities are mapped using annotations.</p>
+<p><code>JPA (Java Persistence API)</code> enables efficient data retrieval through various <strong>querying</strong> methods.</p>
+<p>It supports <code>JPQL (Java Persistence Query Language)</code> for object-oriented queries.</p>
 </div>
-<div class="heatMap page-columns page-full">
-<section id="sprint08-jpa-inherence-october-2024" class="level2 column-page-right">
-<h2 class="anchored" data-anchor-id="sprint08-jpa-inherence-october-2024"><code>Sprint#08 JPA: Inherence</code> (October 2024)</h2>
+<p><br></p>
+<section id="jpql-java-persistence-query-language" class="level2 page-columns page-full" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="jpql-java-persistence-query-language"><span class="header-section-number">1</span> JPQL (Java Persistence Query Language)</h2>
+<p><code>JPQL (Java Persistence Query Language)</code> is an <mark>object-oriented query language used to define queries for entities and their relationships in <code>JPA (Java Persistence API)</code></mark>. It’s similar to <code>SQL</code> but operates on <code>JPA entity objects</code> rather than database tables.</p>
+<p>Criteria API for type-safe programmatic queries, and native SQL for database-specific operations. JPA also allows named queries, parameterized queries, and various operations like filtering, sorting, and joining entities.</p>
+<section id="key-characteristics-of-jpql" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="key-characteristics-of-jpql"><span class="header-section-number">1.1</span> Key Characteristics of JPQL</h3>
+<ol type="1">
+<li><strong>Object-Oriented</strong>: Works with Java objects and their properties, not database tables and columns.</li>
+<li><strong>Database-Independent</strong>: Queries can work across different database systems without modification.</li>
+<li><strong>Supports JPA Relationships</strong>: Can easily navigate entity relationships.</li>
+<li><strong>Powerful</strong>: Supports complex operations like joins, aggregations, and subqueries.</li>
+</ol>
+</section>
+<section id="jpql-vs-sql" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="jpql-vs-sql"><span class="header-section-number">1.2</span> JPQL vs SQL</h3>
+<p>Here’s a comparison between JPQL and SQL:</p>
 <table class="caption-top table">
-<caption>Backlog course October 2024 table</caption>
 <colgroup>
-<col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 60%">
-<col style="width: 34%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>#</th>
-<th>Day</th>
-<th>Date</th>
-<th>Topics</th>
-<th>Details Topics</th>
+<th>Aspect</th>
+<th>JPQL</th>
+<th>SQL</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>#08</td>
-<td>34</td>
-<td>28/10/2024</td>
-<td>- Lab#SB08-4 Spring Boot RestaurantManager: <br> (1) Inherence: Order implementation <br> (2) Order: Interface? Abstract? Record? Sealed? <br> (3) <strong>Order n:m Menu refactor</strong> <br> (4) H2-DB to local <br> (5) Populate H2-DB data and relationships <br><br> - <s>Git: <code>gitTutorial</code> project: <br> (1) undo <br> (2) Rebase vs.&nbsp;Merge </s> <br> <br> ++ DevOps: bash, <code>curl</code></td>
-<td>- <a href="../springboot/sblab8-4.html" class="external" target="_blank">Lab#SB08-4</a> <br><br> - <a href="https://www.youtube.com/watch?v=LeYF1NE3jQ4" class="external" target="_blank">Java meets TypeScript</a> <br> - <a href="https://www.youtube.com/watch?v=CdtyvO9jg8E" class="external" target="_blank">A Spring Developers Guide to Navigating the Frontend</a> <br> - <a href="https://gist.github.com/AlbertProfe/ecdc1184d4d6ed3922d782bbca3459dc" class="external" target="_blank">simplify-boot</a> <br> - <a href="https://gist.github.com/AlbertProfe/316b30c09343cf29d09449e69cfa8502" class="external" target="_blank">GitHub zip code to dropbox</a> <br> - <a href="https://github.com/AlbertProfe/restaurantManager/blob/63515bf40324c505a220be743d948d5d4105659c/_PRA/PRA04.md" class="external" target="_blank">PRA04: Refactoring Many-to-Many Relationship in RestaurantManager</a></td>
+<td>Operates on</td>
+<td>Entity objects</td>
+<td>Database tables</td>
 </tr>
 <tr class="even">
-<td></td>
-<td>35</td>
-<td>29/10/2024</td>
-<td>- Lab#SB08-4 Spring Boot RestaurantManager: <br> (1) Inherence: Order implementation <br> (2) <s>Order: Interface? Abstract? </s> <br> (3) Order n:m Menu refactor <br> ++ (4) <strong>API Rest: data structure and nested objects</strong> <s> <br><br>- Git: <code>gitTutorial</code> project: <br> (1) undo <br> (2) Rebase vs.&nbsp;Merge</s> <br><br> ++ API-First paradigm</td>
-<td>- <a href="../springboot/sblab8-4.html" class="external" target="_blank">Lab#SB08-4</a> <br><br> - <a href="https://www.postman.com/api-first/" class="external" target="_blank">Guide to API-first</a> <br> - <a href="https://jsoncrack.com/" class="external" target="_blank">CrackJson</a> <br> - <a href="../springboot/sblab8-4.html#api-rest-data-structure" class="external" target="_blank">API rest data structure</a></td>
+<td>Case sensitivity</td>
+<td>Case-sensitive</td>
+<td>Generally case-insensitive</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>36</td>
-<td>30/10/2024</td>
-<td>- Lab#SB08-4 Spring Boot RestaurantManager: <br> (1) Inherence: Order implementation <br> (2) Order: Interface? Abstract? <br> (3) <span class="citation" data-cites="Service">@Service</span> and <span class="citation" data-cites="RestController">@RestController</span> of all <span class="citation" data-cites="Entitty">@Entitty</span> <br> (4) Profile <strong>Local H2</strong> <br> (5) <strong>DataLoader and DataPopulate</strong> <br> <br></td>
-<td>- <a href="../springboot/sblab8-4.html" class="external" target="_blank">Lab#SB08-4</a> <br> - <a href="https://github.com/AlbertProfe/restaurantManager/blob/6a5958b74c16a495ac4452b0320756b8a3598e4e/src/main/java/dev/example/restaurantManager/utilities/DataLoader.java" class="external" target="_blank">DataLoader</a> <br><br> <a href="../images/springboot/labsb08/labsb08-4-uml.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="../images/springboot/labsb08/labsb08-4-uml.png" class="img-fluid"></a></td>
+<td>Portability</td>
+<td>Database-independent</td>
+<td>May contain database-specific syntax</td>
 </tr>
 <tr class="even">
-<td></td>
-<td>37</td>
-<td>31/10/2024</td>
-<td>- Lab#SB08-4 Spring Boot RestaurantManager: <br> (1) Inherence: Order implementation <br> (2) Order: Interface? Abstract? <br> (3) <span class="citation" data-cites="Service">@Service</span> and <span class="citation" data-cites="RestController">@RestController</span> <br> (4) Inherence: <strong>type strategies to save data</strong> <br> <br></td>
-<td>- <a href="../springboot/sblab8-4.html" class="external" target="_blank">Lab#SB08-4</a> <br><br> - <a href="../springboot/boot-concepts-injection.html" class="external" target="_blank">JPA 1: Dependence Injection</a><br> - <a href="../springboot/boot-concepts-jpa-2.html" class="external" target="_blank">JPA 2: Mappings</a><br> - <a href="../springboot/boot-concepts-jpa-3.html" class="external" target="_blank">JPA 3: Relationships</a><br> - <a href="../springboot/boot-concepts-jpa-4.html" class="external" target="_blank">JPA 4: Queries</a><br> - <a href="../springboot/boot-concepts-jpa-5.html" class="external" target="_blank">JPA 5: Inherence</a><br></td>
+<td>Join syntax</td>
+<td>Simplified using relationships</td>
+<td>Requires explicit join conditions</td>
 </tr>
 </tbody>
 </table>
 </section>
+<section id="jpql-syntax-examples" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="jpql-syntax-examples"><span class="header-section-number">1.3</span> JPQL Syntax Examples</h3>
+<ol type="1">
+<li>Basic Select Query:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="#cb1-1"></a>SELECT u FROM User u WHERE u.age &gt; 18</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Join Query:</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>SELECT o FROM Order o JOIN o.customer c WHERE c.country = 'USA'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>Aggregate Function:</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href="#cb3-1"></a>SELECT AVG(e.salary) FROM Employee e WHERE e.department.name = 'IT'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li>Subquery:</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource jpql number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href="#cb4-1"></a>SELECT e FROM Employee e WHERE e.salary &gt; (SELECT AVG(emp.salary) FROM Employee emp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="using-jpql-in-spring-data-jpa" class="level3 page-columns page-full" data-number="1.4">
+<h3 data-number="1.4" class="anchored" data-anchor-id="using-jpql-in-spring-data-jpa"><span class="header-section-number">1.4</span> Using JPQL in Spring Data JPA</h3>
+<ol type="1">
+<li>With <code>@Query</code> annotation:</li>
+</ol>
+<div class="column-page-right">
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="at">@Query</span><span class="op">(</span><span class="st">"SELECT u FROM User u WHERE u.email = ?1 AND u.active = true"</span><span class="op">)</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>User <span class="fu">findActiveUserByEmail</span><span class="op">(</span><span class="bu">String</span> email<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<ol type="1">
+<li>With <code>EntityManager</code>:</li>
+</ol>
+<div class="column-page-right">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="bu">String</span> jpql <span class="op">=</span> <span class="st">"SELECT p FROM Product p WHERE p.category.name = :categoryName"</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="bu">List</span><span class="op">&lt;</span>Product<span class="op">&gt;</span> products <span class="op">=</span> entityManager<span class="op">.</span><span class="fu">createQuery</span><span class="op">(</span>jpql<span class="op">,</span> Product<span class="op">.</span><span class="fu">class</span><span class="op">)</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="op">.</span><span class="fu">setParameter</span><span class="op">(</span><span class="st">"categoryName"</span><span class="op">,</span> <span class="st">"Electronics"</span><span class="op">)</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="op">.</span><span class="fu">getResultList</span><span class="op">();</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
+</section>
+<section id="benefits-of-jpql" class="level3" data-number="1.5">
+<h3 data-number="1.5" class="anchored" data-anchor-id="benefits-of-jpql"><span class="header-section-number">1.5</span> Benefits of JPQL</h3>
+<ol type="1">
+<li>Type-safety: Works with Java types, reducing runtime errors.</li>
+<li>Abstraction: Shields developers from database-specific details.</li>
+<li>Optimization: JPA providers can optimize JPQL queries for better performance.</li>
+<li>Flexibility: Allows for complex queries while maintaining database independence.</li>
+</ol>
+</section>
+</section>
+<section id="additional-resources" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">2</span> Additional Resources</h2>
+<section id="jpql" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="jpql"><span class="header-section-number">2.1</span> JPQL</h3>
 <ul>
-<li><code>-</code> topic planned or done</li>
-<li><code>----</code> topic pending to future</li>
-<li><code>++</code> new topic not planned</li>
+<li><a href="https://docs.oracle.com/javaee/6/tutorial/doc/bnbtg.html" class="external" target="_blank">JPQL - Java Persistence Query Language</a> <br></li>
+<li><a href="https://docs.oracle.com/javaee/7/tutorial/persistence-querylanguage.htm" class="external" target="_blank">JPA Query Language</a> <br></li>
+<li><a href="https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#hql" class="external" target="_blank">JPQL Reference</a> <br></li>
+<li><a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation" class="external" target="_blank">Spring Data JPA - Query Creation</a></li>
 </ul>
-</div>
-</div>
+</section>
+<section id="jpa-queries" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="jpa-queries"><span class="header-section-number">2.2</span> JPA Queries</h3>
+<p>For more information on Spring Boot JPA query methods, check out these resources:</p>
+<ul>
+<li><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html" class="external" target="_blank">Defining Query Methods</a> <br></li>
+<li><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/query-by-example.html" class="external" target="_blank">Query by Example</a> <br></li>
+<li><a href="https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html" class="external" target="_blank">JPA Query Methods</a> <br></li>
+<li><a href="../springboot/boot-concepts-jpa.html" class="external" target="_blank">Spring Boot: JPA &amp; DI</a></li>
+</ul>
 
 
+</section>
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -2313,13 +2539,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../ifcd0021-24/ifcd0021deliveries-24.html" class="pagination-link" aria-label="IFCD0021 Calendar &amp; Deliveries">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">IFCD0021 Calendar &amp; Deliveries</span>
+      <a href="../springboot/boot-concepts-jpa-3.html" class="pagination-link" aria-label="Spring Boot: JPA Relationships">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Spring Boot: JPA Relationships</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../ifcd0021-24/ifcd0021backlog-product-24.html" class="pagination-link" aria-label="IFCD0021 Product Backlog">
-        <span class="nav-page-text">IFCD0021 Product Backlog</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../springboot/boot-concepts-jpa-5.html" class="pagination-link" aria-label="Spring Boot: JPA Inherence">
+        <span class="nav-page-text">Spring Boot: JPA Inherence</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -2331,7 +2557,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p>If you want to go far, walk slow / We love dukkha</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/ifcd0021-24/ifcd0021backlog-sprint-24.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/boot-concepts-jpa-4.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -2350,38 +2576,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":false});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 

@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="albertprofe">
+<meta name="description" content="Spring Boot JPA">
 
-<title>IFCD0021 Sprint Backlog – albertprofe wiki</title>
+<title>Spring Boot: JPA Relationships – albertprofe wiki</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +66,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../ifcd0021-24/ifcd0021backlog-product-24.html" rel="next">
-<link href="../ifcd0021-24/ifcd0021deliveries-24.html" rel="prev">
+<link href="../springboot/boot-concepts-jpa-4.html" rel="next">
+<link href="../springboot/boot-concepts-jpa-2.html" rel="prev">
 <link href="..//images/home/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -75,12 +111,15 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -1403,7 +1442,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ifcd0021-24/ifcd0021-24.html">IFCD0021-24 Docs</a></li><li class="breadcrumb-item"><a href="../ifcd0021-24/ifcd0021backlog-sprint-24.html">IFCD0021 Sprint Backlog</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/boot-concepts-injection.html">Spring Boot Concepts</a></li><li class="breadcrumb-item"><a href="../springboot/boot-concepts-jpa-3.html">Spring Boot: JPA Relationships</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -1424,40 +1463,34 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
- <span class="menu-text">Training Courses</span>
+ <span class="menu-text">Spring</span>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">IFCD0021-24 Docs</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Spring Legacy</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0021-24/ifcd0021-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0021 Official Docs</span></a>
+  <a href="../spring/spring-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Framework</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0021-24/ifcd0021deliveries-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0021 Calendar &amp; Deliveries</span></a>
+  <a href="../spring/spring-mvc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring MVC</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0021-24/ifcd0021backlog-sprint-24.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">IFCD0021 Sprint Backlog</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0021-24/ifcd0021backlog-product-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0021 Product Backlog</span></a>
+  <a href="../spring/spring-servlets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Springs Servlets</span></a>
   </div>
 </li>
       </ul>
@@ -1466,7 +1499,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">IFCD0210-24 Docs</span></a>
+ <span class="menu-text">Spring Boot Basics</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -1474,26 +1507,26 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0210-24/ifcd0210-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Official Docs</span></a>
+  <a href="../springboot/boot-what-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: fundamentals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0210-24/ifcd0210deliveries-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Calendar &amp; Deliveries</span></a>
+  <a href="../springboot/boot-what-create.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: create a Project</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0210-24/ifcd0210backlog-sprint-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Sprint Backlog</span></a>
+  <a href="../springboot/boot-what-create-th-h2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: H2 DB and Thymeleaf</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0210-24/ifcd0210backlog-product-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Product Backlog</span></a>
+  <a href="../springboot/boot-what-cycle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: cycle</span></a>
   </div>
 </li>
       </ul>
@@ -1501,29 +1534,89 @@ ul.task-list li input[type="checkbox"] {
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">IFCD044 Docs</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Spring Boot Concepts</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd044/ifcd044.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD044 Docs</span></a>
+  <a href="../springboot/boot-concepts-injection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Dependency Injection</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd044/ifcd044backlog-sprint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD044 Sprint Backlog</span></a>
+  <a href="../springboot/boot-concepts-annotations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Annotations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd044/ifcd044backlog-product.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD044 Product Backlog</span></a>
+  <a href="../springboot/boot-concepts-controller.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Controller</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-view.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: View</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-th.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Thymeleaf</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-rest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Rest</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Data &amp; DB</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA &amp; DI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA Mappings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Spring Boot: JPA Relationships</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA Queries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA Inherence</span></a>
   </div>
 </li>
       </ul>
@@ -1532,7 +1625,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">IFCT034PO Docs</span></a>
+ <span class="menu-text">Spring Boot Laboratories</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -1540,20 +1633,119 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifct034po/ifct034po.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCT034PO Docs</span></a>
+  <a href="../springboot/sblab0-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-1: Library UML</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifct034po/ifct034pobacklog-sprint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCT034PO Sprint Backlog</span></a>
+  <a href="../springboot/sblab0-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-2: CRUD User</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifct034po/ifct034pobacklog-product.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCT034PO Product Backlog</span></a>
+  <a href="../springboot/sblab0-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-3: LibraryManagement</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-4: API Rest</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-5: Rest &amp; JPA-H2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-6: Rest &amp; MongoDB</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-7: Styling</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB01-1: DataBase</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB02-1: <code>JPA</code> Relationships</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB03-1: APIs &amp; cloud</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB04-1: <code>JPA</code> Inherence</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB05-1: API Rest</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB06-1: <code>employeeCourse</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB07-1: <code>monitor Book</code></span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-1: DDD and UML</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-2: Vaadin</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-3: H2 and API Rest</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-4: JPA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-5: RestaurantManager</span></a>
   </div>
 </li>
       </ul>
@@ -1562,7 +1754,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">IFCD0210 Docs</span></a>
+ <span class="menu-text">Spring Boot readings</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -1570,44 +1762,8 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Official Docs</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210initemail.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Init Mail</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210deliveries.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Deliveries</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210calendar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Calendar</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210backlog-sprint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Sprint Backlog</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210backlog-product.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Product Backlog</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210backlog-projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Projects Backlog</span></a>
+  <a href="../springboot/resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot Resources</span></a>
   </div>
 </li>
       </ul>
@@ -1622,28 +1778,75 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sprint08-jpa-inherence-october-2024" id="toc-sprint08-jpa-inherence-october-2024" class="nav-link active" data-scroll-target="#sprint08-jpa-inherence-october-2024"><code>Sprint#08 JPA: Inherence</code> (October 2024)</a></li>
+  <li><a href="#jpa-relationships" id="toc-jpa-relationships" class="nav-link active" data-scroll-target="#jpa-relationships"><span class="header-section-number">1</span> JPA Relationships</a>
+  <ul>
+  <li><a href="#onetomany-and-manytoone" id="toc-onetomany-and-manytoone" class="nav-link" data-scroll-target="#onetomany-and-manytoone"><span class="header-section-number">1.1</span> OneToMany and ManyToOne</a>
+  <ul>
+  <li><a href="#onetomany-attributes" id="toc-onetomany-attributes" class="nav-link" data-scroll-target="#onetomany-attributes"><span class="header-section-number">1.1.1</span> <span class="citation" data-cites="OneToMany">@OneToMany</span> attributes</a></li>
+  <li><a href="#casting" id="toc-casting" class="nav-link" data-scroll-target="#casting"><span class="header-section-number">1.1.2</span> Casting</a></li>
+  </ul></li>
+  <li><a href="#manytomany" id="toc-manytomany" class="nav-link" data-scroll-target="#manytomany"><span class="header-section-number">1.2</span> ManyToMany</a>
+  <ul>
+  <li><a href="#orphanremoval-and-cascade" id="toc-orphanremoval-and-cascade" class="nav-link" data-scroll-target="#orphanremoval-and-cascade"><span class="header-section-number">1.2.1</span> OrphanRemoval and Cascade</a>
+  <ul class="collapse">
+  <li><a href="#example-student-and-course-entities" id="toc-example-student-and-course-entities" class="nav-link" data-scroll-target="#example-student-and-course-entities"><span class="header-section-number">1.2.1.1</span> Example: <code>Student</code> and <code>Course</code> Entities</a></li>
+  </ul></li>
+  <li><a href="#manytomany-with-join-table-entity" id="toc-manytomany-with-join-table-entity" class="nav-link" data-scroll-target="#manytomany-with-join-table-entity"><span class="header-section-number">1.2.2</span> ManyToMany with Join Table <span class="citation" data-cites="Entity">@Entity</span></a></li>
+  <li><a href="#when-two-objects-are-equal-object-identity" id="toc-when-two-objects-are-equal-object-identity" class="nav-link" data-scroll-target="#when-two-objects-are-equal-object-identity"><span class="header-section-number">1.2.3</span> When two objects are equal? <strong>Object Identity</strong></a></li>
+  <li><a href="#using-assertj-with-comparator" id="toc-using-assertj-with-comparator" class="nav-link" data-scroll-target="#using-assertj-with-comparator"><span class="header-section-number">1.2.4</span> Using AssertJ with Comparator</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#labs" id="toc-labs" class="nav-link" data-scroll-target="#labs"><span class="header-section-number">2</span> Labs</a>
+  <ul>
+  <li><a href="#onetomany" id="toc-onetomany" class="nav-link" data-scroll-target="#onetomany"><span class="header-section-number">2.1</span> <code>@OneToMany</code></a></li>
+  <li><a href="#manytoone" id="toc-manytoone" class="nav-link" data-scroll-target="#manytoone"><span class="header-section-number">2.2</span> <code>@ManyToOne</code></a></li>
+  <li><a href="#manytomany-1" id="toc-manytomany-1" class="nav-link" data-scroll-target="#manytomany-1"><span class="header-section-number">2.3</span> <code>@ManyToMany</code></a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/ifcd0021-24/ifcd0021backlog-sprint-24.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/boot-concepts-jpa-3.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ifcd0021-24/ifcd0021-24.html">IFCD0021-24 Docs</a></li><li class="breadcrumb-item"><a href="../ifcd0021-24/ifcd0021backlog-sprint-24.html">IFCD0021 Sprint Backlog</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/boot-concepts-injection.html">Spring Boot Concepts</a></li><li class="breadcrumb-item"><a href="../springboot/boot-concepts-jpa-3.html">Spring Boot: JPA Relationships</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">IFCD0021 Sprint Backlog</h1>
+<h1 class="title">Spring Boot: JPA Relationships</h1>
+<p class="subtitle lead">Spring Boot JPA Relationships</p>
   <div class="quarto-categories">
-    <div class="quarto-category">ifcd0021</div>
-    <div class="quarto-category">backlog</div>
+    <div class="quarto-category">Spring-Boot</div>
+    <div class="quarto-category">JPA</div>
   </div>
   </div>
 
+<div>
+  <div class="description">
+    Spring Boot JPA
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>albertprofe </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Tuesday, June 1, 2021</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">Thursday, October 31, 2024</p>
+    </div>
+  </div>
     
   </div>
   
@@ -1652,99 +1855,667 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<style>
-
-.heatMap th { background:  #f4f4f4;}
-tr:nth-child(2) {background-color: #f4f4f4;}
-
-th, td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-tr:hover {background-color:  #f4f4f4;}
-
-</style>
+<div class="summary">
+<p>📘 <strong>JPA Relationships</strong></p>
+<p>Spring Boot provides an implementation of the Java Persistence <code>API</code> (<code>JPA</code>) to simplify database access: ORM (<code>Object-Relational Mapping</code>)</p>
+<p>In JPA, entity classes represent tables in the database, and relationships between entities are mapped using annotations.</p>
+<p>There are three basic relationships:</p>
+<ul>
+<li><strong>OneToOne</strong>: Represents a single-valued association</li>
+<li><strong>OneToMany</strong> / <strong>ManyToOne</strong>: Represents a multi-valued association</li>
+<li><strong>ManyToMany</strong>: Represents a multi-valued association where multiple instances</li>
+</ul>
+</div>
+<p><br></p>
+<section id="jpa-relationships" class="level1 page-columns page-full" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> JPA Relationships</h1>
+<p><code>JPA (Java Persistence API)</code> provides several types of relationships to <mark>model associations between entities </mark>:</p>
+<ol type="1">
+<li><p><strong>OneToOne</strong>: Represents a single-valued association where an instance of one entity is related to a single instance of another entity.</p></li>
+<li><p><strong>OneToMany</strong>: Represents a multi-valued association where an instance of one entity can be related to multiple instances of another entity.</p></li>
+<li><p><strong>ManyToOne</strong>: The inverse of <code>OneToMany</code>, where multiple instances of an entity can be related to a single instance of another entity.</p></li>
+<li><p><strong>ManyToMany</strong>: Represents a multi-valued association where multiple instances of one entity can be related to multiple instances of another entity.</p></li>
+</ol>
+<p>These relationships can be either <code>unidirectional</code> or <code>bidirectional</code>:</p>
+<ul>
+<li><strong>Unidirectional</strong>: Only one entity has a reference to the other.</li>
+<li><strong>Bidirectional</strong>: Both entities have references to each other.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Relationships are typically annotated in entity classes using <code>@OneToOne</code>, <code>@OneToMany</code>, <code>@ManyToOne</code>, or <code>@ManyToMany</code>. Additional annotations like <code>@JoinColumn</code> and <code>mappedBy</code> are used to specify the joining strategy and the owning side of the relationship.</p>
+</blockquote>
+<section id="onetomany-and-manytoone" class="level2 page-columns page-full" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="onetomany-and-manytoone"><span class="header-section-number">1.1</span> OneToMany and ManyToOne</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/home/backlog.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Sprint Backlog"><img src="../images/home/backlog.jpg" class="img-fluid figure-img" style="width:30.0%" alt="Sprint Backlog"></a></p>
-<figcaption>Sprint Backlog</figcaption>
+<p><a href="../images/springboot/labsb08/labsb08-4-onetomay.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Entity @oneToMany"><img src="../images/springboot/labsb08/labsb08-4-onetomay.png" class="img-fluid figure-img" alt="Entity @oneToMany"></a></p>
+<figcaption>Entity <span class="citation" data-cites="oneToMany">@oneToMany</span></figcaption>
 </figure>
 </div>
-<div class="heatMap page-columns page-full">
-<section id="sprint08-jpa-inherence-october-2024" class="level2 column-page-right">
-<h2 class="anchored" data-anchor-id="sprint08-jpa-inherence-october-2024"><code>Sprint#08 JPA: Inherence</code> (October 2024)</h2>
-<table class="caption-top table">
-<caption>Backlog course October 2024 table</caption>
-<colgroup>
-<col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 60%">
-<col style="width: 34%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>#</th>
-<th>Day</th>
-<th>Date</th>
-<th>Topics</th>
-<th>Details Topics</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>#08</td>
-<td>34</td>
-<td>28/10/2024</td>
-<td>- Lab#SB08-4 Spring Boot RestaurantManager: <br> (1) Inherence: Order implementation <br> (2) Order: Interface? Abstract? Record? Sealed? <br> (3) <strong>Order n:m Menu refactor</strong> <br> (4) H2-DB to local <br> (5) Populate H2-DB data and relationships <br><br> - <s>Git: <code>gitTutorial</code> project: <br> (1) undo <br> (2) Rebase vs.&nbsp;Merge </s> <br> <br> ++ DevOps: bash, <code>curl</code></td>
-<td>- <a href="../springboot/sblab8-4.html" class="external" target="_blank">Lab#SB08-4</a> <br><br> - <a href="https://www.youtube.com/watch?v=LeYF1NE3jQ4" class="external" target="_blank">Java meets TypeScript</a> <br> - <a href="https://www.youtube.com/watch?v=CdtyvO9jg8E" class="external" target="_blank">A Spring Developers Guide to Navigating the Frontend</a> <br> - <a href="https://gist.github.com/AlbertProfe/ecdc1184d4d6ed3922d782bbca3459dc" class="external" target="_blank">simplify-boot</a> <br> - <a href="https://gist.github.com/AlbertProfe/316b30c09343cf29d09449e69cfa8502" class="external" target="_blank">GitHub zip code to dropbox</a> <br> - <a href="https://github.com/AlbertProfe/restaurantManager/blob/63515bf40324c505a220be743d948d5d4105659c/_PRA/PRA04.md" class="external" target="_blank">PRA04: Refactoring Many-to-Many Relationship in RestaurantManager</a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>35</td>
-<td>29/10/2024</td>
-<td>- Lab#SB08-4 Spring Boot RestaurantManager: <br> (1) Inherence: Order implementation <br> (2) <s>Order: Interface? Abstract? </s> <br> (3) Order n:m Menu refactor <br> ++ (4) <strong>API Rest: data structure and nested objects</strong> <s> <br><br>- Git: <code>gitTutorial</code> project: <br> (1) undo <br> (2) Rebase vs.&nbsp;Merge</s> <br><br> ++ API-First paradigm</td>
-<td>- <a href="../springboot/sblab8-4.html" class="external" target="_blank">Lab#SB08-4</a> <br><br> - <a href="https://www.postman.com/api-first/" class="external" target="_blank">Guide to API-first</a> <br> - <a href="https://jsoncrack.com/" class="external" target="_blank">CrackJson</a> <br> - <a href="../springboot/sblab8-4.html#api-rest-data-structure" class="external" target="_blank">API rest data structure</a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>36</td>
-<td>30/10/2024</td>
-<td>- Lab#SB08-4 Spring Boot RestaurantManager: <br> (1) Inherence: Order implementation <br> (2) Order: Interface? Abstract? <br> (3) <span class="citation" data-cites="Service">@Service</span> and <span class="citation" data-cites="RestController">@RestController</span> of all <span class="citation" data-cites="Entitty">@Entitty</span> <br> (4) Profile <strong>Local H2</strong> <br> (5) <strong>DataLoader and DataPopulate</strong> <br> <br></td>
-<td>- <a href="../springboot/sblab8-4.html" class="external" target="_blank">Lab#SB08-4</a> <br> - <a href="https://github.com/AlbertProfe/restaurantManager/blob/6a5958b74c16a495ac4452b0320756b8a3598e4e/src/main/java/dev/example/restaurantManager/utilities/DataLoader.java" class="external" target="_blank">DataLoader</a> <br><br> <a href="../images/springboot/labsb08/labsb08-4-uml.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="../images/springboot/labsb08/labsb08-4-uml.png" class="img-fluid"></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>37</td>
-<td>31/10/2024</td>
-<td>- Lab#SB08-4 Spring Boot RestaurantManager: <br> (1) Inherence: Order implementation <br> (2) Order: Interface? Abstract? <br> (3) <span class="citation" data-cites="Service">@Service</span> and <span class="citation" data-cites="RestController">@RestController</span> <br> (4) Inherence: <strong>type strategies to save data</strong> <br> <br></td>
-<td>- <a href="../springboot/sblab8-4.html" class="external" target="_blank">Lab#SB08-4</a> <br><br> - <a href="../springboot/boot-concepts-injection.html" class="external" target="_blank">JPA 1: Dependence Injection</a><br> - <a href="../springboot/boot-concepts-jpa-2.html" class="external" target="_blank">JPA 2: Mappings</a><br> - <a href="../springboot/boot-concepts-jpa-3.html" class="external" target="_blank">JPA 3: Relationships</a><br> - <a href="../springboot/boot-concepts-jpa-4.html" class="external" target="_blank">JPA 4: Queries</a><br> - <a href="../springboot/boot-concepts-jpa-5.html" class="external" target="_blank">JPA 5: Inherence</a><br></td>
-</tr>
-</tbody>
-</table>
-</section>
-</div>
+<p><strong><code>OneToMany</code> Unidirectional</strong></p>
+<ul>
+<li>One entity has a collection of another entity</li>
+<li>Only the <em>owning</em> side (the “One” side) has a reference to the other entity</li>
+<li>Example: One Department has many Employees</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="at">@Entity</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">public</span> <span class="kw">class</span> Department <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="at">@OneToMany</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span>Employee<span class="op">&gt;</span> employees<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="op">}</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="at">@Entity</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">public</span> <span class="kw">class</span> Employee <span class="op">{</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>    <span class="co">// No reference to Department</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="onetomany-attributes" class="level3 page-columns page-full" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="onetomany-attributes"><span class="header-section-number">1.1.1</span> <span class="citation" data-cites="OneToMany">@OneToMany</span> attributes</h3>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Eager</strong> loading fetches all required data upfront when an object is first loaded. It immediately initializes and loads related entities or resources, ensuring everything is readily available.</p>
+<p><mark>This approach can improve performance for frequently accessed data but may increase initial load times and memory usage.</mark></p>
+</div><div class="">
+<p><strong>Lazy</strong> loading, conversely, defers data loading until it’s explicitly requested. It retrieves only the essential data initially, loading related entities or resources on-demand when accessed.</p>
+<p>This method can <mark>enhance initial performance and reduce memory consumption, particularly for large datasets or infrequently used resources.</mark></p>
+<p>However, it may introduce slight delays when accessing lazy-loaded data for the first time</p>
+</div></div>
+<ul>
+<li><strong>fetch</strong>: Specifies whether to lazily or eagerly load the related entities. Default is FetchType.<code>LAZY</code>.</li>
+<li><strong>cascade</strong>: Specifies which operations should cascade to child entities. Options include <code>ALL</code>, <code>PERSIST</code>, <code>MERGE</code>, <code>REMOVE</code>, etc.</li>
+<li><strong>orphanRemoval</strong>: If true, removes child entities when they are removed from the collection. Default is <code>false</code>.</li>
+<li><strong>mappedBy</strong>: Specifies the field that <strong>owns</strong> the relationship in the child entity.</li>
+<li><strong>optional</strong>: If <code>false</code>, a non-null relationship must always exist.</li>
+</ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Eager vs Lazy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Eager</strong> loading fetches all related data immediately, making everything available upfront. It can be faster for frequent access but may use more memory.</p>
+<p><strong>Lazy</strong> loading, on the other hand, loads related data only when requested, initializing it on-demand. This approach saves memory but might cause slight delays on first access.</p>
+</div>
+</div>
+<p><strong>Key Points</strong></p>
+<ul>
+<li>For <span class="citation" data-cites="OneToMany">@OneToMany</span> and <span class="citation" data-cites="ManyToMany">@ManyToMany</span>, the default fetch type is <code>LAZY</code>.</li>
+<li>For <span class="citation" data-cites="ManyToOne">@ManyToOne</span> and <span class="citation" data-cites="OneToOne">@OneToOne</span>, the default fetch type is <code>EAGER5</code>.</li>
+<li>Using FetchType.<code>LAZY</code> is generally recommended to avoid performance issues, especially for collections.</li>
+<li>The <code>cascade</code> attribute determines which operations should be cascaded from parent to child entities.</li>
+<li>The <code>orphanRemoval</code> attribute is useful for <mark>automatically removing child entities when they are no longer referenced by the parent</mark>.</li>
+</ul>
+<p><strong>ManyToOne Unidirectional</strong></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>ManyToOne Unidirectional example: <a href="https://github.com/AlbertProfe/restaurantManager/blob/51b172d69b9f04196dbd52d3abdf9c50a05a3ff9/src/test/java/dev/example/restaurantManager/TestsRelationshipsOrderRestaurant.java" class="external" target="_blank">Order and Customer</a></p>
+</div></div><ul>
+<li>Many entities are associated with one entity</li>
+<li>Only the <strong>owning</strong> side (the “Many” side) has a reference to the other entity</li>
+<li>Example: Many Employees belong to one Department</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="at">@Entity</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">public</span> <span class="kw">class</span> Employee <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="at">@ManyToOne</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>    <span class="kw">private</span> Department department<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="op">}</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="at">@Entity</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="kw">public</span> <span class="kw">class</span> Department <span class="op">{</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="co">// No reference to Employee</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Bidirectional Relationships</strong></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Bidirectional Relationships example:</p>
+<ul>
+<li><a href="https://github.com/AlbertProfe/cifojava2022-3/wiki/Library2:-API-Rest-Author-Book-@OneToMany-CRUD-with-Swagger" class="external" target="_blank">Library2: API Rest Author Book <span class="citation" data-cites="OneToMany">@OneToMany</span> CRUD with Swagger</a></li>
+<li><a href="https://github.com/AlbertProfe/restaurantManager/tree/c562d8da650da2f758754312c0e1ecea2d8909af" class="external" target="_blank">TestCreateBookingTable() with JPA, TableRestaurant 1:n Booking bidirectional relationship</a></li>
+</ul>
+</div></div><ul>
+<li>Both entities have references to each other</li>
+<li>The “Many” side is usually the owning side</li>
+<li>Example: One Department has many Employees, and each Employee belongs to one Department</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="at">@Entity</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">public</span> <span class="kw">class</span> Department <span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>    <span class="at">@OneToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"department"</span><span class="op">)</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span>Employee<span class="op">&gt;</span> employees<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="op">}</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="at">@Entity</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="kw">public</span> <span class="kw">class</span> Employee <span class="op">{</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>    <span class="at">@ManyToOne</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    <span class="kw">private</span> Department department<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>In bidirectional relationships, use <code>mappedBy</code> on the <mark>non-owning side to indicate the owning side’s field name</mark>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why Serialization is Needed?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Serialization</strong> is <mark>the process of converting an object or class into a byte stream</mark>. This byte stream can then be easily saved to a file, sent over a network, or stored in a database.</p>
+<p><code>Hibernate</code> uses serialization to <mark>create deep copies of entity objects</mark> for various purposes, such as <strong>detached</strong> entities, Session Management or <strong>caching</strong>.</p>
+<p>For example: Collections within entities (like an <code>ArrayList&lt;Menu&gt; menus</code> within a <code>Order</code> entity ) are often <strong>serialized</strong> to store them efficiently in the database or to manage state changes.</p>
+<p>Implementing <code>Serializable</code> is <strong>not always the best solution</strong>. In some cases, it might be better to adjust your entity relationships (<code>@OneToMany</code>) or use different mapping strategies (<code>@ElementCollection</code> for simple collections).</p>
+</div>
+</div>
+</section>
+<section id="casting" class="level3 page-columns page-full" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="casting"><span class="header-section-number">1.1.2</span> Casting</h3>
+<p>The <a href="https://github.com/AlbertProfe/restaurantManager/blob/c562d8da650da2f758754312c0e1ecea2d8909af/src/test/java/dev/example/restaurantManager/RelationshipsOrderRestaurantTest.java#L80" class="external" target="_blank">original</a> code avoids these issues by declaring orderToSave directly as TakeAwayOrder, eliminating the need for casting. This approach is generally preferred when possible, as it’s safer and more straightforward.</p>
+<div class="column-page-right">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">// Assume OrderRestaurant is a superclass of TakeAwayOrder</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>OrderRestaurant orderToSave <span class="op">=</span> <span class="kw">new</span> <span class="fu">TakeAwayOrder</span><span class="op">(</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="st">"T11"</span><span class="op">,</span> <span class="kw">new</span> <span class="bu">Date</span><span class="op">(),</span> <span class="st">"Alice"</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="fl">10.99</span><span class="op">,</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="kw">true</span><span class="op">,</span> <span class="kw">new</span> <span class="bu">ArrayList</span><span class="op">&lt;&gt;(</span><span class="bu">Arrays</span><span class="op">.</span><span class="fu">asList</span><span class="op">(</span>menu1<span class="op">)),</span> <span class="kw">null</span> <span class="op">);</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">// We need to cast here</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="op">((</span>TakeAwayOrder<span class="op">)</span> orderToSave<span class="op">).</span><span class="fu">setCustomerTakeAway</span><span class="op">(</span>customer1<span class="op">);</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">// We might need to cast here too, depending on the repository's type parameter</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>takeAwayOrderRepository<span class="op">.</span><span class="fu">save</span><span class="op">((</span>TakeAwayOrder<span class="op">)</span> orderToSave<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong>Upcasting</strong>: When we assigned a TakeAwayOrder object to an OrderRestaurant variable, we performed an implicit upcast. This is always safe because a TakeAwayOrder is an OrderRestaurant.</li>
+<li><strong>Downcasting</strong>: When we cast orderToSave back to TakeAwayOrder, we’re performing a downcast. This is potentially risky because not all OrderRestaurant objects are TakeAwayOrder objects.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why casting can be problematic?
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><code>-</code> topic planned or done</li>
-<li><code>----</code> topic pending to future</li>
-<li><code>++</code> new topic not planned</li>
+<li>Type safety: Downcasting can lead to runtime errors if the object isn’t actually of the type you’re casting to.</li>
+<li>Code readability: Excessive casting can make code harder to read and understand.</li>
+<li>Performance: While minor, casting does involve a runtime check.</li>
 </ul>
 </div>
 </div>
+</section>
+</section>
+<section id="manytomany" class="level2 page-columns page-full" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="manytomany"><span class="header-section-number">1.2</span> ManyToMany</h2>
+<p><strong>ManyToMany Unidirectional</strong></p>
+<ul>
+<li>Multiple entities are associated with multiple entities of another type</li>
+<li>Only one side has a reference to the other entity</li>
+<li>Example: Many Students can enroll in many Courses</li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<ul>
+<li><a href="https://github.com/AlbertProfe/restaurantManager/blob/f4d3326cb7938abed678f3831289d4be4c8c069a/src/main/java/dev/example/restaurantManager/model/OrderRestaurant.java#L27" class="external" target="_blank"><span class="citation" data-cites="ManyToMany">@ManyToMany</span> RestaurantManger: ORDER</a></li>
+<li><a href="https://github.com/AlbertProfe/restaurantManager/blob/f4d3326cb7938abed678f3831289d4be4c8c069a/src/main/java/dev/example/restaurantManager/model/MenuRestaurant.java#L27" class="external" target="_blank"><span class="citation" data-cites="ManyToMany">@ManyToMany</span> RestaurantManger: MENU</a></li>
+</ul>
+</div></div><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="at">@Entity</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">public</span> <span class="kw">class</span> Student <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="at">@ManyToMany</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="at">@JoinTable</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"STUDENT_COURSE"</span><span class="op">,</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>        joinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"STUDENT_ID"</span><span class="op">),</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>        inverseJoinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"COURSE_ID"</span><span class="op">))</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Course<span class="op">&gt;</span> courses<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="op">}</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="at">@Entity</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="kw">public</span> <span class="kw">class</span> Course <span class="op">{</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>    <span class="co">// No reference to Student</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>ManyToMany Bidirectional</strong></p>
+<ul>
+<li>Both entities have references to each other</li>
+<li>One side is designated as the <mark>owning side, the other the inverse side</mark>
+<ul>
+<li><strong>Example</strong>: Many Students can enroll in many Courses, and each Course can have many Students</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="at">@Entity</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">public</span> <span class="kw">class</span> Student <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="at">@ManyToMany</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="at">@JoinTable</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"STUDENT_COURSE"</span><span class="op">,</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>        joinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"STUDENT_ID"</span><span class="op">),</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>        inverseJoinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"COURSE_ID"</span><span class="op">))</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Course<span class="op">&gt;</span> courses<span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="op">}</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="at">@Entity</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="kw">public</span> <span class="kw">class</span> Course <span class="op">{</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>    <span class="at">@ManyToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"COURSES"</span><span class="op">)</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Student<span class="op">&gt;</span> students<span class="op">;</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>In bidirectional ManyToMany relationships, use <code>mappedBy</code> on the non-owning side to indicate the owning side’s field name. The <code>@JoinTable</code> annotation is used to specify the join table details.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+ManyToMany Considerations
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>ManyToMany</code> relationships often require a <mark>join table in the database</mark></li>
+<li>Consider using an <mark>intermediate entity for complex relationships</mark> or when additional attributes are needed for the relationship</li>
+<li>Be cautious of <strong>performance</strong> implications with large datasets</li>
+</ul>
+</div>
+</div>
+<section id="orphanremoval-and-cascade" class="level3 page-columns page-full" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="orphanremoval-and-cascade"><span class="header-section-number">1.2.1</span> OrphanRemoval and Cascade</h3>
+<blockquote class="blockquote">
+<p><code>Cascade</code> <strong>propagates operations from parent to child</strong> entities, while <code>orphanRemoval</code> <strong>automatically deletes child entities</strong> no longer associated with a parent.</p>
+</blockquote>
+<p><code>Cascade</code> affects specified actions (e.g., <code>PERSIST</code>, <code>REMOVE</code>), whereas <code>orphanRemoval</code> only deals with removing disassociated children.</p>
+<div class="column-page-right callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cascade vs OrphanRemoval
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The main differences between <code>cascade</code> and <code>orphanRemoval</code> in JPA are:</p>
+<ol type="1">
+<li><p><strong>Scope</strong> of operation:</p>
+<ul>
+<li><mark><code>Cascade</code> applies to all operations specified (e.g.&nbsp;<code>PERSIST</code>, <code>MERGE</code>, RE`MOVE, etc.) and propagates them from parent to child entities&lt;</mark>.</li>
+<li><code>OrphanRemoval</code> only deals with <mark>removing child entities that are no longer associated with the parent </mark>.</li>
+</ul></li>
+<li><p><strong>When</strong> they take effect:</p>
+<ul>
+<li><code>Cascade</code> operations occur when the specified action is performed on <mark>the parent entity </mark>.</li>
+<li><code>OrphanRemoval</code> occurs when a child entity <mark>is disassociated from its parent</mark>, even without explicitly calling remove.</li>
+</ul></li>
+<li><p>Use cases:</p>
+<ul>
+<li><code>Cascade</code> is useful for propagating operations like persist or remove from parent to children.</li>
+<li><code>OrphanRemoval</code> is useful for <mark>automatically deleting child entities that are no longer referenced by a parent.</mark></li>
+</ul></li>
+<li><p><strong>Behavior</strong>:</p>
+<ul>
+<li><code>CascadeType.REMOVE</code> will only delete child entities when the parent is explicitly removed.</li>
+<li><code>OrphanRemoval</code> will <mark>delete child entities as soon as they are disassociated from the parent, even if the parent is not removed</mark></li>
+</ul></li>
+<li><p>Combining them:</p>
+<ul>
+<li>They can be used together. <code>CascadeType.ALL</code> with <code>orphanRemoval=true</code> provides the most comprehensive cascading behavior.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<section id="example-student-and-course-entities" class="level4" data-number="1.2.1.1">
+<h4 data-number="1.2.1.1" class="anchored" data-anchor-id="example-student-and-course-entities"><span class="header-section-number">1.2.1.1</span> Example: <code>Student</code> and <code>Course</code> Entities</h4>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+direction RL
+    class Student {
+        -Long id
+        -String name
+        -Set&lt;Course&gt; courses
+        +enrollInCourse(Course course)
+        +dropCourse(Course course)
+    }
+    class Course {
+        -Long id
+        -String title
+        -Set&lt;Student&gt; students
+    }
+    class SchoolService {
+        -StudentRepository studentRepository
+        -CourseRepository courseRepository
+        +manageEnrollment()
+    }
+
+    Student "*" -- "*" Course : enrolls in
+    SchoolService --&gt; Student : uses
+    SchoolService --&gt; Course : uses
+    SchoolService &lt;-- StudentRepository : uses
+    SchoolService &lt;-- CourseRepository : uses
+
+    
+    
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Let’s see an example involving <code>Student</code> and <code>Course</code> entities in a school system, where <strong>orphan removal</strong> is meaningful.</p>
+<p><code>Student @Entity</code> <strong>owner-side</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">import</span> <span class="im">javax</span><span class="op">.</span><span class="im">persistence</span><span class="op">.*;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashSet</span><span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Set</span><span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="at">@Entity</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">public</span> <span class="kw">class</span> Student <span class="op">{</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="at">@Id</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="at">@GeneratedValue</span><span class="op">(</span>strategy <span class="op">=</span> GenerationType<span class="op">.</span><span class="fu">IDENTITY</span><span class="op">)</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="kw">private</span> <span class="bu">Long</span> id<span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>    </span>
+<span id="cb7-11"><a href="#cb7-11"></a>    <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a>    <span class="at">@ManyToMany</span><span class="op">(</span>cascade <span class="op">=</span> <span class="op">{</span>CascadeType<span class="op">.</span><span class="fu">PERSIST</span><span class="op">,</span> CascadeType<span class="op">.</span><span class="fu">MERGE</span><span class="op">},</span> </span>
+<span id="cb7-14"><a href="#cb7-14"></a>    orphanRemoval <span class="op">=</span> <span class="kw">true</span><span class="op">)</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>    <span class="at">@JoinTable</span><span class="op">(</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>        name <span class="op">=</span> <span class="st">"student_course"</span><span class="op">,</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>        joinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"STUDENT_ID"</span><span class="op">),</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a>        inverseJoinColumns <span class="op">=</span> <span class="at">@JoinColumn</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"COURSE_ID"</span><span class="op">)</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a>    <span class="op">)</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Course<span class="op">&gt;</span> courses <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashSet</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a></span>
+<span id="cb7-22"><a href="#cb7-22"></a>    <span class="co">// Constructors, getters, setters, and utility methods</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a></span>
+<span id="cb7-24"><a href="#cb7-24"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">enrollInCourse</span><span class="op">(</span>Course course<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a>        courses<span class="op">.</span><span class="fu">add</span><span class="op">(</span>course<span class="op">);</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a>        course<span class="op">.</span><span class="fu">getStudents</span><span class="op">().</span><span class="fu">add</span><span class="op">(</span><span class="kw">this</span><span class="op">);</span> </span>
+<span id="cb7-27"><a href="#cb7-27"></a>        <span class="co">// Maintain bidirectional relationship</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a>    <span class="op">}</span></span>
+<span id="cb7-29"><a href="#cb7-29"></a></span>
+<span id="cb7-30"><a href="#cb7-30"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">dropCourse</span><span class="op">(</span>Course course<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-31"><a href="#cb7-31"></a>        courses<span class="op">.</span><span class="fu">remove</span><span class="op">(</span>course<span class="op">);</span></span>
+<span id="cb7-32"><a href="#cb7-32"></a>        course<span class="op">.</span><span class="fu">getStudents</span><span class="op">().</span><span class="fu">remove</span><span class="op">(</span><span class="kw">this</span><span class="op">);</span> </span>
+<span id="cb7-33"><a href="#cb7-33"></a>        <span class="co">// Maintain bidirectional relationship</span></span>
+<span id="cb7-34"><a href="#cb7-34"></a>    <span class="op">}</span></span>
+<span id="cb7-35"><a href="#cb7-35"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>Course @Entity</code> <strong>inverse-side</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">import</span> <span class="im">javax</span><span class="op">.</span><span class="im">persistence</span><span class="op">.*;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">HashSet</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Set</span><span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="at">@Entity</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="kw">public</span> <span class="kw">class</span> Course <span class="op">{</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>    <span class="at">@Id</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>    <span class="at">@GeneratedValue</span><span class="op">(</span>strategy <span class="op">=</span> GenerationType<span class="op">.</span><span class="fu">IDENTITY</span><span class="op">)</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>    <span class="kw">private</span> <span class="bu">Long</span> id<span class="op">;</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>    </span>
+<span id="cb8-11"><a href="#cb8-11"></a>    <span class="kw">private</span> <span class="bu">String</span> title<span class="op">;</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a></span>
+<span id="cb8-13"><a href="#cb8-13"></a>    <span class="at">@ManyToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"COURSES"</span><span class="op">)</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>    <span class="kw">private</span> <span class="bu">Set</span><span class="op">&lt;</span>Student<span class="op">&gt;</span> students <span class="op">=</span> <span class="kw">new</span> <span class="bu">HashSet</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a></span>
+<span id="cb8-16"><a href="#cb8-16"></a>    <span class="co">// Constructors, getters, setters, and utility methods</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here’s how we use these <code>entities</code> in a service or test:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">public</span> <span class="kw">class</span> SchoolService <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>    <span class="at">@Autowired</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>    <span class="kw">private</span> StudentRepository studentRepository<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="at">@Autowired</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="kw">private</span> CourseRepository courseRepository<span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">manageEnrollment</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>        <span class="co">// Create some courses</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>        Course math <span class="op">=</span> <span class="kw">new</span> <span class="fu">Course</span><span class="op">(</span><span class="st">"Mathematics"</span><span class="op">);</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>        Course science <span class="op">=</span> <span class="kw">new</span> <span class="fu">Course</span><span class="op">(</span><span class="st">"Science"</span><span class="op">);</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a></span>
+<span id="cb9-14"><a href="#cb9-14"></a>        <span class="co">// Save courses</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>        courseRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>math<span class="op">);</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>        courseRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>science<span class="op">);</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a></span>
+<span id="cb9-18"><a href="#cb9-18"></a>        <span class="co">// Create a student and enroll in courses</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a>        Student issac <span class="op">=</span> <span class="kw">new</span> <span class="fu">Student</span><span class="op">(</span><span class="st">"Isaac Boncodi"</span><span class="op">);</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a>        issac<span class="op">.</span><span class="fu">enrollInCourse</span><span class="op">(</span>math<span class="op">);</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a>        issac<span class="op">.</span><span class="fu">enrollInCourse</span><span class="op">(</span>science<span class="op">);</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a></span>
+<span id="cb9-23"><a href="#cb9-23"></a>        <span class="co">// Save the student (this will also</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a>        <span class="co">// save the relationships)</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a>        studentRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>issac<span class="op">);</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a></span>
+<span id="cb9-27"><a href="#cb9-27"></a>        <span class="co">// Drop the Science course</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a>        issac<span class="op">.</span><span class="fu">dropCourse</span><span class="op">(</span>science<span class="op">);</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a></span>
+<span id="cb9-30"><a href="#cb9-30"></a>        <span class="co">// Now if we save issac again, the Science course</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a>        <span class="co">// will be removed from the database</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a>        <span class="co">// if no other students are enrolled in it.</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a>        studentRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>issac<span class="op">);</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a>        </span>
+<span id="cb9-35"><a href="#cb9-35"></a>        <span class="co">// The Science course will be removed</span></span>
+<span id="cb9-36"><a href="#cb9-36"></a>        <span class="co">// if it's no longer associated with any students.</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a>    <span class="op">}</span></span>
+<span id="cb9-38"><a href="#cb9-38"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="1">
+<li><p><strong>Entities</strong>: <code>Student</code> and <code>Course</code> are related through a many-to-many relationship with a join table (<code>student_course</code>).</p></li>
+<li><p><strong>Orphan Removal</strong>: The <code>orphanRemoval = true</code> attribute in the <code>Student</code> class means that if a <code>Student</code> drops a <code>Course</code>, and no other students are enrolled in that course, it will be removed from the database.</p></li>
+<li><p><strong>Methods</strong>:</p>
+<ul>
+<li><code>enrollInCourse</code>: Adds a course to a student’s list and maintains the bidirectional relationship.</li>
+<li><code>dropCourse</code>: Removes a course from a student’s list and maintains the bidirectional relationship.</li>
+</ul></li>
+<li><p><strong>Usage</strong>: When you drop a course and save the <code>Student</code>, if that course is no longer associated with any other students, it will be deleted from the database.</p></li>
+</ol>
+</section>
+</section>
+<section id="manytomany-with-join-table-entity" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="manytomany-with-join-table-entity"><span class="header-section-number">1.2.2</span> ManyToMany with Join Table <span class="citation" data-cites="Entity">@Entity</span></h3>
+<blockquote class="blockquote">
+<p><span class="citation" data-cites="Entity">@Entity</span> <span class="citation" data-cites="ManyToMany">@ManyToMany</span> with Join Table: in this particular case we will use two <span class="citation" data-cites="OneToMany">@OneToMany</span> relationships to create a many-to-many, centered and owned by the join table.</p>
+</blockquote>
+<ul>
+<li>Represents a <code>many-to-many</code> relationship <mark>using an intermediate entity</mark></li>
+<li>The <code>join table</code> becomes an <strong>entity itself</strong>, with two <code>one-to-many</code> relationships</li>
+<li>Provides more flexibility and allows additional attributes on the relationship</li>
+<li><strong>Example</strong>: Students enrolled in Courses, with additional enrollment information</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1"></a><span class="at">@Entity</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">public</span> <span class="kw">class</span> Student <span class="op">{</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>    <span class="at">@OneToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"student"</span><span class="op">)</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>    <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span>Enrollment<span class="op">&gt;</span> enrollments<span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="op">}</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="at">@Entity</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="kw">public</span> <span class="kw">class</span> Course <span class="op">{</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>    <span class="at">@OneToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"course"</span><span class="op">)</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>    <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span>Enrollment<span class="op">&gt;</span> enrollments<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="op">}</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="at">@Entity</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="kw">public</span> <span class="kw">class</span> Enrollment <span class="op">{</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a>    <span class="at">@ManyToOne</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a>    <span class="kw">private</span> Student student<span class="op">;</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a></span>
+<span id="cb10-18"><a href="#cb10-18"></a>    <span class="at">@ManyToOne</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a>    <span class="kw">private</span> Course course<span class="op">;</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a></span>
+<span id="cb10-21"><a href="#cb10-21"></a>    <span class="kw">private</span> LocalDate enrollmentDate<span class="op">;</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a>    <span class="kw">private</span> <span class="bu">String</span> grade<span class="op">;</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this approach:</p>
+<ul>
+<li>The <code>Enrollment</code> entity serves as the join table</li>
+<li>It has two <code>@ManyToOne</code> relationships: one to <code>Student</code> and one to <code>Course</code></li>
+<li>Additional fields like <code>enrollmentDate</code> and <code>grade</code> can be added to the <code>Enrollment</code> entity</li>
+<li>Both <code>Student</code> and <code>Course</code> have <code>@OneToMany</code> relationships to <code>Enrollment</code></li>
+<li>The mappedBy attribute in <span class="citation" data-cites="OneToMany">@OneToMany</span> indicates the owning side of the relationship</li>
+</ul>
+<blockquote class="blockquote">
+<p>This structure allows for more detailed modeling of the relationship between students and courses, enabling the storage of relationship-specific data and easier querying of the association.</p>
+</blockquote>
+<p><strong>Key Points</strong></p>
+<p>This structure allows you to:</p>
+<ul>
+<li>Add additional fields to the relationship (e.g., enrollmentDate)</li>
+<li>Easily <code>query</code> the relationship from both sides</li>
+<li>Maintain better control over the <code>lifecycle</code> of the relationship</li>
+</ul>
+</section>
+<section id="when-two-objects-are-equal-object-identity" class="level3 page-columns page-full" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="when-two-objects-are-equal-object-identity"><span class="header-section-number">1.2.3</span> When two objects are equal? <strong>Object Identity</strong></h3>
+<blockquote class="blockquote">
+<p>The difference between comparing objects based on object identity and comparing them based on field values lies in how equality is determined:</p>
+<ul>
+<li>by identity, that is, <mark>by using their memory addresses</mark></li>
+<li>by their field values</li>
+</ul>
+</blockquote>
+<p><strong>Object Identity</strong></p>
+<ul>
+<li><strong>Object Identity</strong> refers to comparing objects using their memory addresses (i.e., whether they are the same instance in memory).</li>
+<li>In Java, this is done using the <code>==</code> operator.</li>
+<li>Two objects are considered equal based on object identity if they refer to the same memory location.</li>
+</ul>
+<p><strong>Field Values</strong></p>
+<ul>
+<li><strong>Field Values</strong> refer to comparing objects based on the values of their fields.</li>
+<li>In Java, this is typically done using the <code>equals</code> method.</li>
+<li>Two objects are considered equal based on field values if their corresponding fields have the same values, even if they are different instances in memory.</li>
+</ul>
+<p>Example:</p>
+<p>Consider the following <code>MenuRestaurant</code> class:</p>
+<div class="column-page-right">
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">public</span> <span class="kw">class</span> MenuRestaurant <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>    <span class="kw">private</span> <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a>    <span class="co">// Constructors, getters, and setters</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a>    <span class="at">@Override</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">equals</span><span class="op">(</span><span class="bu">Object</span> o<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>        <span class="cf">if</span> <span class="op">(</span><span class="kw">this</span> <span class="op">==</span> o<span class="op">)</span> <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>        <span class="cf">if</span> <span class="op">(</span>o <span class="op">==</span> <span class="kw">null</span> <span class="op">||</span> <span class="fu">getClass</span><span class="op">()</span> <span class="op">!=</span> o<span class="op">.</span><span class="fu">getClass</span><span class="op">())</span> <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>        MenuRestaurant that <span class="op">=</span> <span class="op">(</span>MenuRestaurant<span class="op">)</span> o<span class="op">;</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a>        <span class="cf">return</span> id <span class="op">==</span> that<span class="op">.</span><span class="fu">id</span> <span class="op">&amp;&amp;</span> Objects<span class="op">.</span><span class="fu">equals</span><span class="op">(</span>name<span class="op">,</span> that<span class="op">.</span><span class="fu">name</span><span class="op">);</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a>    <span class="op">}</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a></span>
+<span id="cb11-15"><a href="#cb11-15"></a>    <span class="at">@Override</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">hashCode</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-17"><a href="#cb11-17"></a>        <span class="cf">return</span> Objects<span class="op">.</span><span class="fu">hash</span><span class="op">(</span>id<span class="op">,</span> name<span class="op">);</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a>    <span class="op">}</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Comparing Based on Object Identity</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1"></a>MenuRestaurant menu1 <span class="op">=</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a>    <span class="kw">new</span> <span class="fu">MenuRestaurant</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Pizza"</span><span class="op">);</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>MenuRestaurant menu2 <span class="op">=</span> </span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="kw">new</span> <span class="fu">MenuRestaurant</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Pizza"</span><span class="op">);</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>menu1 <span class="op">==</span> menu2<span class="op">);</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">// false, because they are different instances</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Comparing Based on Field Values</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1"></a>MenuRestaurant menu1 <span class="op">=</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>    <span class="kw">new</span> <span class="fu">MenuRestaurant</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Pizza"</span><span class="op">);</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>MenuRestaurant menu2 <span class="op">=</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>    <span class="kw">new</span> <span class="fu">MenuRestaurant</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="st">"Pizza"</span><span class="op">);</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>menu1<span class="op">.</span><span class="fu">equals</span><span class="op">(</span>menu2<span class="op">));</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co">// true, because their fields are equal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="using-assertj-with-comparator" class="level3 page-columns page-full" data-number="1.2.4">
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="using-assertj-with-comparator"><span class="header-section-number">1.2.4</span> Using AssertJ with Comparator</h3>
+<ul>
+<li><a href="https://github.com/AlbertProfe/restaurantManager/blob/bc75ce39d75158ee0e30f287e3d5b030fb8d9591/src/test/java/dev/example/restaurantManager/RelationshipsOrderRestaurantTest.java#L222" class="external" target="_blank">public void testAddingMenusToOrder()</a></li>
+<li><a href="https://nus-cs2030s.github.io/2223-s2/10-heap-stack.html" class="external" target="_blank">Heap and Stack</a></li>
+</ul>
+<div class="column-page-right">
+<p><code>usingElementComparator(Comparator.comparing(MenuRestaurant::getId))</code></p>
+</div>
+<p>When you use the above expression, you are specifying that the comparison should be based on the <code>id</code> field of the <code>MenuRestaurant</code> objects:</p>
+<div class="column-page-right">
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">assertj</span><span class="op">.</span><span class="im">core</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.</span><span class="im">assertThat</span><span class="op">;</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="bu">List</span><span class="op">&lt;</span>MenuRestaurant<span class="op">&gt;</span> menuList <span class="op">=</span> <span class="bu">Arrays</span><span class="op">.</span><span class="fu">asList</span><span class="op">(</span>menu1<span class="op">,</span> menu2<span class="op">,</span> menu3<span class="op">);</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="fu">assertThat</span><span class="op">(</span>menuList<span class="op">)</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>    <span class="op">.</span><span class="fu">usingElementComparator</span><span class="op">(</span><span class="bu">Comparator</span><span class="op">.</span><span class="fu">comparing</span><span class="op">(</span>MenuRestaurant<span class="op">::</span>getId<span class="op">))</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>    <span class="op">.</span><span class="fu">containsExactlyInAnyOrder</span><span class="op">(</span>menu1<span class="op">,</span> menu2<span class="op">,</span> menu3<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this case, the comparison is based on the <code>id</code> field, not the object identity or the default <code>equals</code> method. This allows you to verify that the collection contains the expected elements based on their IDs, regardless of their memory addresses.</p>
+</section>
+</section>
+</section>
+<section id="labs" class="level1 page-columns page-full" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Labs</h1>
+<p>Here are some of the most common JPA mappings and relationships used in Spring Boot</p>
+<section id="onetomany" class="level2 page-columns page-full" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="onetomany"><span class="header-section-number">2.1</span> <code>@OneToMany</code></h2>
+<p><code>@OneToMany</code>: This annotation is used to represent a one-to-many relationship between two entities.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>For example, if a customer can have multiple orders, you can define a <span class="citation" data-cites="OneToMany">@OneToMany</span> relationship between the Customer entity and the Order entity.</p>
+</div></div><div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Example:</p>
+<p><a href="../springboot/sblab2.html#api-rest-author-book-onetomany-crud-with-swagger">API Rest Author-Book <span class="citation" data-cites="OneToMany">@OneToMany</span> CRUD with Swagger</a></p>
+</div>
+</div>
+</section>
+<section id="manytoone" class="level2 page-columns page-full" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="manytoone"><span class="header-section-number">2.2</span> <code>@ManyToOne</code></h2>
+<p><code>@ManyToOne</code>: This annotation is used to represent a many-to-one relationship between two entities.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>For example, if an order belongs to a customer, you can define a <span class="citation" data-cites="ManyToOne">@ManyToOne</span> relationship between the Order entity and the Customer entity.</p>
+</div></div><div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Example:</p>
+<p><a href="../springboot/sblab2.html#library-book-manytomany-and-onetoone-crud">Library-Book <span class="citation" data-cites="ManyToMany">@ManyToMany</span> and <span class="citation" data-cites="OneToOne">@OneToOne</span> CRUD</a></p>
+</div>
+</div>
+</section>
+<section id="manytomany-1" class="level2 page-columns page-full" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="manytomany-1"><span class="header-section-number">2.3</span> <code>@ManyToMany</code></h2>
+<p><code>@ManyToMany</code>: This annotation is used to represent a many-to-many relationship between two entities.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>For example, if a book can have multiple authors and an author can have written multiple books, you can define a <span class="citation" data-cites="ManyToMany">@ManyToMany</span> relationship between the Book entity and the Author entity.</p>
+</div></div><div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="../springboot/sblab2.html#api-rest-library-book-author-manytomany-onetomany-crud-with-swagger-and-inherence">API Rest Library-Book-Author <span class="citation" data-cites="ManyToMany">@ManyToMany</span> <span class="citation" data-cites="OneToMany">@OneToMany</span> CRUD with Swagger and Inherence</a></p>
+</div>
+</div>
 
 
+</section>
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -2313,13 +3084,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../ifcd0021-24/ifcd0021deliveries-24.html" class="pagination-link" aria-label="IFCD0021 Calendar &amp; Deliveries">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">IFCD0021 Calendar &amp; Deliveries</span>
+      <a href="../springboot/boot-concepts-jpa-2.html" class="pagination-link" aria-label="Spring Boot: JPA Mappings">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Spring Boot: JPA Mappings</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../ifcd0021-24/ifcd0021backlog-product-24.html" class="pagination-link" aria-label="IFCD0021 Product Backlog">
-        <span class="nav-page-text">IFCD0021 Product Backlog</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../springboot/boot-concepts-jpa-4.html" class="pagination-link" aria-label="Spring Boot: JPA Queries">
+        <span class="nav-page-text">Spring Boot: JPA Queries</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -2331,7 +3102,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p>If you want to go far, walk slow / We love dukkha</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/ifcd0021-24/ifcd0021backlog-sprint-24.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/boot-concepts-jpa-3.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -2350,7 +3121,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":false});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
