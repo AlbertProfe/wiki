@@ -1295,32 +1295,199 @@ Each structure requires different **request/response** handling in the controlle
 
 # Inherence and JPA
 
-
-**Inheritance** is a fundamental concept of POO, but Relational databases **have no concept of inheritance** neither NoSQL (MongoDB, DymamoDB), so persisting [inheritance](https://en.wikibooks.org/wiki/Java_Persistence/Inheritance) in a SQL and NoSQL database _has its own particular way._  
-
-> Because relational databases have no concept of inheritance, there is no standard way of implementing inheritance in database, _so the hardest part of persisting inheritance is choosing how to represent the inheritance in the database._
-
-JPA defines several inheritance mechanisms, mainly defined though the [@Inheritance](https://docs.oracle.com/javaee/7/api/javax/persistence/Inheritance.html) annotation or the `<inheritance>` element.
-
-There are **three inheritance strategies** defined from the [InheritanceType](https://docs.oracle.com/javaee/7/api/javax/persistence/InheritanceType.html) `enum`:
-1. SINGLE_TABLE
-1. TABLE_PER_CLASS
-1. JOINED
-
-* Single table inheritance is the default with discriminator values,
-* and table per class is an optional feature of the JPA spec, **so not all providers may support it**.
-* in joined strategy each class in the hierarchy is mapped to its table.
-
-MAPPED SUPERCLASS
-
-* JPA also defines a mapped superclass concept defined through the [@MappedSuperclass](https://docs.oracle.com/javaee/7/api/javax/persistence/MappedSuperclass.html) annotation or the `<mapped-superclass>` element. 
-* A mapped superclass **is not a persistent class**, but allows common mappings to be defined for its subclasses.
-
 ![Entity Inheritance](/images/springboot/labsb04-1-entity-inherence-.png)
 
 
-Links: [orientdb](https://orientdb.com/docs/2.2.x/Teleporter-Table-Per-Concrete-Class-Inheritance.html), [logicbig](https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/mapped-super-class.html), [Java Persistence/Inheritance wikibooks](https://en.wikibooks.org/wiki/Java_Persistence/Inheritance) and 
-[apache](https://openjpa.apache.org/builds/2.2.0/apache-openjpa/docs/jpa_overview_mapping_inher.html) 
+**Inheritance** is a fundamental concept of `POO`, but <mark>Relational databases have no concept of inheritance</mark> neither `NoSQL` (MongoDB, DymamoDB), so persisting [inheritance](https://en.wikibooks.org/wiki/Java_Persistence/Inheritance) in a `SQL` and `NoSQL` database has its own particular way.
+
+> Because `relational databases` have no concept of `inheritance`, there is no standard way of implementing `inheritance` in database, so the hardest part of persisting `inheritance` is choosing **how** to represent the inheritance in the database.
+
+`JPA` defines several `inheritance` mechanisms, mainly defined though the [@Inheritance](https://docs.oracle.com/javaee/7/api/javax/persistence/Inheritance.html) annotation or the `<inheritance>` element.
+
+There are **three inheritance strategies** defined from the [InheritanceType](https://docs.oracle.com/javaee/7/api/javax/persistence/InheritanceType.html) `enum`:
+
+1. `SINGLE_TABLE`: [`SINGLE_TABLE`](/images/springboot/inherence-jpa-onetable.png){.external target='_blank'}
+1. `TABLE_PER_CLASS`: [TABLE_PER_CLASS](/images/springboot/inherence-jpa-onetalbe-per-class.png){.external target='_blank'}
+1. `JOINED`: [`JOINED`](/images/springboot/inherence-jpa-join.png){.external target='_blank'}
+
+* **Single table** inheritance is the default with discriminator values,
+* and **table per class** is an optional feature of the JPA spec, <mark>so not all providers may support it</mark>.
+* in **joined** strategy each class in the hierarchy is mapped to its table.
+
+**MAPPED SUPERCLASS**
+
+JPA also defines a `mapped superclass` concept defined through the [@MappedSuperclass](https://docs.oracle.com/javaee/7/api/javax/persistence/MappedSuperclass.html) annotation or the `<mapped-superclass>` element.
+
+A `mapped superclass` **is not a persistent class**, but allows common mappings to be defined for its subclasses.
+
+1. `MAPPED SUPERCLASS`: [@MappedSuperClass](/images/springboot/inherence-jpa-mapped-superclass.png){.external target='_blank'}
+
+
+Links:
+
+- [orientdb](https://orientdb.com/docs/2.2.x/Teleporter-Table-Per-Concrete-Class-Inheritance.html)
+- [logicbig](https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/mapped-super-class.html)
+- [Java Persistence/Inheritance wikibooks](https://en.wikibooks.org/wiki/Java_Persistence/Inheritance)
+- [apache](https://openjpa.apache.org/builds/2.2.0/apache-openjpa/docs/jpa_overview_mapping_inher.html)
+- [Lab#SB04-1](/springboot/sblab4.qmd){.external target='_blank'}
+
+## `OrderRestaurant` to `Abstract` class
+
+- [OrderRestaurant refactor to abstract class and test createOrdersTest()](https://github.com/AlbertProfe/restaurantManager/tree/ca402fdfd3f82b64850905eaaa08881821bc6a90){.external target='_blank'}
+
+**Key Points**
+
+- **Abstract Class**: The `OrderRestaurant` class is declared as `abstract`, meaning it cannot be instantiated directly.
+- **Abstract Method**: The `calculateTotalPayment` method is declared as `abstract`, requiring any concrete subclasses to implement this method.
+- **Non-Abstract Methods**: Methods like `addMenu` and `removeMenu` are implemented in the abstract class and can be used by all subclasses.
+- **Constructor**: A constructor is provided to initialize the object without the `orderMenuQties` list.
+- **List Initialization**: In the `addMenu` method, the `orderMenuQties` list is initialized if it is null to avoid `NullPointerException`.
+
+<details>
+<summary>`OrderRestaurant` to `Abstract` class</summary>
+
+```java
+package dev.example.restaurantManager.model;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "ORDER_RESTAURANT")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class OrderRestaurant {
+
+    @Id
+    private String id;
+    private Date date;
+    private String waiter;
+    private int peopleQty;
+    private double totalPayment;
+    private boolean paid;
+
+
+    @OneToMany(mappedBy = "order", 
+        cascade = CascadeType.ALL,
+        orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<OrderMenuQty> orderMenuQties;
+
+
+    // Constructor without orderMenuQties
+    public OrderRestaurant(String id, Date date, 
+            String waiter, int peopleQty,
+            double totalPayment, boolean paid) {
+        this.id = id;
+        this.date = date;
+        this.waiter = waiter;
+        this.peopleQty = peopleQty;
+        this.totalPayment = totalPayment;
+        this.paid = paid;
+    }
+
+    public abstract double calculateTotalPayment();
+
+    // Method to add a menu to the order
+    public void addMenu(MenuRestaurant menu, int quantity) {
+        OrderMenuQty orderMenuQty = new OrderMenuQty();
+        orderMenuQty.setOrder(this);
+        orderMenuQty.setMenu(menu);
+        orderMenuQty.setQuantity(quantity);
+        this.orderMenuQties.add(orderMenuQty);
+    }
+
+    // Method to remove a menu from the order
+    public void removeMenu(MenuRestaurant menu) {
+        this.orderMenuQties
+            .removeIf(omq -> omq.getMenu().equals(menu));
+    }
+
+
+    @Override
+    public String toString() {
+        return "OrderRestaurant{" +
+                "id='" + id + '\'' +
+                ", date=" + date +
+                ", waiter='" + waiter + '\'' +
+                ", peopleQty=" + peopleQty +
+                ", totalPayment=" + totalPayment +
+                ", paid=" + paid +
+
+                '}';
+    }
+
+}
+
+```
+</details>
+
+Declare the **Class as Abstract**: to make a superclass an `abstract` class, you need to add the `abstract` **keyword** before the `class` **keyword** in its declaration.
+
+``` java
+public abstract class OrderRestaurant {
+    // class members and methods
+}
+```
+
+**Abstract Methods**
+
+
+If the class contains methods that should be implemented by its subclasses, declare these methods as abstract by adding the `abstract` keyword before the method declaration. Abstract methods do not have an implementation.
+
+```java
+public abstract class OrderRestaurant {
+    public abstract void prepareOrder();
+    public abstract void serveOrder();
+}
+```
+
+**Non-Abstract Methods**
+
+
+An abstract class can also contain non-abstract methods, which have implementations and can be used directly by subclasses.
+
+```java
+public abstract class OrderRestaurant {
+    public void printReceipt() {
+        // implementation
+    }
+}
+```
+
+**Subclass Implementation**
+
+Subclasses of the abstract class must implement all abstract methods declared in the superclass. If a subclass itself is abstract, it does not need to implement these methods but must be declared as abstract as well.
+
+```java
+public class FastFoodRestaurant 
+            extends OrderRestaurant {
+    @Override
+    public void prepareOrder() {
+        // implementation
+    }
+
+    @Override
+    public void serveOrder() {
+        // implementation
+    }
+}
+```
+
+**Avoid Instantiation**
+
+Abstract classes cannot be instantiated directly. Any attempt to instantiate an abstract class will result in an `InstantiationException`. Ensure that any code that previously instantiated the superclass now instantiates one of its concrete subclasses.
+
+**Refactoring Tools**
+
+Using an IDE like IntelliJ IDEA, you can use the "Extract Superclass" refactoring to help create an abstract superclass from an existing class. This tool allows you to move members to the new superclass and declare methods as abstract if necessary.
+
 
 
 # Populate DB
