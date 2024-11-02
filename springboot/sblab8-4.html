@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,11 +74,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-23504dfa93b9834cc4e0ed111f21ac64.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-23504dfa93b9834cc4e0ed111f21ac64.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-8654f46d95255d4aca9b36c8f0882426.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
@@ -796,7 +796,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../springboot/boot-concepts-jpa-3.html">
- <span class="dropdown-text">Spring Boot: JPA Relationhips</span></a>
+ <span class="dropdown-text">Spring Boot: JPA Relationships</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../springboot/boot-concepts-jpa-4.html">
@@ -1604,7 +1604,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../springboot/boot-concepts-jpa-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spring Boot: JPA Relationhips</span></a>
+ <span class="menu-text">Spring Boot: JPA Relationships</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1809,7 +1809,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#order-with-menus-no-qty" id="toc-order-with-menus-no-qty" class="nav-link" data-scroll-target="#order-with-menus-no-qty"><span class="header-section-number">4.1</span> <code>Order</code> with <code>Menus</code>, no qty</a></li>
   <li><a href="#order-with-menus-and-qty" id="toc-order-with-menus-and-qty" class="nav-link" data-scroll-target="#order-with-menus-and-qty"><span class="header-section-number">4.2</span> <code>Order</code> with <code>Menus</code> and qty</a></li>
   </ul></li>
-  <li><a href="#inherence-and-jpa" id="toc-inherence-and-jpa" class="nav-link" data-scroll-target="#inherence-and-jpa"><span class="header-section-number">5</span> Inherence and JPA</a></li>
+  <li><a href="#inherence-and-jpa" id="toc-inherence-and-jpa" class="nav-link" data-scroll-target="#inherence-and-jpa"><span class="header-section-number">5</span> Inherence and JPA</a>
+  <ul>
+  <li><a href="#orderrestaurant-to-abstract-class" id="toc-orderrestaurant-to-abstract-class" class="nav-link" data-scroll-target="#orderrestaurant-to-abstract-class"><span class="header-section-number">5.1</span> <code>OrderRestaurant</code> to <code>Abstract</code> class</a></li>
+  </ul></li>
   <li><a href="#populate-db" id="toc-populate-db" class="nav-link" data-scroll-target="#populate-db"><span class="header-section-number">6</span> Populate DB</a>
   <ul>
   <li><a href="#dataloader-class" id="toc-dataloader-class" class="nav-link" data-scroll-target="#dataloader-class"><span class="header-section-number">6.1</span> DataLoader Class</a></li>
@@ -1864,7 +1867,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Wednesday, October 30, 2024</p>
+      <p class="date-modified">Saturday, November 2, 2024</p>
     </div>
   </div>
     
@@ -3448,29 +3451,173 @@ direction RL
 </section>
 <section id="inherence-and-jpa" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Inherence and JPA</h1>
-<p><strong>Inheritance</strong> is a fundamental concept of POO, but Relational databases <strong>have no concept of inheritance</strong> neither NoSQL (MongoDB, DymamoDB), so persisting <a href="https://en.wikibooks.org/wiki/Java_Persistence/Inheritance">inheritance</a> in a SQL and NoSQL database <em>has its own particular way.</em></p>
-<blockquote class="blockquote">
-<p>Because relational databases have no concept of inheritance, there is no standard way of implementing inheritance in database, <em>so the hardest part of persisting inheritance is choosing how to represent the inheritance in the database.</em></p>
-</blockquote>
-<p>JPA defines several inheritance mechanisms, mainly defined though the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/Inheritance.html"><span class="citation" data-cites="Inheritance">@Inheritance</span></a> annotation or the <code>&lt;inheritance&gt;</code> element.</p>
-<p>There are <strong>three inheritance strategies</strong> defined from the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/InheritanceType.html">InheritanceType</a> <code>enum</code>: 1. SINGLE_TABLE 1. TABLE_PER_CLASS 1. JOINED</p>
-<ul>
-<li>Single table inheritance is the default with discriminator values,</li>
-<li>and table per class is an optional feature of the JPA spec, <strong>so not all providers may support it</strong>.</li>
-<li>in joined strategy each class in the hierarchy is mapped to its table.</li>
-</ul>
-<p>MAPPED SUPERCLASS</p>
-<ul>
-<li>JPA also defines a mapped superclass concept defined through the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/MappedSuperclass.html"><span class="citation" data-cites="MappedSuperclass">@MappedSuperclass</span></a> annotation or the <code>&lt;mapped-superclass&gt;</code> element.</li>
-<li>A mapped superclass <strong>is not a persistent class</strong>, but allows common mappings to be defined for its subclasses.</li>
-</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="../images/springboot/labsb04-1-entity-inherence-.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Entity Inheritance"><img src="../images/springboot/labsb04-1-entity-inherence-.png" class="img-fluid figure-img" alt="Entity Inheritance"></a></p>
 <figcaption>Entity Inheritance</figcaption>
 </figure>
 </div>
-<p>Links: <a href="https://orientdb.com/docs/2.2.x/Teleporter-Table-Per-Concrete-Class-Inheritance.html">orientdb</a>, <a href="https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/mapped-super-class.html">logicbig</a>, <a href="https://en.wikibooks.org/wiki/Java_Persistence/Inheritance">Java Persistence/Inheritance wikibooks</a> and <a href="https://openjpa.apache.org/builds/2.2.0/apache-openjpa/docs/jpa_overview_mapping_inher.html">apache</a></p>
+<p><strong>Inheritance</strong> is a fundamental concept of <code>POO</code>, but <mark>Relational databases have no concept of inheritance</mark> neither <code>NoSQL</code> (MongoDB, DymamoDB), so persisting <a href="https://en.wikibooks.org/wiki/Java_Persistence/Inheritance">inheritance</a> in a <code>SQL</code> and <code>NoSQL</code> database has its own particular way.</p>
+<blockquote class="blockquote">
+<p>Because <code>relational databases</code> have no concept of <code>inheritance</code>, there is no standard way of implementing <code>inheritance</code> in database, so the hardest part of persisting <code>inheritance</code> is choosing <strong>how</strong> to represent the inheritance in the database.</p>
+</blockquote>
+<p><code>JPA</code> defines several <code>inheritance</code> mechanisms, mainly defined though the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/Inheritance.html"><span class="citation" data-cites="Inheritance">@Inheritance</span></a> annotation or the <code>&lt;inheritance&gt;</code> element.</p>
+<p>There are <strong>three inheritance strategies</strong> defined from the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/InheritanceType.html">InheritanceType</a> <code>enum</code>:</p>
+<ol type="1">
+<li><code>SINGLE_TABLE</code>: <a href="../images/springboot/inherence-jpa-onetable.png" class="external" target="_blank"><code>SINGLE_TABLE</code></a></li>
+<li><code>TABLE_PER_CLASS</code>: <a href="../images/springboot/inherence-jpa-onetalbe-per-class.png" class="external" target="_blank">TABLE_PER_CLASS</a></li>
+<li><code>JOINED</code>: <a href="../images/springboot/inherence-jpa-join.png" class="external" target="_blank"><code>JOINED</code></a></li>
+</ol>
+<ul>
+<li><strong>Single table</strong> inheritance is the default with discriminator values,</li>
+<li>and <strong>table per class</strong> is an optional feature of the JPA spec, <mark>so not all providers may support it</mark>.</li>
+<li>in <strong>joined</strong> strategy each class in the hierarchy is mapped to its table.</li>
+</ul>
+<p><strong>MAPPED SUPERCLASS</strong></p>
+<p>JPA also defines a <code>mapped superclass</code> concept defined through the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/MappedSuperclass.html"><span class="citation" data-cites="MappedSuperclass">@MappedSuperclass</span></a> annotation or the <code>&lt;mapped-superclass&gt;</code> element.</p>
+<p>A <code>mapped superclass</code> <strong>is not a persistent class</strong>, but allows common mappings to be defined for its subclasses.</p>
+<ol type="1">
+<li><code>MAPPED SUPERCLASS</code>: <a href="../images/springboot/inherence-jpa-mapped-superclass.png" class="external" target="_blank"><span class="citation" data-cites="MappedSuperClass">@MappedSuperClass</span></a></li>
+</ol>
+<p>Links:</p>
+<ul>
+<li><a href="https://orientdb.com/docs/2.2.x/Teleporter-Table-Per-Concrete-Class-Inheritance.html">orientdb</a></li>
+<li><a href="https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/mapped-super-class.html">logicbig</a></li>
+<li><a href="https://en.wikibooks.org/wiki/Java_Persistence/Inheritance">Java Persistence/Inheritance wikibooks</a></li>
+<li><a href="https://openjpa.apache.org/builds/2.2.0/apache-openjpa/docs/jpa_overview_mapping_inher.html">apache</a></li>
+<li><a href="../springboot/sblab4.html" class="external" target="_blank">Lab#SB04-1</a></li>
+</ul>
+<section id="orderrestaurant-to-abstract-class" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="orderrestaurant-to-abstract-class"><span class="header-section-number">5.1</span> <code>OrderRestaurant</code> to <code>Abstract</code> class</h2>
+<ul>
+<li><a href="https://github.com/AlbertProfe/restaurantManager/tree/ca402fdfd3f82b64850905eaaa08881821bc6a90" class="external" target="_blank">OrderRestaurant refactor to abstract class and test createOrdersTest()</a></li>
+</ul>
+<p><strong>Key Points</strong></p>
+<ul>
+<li><strong>Abstract Class</strong>: The <code>OrderRestaurant</code> class is declared as <code>abstract</code>, meaning it cannot be instantiated directly.</li>
+<li><strong>Abstract Method</strong>: The <code>calculateTotalPayment</code> method is declared as <code>abstract</code>, requiring any concrete subclasses to implement this method.</li>
+<li><strong>Non-Abstract Methods</strong>: Methods like <code>addMenu</code> and <code>removeMenu</code> are implemented in the abstract class and can be used by all subclasses.</li>
+<li><strong>Constructor</strong>: A constructor is provided to initialize the object without the <code>orderMenuQties</code> list.</li>
+<li><strong>List Initialization</strong>: In the <code>addMenu</code> method, the <code>orderMenuQties</code> list is initialized if it is null to avoid <code>NullPointerException</code>.</li>
+</ul>
+<details>
+<summary>
+<code>OrderRestaurant</code> to <code>Abstract</code> class
+</summary>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">package</span><span class="im"> dev</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">restaurantManager</span><span class="op">.</span><span class="im">model</span><span class="op">;</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">ArrayList</span><span class="op">;</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Date</span><span class="op">;</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">List</span><span class="op">;</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">fasterxml</span><span class="op">.</span><span class="im">jackson</span><span class="op">.</span><span class="im">annotation</span><span class="op">.</span><span class="im">JsonIgnore</span><span class="op">;</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="kw">import</span> <span class="im">jakarta</span><span class="op">.</span><span class="im">persistence</span><span class="op">.*;</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="kw">import</span> <span class="im">lombok</span><span class="op">.*;</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a></span>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="at">@Getter</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="at">@Setter</span></span>
+<span id="cb21-12"><a href="#cb21-12"></a><span class="at">@AllArgsConstructor</span></span>
+<span id="cb21-13"><a href="#cb21-13"></a><span class="at">@NoArgsConstructor</span></span>
+<span id="cb21-14"><a href="#cb21-14"></a><span class="at">@Entity</span></span>
+<span id="cb21-15"><a href="#cb21-15"></a><span class="at">@Table</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"ORDER_RESTAURANT"</span><span class="op">)</span></span>
+<span id="cb21-16"><a href="#cb21-16"></a><span class="at">@Inheritance</span><span class="op">(</span>strategy <span class="op">=</span> InheritanceType<span class="op">.</span><span class="fu">SINGLE_TABLE</span><span class="op">)</span></span>
+<span id="cb21-17"><a href="#cb21-17"></a><span class="kw">public</span> <span class="kw">abstract</span> <span class="kw">class</span> OrderRestaurant <span class="op">{</span></span>
+<span id="cb21-18"><a href="#cb21-18"></a></span>
+<span id="cb21-19"><a href="#cb21-19"></a>    <span class="at">@Id</span></span>
+<span id="cb21-20"><a href="#cb21-20"></a>    <span class="kw">private</span> <span class="bu">String</span> id<span class="op">;</span></span>
+<span id="cb21-21"><a href="#cb21-21"></a>    <span class="kw">private</span> <span class="bu">Date</span> date<span class="op">;</span></span>
+<span id="cb21-22"><a href="#cb21-22"></a>    <span class="kw">private</span> <span class="bu">String</span> waiter<span class="op">;</span></span>
+<span id="cb21-23"><a href="#cb21-23"></a>    <span class="kw">private</span> <span class="dt">int</span> peopleQty<span class="op">;</span></span>
+<span id="cb21-24"><a href="#cb21-24"></a>    <span class="kw">private</span> <span class="dt">double</span> totalPayment<span class="op">;</span></span>
+<span id="cb21-25"><a href="#cb21-25"></a>    <span class="kw">private</span> <span class="dt">boolean</span> paid<span class="op">;</span></span>
+<span id="cb21-26"><a href="#cb21-26"></a></span>
+<span id="cb21-27"><a href="#cb21-27"></a></span>
+<span id="cb21-28"><a href="#cb21-28"></a>    <span class="at">@OneToMany</span><span class="op">(</span>mappedBy <span class="op">=</span> <span class="st">"order"</span><span class="op">,</span> </span>
+<span id="cb21-29"><a href="#cb21-29"></a>        cascade <span class="op">=</span> CascadeType<span class="op">.</span><span class="fu">ALL</span><span class="op">,</span></span>
+<span id="cb21-30"><a href="#cb21-30"></a>        orphanRemoval <span class="op">=</span> <span class="kw">true</span><span class="op">,</span> fetch <span class="op">=</span> FetchType<span class="op">.</span><span class="fu">EAGER</span><span class="op">)</span></span>
+<span id="cb21-31"><a href="#cb21-31"></a>    <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span>OrderMenuQty<span class="op">&gt;</span> orderMenuQties<span class="op">;</span></span>
+<span id="cb21-32"><a href="#cb21-32"></a></span>
+<span id="cb21-33"><a href="#cb21-33"></a></span>
+<span id="cb21-34"><a href="#cb21-34"></a>    <span class="co">// Constructor without orderMenuQties</span></span>
+<span id="cb21-35"><a href="#cb21-35"></a>    <span class="kw">public</span> <span class="fu">OrderRestaurant</span><span class="op">(</span><span class="bu">String</span> id<span class="op">,</span> <span class="bu">Date</span> date<span class="op">,</span> </span>
+<span id="cb21-36"><a href="#cb21-36"></a>            <span class="bu">String</span> waiter<span class="op">,</span> <span class="dt">int</span> peopleQty<span class="op">,</span></span>
+<span id="cb21-37"><a href="#cb21-37"></a>            <span class="dt">double</span> totalPayment<span class="op">,</span> <span class="dt">boolean</span> paid<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb21-38"><a href="#cb21-38"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">id</span> <span class="op">=</span> id<span class="op">;</span></span>
+<span id="cb21-39"><a href="#cb21-39"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">date</span> <span class="op">=</span> date<span class="op">;</span></span>
+<span id="cb21-40"><a href="#cb21-40"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">waiter</span> <span class="op">=</span> waiter<span class="op">;</span></span>
+<span id="cb21-41"><a href="#cb21-41"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">peopleQty</span> <span class="op">=</span> peopleQty<span class="op">;</span></span>
+<span id="cb21-42"><a href="#cb21-42"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">totalPayment</span> <span class="op">=</span> totalPayment<span class="op">;</span></span>
+<span id="cb21-43"><a href="#cb21-43"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">paid</span> <span class="op">=</span> paid<span class="op">;</span></span>
+<span id="cb21-44"><a href="#cb21-44"></a>    <span class="op">}</span></span>
+<span id="cb21-45"><a href="#cb21-45"></a></span>
+<span id="cb21-46"><a href="#cb21-46"></a>    <span class="kw">public</span> <span class="kw">abstract</span> <span class="dt">double</span> <span class="fu">calculateTotalPayment</span><span class="op">();</span></span>
+<span id="cb21-47"><a href="#cb21-47"></a></span>
+<span id="cb21-48"><a href="#cb21-48"></a>    <span class="co">// Method to add a menu to the order</span></span>
+<span id="cb21-49"><a href="#cb21-49"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">addMenu</span><span class="op">(</span>MenuRestaurant menu<span class="op">,</span> <span class="dt">int</span> quantity<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb21-50"><a href="#cb21-50"></a>        OrderMenuQty orderMenuQty <span class="op">=</span> <span class="kw">new</span> <span class="fu">OrderMenuQty</span><span class="op">();</span></span>
+<span id="cb21-51"><a href="#cb21-51"></a>        orderMenuQty<span class="op">.</span><span class="fu">setOrder</span><span class="op">(</span><span class="kw">this</span><span class="op">);</span></span>
+<span id="cb21-52"><a href="#cb21-52"></a>        orderMenuQty<span class="op">.</span><span class="fu">setMenu</span><span class="op">(</span>menu<span class="op">);</span></span>
+<span id="cb21-53"><a href="#cb21-53"></a>        orderMenuQty<span class="op">.</span><span class="fu">setQuantity</span><span class="op">(</span>quantity<span class="op">);</span></span>
+<span id="cb21-54"><a href="#cb21-54"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">orderMenuQties</span><span class="op">.</span><span class="fu">add</span><span class="op">(</span>orderMenuQty<span class="op">);</span></span>
+<span id="cb21-55"><a href="#cb21-55"></a>    <span class="op">}</span></span>
+<span id="cb21-56"><a href="#cb21-56"></a></span>
+<span id="cb21-57"><a href="#cb21-57"></a>    <span class="co">// Method to remove a menu from the order</span></span>
+<span id="cb21-58"><a href="#cb21-58"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">removeMenu</span><span class="op">(</span>MenuRestaurant menu<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb21-59"><a href="#cb21-59"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">orderMenuQties</span></span>
+<span id="cb21-60"><a href="#cb21-60"></a>            <span class="op">.</span><span class="fu">removeIf</span><span class="op">(</span>omq <span class="op">-&gt;</span> omq<span class="op">.</span><span class="fu">getMenu</span><span class="op">().</span><span class="fu">equals</span><span class="op">(</span>menu<span class="op">));</span></span>
+<span id="cb21-61"><a href="#cb21-61"></a>    <span class="op">}</span></span>
+<span id="cb21-62"><a href="#cb21-62"></a></span>
+<span id="cb21-63"><a href="#cb21-63"></a></span>
+<span id="cb21-64"><a href="#cb21-64"></a>    <span class="at">@Override</span></span>
+<span id="cb21-65"><a href="#cb21-65"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">toString</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb21-66"><a href="#cb21-66"></a>        <span class="cf">return</span> <span class="st">"OrderRestaurant{"</span> <span class="op">+</span></span>
+<span id="cb21-67"><a href="#cb21-67"></a>                <span class="st">"id='"</span> <span class="op">+</span> id <span class="op">+</span> <span class="ch">'\''</span> <span class="op">+</span></span>
+<span id="cb21-68"><a href="#cb21-68"></a>                <span class="st">", date="</span> <span class="op">+</span> date <span class="op">+</span></span>
+<span id="cb21-69"><a href="#cb21-69"></a>                <span class="st">", waiter='"</span> <span class="op">+</span> waiter <span class="op">+</span> <span class="ch">'\''</span> <span class="op">+</span></span>
+<span id="cb21-70"><a href="#cb21-70"></a>                <span class="st">", peopleQty="</span> <span class="op">+</span> peopleQty <span class="op">+</span></span>
+<span id="cb21-71"><a href="#cb21-71"></a>                <span class="st">", totalPayment="</span> <span class="op">+</span> totalPayment <span class="op">+</span></span>
+<span id="cb21-72"><a href="#cb21-72"></a>                <span class="st">", paid="</span> <span class="op">+</span> paid <span class="op">+</span></span>
+<span id="cb21-73"><a href="#cb21-73"></a></span>
+<span id="cb21-74"><a href="#cb21-74"></a>                <span class="ch">'}'</span><span class="op">;</span></span>
+<span id="cb21-75"><a href="#cb21-75"></a>    <span class="op">}</span></span>
+<span id="cb21-76"><a href="#cb21-76"></a></span>
+<span id="cb21-77"><a href="#cb21-77"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>Declare the <strong>Class as Abstract</strong>: to make a superclass an <code>abstract</code> class, you need to add the <code>abstract</code> <strong>keyword</strong> before the <code>class</code> <strong>keyword</strong> in its declaration.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">public</span> <span class="kw">abstract</span> <span class="kw">class</span> OrderRestaurant <span class="op">{</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>    <span class="co">// class members and methods</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Abstract Methods</strong></p>
+<p>If the class contains methods that should be implemented by its subclasses, declare these methods as abstract by adding the <code>abstract</code> keyword before the method declaration. Abstract methods do not have an implementation.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">public</span> <span class="kw">abstract</span> <span class="kw">class</span> OrderRestaurant <span class="op">{</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>    <span class="kw">public</span> <span class="kw">abstract</span> <span class="dt">void</span> <span class="fu">prepareOrder</span><span class="op">();</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>    <span class="kw">public</span> <span class="kw">abstract</span> <span class="dt">void</span> <span class="fu">serveOrder</span><span class="op">();</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Non-Abstract Methods</strong></p>
+<p>An abstract class can also contain non-abstract methods, which have implementations and can be used directly by subclasses.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">public</span> <span class="kw">abstract</span> <span class="kw">class</span> OrderRestaurant <span class="op">{</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">printReceipt</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>        <span class="co">// implementation</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a>    <span class="op">}</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Subclass Implementation</strong></p>
+<p>Subclasses of the abstract class must implement all abstract methods declared in the superclass. If a subclass itself is abstract, it does not need to implement these methods but must be declared as abstract as well.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">public</span> <span class="kw">class</span> FastFoodRestaurant </span>
+<span id="cb25-2"><a href="#cb25-2"></a>            <span class="kw">extends</span> OrderRestaurant <span class="op">{</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>    <span class="at">@Override</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">prepareOrder</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a>        <span class="co">// implementation</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a>    <span class="op">}</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a></span>
+<span id="cb25-8"><a href="#cb25-8"></a>    <span class="at">@Override</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">serveOrder</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb25-10"><a href="#cb25-10"></a>        <span class="co">// implementation</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a>    <span class="op">}</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Avoid Instantiation</strong></p>
+<p>Abstract classes cannot be instantiated directly. Any attempt to instantiate an abstract class will result in an <code>InstantiationException</code>. Ensure that any code that previously instantiated the superclass now instantiates one of its concrete subclasses.</p>
+<p><strong>Refactoring Tools</strong></p>
+<p>Using an IDE like IntelliJ IDEA, you can use the “Extract Superclass” refactoring to help create an abstract superclass from an existing class. This tool allows you to move members to the new superclass and declare methods as abstract if necessary.</p>
+</section>
 </section>
 <section id="populate-db" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Populate DB</h1>
@@ -3495,7 +3642,7 @@ How to import H2-DB
 </div>
 <div class="callout-body-container callout-body">
 <p>Using the command line, navigate to the directory containing the <strong>H2 jar file</strong>. Run the following command:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb21-1"><a href="#cb21-1"></a>java <span class="op">-</span>cp h2<span class="op">-*.</span><span class="fu">jar</span> org<span class="op">.</span><span class="fu">h2</span><span class="op">.</span><span class="fu">tools</span><span class="op">.</span><span class="fu">RunScript</span> <span class="op">-</span>url jdbc<span class="op">:</span>h2<span class="op">:~/</span>restaurantManagerDB <span class="op">-</span>user <span class="op">&lt;</span>username<span class="op">&gt;</span> <span class="op">-</span>password <span class="op">&lt;</span>password<span class="op">&gt;</span> <span class="op">-</span>script path<span class="op">/</span>to<span class="op">/</span>your<span class="op">/</span>restaurantManagerDB_script<span class="op">.</span><span class="fu">sql</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb26-1"><a href="#cb26-1"></a>java <span class="op">-</span>cp h2<span class="op">-*.</span><span class="fu">jar</span> org<span class="op">.</span><span class="fu">h2</span><span class="op">.</span><span class="fu">tools</span><span class="op">.</span><span class="fu">RunScript</span> <span class="op">-</span>url jdbc<span class="op">:</span>h2<span class="op">:~/</span>restaurantManagerDB <span class="op">-</span>user <span class="op">&lt;</span>username<span class="op">&gt;</span> <span class="op">-</span>password <span class="op">&lt;</span>password<span class="op">&gt;</span> <span class="op">-</span>script path<span class="op">/</span>to<span class="op">/</span>your<span class="op">/</span>restaurantManagerDB_script<span class="op">.</span><span class="fu">sql</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Replace <code>&lt;username&gt;</code> and <code>&lt;password&gt;</code> with your chosen credentials, and provide the correct path to your SQL script.</p>
 </div>
 </div>
@@ -3543,12 +3690,12 @@ How to import H2-DB
 </section>
 <section id="usage-example" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="usage-example"><span class="header-section-number">6.3</span> Usage Example</h2>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb22-1"><a href="#cb22-1"></a><span class="at">@Component</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="kw">public</span> <span class="kw">class</span> MathComponent <span class="op">{</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">add</span><span class="op">(</span><span class="dt">int</span> x<span class="op">,</span> <span class="dt">int</span> y<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a>        <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a>    <span class="op">}</span></span>
-<span id="cb22-6"><a href="#cb22-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb27-1"><a href="#cb27-1"></a><span class="at">@Component</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="kw">public</span> <span class="kw">class</span> MathComponent <span class="op">{</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">add</span><span class="op">(</span><span class="dt">int</span> x<span class="op">,</span> <span class="dt">int</span> y<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a>        <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a>    <span class="op">}</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In this example, Spring will automatically create a <code>bean</code> of <code>MathComponent</code>, which can then be autowired or retrieved from the application context.</p>
 <p><strong>Benefits</strong></p>
 <blockquote class="blockquote">
@@ -4521,7 +4668,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

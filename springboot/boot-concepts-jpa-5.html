@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -73,11 +73,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-23504dfa93b9834cc4e0ed111f21ac64.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-23504dfa93b9834cc4e0ed111f21ac64.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-8654f46d95255d4aca9b36c8f0882426.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
@@ -1824,7 +1824,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, October 31, 2024</p>
+      <p class="date-modified">Saturday, November 2, 2024</p>
     </div>
   </div>
     
@@ -1844,39 +1844,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><br></p>
 <section id="inherence-and-jpa" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Inherence and JPA</h1>
-<p><strong>Inheritance</strong> is a fundamental concept of POO, but Relational databases <strong>have no concept of inheritance</strong> neither NoSQL (MongoDB, DymamoDB), so persisting <a href="https://en.wikibooks.org/wiki/Java_Persistence/Inheritance">inheritance</a> in a SQL and NoSQL database _has its own particular way.</p>
-<blockquote class="blockquote">
-<p>Because relational databases have no concept of inheritance, there is no standard way of implementing inheritance in database, <em>so the hardest part of persisting inheritance is choosing how to represent the inheritance in the database.</em></p>
-</blockquote>
-<p>JPA defines several inheritance mechanisms, mainly defined though the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/Inheritance.html"><span class="citation" data-cites="Inheritance">@Inheritance</span></a> annotation or the <code>&lt;inheritance&gt;</code> element.</p>
-<p>There are <strong>three inheritance strategies</strong> defined from the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/InheritanceType.html">InheritanceType</a> <code>enum</code>:</p>
-<ol type="1">
-<li>SINGLE_TABLE</li>
-<li>TABLE_PER_CLASS</li>
-<li>JOINED</li>
-</ol>
-<ul>
-<li>Single table inheritance is the default with discriminator values,</li>
-<li>and table per class is an optional feature of the JPA spec, <strong>so not all providers may support it</strong>.</li>
-<li>in joined strategy each class in the hierarchy is mapped to its table.</li>
-</ul>
-<p>MAPPED SUPERCLASS</p>
-<ul>
-<li>JPA also defines a mapped superclass concept defined through the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/MappedSuperclass.html"><span class="citation" data-cites="MappedSuperclass">@MappedSuperclass</span></a> annotation or the <code>&lt;mapped-superclass&gt;</code> element.</li>
-<li>A mapped superclass <strong>is not a persistent class</strong>, but allows common mappings to be defined for its subclasses.</li>
-</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="../images/springboot/labsb04-1-entity-inherence-.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Entity Inheritance"><img src="../images/springboot/labsb04-1-entity-inherence-.png" class="img-fluid figure-img" alt="Entity Inheritance"></a></p>
 <figcaption>Entity Inheritance</figcaption>
 </figure>
 </div>
+<p><strong>Inheritance</strong> is a fundamental concept of <code>POO</code>, but <mark>Relational databases have no concept of inheritance</mark> neither <code>NoSQL</code> (MongoDB, DymamoDB), so persisting <a href="https://en.wikibooks.org/wiki/Java_Persistence/Inheritance">inheritance</a> in a <code>SQL</code> and <code>NoSQL</code> database has its own particular way.</p>
+<blockquote class="blockquote">
+<p>Because <code>relational databases</code> have no concept of <code>inheritance</code>, there is no standard way of implementing <code>inheritance</code> in database, so the hardest part of persisting <code>inheritance</code> is choosing <strong>how</strong> to represent the inheritance in the database.</p>
+</blockquote>
+<p><code>JPA</code> defines several <code>inheritance</code> mechanisms, mainly defined though the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/Inheritance.html"><span class="citation" data-cites="Inheritance">@Inheritance</span></a> annotation or the <code>&lt;inheritance&gt;</code> element.</p>
+<p>There are <strong>three inheritance strategies</strong> defined from the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/InheritanceType.html">InheritanceType</a> <code>enum</code>:</p>
+<ol type="1">
+<li><code>SINGLE_TABLE</code>: <a href="../images/springboot/inherence-jpa-onetable.png" class="external" target="_blank"><code>SINGLE_TABLE</code></a></li>
+<li><code>TABLE_PER_CLASS</code>: <a href="../images/springboot/inherence-jpa-onetalbe-per-class.png" class="external" target="_blank">TABLE_PER_CLASS</a></li>
+<li><code>JOINED</code>: <a href="../images/springboot/inherence-jpa-join.png" class="external" target="_blank"><code>JOINED</code></a></li>
+</ol>
+<ul>
+<li><strong>Single table</strong> inheritance is the default with discriminator values,</li>
+<li>and <strong>table per class</strong> is an optional feature of the JPA spec, <mark>so not all providers may support it</mark>.</li>
+<li>in <strong>joined</strong> strategy each class in the hierarchy is mapped to its table.</li>
+</ul>
+<p><strong>MAPPED SUPERCLASS</strong></p>
+<p>JPA also defines a <code>mapped superclass</code> concept defined through the <a href="https://docs.oracle.com/javaee/7/api/javax/persistence/MappedSuperclass.html"><span class="citation" data-cites="MappedSuperclass">@MappedSuperclass</span></a> annotation or the <code>&lt;mapped-superclass&gt;</code> element.</p>
+<p>A <code>mapped superclass</code> <strong>is not a persistent class</strong>, but allows common mappings to be defined for its subclasses.</p>
+<ol type="1">
+<li><code>MAPPED SUPERCLASS</code>: <a href="../images/springboot/inherence-jpa-mapped-superclass.png" class="external" target="_blank"><span class="citation" data-cites="MappedSuperClass">@MappedSuperClass</span></a></li>
+</ol>
 <p>Links:</p>
 <ul>
 <li><a href="https://orientdb.com/docs/2.2.x/Teleporter-Table-Per-Concrete-Class-Inheritance.html">orientdb</a></li>
 <li><a href="https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/mapped-super-class.html">logicbig</a></li>
 <li><a href="https://en.wikibooks.org/wiki/Java_Persistence/Inheritance">Java Persistence/Inheritance wikibooks</a></li>
 <li><a href="https://openjpa.apache.org/builds/2.2.0/apache-openjpa/docs/jpa_overview_mapping_inher.html">apache</a></li>
+<li><a href="../springboot/sblab4.html" class="external" target="_blank">Lab#SB04-1</a></li>
+<li><a href="../springboot/sblab8-4.html" class="external" target="_blank">Lab#SB08-4</a></li>
 </ul>
 <p>Each strategy has its own advantages and trade-offs in terms of performance, flexibility, and database structure. The choice depends on the specific requirements of our application.</p>
 <section id="single_table" class="level2" data-number="1.1">
@@ -1985,7 +1988,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="labs" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Labs</h1>
 <ul>
-<li><a href="../springboot/sblab4.html" class="external" target="_blank">Spring Boot Projects JPA Inherence strategies</a></li>
+<li><a href="../springboot/sblab4.html" class="external" target="_blank">Lab#SB04-1: Spring Boot Projects JPA Inherence strategies</a></li>
+<li><a href="../springboot/sblab8-4.html" class="external" target="_blank">Lab#SB08-4: RestaurantManager Inherence-JPA</a></li>
 </ul>
 
 
@@ -2592,7 +2596,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
