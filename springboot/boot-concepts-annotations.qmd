@@ -48,6 +48,102 @@ Here are some examples of common annotations used in Spring Boot:
 
 - ``@Autowired``: This annotation is used to automatically wire a bean from the Spring application context into a class field or method. When we use this annotation Spring Boot is responsible to create the instance of that variable, **it basically manages the whole life cycle of the object**.
 
+# POJO, @Bean and @Entity
+
+
+
+**`POJO` (Plain Old Java Object)**
+
+A `POJO` is a <mark>simple Java object</mark> that doesn't depend on any framework-specific interfaces or annotations.
+
+```java
+public class User {
+    private String name;
+    private int age;
+
+    // Getters and setters
+}
+```
+
+**@Bean**
+
+The `@Bean` annotation is used in Spring to declare a **bean** to be managed by the Spring container. It's typically used in `@Configuration` classes.
+
+```java
+@Configuration
+public class AppConfig {
+    @Bean
+    public User user() {
+        User user = new User();
+        user.setName("John");
+        user.setAge(30);
+        return user;
+    }
+}
+```
+
+**@Entity**
+
+The `@Entity` annotation is used in `JPA` to mark a `POJO` as a **persistent** entity that will be mapped to a database table.
+
+```java
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private int age;
+
+    // Getters and setters
+}
+```
+
+In summary:
+
+- `POJO`: A simple Java object
+- `@Bean`: Declares a Spring-managed bean
+- `@Entity`: Marks a class for ORM persistence
+
+These concepts are fundamental to Spring and JPA, providing flexibility in object management and persistence[1][2].
+
+Citations:
+[1] https://docs.spring.io/spring-framework/reference/core/beans/java/bean-annotation.html
+[2] https://www.digitalocean.com/community/tutorials/spring-bean-annotation
+
+
+## `@Bean`
+
+`@Bean` in Spring is:
+
+1. A <mark>method-level annotation</mark>
+2. Used to declare a Spring `bean` typically used in `@Configuration` classes
+3. Tells Spring to:
+  1. <mark>manage the object returned by the method</mark>
+  2. and allows you to configure and customize the bean
+4. [JavaBeans - Wikipedia](https://en.wikipedia.org/wiki/JavaBeans)
+
+> `@Bean` in Spring is like telling a toy factory to make a special toy for you. When you use `@Bean`, you are saying,:
+> 
+> - "Please create this toy and keep it safe so I can play with it whenever I want."
+> 
+> Just like the factory remembers how to make your favorite toy, Spring remembers how to create and manage the special object you asked for, so you can use it in your game whenever you need it.
+
+Example:
+
+```java
+@Configuration
+public class AppConfig {
+
+@Bean
+public MyService myService() {
+return new MyService();
+}
+}
+```
+
 # JPA
 
 - ``@Entity``: This annotation is used to define a class as a **JPA entity**, which can be used to interact with a database.
@@ -97,4 +193,105 @@ In this example, Spring will automatically create a `bean` of `MathComponent`, w
 2. Promotes **Loose Coupling**: Facilitates dependency injection and easier unit testing.
 3. Improves Code Organization: Helps in categorizing classes based on their roles in the application.
 
+## @Transient
 
+
+The `@Transient` <mark>annotation is used in **Java persistence contexts**, particularly with `JPA (Java Persistence API)` and frameworks like `Hibernate`. It indicates that a field should not be persisted to the database.</mark>
+
+**Usage of @Transient**
+
+`@Transient` is applied to fields or properties in an `entity` class that you don't want to be stored in the database. This is useful for:
+
+1. Calculated fields
+2. Temporary data
+3. Fields used only in application logic
+
+**Code Example**
+
+```java
+@Entity
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String firstName;
+    private String lastName;
+
+    @Transient
+    private String fullName;
+
+    public String getFullName() {
+        if (fullName == null) {
+            fullName = firstName + " " + lastName;
+        }
+        return fullName;
+    }
+
+    // Other getters and setters
+}
+```
+
+In this example, `fullName` is marked as `@Transient` because it's a calculated field based on `firstName` and `lastName`. It won't be stored in the database but can be used in application logic.
+
+Remember, `@Transient` fields:
+
+- Are not persisted to the database
+- Are not included in database operations (insert, update, select)
+- Can still be used within the application
+
+> `@Transient` provides flexibility in managing which data is stored persistently and which is used only in-memory.
+
+
+
+## @Transactional
+
+The `@Transactional` annotation <mark>is used in Spring to manage database transactions declaratively. It ensures that a group of operations are executed as a single, atomic unit of work.</mark>
+
+**Key Features of @Transactional**
+
+1. Automatic transaction management
+2. Rollback on exceptions
+3. Configurable isolation levels and propagation behaviors
+
+**Usage Example**
+
+```java
+@Service
+public class UserService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Transactional
+    public void createUser(User user) {
+        userRepository.save(user);
+        // If any exception occurs after this point, the save will be rolled back
+        sendWelcomeEmail(user);
+    }
+
+    @Transactional(readOnly = true)
+    public User getUser(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+}
+```
+
+**Key Points**
+
+- `@Transactional` **can be applied at class or method level**
+- By default, it rolls back on `RuntimeExceptions`
+- `readOnly` = true optimizes read operations
+- Can be customized with attributes like:
+  - propagation
+  - isolation
+  - timeout
+  - `rollbackFor` / `noRollbackFor`
+
+**Benefits**
+
+1. Simplifies transaction management
+2. Promotes clean, modular code
+3. Improves data integrity and consistency
+
+> `@Transactional` is a powerful tool in Spring for ensuring data consistency and managing complex database operations with minimal boilerplate code.
