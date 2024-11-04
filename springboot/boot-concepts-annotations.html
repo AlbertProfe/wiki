@@ -1778,11 +1778,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#app" id="toc-app" class="nav-link active" data-scroll-target="#app"><span class="header-section-number">1</span> App</a></li>
   <li><a href="#class" id="toc-class" class="nav-link" data-scroll-target="#class"><span class="header-section-number">2</span> Class</a></li>
   <li><a href="#dependence-injection" id="toc-dependence-injection" class="nav-link" data-scroll-target="#dependence-injection"><span class="header-section-number">3</span> Dependence Injection</a></li>
-  <li><a href="#jpa" id="toc-jpa" class="nav-link" data-scroll-target="#jpa"><span class="header-section-number">4</span> JPA</a>
+  <li><a href="#pojo-bean-and-entity" id="toc-pojo-bean-and-entity" class="nav-link" data-scroll-target="#pojo-bean-and-entity"><span class="header-section-number">4</span> POJO, <span class="citation" data-cites="Bean">@Bean</span> and <span class="citation" data-cites="Entity">@Entity</span></a>
   <ul>
-  <li><a href="#mapping-and-parameters" id="toc-mapping-and-parameters" class="nav-link" data-scroll-target="#mapping-and-parameters"><span class="header-section-number">4.1</span> Mapping and parameters</a></li>
-  <li><a href="#component" id="toc-component" class="nav-link" data-scroll-target="#component"><span class="header-section-number">4.2</span> <span class="citation" data-cites="Component">@Component</span></a></li>
-  <li><a href="#usage-example" id="toc-usage-example" class="nav-link" data-scroll-target="#usage-example"><span class="header-section-number">4.3</span> Usage Example</a></li>
+  <li><a href="#bean" id="toc-bean" class="nav-link" data-scroll-target="#bean"><span class="header-section-number">4.1</span> <code>@Bean</code></a></li>
+  </ul></li>
+  <li><a href="#jpa" id="toc-jpa" class="nav-link" data-scroll-target="#jpa"><span class="header-section-number">5</span> JPA</a>
+  <ul>
+  <li><a href="#mapping-and-parameters" id="toc-mapping-and-parameters" class="nav-link" data-scroll-target="#mapping-and-parameters"><span class="header-section-number">5.1</span> Mapping and parameters</a></li>
+  <li><a href="#component" id="toc-component" class="nav-link" data-scroll-target="#component"><span class="header-section-number">5.2</span> <span class="citation" data-cites="Component">@Component</span></a></li>
+  <li><a href="#usage-example" id="toc-usage-example" class="nav-link" data-scroll-target="#usage-example"><span class="header-section-number">5.3</span> Usage Example</a></li>
+  <li><a href="#transient" id="toc-transient" class="nav-link" data-scroll-target="#transient"><span class="header-section-number">5.4</span> <span class="citation" data-cites="Transient">@Transient</span></a></li>
+  <li><a href="#transactional" id="toc-transactional" class="nav-link" data-scroll-target="#transactional"><span class="header-section-number">5.5</span> <span class="citation" data-cites="Transactional">@Transactional</span></a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/boot-concepts-annotations.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -1826,7 +1832,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, November 1, 2024</p>
+      <p class="date-modified">Monday, November 4, 2024</p>
     </div>
   </div>
     
@@ -1875,13 +1881,86 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>@Autowired</code>: This annotation is used to automatically wire a bean from the Spring application context into a class field or method. When we use this annotation Spring Boot is responsible to create the instance of that variable, <strong>it basically manages the whole life cycle of the object</strong>.</li>
 </ul>
 </section>
-<section id="jpa" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> JPA</h1>
+<section id="pojo-bean-and-entity" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> POJO, <span class="citation" data-cites="Bean">@Bean</span> and <span class="citation" data-cites="Entity">@Entity</span></h1>
+<p><strong><code>POJO</code> (Plain Old Java Object)</strong></p>
+<p>A <code>POJO</code> is a <mark>simple Java object</mark> that doesn’t depend on any framework-specific interfaces or annotations.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">public</span> <span class="kw">class</span> User <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="kw">private</span> <span class="dt">int</span> age<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="co">// Getters and setters</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong><span class="citation" data-cites="Bean">@Bean</span></strong></p>
+<p>The <code>@Bean</code> annotation is used in Spring to declare a <strong>bean</strong> to be managed by the Spring container. It’s typically used in <code>@Configuration</code> classes.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="at">@Configuration</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">public</span> <span class="kw">class</span> AppConfig <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="at">@Bean</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>    <span class="kw">public</span> User <span class="fu">user</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>        User user <span class="op">=</span> <span class="kw">new</span> <span class="fu">User</span><span class="op">();</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>        user<span class="op">.</span><span class="fu">setName</span><span class="op">(</span><span class="st">"John"</span><span class="op">);</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>        user<span class="op">.</span><span class="fu">setAge</span><span class="op">(</span><span class="dv">30</span><span class="op">);</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>        <span class="cf">return</span> user<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong><span class="citation" data-cites="Entity">@Entity</span></strong></p>
+<p>The <code>@Entity</code> annotation is used in <code>JPA</code> to mark a <code>POJO</code> as a <strong>persistent</strong> entity that will be mapped to a database table.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="at">@Entity</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="at">@Table</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"users"</span><span class="op">)</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">public</span> <span class="kw">class</span> User <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="at">@Id</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="at">@GeneratedValue</span><span class="op">(</span>strategy <span class="op">=</span> GenerationType<span class="op">.</span><span class="fu">IDENTITY</span><span class="op">)</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="kw">private</span> <span class="bu">Long</span> id<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="kw">private</span> <span class="bu">String</span> name<span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>    <span class="kw">private</span> <span class="dt">int</span> age<span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a></span>
+<span id="cb3-11"><a href="#cb3-11"></a>    <span class="co">// Getters and setters</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In summary:</p>
+<ul>
+<li><code>POJO</code>: A simple Java object</li>
+<li><code>@Bean</code>: Declares a Spring-managed bean</li>
+<li><code>@Entity</code>: Marks a class for ORM persistence</li>
+</ul>
+<p>These concepts are fundamental to Spring and JPA, providing flexibility in object management and persistence[1][2].</p>
+<p>Citations: [1] https://docs.spring.io/spring-framework/reference/core/beans/java/bean-annotation.html [2] https://www.digitalocean.com/community/tutorials/spring-bean-annotation</p>
+<section id="bean" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="bean"><span class="header-section-number">4.1</span> <code>@Bean</code></h2>
+<p><code>@Bean</code> in Spring is:</p>
+<ol type="1">
+<li>A <mark>method-level annotation</mark></li>
+<li>Used to declare a Spring <code>bean</code> typically used in <code>@Configuration</code> classes</li>
+<li>Tells Spring to:</li>
+<li><mark>manage the object returned by the method</mark></li>
+<li>and allows you to configure and customize the bean</li>
+<li><a href="https://en.wikipedia.org/wiki/JavaBeans">JavaBeans - Wikipedia</a></li>
+</ol>
+<blockquote class="blockquote">
+<p><code>@Bean</code> in Spring is like telling a toy factory to make a special toy for you. When you use <code>@Bean</code>, you are saying,:</p>
+<ul>
+<li>“Please create this toy and keep it safe so I can play with it whenever I want.”</li>
+</ul>
+<p>Just like the factory remembers how to make your favorite toy, Spring remembers how to create and manage the special object you asked for, so you can use it in your game whenever you need it.</p>
+</blockquote>
+<p>Example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="at">@Configuration</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">public</span> <span class="kw">class</span> AppConfig <span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="at">@Bean</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">public</span> MyService <span class="fu">myService</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="cf">return</span> <span class="kw">new</span> <span class="fu">MyService</span><span class="op">();</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="op">}</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="jpa" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> JPA</h1>
 <ul>
 <li><code>@Entity</code>: This annotation is used to define a class as a <strong>JPA entity</strong>, which can be used to interact with a database.</li>
 </ul>
-<section id="mapping-and-parameters" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="mapping-and-parameters"><span class="header-section-number">4.1</span> Mapping and parameters</h2>
+<section id="mapping-and-parameters" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="mapping-and-parameters"><span class="header-section-number">5.1</span> Mapping and parameters</h2>
 <ul>
 <li><code>@RequestMapping</code>: This annotation is used to map HTTP requests to specific methods in a controller class.</li>
 <li><code>@RequestParam</code> : This annotation is used to bind request parameters to a method parameter in the controller.<br>
@@ -1889,8 +1968,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>@PathVariable</code> : This annotations binds the placeholder from the URI to the method parameter and can be used when the URI is dynamically created or the value of the URI itself acts as a parameter.</li>
 </ul>
 </section>
-<section id="component" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="component"><span class="header-section-number">4.2</span> <span class="citation" data-cites="Component">@Component</span></h2>
+<section id="component" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="component"><span class="header-section-number">5.2</span> <span class="citation" data-cites="Component">@Component</span></h2>
 <p>The <code>@Component</code> annotation is used <mark>to mark a class as a Spring-managed component</mark>.</p>
 <ul>
 <li><strong>Automatic</strong> <code>Bean</code> Creation: <code>@Component</code> tells Spring to automatically create and manage an instance of the annotated class as a bean in the application context.</li>
@@ -1906,14 +1985,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Specialized Annotations: <code>@Service</code>, <code>@Repository</code>, and <code>@Controller</code> are specialized forms of <code>@Component</code> for specific use cases.</li>
 </ol>
 </section>
-<section id="usage-example" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="usage-example"><span class="header-section-number">4.3</span> Usage Example</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="at">@Component</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">public</span> <span class="kw">class</span> MathComponent <span class="op">{</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">add</span><span class="op">(</span><span class="dt">int</span> x<span class="op">,</span> <span class="dt">int</span> y<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>        <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>    <span class="op">}</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="usage-example" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="usage-example"><span class="header-section-number">5.3</span> Usage Example</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="at">@Component</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">public</span> <span class="kw">class</span> MathComponent <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">add</span><span class="op">(</span><span class="dt">int</span> x<span class="op">,</span> <span class="dt">int</span> y<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>        <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="op">}</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In this example, Spring will automatically create a <code>bean</code> of <code>MathComponent</code>, which can then be autowired or retrieved from the application context.</p>
 <p><strong>Benefits</strong></p>
 <blockquote class="blockquote">
@@ -1924,6 +2003,100 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Promotes <strong>Loose Coupling</strong>: Facilitates dependency injection and easier unit testing.</li>
 <li>Improves Code Organization: Helps in categorizing classes based on their roles in the application.</li>
 </ol>
+</section>
+<section id="transient" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="transient"><span class="header-section-number">5.4</span> <span class="citation" data-cites="Transient">@Transient</span></h2>
+<p>The <code>@Transient</code> <mark>annotation is used in <strong>Java persistence contexts</strong>, particularly with <code>JPA (Java Persistence API)</code> and frameworks like <code>Hibernate</code>. It indicates that a field should not be persisted to the database.</mark></p>
+<p><strong>Usage of <span class="citation" data-cites="Transient">@Transient</span></strong></p>
+<p><code>@Transient</code> is applied to fields or properties in an <code>entity</code> class that you don’t want to be stored in the database. This is useful for:</p>
+<ol type="1">
+<li>Calculated fields</li>
+<li>Temporary data</li>
+<li>Fields used only in application logic</li>
+</ol>
+<p><strong>Code Example</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="at">@Entity</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">public</span> <span class="kw">class</span> User <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="at">@Id</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="at">@GeneratedValue</span><span class="op">(</span>strategy <span class="op">=</span> GenerationType<span class="op">.</span><span class="fu">IDENTITY</span><span class="op">)</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="kw">private</span> <span class="bu">Long</span> id<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="kw">private</span> <span class="bu">String</span> firstName<span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>    <span class="kw">private</span> <span class="bu">String</span> lastName<span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a></span>
+<span id="cb6-10"><a href="#cb6-10"></a>    <span class="at">@Transient</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>    <span class="kw">private</span> <span class="bu">String</span> fullName<span class="op">;</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a></span>
+<span id="cb6-13"><a href="#cb6-13"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">getFullName</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>        <span class="cf">if</span> <span class="op">(</span>fullName <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a>            fullName <span class="op">=</span> firstName <span class="op">+</span> <span class="st">" "</span> <span class="op">+</span> lastName<span class="op">;</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a>        <span class="op">}</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>        <span class="cf">return</span> fullName<span class="op">;</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a>    <span class="op">}</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a></span>
+<span id="cb6-20"><a href="#cb6-20"></a>    <span class="co">// Other getters and setters</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this example, <code>fullName</code> is marked as <code>@Transient</code> because it’s a calculated field based on <code>firstName</code> and <code>lastName</code>. It won’t be stored in the database but can be used in application logic.</p>
+<p>Remember, <code>@Transient</code> fields:</p>
+<ul>
+<li>Are not persisted to the database</li>
+<li>Are not included in database operations (insert, update, select)</li>
+<li>Can still be used within the application</li>
+</ul>
+<blockquote class="blockquote">
+<p><code>@Transient</code> provides flexibility in managing which data is stored persistently and which is used only in-memory.</p>
+</blockquote>
+</section>
+<section id="transactional" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="transactional"><span class="header-section-number">5.5</span> <span class="citation" data-cites="Transactional">@Transactional</span></h2>
+<p>The <code>@Transactional</code> annotation <mark>is used in Spring to manage database transactions declaratively. It ensures that a group of operations are executed as a single, atomic unit of work.</mark></p>
+<p><strong>Key Features of <span class="citation" data-cites="Transactional">@Transactional</span></strong></p>
+<ol type="1">
+<li>Automatic transaction management</li>
+<li>Rollback on exceptions</li>
+<li>Configurable isolation levels and propagation behaviors</li>
+</ol>
+<p><strong>Usage Example</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="at">@Service</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">public</span> <span class="kw">class</span> UserService <span class="op">{</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="at">@Autowired</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="kw">private</span> UserRepository userRepository<span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="at">@Transactional</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">createUser</span><span class="op">(</span>User user<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>        userRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>user<span class="op">);</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>        <span class="co">// If any exception occurs after this point, the save will be rolled back</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>        <span class="fu">sendWelcomeEmail</span><span class="op">(</span>user<span class="op">);</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>    <span class="op">}</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a></span>
+<span id="cb7-14"><a href="#cb7-14"></a>    <span class="at">@Transactional</span><span class="op">(</span>readOnly <span class="op">=</span> <span class="kw">true</span><span class="op">)</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>    <span class="kw">public</span> User <span class="fu">getUser</span><span class="op">(</span><span class="bu">Long</span> id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>        <span class="cf">return</span> userRepository<span class="op">.</span><span class="fu">findById</span><span class="op">(</span>id<span class="op">).</span><span class="fu">orElse</span><span class="op">(</span><span class="kw">null</span><span class="op">);</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>    <span class="op">}</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Key Points</strong></p>
+<ul>
+<li><code>@Transactional</code> <strong>can be applied at class or method level</strong></li>
+<li>By default, it rolls back on <code>RuntimeExceptions</code></li>
+<li><code>readOnly</code> = true optimizes read operations</li>
+<li>Can be customized with attributes like:
+<ul>
+<li>propagation</li>
+<li>isolation</li>
+<li>timeout</li>
+<li><code>rollbackFor</code> / <code>noRollbackFor</code></li>
+</ul></li>
+</ul>
+<p><strong>Benefits</strong></p>
+<ol type="1">
+<li>Simplifies transaction management</li>
+<li>Promotes clean, modular code</li>
+<li>Improves data integrity and consistency</li>
+</ol>
+<blockquote class="blockquote">
+<p><code>@Transactional</code> is a powerful tool in Spring for ensuring data consistency and managing complex database operations with minimal boilerplate code.</p>
+</blockquote>
 
 
 </section>
