@@ -1,0 +1,259 @@
+---
+title: "Spring Boot: Scaling"
+subtitle: Spring Boot Scaling
+author: albertprofe
+date: "06/01/2021"
+date-modified: last-modified
+date-format: full
+description:  Spring Boot Scaling
+categories: [Spring-Boot, Scaling]
+toc: true
+number-sections: true
+format:
+  html
+---
+
+
+::: {.summary}
+
+📘 **JPA Scaling**
+
+Key <mark>strategies for scaling Spring Boot applications</mark>.
+
+Each approach addresses different aspects of application scaling, from *data management* to *processing efficiency and API design*, providing us with a comprehensive toolkit for building robust, scalable Spring Boot applications:
+
+- **DTOs** optimize data transmission between layers, reducing network overhead and decoupling models.
+- **Auditing** tracks and logs data changes, enhancing integrity and traceability.
+-  **Pagination** efficiently handles large datasets, improving performance and reducing memory usage.
+-  Spring **Batch** provides a framework for robust batch processing, ideal for ETL operations and data migrations.
+- **Caching** improves application performance by storing frequently accessed data in memory, easily implemented with Spring Boot's annotations.
+- **Wrappers** encapsulate or extend object functionality for various purposes, such as standardizing API responses or implementing lazy loading.
+
+These strategies, when implemented correctly, can significantly **enhance the scalability, performance, and maintainability** of Spring Boot applications.
+
+:::
+
+</br>
+
+
+
+# Scaling Spring Boot
+
+## 1. DTO: Data Transfer Object
+
+> **Data Transfer Objects (DTOs)** are crucial for efficient data transmission between different layers of an application. They help reduce network overhead and decouple the internal data model from the external API representation.
+
+In Spring Boot, `DTOs` are often used with `RESTful APIs` to control what data is exposed to clients. Here's a simple example:
+
+```java
+public class UserDTO {
+    private Long id;
+    private String username;
+    private String email;
+
+    // Constructors, getters, and setters
+}
+```
+
+To map between entities and `DTOs`, you can use libraries like `ModelMapper` or `MapStruct`. For instance, with `MapStruct`:
+
+```java
+@Mapper(componentModel = "spring")
+public interface UserMapper {
+    UserDTO userToUserDTO(User user);
+    User userDTOToUser(UserDTO userDTO);
+}
+```
+
+`DTOs` are particularly useful when working with complex domain models or when you need to aggregate data from multiple entities.
+
+## 2. Auditing
+
+> **Auditing** is the process of tracking and logging changes to data over time. Spring Data JPA provides built-in support for `auditing` through annotations and interfaces.
+
+To enable auditing, add the `@EnableJpaAuditing` annotation to a configuration class:
+
+```java
+@Configuration
+@EnableJpaAuditing
+public class JpaConfig {
+}
+```
+
+Then, use auditing annotations in your entity classes:
+
+```java
+@Entity
+@EntityListeners(AuditingEntityListener.class)
+public class User {
+    @CreatedDate
+    private Instant createdDate;
+
+    @LastModifiedDate
+    private Instant lastModifiedDate;
+
+    @CreatedBy
+    private String createdBy;
+
+    @LastModifiedBy
+    private String lastModifiedBy;
+
+    // Other fields, getters, and setters
+}
+```
+
+To provide the current user for `@CreatedBy` and `@LastModifiedBy`, implement the `AuditorAware` interface.
+
+For more details on auditing, refer to the [Spring Data JPA Auditing documentation](https://docs.spring.io/spring-data/jpa/reference/auditing.html).
+
+## 3. Pagination
+
+> **Pagination** is essential for handling large datasets efficiently.
+> 
+> `Spring Data JPA` provides built-in support for pagination through the `Pageable` interface and `Page` object.
+
+To use `pagination` in a repository method:
+
+```java
+public interface UserRepository extends JpaRepository<User, Long> {
+    Page<User> findByLastName(String lastName, Pageable pageable);
+}
+```
+
+In your service or controller:
+
+```java
+@GetMapping("/users")
+public Page<User> getUsers(@RequestParam(defaultValue = "0") int page,
+                           @RequestParam(defaultValue = "10") int size) {
+    Pageable pageable = PageRequest.of(page, size);
+    return userRepository.findAll(pageable);
+}
+```
+
+This approach allows clients to request specific pages of data, improving performance and reducing memory usage.
+
+For more information on pagination and sorting, see the [Spring Data JPA documentation on Paging and Sorting](https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html#repositories.special-parameters).
+
+## 4. Spring Batch
+
+> **Spring Batch** is a lightweight, comprehensive framework designed for robust batch processing. It's particularly useful for **ETL operations**, data migrations, and periodic data processing tasks.
+
+A basic `Spring Batch` job consists of one or more steps, each with a reader, processor, and writer:
+
+```java
+@Configuration
+@EnableBatchProcessing
+public class BatchConfig {
+
+    @Bean
+    public Job importUserJob(JobBuilderFactory jobBuilderFactory,
+                             Step step1) {
+        return jobBuilderFactory.get("importUserJob")
+                .incrementer(new RunIdIncrementer())
+                .flow(step1)
+                .end()
+                .build();
+    }
+
+    @Bean
+    public Step step1(StepBuilderFactory stepBuilderFactory,
+                      ItemReader<User> reader,
+                      ItemProcessor<User, User> processor,
+                      ItemWriter<User> writer) {
+        return stepBuilderFactory.get("step1")
+                .<User, User>chunk(10)
+                .reader(reader)
+                .processor(processor)
+                .writer(writer)
+                .build();
+    }
+}
+```
+
+Spring Batch provides robust error handling, restart capability, and parallel processing options, making it ideal for large-scale data operations.
+
+## 5. Caching
+
+> **Caching** is a powerful technique to improve application performance by storing frequently accessed data in memory. Spring Boot provides easy integration with various `caching` providers.
+
+To enable `caching`, add the `@EnableCaching` annotation to a configuration class:
+
+```java
+@Configuration
+@EnableCaching
+public class CacheConfig {
+}
+```
+
+Then, use `caching` annotations in your service methods:
+
+```java
+@Service
+public class UserService {
+
+    @Cacheable("users")
+    public User getUserById(Long id) {
+        // Method implementation
+    }
+
+    @CachePut(value = "users", key = "#user.id")
+    public User updateUser(User user) {
+        // Method implementation
+    }
+
+    @CacheEvict(value = "users", key = "#id")
+    public void deleteUser(Long id) {
+        // Method implementation
+    }
+}
+```
+
+Spring Boot auto-configures a suitable `CacheManager` based on the classpath dependencies. You can customize the caching behavior using properties in `application.properties` or `application.yml`.
+
+For more advanced caching scenarios, consider using distributed caches like `Redis` or `Hazelcast`.
+
+## 6. Wrappers
+
+> **Wrappers** in Spring Boot often refer to classes that encapsulate or extend the functionality of other objects. They can be used for various purposes, such as adding cross-cutting concerns, adapting interfaces, or providing additional functionality.
+
+One common use of `wrappers` is in the context of response entities. For example, you might create a wrapper class to standardize `API responses`:
+
+```java
+public class ApiResponse<T> {
+    private T data;
+    private String message;
+    private boolean success;
+
+    // Constructors, getters, and setters
+}
+```
+
+You can then use this wrapper in your controllers:
+
+```java
+@GetMapping("/users/{id}")
+public ResponseEntity<ApiResponse<User>> getUser(@PathVariable Long id) {
+    User user = userService.getUserById(id);
+    ApiResponse<User> response = new ApiResponse<>(user, "User retrieved successfully", true);
+    return ResponseEntity.ok(response);
+}
+```
+
+Another example is using wrappers for lazy loading in JPA:
+
+```java
+@Entity
+public class User {
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Order> orders;
+
+    // Other fields and methods
+}
+```
+
+Here, `orders` is wrapped in a proxy object that loads the actual data only when accessed, improving performance for large datasets.
+
+Wrappers can also be used for decorating beans, implementing the decorator pattern, or creating custom type converters in Spring Boot applications.
+
+
