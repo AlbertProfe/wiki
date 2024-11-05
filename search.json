@@ -14295,7 +14295,7 @@
     "href": "ifcd0021-24/ifcd0021backlog-sprint-24.html#sprint09-inherence-november-2024",
     "title": "IFCD0021 Sprint Backlog",
     "section": "Sprint#09 Inherence (November 2024)",
-    "text": "Sprint#09 Inherence (November 2024)\n\nBacklog course November 2024 table\n\n\n\n\n\n\n\n\n\n#\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#09\n38\n04/11/2024\n- Lab#SB08-4 Spring Boot RestaurantManager:  (1) Inherence: Order implementation  (2) Inherence: type strategies to save data  (3) Implement Order as Abstract (4) branch: feature-order-abstract  (5) Test: @Transient & @Transactional  - JPA Annotations  - POJO, @Bean and @Entity  ++ Java Paginating:  (1) Pageable  (2) Page  (2) PageRequest\n- Lab#SB08-4  - JPA 1: Dependency Injection - JPA 2: Mappings - JPA 3: Relationships - JPA 4: Queries - JPA 5: Inherence - JPA Annotations  - JPA Inherence strategies  - OrderRestaurant refactor &gt; abstract  - @MappedSuperClass / - SINGLE_TABLE / - JOINED / - TABLE_PER_CLASS   - Library6 / - BooksPageable\n\n\n\n39\n05/11/2024\n- Lab#SB08-4 Spring Boot RestaurantManager:  (1) Inherence: Order implementation  (2) Inherence: type strategies to save data  (3) Implement Order as Abstract (4) branch: feature-order-abstract  (5) Test: @Transient\n\n\n\n\n40\n06/11/2024\n- DTO: Data Transfer Object  - Auditing\n\n\n\n\n41\n07/11/2024\n- DTO: Data Transfer Object  - Auditing\n\n\n\n\n42\n08/11/2024\n- Git: gitTutorial project:  (1) undo  (2) Rebase vs. Merge",
+    "text": "Sprint#09 Inherence (November 2024)\n\nBacklog course November 2024 table\n\n\n\n\n\n\n\n\n\n#\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#09\n38\n04/11/2024\n- Lab#SB08-4 Spring Boot RestaurantManager:  (1) Inherence: Order implementation  (2) Inherence: type strategies to save data  (3) Implement Order as Abstract (4) branch: feature-order-abstract  (5) Test: @Transient & @Transactional  - JPA Annotations  - POJO, @Bean and @Entity  ++ Java Pagination:  (1) Pageable  (2) Page  (2) PageRequest\n- Lab#SB08-4  - JPA 1: Dependency Injection - JPA 2: Mappings - JPA 3: Relationships - JPA 4: Queries - JPA 5: Inherence - JPA Annotations  - JPA Inherence strategies  - OrderRestaurant refactor &gt; abstract  - @MappedSuperClass / - SINGLE_TABLE / - JOINED / - TABLE_PER_CLASS   - Library6 / - BooksPageable\n\n\n\n39\n05/11/2024\n- Lab#SB08-4 Spring Boot RestaurantManager:  (1) Inherence: Order implementation  (2) Inherence: type strategies to save data  (3) Implement Order as Abstract (4) branch: feature-order-abstract  (5) Test: @Transient   - PRA05: Spring Boot JPA Inheritance and Abstraction \n\n\n\n\n40\n06/11/2024\n- Scaling Spring Boot:  (1) DTO: Data Transfer Object  (2) Auditing  (3) Pagination  (4) Spring Batch  (5) Caching  (6) Wrappers\n- Lab#SB08-4  - Scaling  - Auditing  - Transactionality  - Paging, Iterating Large Results, Sorting & Limiting\n\n\n\n41\n07/11/2024\n- Scaling Spring Boot:  (1) DTO: Data Transfer Object  (2) Auditing  (3) Pagination  (4) Spring Batch  (5) Caching  (6) Wrappers\n- Lab#SB08-4  - Scaling  - Auditing  - Transactionality  - Paging, Iterating Large Results, Sorting & Limiting\n\n\n\n42\n08/11/2024\n- Git: gitTutorial project:  (1) undo  (2) Rebase vs. Merge",
     "crumbs": [
       "IFCD0021-24 Docs",
       "IFCD0021 Sprint Backlog"
@@ -14354,6 +14354,83 @@
     "crumbs": [
       "Spring Boot Concepts",
       "Spring Boot: Annotations"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-scaling.html",
+    "href": "springboot/boot-concepts-scaling.html",
+    "title": "Spring Boot: Scaling",
+    "section": "",
+    "text": "📘 JPA Scaling\nKey strategies for scaling Spring Boot applications.\nEach approach addresses different aspects of application scaling, from data management to processing efficiency and API design, providing us with a comprehensive toolkit for building robust, scalable Spring Boot applications:\n\nDTOs optimize data transmission between layers, reducing network overhead and decoupling models.\nAuditing tracks and logs data changes, enhancing integrity and traceability.\nPagination efficiently handles large datasets, improving performance and reducing memory usage.\nSpring Batch provides a framework for robust batch processing, ideal for ETL operations and data migrations.\nCaching improves application performance by storing frequently accessed data in memory, easily implemented with Spring Boot’s annotations.\nWrappers encapsulate or extend object functionality for various purposes, such as standardizing API responses or implementing lazy loading.\n\nThese strategies, when implemented correctly, can significantly enhance the scalability, performance, and maintainability of Spring Boot applications.",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Scaling"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-scaling.html#auditing",
+    "href": "springboot/boot-concepts-scaling.html#auditing",
+    "title": "Spring Boot: Scaling",
+    "section": "1.2 2. Auditing",
+    "text": "1.2 2. Auditing\n\nAuditing is the process of tracking and logging changes to data over time. Spring Data JPA provides built-in support for auditing through annotations and interfaces.\n\nTo enable auditing, add the @EnableJpaAuditing annotation to a configuration class:\n@Configuration\n@EnableJpaAuditing\npublic class JpaConfig {\n}\nThen, use auditing annotations in your entity classes:\n@Entity\n@EntityListeners(AuditingEntityListener.class)\npublic class User {\n    @CreatedDate\n    private Instant createdDate;\n\n    @LastModifiedDate\n    private Instant lastModifiedDate;\n\n    @CreatedBy\n    private String createdBy;\n\n    @LastModifiedBy\n    private String lastModifiedBy;\n\n    // Other fields, getters, and setters\n}\nTo provide the current user for @CreatedBy and @LastModifiedBy, implement the AuditorAware interface.\nFor more details on auditing, refer to the Spring Data JPA Auditing documentation.",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Scaling"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-scaling.html#pagination",
+    "href": "springboot/boot-concepts-scaling.html#pagination",
+    "title": "Spring Boot: Scaling",
+    "section": "1.3 3. Pagination",
+    "text": "1.3 3. Pagination\n\nPagination is essential for handling large datasets efficiently.\nSpring Data JPA provides built-in support for pagination through the Pageable interface and Page object.\n\nTo use pagination in a repository method:\npublic interface UserRepository extends JpaRepository&lt;User, Long&gt; {\n    Page&lt;User&gt; findByLastName(String lastName, Pageable pageable);\n}\nIn your service or controller:\n@GetMapping(\"/users\")\npublic Page&lt;User&gt; getUsers(@RequestParam(defaultValue = \"0\") int page,\n                           @RequestParam(defaultValue = \"10\") int size) {\n    Pageable pageable = PageRequest.of(page, size);\n    return userRepository.findAll(pageable);\n}\nThis approach allows clients to request specific pages of data, improving performance and reducing memory usage.\nFor more information on pagination and sorting, see the Spring Data JPA documentation on Paging and Sorting.",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Scaling"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-scaling.html#spring-batch",
+    "href": "springboot/boot-concepts-scaling.html#spring-batch",
+    "title": "Spring Boot: Scaling",
+    "section": "1.4 4. Spring Batch",
+    "text": "1.4 4. Spring Batch\n\nSpring Batch is a lightweight, comprehensive framework designed for robust batch processing. It’s particularly useful for ETL operations, data migrations, and periodic data processing tasks.\n\nA basic Spring Batch job consists of one or more steps, each with a reader, processor, and writer:\n@Configuration\n@EnableBatchProcessing\npublic class BatchConfig {\n\n    @Bean\n    public Job importUserJob(JobBuilderFactory jobBuilderFactory,\n                             Step step1) {\n        return jobBuilderFactory.get(\"importUserJob\")\n                .incrementer(new RunIdIncrementer())\n                .flow(step1)\n                .end()\n                .build();\n    }\n\n    @Bean\n    public Step step1(StepBuilderFactory stepBuilderFactory,\n                      ItemReader&lt;User&gt; reader,\n                      ItemProcessor&lt;User, User&gt; processor,\n                      ItemWriter&lt;User&gt; writer) {\n        return stepBuilderFactory.get(\"step1\")\n                .&lt;User, User&gt;chunk(10)\n                .reader(reader)\n                .processor(processor)\n                .writer(writer)\n                .build();\n    }\n}\nSpring Batch provides robust error handling, restart capability, and parallel processing options, making it ideal for large-scale data operations.",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Scaling"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-scaling.html#caching",
+    "href": "springboot/boot-concepts-scaling.html#caching",
+    "title": "Spring Boot: Scaling",
+    "section": "1.5 5. Caching",
+    "text": "1.5 5. Caching\n\nCaching is a powerful technique to improve application performance by storing frequently accessed data in memory. Spring Boot provides easy integration with various caching providers.\n\nTo enable caching, add the @EnableCaching annotation to a configuration class:\n@Configuration\n@EnableCaching\npublic class CacheConfig {\n}\nThen, use caching annotations in your service methods:\n@Service\npublic class UserService {\n\n    @Cacheable(\"users\")\n    public User getUserById(Long id) {\n        // Method implementation\n    }\n\n    @CachePut(value = \"users\", key = \"#user.id\")\n    public User updateUser(User user) {\n        // Method implementation\n    }\n\n    @CacheEvict(value = \"users\", key = \"#id\")\n    public void deleteUser(Long id) {\n        // Method implementation\n    }\n}\nSpring Boot auto-configures a suitable CacheManager based on the classpath dependencies. You can customize the caching behavior using properties in application.properties or application.yml.\nFor more advanced caching scenarios, consider using distributed caches like Redis or Hazelcast.",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Scaling"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-scaling.html#wrappers",
+    "href": "springboot/boot-concepts-scaling.html#wrappers",
+    "title": "Spring Boot: Scaling",
+    "section": "1.6 6. Wrappers",
+    "text": "1.6 6. Wrappers\n\nWrappers in Spring Boot often refer to classes that encapsulate or extend the functionality of other objects. They can be used for various purposes, such as adding cross-cutting concerns, adapting interfaces, or providing additional functionality.\n\nOne common use of wrappers is in the context of response entities. For example, you might create a wrapper class to standardize API responses:\npublic class ApiResponse&lt;T&gt; {\n    private T data;\n    private String message;\n    private boolean success;\n\n    // Constructors, getters, and setters\n}\nYou can then use this wrapper in your controllers:\n@GetMapping(\"/users/{id}\")\npublic ResponseEntity&lt;ApiResponse&lt;User&gt;&gt; getUser(@PathVariable Long id) {\n    User user = userService.getUserById(id);\n    ApiResponse&lt;User&gt; response = new ApiResponse&lt;&gt;(user, \"User retrieved successfully\", true);\n    return ResponseEntity.ok(response);\n}\nAnother example is using wrappers for lazy loading in JPA:\n@Entity\npublic class User {\n    @OneToMany(fetch = FetchType.LAZY)\n    private List&lt;Order&gt; orders;\n\n    // Other fields and methods\n}\nHere, orders is wrapped in a proxy object that loads the actual data only when accessed, improving performance for large datasets.\nWrappers can also be used for decorating beans, implementing the decorator pattern, or creating custom type converters in Spring Boot applications.",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Scaling"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-scaling.html#dto-data-transfer-object",
+    "href": "springboot/boot-concepts-scaling.html#dto-data-transfer-object",
+    "title": "Spring Boot: Scaling",
+    "section": "1.1 1. DTO: Data Transfer Object",
+    "text": "1.1 1. DTO: Data Transfer Object\n\nData Transfer Objects (DTOs) are crucial for efficient data transmission between different layers of an application. They help reduce network overhead and decouple the internal data model from the external API representation.\n\nIn Spring Boot, DTOs are often used with RESTful APIs to control what data is exposed to clients. Here’s a simple example:\npublic class UserDTO {\n    private Long id;\n    private String username;\n    private String email;\n\n    // Constructors, getters, and setters\n}\nTo map between entities and DTOs, you can use libraries like ModelMapper or MapStruct. For instance, with MapStruct:\n@Mapper(componentModel = \"spring\")\npublic interface UserMapper {\n    UserDTO userToUserDTO(User user);\n    User userDTOToUser(UserDTO userDTO);\n}\nDTOs are particularly useful when working with complex domain models or when you need to aggregate data from multiple entities.",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Scaling"
     ]
   }
 ]

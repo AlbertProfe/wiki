@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="albertprofe">
+<meta name="description" content="Spring Boot Scaling">
 
-<title>IFCD0021 Sprint Backlog – albertprofe wiki</title>
+<title>Spring Boot: Scaling – albertprofe wiki</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +66,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../ifcd0021-24/ifcd0021backlog-product-24.html" rel="next">
-<link href="../ifcd0021-24/ifcd0021deliveries-24.html" rel="prev">
+<link href="../springboot/boot-concepts-jpa-5.html" rel="prev">
 <link href="..//images/home/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -44,9 +79,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-8654f46d95255d4aca9b36c8f0882426.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1407,7 +1439,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ifcd0021-24/ifcd0021-24.html">IFCD0021-24 Docs</a></li><li class="breadcrumb-item"><a href="../ifcd0021-24/ifcd0021backlog-sprint-24.html">IFCD0021 Sprint Backlog</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/boot-concepts-injection.html">Spring Boot Concepts</a></li><li class="breadcrumb-item"><a href="../springboot/boot-concepts-scaling.html">Spring Boot: Scaling</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -1428,40 +1460,34 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
- <span class="menu-text">Training Courses</span>
+ <span class="menu-text">Spring</span>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">IFCD0021-24 Docs</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Spring Legacy</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0021-24/ifcd0021-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0021 Official Docs</span></a>
+  <a href="../spring/spring-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Framework</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0021-24/ifcd0021deliveries-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0021 Calendar &amp; Deliveries</span></a>
+  <a href="../spring/spring-mvc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring MVC</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0021-24/ifcd0021backlog-sprint-24.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">IFCD0021 Sprint Backlog</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0021-24/ifcd0021backlog-product-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0021 Product Backlog</span></a>
+  <a href="../spring/spring-servlets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Springs Servlets</span></a>
   </div>
 </li>
       </ul>
@@ -1470,7 +1496,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">IFCD0210-24 Docs</span></a>
+ <span class="menu-text">Spring Boot Basics</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -1478,26 +1504,26 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0210-24/ifcd0210-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Official Docs</span></a>
+  <a href="../springboot/boot-what-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: fundamentals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0210-24/ifcd0210deliveries-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Calendar &amp; Deliveries</span></a>
+  <a href="../springboot/boot-what-create.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: create a Project</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0210-24/ifcd0210backlog-sprint-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Sprint Backlog</span></a>
+  <a href="../springboot/boot-what-create-th-h2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: H2 DB and Thymeleaf</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0210-24/ifcd0210backlog-product-24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Product Backlog</span></a>
+  <a href="../springboot/boot-what-cycle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: cycle</span></a>
   </div>
 </li>
       </ul>
@@ -1505,29 +1531,95 @@ ul.task-list li input[type="checkbox"] {
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">IFCD044 Docs</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Spring Boot Concepts</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd044/ifcd044.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD044 Docs</span></a>
+  <a href="../springboot/boot-concepts-injection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Dependency Injection</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd044/ifcd044backlog-sprint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD044 Sprint Backlog</span></a>
+  <a href="../springboot/boot-concepts-annotations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Annotations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd044/ifcd044backlog-product.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD044 Product Backlog</span></a>
+  <a href="../springboot/boot-concepts-controller.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Controller</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-view.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: View</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-th.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Thymeleaf</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-rest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Rest</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Data &amp; DB</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA &amp; DI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA Mappings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA Relationships</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA Queries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-jpa-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: JPA Inherence</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-scaling.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Spring Boot: Scaling</span></a>
   </div>
 </li>
       </ul>
@@ -1536,7 +1628,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">IFCT034PO Docs</span></a>
+ <span class="menu-text">Spring Boot Laboratories</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -1544,20 +1636,119 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifct034po/ifct034po.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCT034PO Docs</span></a>
+  <a href="../springboot/sblab0-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-1: Library UML</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifct034po/ifct034pobacklog-sprint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCT034PO Sprint Backlog</span></a>
+  <a href="../springboot/sblab0-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-2: CRUD User</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifct034po/ifct034pobacklog-product.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCT034PO Product Backlog</span></a>
+  <a href="../springboot/sblab0-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-3: LibraryManagement</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-4: API Rest</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-5: Rest &amp; JPA-H2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-6: Rest &amp; MongoDB</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab0-7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB00-7: Styling</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB01-1: DataBase</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB02-1: <code>JPA</code> Relationships</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB03-1: APIs &amp; cloud</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB04-1: <code>JPA</code> Inherence</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB05-1: API Rest</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB06-1: <code>employeeCourse</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB07-1: <code>monitor Book</code></span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-1: DDD and UML</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-2: Vaadin</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-3: H2 and API Rest</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-4: JPA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-5: RestaurantManager</span></a>
   </div>
 </li>
       </ul>
@@ -1566,7 +1757,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">IFCD0210 Docs</span></a>
+ <span class="menu-text">Spring Boot readings</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -1574,44 +1765,8 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Official Docs</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210initemail.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Init Mail</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210deliveries.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Deliveries</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210calendar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Calendar</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210backlog-sprint.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Sprint Backlog</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210backlog-product.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Product Backlog</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ifcd0210/ifcd0210backlog-projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">IFCD0210 Projects Backlog</span></a>
+  <a href="../springboot/resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot Resources</span></a>
   </div>
 </li>
       </ul>
@@ -1626,28 +1781,60 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sprint09-inherence-november-2024" id="toc-sprint09-inherence-november-2024" class="nav-link active" data-scroll-target="#sprint09-inherence-november-2024"><code>Sprint#09 Inherence</code> (November 2024)</a></li>
+  <li><a href="#scaling-spring-boot" id="toc-scaling-spring-boot" class="nav-link active" data-scroll-target="#scaling-spring-boot"><span class="header-section-number">1</span> Scaling Spring Boot</a>
+  <ul>
+  <li><a href="#dto-data-transfer-object" id="toc-dto-data-transfer-object" class="nav-link" data-scroll-target="#dto-data-transfer-object"><span class="header-section-number">1.1</span> 1. DTO: Data Transfer Object</a></li>
+  <li><a href="#auditing" id="toc-auditing" class="nav-link" data-scroll-target="#auditing"><span class="header-section-number">1.2</span> 2. Auditing</a></li>
+  <li><a href="#pagination" id="toc-pagination" class="nav-link" data-scroll-target="#pagination"><span class="header-section-number">1.3</span> 3. Pagination</a></li>
+  <li><a href="#spring-batch" id="toc-spring-batch" class="nav-link" data-scroll-target="#spring-batch"><span class="header-section-number">1.4</span> 4. Spring Batch</a></li>
+  <li><a href="#caching" id="toc-caching" class="nav-link" data-scroll-target="#caching"><span class="header-section-number">1.5</span> 5. Caching</a></li>
+  <li><a href="#wrappers" id="toc-wrappers" class="nav-link" data-scroll-target="#wrappers"><span class="header-section-number">1.6</span> 6. Wrappers</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/ifcd0021-24/ifcd0021backlog-sprint-24.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/boot-concepts-scaling.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ifcd0021-24/ifcd0021-24.html">IFCD0021-24 Docs</a></li><li class="breadcrumb-item"><a href="../ifcd0021-24/ifcd0021backlog-sprint-24.html">IFCD0021 Sprint Backlog</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/boot-concepts-injection.html">Spring Boot Concepts</a></li><li class="breadcrumb-item"><a href="../springboot/boot-concepts-scaling.html">Spring Boot: Scaling</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">IFCD0021 Sprint Backlog</h1>
+<h1 class="title">Spring Boot: Scaling</h1>
+<p class="subtitle lead">Spring Boot Scaling</p>
   <div class="quarto-categories">
-    <div class="quarto-category">ifcd0021</div>
-    <div class="quarto-category">backlog</div>
+    <div class="quarto-category">Spring-Boot</div>
+    <div class="quarto-category">Scaling</div>
   </div>
   </div>
 
+<div>
+  <div class="description">
+    Spring Boot Scaling
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>albertprofe </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Tuesday, June 1, 2021</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">Tuesday, November 5, 2024</p>
+    </div>
+  </div>
     
   </div>
   
@@ -1656,106 +1843,196 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<style>
-
-.heatMap th { background:  #f4f4f4;}
-tr:nth-child(2) {background-color: #f4f4f4;}
-
-th, td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-tr:hover {background-color:  #f4f4f4;}
-
-</style>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../images/home/backlog.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Sprint Backlog"><img src="../images/home/backlog.jpg" class="img-fluid figure-img" style="width:30.0%" alt="Sprint Backlog"></a></p>
-<figcaption>Sprint Backlog</figcaption>
-</figure>
-</div>
-<div class="heatMap page-columns page-full">
-<section id="sprint09-inherence-november-2024" class="level2 column-page-right">
-<h2 class="anchored" data-anchor-id="sprint09-inherence-november-2024"><code>Sprint#09 Inherence</code> (November 2024)</h2>
-<table class="caption-top table">
-<caption>Backlog course November 2024 table</caption>
-<colgroup>
-<col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 60%">
-<col style="width: 34%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>#</th>
-<th>Day</th>
-<th>Date</th>
-<th>Topics</th>
-<th>Details Topics</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>#09</td>
-<td>38</td>
-<td>04/11/2024</td>
-<td>- Lab#SB08-4 Spring Boot RestaurantManager: <br> (1) Inherence: Order implementation <br> (2) Inherence: <strong>type strategies to save data</strong> <br> (3) Implement Order as <code>Abstract</code><br> (4) <strong>branch</strong>: <code>feature-order-abstract</code> <br> (5) Test: <span class="citation" data-cites="Transient">@Transient</span> &amp; <span class="citation" data-cites="Transactional">@Transactional</span> <br><br> - JPA Annotations <br> - POJO, <span class="citation" data-cites="Bean">@Bean</span> and <span class="citation" data-cites="Entity">@Entity</span> <br><br> ++ Java Pagination: <br> (1) Pageable <br> (2) Page <br> (2) PageRequest</td>
-<td>- <a href="../springboot/sblab8-4.html" class="external" target="_blank">Lab#SB08-4</a> <br> - <a href="../springboot/boot-concepts-injection.html" class="external" target="_blank">JPA 1: Dependency Injection</a><br> - <a href="../springboot/boot-concepts-jpa-2.html" class="external" target="_blank">JPA 2: Mappings</a><br> - <a href="../springboot/boot-concepts-jpa-3.html" class="external" target="_blank">JPA 3: Relationships</a><br> - <a href="../springboot/boot-concepts-jpa-4.html" class="external" target="_blank">JPA 4: Queries</a><br> - <a href="../springboot/boot-concepts-jpa-5.html" class="external" target="_blank">JPA 5: Inherence</a><br> - <a href="../springboot/boot-concepts-annotations.html" class="external" target="_blank">JPA Annotations</a><br> <br> - <a href="https://github.com/AlbertProfe/cifojava2022-6/wiki" class="external" target="_blank">JPA Inherence strategies</a> <br> - <a href="https://github.com/AlbertProfe/restaurantManager/tree/b1bdddcf75c6772d4fd89d71d8370d778511abfe" class="external" target="_blank">OrderRestaurant refactor &gt; abstract</a> <br> - <a href="https://camo.githubusercontent.com/edaad3359cdc9de33a4d972aa6e87de37f6865534866254e8d2b5d506c067866/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f69643d3174335a315878316e48327632466b534d61475f4a386349696a3452565f336764" class="external" target="_blank"><span class="citation" data-cites="MappedSuperClass">@MappedSuperClass</span></a> / - <a href="https://camo.githubusercontent.com/ec2cde1fb13acb2151fd8c33054ed895c27ea87e425159755412dcdcf99c7ab1/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f69643d31386e66694b6e5161696d342d6c54443231694277793331334461787476373348" class="external" target="_blank"><code>SINGLE_TABLE</code></a> / - <a href="https://camo.githubusercontent.com/746e24e3c4e42e9821c4846df58c2023d6b0267d337b554fba72ade3a811120b/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f69643d3142707861573766565f6b6834507946576e336934396e473453716e4b59704145" class="external" target="_blank"><code>JOINED</code></a> / - <a href="https://camo.githubusercontent.com/1f2ef03652d55fdfa773967fa6e1b46442ccc49c9fa33f633de2ea79951612d9/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f69643d31697843653273526d4973535f39773762506b6d636479425a6d684b6133477458" class="external" target="_blank">TABLE_PER_CLASS</a> <br> <br> - <a href="https://github.com/AlbertProfe/cifojava2022-3/tree/master/library6" class="external" target="_blank">Library6</a> / - <a href="https://github.com/AlbertProfe/BooksPageable" class="external" target="_blank">BooksPageable</a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>39</td>
-<td>05/11/2024</td>
-<td>- Lab#SB08-4 Spring Boot RestaurantManager: <br> (1) Inherence: Order implementation <br> (2) Inherence: <strong>type strategies to save data</strong> <br> (3) Implement Order as <code>Abstract</code><br> (4) <strong>branch</strong>: <code>feature-order-abstract</code> <br> (5) Test: <span class="citation" data-cites="Transient">@Transient</span> <br> <br> - PRA05: Spring Boot JPA Inheritance and Abstraction <br></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>40</td>
-<td>06/11/2024</td>
-<td>- Scaling Spring Boot: <br> (1) DTO: Data Transfer Object <br> (2) Auditing <br> (3) Pagination <br> (4) Spring Batch <br> (5) Caching <br> (6) Wrappers</td>
-<td>- <a href="../springboot/sblab8-4.html" class="external" target="_blank">Lab#SB08-4</a> <br> - <a href="../springboot/boot-concepts-scaling.html" class="external" target="_blank">Scaling</a> <br> - <a href="https://docs.spring.io/spring-data/jpa/reference/auditing.html" class="external" target="_blank">Auditing</a> <br> - <a href="https://docs.spring.io/spring-data/jpa/reference/jpa/transactions.html" class="external" target="_blank">Transactionality</a> <br> - <a href="https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html#repositories.special-parameters" class="external" target="_blank">Paging, Iterating Large Results, Sorting &amp; Limiting</a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>41</td>
-<td>07/11/2024</td>
-<td>- Scaling Spring Boot: <br> (1) DTO: Data Transfer Object <br> (2) Auditing <br> (3) Pagination <br> (4) Spring Batch <br> (5) Caching <br> (6) Wrappers</td>
-<td>- <a href="../springboot/sblab8-4.html" class="external" target="_blank">Lab#SB08-4</a> <br> - <a href="../springboot/boot-concepts-scaling.html" class="external" target="_blank">Scaling</a> <br> - <a href="https://docs.spring.io/spring-data/jpa/reference/auditing.html" class="external" target="_blank">Auditing</a> <br> - <a href="https://docs.spring.io/spring-data/jpa/reference/jpa/transactions.html" class="external" target="_blank">Transactionality</a> <br> - <a href="https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html#repositories.special-parameters" class="external" target="_blank">Paging, Iterating Large Results, Sorting &amp; Limiting</a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>42</td>
-<td>08/11/2024</td>
-<td>- Git: <code>gitTutorial</code> project: <br> (1) undo <br> (2) Rebase vs.&nbsp;Merge  <br></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</section>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="summary">
+<p>📘 <strong>JPA Scaling</strong></p>
+<p>Key <mark>strategies for scaling Spring Boot applications</mark>.</p>
+<p>Each approach addresses different aspects of application scaling, from <em>data management</em> to <em>processing efficiency and API design</em>, providing us with a comprehensive toolkit for building robust, scalable Spring Boot applications:</p>
 <ul>
-<li><code>-</code> topic planned or done</li>
-<li><code>----</code> topic pending to future</li>
-<li><code>++</code> new topic not planned</li>
+<li><strong>DTOs</strong> optimize data transmission between layers, reducing network overhead and decoupling models.</li>
+<li><strong>Auditing</strong> tracks and logs data changes, enhancing integrity and traceability.</li>
+<li><strong>Pagination</strong> efficiently handles large datasets, improving performance and reducing memory usage.</li>
+<li>Spring <strong>Batch</strong> provides a framework for robust batch processing, ideal for ETL operations and data migrations.</li>
+<li><strong>Caching</strong> improves application performance by storing frequently accessed data in memory, easily implemented with Spring Boot’s annotations.</li>
+<li><strong>Wrappers</strong> encapsulate or extend object functionality for various purposes, such as standardizing API responses or implementing lazy loading.</li>
 </ul>
+<p>These strategies, when implemented correctly, can significantly <strong>enhance the scalability, performance, and maintainability</strong> of Spring Boot applications.</p>
 </div>
-</div>
+<p><br></p>
+<section id="scaling-spring-boot" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Scaling Spring Boot</h1>
+<section id="dto-data-transfer-object" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="dto-data-transfer-object"><span class="header-section-number">1.1</span> 1. DTO: Data Transfer Object</h2>
+<blockquote class="blockquote">
+<p><strong>Data Transfer Objects (DTOs)</strong> are crucial for efficient data transmission between different layers of an application. They help reduce network overhead and decouple the internal data model from the external API representation.</p>
+</blockquote>
+<p>In Spring Boot, <code>DTOs</code> are often used with <code>RESTful APIs</code> to control what data is exposed to clients. Here’s a simple example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">public</span> <span class="kw">class</span> UserDTO <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="kw">private</span> <span class="bu">Long</span> id<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="kw">private</span> <span class="bu">String</span> username<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="kw">private</span> <span class="bu">String</span> email<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>    <span class="co">// Constructors, getters, and setters</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To map between entities and <code>DTOs</code>, you can use libraries like <code>ModelMapper</code> or <code>MapStruct</code>. For instance, with <code>MapStruct</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="at">@Mapper</span><span class="op">(</span>componentModel <span class="op">=</span> <span class="st">"spring"</span><span class="op">)</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">public</span> <span class="kw">interface</span> UserMapper <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>    UserDTO <span class="fu">userToUserDTO</span><span class="op">(</span>User user<span class="op">);</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>    User <span class="fu">userDTOToUser</span><span class="op">(</span>UserDTO userDTO<span class="op">);</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>DTOs</code> are particularly useful when working with complex domain models or when you need to aggregate data from multiple entities.</p>
+</section>
+<section id="auditing" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="auditing"><span class="header-section-number">1.2</span> 2. Auditing</h2>
+<blockquote class="blockquote">
+<p><strong>Auditing</strong> is the process of tracking and logging changes to data over time. Spring Data JPA provides built-in support for <code>auditing</code> through annotations and interfaces.</p>
+</blockquote>
+<p>To enable auditing, add the <code>@EnableJpaAuditing</code> annotation to a configuration class:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="at">@Configuration</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="at">@EnableJpaAuditing</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">public</span> <span class="kw">class</span> JpaConfig <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then, use auditing annotations in your entity classes:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="at">@Entity</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="at">@EntityListeners</span><span class="op">(</span>AuditingEntityListener<span class="op">.</span><span class="fu">class</span><span class="op">)</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">public</span> <span class="kw">class</span> User <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="at">@CreatedDate</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="kw">private</span> Instant createdDate<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    <span class="at">@LastModifiedDate</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="kw">private</span> Instant lastModifiedDate<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a>    <span class="at">@CreatedBy</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>    <span class="kw">private</span> <span class="bu">String</span> createdBy<span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a>    <span class="at">@LastModifiedBy</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>    <span class="kw">private</span> <span class="bu">String</span> lastModifiedBy<span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a></span>
+<span id="cb4-16"><a href="#cb4-16"></a>    <span class="co">// Other fields, getters, and setters</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To provide the current user for <code>@CreatedBy</code> and <code>@LastModifiedBy</code>, implement the <code>AuditorAware</code> interface.</p>
+<p>For more details on auditing, refer to the <a href="https://docs.spring.io/spring-data/jpa/reference/auditing.html">Spring Data JPA Auditing documentation</a>.</p>
+</section>
+<section id="pagination" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="pagination"><span class="header-section-number">1.3</span> 3. Pagination</h2>
+<blockquote class="blockquote">
+<p><strong>Pagination</strong> is essential for handling large datasets efficiently.</p>
+<p><code>Spring Data JPA</code> provides built-in support for pagination through the <code>Pageable</code> interface and <code>Page</code> object.</p>
+</blockquote>
+<p>To use <code>pagination</code> in a repository method:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">public</span> <span class="kw">interface</span> UserRepository <span class="kw">extends</span> JpaRepository<span class="op">&lt;</span>User<span class="op">,</span> <span class="bu">Long</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>    Page<span class="op">&lt;</span>User<span class="op">&gt;</span> <span class="fu">findByLastName</span><span class="op">(</span><span class="bu">String</span> lastName<span class="op">,</span> <span class="bu">Pageable</span> pageable<span class="op">);</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In your service or controller:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="at">@GetMapping</span><span class="op">(</span><span class="st">"/users"</span><span class="op">)</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">public</span> Page<span class="op">&lt;</span>User<span class="op">&gt;</span> <span class="fu">getUsers</span><span class="op">(</span><span class="at">@RequestParam</span><span class="op">(</span>defaultValue <span class="op">=</span> <span class="st">"0"</span><span class="op">)</span> <span class="dt">int</span> page<span class="op">,</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>                           <span class="at">@RequestParam</span><span class="op">(</span>defaultValue <span class="op">=</span> <span class="st">"10"</span><span class="op">)</span> <span class="dt">int</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="bu">Pageable</span> pageable <span class="op">=</span> PageRequest<span class="op">.</span><span class="fu">of</span><span class="op">(</span>page<span class="op">,</span> size<span class="op">);</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="cf">return</span> userRepository<span class="op">.</span><span class="fu">findAll</span><span class="op">(</span>pageable<span class="op">);</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This approach allows clients to request specific pages of data, improving performance and reducing memory usage.</p>
+<p>For more information on pagination and sorting, see the <a href="https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html#repositories.special-parameters">Spring Data JPA documentation on Paging and Sorting</a>.</p>
+</section>
+<section id="spring-batch" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="spring-batch"><span class="header-section-number">1.4</span> 4. Spring Batch</h2>
+<blockquote class="blockquote">
+<p><strong>Spring Batch</strong> is a lightweight, comprehensive framework designed for robust batch processing. It’s particularly useful for <strong>ETL operations</strong>, data migrations, and periodic data processing tasks.</p>
+</blockquote>
+<p>A basic <code>Spring Batch</code> job consists of one or more steps, each with a reader, processor, and writer:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="at">@Configuration</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="at">@EnableBatchProcessing</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">public</span> <span class="kw">class</span> BatchConfig <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">@Bean</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="kw">public</span> Job <span class="fu">importUserJob</span><span class="op">(</span>JobBuilderFactory jobBuilderFactory<span class="op">,</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>                             Step step1<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>        <span class="cf">return</span> jobBuilderFactory<span class="op">.</span><span class="fu">get</span><span class="op">(</span><span class="st">"importUserJob"</span><span class="op">)</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>                <span class="op">.</span><span class="fu">incrementer</span><span class="op">(</span><span class="kw">new</span> <span class="fu">RunIdIncrementer</span><span class="op">())</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>                <span class="op">.</span><span class="fu">flow</span><span class="op">(</span>step1<span class="op">)</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>                <span class="op">.</span><span class="fu">end</span><span class="op">()</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>                <span class="op">.</span><span class="fu">build</span><span class="op">();</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>    <span class="op">}</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a></span>
+<span id="cb7-15"><a href="#cb7-15"></a>    <span class="at">@Bean</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>    <span class="kw">public</span> Step <span class="fu">step1</span><span class="op">(</span>StepBuilderFactory stepBuilderFactory<span class="op">,</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>                      ItemReader<span class="op">&lt;</span>User<span class="op">&gt;</span> reader<span class="op">,</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a>                      ItemProcessor<span class="op">&lt;</span>User<span class="op">,</span> User<span class="op">&gt;</span> processor<span class="op">,</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a>                      ItemWriter<span class="op">&lt;</span>User<span class="op">&gt;</span> writer<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a>        <span class="cf">return</span> stepBuilderFactory<span class="op">.</span><span class="fu">get</span><span class="op">(</span><span class="st">"step1"</span><span class="op">)</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a>                <span class="op">.&lt;</span>User<span class="op">,</span> User<span class="op">&gt;</span><span class="fu">chunk</span><span class="op">(</span><span class="dv">10</span><span class="op">)</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a>                <span class="op">.</span><span class="fu">reader</span><span class="op">(</span>reader<span class="op">)</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a>                <span class="op">.</span><span class="fu">processor</span><span class="op">(</span>processor<span class="op">)</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a>                <span class="op">.</span><span class="fu">writer</span><span class="op">(</span>writer<span class="op">)</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a>                <span class="op">.</span><span class="fu">build</span><span class="op">();</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a>    <span class="op">}</span></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Spring Batch provides robust error handling, restart capability, and parallel processing options, making it ideal for large-scale data operations.</p>
+</section>
+<section id="caching" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="caching"><span class="header-section-number">1.5</span> 5. Caching</h2>
+<blockquote class="blockquote">
+<p><strong>Caching</strong> is a powerful technique to improve application performance by storing frequently accessed data in memory. Spring Boot provides easy integration with various <code>caching</code> providers.</p>
+</blockquote>
+<p>To enable <code>caching</code>, add the <code>@EnableCaching</code> annotation to a configuration class:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a><span class="at">@Configuration</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="at">@EnableCaching</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">public</span> <span class="kw">class</span> CacheConfig <span class="op">{</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then, use <code>caching</code> annotations in your service methods:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a><span class="at">@Service</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">public</span> <span class="kw">class</span> UserService <span class="op">{</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a>    <span class="at">@Cacheable</span><span class="op">(</span><span class="st">"users"</span><span class="op">)</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="kw">public</span> User <span class="fu">getUserById</span><span class="op">(</span><span class="bu">Long</span> id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>        <span class="co">// Method implementation</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="op">}</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="at">@CachePut</span><span class="op">(</span>value <span class="op">=</span> <span class="st">"users"</span><span class="op">,</span> key <span class="op">=</span> <span class="st">"#user.id"</span><span class="op">)</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>    <span class="kw">public</span> User <span class="fu">updateUser</span><span class="op">(</span>User user<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>        <span class="co">// Method implementation</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>    <span class="op">}</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a></span>
+<span id="cb9-14"><a href="#cb9-14"></a>    <span class="at">@CacheEvict</span><span class="op">(</span>value <span class="op">=</span> <span class="st">"users"</span><span class="op">,</span> key <span class="op">=</span> <span class="st">"#id"</span><span class="op">)</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">deleteUser</span><span class="op">(</span><span class="bu">Long</span> id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>        <span class="co">// Method implementation</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a>    <span class="op">}</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Spring Boot auto-configures a suitable <code>CacheManager</code> based on the classpath dependencies. You can customize the caching behavior using properties in <code>application.properties</code> or <code>application.yml</code>.</p>
+<p>For more advanced caching scenarios, consider using distributed caches like <code>Redis</code> or <code>Hazelcast</code>.</p>
+</section>
+<section id="wrappers" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="wrappers"><span class="header-section-number">1.6</span> 6. Wrappers</h2>
+<blockquote class="blockquote">
+<p><strong>Wrappers</strong> in Spring Boot often refer to classes that encapsulate or extend the functionality of other objects. They can be used for various purposes, such as adding cross-cutting concerns, adapting interfaces, or providing additional functionality.</p>
+</blockquote>
+<p>One common use of <code>wrappers</code> is in the context of response entities. For example, you might create a wrapper class to standardize <code>API responses</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">public</span> <span class="kw">class</span> ApiResponse<span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>    <span class="kw">private</span> T data<span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>    <span class="kw">private</span> <span class="bu">String</span> message<span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>    <span class="kw">private</span> <span class="dt">boolean</span> success<span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a></span>
+<span id="cb10-6"><a href="#cb10-6"></a>    <span class="co">// Constructors, getters, and setters</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can then use this wrapper in your controllers:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1"></a><span class="at">@GetMapping</span><span class="op">(</span><span class="st">"/users/{id}"</span><span class="op">)</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">public</span> ResponseEntity<span class="op">&lt;</span>ApiResponse<span class="op">&lt;</span>User<span class="op">&gt;&gt;</span> <span class="fu">getUser</span><span class="op">(</span><span class="at">@PathVariable</span> <span class="bu">Long</span> id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>    User user <span class="op">=</span> userService<span class="op">.</span><span class="fu">getUserById</span><span class="op">(</span>id<span class="op">);</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>    ApiResponse<span class="op">&lt;</span>User<span class="op">&gt;</span> response <span class="op">=</span> <span class="kw">new</span> ApiResponse<span class="op">&lt;&gt;(</span>user<span class="op">,</span> <span class="st">"User retrieved successfully"</span><span class="op">,</span> <span class="kw">true</span><span class="op">);</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>    <span class="cf">return</span> ResponseEntity<span class="op">.</span><span class="fu">ok</span><span class="op">(</span>response<span class="op">);</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Another example is using wrappers for lazy loading in JPA:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1"></a><span class="at">@Entity</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">public</span> <span class="kw">class</span> User <span class="op">{</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>    <span class="at">@OneToMany</span><span class="op">(</span>fetch <span class="op">=</span> FetchType<span class="op">.</span><span class="fu">LAZY</span><span class="op">)</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="kw">private</span> <span class="bu">List</span><span class="op">&lt;</span>Order<span class="op">&gt;</span> orders<span class="op">;</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="co">// Other fields and methods</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here, <code>orders</code> is wrapped in a proxy object that loads the actual data only when accessed, improving performance for large datasets.</p>
+<p>Wrappers can also be used for decorating beans, implementing the decorator pattern, or creating custom type converters in Spring Boot applications.</p>
 
 
+</section>
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -2324,14 +2601,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../ifcd0021-24/ifcd0021deliveries-24.html" class="pagination-link" aria-label="IFCD0021 Calendar &amp; Deliveries">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">IFCD0021 Calendar &amp; Deliveries</span>
+      <a href="../springboot/boot-concepts-jpa-5.html" class="pagination-link" aria-label="Spring Boot: JPA Inherence">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Spring Boot: JPA Inherence</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../ifcd0021-24/ifcd0021backlog-product-24.html" class="pagination-link" aria-label="IFCD0021 Product Backlog">
-        <span class="nav-page-text">IFCD0021 Product Backlog</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -2342,7 +2616,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p>If you want to go far, walk slow / We love dukkha</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/ifcd0021-24/ifcd0021backlog-sprint-24.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/boot-concepts-scaling.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -2361,38 +2635,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 
