@@ -1,5 +1,5 @@
 ---
-title: "Lab#SB08-5: RestaurantManager"
+title: "Lab#SB08-5: Test API Rest"
 subtitle: Spring Boot Restaurant Management
 author: albertprofe
 date: "01/010/2024"
@@ -14,10 +14,211 @@ format:
 ---
 
 :::: {.labs}
-📘 Spring Boot Lab#SB00-5: RestaurantManager
-We are going to evolve the current Java SE Restaurant project into a Spring Boot Restaurant Management System with an H2 DB and web interface using Thymeleaf.
+📘 Spring Boot Lab#SB00-5: Test API Rest
+
+There are several effective methods exist to validate `API endpoints`: <mark>from simple `bash` scripts that log responses to sophisticated testing frameworks like `JUnit` and `RestAssured`</mark>
+
+Developers have a variety of tools at their disposal. Additionally, `Postman` provides a user-friendly interface for manual testing, while `Mockito` enables unit testing with mocked dependencies.
+
+
 :::
 </br>
 
 
 
+# Testing REST APIs in Spring Boot
+
+There are four primary methods to test a `REST API` in Spring Boot:
+
+## Bash Script with cURL
+
+Create a bash script to send requests and log responses:
+
+```bash
+#!/bin/bash
+
+# Send GET request and save response
+curl -X GET http://localhost:8080/api/endpoint > response.json
+
+# Log the response
+echo "API Response:" >> log.txt
+cat response.json >> log.txt
+echo "" >> log.txt
+
+# Check for errors
+if grep -q "error" response.json; then
+    echo "Error detected in API response" >> log.txt
+else
+    echo "API request successful" >> log.txt
+fi
+```
+
+## Postman
+
+Use Postman to send requests and validate responses:
+
+1. Create a new request in `Postman`
+2. Set the `HTTP` method and `URL`
+3. Add headers and request body if needed
+4. Send the request and examine the response
+5. Write tests in the "Tests" tab using `JavaScript`:
+
+```javascript
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Response contains expected data", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.key).to.eql("expected_value");
+});
+```
+
+## JUnit and RestAssured
+
+Test the `@RestController` class using JUnit and RestAssured:
+
+```java
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class ApiControllerTest {
+
+    @LocalServerPort
+    private int port;
+
+    @Test
+    public void testGetEndpoint() {
+        RestAssured.given()
+            .port(port)
+            .when()
+            .get("/api/endpoint")
+            .then()
+            .statusCode(200)
+            .body("key", equalTo("expected_value"));
+    }
+}
+```
+
+## Mockito
+
+Use `Mockito` to test controller methods with mocked dependencies:
+
+```java
+@ExtendWith(MockitoExtension.class)
+public class ApiControllerTest {
+
+    @Mock
+    private SomeService someService;
+
+    @InjectMocks
+    private ApiController apiController;
+
+    @Test
+    public void testGetEndpoint() {
+        when(someService.getData()).thenReturn("mocked_data");
+
+        ResponseEntity<String> response = apiController.getEndpoint();
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("mocked_data", response.getBody());
+        verify(someService).getData();
+    }
+}
+```
+
+
+# Configure local H2 server
+
+
+Running a **local H2 server** instance for testing `REST APIs` provides a <mark>more realistic environment that closely simulates production conditions.</mark> 
+
+> This setup allows for accurate testing results, as it retains data between test runs, unlike in-memory databases. The local server supports **multiple connections, which is essential for testing concurrent API requests effectively.**
+
+
+
+![](/images/springboot/labsb08/lab08-5-h2.png)
+
+Moreover, having a local server enables realistic performance benchmarking for database interactions and provides **debugging tools like the H2 Console**.
+
+This console allows easy inspection of the database state during tests, which is invaluable for troubleshooting. Additionally, testing advanced features such as transactions and concurrency is more effective in a server-mode database.
+
+``` java
+albert@albert-VirtualBox:~/MyApps$ java -cp h2-*.jar org.h2.tools.Server -tcp -tcpAllowOthers -tcpPort 8082
+TCP server running at tcp://127.0.1.1:8082 (others can connect)
+
+albert@albert-VirtualBox:~/MyApps$ java -cp h2-*.jar org.h2.tools.Server -tcp -tcpAllowOthers -tcpPort 80 -web -webAllowOthers -webPort 8080
+TCP server running at tcp://127.0.1.1:8082 (others can connect)
+Web Console server running at http://127.0.1.1:8080 (others can connect)
+
+```
+
+![](/images/springboot/labsb08/lab08-5-h2-2.png)
+
+
+To run the H2 database in server mode and allow multiple connections, you can use the following command:
+
+```bash
+java -cp h2-*.jar org.h2.tools.Server -tcp -tcpAllowOthers -tcpPort 8082
+```
+
+Let's break down this command and explain its components:
+
+1. `java`: Invokes the Java runtime.
+  
+2. `-cp h2-*.jar`: Specifies the classpath, including the H2 database JAR file.
+  
+3. `org.h2.tools.Server`: The main class to start the H2 server.
+  
+4. `-tcp`: Starts the TCP server.
+  
+5. `-tcpAllowOthers`: Allows other computers to connect to the H2 database server. This is important for remote connections.
+  
+6. `-tcpPort 8082`: Specifies the TCP port on which the server will listen. In this case, it's set to 8082.
+  
+
+After running this command, the `H2 database` server will start and listen for connections on port 8082. You should see output indicating that the server has started successfully.
+
+To connect to this server from your application, you would use a `JDBC URL` like this:
+
+```
+jdbc:h2:tcp://localhost:8082/~/path/to/your/database
+```
+
+## Downloads
+
+[Download latest version](https://h2database.com/html/download.html) or add to `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <version>2.3.232</version>
+</dependency>
+```
+
+## Links
+
+- [https://h2database.com](https://h2database.com/){.external target='_blank'}
+- [Using server](https://h2database.com/html/tutorial.html#using_server){.external target='_blank'}
+
+
+# Test Junit
+
+In Spring Boot applications testing with `H2 database` setups, different ports are used for specific purposes:
+
+1. Spring Boot Application **(Port 8084)**:
+   The test uses port 8084 for the Spring Boot application. This is likely a custom port chosen for the test environment, different from the default `8080` to avoid conflicts with other services.
+
+2. H2 TCP Server **(Port 8082)**:
+   The H2 database TCP server runs on port `8082`. This is the default port for H2's TCP server and is used for database connections from your application.
+
+3. H2 Web Console **(Port 8080)**:
+   The H2 web console is set to run on port `8080`. This provides a web interface to interact with the H2 database for management and querying.
+
+> Using different ports for these components allows them to run simultaneously without conflicts. The Spring Boot application **can connect to the H2 database via the TCP port (8082)**, while developers can access the H2 console via the web port (8080) for database management.
+> 
+> The application's API is then tested on its own port (8084), <mark>ensuring isolation between the application, database server, and database console.</mark>
+
+
+![](/images/springboot/labsb08/lab08-5-test.png)
+
+![](/images/springboot/labsb08/lab08-5-h2-lock.png)
