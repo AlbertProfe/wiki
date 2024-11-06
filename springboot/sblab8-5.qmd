@@ -26,9 +26,9 @@ Developers have a variety of tools at their disposal. Additionally, `Postman` pr
 
 
 
-# Testing REST APIs in Spring Boot
+# Testing API Rest
 
-There are four primary methods to test a `REST API` in Spring Boot:
+There are four relevant methods to test a `REST API` in Spring Boot:
 
 ## Bash Script with cURL
 
@@ -129,7 +129,7 @@ public class ApiControllerTest {
 # Configure local H2 server
 
 
-Running a **local H2 server** instance for testing `REST APIs` provides a <mark>more realistic environment that closely simulates production conditions.</mark> 
+Running a **local H2 server** instance for testing `REST APIs` provides a <mark>more realistic environment that closely simulates production conditions.</mark>
 
 > This setup allows for accurate testing results, as it retains data between test runs, unlike in-memory databases. The local server supports **multiple connections, which is essential for testing concurrent API requests effectively.**
 
@@ -154,7 +154,7 @@ Web Console server running at http://127.0.1.1:8080 (others can connect)
 ![](/images/springboot/labsb08/lab08-5-h2-2.png)
 
 
-To run the H2 database in server mode and allow multiple connections, you can use the following command:
+To run the `H2 database` in server mode and allow multiple connections, you can use the following command:
 
 ```bash
 java -cp h2-*.jar org.h2.tools.Server -tcp -tcpAllowOthers -tcpPort 8082
@@ -162,15 +162,15 @@ java -cp h2-*.jar org.h2.tools.Server -tcp -tcpAllowOthers -tcpPort 8082
 
 Let's break down this command and explain its components:
 
-1. `java`: Invokes the Java runtime.
+1. `java`: Invokes the `Java` runtime.
   
-2. `-cp h2-*.jar`: Specifies the classpath, including the H2 database JAR file.
+2. `-cp h2-*.jar`: Specifies the classpath, including the `H2 database` JAR file.
   
-3. `org.h2.tools.Server`: The main class to start the H2 server.
+3. `org.h2.tools.Server`: The main class to start the `H2 server`.
   
-4. `-tcp`: Starts the TCP server.
+4. `-tcp`: Starts the `TCP` server.
   
-5. `-tcpAllowOthers`: Allows other computers to connect to the H2 database server. This is important for remote connections.
+5. `-tcpAllowOthers`: Allows other computers to connect to the `H2 database` server. This is important for remote connections.
   
 6. `-tcpPort 8082`: Specifies the TCP port on which the server will listen. In this case, it's set to 8082.
   
@@ -179,7 +179,7 @@ After running this command, the `H2 database` server will start and listen for c
 
 To connect to this server from your application, you would use a `JDBC URL` like this:
 
-```
+``` bash
 jdbc:h2:tcp://localhost:8082/~/path/to/your/database
 ```
 
@@ -187,7 +187,7 @@ jdbc:h2:tcp://localhost:8082/~/path/to/your/database
 
 [Download latest version](https://h2database.com/html/download.html) or add to `pom.xml`:
 
-```xml
+``` xml
 <dependency>
     <groupId>com.h2database</groupId>
     <artifactId>h2</artifactId>
@@ -197,7 +197,7 @@ jdbc:h2:tcp://localhost:8082/~/path/to/your/database
 
 ## Links
 
-- [https://h2database.com](https://h2database.com/){.external target='_blank'}
+- [h2database](https://h2database.com/){.external target='_blank'}
 - [Using server](https://h2database.com/html/tutorial.html#using_server){.external target='_blank'}
 
 
@@ -205,20 +205,24 @@ jdbc:h2:tcp://localhost:8082/~/path/to/your/database
 
 In Spring Boot applications testing with `H2 database` setups, different ports are used for specific purposes:
 
-1. Spring Boot Application **(Port 8084)**:
-   The test uses port 8084 for the Spring Boot application. This is likely a custom port chosen for the test environment, different from the default `8080` to avoid conflicts with other services.
+1. <mark>Spring Boot Application</mark> **(Port 8084)**:
+   The test uses port `8084` for the Spring Boot application. This is a custom port chosen for the test environment, different from the default `8080` *to avoid conflicts with other services*, we leave this port, the `8080` for the `h2-console.`
 
-2. H2 TCP Server **(Port 8082)**:
+2. <mark>H2 TCP Server</mark> **(Port 8082)**:
    The H2 database TCP server runs on port `8082`. This is the default port for H2's TCP server and is used for database connections from your application.
 
-3. H2 Web Console **(Port 8080)**:
-   The H2 web console is set to run on port `8080`. This provides a web interface to interact with the H2 database for management and querying.
+3. <mark>H2 Web Console</mark> **(Port 8080)**:
+   The H2 web console is set to run on port `8080`. This provides a web interface to interact with the `H2 database` for management and querying.
 
 > Using different ports for these components allows them to run simultaneously without conflicts. The Spring Boot application **can connect to the H2 database via the TCP port (8082)**, while developers can access the H2 console via the web port (8080) for database management.
-> 
-> The application's API is then tested on its own port (8084), <mark>ensuring isolation between the application, database server, and database console.</mark>
+
+
 
 
 ![](/images/springboot/labsb08/lab08-5-test.png)
 
+The application's API is then tested on its own port (8084), <mark>ensuring isolation between the application, database server, and database console.</mark>
+
 ![](/images/springboot/labsb08/lab08-5-h2-lock.png)
+
+![](/images/springboot/labsb08/lab08-5-h2-trace.png)
