@@ -66,6 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../springboot/sblab8-6.html" rel="next">
 <link href="../springboot/sblab8-4.html" rel="prev">
 <link href="..//images/home/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js"></script>
@@ -883,6 +884,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../springboot/sblab8-5.html">
  <span class="dropdown-text">Lab#SB08-5: Test API Rest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab8-6.html">
+ <span class="dropdown-text">Lab#SB08-6: RestaurantManager</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Spring Boot readings</li>
@@ -1754,6 +1759,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Lab#SB08-5: Test API Rest</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-6: RestaurantManager</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -1784,7 +1795,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#testing-rest-apis-in-spring-boot" id="toc-testing-rest-apis-in-spring-boot" class="nav-link active" data-scroll-target="#testing-rest-apis-in-spring-boot"><span class="header-section-number">1</span> Testing REST APIs in Spring Boot</a>
+  <li><a href="#testing-api-rest" id="toc-testing-api-rest" class="nav-link active" data-scroll-target="#testing-api-rest"><span class="header-section-number">1</span> Testing API Rest</a>
   <ul>
   <li><a href="#bash-script-with-curl" id="toc-bash-script-with-curl" class="nav-link" data-scroll-target="#bash-script-with-curl"><span class="header-section-number">1.1</span> Bash Script with cURL</a></li>
   <li><a href="#postman" id="toc-postman" class="nav-link" data-scroll-target="#postman"><span class="header-section-number">1.2</span> Postman</a></li>
@@ -1856,9 +1867,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Developers have a variety of tools at their disposal. Additionally, <code>Postman</code> provides a user-friendly interface for manual testing, while <code>Mockito</code> enables unit testing with mocked dependencies.</p>
 </div>
 <p><br></p>
-<section id="testing-rest-apis-in-spring-boot" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Testing REST APIs in Spring Boot</h1>
-<p>There are four primary methods to test a <code>REST API</code> in Spring Boot:</p>
+<section id="testing-api-rest" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Testing API Rest</h1>
+<p>There are four relevant methods to test a <code>REST API</code> in Spring Boot:</p>
 <section id="bash-script-with-curl" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="bash-script-with-curl"><span class="header-section-number">1.1</span> Bash Script with cURL</h2>
 <p>Create a bash script to send requests and log responses:</p>
@@ -1960,20 +1971,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-5"><a href="#cb5-5"></a>TCP server running at tcp<span class="op">:</span><span class="co">//127.0.1.1:8082 (others can connect)</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a>Web <span class="bu">Console</span> server running at http<span class="op">:</span><span class="co">//127.0.1.1:8080 (others can connect)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><a href="../images/springboot/labsb08/lab08-5-h2-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="../images/springboot/labsb08/lab08-5-h2-2.png" class="img-fluid"></a></p>
-<p>To run the H2 database in server mode and allow multiple connections, you can use the following command:</p>
+<p>To run the <code>H2 database</code> in server mode and allow multiple connections, you can use the following command:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">java</span> <span class="at">-cp</span> h2-<span class="pp">*</span>.jar org.h2.tools.Server <span class="at">-tcp</span> <span class="at">-tcpAllowOthers</span> <span class="at">-tcpPort</span> 8082</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s break down this command and explain its components:</p>
 <ol type="1">
-<li><p><code>java</code>: Invokes the Java runtime.</p></li>
-<li><p><code>-cp h2-*.jar</code>: Specifies the classpath, including the H2 database JAR file.</p></li>
-<li><p><code>org.h2.tools.Server</code>: The main class to start the H2 server.</p></li>
-<li><p><code>-tcp</code>: Starts the TCP server.</p></li>
-<li><p><code>-tcpAllowOthers</code>: Allows other computers to connect to the H2 database server. This is important for remote connections.</p></li>
+<li><p><code>java</code>: Invokes the <code>Java</code> runtime.</p></li>
+<li><p><code>-cp h2-*.jar</code>: Specifies the classpath, including the <code>H2 database</code> JAR file.</p></li>
+<li><p><code>org.h2.tools.Server</code>: The main class to start the <code>H2 server</code>.</p></li>
+<li><p><code>-tcp</code>: Starts the <code>TCP</code> server.</p></li>
+<li><p><code>-tcpAllowOthers</code>: Allows other computers to connect to the <code>H2 database</code> server. This is important for remote connections.</p></li>
 <li><p><code>-tcpPort 8082</code>: Specifies the TCP port on which the server will listen. In this case, it’s set to 8082.</p></li>
 </ol>
 <p>After running this command, the <code>H2 database</code> server will start and listen for connections on port 8082. You should see output indicating that the server has started successfully.</p>
 <p>To connect to this server from your application, you would use a <code>JDBC URL</code> like this:</p>
-<pre><code>jdbc:h2:tcp://localhost:8082/~/path/to/your/database</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">jdbc:h2:tcp://localhost:8082/~/path/to/your/database</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="downloads" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="downloads"><span class="header-section-number">2.1</span> Downloads</h2>
 <p><a href="https://h2database.com/html/download.html">Download latest version</a>&nbsp;or add to&nbsp;<code>pom.xml</code>:</p>
@@ -1986,7 +1997,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="links" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="links"><span class="header-section-number">2.2</span> Links</h2>
 <ul>
-<li><a href="https://h2database.com/" class="external" target="_blank">https://h2database.com</a></li>
+<li><a href="https://h2database.com/" class="external" target="_blank">h2database</a></li>
 <li><a href="https://h2database.com/html/tutorial.html#using_server" class="external" target="_blank">Using server</a></li>
 </ul>
 </section>
@@ -1995,16 +2006,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="3"><span class="header-section-number">3</span> Test Junit</h1>
 <p>In Spring Boot applications testing with <code>H2 database</code> setups, different ports are used for specific purposes:</p>
 <ol type="1">
-<li><p>Spring Boot Application <strong>(Port 8084)</strong>: The test uses port 8084 for the Spring Boot application. This is likely a custom port chosen for the test environment, different from the default <code>8080</code> to avoid conflicts with other services.</p></li>
-<li><p>H2 TCP Server <strong>(Port 8082)</strong>: The H2 database TCP server runs on port <code>8082</code>. This is the default port for H2’s TCP server and is used for database connections from your application.</p></li>
-<li><p>H2 Web Console <strong>(Port 8080)</strong>: The H2 web console is set to run on port <code>8080</code>. This provides a web interface to interact with the H2 database for management and querying.</p></li>
+<li><p><mark>Spring Boot Application</mark> <strong>(Port 8084)</strong>: The test uses port <code>8084</code> for the Spring Boot application. This is a custom port chosen for the test environment, different from the default <code>8080</code> <em>to avoid conflicts with other services</em>, we leave this port, the <code>8080</code> for the <code>h2-console.</code></p></li>
+<li><p><mark>H2 TCP Server</mark> <strong>(Port 8082)</strong>: The H2 database TCP server runs on port <code>8082</code>. This is the default port for H2’s TCP server and is used for database connections from your application.</p></li>
+<li><p><mark>H2 Web Console</mark> <strong>(Port 8080)</strong>: The H2 web console is set to run on port <code>8080</code>. This provides a web interface to interact with the <code>H2 database</code> for management and querying.</p></li>
 </ol>
 <blockquote class="blockquote">
 <p>Using different ports for these components allows them to run simultaneously without conflicts. The Spring Boot application <strong>can connect to the H2 database via the TCP port (8082)</strong>, while developers can access the H2 console via the web port (8080) for database management.</p>
-<p>The application’s API is then tested on its own port (8084), <mark>ensuring isolation between the application, database server, and database console.</mark></p>
 </blockquote>
 <p><a href="../images/springboot/labsb08/lab08-5-test.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="../images/springboot/labsb08/lab08-5-test.png" class="img-fluid"></a></p>
+<p>The application’s API is then tested on its own port (8084), <mark>ensuring isolation between the application, database server, and database console.</mark></p>
 <p><a href="../images/springboot/labsb08/lab08-5-h2-lock.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="../images/springboot/labsb08/lab08-5-h2-lock.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-5-h2-trace.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="../images/springboot/labsb08/lab08-5-h2-trace.png" class="img-fluid"></a></p>
 
 
 </section>
@@ -2581,6 +2593,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../springboot/sblab8-6.html" class="pagination-link" aria-label="Lab#SB08-6: RestaurantManager">
+        <span class="nav-page-text">Lab#SB08-6: RestaurantManager</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

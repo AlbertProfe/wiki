@@ -879,7 +879,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../springboot/sblab8-5.html">
- <span class="dropdown-text">Lab#SB08-5: RestaurantManager</span></a>
+ <span class="dropdown-text">Lab#SB08-5: Test API Rest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab8-6.html">
+ <span class="dropdown-text">Lab#SB08-6: RestaurantManager</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Spring Boot readings</li>
@@ -1748,7 +1752,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../springboot/sblab8-5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab#SB08-5: RestaurantManager</span></a>
+ <span class="menu-text">Lab#SB08-5: Test API Rest</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/sblab8-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#SB08-6: RestaurantManager</span></a>
   </div>
 </li>
       </ul>
@@ -1783,12 +1793,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#scaling-spring-boot" id="toc-scaling-spring-boot" class="nav-link active" data-scroll-target="#scaling-spring-boot"><span class="header-section-number">1</span> Scaling Spring Boot</a>
   <ul>
-  <li><a href="#dto-data-transfer-object" id="toc-dto-data-transfer-object" class="nav-link" data-scroll-target="#dto-data-transfer-object"><span class="header-section-number">1.1</span> 1. DTO: Data Transfer Object</a></li>
-  <li><a href="#auditing" id="toc-auditing" class="nav-link" data-scroll-target="#auditing"><span class="header-section-number">1.2</span> 2. Auditing</a></li>
-  <li><a href="#pagination" id="toc-pagination" class="nav-link" data-scroll-target="#pagination"><span class="header-section-number">1.3</span> 3. Pagination</a></li>
-  <li><a href="#spring-batch" id="toc-spring-batch" class="nav-link" data-scroll-target="#spring-batch"><span class="header-section-number">1.4</span> 4. Spring Batch</a></li>
-  <li><a href="#caching" id="toc-caching" class="nav-link" data-scroll-target="#caching"><span class="header-section-number">1.5</span> 5. Caching</a></li>
-  <li><a href="#wrappers" id="toc-wrappers" class="nav-link" data-scroll-target="#wrappers"><span class="header-section-number">1.6</span> 6. Wrappers</a></li>
+  <li><a href="#dto-data-transfer-object" id="toc-dto-data-transfer-object" class="nav-link" data-scroll-target="#dto-data-transfer-object"><span class="header-section-number">1.1</span> DTO: Data Transfer Object</a></li>
+  <li><a href="#auditing" id="toc-auditing" class="nav-link" data-scroll-target="#auditing"><span class="header-section-number">1.2</span> Auditing</a></li>
+  <li><a href="#pagination" id="toc-pagination" class="nav-link" data-scroll-target="#pagination"><span class="header-section-number">1.3</span> Pagination</a></li>
+  <li><a href="#spring-batch" id="toc-spring-batch" class="nav-link" data-scroll-target="#spring-batch"><span class="header-section-number">1.4</span> Spring Batch</a></li>
+  <li><a href="#caching" id="toc-caching" class="nav-link" data-scroll-target="#caching"><span class="header-section-number">1.5</span> Caching</a></li>
+  <li><a href="#wrappers" id="toc-wrappers" class="nav-link" data-scroll-target="#wrappers"><span class="header-section-number">1.6</span> Wrappers</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/boot-concepts-scaling.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -1832,7 +1842,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tuesday, November 5, 2024</p>
+      <p class="date-modified">Wednesday, November 6, 2024</p>
     </div>
   </div>
     
@@ -1861,7 +1871,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="scaling-spring-boot" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Scaling Spring Boot</h1>
 <section id="dto-data-transfer-object" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="dto-data-transfer-object"><span class="header-section-number">1.1</span> 1. DTO: Data Transfer Object</h2>
+<h2 data-number="1.1" class="anchored" data-anchor-id="dto-data-transfer-object"><span class="header-section-number">1.1</span> DTO: Data Transfer Object</h2>
 <blockquote class="blockquote">
 <p><strong>Data Transfer Objects (DTOs)</strong> are crucial for efficient data transmission between different layers of an application. They help reduce network overhead and decouple the internal data model from the external API representation.</p>
 </blockquote>
@@ -1882,7 +1892,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>DTOs</code> are particularly useful when working with complex domain models or when you need to aggregate data from multiple entities.</p>
 </section>
 <section id="auditing" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="auditing"><span class="header-section-number">1.2</span> 2. Auditing</h2>
+<h2 data-number="1.2" class="anchored" data-anchor-id="auditing"><span class="header-section-number">1.2</span> Auditing</h2>
 <blockquote class="blockquote">
 <p><strong>Auditing</strong> is the process of tracking and logging changes to data over time. Spring Data JPA provides built-in support for <code>auditing</code> through annotations and interfaces.</p>
 </blockquote>
@@ -1913,7 +1923,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>For more details on auditing, refer to the <a href="https://docs.spring.io/spring-data/jpa/reference/auditing.html">Spring Data JPA Auditing documentation</a>.</p>
 </section>
 <section id="pagination" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="pagination"><span class="header-section-number">1.3</span> 3. Pagination</h2>
+<h2 data-number="1.3" class="anchored" data-anchor-id="pagination"><span class="header-section-number">1.3</span> Pagination</h2>
 <blockquote class="blockquote">
 <p><strong>Pagination</strong> is essential for handling large datasets efficiently.</p>
 <p><code>Spring Data JPA</code> provides built-in support for pagination through the <code>Pageable</code> interface and <code>Page</code> object.</p>
@@ -1933,7 +1943,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>For more information on pagination and sorting, see the <a href="https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html#repositories.special-parameters">Spring Data JPA documentation on Paging and Sorting</a>.</p>
 </section>
 <section id="spring-batch" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="spring-batch"><span class="header-section-number">1.4</span> 4. Spring Batch</h2>
+<h2 data-number="1.4" class="anchored" data-anchor-id="spring-batch"><span class="header-section-number">1.4</span> Spring Batch</h2>
 <blockquote class="blockquote">
 <p><strong>Spring Batch</strong> is a lightweight, comprehensive framework designed for robust batch processing. It’s particularly useful for <strong>ETL operations</strong>, data migrations, and periodic data processing tasks.</p>
 </blockquote>
@@ -1968,7 +1978,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Spring Batch provides robust error handling, restart capability, and parallel processing options, making it ideal for large-scale data operations.</p>
 </section>
 <section id="caching" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="caching"><span class="header-section-number">1.5</span> 5. Caching</h2>
+<h2 data-number="1.5" class="anchored" data-anchor-id="caching"><span class="header-section-number">1.5</span> Caching</h2>
 <blockquote class="blockquote">
 <p><strong>Caching</strong> is a powerful technique to improve application performance by storing frequently accessed data in memory. Spring Boot provides easy integration with various <code>caching</code> providers.</p>
 </blockquote>
@@ -2000,7 +2010,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>For more advanced caching scenarios, consider using distributed caches like <code>Redis</code> or <code>Hazelcast</code>.</p>
 </section>
 <section id="wrappers" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="wrappers"><span class="header-section-number">1.6</span> 6. Wrappers</h2>
+<h2 data-number="1.6" class="anchored" data-anchor-id="wrappers"><span class="header-section-number">1.6</span> Wrappers</h2>
 <blockquote class="blockquote">
 <p><strong>Wrappers</strong> in Spring Boot often refer to classes that encapsulate or extend the functionality of other objects. They can be used for various purposes, such as adding cross-cutting concerns, adapting interfaces, or providing additional functionality.</p>
 </blockquote>
