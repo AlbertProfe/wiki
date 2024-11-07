@@ -34,6 +34,8 @@ There are four relevant methods to test a `REST API` in Spring Boot:
 
 Create a bash script to send requests and log responses:
 
+::: {.column-page-right}
+
 ```bash
 #!/bin/bash
 
@@ -52,6 +54,8 @@ else
     echo "API request successful" >> log.txt
 fi
 ```
+:::
+
 
 ## Postman
 
@@ -79,7 +83,8 @@ pm.test("Response contains expected data", function () {
 Test the `@RestController` class using JUnit and RestAssured:
 
 ```java
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = 
+    SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ApiControllerTest {
 
     @LocalServerPort
@@ -102,6 +107,8 @@ public class ApiControllerTest {
 
 Use `Mockito` to test controller methods with mocked dependencies:
 
+
+::: {.column-page-right}
 ```java
 @ExtendWith(MockitoExtension.class)
 public class ApiControllerTest {
@@ -124,7 +131,7 @@ public class ApiControllerTest {
     }
 }
 ```
-
+:::
 
 # Configure local H2 server
 
@@ -144,17 +151,24 @@ This console allows easy inspection of the database state during tests, which is
 ``` java
 albert@albert-VirtualBox:~/MyApps$ java -cp h2-*.jar org.h2.tools.Server -tcp -tcpAllowOthers -tcpPort 8082
 TCP server running at tcp://127.0.1.1:8082 (others can connect)
+```
 
+And adding flags to publish the **web console:**
+
+``` java
 albert@albert-VirtualBox:~/MyApps$ java -cp h2-*.jar org.h2.tools.Server -tcp -tcpAllowOthers -tcpPort 80 -web -webAllowOthers -webPort 8080
 TCP server running at tcp://127.0.1.1:8082 (others can connect)
 Web Console server running at http://127.0.1.1:8080 (others can connect)
 
 ```
 
+Once it is running the web console pops up:
+
+
 ![](/images/springboot/labsb08/lab08-5-h2-2.png)
 
 
-To run the `H2 database` in server mode and allow multiple connections, you can use the following command:
+To run the `H2 database` in server mode and allow multiple connections at `8082` server port, you can use the following command:
 
 ```bash
 java -cp h2-*.jar org.h2.tools.Server -tcp -tcpAllowOthers -tcpPort 8082
@@ -195,13 +209,13 @@ jdbc:h2:tcp://localhost:8082/~/path/to/your/database
 </dependency>
 ```
 
-## Links
+**Links**
 
 - [h2database](https://h2database.com/){.external target='_blank'}
 - [Using server](https://h2database.com/html/tutorial.html#using_server){.external target='_blank'}
 
 
-# Test Junit
+# Three-ports system
 
 In Spring Boot applications testing with `H2 database` setups, different ports are used for specific purposes:
 
@@ -221,7 +235,31 @@ In Spring Boot applications testing with `H2 database` setups, different ports a
 
 ![](/images/springboot/labsb08/lab08-5-test.png)
 
-The application's API is then tested on its own port (8084), <mark>ensuring isolation between the application, database server, and database console.</mark>
+The application's `API` is then tested on its own port (`8084`), <mark>ensuring isolation between the application, database server, and database console.</mark>
+
+H2 web console starts at `8080` port
+
+![](/images/springboot/labsb08/lab08-5-h2-2.png)
+
+
+## `.lock` and `.trace`
+
+> Be careful with the files RestaurantMangerDB creates like `.lock` and `.trace`.
+
+`.lock` and `.trace` files are typically used by database systems for management and troubleshooting purposes:
+
+**.lock files:**
+- Used to prevent concurrent access to database resources
+- Indicate that a process has exclusive access to a particular file or resource
+- Help maintain data integrity by avoiding conflicts between multiple processes
+
+**.trace files:**
+- Contain detailed logs of database operations and events
+- Used for debugging and performance analysis
+- May include SQL statements, execution plans, and error messages
+- Helpful for identifying issues like deadlocks or slow queries
+
+
 
 ![](/images/springboot/labsb08/lab08-5-h2-lock.png)
 
