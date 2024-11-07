@@ -1805,14 +1805,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#configure-local-h2-server" id="toc-configure-local-h2-server" class="nav-link" data-scroll-target="#configure-local-h2-server"><span class="header-section-number">2</span> Configure local H2 server</a>
   <ul>
   <li><a href="#downloads" id="toc-downloads" class="nav-link" data-scroll-target="#downloads"><span class="header-section-number">2.1</span> Downloads</a></li>
-  <li><a href="#links" id="toc-links" class="nav-link" data-scroll-target="#links"><span class="header-section-number">2.2</span> Links</a></li>
   </ul></li>
-  <li><a href="#test-junit" id="toc-test-junit" class="nav-link" data-scroll-target="#test-junit"><span class="header-section-number">3</span> Test Junit</a></li>
+  <li><a href="#three-ports-system" id="toc-three-ports-system" class="nav-link" data-scroll-target="#three-ports-system"><span class="header-section-number">3</span> Three-ports system</a>
+  <ul>
+  <li><a href="#lock-and-.trace" id="toc-lock-and-.trace" class="nav-link" data-scroll-target="#lock-and-.trace"><span class="header-section-number">3.1</span> <code>.lock</code> and <code>.trace</code></a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/sblab8-5.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/sblab0-1.html">Spring Boot Laboratories</a></li><li class="breadcrumb-item"><a href="../springboot/sblab8-5.html">Lab#SB08-5: Test API Rest</a></li></ol></nav>
 <div class="quarto-title">
@@ -1850,7 +1852,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Wednesday, November 6, 2024</p>
+      <p class="date-modified">Thursday, November 7, 2024</p>
     </div>
   </div>
     
@@ -1867,12 +1869,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Developers have a variety of tools at their disposal. Additionally, <code>Postman</code> provides a user-friendly interface for manual testing, while <code>Mockito</code> enables unit testing with mocked dependencies.</p>
 </div>
 <p><br></p>
-<section id="testing-api-rest" class="level1" data-number="1">
+<section id="testing-api-rest" class="level1 page-columns page-full" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Testing API Rest</h1>
 <p>There are four relevant methods to test a <code>REST API</code> in Spring Boot:</p>
-<section id="bash-script-with-curl" class="level2" data-number="1.1">
+<section id="bash-script-with-curl" class="level2 page-columns page-full" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="bash-script-with-curl"><span class="header-section-number">1.1</span> Bash Script with cURL</h2>
 <p>Create a bash script to send requests and log responses:</p>
+<div class="column-page-right">
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="co"># Send GET request and save response</span></span>
@@ -1889,6 +1892,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-14"><a href="#cb1-14"></a><span class="cf">else</span></span>
 <span id="cb1-15"><a href="#cb1-15"></a>    <span class="bu">echo</span> <span class="st">"API request successful"</span> <span class="op">&gt;&gt;</span> log.txt</span>
 <span id="cb1-16"><a href="#cb1-16"></a><span class="cf">fi</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="postman" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="postman"><span class="header-section-number">1.2</span> Postman</h2>
@@ -1912,27 +1916,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="junit-and-restassured" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="junit-and-restassured"><span class="header-section-number">1.3</span> JUnit and RestAssured</h2>
 <p>Test the <code>@RestController</code> class using JUnit and RestAssured:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="at">@SpringBootTest</span><span class="op">(</span>webEnvironment <span class="op">=</span> SpringBootTest<span class="op">.</span><span class="fu">WebEnvironment</span><span class="op">.</span><span class="fu">RANDOM_PORT</span><span class="op">)</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">public</span> <span class="kw">class</span> ApiControllerTest <span class="op">{</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a></span>
-<span id="cb3-4"><a href="#cb3-4"></a>    <span class="at">@LocalServerPort</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>    <span class="kw">private</span> <span class="dt">int</span> port<span class="op">;</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a></span>
-<span id="cb3-7"><a href="#cb3-7"></a>    <span class="at">@Test</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testGetEndpoint</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>        RestAssured<span class="op">.</span><span class="fu">given</span><span class="op">()</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a>            <span class="op">.</span><span class="fu">port</span><span class="op">(</span>port<span class="op">)</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a>            <span class="op">.</span><span class="fu">when</span><span class="op">()</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a>            <span class="op">.</span><span class="fu">get</span><span class="op">(</span><span class="st">"/api/endpoint"</span><span class="op">)</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>            <span class="op">.</span><span class="fu">then</span><span class="op">()</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a>            <span class="op">.</span><span class="fu">statusCode</span><span class="op">(</span><span class="dv">200</span><span class="op">)</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a>            <span class="op">.</span><span class="fu">body</span><span class="op">(</span><span class="st">"key"</span><span class="op">,</span> <span class="fu">equalTo</span><span class="op">(</span><span class="st">"expected_value"</span><span class="op">));</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a>    <span class="op">}</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="at">@SpringBootTest</span><span class="op">(</span>webEnvironment <span class="op">=</span> </span>
+<span id="cb3-2"><a href="#cb3-2"></a>    SpringBootTest<span class="op">.</span><span class="fu">WebEnvironment</span><span class="op">.</span><span class="fu">RANDOM_PORT</span><span class="op">)</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">public</span> <span class="kw">class</span> ApiControllerTest <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="at">@LocalServerPort</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="kw">private</span> <span class="dt">int</span> port<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="at">@Test</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">testGetEndpoint</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>        RestAssured<span class="op">.</span><span class="fu">given</span><span class="op">()</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>            <span class="op">.</span><span class="fu">port</span><span class="op">(</span>port<span class="op">)</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>            <span class="op">.</span><span class="fu">when</span><span class="op">()</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>            <span class="op">.</span><span class="fu">get</span><span class="op">(</span><span class="st">"/api/endpoint"</span><span class="op">)</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>            <span class="op">.</span><span class="fu">then</span><span class="op">()</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a>            <span class="op">.</span><span class="fu">statusCode</span><span class="op">(</span><span class="dv">200</span><span class="op">)</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>            <span class="op">.</span><span class="fu">body</span><span class="op">(</span><span class="st">"key"</span><span class="op">,</span> <span class="fu">equalTo</span><span class="op">(</span><span class="st">"expected_value"</span><span class="op">));</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>    <span class="op">}</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="mockito" class="level2" data-number="1.4">
+<section id="mockito" class="level2 page-columns page-full" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="mockito"><span class="header-section-number">1.4</span> Mockito</h2>
 <p>Use <code>Mockito</code> to test controller methods with mocked dependencies:</p>
+<div class="column-page-right">
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="at">@ExtendWith</span><span class="op">(</span>MockitoExtension<span class="op">.</span><span class="fu">class</span><span class="op">)</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw">public</span> <span class="kw">class</span> ApiControllerTest <span class="op">{</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a></span>
@@ -1953,6 +1959,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-18"><a href="#cb4-18"></a>        <span class="fu">verify</span><span class="op">(</span>someService<span class="op">).</span><span class="fu">getData</span><span class="op">();</span></span>
 <span id="cb4-19"><a href="#cb4-19"></a>    <span class="op">}</span></span>
 <span id="cb4-20"><a href="#cb4-20"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 <section id="configure-local-h2-server" class="level1" data-number="2">
@@ -1965,14 +1972,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Moreover, having a local server enables realistic performance benchmarking for database interactions and provides <strong>debugging tools like the H2 Console</strong>.</p>
 <p>This console allows easy inspection of the database state during tests, which is invaluable for troubleshooting. Additionally, testing advanced features such as transactions and concurrency is more effective in a server-mode database.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a>albert<span class="at">@albert</span><span class="op">-</span>VirtualBox<span class="op">:~/</span>MyApps$ java <span class="op">-</span>cp h2<span class="op">-*.</span><span class="fu">jar</span> org<span class="op">.</span><span class="fu">h2</span><span class="op">.</span><span class="fu">tools</span><span class="op">.</span><span class="fu">Server</span> <span class="op">-</span>tcp <span class="op">-</span>tcpAllowOthers <span class="op">-</span>tcpPort <span class="dv">8082</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>TCP server running at tcp<span class="op">:</span><span class="co">//127.0.1.1:8082 (others can connect)</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a>albert<span class="at">@albert</span><span class="op">-</span>VirtualBox<span class="op">:~/</span>MyApps$ java <span class="op">-</span>cp h2<span class="op">-*.</span><span class="fu">jar</span> org<span class="op">.</span><span class="fu">h2</span><span class="op">.</span><span class="fu">tools</span><span class="op">.</span><span class="fu">Server</span> <span class="op">-</span>tcp <span class="op">-</span>tcpAllowOthers <span class="op">-</span>tcpPort <span class="dv">80</span> <span class="op">-</span>web <span class="op">-</span>webAllowOthers <span class="op">-</span>webPort <span class="dv">8080</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>TCP server running at tcp<span class="op">:</span><span class="co">//127.0.1.1:8082 (others can connect)</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>Web <span class="bu">Console</span> server running at http<span class="op">:</span><span class="co">//127.0.1.1:8080 (others can connect)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2"></a>TCP server running at tcp<span class="op">:</span><span class="co">//127.0.1.1:8082 (others can connect)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And adding flags to publish the <strong>web console:</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a>albert<span class="at">@albert</span><span class="op">-</span>VirtualBox<span class="op">:~/</span>MyApps$ java <span class="op">-</span>cp h2<span class="op">-*.</span><span class="fu">jar</span> org<span class="op">.</span><span class="fu">h2</span><span class="op">.</span><span class="fu">tools</span><span class="op">.</span><span class="fu">Server</span> <span class="op">-</span>tcp <span class="op">-</span>tcpAllowOthers <span class="op">-</span>tcpPort <span class="dv">80</span> <span class="op">-</span>web <span class="op">-</span>webAllowOthers <span class="op">-</span>webPort <span class="dv">8080</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>TCP server running at tcp<span class="op">:</span><span class="co">//127.0.1.1:8082 (others can connect)</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>Web <span class="bu">Console</span> server running at http<span class="op">:</span><span class="co">//127.0.1.1:8080 (others can connect)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Once it is running the web console pops up:</p>
 <p><a href="../images/springboot/labsb08/lab08-5-h2-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="../images/springboot/labsb08/lab08-5-h2-2.png" class="img-fluid"></a></p>
-<p>To run the <code>H2 database</code> in server mode and allow multiple connections, you can use the following command:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">java</span> <span class="at">-cp</span> h2-<span class="pp">*</span>.jar org.h2.tools.Server <span class="at">-tcp</span> <span class="at">-tcpAllowOthers</span> <span class="at">-tcpPort</span> 8082</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To run the <code>H2 database</code> in server mode and allow multiple connections at <code>8082</code> server port, you can use the following command:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">java</span> <span class="at">-cp</span> h2-<span class="pp">*</span>.jar org.h2.tools.Server <span class="at">-tcp</span> <span class="at">-tcpAllowOthers</span> <span class="at">-tcpPort</span> 8082</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s break down this command and explain its components:</p>
 <ol type="1">
 <li><p><code>java</code>: Invokes the <code>Java</code> runtime.</p></li>
@@ -1984,26 +1992,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>After running this command, the <code>H2 database</code> server will start and listen for connections on port 8082. You should see output indicating that the server has started successfully.</p>
 <p>To connect to this server from your application, you would use a <code>JDBC URL</code> like this:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">jdbc:h2:tcp://localhost:8082/~/path/to/your/database</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex">jdbc:h2:tcp://localhost:8082/~/path/to/your/database</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="downloads" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="downloads"><span class="header-section-number">2.1</span> Downloads</h2>
 <p><a href="https://h2database.com/html/download.html">Download latest version</a>&nbsp;or add to&nbsp;<code>pom.xml</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource xml number-lines code-with-copy"><code class="sourceCode xml"><span id="cb8-1"><a href="#cb8-1"></a>&lt;<span class="kw">dependency</span>&gt;</span>
-<span id="cb8-2"><a href="#cb8-2"></a>    &lt;<span class="kw">groupId</span>&gt;com.h2database&lt;/<span class="kw">groupId</span>&gt;</span>
-<span id="cb8-3"><a href="#cb8-3"></a>    &lt;<span class="kw">artifactId</span>&gt;h2&lt;/<span class="kw">artifactId</span>&gt;</span>
-<span id="cb8-4"><a href="#cb8-4"></a>    &lt;<span class="kw">version</span>&gt;2.3.232&lt;/<span class="kw">version</span>&gt;</span>
-<span id="cb8-5"><a href="#cb8-5"></a>&lt;/<span class="kw">dependency</span>&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="links" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="links"><span class="header-section-number">2.2</span> Links</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource xml number-lines code-with-copy"><code class="sourceCode xml"><span id="cb9-1"><a href="#cb9-1"></a>&lt;<span class="kw">dependency</span>&gt;</span>
+<span id="cb9-2"><a href="#cb9-2"></a>    &lt;<span class="kw">groupId</span>&gt;com.h2database&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb9-3"><a href="#cb9-3"></a>    &lt;<span class="kw">artifactId</span>&gt;h2&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb9-4"><a href="#cb9-4"></a>    &lt;<span class="kw">version</span>&gt;2.3.232&lt;/<span class="kw">version</span>&gt;</span>
+<span id="cb9-5"><a href="#cb9-5"></a>&lt;/<span class="kw">dependency</span>&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Links</strong></p>
 <ul>
 <li><a href="https://h2database.com/" class="external" target="_blank">h2database</a></li>
 <li><a href="https://h2database.com/html/tutorial.html#using_server" class="external" target="_blank">Using server</a></li>
 </ul>
 </section>
 </section>
-<section id="test-junit" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Test Junit</h1>
+<section id="three-ports-system" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Three-ports system</h1>
 <p>In Spring Boot applications testing with <code>H2 database</code> setups, different ports are used for specific purposes:</p>
 <ol type="1">
 <li><p><mark>Spring Boot Application</mark> <strong>(Port 8084)</strong>: The test uses port <code>8084</code> for the Spring Boot application. This is a custom port chosen for the test environment, different from the default <code>8080</code> <em>to avoid conflicts with other services</em>, we leave this port, the <code>8080</code> for the <code>h2-console.</code></p></li>
@@ -2014,11 +2020,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Using different ports for these components allows them to run simultaneously without conflicts. The Spring Boot application <strong>can connect to the H2 database via the TCP port (8082)</strong>, while developers can access the H2 console via the web port (8080) for database management.</p>
 </blockquote>
 <p><a href="../images/springboot/labsb08/lab08-5-test.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="../images/springboot/labsb08/lab08-5-test.png" class="img-fluid"></a></p>
-<p>The application’s API is then tested on its own port (8084), <mark>ensuring isolation between the application, database server, and database console.</mark></p>
-<p><a href="../images/springboot/labsb08/lab08-5-h2-lock.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="../images/springboot/labsb08/lab08-5-h2-lock.png" class="img-fluid"></a></p>
-<p><a href="../images/springboot/labsb08/lab08-5-h2-trace.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="../images/springboot/labsb08/lab08-5-h2-trace.png" class="img-fluid"></a></p>
+<p>The application’s <code>API</code> is then tested on its own port (<code>8084</code>), <mark>ensuring isolation between the application, database server, and database console.</mark></p>
+<p>H2 web console starts at <code>8080</code> port</p>
+<p><a href="../images/springboot/labsb08/lab08-5-h2-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="../images/springboot/labsb08/lab08-5-h2-2.png" class="img-fluid"></a></p>
+<section id="lock-and-.trace" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="lock-and-.trace"><span class="header-section-number">3.1</span> <code>.lock</code> and <code>.trace</code></h2>
+<blockquote class="blockquote">
+<p>Be careful with the files RestaurantMangerDB creates like <code>.lock</code> and <code>.trace</code>.</p>
+</blockquote>
+<p><code>.lock</code> and <code>.trace</code> files are typically used by database systems for management and troubleshooting purposes:</p>
+<p><strong>.lock files:</strong> - Used to prevent concurrent access to database resources - Indicate that a process has exclusive access to a particular file or resource - Help maintain data integrity by avoiding conflicts between multiple processes</p>
+<p><strong>.trace files:</strong> - Contain detailed logs of database operations and events - Used for debugging and performance analysis - May include SQL statements, execution plans, and error messages - Helpful for identifying issues like deadlocks or slow queries</p>
+<p><a href="../images/springboot/labsb08/lab08-5-h2-lock.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="../images/springboot/labsb08/lab08-5-h2-lock.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-5-h2-trace.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="../images/springboot/labsb08/lab08-5-h2-trace.png" class="img-fluid"></a></p>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
