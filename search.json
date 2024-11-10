@@ -14526,10 +14526,153 @@
     "href": "ifcd0021-24/ifcd0021backlog-sprint-24.html#sprint10-front-end-november-2024",
     "title": "IFCD0021 Sprint Backlog",
     "section": "Sprint#10 Front-End (November 2024)",
-    "text": "Sprint#10 Front-End (November 2024)\n\nBacklog course November 2024 table\n\n\n\n\n\n\n\n\n\n#\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#10\n43\n11/11/2024\n- Vaadin / Thymeleaf\n\n\n\n\n44\n12/11/2024\n- Vaadin / Thymeleaf\n\n\n\n\n45\n13/11/2024\n- Vaadin / Thymeleaf\n\n\n\n\n46\n14/11/2024\n- Websockets\n\n\n\n\n47\n15/11/2024\n- Websockets\n\n\n\n\n48\n18/11/2024\n- FCOO\n\n\n\n\n49\n19/11/2024\n- FCOO",
+    "text": "Sprint#10 Front-End (November 2024)\n\nBacklog course November 2024 table\n\n\n\n\n\n\n\n\n\n#\nDay\nDate\nTopics\nDetails Topics\n\n\n\n\n#10\n43\n11/11/2024\n- Vaadin / Thymeleaf\n- Lab#SB09-1: SpringIO Conference\n\n\n\n44\n12/11/2024\n- Vaadin / Thymeleaf\n\n\n\n\n45\n13/11/2024\n- Vaadin / Thymeleaf\n\n\n\n\n46\n14/11/2024\n- Websockets\n- Lab#RE05-1: Websockets\n\n\n\n47\n15/11/2024\n- Websockets\n\n\n\n\n48\n18/11/2024\n- FCOO\n\n\n\n\n49\n19/11/2024\n- FCOO",
     "crumbs": [
       "IFCD0021-24 Docs",
       "IFCD0021 Sprint Backlog"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab9-1.html",
+    "href": "springboot/sblab9-1.html",
+    "title": "Lab#SB01-1: SpringIO Conference",
+    "section": "",
+    "text": "📘 Spring Boot Lab#SB09-1: SpringIO Conference\nThis lab explores all the topics from the UML diagram for the entities Conference, Book, and Speaker; example objects; Java entity code; object creation; and SQL data initialization.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB01-1: SpringIO Conference"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab9-1.html#example-objects",
+    "href": "springboot/sblab9-1.html#example-objects",
+    "title": "Lab#SB01-1: SpringIO Conference",
+    "section": "1 Example Objects",
+    "text": "1 Example Objects\n\nSpring.io Barcelona 2024\n\nConference: “Spring Boot Updates”, Date: 2024-05-15, Room: “Auditorium A”, Duration: 90 minutes, Link: “youtube.com/2024springboot”\nBook: “Spring in Action”, Author: “Craig Walls”, ISBN: “9781617294945”\nSpeaker: “John Doe”, Bio: “Senior Developer Advocate”, Email: “john.doe@example.com”\n\nSpring.io Barcelona 2023\n\nConference: “Reactive Programming with Spring”, Date: 2023-04-20, Room: “Room B”, Duration: 75 minutes, Link: “youtube.com/2023reactive”\nBook: “Reactive Spring”, Author: “Josh Long”, ISBN: “9781617297571”\nSpeaker: “Jane Smith”, Bio: “Spring Developer”, Email: “jane.smith@example.com”\n\nSpring.io Barcelona 2022\n\nConference: “Kubernetes and Spring Cloud”, Date: 2022-03-10, Room: “Main Hall”, Duration: 60 minutes, Link: “youtube.com/2022kubernetes”\nBook: “Cloud Native Java”, Author: “Josh Long & Kenny Bastani”, ISBN: “9781449374648”\nSpeaker: “Alice Johnson”, Bio: “Cloud Architect”, Email: “alice.johnson@example.com”",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB01-1: SpringIO Conference"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab9-1.html#java-entities-with-uuid-and-lombok",
+    "href": "springboot/sblab9-1.html#java-entities-with-uuid-and-lombok",
+    "title": "Lab#SB01-1: SpringIO Conference",
+    "section": "2 Java Entities with UUID and Lombok",
+    "text": "2 Java Entities with UUID and Lombok\n\n2.1 Conference Entity\nimport lombok.*;\nimport org.hibernate.annotations.GenericGenerator;\n\nimport javax.persistence.*;\nimport java.util.UUID;\n\n@Entity\n@Table(name = \"conferences\")\n@Getter\n@Setter\n@NoArgsConstructor\n@AllArgsConstructor\n@Builder\npublic class Conference {\n\n    @Id\n    @GeneratedValue(generator = \"UUID\")\n    @GenericGenerator(name = \"UUID\", strategy = \"org.hibernate.id.UUIDGenerator\")\n    @Column(name = \"id\", updatable = false, nullable = false)\n    private UUID id;\n\n    @Column(nullable = false)\n    private String date;\n\n    @Column(name = \"youtube_link\")\n    private String linkToYouTubeVideo;\n\n    @Column(nullable = false)\n    private String title;\n\n    @Column(name = \"conference_name\", nullable = false)\n    private String conferenceName;\n\n    @Column(columnDefinition = \"TEXT\")\n    private String content;\n\n    private Integer duration;\n\n    private String room;\n\n    @ManyToOne\n    @JoinColumn(name = \"book_id\", nullable = false)\n    private Book book;\n\n    @ManyToOne\n    @JoinColumn(name = \"speaker_id\", nullable = false)\n    private Speaker speaker;\n}\n\n\n2.2 Book Entity\nimport lombok.*;\nimport org.hibernate.annotations.GenericGenerator;\n\nimport javax.persistence.*;\nimport java.util.List;\nimport java.util.UUID;\n\n@Entity\n@Table(name = \"books\")\n@Getter\n@Setter\n@NoArgsConstructor\n@AllArgsConstructor\n@Builder\npublic class Book {\n\n    @Id\n    @GeneratedValue(generator = \"UUID\")\n    @GenericGenerator(name = \"UUID\", strategy = \"org.hibernate.id.UUIDGenerator\")\n    @Column(name = \"id\", updatable = false, nullable = false)\n    private UUID id;\n\n    @Column(nullable = false)\n    private String title;\n\n    @Column(nullable = false)\n    private String author;\n\n    @Column(nullable = false, unique = true)\n    private String ISBN;\n\n    @OneToMany(mappedBy = \"book\")\n    private List&lt;Conference&gt; conferences;\n}\n\n\n2.3 Speaker Entity\nimport lombok.*;\nimport org.hibernate.annotations.GenericGenerator;\n\nimport javax.persistence.*;\nimport java.util.List;\nimport java.util.UUID;\n\n@Entity\n@Table(name = \"speakers\")\n@Getter\n@Setter\n@NoArgsConstructor\n@AllArgsConstructor\n@Builder\npublic class Speaker {\n\n    @Id\n    @GeneratedValue(generator = \"UUID\")\n    @GenericGenerator(name = \"UUID\", strategy = \"org.hibernate.id.UUIDGenerator\")\n    @Column(name = \"id\", updatable = false, nullable = false)\n    private UUID id;\n\n    @Column(nullable = false)\n    private String name;\n\n    @Column(columnDefinition = \"TEXT\")\n    private String bio;\n\n    @Column(nullable = false, unique = true)\n    private String email;\n\n    @OneToMany(mappedBy = \"speaker\")\n    private List&lt;Conference&gt; conferences;\n}",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB01-1: SpringIO Conference"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab9-1.html#creating-conference-objects",
+    "href": "springboot/sblab9-1.html#creating-conference-objects",
+    "title": "Lab#SB01-1: SpringIO Conference",
+    "section": "3 Creating Conference Objects",
+    "text": "3 Creating Conference Objects\n\n3.1 Object 1\nBook book1 = Book.builder()\n    .id(UUID.randomUUID())\n    .title(\"Spring Boot in Action\")\n    .author(\"Craig Walls\")\n    .ISBN(\"9781617292545\")\n    .build();\n\nSpeaker speaker1 = Speaker.builder()\n    .id(UUID.randomUUID())\n    .name(\"Stéphane Nicoll\")\n    .bio(\"Spring Framework committer\")\n    .email(\"snicoll@pivotal.io\")\n    .build();\n\nConference conference1 = Conference.builder()\n     .id(UUID.randomUUID())\n     .date(\"2023-05-17\")\n     .linkToYouTubeVideo(\"https://www.youtube.com/watch?v=TtQTF7M9xPo\")\n     .title(\"Spring Boot 3.0 & Spring Framework 6.0: What's New\")\n     .conferenceName(\"Spring I/O 2023\")\n     .content(\"Overview of new features in Spring Boot 3.0 and Spring Framework 6.0, including Java 17 baseline, native compilation, and observability improvements.\")\n     .duration(50)\n     .room(\"Auditorium 1\")\n     .book(book1)\n     .speaker(speaker1)\n     .build();\n\n\n3.2 Object 2\nBook book2 = Book.builder()\n     .id(UUID.randomUUID())\n     .title(\"Spring Security in Action\")\n     .author(\"Laurentiu Spilca\")\n     .ISBN(\"9781617297731\")\n     .build();\n\nSpeaker speaker2 = Speaker.builder()\n     .id(UUID.randomUUID())\n     .name(\"Rob Winch\")\n     .bio(\"Spring Security lead\")\n     .email(\"rwinch@pivotal.io\")\n     .build();\n\nConference conference2 = Conference.builder()\n     .id(UUID.randomUUID())\n     .date(\"2023-05-18\")\n     .linkToYouTubeVideo(\"https://www.youtube.com/watch?v=wYYKNhCXVVE\")\n     .title(\"Securing Spring Boot 3 Applications\")\n     .conferenceName(\"Spring I/O 2023\")\n     .content(\"Exploration of security features in Spring Boot 3, including OAuth 2.0 and OpenID Connect support, and best practices for securing microservices.\")\n     .duration(45)\n     .room(\"Room B\")\n     .book(book2)\n     .speaker(speaker2)\n     .build();\n\n\n3.3 Object 3\nBook book3 = Book.builder()\n     .id(UUID.randomUUID())\n     .title(\"Reactive Spring\")\n     .author(\"Josh Long\")\n     .ISBN(\"9781732910225\")\n     .build();\n\nSpeaker speaker3 = Speaker.builder()\n     .id(UUID.randomUUID())\n     .name(\"Josh Long\")\n     .bio(\"Spring Developer Advocate\")\n     .email(\"jlong@pivotal.io\")\n     .build();\n\nConference conference3 = Conference.builder()\n     .id(UUID.randomUUID())\n     .date(\"2022-05-26\")\n     .linkToYouTubeVideo(\"https://www.youtube.com/watch?v=TKK4Oi1Xc-Y\")\n     .title(\"Reactive Spring\")\n     .conferenceName(\"Spring I/O 2022\")\n     .content(\"Deep dive into reactive programming with Spring, covering Project Reactor, Spring WebFlux, and reactive data access.\")\n     .duration(55)\n     .room(\"Main Hall\")\n     .book(book3)\n     .speaker(speaker3)\n     .build();\n\n\n3.4 Object 4\nBook book4 = Book.builder()\n      .id(UUID.randomUUID())\n      .title(\"Native Image Definitive Guide\")\n      .author(\"Oleg Šelajev\")\n      .ISBN(\"9781492078531\")\n      .build();\n\nSpeaker speaker4 = Speaker.builder()\n      .id(UUID.randomUUID())\n      .name(\"Sébastien Deleuze\")\n      .bio(\"Spring Framework committer\")\n      .email(\"sdeleuze@vmware.com\")\n      .build();\n\nConference conference4 = Conference.builder()\n      .id(UUID.randomUUID())\n      .date(\"2024-05-23\")\n      .linkToYouTubeVideo(\"https://www.youtube.com/placeholder_2024\") \n      // Placeholder link for future conference video.\n      .\n      title=\"Spring Native and GraalVM: The Future of Spring Applications\"\n      conferenceName=\"Spring I/O 2024\"\n      content=\"Exploring the latest advancements in Spring Native and GraalVM integration, focusing on performance improvements and reduced startup times.\"\n      duration=60 \n      room=\"Innovation Theater\"\n      book=book4 \n      speaker=speaker4 \n      build();",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB01-1: SpringIO Conference"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab9-1.html#sql-data-initialization-with-data.sql",
+    "href": "springboot/sblab9-1.html#sql-data-initialization-with-data.sql",
+    "title": "Lab#SB01-1: SpringIO Conference",
+    "section": "4 SQL Data Initialization with data.sql",
+    "text": "4 SQL Data Initialization with data.sql\nCreate a data.sql file in src/main/resources with the following content:\n-- Insert Books \nINSERT INTO books (id, title, author, isbn) VALUES \n(UUID(), 'Spring Boot in Action', 'Craig Walls', '9781617292545'),\n(UUID(), 'Spring Security in Action', 'Laurentiu Spilca', '9781617297731'),\n(UUID(), 'Reactive Spring', 'Josh Long', '9781732910225'),\n(UUID(), 'Native Image Definitive Guide', 'Oleg Šelajev', '9781492078531');\n\n-- Insert Speakers \nINSERT INTO speakers (id, name, bio, email) VALUES \n(UUID(), 'Stéphane Nicoll', 'Spring Framework committer', 'snicoll@pivotal.io'),\n(UUID(), 'Rob Winch', 'Spring Security lead', 'rwinch@pivotal.io'),\n(UUID(), 'Josh Long', 'Spring Developer Advocate', 'jlong@pivotal.io'),\n(UUID(), 'Sébastien Deleuze', 'Spring Framework committer', 'sdeleuze@vmware.com');\n\n-- Insert Conferences \nINSERT INTO conferences (id, date, link_to_youtube_video, title, conference_name, content, duration, room, book_id, speaker_id) VALUES \n(UUID(), '2023-05-17', 'https://www.youtube.com/watch?v=TtQTF7M9xPo', 'Spring Boot 3.0 & Spring Framework 6.0: What''s New', 'Spring I/O 2023', 'Overview of new features in Spring Boot 3.0 and Spring Framework 6.0.', 50, 'Auditorium 1', (SELECT id FROM books WHERE title='Spring Boot in Action'), (SELECT id FROM speakers WHERE name='Stéphane Nicoll')),\n(UUID(), '2023-05-18', 'https://www.youtube.com/watch?v=wYYKNhCXVVE', 'Securing Spring Boot 3 Applications', 'Spring I/O 2023', 'Exploration of security features in Spring Boot.', 45, 'Room B', (SELECT id FROM books WHERE title='Spring Security in Action'), (SELECT id FROM speakers WHERE name='Rob Winch')),\n(UUID(), '2022-05-26', 'https://www.youtube.com/watch?v=TKK4Oi1Xc-Y', 'Reactive Spring', 'Spring I/O 2022', 'Deep dive into reactive programming with Spring.', 55, 'Main Hall', (SELECT id FROM books WHERE title='Reactive Spring'), (SELECT id FROM speakers WHERE name='Josh Long')),\n(UUID(), '2024-05-23', 'https://www.youtube.com/placeholder_2024', 'Spring Native and GraalVM: The Future of Spring Applications', 'Spring I/O 2024', 'Exploring advancements in Spring Native.', 60, 'Innovation Theater', (SELECT id FROM books WHERE title='Native Image Definitive Guide'), (SELECT id FROM speakers WHERE name='Sébastien Deleuze'));\n```\nThis markdown code captures all the previous information discussed throughout our conversation regarding the UML diagram for the entities Conference, Book, and Speaker; example objects; Java entity code; object creation; and SQL data initialization. You can copy this markdown directly into your documentation or README files as needed.\nCitations: [1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/19229998/ab3f9a99-1642-47c2-afba-767cc8e198f7/paste.txt",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB01-1: SpringIO Conference"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab9-1.html#objects",
+    "href": "springboot/sblab9-1.html#objects",
+    "title": "Lab#SB01-1: SpringIO Conference",
+    "section": "1.1 Objects",
+    "text": "1.1 Objects\n\nSpring.io Barcelona 2024\n\nConference: “Spring Boot Updates”, Date: 2024-05-15, Room: “Auditorium A”, Duration: 90 minutes, Link: “youtube.com/2024springboot”\nBook: “Spring in Action”, Author: “Craig Walls”, ISBN: “9781617294945”\nSpeaker: “John Doe”, Bio: “Senior Developer Advocate”, Email: “john.doe@example.com”\n\nSpring.io Barcelona 2023\n\nConference: “Reactive Programming with Spring”, Date: 2023-04-20, Room: “Room B”, Duration: 75 minutes, Link: “youtube.com/2023reactive”\nBook: “Reactive Spring”, Author: “Josh Long”, ISBN: “9781617297571”\nSpeaker: “Jane Smith”, Bio: “Spring Developer”, Email: “jane.smith@example.com”\n\nSpring.io Barcelona 2022\n\nConference: “Kubernetes and Spring Cloud”, Date: 2022-03-10, Room: “Main Hall”, Duration: 60 minutes, Link: “youtube.com/2022kubernetes”\nBook: “Cloud Native Java”, Author: “Josh Long & Kenny Bastani”, ISBN: “9781449374648”\nSpeaker: “Alice Johnson”, Bio: “Cloud Architect”, Email: “alice.johnson@example.com”",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB01-1: SpringIO Conference"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab9-1.html#conference-entity",
+    "href": "springboot/sblab9-1.html#conference-entity",
+    "title": "Lab#SB01-1: SpringIO Conference",
+    "section": "3.1 Conference Entity",
+    "text": "3.1 Conference Entity\nimport lombok.*;\nimport org.hibernate.annotations.GenericGenerator;\n\nimport javax.persistence.*;\nimport java.util.UUID;\n\n@Entity\n@Table(name = \"conferences\")\n@Getter\n@Setter\n@NoArgsConstructor\n@AllArgsConstructor\n@Builder\npublic class Conference {\n\n    @Id\n    @GeneratedValue(generator = \"UUID\")\n    @GenericGenerator(name = \"UUID\",\n          strategy = \"org.hibernate.id.UUIDGenerator\")\n    @Column(name = \"id\", updatable = false,\n          nullable = false)\n    private UUID id;\n\n    @Column(nullable = false)\n    private String date;\n\n    @Column(name = \"youtube_link\")\n    private String linkToYouTubeVideo;\n\n    @Column(nullable = false)\n    private String title;\n\n    @Column(name = \"conference_name\", \n          nullable = false)\n    private String conferenceName;\n\n    @Column(columnDefinition = \"TEXT\")\n    private String content;\n\n    private Integer duration;\n\n    private String room;\n\n    @ManyToOne\n    @JoinColumn(name = \"book_id\", \n            nullable = false)\n    private Book book;\n\n    @ManyToOne\n    @JoinColumn(name = \"speaker_id\",\n            nullable = false)\n    private Speaker speaker;\n}",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB01-1: SpringIO Conference"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab9-1.html#book-entity",
+    "href": "springboot/sblab9-1.html#book-entity",
+    "title": "Lab#SB01-1: SpringIO Conference",
+    "section": "3.2 Book Entity",
+    "text": "3.2 Book Entity\nimport lombok.*;\nimport org.hibernate.annotations.GenericGenerator;\n\nimport javax.persistence.*;\nimport java.util.List;\nimport java.util.UUID;\n\n@Entity\n@Table(name = \"books\")\n@Getter\n@Setter\n@NoArgsConstructor\n@AllArgsConstructor\n@Builder\npublic class Book {\n\n    @Id\n    @GeneratedValue(generator = \"UUID\")\n    @GenericGenerator(name = \"UUID\",\n            strategy = \"org.hibernate.id.UUIDGenerator\")\n    @Column(name = \"id\", updatable = false,\n            nullable = false)\n    private UUID id;\n\n    @Column(nullable = false)\n    private String title;\n\n    @Column(nullable = false)\n    private String author;\n\n    @Column(nullable = false, unique = true)\n    private String ISBN;\n\n    @OneToMany(mappedBy = \"book\")\n    private List&lt;Conference&gt; conferences;\n}",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB01-1: SpringIO Conference"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab9-1.html#speaker-entity",
+    "href": "springboot/sblab9-1.html#speaker-entity",
+    "title": "Lab#SB01-1: SpringIO Conference",
+    "section": "3.3 Speaker Entity",
+    "text": "3.3 Speaker Entity\nimport lombok.*;\nimport org.hibernate.annotations.GenericGenerator;\n\nimport javax.persistence.*;\nimport java.util.List;\nimport java.util.UUID;\n\n@Entity\n@Table(name = \"speakers\")\n@Getter\n@Setter\n@NoArgsConstructor\n@AllArgsConstructor\n@Builder\npublic class Speaker {\n\n    @Id\n    @GeneratedValue(generator = \"UUID\")\n    @GenericGenerator(name = \"UUID\",\n            strategy = \"org.hibernate.id.UUIDGenerator\")\n    @Column(name = \"id\", updatable = false,\n            nullable = false)\n    private UUID id;\n\n    @Column(nullable = false)\n    private String name;\n\n    @Column(columnDefinition = \"TEXT\")\n    private String bio;\n\n    @Column(nullable = false, unique = true)\n    private String email;\n\n    @OneToMany(mappedBy = \"speaker\")\n    private List&lt;Conference&gt; conferences;\n}",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB01-1: SpringIO Conference"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab9-1.html#object-1",
+    "href": "springboot/sblab9-1.html#object-1",
+    "title": "Lab#SB01-1: SpringIO Conference",
+    "section": "4.1 Object 1",
+    "text": "4.1 Object 1\n\nBook book1 = Book.builder()\n    .id(UUID.randomUUID())\n    .title(\"Spring Boot in Action\")\n    .author(\"Craig Walls\")\n    .ISBN(\"9781617292545\")\n    .build();\n\nSpeaker speaker1 = Speaker.builder()\n    .id(UUID.randomUUID())\n    .name(\"Stéphane Nicoll\")\n    .bio(\"Spring Framework committer\")\n    .email(\"snicoll@pivotal.io\")\n    .build();\n\nConference conference1 = Conference.builder()\n     .id(UUID.randomUUID())\n     .date(\"2023-05-17\")\n     .linkToYouTubeVideo(\"https://www.youtube.com/watch?v=TtQTF7M9xPo\")\n     .title(\"Spring Boot 3.0 & Spring Framework 6.0: What's New\")\n     .conferenceName(\"Spring I/O 2023\")\n     .content(\"Overview of new features in Spring Boot 3.0 and Spring Framework 6.0, including Java 17 baseline, native compilation, and observability improvements.\")\n     .duration(50)\n     .room(\"Auditorium 1\")\n     .book(book1)\n     .speaker(speaker1)\n     .build();",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB01-1: SpringIO Conference"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab9-1.html#object-2",
+    "href": "springboot/sblab9-1.html#object-2",
+    "title": "Lab#SB01-1: SpringIO Conference",
+    "section": "4.2 Object 2",
+    "text": "4.2 Object 2\n\nBook book2 = Book.builder()\n     .id(UUID.randomUUID())\n     .title(\"Spring Security in Action\")\n     .author(\"Laurentiu Spilca\")\n     .ISBN(\"9781617297731\")\n     .build();\n\nSpeaker speaker2 = Speaker.builder()\n     .id(UUID.randomUUID())\n     .name(\"Rob Winch\")\n     .bio(\"Spring Security lead\")\n     .email(\"rwinch@pivotal.io\")\n     .build();\n\nConference conference2 = Conference.builder()\n     .id(UUID.randomUUID())\n     .date(\"2023-05-18\")\n     .linkToYouTubeVideo(\"https://www.youtube.com/watch?v=wYYKNhCXVVE\")\n     .title(\"Securing Spring Boot 3 Applications\")\n     .conferenceName(\"Spring I/O 2023\")\n     .content(\"Exploration of security features in Spring Boot 3, including OAuth 2.0 and OpenID Connect support, and best practices for securing microservices.\")\n     .duration(45)\n     .room(\"Room B\")\n     .book(book2)\n     .speaker(speaker2)\n     .build();",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB01-1: SpringIO Conference"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab9-1.html#object-3",
+    "href": "springboot/sblab9-1.html#object-3",
+    "title": "Lab#SB01-1: SpringIO Conference",
+    "section": "4.3 Object 3",
+    "text": "4.3 Object 3\n\nBook book3 = Book.builder()\n     .id(UUID.randomUUID())\n     .title(\"Reactive Spring\")\n     .author(\"Josh Long\")\n     .ISBN(\"9781732910225\")\n     .build();\n\nSpeaker speaker3 = Speaker.builder()\n     .id(UUID.randomUUID())\n     .name(\"Josh Long\")\n     .bio(\"Spring Developer Advocate\")\n     .email(\"jlong@pivotal.io\")\n     .build();\n\nConference conference3 = Conference.builder()\n     .id(UUID.randomUUID())\n     .date(\"2022-05-26\")\n     .linkToYouTubeVideo(\"https://www.youtube.com/watch?v=TKK4Oi1Xc-Y\")\n     .title(\"Reactive Spring\")\n     .conferenceName(\"Spring I/O 2022\")\n     .content(\"Deep dive into reactive programming with Spring, covering Project Reactor, Spring WebFlux, and reactive data access.\")\n     .duration(55)\n     .room(\"Main Hall\")\n     .book(book3)\n     .speaker(speaker3)\n     .build();\n\n\nBook book4 = Book.builder()\n      .id(UUID.randomUUID())\n      .title(\"Native Image Definitive Guide\")\n      .author(\"Oleg Šelajev\")\n      .ISBN(\"9781492078531\")\n      .build();\n\nSpeaker speaker4 = Speaker.builder()\n      .id(UUID.randomUUID())\n      .name(\"Sébastien Deleuze\")\n      .bio(\"Spring Framework committer\")\n      .email(\"sdeleuze@vmware.com\")\n      .build();\n\nConference conference4 = Conference.builder()\n      .id(UUID.randomUUID())\n      .date(\"2024-05-23\")\n      .linkToYouTubeVideo(\"https://www.youtube.com/placeholder_2024\") \n      // Placeholder link for future conference video.\n      .\n      title=\"Spring Native and GraalVM: The Future of Spring Applications\"\n      conferenceName=\"Spring I/O 2024\"\n      content=\"Exploring the latest advancements in Spring Native and GraalVM integration, focusing on performance improvements and reduced startup times.\"\n      duration=60 \n      room=\"Innovation Theater\"\n      book=book4 \n      speaker=speaker4 \n      build();",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB01-1: SpringIO Conference"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab9-1.html#object-4",
+    "href": "springboot/sblab9-1.html#object-4",
+    "title": "Lab#SB01-1: SpringIO Conference",
+    "section": "4.4 Object 4",
+    "text": "4.4 Object 4\nBook book4 = Book.builder()\n      .id(UUID.randomUUID())\n      .title(\"Native Image Definitive Guide\")\n      .author(\"Oleg Šelajev\")\n      .ISBN(\"9781492078531\")\n      .build();\n\nSpeaker speaker4 = Speaker.builder()\n      .id(UUID.randomUUID())\n      .name(\"Sébastien Deleuze\")\n      .bio(\"Spring Framework committer\")\n      .email(\"sdeleuze@vmware.com\")\n      .build();\n\nConference conference4 = Conference.builder()\n      .id(UUID.randomUUID())\n      .date(\"2024-05-23\")\n      .linkToYouTubeVideo(\"https://www.youtube.com/placeholder_2024\") \n      // Placeholder link for future conference video.\n      .\n      title=\"Spring Native and GraalVM: The Future of Spring Applications\"\n      conferenceName=\"Spring I/O 2024\"\n      content=\"Exploring the latest advancements in Spring Native and GraalVM integration, focusing on performance improvements and reduced startup times.\"\n      duration=60 \n      room=\"Innovation Theater\"\n      book=book4 \n      speaker=speaker4 \n      build();",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB01-1: SpringIO Conference"
     ]
   }
 ]
