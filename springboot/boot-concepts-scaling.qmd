@@ -108,6 +108,8 @@ For more details on auditing, refer to the [Spring Data JPA Auditing documentati
 
 ## Pagination
 
+- [BooksPageable](https://github.com/AlbertProfe/BooksPageable){.external target='_blank'} 
+
 > **Pagination** is essential for handling large datasets efficiently.
 > 
 > `Spring Data JPA` provides built-in support for pagination through the `Pageable` interface and `Page` object.
@@ -134,6 +136,59 @@ public Page<User> getUsers(@RequestParam(defaultValue = "0") int page,
 This approach allows clients to request specific pages of data, improving performance and reducing memory usage.
 
 For more information on pagination and sorting, see the [Spring Data JPA documentation on Paging and Sorting](https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html#repositories.special-parameters).
+
+### Interfaces
+
+``` {mermaid}
+classDiagram
+    class Pageable {
+        +int getPageNumber()
+        +int getPageSize()
+        +Sort getSort()
+        +boolean hasPrevious()
+        +Pageable next()
+        +Pageable previousOrFirst()
+    }
+    
+    class PageRequest {
+        +static PageRequest of(int page, int size, Sort sort)
+    }
+    
+    class Slice {
+        +List<T> getContent()
+        +boolean hasNext()
+        +Pageable nextPageable()
+    }
+    
+    class Page {
+        +long getTotalElements()
+        +int getTotalPages()
+    }
+    
+    Pageable <|-- PageRequest
+    Slice <|-- Page
+
+```
+
+For official documentation on `Pageable`, `Page`, `Slice`, and `PageRequest` in Spring Boot, you can refer to the following links:
+
+- **Pageable**: [Spring Data Core API Documentation](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/Pageable.html).
+- **Page**: [Spring Data Core API Documentation](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/Page.html).
+- **Slice**: [Spring Data Core API Documentation](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/Slice.html).
+- **PageRequest**: Typically used to create a `Pageable` instance, details are included in the `Pageable` documentation.
+
+
+> **Pagination** is managed using the `Pageable`, `Page`, `Slice`, and `PageRequest` interfaces:
+
+- **Pageable**: This interface defines pagination parameters such as page number, page size, and sorting options. It is commonly instantiated using `PageRequest`.
+
+- **PageRequest**: A concrete implementation of `Pageable` that allows you to specify the page index (zero-based), size, and sorting.
+
+- **Page**: Extends `Slice` and provides additional metadata like total number of pages and total elements. It is used when you need complete pagination details.
+
+- **Slice**: Represents a subset of data without total count information, useful for simple "next" and "previous" navigation.
+
+
 
 ## Spring Batch
 
