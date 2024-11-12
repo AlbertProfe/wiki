@@ -806,6 +806,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../springboot/boot-concepts-jpa-5.html">
  <span class="dropdown-text">Spring Boot: JPA Inherence</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-scaling.html">
+ <span class="dropdown-text">Spring Boot: Scaling</span></a>
+  </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Spring Boot Laboratories</li>
         <li>
@@ -866,7 +870,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../springboot/sblab8-1.html">
- <span class="dropdown-text">Lab#SB08-1: DDD and UML</span></a>
+ <span class="dropdown-text">Lab#SB08-1: Restaurant UML</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../springboot/sblab8-2.html">
@@ -882,7 +886,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../springboot/sblab8-5.html">
- <span class="dropdown-text">Lab#SB08-5: RestaurantManager</span></a>
+ <span class="dropdown-text">Lab#SB08-5: Test API Rest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab9-1.html">
+ <span class="dropdown-text">Lab#SB09-1: SpringIO Conference</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Spring Boot readings</li>
@@ -1879,6 +1887,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#pros-cons-usage-static-methods" id="toc-pros-cons-usage-static-methods" class="nav-link" data-scroll-target="#pros-cons-usage-static-methods"><span class="header-section-number">3.0.1</span> Pros &amp; cons usage <code>static</code> methods</a></li>
   <li><a href="#pros-cons-usage-non-static-methods" id="toc-pros-cons-usage-non-static-methods" class="nav-link" data-scroll-target="#pros-cons-usage-non-static-methods"><span class="header-section-number">3.0.2</span> Pros &amp; cons usage <code>non-static</code> methods</a></li>
   </ul></li>
+  <li><a href="#final-modifier" id="toc-final-modifier" class="nav-link" data-scroll-target="#final-modifier"><span class="header-section-number">4</span> <code>final</code> modifier</a>
+  <ul>
+  <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points"><span class="header-section-number">4.1</span> Key Points</a></li>
+  </ul></li>
+  <li><a href="#static-final" id="toc-static-final" class="nav-link" data-scroll-target="#static-final"><span class="header-section-number">5</span> <code>static</code> / <code>final</code></a></li>
+  <li><a href="#final-and-immutable" id="toc-final-and-immutable" class="nav-link" data-scroll-target="#final-and-immutable"><span class="header-section-number">6</span> <code>final</code> and immutable</a>
+  <ul>
+  <li><a href="#final" id="toc-final" class="nav-link" data-scroll-target="#final"><span class="header-section-number">6.1</span> <code>Final</code></a></li>
+  <li><a href="#immutable" id="toc-immutable" class="nav-link" data-scroll-target="#immutable"><span class="header-section-number">6.2</span> <code>Immutable</code></a></li>
+  <li><a href="#key-distinctions" id="toc-key-distinctions" class="nav-link" data-scroll-target="#key-distinctions"><span class="header-section-number">6.3</span> Key Distinctions</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/javase/se-concepts-static.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1921,7 +1940,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, November 1, 2024</p>
+      <p class="date-modified">Tuesday, November 12, 2024</p>
     </div>
   </div>
     
@@ -2332,6 +2351,204 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
+</section>
+</section>
+<section id="final-modifier" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> <code>final</code> modifier</h1>
+<p>The <code>final</code> modifier in <code>Java</code> is a powerful keyword used to restrict the modification of variables, methods, and classes.</p>
+<p>The <code>final</code> modifier in Java is a powerful keyword used to restrict the modification of variables, methods, and classes. Here’s an overview of how it works:</p>
+<p><strong><code>Final</code> Variables</strong></p>
+<p>When applied to variables, the <code>final</code> modifier creates <mark>constants</mark> that <strong>cannot</strong> be reassigned once initialized.</p>
+<ul>
+<li>For primitive types, the value cannot be changed.</li>
+<li>For reference types, the reference cannot be changed, but the object’s contents can still be modified.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a><span class="dt">final</span> <span class="dt">int</span> MAX_VALUE <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="dt">final</span> <span class="bu">List</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">&gt;</span> names <span class="op">=</span> <span class="kw">new</span> <span class="bu">ArrayList</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">// Valid: Modifying the list's contents</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>names<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"Alice"</span><span class="op">);</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">// Invalid: Attempting to reassign the variable</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">// MAX_VALUE = 200; // Compilation error</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">// names = new ArrayList&lt;&gt;(); // Compilation error</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong><code>Final</code> Methods</strong></p>
+<p>A <code>final</code> method cannot be overridden by subclasses. This is useful for preserving critical functionality or preventing unexpected behavior in inherited classes.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">class</span> Parent <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>    <span class="dt">final</span> <span class="dt">void</span> <span class="fu">display</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"This method cannot be overridden"</span><span class="op">);</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>    <span class="op">}</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="op">}</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="kw">class</span> Child <span class="kw">extends</span> Parent <span class="op">{</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>    <span class="co">// Invalid: Attempting to override a final method</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="co">// void display() { } // Compilation error</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>Final</code> Classes</p>
+<p>A <code>final</code> class cannot be extended or inherited. This is often used to <mark>create immutable classes</mark> or to prevent unintended modifications to a class’s behavior.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1"></a><span class="dt">final</span> <span class="kw">class</span> ImmutableClass <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>    <span class="co">// Class implementation</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="op">}</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">// Invalid: Attempting to extend a final class</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">// class Subclass extends ImmutableClass { } // Compilation error</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="key-points" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="key-points"><span class="header-section-number">4.1</span> Key Points</h2>
+<ol type="1">
+<li><code>Final</code> variables must be initialized either at declaration or in the constructor.</li>
+<li><code>Static</code> final variables are often used to define constants.</li>
+<li>Final methods in <code>interfaces</code> are redundant, as <code>interface</code> methods are implicitly final.</li>
+<li>The <code>final</code> keyword can improve performance in some cases, as the compiler can optimize final methods and variables.</li>
+</ol>
+</section>
+</section>
+<section id="static-final" class="level1 page-columns page-full" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> <code>static</code> / <code>final</code></h1>
+<div class="column-page-right">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 30%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Modifier</th>
+<th>Use Case</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>static</code></td>
+<td>Class members</td>
+<td>Belongs to the class rather than instances</td>
+<td><code>public static int count = 0;</code></td>
+</tr>
+<tr class="even">
+<td><code>static</code></td>
+<td>Utility methods</td>
+<td>Methods that don’t require instance state</td>
+<td><code>public static int add(int a, int b) { return a + b; }</code></td>
+</tr>
+<tr class="odd">
+<td><code>static</code></td>
+<td>Constants</td>
+<td>Class-level constants (usually combined with <code>final</code>)</td>
+<td><code>public static final double PI = 3.14159;</code></td>
+</tr>
+<tr class="even">
+<td><code>static</code></td>
+<td>Static blocks</td>
+<td>Code executed when class is loaded</td>
+<td><code>static { System.out.println("Class loaded"); }</code></td>
+</tr>
+<tr class="odd">
+<td><code>final</code></td>
+<td>Variables</td>
+<td>Creates constants that can’t be reassigned</td>
+<td><code>final int MAX_SIZE = 100;</code></td>
+</tr>
+<tr class="even">
+<td><code>final</code></td>
+<td>Methods</td>
+<td>Prevents method overriding in subclasses</td>
+<td><code>public final void display() { }</code></td>
+</tr>
+<tr class="odd">
+<td><code>final</code></td>
+<td>Classes</td>
+<td>Prevents class inheritance</td>
+<td><code>public final class ImmutableString { }</code></td>
+</tr>
+<tr class="even">
+<td><code>final</code></td>
+<td>Method parameters</td>
+<td>Prevents parameter reassignment within method</td>
+<td><code>public void process(final int value) { }</code></td>
+</tr>
+<tr class="odd">
+<td><code>static final</code></td>
+<td>Class constants</td>
+<td>Immutable class-level constants</td>
+<td><code>public static final String VERSION = "1.0";</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Somethimes we use <code>static</code> and final <code>together</code>, an example demonstrating the use of <code>final static</code> variables in Java:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">public</span> <span class="kw">class</span> MathConstants <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">final</span> <span class="dt">double</span> PI <span class="op">=</span> <span class="fl">3.14159265359</span><span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">final</span> <span class="dt">double</span> E <span class="op">=</span> <span class="fl">2.71828182846</span><span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">final</span> <span class="dt">double</span> GOLDEN_RATIO <span class="op">=</span> <span class="fl">1.61803398875</span><span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Value of PI: "</span> <span class="op">+</span> PI<span class="op">);</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Value of E: "</span> <span class="op">+</span> E<span class="op">);</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Value of Golden Ratio: "</span> <span class="op">+</span> GOLDEN_RATIO<span class="op">);</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a></span>
+<span id="cb11-11"><a href="#cb11-11"></a>        <span class="co">// The following lines would cause compilation errors if uncommented:</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a>        <span class="co">// PI = 3.14; // Error: cannot assign a value to final variable PI</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a>        <span class="co">// E = 2.72; // Error: cannot assign a value to final variable E</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a>    <span class="op">}</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this example:</p>
+<ol type="1">
+<li><p>We declare three <code>public static final</code> variables: <code>PI</code>, <code>E</code>, and <code>GOLDEN_RATIO</code>. These are mathematical constants that should never change[2][4].</p></li>
+<li><p>The <code>static</code> keyword means these variables belong to the class itself, not to any specific instance of the class. They can be accessed directly through the class name, like <code>MathConstants.PI</code>[3].</p></li>
+<li><p>The <code>final</code> keyword ensures that these variables cannot be reassigned once they are initialized. This makes them true constants.</p></li>
+<li><p>We initialize these constants at the point of declaration. For <code>final static</code> variables, this is one of the valid ways to initialize them.</p></li>
+<li><p>In the <code>main</code> method, we print out the values of these constants.</p></li>
+<li><p>The commented-out lines demonstrate that attempting to reassign these constants would result in a compilation error.</p></li>
+</ol>
+<p>Key points about <code>final static</code> variables:</p>
+<ol type="1">
+<li>They must be initialized either at the point of declaration or in a static initializer block.</li>
+<li>They are often used for constants that are shared across all instances of a class.</li>
+<li>By convention, <code>final static</code> variables are usually named in ALL_CAPS with underscores separating words.</li>
+<li>They are evaluated at compile-time, which can lead to performance optimizations.</li>
+</ol>
+<p>Using <code>final static</code> variables for constants provides several benefits: - It ensures the value cannot be changed accidentally. - It clearly communicates the intent that this value should not change. - It allows the compiler to perform optimizations, potentially improving performance.</p>
+<blockquote class="blockquote">
+<p>Remember, while <code>final</code> prevents reassignment, if the constant is an object reference, the object’s internal state can still be modified unless the object itself is immutable.</p>
+</blockquote>
+</section>
+<section id="final-and-immutable" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> <code>final</code> and immutable</h1>
+<p>The key differences between <code>final</code> and immutable in Java are:</p>
+<section id="final" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="final"><span class="header-section-number">6.1</span> <code>Final</code></h2>
+<ol type="1">
+<li>Applies to variables, methods, and classes.</li>
+<li>For variables, prevents reassignment of the reference, but not modification of the object’s state.</li>
+<li>Ensures the variable will always point to the same object reference.</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1"></a><span class="dt">final</span> <span class="bu">List</span><span class="op">&lt;</span><span class="bu">String</span><span class="op">&gt;</span> list <span class="op">=</span> <span class="kw">new</span> <span class="bu">ArrayList</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>list<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="st">"Item"</span><span class="op">);</span> <span class="co">// Valid: Modifying object state</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">// list = new ArrayList&lt;&gt;(); // Invalid: Reassignment not allowed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="immutable" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="immutable"><span class="header-section-number">6.2</span> <code>Immutable</code></h2>
+<ol type="1">
+<li>Applies to objects, not variables.</li>
+<li>Prevents any changes to the object’s state after creation.</li>
+<li>The object’s internal values cannot be modified once initialized.</li>
+</ol>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1"></a><span class="bu">String</span> str <span class="op">=</span> <span class="st">"Hello"</span><span class="op">;</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co">// str.toLowerCase(); // Returns a new String, doesn't modify original</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">// String is immutable, so its state can't be changed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="key-distinctions" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="key-distinctions"><span class="header-section-number">6.3</span> Key Distinctions</h2>
+<ol type="1">
+<li><p><strong>Scope</strong>: <code>final</code> is about reference constancy, while immutability is about object state constancy.</p></li>
+<li><p><strong>Mutability</strong>: A <code>final</code> variable can still refer to a mutable object, whereas an immutable object’s state cannot be changed at all.</p></li>
+<li><p><strong>Implementation</strong>: <code>final</code> is a keyword in Java, while immutability is a design principle implemented by the programmer.</p></li>
+<li><p><strong>Flexibility</strong>: You can have a non-final reference to an immutable object, allowing the reference to be reassigned while the object remains unchangeable.</p></li>
+<li><p><strong>Combination</strong>: An object can be both <code>final</code> and immutable, like the <code>String</code> class in Java.</p></li>
+</ol>
 
 
 </section>
