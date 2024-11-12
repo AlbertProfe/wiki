@@ -20,16 +20,17 @@ We are going to evolve the current Java SE Restaurant project into a `Spring Boo
 :::
 </br>
 
-![](/images/springboot/labsb08/lab08-1-vaadin-view-restaurantVaadin2.png)
+# Create a new Spring Boot project & H2 DB
 
-# From RestaurantProject to RestaurantManagement
+From RestaurantProject to RestaurantManagement, reference code where to start:
 
-- [Restuarant Java SE Lab](/javase/selab4-1.qmd)
+- [Restaurant Java SE Lab](/javase/selab4-1.qmd)
 - [Restaurant Java SE Code](https://github.com/AlbertProfe/restaurant){.external target='_blank'}
 - [Restaurant Java SE Wiki](https://github.com/AlbertProfe/restaurant/wiki){.external target='_blank'}
 - [Spring Boot H2 and TH](/springboot/boot-what-create-th-h2.qmd){.external target='_blank'}
 
-# Create a new Spring Boot project & H2 DB
+![](/images/springboot/labsb08/lab08-1-vaadin-view-restaurantVaadin2.png)
+
 
 - **Create a new Spring Boot project**: The first step would be to create a new Spring Boot project in the preferred IDE or text editor.
 
@@ -56,7 +57,7 @@ We are going to evolve the current Java SE Restaurant project into a `Spring Boo
 
 - **Create Staff Entity**: To represent staff members in the system, create a Staff entity that includes attributes such as staff ID, name, position, shift schedules, and assigned tables.
 
-## Domains: @Controller, @Service and @Repository
+Domains: `@Controller`, `@Service` and `@Repository`
 
 - **Create Repositories**: To access the data stored in the database, create repositories for each entity. **The repositories will provide the methods to create, read, update, and delete the data.**
 
@@ -70,9 +71,11 @@ We are going to evolve the current Java SE Restaurant project into a `Spring Boo
 
 # Vaadin
 
-## Modern Java framework for building web applications
+Modern Java framework for building web applications
 
-Vaadin is a web application framework for Java that allows developers to build modern, interactive web applications using Java without having to write HTML, CSS, or JavaScript. Here are some key points about Vaadin:
+> `Vaadin` is a web application framework for Java that allows developers to build modern, interactive web applications using Java without having to write `HTML`, `CSS`, or `JavaScript`.
+
+Here are some key points about `Vaadin`:
 
 - [Vaadin Official Website](https://vaadin.com/)
 - [Vaadin Documentation](https://vaadin.com/docs/latest/)
@@ -80,11 +83,11 @@ Vaadin is a web application framework for Java that allows developers to build m
 
 ## Create Vaadin Views
 
-- **Create Vaadin Views**: To create the web interface of the system, create Vaadin views for each of the main functionalities. **The views will be used to display the data and handle user interactions.**
+- **Create Vaadin Views**: To create the web interface of the system, create `Vaadin` views for each of the main functionalities. **The views will be used to display the data and handle user interactions.**
 
-> Vaadin allows you to create rich, interactive UIs using Java code. It provides a wide range of UI components and layouts that you can use to build your application's interface.
+> `Vaadin` allows you to create rich, interactive UIs using `Java` code. It provides a wide range of UI components and layouts that you can use to build your application's interface.
 
-Example of a simple Vaadin view:
+Example of a simple `Vaadin` view:
 
 ```java
 @Route("menu")
@@ -105,7 +108,7 @@ public class MenuView extends VerticalLayout {
 
 This view creates a page with a title and a grid showing all menu items.
 
-## Key Vaadin Concepts
+Key Vaadin Concepts
 
 1. **Server-side Architecture**: Vaadin primarily runs on the server, which means your business logic stays secure and you can leverage the full power of Java.
 
@@ -122,7 +125,7 @@ This view creates a page with a title and a grid showing all menu items.
 
 The `CustomerView` class is a Vaadin-based web application view for managing customer information in a restaurant.
 
-## Key Components
+Key Components:
 
 - **Route**: Default view of the application (`@Route("")`).
 - **Layout**: Extends `VerticalLayout` for vertical arrangement.
@@ -131,7 +134,7 @@ The `CustomerView` class is a Vaadin-based web application view for managing cus
 - **Buttons**: Save and Delete buttons for managing customers.
 - **Binder**: For data binding between form fields and the `Customer` object.
 
-## Main Features
+Main Features:
 
 1. **Layout Structure**
    - 3-column layout for responsive design.
@@ -158,7 +161,13 @@ The `CustomerView` class is a Vaadin-based web application view for managing cus
 6. **Repository Integration**
    - Uses `CustomerRepository` for CRUD operations.
 
-## Key Methods
+`CustomerView` public class methods:
+
+
+![](/images/springboot/labsb08/lab08-2-vaadin-class-methods.png){width="50%"}
+
+
+Key Methods:
 
 - `createMainLayout()`: Sets up UI components and layout.
 - `setupEventListeners()`: Configures event handlers.
@@ -167,18 +176,19 @@ The `CustomerView` class is a Vaadin-based web application view for managing cus
 - `clearForm()`: Resets form fields.
 - `refreshGrid()`: Updates grid with latest customer data.
 
-This view provides an easy-to-use interface for managing customer information in a restaurant
+This view provides an easy-to-use interface for managing `customer` information in a restaurant domain.
 
-## `CustomerView.java`
 
 - [src/main/java/dev/example/restaurant/view/CustomerView.java](https://github.com/AlbertProfe/restaurantVaadin/blob/master/src/main/java/dev/example/restaurant/view/CustomerView.java){.external target='_blank'}
 
+
+::: {.column-page-right}
+
 <details>
-<summary>Code</summary>
+<summary>Code `CustomerView.java`</summary>
 
 ```{.java .code-overflow-wrap filename="CustomerView.java"}
 package dev.example.restaurant.view;
-
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
@@ -253,12 +263,14 @@ public class CustomerView extends VerticalLayout {
         grid.setSizeFull();
 
         // Create a form layout
-        HorizontalLayout formLayout = new HorizontalLayout(name, email, phoneNumber);
+        HorizontalLayout formLayout = 
+            new HorizontalLayout(name, email, phoneNumber);
         formLayout.setWidth("100%");
         formLayout.setJustifyContentMode(JustifyContentMode.CENTER);
 
         // Create a button layout
-        HorizontalLayout buttonLayout = new HorizontalLayout(save, delete);
+        HorizontalLayout buttonLayout = 
+            new HorizontalLayout(save, delete);
         buttonLayout.setJustifyContentMode(JustifyContentMode.CENTER);
 
         // Add components to the center column
@@ -328,6 +340,8 @@ public class CustomerView extends VerticalLayout {
 ```
 </details>
 
+:::
+
 # Test
 
 **Test the system**
@@ -336,7 +350,7 @@ Test the system by running it and making sure that all the functionalities work 
 
 # Code and output
 
-![](/images/springboot/labsb08/lab08-1-vaadin-view.png)
+![](/images/springboot/labsb08/lab08-2-vaadin-view.png)
 
 - [GitHub code](https://github.com/AlbertProfe/restaurantVaadin){.external target='_blank'}
 
@@ -363,4 +377,4 @@ Event listeners handle user interactions, ensuring data is saved or deleted as n
 
 
 
-![](/images/springboot/labsb08/lab08-2-vaadin-vompo.png)
+![](/images/springboot/labsb08/lab08-2-vaadin-components.png)
