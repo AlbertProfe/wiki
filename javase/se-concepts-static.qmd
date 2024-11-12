@@ -380,3 +380,171 @@ In this example, `staticVariable` is a static variable that can be accessed dire
 | Object-oriented design principles promote the use of non-static methods because they can be overridden by subclasses to change their behavior |  |
 
 
+# `final` modifier
+
+The `final` modifier in `Java` is a powerful keyword used to restrict the modification of variables, methods, and classes.
+
+
+The `final` modifier in Java is a powerful keyword used to restrict the modification of variables, methods, and classes. Here's an overview of how it works:
+
+**`Final` Variables**
+
+When applied to variables, the `final` modifier creates <mark>constants</mark> that **cannot** be reassigned once initialized.
+
+- For primitive types, the value cannot be changed.
+- For reference types, the reference cannot be changed, but the object's contents can still be modified.
+
+```java
+final int MAX_VALUE = 100;
+final List<String> names = new ArrayList<>();
+
+// Valid: Modifying the list's contents
+names.add("Alice");
+
+// Invalid: Attempting to reassign the variable
+// MAX_VALUE = 200; // Compilation error
+// names = new ArrayList<>(); // Compilation error
+```
+
+**`Final` Methods**
+
+A `final` method cannot be overridden by subclasses. This is useful for preserving critical functionality or preventing unexpected behavior in inherited classes.
+
+```java
+class Parent {
+    final void display() {
+        System.out.println("This method cannot be overridden");
+    }
+}
+
+class Child extends Parent {
+    // Invalid: Attempting to override a final method
+    // void display() { } // Compilation error
+}
+```
+
+`Final` Classes
+
+A `final` class cannot be extended or inherited. This is often used to <mark>create immutable classes</mark> or to prevent unintended modifications to a class's behavior.
+
+```java
+final class ImmutableClass {
+    // Class implementation
+}
+
+// Invalid: Attempting to extend a final class
+// class Subclass extends ImmutableClass { } // Compilation error
+```
+
+## Key Points
+
+1. `Final` variables must be initialized either at declaration or in the constructor.
+2. `Static` final variables are often used to define constants.
+3. Final methods in `interfaces` are redundant, as `interface` methods are implicitly final.
+4. The `final` keyword can improve performance in some cases, as the compiler can optimize final methods and variables.
+
+
+# `static` / `final`
+
+
+::: {.column-page-right}
+| Modifier | Use Case | Description | Example |
+|----------|----------|-------------|---------|
+| `static` | Class members | Belongs to the class rather than instances | `public static int count = 0;` |
+| `static` | Utility methods | Methods that don't require instance state | `public static int add(int a, int b) { return a + b; }` |
+| `static` | Constants | Class-level constants (usually combined with `final`) | `public static final double PI = 3.14159;` |
+| `static` | Static blocks | Code executed when class is loaded | `static { System.out.println("Class loaded"); }` |
+| `final` | Variables | Creates constants that can't be reassigned | `final int MAX_SIZE = 100;` |
+| `final` | Methods | Prevents method overriding in subclasses | `public final void display() { }` |
+| `final` | Classes | Prevents class inheritance | `public final class ImmutableString { }` |
+| `final` | Method parameters | Prevents parameter reassignment within method | `public void process(final int value) { }` |
+| `static final` | Class constants | Immutable class-level constants | `public static final String VERSION = "1.0";` |
+:::
+
+Somethimes we use `static` and final `together`, an example demonstrating the use of `final static` variables in Java:
+
+```java
+public class MathConstants {
+    public static final double PI = 3.14159265359;
+    public static final double E = 2.71828182846;
+    public static final double GOLDEN_RATIO = 1.61803398875;
+
+    public static void main(String[] args) {
+        System.out.println("Value of PI: " + PI);
+        System.out.println("Value of E: " + E);
+        System.out.println("Value of Golden Ratio: " + GOLDEN_RATIO);
+
+        // The following lines would cause compilation errors if uncommented:
+        // PI = 3.14; // Error: cannot assign a value to final variable PI
+        // E = 2.72; // Error: cannot assign a value to final variable E
+    }
+}
+```
+
+In this example:
+
+1. We declare three `public static final` variables: `PI`, `E`, and `GOLDEN_RATIO`. These are mathematical constants that should never change[2][4].
+
+2. The `static` keyword means these variables belong to the class itself, not to any specific instance of the class. They can be accessed directly through the class name, like `MathConstants.PI`[3].
+
+3. The `final` keyword ensures that these variables cannot be reassigned once they are initialized. This makes them true constants.
+
+4. We initialize these constants at the point of declaration. For `final static` variables, this is one of the valid ways to initialize them.
+
+5. In the `main` method, we print out the values of these constants.
+
+6. The commented-out lines demonstrate that attempting to reassign these constants would result in a compilation error.
+
+Key points about `final static` variables:
+
+1. They must be initialized either at the point of declaration or in a static initializer block.
+2. They are often used for constants that are shared across all instances of a class.
+3. By convention, `final static` variables are usually named in ALL_CAPS with underscores separating words.
+4. They are evaluated at compile-time, which can lead to performance optimizations.
+
+Using `final static` variables for constants provides several benefits:
+- It ensures the value cannot be changed accidentally.
+- It clearly communicates the intent that this value should not change.
+- It allows the compiler to perform optimizations, potentially improving performance.
+
+> Remember, while `final` prevents reassignment, if the constant is an object reference, the object's internal state can still be modified unless the object itself is immutable.
+
+# `final` and immutable
+
+The key differences between `final` and immutable in Java are:
+
+## `Final`
+
+1. Applies to variables, methods, and classes.
+2. For variables, prevents reassignment of the reference, but not modification of the object's state.
+3. Ensures the variable will always point to the same object reference.
+
+```java
+final List<String> list = new ArrayList<>();
+list.add("Item"); // Valid: Modifying object state
+// list = new ArrayList<>(); // Invalid: Reassignment not allowed
+```
+
+## `Immutable`
+
+1. Applies to objects, not variables.
+2. Prevents any changes to the object's state after creation.
+3. The object's internal values cannot be modified once initialized.
+
+```java
+String str = "Hello";
+// str.toLowerCase(); // Returns a new String, doesn't modify original
+// String is immutable, so its state can't be changed
+```
+
+## Key Distinctions
+
+1. **Scope**: `final` is about reference constancy, while immutability is about object state constancy.
+
+2. **Mutability**: A `final` variable can still refer to a mutable object, whereas an immutable object's state cannot be changed at all.
+
+3. **Implementation**: `final` is a keyword in Java, while immutability is a design principle implemented by the programmer.
+
+4. **Flexibility**: You can have a non-final reference to an immutable object, allowing the reference to be reassigned while the object remains unchangeable.
+
+5. **Combination**: An object can be both `final` and immutable, like the `String` class in Java.
