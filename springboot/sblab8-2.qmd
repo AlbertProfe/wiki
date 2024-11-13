@@ -20,6 +20,8 @@ We are going to evolve the current Java SE Restaurant project into a `Spring Boo
 :::
 </br>
 
+- [Commits RestaurantVaadin](https://github.com/AlbertProfe/restaurantVaadin){.external target='_blank'}
+
 # Create a new Spring Boot project & H2 DB
 
 From RestaurantProject to RestaurantManagement, reference code where to start:
@@ -77,9 +79,59 @@ Modern Java framework for building web applications
 
 Here are some key points about `Vaadin`:
 
-- [Vaadin Official Website](https://vaadin.com/)
-- [Vaadin Documentation](https://vaadin.com/docs/latest/)
-- [Vaadin Spring Boot Integration](https://vaadin.com/docs/latest/flow/integrations/spring/)
+- [Vaadin Official Website](https://vaadin.com/){.external target='_blank'}
+- [Vaadin Documentation](https://vaadin.com/docs/latest/){.external target='_blank'}
+- [Vaadin Spring Boot Integration](https://vaadin.com/docs/latest/flow/integrations/spring/){.external target='_blank'}
+- [Vaadin Flow](https://vaadin.com/docs/latest/flow){.external target='_blank'}
+- [GitHub Tutorial Vaadin 24](https://github.com/vaadin/tutorial/){.external target='_blank'}
+- [Vaadin Maven CLI create a project](https://vaadin.com/docs/latest/getting-started/project/maven-archetype){.external target='_blank'}
+
+
+
+`Vaadin` Flow lets a <mark>server-side Java application build a user interface from components in Java. These Java components are connected to web components running in the browser</mark>. Flow manages the relaying of user [interaction back to the server-side application](https://vaadin.com/docs/latest/flow/application){.external target='_blank'}, which can handle it with event listeners.
+
+> Application views and their components are typically used to display and accept input of application data. This data is often stored in a backend service, such as a database. Application logic is often created using application frameworks, such as Spring.
+
+
+![](https://vaadin.com/docs/latest/_astro/application-architecture.BkkGoEuL_1Qhbrj.webp){width="70%"}
+
+
+::: {.callout-note}
+# `Vaadin` offers two main flavors for web application development:
+
+1. **Hilla**: A full-stack framework combining a Spring Boot backend with a React or Lit frontend. It provides type-safe communication between client and server, auto-generated TypeScript interfaces, and built-in security features.
+
+
+2. **Flow**: A server-side Java framework for building web applications. It allows developers to create UIs using a component-based approach, with automatic server-client communication and state management.
+
+
+Both flavors leverage Vaadin's extensive set of UI components and themes. `Hilla` is ideal for developers comfortable with modern `JavaScript` frameworks, while `Flow` suits those preferring a Java-centric approach.
+
+Both can be used to create responsive, feature-rich web applications with excellent performance and maintainability.
+
+
+[Hilla](https://vaadin.com/docs/latest/hilla){.external target='_blank'} / [Flow](https://vaadin.com/docs/latest/flow){.external target='_blank'}
+
+:::
+
+
+## `atmosphere`
+
+**Vaadin** uses the [Atmosphere framework](https://github.com/Atmosphere/atmosphere) to facilitate robust <mark>client-server communication, particularly for real-time and push-based features. </mark>
+
+`Atmosphere` is an open-source project that provides a powerful abstraction layer for various **asynchronous communication protocols**, including `WebSockets`, `Server-Sent Events`, and `long-polling`.
+
+`Vaadin` integrates `Atmosphere` to handle its server **push** functionality, allowing servers to send updates to clients without the need for **client-side polling**. This integration enables `Vaadin` applications to create responsive, **real-time user interfaces** with minimal developer effort.
+
+`Atmosphere`'s key features utilized by Vaadin include:
+
+1. **Protocol negotiation** and fallback mechanisms
+2. **Automatic selection** of the best available transport method
+3. **Handling of connection management** and reconnection scenarios
+4. **Cross-browser compatibility**
+
+> By building on Atmosphere, Vaadin abstracts away the complexities of low-level communication protocols, allowing developers to focus on application logic while still benefiting from efficient, real-time communication between client and server.
+
 
 ## Create Vaadin Views
 
@@ -378,3 +430,27 @@ Event listeners handle user interactions, ensuring data is saved or deleted as n
 
 
 ![](/images/springboot/labsb08/lab08-2-vaadin-components.png)
+
+
+## Commit `33b1284`
+
+Commits on Nov 12, 2024: **MainLayout, BookingView, RouterLink and drawer**
+
+- [Code](https://github.com/AlbertProfe/restaurantVaadin/tree/33b12844f8d20c52d08de41c8e3eb3c5f58751a9){.external target='_blank'}
+
+This setup accomplishes the following:
+
+- The `CustomerView` and `BookingView` classes are annotated with @Route, specifying their respective URL paths ("customer" and "booking") and setting `MainLayout` as their parent layout14.
+- The `MainLayout` class extends `AppLayout`, which provides a header and a responsive drawers.
+- In the `MainLayout`, we create a `header` with a logo and a drawer `toggle button`.
+- The `drawer` is populated with `RouterLink` components for both the `Customer` and `Booking` views, allowing for navigation between them.
+- The `setHighlightCondition` method is used to highlight the current active link in the drawer.
+
+
+![](/images/springboot/labsb08/lab08-2-vaadin-mainlayout.png)
+
+With this setup, users can navigate to `/customer` to see the `Customer` view and `/booking` to see the `Booking` view. The main layout provides a consistent structure across both views, with a header and a navigation drawer that can be toggled on smaller screens
+
+![](/images/springboot/labsb08/lab08-2-vaadin-mainlayout-2.png)
+
+![](/images/springboot/labsb08/lab08-2-vaadin-mainlayout-3.png)
