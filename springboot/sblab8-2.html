@@ -1803,13 +1803,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#vaadin" id="toc-vaadin" class="nav-link" data-scroll-target="#vaadin"><span class="header-section-number">2</span> Vaadin</a>
   <ul>
-  <li><a href="#create-vaadin-views" id="toc-create-vaadin-views" class="nav-link" data-scroll-target="#create-vaadin-views"><span class="header-section-number">2.1</span> Create Vaadin Views</a></li>
+  <li><a href="#atmosphere" id="toc-atmosphere" class="nav-link" data-scroll-target="#atmosphere"><span class="header-section-number">2.1</span> <code>atmosphere</code></a></li>
+  <li><a href="#create-vaadin-views" id="toc-create-vaadin-views" class="nav-link" data-scroll-target="#create-vaadin-views"><span class="header-section-number">2.2</span> Create Vaadin Views</a></li>
   </ul></li>
   <li><a href="#code-customerview" id="toc-code-customerview" class="nav-link" data-scroll-target="#code-customerview"><span class="header-section-number">3</span> Code: <code>CustomerView</code></a></li>
   <li><a href="#test" id="toc-test" class="nav-link" data-scroll-target="#test"><span class="header-section-number">4</span> Test</a></li>
   <li><a href="#code-and-output" id="toc-code-and-output" class="nav-link" data-scroll-target="#code-and-output"><span class="header-section-number">5</span> Code and output</a>
   <ul>
   <li><a href="#commit-3333400" id="toc-commit-3333400" class="nav-link" data-scroll-target="#commit-3333400"><span class="header-section-number">5.1</span> Commit <code>3333400</code></a></li>
+  <li><a href="#commit-33b1284" id="toc-commit-33b1284" class="nav-link" data-scroll-target="#commit-33b1284"><span class="header-section-number">5.2</span> Commit <code>33b1284</code></a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/sblab8-2.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -1853,7 +1855,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Tuesday, November 12, 2024</p>
+      <p class="date-modified">Wednesday, November 13, 2024</p>
     </div>
   </div>
     
@@ -1868,6 +1870,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>📘 Spring Boot Lab#SB00-2: RestaurantManager Vaadin We are going to evolve the current Java SE Restaurant project into a <code>Spring Boot Restaurant Management System</code> with an <code>H2 DB</code> and web interface using <code>Vaadin</code>.</p>
 </div>
 <p><br></p>
+<ul>
+<li><a href="https://github.com/AlbertProfe/restaurantVaadin" class="external" target="_blank">Commits RestaurantVaadin</a></li>
+</ul>
 <section id="create-a-new-spring-boot-project-h2-db" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Create a new Spring Boot project &amp; H2 DB</h1>
 <p>From RestaurantProject to RestaurantManagement, reference code where to start:</p>
@@ -1934,12 +1939,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p>Here are some key points about <code>Vaadin</code>:</p>
 <ul>
-<li><a href="https://vaadin.com/">Vaadin Official Website</a></li>
-<li><a href="https://vaadin.com/docs/latest/">Vaadin Documentation</a></li>
-<li><a href="https://vaadin.com/docs/latest/flow/integrations/spring/">Vaadin Spring Boot Integration</a></li>
+<li><a href="https://vaadin.com/" class="external" target="_blank">Vaadin Official Website</a></li>
+<li><a href="https://vaadin.com/docs/latest/" class="external" target="_blank">Vaadin Documentation</a></li>
+<li><a href="https://vaadin.com/docs/latest/flow/integrations/spring/" class="external" target="_blank">Vaadin Spring Boot Integration</a></li>
+<li><a href="https://vaadin.com/docs/latest/flow" class="external" target="_blank">Vaadin Flow</a></li>
+<li><a href="https://github.com/vaadin/tutorial/" class="external" target="_blank">GitHub Tutorial Vaadin 24</a></li>
+<li><a href="https://vaadin.com/docs/latest/getting-started/project/maven-archetype" class="external" target="_blank">Vaadin Maven CLI create a project</a></li>
 </ul>
-<section id="create-vaadin-views" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="create-vaadin-views"><span class="header-section-number">2.1</span> Create Vaadin Views</h2>
+<p><code>Vaadin</code> Flow lets a <mark>server-side Java application build a user interface from components in Java. These Java components are connected to web components running in the browser</mark>. Flow manages the relaying of user <a href="https://vaadin.com/docs/latest/flow/application" class="external" target="_blank">interaction back to the server-side application</a>, which can handle it with event listeners.</p>
+<blockquote class="blockquote">
+<p>Application views and their components are typically used to display and accept input of application data. This data is often stored in a backend service, such as a database. Application logic is often created using application frameworks, such as Spring.</p>
+</blockquote>
+<p><a href="https://vaadin.com/docs/latest/_astro/application-architecture.BkkGoEuL_1Qhbrj.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://vaadin.com/docs/latest/_astro/application-architecture.BkkGoEuL_1Qhbrj.webp" class="img-fluid" style="width:70.0%"></a></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<code>Vaadin</code> offers two main flavors for web application development:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><strong>Hilla</strong>: A full-stack framework combining a Spring Boot backend with a React or Lit frontend. It provides type-safe communication between client and server, auto-generated TypeScript interfaces, and built-in security features.</p></li>
+<li><p><strong>Flow</strong>: A server-side Java framework for building web applications. It allows developers to create UIs using a component-based approach, with automatic server-client communication and state management.</p></li>
+</ol>
+<p>Both flavors leverage Vaadin’s extensive set of UI components and themes. <code>Hilla</code> is ideal for developers comfortable with modern <code>JavaScript</code> frameworks, while <code>Flow</code> suits those preferring a Java-centric approach.</p>
+<p>Both can be used to create responsive, feature-rich web applications with excellent performance and maintainability.</p>
+<p><a href="https://vaadin.com/docs/latest/hilla" class="external" target="_blank">Hilla</a> / <a href="https://vaadin.com/docs/latest/flow" class="external" target="_blank">Flow</a></p>
+</div>
+</div>
+<section id="atmosphere" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="atmosphere"><span class="header-section-number">2.1</span> <code>atmosphere</code></h2>
+<p><strong>Vaadin</strong> uses the <a href="https://github.com/Atmosphere/atmosphere">Atmosphere framework</a> to facilitate robust <mark>client-server communication, particularly for real-time and push-based features. </mark></p>
+<p><code>Atmosphere</code> is an open-source project that provides a powerful abstraction layer for various <strong>asynchronous communication protocols</strong>, including <code>WebSockets</code>, <code>Server-Sent Events</code>, and <code>long-polling</code>.</p>
+<p><code>Vaadin</code> integrates <code>Atmosphere</code> to handle its server <strong>push</strong> functionality, allowing servers to send updates to clients without the need for <strong>client-side polling</strong>. This integration enables <code>Vaadin</code> applications to create responsive, <strong>real-time user interfaces</strong> with minimal developer effort.</p>
+<p><code>Atmosphere</code>’s key features utilized by Vaadin include:</p>
+<ol type="1">
+<li><strong>Protocol negotiation</strong> and fallback mechanisms</li>
+<li><strong>Automatic selection</strong> of the best available transport method</li>
+<li><strong>Handling of connection management</strong> and reconnection scenarios</li>
+<li><strong>Cross-browser compatibility</strong></li>
+</ol>
+<blockquote class="blockquote">
+<p>By building on Atmosphere, Vaadin abstracts away the complexities of low-level communication protocols, allowing developers to focus on application logic while still benefiting from efficient, real-time communication between client and server.</p>
+</blockquote>
+</section>
+<section id="create-vaadin-views" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="create-vaadin-views"><span class="header-section-number">2.2</span> Create Vaadin Views</h2>
 <ul>
 <li><strong>Create Vaadin Views</strong>: To create the web interface of the system, create <code>Vaadin</code> views for each of the main functionalities. <strong>The views will be used to display the data and handle user interactions.</strong></li>
 </ul>
@@ -2019,7 +2067,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ol>
 <p><code>CustomerView</code> public class methods:</p>
-<p><a href="../images/springboot/labsb08/lab08-2-vaadin-class-methods.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="../images/springboot/labsb08/lab08-2-vaadin-class-methods.png" class="img-fluid" style="width:50.0%"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-vaadin-class-methods.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="../images/springboot/labsb08/lab08-2-vaadin-class-methods.png" class="img-fluid" style="width:50.0%"></a></p>
 <p>Key Methods:</p>
 <ul>
 <li><code>createMainLayout()</code>: Sets up UI components and layout.</li>
@@ -2201,7 +2249,7 @@ Code <code>CustomerView.java</code>
 </section>
 <section id="code-and-output" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Code and output</h1>
-<p><a href="../images/springboot/labsb08/lab08-2-vaadin-view.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="../images/springboot/labsb08/lab08-2-vaadin-view.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-vaadin-view.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="../images/springboot/labsb08/lab08-2-vaadin-view.png" class="img-fluid"></a></p>
 <ul>
 <li><a href="https://github.com/AlbertProfe/restaurantVaadin" class="external" target="_blank">GitHub code</a></li>
 </ul>
@@ -2213,12 +2261,31 @@ Code <code>CustomerView.java</code>
 <li><a href="https://github.com/AlbertProfe/restaurantVaadin/blob/33334005faf1e28d6ae953d6dff56f68990abd83/src/main/java/dev/example/restaurant/view/CustomerView.java" class="external" target="_blank">Code: /view/CustomerView.java</a></li>
 </ul>
 <p><strong>H2 LOCAL server</strong></p>
-<p><a href="../images/springboot/labsb08/lab08-2-vaadin-h2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="../images/springboot/labsb08/lab08-2-vaadin-h2.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-vaadin-h2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="../images/springboot/labsb08/lab08-2-vaadin-h2.png" class="img-fluid"></a></p>
 <p><strong>View</strong></p>
 <p>The new view <code>Vaadin</code> code defines a <code>CustomerView</code> class facilitates <mark>CRUD operations on customer data</mark> through a user interface that includes form fields for customer details (<code>name</code>, <code>email</code>, <code>phonenumber</code>), buttons for saving and deleting records, and a <code>grid</code> for displaying customer information.</p>
 <p>The layout is structured into <strong>three columns</strong>, with a progress bar and additional components like a <code>ComboBox</code> for customer types and a <code>DatePicker</code> for selecting start dates.</p>
 <p>Event listeners handle user interactions, ensuring data is saved or deleted as needed while maintaining synchronization with the underlying database via the <code>CustomerRepository</code>.</p>
-<p><a href="../images/springboot/labsb08/lab08-2-vaadin-components.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="../images/springboot/labsb08/lab08-2-vaadin-components.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-vaadin-components.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="../images/springboot/labsb08/lab08-2-vaadin-components.png" class="img-fluid"></a></p>
+</section>
+<section id="commit-33b1284" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="commit-33b1284"><span class="header-section-number">5.2</span> Commit <code>33b1284</code></h2>
+<p>Commits on Nov 12, 2024: <strong>MainLayout, BookingView, RouterLink and drawer</strong></p>
+<ul>
+<li><a href="https://github.com/AlbertProfe/restaurantVaadin/tree/33b12844f8d20c52d08de41c8e3eb3c5f58751a9" class="external" target="_blank">Code</a></li>
+</ul>
+<p>This setup accomplishes the following:</p>
+<ul>
+<li>The <code>CustomerView</code> and <code>BookingView</code> classes are annotated with <span class="citation" data-cites="Route">@Route</span>, specifying their respective URL paths (“customer” and “booking”) and setting <code>MainLayout</code> as their parent layout14.</li>
+<li>The <code>MainLayout</code> class extends <code>AppLayout</code>, which provides a header and a responsive drawers.</li>
+<li>In the <code>MainLayout</code>, we create a <code>header</code> with a logo and a drawer <code>toggle button</code>.</li>
+<li>The <code>drawer</code> is populated with <code>RouterLink</code> components for both the <code>Customer</code> and <code>Booking</code> views, allowing for navigation between them.</li>
+<li>The <code>setHighlightCondition</code> method is used to highlight the current active link in the drawer.</li>
+</ul>
+<p><a href="../images/springboot/labsb08/lab08-2-vaadin-mainlayout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="../images/springboot/labsb08/lab08-2-vaadin-mainlayout.png" class="img-fluid"></a></p>
+<p>With this setup, users can navigate to <code>/customer</code> to see the <code>Customer</code> view and <code>/booking</code> to see the <code>Booking</code> view. The main layout provides a consistent structure across both views, with a header and a navigation drawer that can be toggled on smaller screens</p>
+<p><a href="../images/springboot/labsb08/lab08-2-vaadin-mainlayout-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="../images/springboot/labsb08/lab08-2-vaadin-mainlayout-2.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-vaadin-mainlayout-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="../images/springboot/labsb08/lab08-2-vaadin-mainlayout-3.png" class="img-fluid"></a></p>
 
 
 </section>
