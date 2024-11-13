@@ -12732,8 +12732,8 @@
     "objectID": "springboot/sblab8-2.html#create-vaadin-views",
     "href": "springboot/sblab8-2.html#create-vaadin-views",
     "title": "Lab#SB08-2: Vaadin",
-    "section": "2.2 Create Vaadin Views",
-    "text": "2.2 Create Vaadin Views\n\nCreate Vaadin Views: To create the web interface of the system, create Vaadin views for each of the main functionalities. The views will be used to display the data and handle user interactions.\n\n\nVaadin allows you to create rich, interactive UIs using Java code. It provides a wide range of UI components and layouts that you can use to build your application’s interface.\n\nExample of a simple Vaadin view:\n@Route(\"menu\")\npublic class MenuView extends VerticalLayout {\n    private final MenuService menuService;\n\n    public MenuView(MenuService menuService) {\n        this.menuService = menuService;\n        \n        H1 title = new H1(\"Restaurant Menu\");\n        Grid&lt;Menu&gt; grid = new Grid&lt;&gt;(Menu.class);\n        grid.setItems(menuService.getAllMenuItems());\n        \n        add(title, grid);\n    }\n}\nThis view creates a page with a title and a grid showing all menu items.\nKey Vaadin Concepts\n\nServer-side Architecture: Vaadin primarily runs on the server, which means your business logic stays secure and you can leverage the full power of Java.\nComponent-based UI: Build UIs by combining and customizing existing components or creating your own.\nData Binding: Easily bind UI components to data sources, including JPA entities.\nThemes and Styling: Customize the look and feel of your application using CSS and Vaadin’s theming capabilities.\nIntegration with Spring Boot: Vaadin integrates seamlessly with Spring Boot, allowing you to use Spring’s dependency injection and other features.",
+    "section": "2.3 Create Vaadin Views",
+    "text": "2.3 Create Vaadin Views\n\nCreate Vaadin Views: To create the web interface of the system, create Vaadin views for each of the main functionalities. The views will be used to display the data and handle user interactions.\n\n\nVaadin allows you to create rich, interactive UIs using Java code. It provides a wide range of UI components and layouts that you can use to build your application’s interface.\n\nExample of a simple Vaadin view:\n\n@Route(\"menu\")\npublic class MenuView extends VerticalLayout {\n    private final MenuService menuService;\n\n    public MenuView(MenuService menuService) {\n        this.menuService = menuService;\n        \n        H1 title = new H1(\"Restaurant Menu\");\n        Grid&lt;Menu&gt; grid = new Grid&lt;&gt;(Menu.class);\n        grid.setItems(menuService.getAllMenuItems());\n        \n        add(title, grid);\n    }\n}\n\nThis view creates a page with a title and a grid showing all menu items.\nKey Vaadin Concepts:\n\nServer-side Architecture: Vaadin primarily runs on the server, which means your business logic stays secure and you can leverage the full power of Java.\nComponent-based UI: Build UIs by combining and customizing existing components or creating your own.\nData Binding: Easily bind UI components to data sources, including JPA entities.\nThemes and Styling: Customize the look and feel of your application using CSS and Vaadin’s theming capabilities.\nIntegration with Spring Boot: Vaadin integrates seamlessly with Spring Boot, allowing you to use Spring’s dependency injection and other features.",
     "crumbs": [
       "Spring Boot Laboratories",
       "Lab#SB08-2: Vaadin"
@@ -14778,8 +14778,8 @@
     "objectID": "springboot/sblab8-2.html#commit-3333400",
     "href": "springboot/sblab8-2.html#commit-3333400",
     "title": "Lab#SB08-2: Vaadin",
-    "section": "5.1 Commit 3333400",
-    "text": "5.1 Commit 3333400\nCommit on Nov 12, 2024: add UI components: data picker, dialog, combo, accordion\n\nCode\nCode: /view/CustomerView.java\n\nH2 LOCAL server\n\nView\nThe new view Vaadin code defines a CustomerView class facilitates CRUD operations on customer data through a user interface that includes form fields for customer details (name, email, phonenumber), buttons for saving and deleting records, and a grid for displaying customer information.\nThe layout is structured into three columns, with a progress bar and additional components like a ComboBox for customer types and a DatePicker for selecting start dates.\nEvent listeners handle user interactions, ensuring data is saved or deleted as needed while maintaining synchronization with the underlying database via the CustomerRepository.",
+    "section": "5.2 Commit 3333400",
+    "text": "5.2 Commit 3333400\nCommit on Nov 12, 2024: add UI components: data picker, dialog, combo, accordion\n\nCode\nCode: /view/CustomerView.java\n\nH2 LOCAL server\n\nView\nThe new view Vaadin code defines a CustomerView class facilitates CRUD operations on customer data through a user interface that includes form fields for customer details (name, email, phonenumber), buttons for saving and deleting records, and a grid for displaying customer information.\nThe layout is structured into three columns, with a progress bar and additional components like a ComboBox for customer types and a DatePicker for selecting start dates.\nEvent listeners handle user interactions, ensuring data is saved or deleted as needed while maintaining synchronization with the underlying database via the CustomerRepository.",
     "crumbs": [
       "Spring Boot Laboratories",
       "Lab#SB08-2: Vaadin"
@@ -14789,8 +14789,8 @@
     "objectID": "springboot/sblab8-2.html#commit-33b1284",
     "href": "springboot/sblab8-2.html#commit-33b1284",
     "title": "Lab#SB08-2: Vaadin",
-    "section": "5.2 Commit 33b1284",
-    "text": "5.2 Commit 33b1284\nCommits on Nov 12, 2024: MainLayout, BookingView, RouterLink and drawer\n\nCode\n\nThis setup accomplishes the following:\n\nThe CustomerView and BookingView classes are annotated with @Route, specifying their respective URL paths (“customer” and “booking”) and setting MainLayout as their parent layout14.\nThe MainLayout class extends AppLayout, which provides a header and a responsive drawers.\nIn the MainLayout, we create a header with a logo and a drawer toggle button.\nThe drawer is populated with RouterLink components for both the Customer and Booking views, allowing for navigation between them.\nThe setHighlightCondition method is used to highlight the current active link in the drawer.\n\n\nWith this setup, users can navigate to /customer to see the Customer view and /booking to see the Booking view. The main layout provides a consistent structure across both views, with a header and a navigation drawer that can be toggled on smaller screens",
+    "section": "5.3 Commit 33b1284",
+    "text": "5.3 Commit 33b1284\nCommits on Nov 12, 2024: MainLayout, BookingView, RouterLink and drawer\n\nCode\n\nThis setup accomplishes the following:\n\nThe CustomerView and BookingView classes are annotated with @Route, specifying their respective URL paths (“customer” and “booking”) and setting MainLayout as their parent layout14.\nThe MainLayout class extends AppLayout, which provides a header and a responsive drawers.\nIn the MainLayout, we create a header with a logo and a drawer toggle button.\nThe drawer is populated with RouterLink components for both the Customer and Booking views, allowing for navigation between them.\nThe setHighlightCondition method is used to highlight the current active link in the drawer.\n\n\nWith this setup, users can navigate to /customer to see the Customer view and /booking to see the Booking view. The main layout provides a consistent structure across both views, with a header and a navigation drawer that can be toggled on smaller screens",
     "crumbs": [
       "Spring Boot Laboratories",
       "Lab#SB08-2: Vaadin"
@@ -14813,6 +14813,39 @@
     "title": "Lab#SB08-2: Vaadin",
     "section": "2.1 atmosphere",
     "text": "2.1 atmosphere\nVaadin uses the Atmosphere framework to facilitate robust client-server communication, particularly for real-time and push-based features. \nAtmosphere is an open-source project that provides a powerful abstraction layer for various asynchronous communication protocols, including WebSockets, Server-Sent Events, and long-polling.\nVaadin integrates Atmosphere to handle its server push functionality, allowing servers to send updates to clients without the need for client-side polling. This integration enables Vaadin applications to create responsive, real-time user interfaces with minimal developer effort.\nAtmosphere’s key features utilized by Vaadin include:\n\nProtocol negotiation and fallback mechanisms\nAutomatic selection of the best available transport method\nHandling of connection management and reconnection scenarios\nCross-browser compatibility\n\n\nBy building on Atmosphere, Vaadin abstracts away the complexities of low-level communication protocols, allowing developers to focus on application logic while still benefiting from efficient, real-time communication between client and server.",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-2: Vaadin"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-2.html#commit-6a3c9f1",
+    "href": "springboot/sblab8-2.html#commit-6a3c9f1",
+    "title": "Lab#SB08-2: Vaadin",
+    "section": "5.1 Commit 6a3c9f1",
+    "text": "5.1 Commit 6a3c9f1\nCommits on Oct 2, 2024:\n\ncreate project customer entity\nadding layout\ndecoupling layout\nminor changes",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-2: Vaadin"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-2.html#commit-b67d768",
+    "href": "springboot/sblab8-2.html#commit-b67d768",
+    "title": "Lab#SB08-2: Vaadin",
+    "section": "5.4 Commit b67d768",
+    "text": "5.4 Commit b67d768\nCommits on Nov 13, 2024: Login, LoginView and Configuration\n\nSecurity Vaadin v24.4\n\n/home is public:\n\nAny other view/page needs auth:\n\nBob may navigate with (USER_ROLE):\n\nOnce, Bob is logged (USER_ROLE), there are some view/page (/booking) with ADMIN_ROLE\n\nADMIN_ROLE & /booking:",
+    "crumbs": [
+      "Spring Boot Laboratories",
+      "Lab#SB08-2: Vaadin"
+    ]
+  },
+  {
+    "objectID": "springboot/sblab8-2.html#binding",
+    "href": "springboot/sblab8-2.html#binding",
+    "title": "Lab#SB08-2: Vaadin",
+    "section": "2.2 Binding",
+    "text": "2.2 Binding\n\nData Binding\nLoading & Saving Business Objects\n\nIn Vaadin, the Binder is a data binding class used to connect UI components to Java beans. It is not a container but rather a utility that facilitates the transfer and validation of data between the user interface and backend objects.\nBinder reads values from business objects, converts them to the format required by UI fields, and vice versa, supporting validation to ensure data integrity. This makes it essential for creating dynamic and interactive forms in Vaadin applications.\nExample\nWriting automatically to business objects when the user makes changes in the UI is usually the most convenient option. You can bind the values directly to an instance by allowing Binder to save automatically values from the fields.\nIn the example here, field values are saved automatically:\nBinder&lt;Person&gt; binder = new Binder&lt;&gt;();\n\n// Field binding configuration omitted.\n// It should be done here.\n\nPerson person = new Person(\"John Doe\", 1957);\n\n// Loads the values from the person instance.\n// Sets person to be updated when any bound field\n// is updated.\nbinder.setBean(person);\n\nButton saveButton = new Button(\"Save\", event -&gt; {\n    if (binder.validate().isOk()) {\n        // Person is always up-to-date as long as\n        // there are no validation errors.\n\n        MyBackend.updatePersonInDatabase(person);\n    }\n});",
     "crumbs": [
       "Spring Boot Laboratories",
       "Lab#SB08-2: Vaadin"
