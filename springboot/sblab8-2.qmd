@@ -136,12 +136,51 @@ Both can be used to create responsive, feature-rich web applications with excell
 
 - [Data Binding](https://vaadin.com/docs/latest/flow/binding-data){.external target='_blank'}
 - [Loading & Saving Business Objects](https://vaadin.com/docs/latest/flow/binding-data/components-binder-load){.external target='_blank'}
+- [Binding Data to Forms](https://vaadin.com/docs/latest/flow/binding-data/components-binder){.external target='_blank'}
+
 
 In `Vaadin`, the <mark>**Binder** is a data binding class used to **connect UI components to Java beans**. It is not a container but rather a **utility** that facilitates the transfer and validation of data between the user interface and backend objects.</mark>
 
 **Binder** reads values from business objects, converts them to the format required by UI fields, and vice versa, supporting validation to ensure <mark>data integrity</mark>. This makes it essential for creating dynamic and interactive forms in Vaadin applications.
 
-**Example**
+::: {.callout-note}
+# There can be only one Binder
+
+There can be only one **Binder** instance for each form.
+
+You should use this instance for all the fields in the form.
+:::
+
+**Client To Server: How to Bind Form Data**
+
+The following steps include everything needed to load, edit, and save values for a form. Java 8 method references are used.
+
+
+Binder<Person> binder = new Binder<>(Person.class);
+
+TextField titleField = new TextField();
+
+``` java
+// Start by defining the Field instance to use
+binder.forField(titleField)
+        // Finalize by doing the actual binding
+        // to the Person class
+        .bind(
+                // Callback that loads the title
+                // from a person instance
+                Person::getTitle,
+                // Callback that saves the title
+                // in a person instance
+                Person::setTitle);
+
+TextField nameField = new TextField();
+
+// Shorthand for cases without extra configuration
+binder.bind(nameField, Person::getName,
+        Person::setName);
+```        
+
+**Server to Client: Reading & Writing Automatically**
 
 Writing automatically to business objects when the user makes changes in the UI is usually the most convenient option. You can bind the values directly to an instance by allowing Binder to save automatically values from the fields.
 
@@ -435,6 +474,37 @@ public class CustomerView extends VerticalLayout {
 </details>
 
 :::
+
+# Security
+
+**Necessary Dependencies**
+
+The chat application is a Spring Boot application. Therefore, use Spring Security to secure it. Start by adding this dependency to your pom.xml file:
+
+``` xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+
+
+Key points about <mark>securing a `Vaadin Flow` application with `Spring Security`</mark>:
+
+
+1. Add the **Spring Boot Security starter** `dependency`.
+2. Create a `login view` using Vaadin's `LoginForm` component.
+3. Define user roles (e.g. USER and ADMIN).
+4. Configure `Spring Security` by extending `VaadinWebSecurity`. Set up the login view and define users/roles.
+5. Grant access to views using annotations like `@PermitAll` or `@RolesAllowed`.
+6. Secure the application layer (services) with `@RolesAllowed` annotations.
+7. Add a `logout` button to the main layout.
+8. Hide UI elements (button `LogOut`) based on user roles using `AuthenticationContext`.
+9. Use the authenticated `authenticationContext.getPrincipalName()` as the value `LogOut` button.
+
+> This setup restricts access to authenticated users, allows only admins to create channels, and personalizes the user experience. It integrates Vaadin's built-in security features with Spring Security for a comprehensive security solution.
+
+
 
 # Test
 
