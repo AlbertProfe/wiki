@@ -605,3 +605,66 @@ Once, `Bob` is logged (`USER_ROLE`), there are some view/page (`/booking`) with 
 `ADMIN_ROLE` & `/booking`:
 
 ![](/images/springboot/labsb08/lab08-2-login-admin.png)
+
+
+# Commit `c0c2192`
+
+Commits on Nov 14, 2024: **Icon, Drawer with Login button and fake user isaac-1234**
+
+We create a new user: `isaac` and encrypt the password with [bcrypt](https://bcrypt.online/){.external target='_blank'}:
+
+
+::: {.column-page-right}
+
+``` java
+@Bean
+    public UserDetailsService users() {
+        var alice = User.builder()
+                .username("alice")
+                // password = password with this hash, don't tell anybody :-)
+                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
+                .roles(Roles.USER)
+                .build();
+        var bob = User.builder()
+                .username("bob")
+                // password = password with this hash, don't tell anybody :-)
+                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
+                .roles(Roles.USER)
+                .build();
+        var isaac = User.builder()
+                .username("isaac")
+                // password = password with this hash, don't tell anybody :-)
+                .password("{bcrypt}$2y$10$jaoj0Q2GRSxqwXaVB4yzSugTJJM8zuQf0NmLZU.iPhoC2CJBA.hsi")
+                .roles(Roles.ADMIN, Roles.USER)
+                .build();
+
+        var admin = User.builder()
+                .username("admin")
+                // password = password with this hash, don't tell anybody :-)
+                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
+                .roles(Roles.ADMIN, Roles.USER)
+                .build();
+        return new InMemoryUserDetailsManager(alice, bob, admin, isaac);
+    }
+
+```
+:::
+
+`Drawer` with icons and login view in `MainLayout`:
+
+![](/images/springboot/labsb08/lab08-2-login-icon-view.png)
+
+`LogOut` button hidden
+
+![](/images/springboot/labsb08/lab08-2-login-icon-drawer.png)
+
+New User **isaac-1234**
+
+![](/images/springboot/labsb08/lab08-2-login-icon-isaac.png)
+
+**isaac** logged in:
+
+![](/images/springboot/labsb08/lab08-2-login-icon-isaac-2.png)
+
+
+
