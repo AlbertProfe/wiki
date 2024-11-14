@@ -1411,6 +1411,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">IFCT116-24 Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-24.html">
+ <span class="dropdown-text">IFCT116 Official Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-deliveries-24.html">
+ <span class="dropdown-text">IFCT116 Calendar &amp; Deliveries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-backlog-sprint-24.html">
+ <span class="dropdown-text">IFCT116 Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-backlog-product-24.html">
+ <span class="dropdown-text">IFCT116 Product Backlog</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -1911,8 +1927,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <section id="model-entities" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="model-entities"><span class="header-section-number">1.1</span> Model &amp; Entities</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/labsb08/lab08-2-model-entity.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="../images/springboot/labsb08/lab08-2-model-entity.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></a></p>
+</figure>
+</div>
 <ul>
-<li><strong>Create a Menu Entity</strong>: To represent a menu item in the restaurant management system, create a Menu <span class="citation" data-cites="Entity">@Entity</span></li>
+<li><strong>Create a Menu Entity</strong>: To represent a menu item in the restaurant management system, create a Menu <code>@Entity</code></li>
 </ul>
 <blockquote class="blockquote">
 <p>It could include attributes such as name, price, description, category (appetizer, main course, dessert, etc.), and availability status.</p>
@@ -1922,6 +1943,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Create Booking Entity</strong>: To represent a booking in the system, create a Booking entity that includes attributes such as booking date, time, number of people, tables, and associated customer.</p></li>
 <li><p><strong>Create Staff Entity</strong>: To represent staff members in the system, create a Staff entity that includes attributes such as staff ID, name, position, shift schedules, and assigned tables.</p></li>
 </ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/labsb08/lab08-2-model-design.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="../images/springboot/labsb08/lab08-2-model-design.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></a></p>
+</figure>
+</div>
 <p>Domains: <code>@Controller</code>, <code>@Service</code> and <code>@Repository</code></p>
 <ul>
 <li><p><strong>Create Repositories</strong>: To access the data stored in the database, create repositories for each entity. <strong>The repositories will provide the methods to create, read, update, and delete the data.</strong></p></li>
@@ -1957,7 +1983,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p>Application views and their components are typically used to display and accept input of application data. This data is often stored in a backend service, such as a database. Application logic is often created using application frameworks, such as Spring.</p>
 </blockquote>
-<p><a href="https://vaadin.com/docs/latest/_astro/application-architecture.BkkGoEuL_1Qhbrj.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://vaadin.com/docs/latest/_astro/application-architecture.BkkGoEuL_1Qhbrj.webp" class="img-fluid" style="width:70.0%"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://vaadin.com/docs/latest/_astro/application-architecture.BkkGoEuL_1Qhbrj.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://vaadin.com/docs/latest/_astro/application-architecture.BkkGoEuL_1Qhbrj.webp" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></a></p>
+</figure>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2018,25 +2048,27 @@ There can be only one Binder
 </div>
 <p><strong>Client To Server: How to Bind Form Data</strong></p>
 <p>The following steps include everything needed to load, edit, and save values for a form. Java 8 method references are used.</p>
-<p>Binder<person> binder = new Binder&lt;&gt;(Person.class);</person></p>
-<p>TextField titleField = new TextField();</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">// Start by defining the Field instance to use</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>binder<span class="op">.</span><span class="fu">forField</span><span class="op">(</span>titleField<span class="op">)</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>        <span class="co">// Finalize by doing the actual binding</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>        <span class="co">// to the Person class</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>        <span class="op">.</span><span class="fu">bind</span><span class="op">(</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>                <span class="co">// Callback that loads the title</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>                <span class="co">// from a person instance</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>                Person<span class="op">::</span>getTitle<span class="op">,</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>                <span class="co">// Callback that saves the title</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>                <span class="co">// in a person instance</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>                Person<span class="op">::</span>setTitle<span class="op">);</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="bu">TextField</span> nameField <span class="op">=</span> <span class="kw">new</span> <span class="bu">TextField</span><span class="op">();</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="co">// Shorthand for cases without extra configuration</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>binder<span class="op">.</span><span class="fu">bind</span><span class="op">(</span>nameField<span class="op">,</span> Person<span class="op">::</span>getName<span class="op">,</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>        Person<span class="op">::</span>setName<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">Binder</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> binder <span class="op">=</span> <span class="kw">new</span> <span class="bu">Binder</span><span class="op">&lt;&gt;(</span>Person<span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="bu">TextField</span> titleField <span class="op">=</span> <span class="kw">new</span> <span class="bu">TextField</span><span class="op">();</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">// Start by defining the Field instance to use</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>binder<span class="op">.</span><span class="fu">forField</span><span class="op">(</span>titleField<span class="op">)</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>        <span class="co">// Finalize by doing the actual binding</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>        <span class="co">// to the Person class</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>        <span class="op">.</span><span class="fu">bind</span><span class="op">(</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>                <span class="co">// Callback that loads the title</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>                <span class="co">// from a person instance</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>                Person<span class="op">::</span>getTitle<span class="op">,</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>                <span class="co">// Callback that saves the title</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>                <span class="co">// in a person instance</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>                Person<span class="op">::</span>setTitle<span class="op">);</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="bu">TextField</span> nameField <span class="op">=</span> <span class="kw">new</span> <span class="bu">TextField</span><span class="op">();</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="co">// Shorthand for cases without extra configuration</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>binder<span class="op">.</span><span class="fu">bind</span><span class="op">(</span>nameField<span class="op">,</span> Person<span class="op">::</span>getName<span class="op">,</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>        Person<span class="op">::</span>setName<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Server to Client: Reading &amp; Writing Automatically</strong></p>
 <p>Writing automatically to business objects when the user makes changes in the UI is usually the most convenient option. You can bind the values directly to an instance by allowing Binder to save automatically values from the fields.</p>
 <p>In the example here, field values are saved automatically:</p>
@@ -2144,7 +2176,11 @@ There can be only one Binder
 </ul></li>
 </ol>
 <p><code>CustomerView</code> public class methods:</p>
-<p><a href="../images/springboot/labsb08/lab08-2-vaadin-class-methods.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="../images/springboot/labsb08/lab08-2-vaadin-class-methods.png" class="img-fluid" style="width:50.0%"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/labsb08/lab08-2-vaadin-class-methods.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="../images/springboot/labsb08/lab08-2-vaadin-class-methods.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></a></p>
+</figure>
+</div>
 <p>Key Methods:</p>
 <ul>
 <li><code>createMainLayout()</code>: Sets up UI components and layout.</li>
@@ -2327,6 +2363,11 @@ Code <code>CustomerView.java</code>
 <span id="cb5-2"><a href="#cb5-2"></a>    &lt;<span class="kw">groupId</span>&gt;org.springframework.boot&lt;/<span class="kw">groupId</span>&gt;</span>
 <span id="cb5-3"><a href="#cb5-3"></a>    &lt;<span class="kw">artifactId</span>&gt;spring-boot-starter-security&lt;/<span class="kw">artifactId</span>&gt;</span>
 <span id="cb5-4"><a href="#cb5-4"></a>&lt;/<span class="kw">dependency</span>&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/labsb08/lab08-2-security-steps.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="../images/springboot/labsb08/lab08-2-security-steps.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a></p>
+</figure>
+</div>
 <p>Key points about <mark>securing a <code>Vaadin Flow</code> application with <code>Spring Security</code></mark>:</p>
 <ol type="1">
 <li>Add the <strong>Spring Boot Security starter</strong> <code>dependency</code>.</li>
@@ -2363,7 +2404,7 @@ Code <code>CustomerView.java</code>
 <li>decoupling layout</li>
 <li>minor changes</li>
 </ul>
-<p><a href="../images/springboot/labsb08/lab08-2-vaadin-view.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="../images/springboot/labsb08/lab08-2-vaadin-view.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-vaadin-view.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="../images/springboot/labsb08/lab08-2-vaadin-view.png" class="img-fluid"></a></p>
 </section>
 <section id="commit-3333400" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="commit-3333400"><span class="header-section-number">6.2</span> Commit <code>3333400</code></h2>
@@ -2373,12 +2414,12 @@ Code <code>CustomerView.java</code>
 <li><a href="https://github.com/AlbertProfe/restaurantVaadin/blob/33334005faf1e28d6ae953d6dff56f68990abd83/src/main/java/dev/example/restaurant/view/CustomerView.java" class="external" target="_blank">Code: /view/CustomerView.java</a></li>
 </ul>
 <p><strong>H2 LOCAL server</strong></p>
-<p><a href="../images/springboot/labsb08/lab08-2-vaadin-h2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="../images/springboot/labsb08/lab08-2-vaadin-h2.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-vaadin-h2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="../images/springboot/labsb08/lab08-2-vaadin-h2.png" class="img-fluid"></a></p>
 <p><strong>View</strong></p>
 <p>The new view <code>Vaadin</code> code defines a <code>CustomerView</code> class facilitates <mark>CRUD operations on customer data</mark> through a user interface that includes form fields for customer details (<code>name</code>, <code>email</code>, <code>phonenumber</code>), buttons for saving and deleting records, and a <code>grid</code> for displaying customer information.</p>
 <p>The layout is structured into <strong>three columns</strong>, with a progress bar and additional components like a <code>ComboBox</code> for customer types and a <code>DatePicker</code> for selecting start dates.</p>
 <p>Event listeners handle user interactions, ensuring data is saved or deleted as needed while maintaining synchronization with the underlying database via the <code>CustomerRepository</code>.</p>
-<p><a href="../images/springboot/labsb08/lab08-2-vaadin-components.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="../images/springboot/labsb08/lab08-2-vaadin-components.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-vaadin-components.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="../images/springboot/labsb08/lab08-2-vaadin-components.png" class="img-fluid"></a></p>
 </section>
 <section id="commit-33b1284" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="commit-33b1284"><span class="header-section-number">6.3</span> Commit <code>33b1284</code></h2>
@@ -2394,10 +2435,10 @@ Code <code>CustomerView.java</code>
 <li>The <code>drawer</code> is populated with <code>RouterLink</code> components for both the <code>Customer</code> and <code>Booking</code> views, allowing for navigation between them.</li>
 <li>The <code>setHighlightCondition</code> method is used to highlight the current active link in the drawer.</li>
 </ul>
-<p><a href="../images/springboot/labsb08/lab08-2-vaadin-mainlayout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="../images/springboot/labsb08/lab08-2-vaadin-mainlayout.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-vaadin-mainlayout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="../images/springboot/labsb08/lab08-2-vaadin-mainlayout.png" class="img-fluid"></a></p>
 <p>With this setup, users can navigate to <code>/customer</code> to see the <code>Customer</code> view and <code>/booking</code> to see the <code>Booking</code> view. The main layout provides a consistent structure across both views, with a header and a navigation drawer that can be toggled on smaller screens</p>
-<p><a href="../images/springboot/labsb08/lab08-2-vaadin-mainlayout-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="../images/springboot/labsb08/lab08-2-vaadin-mainlayout-2.png" class="img-fluid"></a></p>
-<p><a href="../images/springboot/labsb08/lab08-2-vaadin-mainlayout-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="../images/springboot/labsb08/lab08-2-vaadin-mainlayout-3.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-vaadin-mainlayout-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="../images/springboot/labsb08/lab08-2-vaadin-mainlayout-2.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-vaadin-mainlayout-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="../images/springboot/labsb08/lab08-2-vaadin-mainlayout-3.png" class="img-fluid"></a></p>
 </section>
 <section id="commit-b67d768" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="commit-b67d768"><span class="header-section-number">6.4</span> Commit <code>b67d768</code></h2>
@@ -2406,15 +2447,15 @@ Code <code>CustomerView.java</code>
 <li><a href="https://vaadin.com/docs/latest/getting-started/tutorial/flow/security" class="external" target="_blank">Security Vaadin v24.4</a></li>
 </ul>
 <p><code>/home</code> is public:</p>
-<p><a href="../images/springboot/labsb08/lab08-2-login-home-public.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="../images/springboot/labsb08/lab08-2-login-home-public.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-login-home-public.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="../images/springboot/labsb08/lab08-2-login-home-public.png" class="img-fluid"></a></p>
 <p>Any other view/page needs <code>auth</code>:</p>
-<p><a href="../images/springboot/labsb08/lab08-2-login-public.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="../images/springboot/labsb08/lab08-2-login-public.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-login-public.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="../images/springboot/labsb08/lab08-2-login-public.png" class="img-fluid"></a></p>
 <p>Bob may navigate with (<code>USER_ROLE</code>):</p>
-<p><a href="../images/springboot/labsb08/lab08-2-login-customer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="../images/springboot/labsb08/lab08-2-login-customer.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-login-customer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="../images/springboot/labsb08/lab08-2-login-customer.png" class="img-fluid"></a></p>
 <p>Once, <code>Bob</code> is logged (<code>USER_ROLE</code>), there are some view/page (<code>/booking</code>) with <code>ADMIN_ROLE</code></p>
-<p><a href="../images/springboot/labsb08/lab08-2-login-nopermit.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="../images/springboot/labsb08/lab08-2-login-nopermit.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-login-nopermit.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img src="../images/springboot/labsb08/lab08-2-login-nopermit.png" class="img-fluid"></a></p>
 <p><code>ADMIN_ROLE</code> &amp; <code>/booking</code>:</p>
-<p><a href="../images/springboot/labsb08/lab08-2-login-admin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="../images/springboot/labsb08/lab08-2-login-admin.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-login-admin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="../images/springboot/labsb08/lab08-2-login-admin.png" class="img-fluid"></a></p>
 </section>
 </section>
 <section id="commit-c0c2192" class="level1 page-columns page-full" data-number="7">
@@ -2453,13 +2494,13 @@ Code <code>CustomerView.java</code>
 <span id="cb6-29"><a href="#cb6-29"></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>Drawer</code> with icons and login view in <code>MainLayout</code>:</p>
-<p><a href="../images/springboot/labsb08/lab08-2-login-icon-view.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="../images/springboot/labsb08/lab08-2-login-icon-view.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-login-icon-view.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img src="../images/springboot/labsb08/lab08-2-login-icon-view.png" class="img-fluid"></a></p>
 <p><code>LogOut</code> button hidden</p>
-<p><a href="../images/springboot/labsb08/lab08-2-login-icon-drawer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img src="../images/springboot/labsb08/lab08-2-login-icon-drawer.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-login-icon-drawer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img src="../images/springboot/labsb08/lab08-2-login-icon-drawer.png" class="img-fluid"></a></p>
 <p>New User <strong>isaac-1234</strong></p>
-<p><a href="../images/springboot/labsb08/lab08-2-login-icon-isaac.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="../images/springboot/labsb08/lab08-2-login-icon-isaac.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-login-icon-isaac.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img src="../images/springboot/labsb08/lab08-2-login-icon-isaac.png" class="img-fluid"></a></p>
 <p><strong>isaac</strong> logged in:</p>
-<p><a href="../images/springboot/labsb08/lab08-2-login-icon-isaac-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img src="../images/springboot/labsb08/lab08-2-login-icon-isaac-2.png" class="img-fluid"></a></p>
+<p><a href="../images/springboot/labsb08/lab08-2-login-icon-isaac-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img src="../images/springboot/labsb08/lab08-2-login-icon-isaac-2.png" class="img-fluid"></a></p>
 
 
 </section>
