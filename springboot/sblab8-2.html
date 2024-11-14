@@ -1817,6 +1817,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#commit-33b1284" id="toc-commit-33b1284" class="nav-link" data-scroll-target="#commit-33b1284"><span class="header-section-number">6.3</span> Commit <code>33b1284</code></a></li>
   <li><a href="#commit-b67d768" id="toc-commit-b67d768" class="nav-link" data-scroll-target="#commit-b67d768"><span class="header-section-number">6.4</span> Commit <code>b67d768</code></a></li>
   </ul></li>
+  <li><a href="#commit-c0c2192" id="toc-commit-c0c2192" class="nav-link" data-scroll-target="#commit-c0c2192"><span class="header-section-number">7</span> Commit <code>c0c2192</code></a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/sblab8-2.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -2412,9 +2413,53 @@ Code <code>CustomerView.java</code>
 <p><a href="../images/springboot/labsb08/lab08-2-login-nopermit.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="../images/springboot/labsb08/lab08-2-login-nopermit.png" class="img-fluid"></a></p>
 <p><code>ADMIN_ROLE</code> &amp; <code>/booking</code>:</p>
 <p><a href="../images/springboot/labsb08/lab08-2-login-admin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="../images/springboot/labsb08/lab08-2-login-admin.png" class="img-fluid"></a></p>
-
-
 </section>
+</section>
+<section id="commit-c0c2192" class="level1 page-columns page-full" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Commit <code>c0c2192</code></h1>
+<p>Commits on Nov 14, 2024: <strong>Icon, Drawer with Login button and fake user isaac-1234</strong></p>
+<p>We create a new user: <code>isaac</code> and encrypt the password with <a href="https://bcrypt.online/" class="external" target="_blank">bcrypt</a>:</p>
+<div class="column-page-right">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="at">@Bean</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>    <span class="kw">public</span> UserDetailsService <span class="fu">users</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>        <span class="dt">var</span> alice <span class="op">=</span> User<span class="op">.</span><span class="fu">builder</span><span class="op">()</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>                <span class="op">.</span><span class="fu">username</span><span class="op">(</span><span class="st">"alice"</span><span class="op">)</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>                <span class="co">// password = password with this hash, don't tell anybody :-)</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>                <span class="op">.</span><span class="fu">password</span><span class="op">(</span><span class="st">"{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW"</span><span class="op">)</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>                <span class="op">.</span><span class="fu">roles</span><span class="op">(</span>Roles<span class="op">.</span><span class="fu">USER</span><span class="op">)</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>                <span class="op">.</span><span class="fu">build</span><span class="op">();</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>        <span class="dt">var</span> bob <span class="op">=</span> User<span class="op">.</span><span class="fu">builder</span><span class="op">()</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>                <span class="op">.</span><span class="fu">username</span><span class="op">(</span><span class="st">"bob"</span><span class="op">)</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>                <span class="co">// password = password with this hash, don't tell anybody :-)</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>                <span class="op">.</span><span class="fu">password</span><span class="op">(</span><span class="st">"{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW"</span><span class="op">)</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>                <span class="op">.</span><span class="fu">roles</span><span class="op">(</span>Roles<span class="op">.</span><span class="fu">USER</span><span class="op">)</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>                <span class="op">.</span><span class="fu">build</span><span class="op">();</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a>        <span class="dt">var</span> isaac <span class="op">=</span> User<span class="op">.</span><span class="fu">builder</span><span class="op">()</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a>                <span class="op">.</span><span class="fu">username</span><span class="op">(</span><span class="st">"isaac"</span><span class="op">)</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>                <span class="co">// password = password with this hash, don't tell anybody :-)</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a>                <span class="op">.</span><span class="fu">password</span><span class="op">(</span><span class="st">"{bcrypt}$2y$10$jaoj0Q2GRSxqwXaVB4yzSugTJJM8zuQf0NmLZU.iPhoC2CJBA.hsi"</span><span class="op">)</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a>                <span class="op">.</span><span class="fu">roles</span><span class="op">(</span>Roles<span class="op">.</span><span class="fu">ADMIN</span><span class="op">,</span> Roles<span class="op">.</span><span class="fu">USER</span><span class="op">)</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a>                <span class="op">.</span><span class="fu">build</span><span class="op">();</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a></span>
+<span id="cb6-22"><a href="#cb6-22"></a>        <span class="dt">var</span> admin <span class="op">=</span> User<span class="op">.</span><span class="fu">builder</span><span class="op">()</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a>                <span class="op">.</span><span class="fu">username</span><span class="op">(</span><span class="st">"admin"</span><span class="op">)</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a>                <span class="co">// password = password with this hash, don't tell anybody :-)</span></span>
+<span id="cb6-25"><a href="#cb6-25"></a>                <span class="op">.</span><span class="fu">password</span><span class="op">(</span><span class="st">"{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW"</span><span class="op">)</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a>                <span class="op">.</span><span class="fu">roles</span><span class="op">(</span>Roles<span class="op">.</span><span class="fu">ADMIN</span><span class="op">,</span> Roles<span class="op">.</span><span class="fu">USER</span><span class="op">)</span></span>
+<span id="cb6-27"><a href="#cb6-27"></a>                <span class="op">.</span><span class="fu">build</span><span class="op">();</span></span>
+<span id="cb6-28"><a href="#cb6-28"></a>        <span class="cf">return</span> <span class="kw">new</span> <span class="fu">InMemoryUserDetailsManager</span><span class="op">(</span>alice<span class="op">,</span> bob<span class="op">,</span> admin<span class="op">,</span> isaac<span class="op">);</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>Drawer</code> with icons and login view in <code>MainLayout</code>:</p>
+<p><a href="../images/springboot/labsb08/lab08-2-login-icon-view.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="../images/springboot/labsb08/lab08-2-login-icon-view.png" class="img-fluid"></a></p>
+<p><code>LogOut</code> button hidden</p>
+<p><a href="../images/springboot/labsb08/lab08-2-login-icon-drawer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img src="../images/springboot/labsb08/lab08-2-login-icon-drawer.png" class="img-fluid"></a></p>
+<p>New User <strong>isaac-1234</strong></p>
+<p><a href="../images/springboot/labsb08/lab08-2-login-icon-isaac.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="../images/springboot/labsb08/lab08-2-login-icon-isaac.png" class="img-fluid"></a></p>
+<p><strong>isaac</strong> logged in:</p>
+<p><a href="../images/springboot/labsb08/lab08-2-login-icon-isaac-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img src="../images/springboot/labsb08/lab08-2-login-icon-isaac-2.png" class="img-fluid"></a></p>
+
+
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
