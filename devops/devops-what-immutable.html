@@ -46,6 +46,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-1803afbef69162231c78fac2e5417dab.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1374,6 +1377,22 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">IFCT116-24 Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-24.html">
+ <span class="dropdown-text">IFCT116 Official Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-deliveries-24.html">
+ <span class="dropdown-text">IFCT116 Calendar &amp; Deliveries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-backlog-sprint-24.html">
+ <span class="dropdown-text">IFCT116 Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-backlog-product-24.html">
+ <span class="dropdown-text">IFCT116 Product Backlog</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -1817,7 +1836,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, November 1, 2024</p>
+      <p class="date-modified">Friday, November 15, 2024</p>
     </div>
   </div>
     
@@ -1833,6 +1852,11 @@ ul.task-list li input[type="checkbox"] {
 <p><a href="https://www.digitalocean.com/community/tutorials/what-is-immutable-infrastructure">Immutable infrastructure</a> is an approach to managing services and software deployments on IT resources wherein components are replaced rather than changed. An application or service is effectively redeployed each time any change occurs.</p>
 <section id="pros-of-immutable-infrastructure" class="level3" data-number="1.1">
 <h3 data-number="1.1" class="anchored" data-anchor-id="pros-of-immutable-infrastructure"><span class="header-section-number">1.1</span> Pros of immutable infrastructure</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/devops/devos-immutalbe-pros.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../images/devops/devos-immutalbe-pros.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></a></p>
+</figure>
+</div>
 <ol type="1">
 <li>There are no server updates which can be problematic at times. That means lower IT complexity and failures.</li>
 <li>Reduces support calls: it resolves the issues by deleting the instance that causes the problem.</li>
@@ -2470,6 +2494,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

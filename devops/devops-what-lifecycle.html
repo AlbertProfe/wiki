@@ -45,6 +45,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-1803afbef69162231c78fac2e5417dab.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1373,6 +1376,22 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">IFCT116-24 Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-24.html">
+ <span class="dropdown-text">IFCT116 Official Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-deliveries-24.html">
+ <span class="dropdown-text">IFCT116 Calendar &amp; Deliveries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-backlog-sprint-24.html">
+ <span class="dropdown-text">IFCT116 Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-backlog-product-24.html">
+ <span class="dropdown-text">IFCT116 Product Backlog</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -1811,7 +1830,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, November 1, 2024</p>
+      <p class="date-modified">Friday, November 15, 2024</p>
     </div>
   </div>
     
@@ -1825,11 +1844,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="lifecycle-software" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Lifecycle software</h1>
 <p>And a developer needs such a set skill due to the wide and integral software lifecycle that allows to build apps.</p>
-<div class="mermaidContent">
-<iframe frameborder="0" style="width:100%;height:600px;" src="https://viewer.diagrams.net/?highlight=0000ff&amp;nav=1&amp;title=LifeCycleSoftwareProject#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D10HyckoCdwJTJ-PNSEZZKogrvhmSIg3Aw%26export%3Ddownload">
-</iframe>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/devops/life-cycle-software.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../images/devops/life-cycle-software.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></a></p>
+</figure>
 </div>
-<p><br></p>
 <p>The <strong>software development lifecycle (SDLC)</strong> is a process that describes the stages involved in creating and deploying software. It typically includes the following six steps:</p>
 <ol type="1">
 <li><p><strong>Planning</strong>: This stage involves identifying the goals and objectives of the software, as well as determining the resources and timelines required to develop it.</p></li>
@@ -2444,6 +2463,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
