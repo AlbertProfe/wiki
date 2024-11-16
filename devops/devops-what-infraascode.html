@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="albertprofe">
-<meta name="description" content="Software and code components are replaced rather than changed">
+<meta name="description" content="Infrastructure as code (IaC) uses DevOps methodology and versioning with a descriptive model to define and deploy infrastructure, such as networks, virtual machines, load balancers, and connection topologies. rather than changed">
 
-<title>Immutable Infrastructure – albertprofe wiki</title>
+<title>Infrastructure as code (IaC) – albertprofe wiki</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,8 +32,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../devops/devops-what-lifecycle.html" rel="next">
-<link href="../devops/devops-what-infraascode.html" rel="prev">
+<link href="../devops/devops-what-immutable.html" rel="next">
+<link href="../devops/devops-what-overview.html" rel="prev">
 <link href="..//images/home/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -1435,7 +1435,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../devops/devops-what-intro.html">What is DevOps</a></li><li class="breadcrumb-item"><a href="../devops/devops-what-immutable.html">Immutable Infrastructure</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../devops/devops-what-intro.html">What is DevOps</a></li><li class="breadcrumb-item"><a href="../devops/devops-what-infraascode.html">Infrastructure as code (IaC)</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -1482,13 +1482,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../devops/devops-what-infraascode.html" class="sidebar-item-text sidebar-link">
+  <a href="../devops/devops-what-infraascode.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Infrastructure as code (IaC)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../devops/devops-what-immutable.html" class="sidebar-item-text sidebar-link active">
+  <a href="../devops/devops-what-immutable.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Immutable Infrastructure</span></a>
   </div>
 </li>
@@ -1798,22 +1798,21 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
-  <ul>
-  <li><a href="#pros-of-immutable-infrastructure" id="toc-pros-of-immutable-infrastructure" class="nav-link" data-scroll-target="#pros-of-immutable-infrastructure"><span class="header-section-number">1.1</span> Pros of immutable infrastructure</a></li>
-  <li><a href="#examples-of-immutable-infrastructure-tools" id="toc-examples-of-immutable-infrastructure-tools" class="nav-link" data-scroll-target="#examples-of-immutable-infrastructure-tools"><span class="header-section-number">1.2</span> Examples of Immutable Infrastructure Tools</a></li>
-  <li><a href="#immutable-infrastructure-is-a-devops-key-concept" id="toc-immutable-infrastructure-is-a-devops-key-concept" class="nav-link" data-scroll-target="#immutable-infrastructure-is-a-devops-key-concept"><span class="header-section-number">1.3</span> Immutable infrastructure is a DevOps key-concept</a></li>
-  </ul></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
+  <li><a href="#benefits-of-iac" id="toc-benefits-of-iac" class="nav-link" data-scroll-target="#benefits-of-iac"><span class="header-section-number">2</span> Benefits of IaC</a></li>
+  <li><a href="#avoid-manual-configuration-to-enforce-consistency" id="toc-avoid-manual-configuration-to-enforce-consistency" class="nav-link" data-scroll-target="#avoid-manual-configuration-to-enforce-consistency"><span class="header-section-number">3</span> Avoid manual configuration to enforce consistency</a></li>
+  <li><a href="#tools" id="toc-tools" class="nav-link" data-scroll-target="#tools"><span class="header-section-number">4</span> Tools</a></li>
+  <li><a href="#links" id="toc-links" class="nav-link" data-scroll-target="#links"><span class="header-section-number">5</span> Links</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/devops/devops-what-immutable.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/devops/devops-what-infraascode.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../devops/devops-what-intro.html">What is DevOps</a></li><li class="breadcrumb-item"><a href="../devops/devops-what-immutable.html">Immutable Infrastructure</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../devops/devops-what-intro.html">What is DevOps</a></li><li class="breadcrumb-item"><a href="../devops/devops-what-infraascode.html">Infrastructure as code (IaC)</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Immutable Infrastructure</h1>
-<p class="subtitle lead">Designing code</p>
+<h1 class="title">Infrastructure as code (IaC)</h1>
+<p class="subtitle lead">Infrastructure as code (IaC) uses DevOps methodology</p>
   <div class="quarto-categories">
     <div class="quarto-category">devops</div>
     <div class="quarto-category">immutable</div>
@@ -1822,7 +1821,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    Software and code components are replaced rather than changed
+    Infrastructure as code (IaC) uses DevOps methodology and versioning with a descriptive model to define and deploy infrastructure, such as networks, virtual machines, load balancers, and connection topologies. rather than changed
   </div>
 </div>
 
@@ -1846,7 +1845,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, November 15, 2024</p>
+      <p class="date-modified">Saturday, November 16, 2024</p>
     </div>
   </div>
     
@@ -1857,47 +1856,79 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1</span> Introduction</h2>
-<p><a href="https://www.digitalocean.com/community/tutorials/what-is-immutable-infrastructure">Immutable infrastructure</a> is an approach to managing services and software deployments on IT resources wherein components are replaced rather than changed. An application or service is effectively redeployed each time any change occurs.</p>
-<section id="pros-of-immutable-infrastructure" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="pros-of-immutable-infrastructure"><span class="header-section-number">1.1</span> Pros of immutable infrastructure</h3>
+<section id="overview" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/devops/devos-immutalbe-pros.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../images/devops/devos-immutalbe-pros.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></a></p>
+<p><a href="../images/devops/devops-infraascode.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../images/devops/devops-infraascode.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></a></p>
 </figure>
 </div>
-<ol type="1">
-<li>There are no server updates which can be problematic at times. That means lower IT complexity and failures.</li>
-<li>Reduces support calls: it resolves the issues by deleting the instance that causes the problem.</li>
-<li>Improves security and incident resolution: incident becomes an exception. The exception problem is solved by machine learning (Weka)from manual rules to automatic.</li>
-<li>Cost savings by encouraging reduced hardware usage.</li>
-<li>Configuration management can run faster than manual system.</li>
-<li>Less dependency on third party resources at deployment.</li>
-<li>Requires a learning curve due to new tools.</li>
-</ol>
+<p><mark><code>Infrastructure as code (IaC)</code> uses <code>DevOps</code> methodology and versioning with a <code>descriptive</code> model to define and deploy infrastructure, such as networks, virtual machines, load balancers, and connection topologies</mark>.</p>
+<p>Just as the same source code always generates the same binary, an <code>IaC model</code> generates the <strong>same environment every time it deploys.</strong></p>
 </section>
-<section id="examples-of-immutable-infrastructure-tools" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="examples-of-immutable-infrastructure-tools"><span class="header-section-number">1.2</span> Examples of Immutable Infrastructure Tools</h3>
-<p><a href="https://cloudinfrastructureservices.co.uk/what-is-immutable-infrastructure-best-practices/">Below</a> are some examples of using the tools and services for accomplishing immutable infrastructure. However, the list only includes a few. There are many more.</p>
+<section id="benefits-of-iac" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Benefits of IaC</h1>
+<p>Provisioning infrastructure has historically been a time-consuming and costly manual process. As virtualization, containers, and cloud computing have become the norm, infrastructure management has moved away from physical hardware in data centers—providing many benefits, but also creating some new challenges.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cloud computing
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>With cloud computing, the number of infrastructure components has grown, more applications are being released to production on a daily basis, and infrastructure needs to be able to be spun up, scaled, and taken down frequently.</p>
+<p>Without an <code>IaC</code> practice in place, it becomes increasingly difficult to manage the scale of today’s infrastructure.</p>
+</div>
+</div>
+<p><code>IaC</code> can help your organization manage IT infrastructure needs while also improving consistency and reducing errors and manual configuration.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/devops/devops-benefits-infraascode.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="../images/devops/devops-benefits-infraascode.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></a></p>
+</figure>
+</div>
+<p>Benefits:</p>
 <ul>
-<li>Git commits</li>
-<li><a href="https://cloudinfrastructureservices.co.uk/ansible-vs-puppet/">Puppet</a></li>
-<li><a href="https://cloudinfrastructureservices.co.uk/how-to-setup-docker-compose-on-windows-server-in-azure-aws-gcp/">Docker</a></li>
-<li><a href="https://cloudinfrastructureservices.co.uk/how-to-setup-ansible-control-node-on-azure-aws-gcp/">Ansible</a></li>
-<li><a href="https://cloudinfrastructureservices.co.uk/how-to-setup-jenkins-ci-cd-server-on-azureawsgcp/">Jenkins</a></li>
-<li><a href="https://cloudinfrastructureservices.co.uk/how-to-setup-terraform-on-linux-in-azure-aws-gcp/">Terraform server</a></li>
+<li>Cost reduction</li>
+<li>Increase in speed of deployments</li>
+<li>Reduce errors</li>
+<li>Improve infrastructure consistency</li>
+<li>Eliminate configuration drift</li>
 </ul>
 </section>
-<section id="immutable-infrastructure-is-a-devops-key-concept" class="level3" data-number="1.3">
-<h3 data-number="1.3" class="anchored" data-anchor-id="immutable-infrastructure-is-a-devops-key-concept"><span class="header-section-number">1.3</span> Immutable infrastructure is a DevOps key-concept</h3>
-<p>DevOps adopt this infrastructure concept as it makes creating new servers affordable and accessible. If there is a requirement for improvements or updates, you have to replace the entire server and not change a part of it.</p>
-<p>Immutable infrastructure is very much in tune with the idea of infrastructure as a code. You can do all the planning of components like networking, instances, and security with infrastructure as a code. Once done, you can push it into your dev ecosystem. It becomes easy to test and prod as you promote them in the dev environment and consistently repeat these steps.</p>
-<p>DevOps tools and culture are to work together to achieve supply development with continuous delivery. And you know continuous delivery drives immutable infrastructure.</p>
-<p><a href="https://sites.google.com/view/devopscifo/git">more info on</a></p>
-
-
+<section id="avoid-manual-configuration-to-enforce-consistency" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Avoid manual configuration to enforce consistency</h1>
+<p><code>IaC</code> evolved to solve the problem of environment drift in release pipelines. Without <code>IaC</code>, teams must maintain deployment environment settings individually. Over time, each environment becomes a “snowflake,” a unique configuration that can’t be reproduced automatically. Inconsistency among environments can cause deployment issues. Infrastructure administration and maintenance involve manual processes that are error prone and hard to track.</p>
+<p><mark><code>IaC</code> avoids manual configuration and enforces consistency by representing desired environment states via well-documented code in formats such as JSON<mark>.</mark></mark></p>
+<p>Infrastructure deployments with <code>IaC</code> are repeatable and prevent runtime issues caused by configuration drift or missing dependencies.</p>
+<p>Release pipelines execute the environment descriptions and version configuration models to configure target environments. To make changes, the team edits the source, not the target.</p>
 </section>
+<section id="tools" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Tools</h1>
+<p>Using IaC config files, you can automate deployments of networks, virtual machines, servers, databases, etc. So, to orchestrate this infrastructure you wil need some tools:</p>
+<ul>
+<li>Terraform</li>
+<li>CloudFormation</li>
+<li>Ansible</li>
+<li>Puppet</li>
+<li>Pulumi</li>
+<li>Docker</li>
+</ul>
+</section>
+<section id="links" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Links</h1>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Infrastructure_as_Code" class="external" target="_blank">Infrastructure as Code - Wikipedia</a></li>
+<li><a href="https://aws.amazon.com/what-is/iac/" class="external" target="_blank">What is Infrastructure as Code? - AWS</a></li>
+<li><a href="https://cloud.google.com/docs/iac" class="external" target="_blank">Infrastructure as Code Overview - Google Cloud</a></li>
+<li><a href="https://www.redhat.com/en/topics/automation/what-is-infrastructure-as-code-iac" class="external" target="_blank">What is Infrastructure as Code (IaC)? - Red Hat</a></li>
+<li><a href="https://learn.microsoft.com/en-us/devops/deliver/what-is-infrastructure-as-code" class="external" target="_blank">What is Infrastructure as Code? - Microsoft</a></li>
+<li><a href="https://www.clickittech.com/devops/infrastructure-as-code-tools/" class="external" target="_blank">The Best Infrastructure as Code Tools</a></li>
+</ul>
+
+
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
@@ -2467,13 +2498,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../devops/devops-what-infraascode.html" class="pagination-link" aria-label="Infrastructure as code (IaC)">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Infrastructure as code (IaC)</span>
+      <a href="../devops/devops-what-overview.html" class="pagination-link" aria-label="DevOps: agile and microservices">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">DevOps: agile and microservices</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../devops/devops-what-lifecycle.html" class="pagination-link" aria-label="Software Lifecycle">
-        <span class="nav-page-text">Software Lifecycle</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../devops/devops-what-immutable.html" class="pagination-link" aria-label="Immutable Infrastructure">
+        <span class="nav-page-text">Immutable Infrastructure</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -2485,7 +2516,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p>If you want to go far, walk slow / We love dukkha</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/devops/devops-what-immutable.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/devops/devops-what-infraascode.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
