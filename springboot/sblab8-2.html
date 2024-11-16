@@ -258,8 +258,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">DevOps: Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../devops/devops-what-overview.html">
- <span class="dropdown-text">DevOps: agile and microservices</span></a>
+    <a class="dropdown-item" href="../devops/devops-what-agile-microservice.html">
+ <span class="dropdown-text">DevOps: Agile and Microservices</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-what-infraascode.html">
+ <span class="dropdown-text">Infrastructure as code (IaC)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../devops/devops-what-immutable.html">
@@ -1878,7 +1882,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, November 15, 2024</p>
+      <p class="date-modified">Saturday, November 16, 2024</p>
     </div>
   </div>
     
@@ -2052,51 +2056,98 @@ There can be only one Binder
 </div>
 </div>
 <p><strong>Client To Server: How to Bind Form Data</strong></p>
-<p>The following steps include everything needed to load, edit, and save values for a form. Java 8 method references are used.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">Binder</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> binder <span class="op">=</span> <span class="kw">new</span> <span class="bu">Binder</span><span class="op">&lt;&gt;(</span>Person<span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="bu">TextField</span> titleField <span class="op">=</span> <span class="kw">new</span> <span class="bu">TextField</span><span class="op">();</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co">// Start by defining the Field instance to use</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>binder<span class="op">.</span><span class="fu">forField</span><span class="op">(</span>titleField<span class="op">)</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>        <span class="co">// Finalize by doing the actual binding</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>        <span class="co">// to the Person class</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>        <span class="op">.</span><span class="fu">bind</span><span class="op">(</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>                <span class="co">// Callback that loads the title</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>                <span class="co">// from a person instance</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>                Person<span class="op">::</span>getTitle<span class="op">,</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>                <span class="co">// Callback that saves the title</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>                <span class="co">// in a person instance</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>                Person<span class="op">::</span>setTitle<span class="op">);</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="bu">TextField</span> nameField <span class="op">=</span> <span class="kw">new</span> <span class="bu">TextField</span><span class="op">();</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="co">// Shorthand for cases without extra configuration</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>binder<span class="op">.</span><span class="fu">bind</span><span class="op">(</span>nameField<span class="op">,</span> Person<span class="op">::</span>getName<span class="op">,</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>        Person<span class="op">::</span>setName<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The following steps include everything needed to load, edit, and save values for a form. <code>Java 8 method references</code> are used.</p>
+<div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode numberSource java code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode java"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a></span>
+<span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a><span class="co">// Create a Binder instance for the Person class</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3"></a><span class="bu">Binder</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> binder <span class="op">=</span> <span class="kw">new</span> <span class="bu">Binder</span><span class="op">&lt;&gt;(</span>Person<span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
+<span id="annotated-cell-1-4"><a href="#annotated-cell-1-4"></a></span>
+<span id="annotated-cell-1-5"><a href="#annotated-cell-1-5"></a><span class="co">// Create a TextField for the title</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-6" class="code-annotation-target"><a href="#annotated-cell-1-6"></a><span class="bu">TextField</span> titleField <span class="op">=</span> <span class="kw">new</span> <span class="bu">TextField</span><span class="op">();</span></span>
+<span id="annotated-cell-1-7"><a href="#annotated-cell-1-7"></a></span>
+<span id="annotated-cell-1-8"><a href="#annotated-cell-1-8"></a><span class="co">// Bind the titleField to the Person class</span></span>
+<span id="annotated-cell-1-9"><a href="#annotated-cell-1-9"></a>binder<span class="op">.</span><span class="fu">forField</span><span class="op">(</span>titleField<span class="op">)</span></span>
+<span id="annotated-cell-1-10"><a href="#annotated-cell-1-10"></a>       <span class="op">.</span><span class="fu">bind</span><span class="op">(</span></span>
+<span id="annotated-cell-1-11"><a href="#annotated-cell-1-11"></a>                <span class="co">// Callback that loads the title from a person instance</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3">3</button><span id="annotated-cell-1-12" class="code-annotation-target"><a href="#annotated-cell-1-12"></a>                Person<span class="op">::</span>getTitle<span class="op">,</span></span>
+<span id="annotated-cell-1-13"><a href="#annotated-cell-1-13"></a>                <span class="co">// Callback that saves the title in a person instance</span></span>
+<span id="annotated-cell-1-14"><a href="#annotated-cell-1-14"></a>                Person<span class="op">::</span>setTitle<span class="op">);</span></span>
+<span id="annotated-cell-1-15"><a href="#annotated-cell-1-15"></a></span>
+<span id="annotated-cell-1-16"><a href="#annotated-cell-1-16"></a><span class="co">// Create a TextField for the name</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="4">4</button><span id="annotated-cell-1-17" class="code-annotation-target"><a href="#annotated-cell-1-17"></a><span class="bu">TextField</span> nameField <span class="op">=</span> <span class="kw">new</span> <span class="bu">TextField</span><span class="op">();</span></span>
+<span id="annotated-cell-1-18"><a href="#annotated-cell-1-18"></a></span>
+<span id="annotated-cell-1-19"><a href="#annotated-cell-1-19"></a><span class="co">// Shorthand for cases without extra configuration</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="5">5</button><span id="annotated-cell-1-20" class="code-annotation-target"><a href="#annotated-cell-1-20"></a>binder<span class="op">.</span><span class="fu">bind</span><span class="op">(</span>nameField<span class="op">,</span> Person<span class="op">::</span>getName<span class="op">,</span></span>
+<span id="annotated-cell-1-21"><a href="#annotated-cell-1-21"></a>        Person<span class="op">::</span>setName<span class="op">);</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="3" data-code-annotation="1">Create a Binder instance for the Person class.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="6" data-code-annotation="2">Create a TextField for the title.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="12,14" data-code-annotation="3">Bind the titleField to the Person class using method references.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="17" data-code-annotation="4">Create a TextField for the name.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="20,21" data-code-annotation="5">Bind the nameField to the Person class using method references.</span>
+</dd>
+</dl>
+<details>
+<summary>
+<code>Method references</code> are one-linners to simplify code
+</summary>
+<p><br> <code>Method references</code> are used to <strong>simplify the code and make it more readable</strong>. Here are the key points:</p>
+<p><em>Reference to an Instance Method of a Particular Object</em></p>
+<ul>
+<li>The method reference <code>binder.forField(titleField).bind(Person::getTitle, Person::setTitle)</code> is used. Here, <code>Person::getTitle</code> and <code>Person::setTitle</code> refer to the instance methods <code>getTitle</code> and <code>setTitle</code> of the <code>Person</code> class. This is equivalent to a lambda expression that calls these methods on a <code>Person</code> object.</li>
+</ul>
+<p><em>Reference to an Instance Method of a Particular Object (Shorthand)</em></p>
+<ul>
+<li>The shorthand <code>binder.bind(nameField, Person::getName, Person::setName)</code> is used, which is another example of referencing instance methods <code>getName</code> and <code>setName</code> of the <code>Person</code> class.</li>
+</ul>
+<p><em>Example Breakdown</em></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a>binder<span class="op">.</span><span class="fu">forField</span><span class="op">(</span>titleField<span class="op">)</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>      <span class="op">.</span><span class="fu">bind</span><span class="op">(</span>Person<span class="op">::</span>getTitle<span class="op">,</span> Person<span class="op">::</span>setTitle<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is equivalent to:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a>binder<span class="op">.</span><span class="fu">forField</span><span class="op">(</span>titleField<span class="op">)</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>      <span class="op">.</span><span class="fu">bind</span><span class="op">(</span>person <span class="op">-&gt;</span> person<span class="op">.</span><span class="fu">getTitle</span><span class="op">(),</span> <span class="op">(</span>person<span class="op">,</span> title<span class="op">)</span> <span class="op">-&gt;</span> person<span class="op">.</span><span class="fu">setTitle</span><span class="op">(</span>title<span class="op">));</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Similarly,</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a>binder<span class="op">.</span><span class="fu">bind</span><span class="op">(</span>nameField<span class="op">,</span> Person<span class="op">::</span>getName<span class="op">,</span> Person<span class="op">::</span>setName<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>is equivalent to:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a>binder<span class="op">.</span><span class="fu">bind</span><span class="op">(</span>nameField<span class="op">,</span> person <span class="op">-&gt;</span> person<span class="op">.</span><span class="fu">getName</span><span class="op">(),</span> <span class="op">(</span>person<span class="op">,</span> name<span class="op">)</span> <span class="op">-&gt;</span> person<span class="op">.</span><span class="fu">setName</span><span class="op">(</span>name<span class="op">));</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>Method references</code> here replace the need for explicit <code>lambda</code> expressions, making the code more concise and easier to read.</p>
+</details>
 <p><strong>Server to Client: Reading &amp; Writing Automatically</strong></p>
 <p>Writing automatically to business objects when the user makes changes in the UI is usually the most convenient option. You can bind the values directly to an instance by allowing Binder to save automatically values from the fields.</p>
 <p>In the example here, field values are saved automatically:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="bu">Binder</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> binder <span class="op">=</span> <span class="kw">new</span> <span class="bu">Binder</span><span class="op">&lt;&gt;();</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="co">// Field binding configuration omitted.</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">// It should be done here.</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a></span>
-<span id="cb2-6"><a href="#cb2-6"></a>Person person <span class="op">=</span> <span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"John Doe"</span><span class="op">,</span> <span class="dv">1957</span><span class="op">);</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">// Loads the values from the person instance.</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">// Sets person to be updated when any bound field</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">// is updated.</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>binder<span class="op">.</span><span class="fu">setBean</span><span class="op">(</span>person<span class="op">);</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="bu">Button</span> saveButton <span class="op">=</span> <span class="kw">new</span> <span class="bu">Button</span><span class="op">(</span><span class="st">"Save"</span><span class="op">,</span> event <span class="op">-&gt;</span> <span class="op">{</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>    <span class="cf">if</span> <span class="op">(</span>binder<span class="op">.</span><span class="fu">validate</span><span class="op">().</span><span class="fu">isOk</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a>        <span class="co">// Person is always up-to-date as long as</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a>        <span class="co">// there are no validation errors.</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a></span>
-<span id="cb2-18"><a href="#cb2-18"></a>        MyBackend<span class="op">.</span><span class="fu">updatePersonInDatabase</span><span class="op">(</span>person<span class="op">);</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>    <span class="op">}</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="op">});</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="bu">Binder</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> binder <span class="op">=</span> <span class="kw">new</span> <span class="bu">Binder</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">// Field binding configuration omitted.</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">// It should be done here.</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a>Person person <span class="op">=</span> <span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"John Doe"</span><span class="op">,</span> <span class="dv">1957</span><span class="op">);</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">// Loads the values from the person instance.</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">// Sets person to be updated when any bound field</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">// is updated.</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>binder<span class="op">.</span><span class="fu">setBean</span><span class="op">(</span>person<span class="op">);</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="bu">Button</span> saveButton <span class="op">=</span> <span class="kw">new</span> <span class="bu">Button</span><span class="op">(</span><span class="st">"Save"</span><span class="op">,</span> event <span class="op">-&gt;</span> <span class="op">{</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>    <span class="cf">if</span> <span class="op">(</span>binder<span class="op">.</span><span class="fu">validate</span><span class="op">().</span><span class="fu">isOk</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>        <span class="co">// Person is always up-to-date as long as</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>        <span class="co">// there are no validation errors.</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a></span>
+<span id="cb5-18"><a href="#cb5-18"></a>        MyBackend<span class="op">.</span><span class="fu">updatePersonInDatabase</span><span class="op">(</span>person<span class="op">);</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>    <span class="op">}</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="op">});</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="create-vaadin-views" class="level2 page-columns page-full" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="create-vaadin-views"><span class="header-section-number">2.3</span> Create Vaadin Views</h2>
@@ -2106,20 +2157,20 @@ There can be only one Binder
 </blockquote>
 <p>Example of a simple <code>Vaadin</code> view:</p>
 <div class="column-page-right">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="at">@Route</span><span class="op">(</span><span class="st">"menu"</span><span class="op">)</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">public</span> <span class="kw">class</span> MenuView <span class="kw">extends</span> VerticalLayout <span class="op">{</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>    <span class="kw">private</span> <span class="dt">final</span> MenuService menuService<span class="op">;</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a>    <span class="kw">public</span> <span class="fu">MenuView</span><span class="op">(</span>MenuService menuService<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">menuService</span> <span class="op">=</span> menuService<span class="op">;</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a>        </span>
-<span id="cb3-8"><a href="#cb3-8"></a>        H1 title <span class="op">=</span> <span class="kw">new</span> <span class="fu">H1</span><span class="op">(</span><span class="st">"Restaurant Menu"</span><span class="op">);</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>        Grid<span class="op">&lt;</span><span class="bu">Menu</span><span class="op">&gt;</span> grid <span class="op">=</span> <span class="kw">new</span> Grid<span class="op">&lt;&gt;(</span><span class="bu">Menu</span><span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a>        grid<span class="op">.</span><span class="fu">setItems</span><span class="op">(</span>menuService<span class="op">.</span><span class="fu">getAllMenuItems</span><span class="op">());</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a>        </span>
-<span id="cb3-12"><a href="#cb3-12"></a>        <span class="fu">add</span><span class="op">(</span>title<span class="op">,</span> grid<span class="op">);</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>    <span class="op">}</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="at">@Route</span><span class="op">(</span><span class="st">"menu"</span><span class="op">)</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">public</span> <span class="kw">class</span> MenuView <span class="kw">extends</span> VerticalLayout <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="kw">private</span> <span class="dt">final</span> MenuService menuService<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="kw">public</span> <span class="fu">MenuView</span><span class="op">(</span>MenuService menuService<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">menuService</span> <span class="op">=</span> menuService<span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>        </span>
+<span id="cb6-8"><a href="#cb6-8"></a>        H1 title <span class="op">=</span> <span class="kw">new</span> <span class="fu">H1</span><span class="op">(</span><span class="st">"Restaurant Menu"</span><span class="op">);</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>        Grid<span class="op">&lt;</span><span class="bu">Menu</span><span class="op">&gt;</span> grid <span class="op">=</span> <span class="kw">new</span> Grid<span class="op">&lt;&gt;(</span><span class="bu">Menu</span><span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>        grid<span class="op">.</span><span class="fu">setItems</span><span class="op">(</span>menuService<span class="op">.</span><span class="fu">getAllMenuItems</span><span class="op">());</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>        </span>
+<span id="cb6-12"><a href="#cb6-12"></a>        <span class="fu">add</span><span class="op">(</span>title<span class="op">,</span> grid<span class="op">);</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>    <span class="op">}</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This view creates a page with a title and a grid showing all menu items.</p>
 <p>Key Vaadin Concepts:</p>
@@ -2211,154 +2262,154 @@ Code <code>CustomerView.java</code>
 <div class="code-with-filename-file">
 <pre><strong>CustomerView.java</strong></pre>
 </div>
-<div class="sourceCode" id="cb4" data-filename="CustomerView.java"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">package</span><span class="im"> dev</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">restaurant</span><span class="op">.</span><span class="im">view</span><span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">component</span><span class="op">.</span><span class="im">Component</span><span class="op">;</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">component</span><span class="op">.</span><span class="im">button</span><span class="op">.</span><span class="im">Button</span><span class="op">;</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">component</span><span class="op">.</span><span class="im">grid</span><span class="op">.</span><span class="im">Grid</span><span class="op">;</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">component</span><span class="op">.</span><span class="im">html</span><span class="op">.</span><span class="im">H2</span><span class="op">;</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">component</span><span class="op">.</span><span class="im">orderedlayout</span><span class="op">.</span><span class="im">HorizontalLayout</span><span class="op">;</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">component</span><span class="op">.</span><span class="im">orderedlayout</span><span class="op">.</span><span class="im">VerticalLayout</span><span class="op">;</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">component</span><span class="op">.</span><span class="im">textfield</span><span class="op">.</span><span class="im">TextField</span><span class="op">;</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">data</span><span class="op">.</span><span class="im">binder</span><span class="op">.</span><span class="im">Binder</span><span class="op">;</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">router</span><span class="op">.</span><span class="im">Route</span><span class="op">;</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="kw">import</span> <span class="im">dev</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">restaurant</span><span class="op">.</span><span class="im">model</span><span class="op">.</span><span class="im">Customer</span><span class="op">;</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="kw">import</span> <span class="im">dev</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">restaurant</span><span class="op">.</span><span class="im">repository</span><span class="op">.</span><span class="im">CustomerRepository</span><span class="op">;</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">UUID</span><span class="op">;</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="at">@Route</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="kw">public</span> <span class="kw">class</span> CustomerView <span class="kw">extends</span> VerticalLayout <span class="op">{</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a></span>
-<span id="cb4-19"><a href="#cb4-19"></a>    <span class="kw">private</span> <span class="dt">final</span> CustomerRepository customerRepository<span class="op">;</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a>    <span class="kw">private</span> <span class="dt">final</span> Grid<span class="op">&lt;</span>Customer<span class="op">&gt;</span> grid <span class="op">=</span> <span class="kw">new</span> Grid<span class="op">&lt;&gt;(</span>Customer<span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
-<span id="cb4-21"><a href="#cb4-21"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">TextField</span> name <span class="op">=</span> <span class="kw">new</span> <span class="bu">TextField</span><span class="op">(</span><span class="st">"Name"</span><span class="op">);</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">TextField</span> email <span class="op">=</span> <span class="kw">new</span> <span class="bu">TextField</span><span class="op">(</span><span class="st">"Email"</span><span class="op">);</span></span>
-<span id="cb4-23"><a href="#cb4-23"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">TextField</span> phoneNumber <span class="op">=</span> <span class="kw">new</span> <span class="bu">TextField</span><span class="op">(</span><span class="st">"Phone Number"</span><span class="op">);</span></span>
-<span id="cb4-24"><a href="#cb4-24"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">Button</span> save <span class="op">=</span> <span class="kw">new</span> <span class="bu">Button</span><span class="op">(</span><span class="st">"Save"</span><span class="op">);</span></span>
-<span id="cb4-25"><a href="#cb4-25"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">Button</span> delete <span class="op">=</span> <span class="kw">new</span> <span class="bu">Button</span><span class="op">(</span><span class="st">"Delete"</span><span class="op">);</span></span>
-<span id="cb4-26"><a href="#cb4-26"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">Binder</span><span class="op">&lt;</span>Customer<span class="op">&gt;</span> binder <span class="op">=</span> <span class="kw">new</span> <span class="bu">Binder</span><span class="op">&lt;&gt;(</span>Customer<span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
-<span id="cb4-27"><a href="#cb4-27"></a></span>
-<span id="cb4-28"><a href="#cb4-28"></a>    <span class="kw">public</span> <span class="fu">CustomerView</span><span class="op">(</span>CustomerRepository customerRepository<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-29"><a href="#cb4-29"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">customerRepository</span> <span class="op">=</span> customerRepository<span class="op">;</span></span>
-<span id="cb4-30"><a href="#cb4-30"></a></span>
-<span id="cb4-31"><a href="#cb4-31"></a>        <span class="co">// Set up the main view properties</span></span>
-<span id="cb4-32"><a href="#cb4-32"></a>        <span class="fu">setSizeFull</span><span class="op">();</span></span>
-<span id="cb4-33"><a href="#cb4-33"></a>        <span class="fu">setPadding</span><span class="op">(</span><span class="kw">false</span><span class="op">);</span></span>
-<span id="cb4-34"><a href="#cb4-34"></a>        <span class="fu">setSpacing</span><span class="op">(</span><span class="kw">false</span><span class="op">);</span></span>
-<span id="cb4-35"><a href="#cb4-35"></a></span>
-<span id="cb4-36"><a href="#cb4-36"></a>        <span class="co">// Create and add the main layout</span></span>
-<span id="cb4-37"><a href="#cb4-37"></a>        <span class="fu">add</span><span class="op">(</span><span class="fu">createMainLayout</span><span class="op">());</span></span>
-<span id="cb4-38"><a href="#cb4-38"></a></span>
-<span id="cb4-39"><a href="#cb4-39"></a>        <span class="co">// Set up data binding</span></span>
-<span id="cb4-40"><a href="#cb4-40"></a>        binder<span class="op">.</span><span class="fu">bindInstanceFields</span><span class="op">(</span><span class="kw">this</span><span class="op">);</span></span>
-<span id="cb4-41"><a href="#cb4-41"></a></span>
-<span id="cb4-42"><a href="#cb4-42"></a>        <span class="co">// Set up event listeners</span></span>
-<span id="cb4-43"><a href="#cb4-43"></a>        <span class="fu">setupEventListeners</span><span class="op">();</span></span>
-<span id="cb4-44"><a href="#cb4-44"></a></span>
-<span id="cb4-45"><a href="#cb4-45"></a>        <span class="co">// Initialize the view</span></span>
-<span id="cb4-46"><a href="#cb4-46"></a>        <span class="fu">clearForm</span><span class="op">();</span></span>
-<span id="cb4-47"><a href="#cb4-47"></a>        <span class="fu">refreshGrid</span><span class="op">();</span></span>
-<span id="cb4-48"><a href="#cb4-48"></a>    <span class="op">}</span></span>
-<span id="cb4-49"><a href="#cb4-49"></a></span>
-<span id="cb4-50"><a href="#cb4-50"></a>    <span class="co">// Method to create the main layout</span></span>
-<span id="cb4-51"><a href="#cb4-51"></a>    <span class="kw">private</span> <span class="bu">Component</span> <span class="fu">createMainLayout</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb4-52"><a href="#cb4-52"></a>        <span class="co">// Create the 3-column layout</span></span>
-<span id="cb4-53"><a href="#cb4-53"></a>        HorizontalLayout mainLayout <span class="op">=</span> <span class="kw">new</span> <span class="fu">HorizontalLayout</span><span class="op">();</span></span>
-<span id="cb4-54"><a href="#cb4-54"></a>        mainLayout<span class="op">.</span><span class="fu">setSizeFull</span><span class="op">();</span></span>
-<span id="cb4-55"><a href="#cb4-55"></a>        mainLayout<span class="op">.</span><span class="fu">setPadding</span><span class="op">(</span><span class="kw">false</span><span class="op">);</span></span>
-<span id="cb4-56"><a href="#cb4-56"></a>        mainLayout<span class="op">.</span><span class="fu">setSpacing</span><span class="op">(</span><span class="kw">false</span><span class="op">);</span></span>
-<span id="cb4-57"><a href="#cb4-57"></a></span>
-<span id="cb4-58"><a href="#cb4-58"></a>        <span class="co">// Left column (empty for spacing)</span></span>
-<span id="cb4-59"><a href="#cb4-59"></a>        VerticalLayout leftColumn <span class="op">=</span> <span class="kw">new</span> <span class="fu">VerticalLayout</span><span class="op">();</span></span>
-<span id="cb4-60"><a href="#cb4-60"></a>        leftColumn<span class="op">.</span><span class="fu">setWidth</span><span class="op">(</span><span class="st">"20%"</span><span class="op">);</span></span>
-<span id="cb4-61"><a href="#cb4-61"></a></span>
-<span id="cb4-62"><a href="#cb4-62"></a>        <span class="co">// Center column (contains all the components)</span></span>
-<span id="cb4-63"><a href="#cb4-63"></a>        VerticalLayout centerColumn <span class="op">=</span> <span class="kw">new</span> <span class="fu">VerticalLayout</span><span class="op">();</span></span>
-<span id="cb4-64"><a href="#cb4-64"></a>        centerColumn<span class="op">.</span><span class="fu">setWidth</span><span class="op">(</span><span class="st">"60%"</span><span class="op">);</span></span>
-<span id="cb4-65"><a href="#cb4-65"></a>        centerColumn<span class="op">.</span><span class="fu">setAlignItems</span><span class="op">(</span>Alignment<span class="op">.</span><span class="fu">CENTER</span><span class="op">);</span></span>
-<span id="cb4-66"><a href="#cb4-66"></a></span>
-<span id="cb4-67"><a href="#cb4-67"></a>        <span class="co">// Right column (empty for spacing)</span></span>
-<span id="cb4-68"><a href="#cb4-68"></a>        VerticalLayout rightColumn <span class="op">=</span> <span class="kw">new</span> <span class="fu">VerticalLayout</span><span class="op">();</span></span>
-<span id="cb4-69"><a href="#cb4-69"></a>        rightColumn<span class="op">.</span><span class="fu">setWidth</span><span class="op">(</span><span class="st">"20%"</span><span class="op">);</span></span>
-<span id="cb4-70"><a href="#cb4-70"></a></span>
-<span id="cb4-71"><a href="#cb4-71"></a>        <span class="co">// Set up the grid</span></span>
-<span id="cb4-72"><a href="#cb4-72"></a>        grid<span class="op">.</span><span class="fu">setColumns</span><span class="op">(</span><span class="st">"id"</span><span class="op">,</span> <span class="st">"name"</span><span class="op">,</span> <span class="st">"email"</span><span class="op">,</span> <span class="st">"phoneNumber"</span><span class="op">);</span></span>
-<span id="cb4-73"><a href="#cb4-73"></a>        grid<span class="op">.</span><span class="fu">setSizeFull</span><span class="op">();</span></span>
-<span id="cb4-74"><a href="#cb4-74"></a></span>
-<span id="cb4-75"><a href="#cb4-75"></a>        <span class="co">// Create a form layout</span></span>
-<span id="cb4-76"><a href="#cb4-76"></a>        HorizontalLayout formLayout <span class="op">=</span> </span>
-<span id="cb4-77"><a href="#cb4-77"></a>            <span class="kw">new</span> <span class="fu">HorizontalLayout</span><span class="op">(</span>name<span class="op">,</span> email<span class="op">,</span> phoneNumber<span class="op">);</span></span>
-<span id="cb4-78"><a href="#cb4-78"></a>        formLayout<span class="op">.</span><span class="fu">setWidth</span><span class="op">(</span><span class="st">"100%"</span><span class="op">);</span></span>
-<span id="cb4-79"><a href="#cb4-79"></a>        formLayout<span class="op">.</span><span class="fu">setJustifyContentMode</span><span class="op">(</span>JustifyContentMode<span class="op">.</span><span class="fu">CENTER</span><span class="op">);</span></span>
-<span id="cb4-80"><a href="#cb4-80"></a></span>
-<span id="cb4-81"><a href="#cb4-81"></a>        <span class="co">// Create a button layout</span></span>
-<span id="cb4-82"><a href="#cb4-82"></a>        HorizontalLayout buttonLayout <span class="op">=</span> </span>
-<span id="cb4-83"><a href="#cb4-83"></a>            <span class="kw">new</span> <span class="fu">HorizontalLayout</span><span class="op">(</span>save<span class="op">,</span> delete<span class="op">);</span></span>
-<span id="cb4-84"><a href="#cb4-84"></a>        buttonLayout<span class="op">.</span><span class="fu">setJustifyContentMode</span><span class="op">(</span>JustifyContentMode<span class="op">.</span><span class="fu">CENTER</span><span class="op">);</span></span>
-<span id="cb4-85"><a href="#cb4-85"></a></span>
-<span id="cb4-86"><a href="#cb4-86"></a>        <span class="co">// Add components to the center column</span></span>
-<span id="cb4-87"><a href="#cb4-87"></a>        centerColumn<span class="op">.</span><span class="fu">add</span><span class="op">(</span></span>
-<span id="cb4-88"><a href="#cb4-88"></a>                <span class="kw">new</span> <span class="fu">H2</span><span class="op">(</span><span class="st">"Customer Management"</span><span class="op">),</span></span>
-<span id="cb4-89"><a href="#cb4-89"></a>                grid<span class="op">,</span></span>
-<span id="cb4-90"><a href="#cb4-90"></a>                formLayout<span class="op">,</span></span>
-<span id="cb4-91"><a href="#cb4-91"></a>                buttonLayout</span>
-<span id="cb4-92"><a href="#cb4-92"></a>        <span class="op">);</span></span>
-<span id="cb4-93"><a href="#cb4-93"></a></span>
-<span id="cb4-94"><a href="#cb4-94"></a>        <span class="co">// Add all columns to the main layout</span></span>
-<span id="cb4-95"><a href="#cb4-95"></a>        mainLayout<span class="op">.</span><span class="fu">add</span><span class="op">(</span>leftColumn<span class="op">,</span> centerColumn<span class="op">,</span> rightColumn<span class="op">);</span></span>
-<span id="cb4-96"><a href="#cb4-96"></a></span>
-<span id="cb4-97"><a href="#cb4-97"></a>        <span class="cf">return</span> mainLayout<span class="op">;</span></span>
-<span id="cb4-98"><a href="#cb4-98"></a>    <span class="op">}</span></span>
-<span id="cb4-99"><a href="#cb4-99"></a></span>
-<span id="cb4-100"><a href="#cb4-100"></a>    <span class="co">// Method to set up event listeners</span></span>
-<span id="cb4-101"><a href="#cb4-101"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">setupEventListeners</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb4-102"><a href="#cb4-102"></a>        save<span class="op">.</span><span class="fu">addClickListener</span><span class="op">(</span>e <span class="op">-&gt;</span> <span class="fu">saveCustomer</span><span class="op">());</span></span>
-<span id="cb4-103"><a href="#cb4-103"></a>        delete<span class="op">.</span><span class="fu">addClickListener</span><span class="op">(</span>e <span class="op">-&gt;</span> <span class="fu">deleteCustomer</span><span class="op">());</span></span>
-<span id="cb4-104"><a href="#cb4-104"></a></span>
-<span id="cb4-105"><a href="#cb4-105"></a>        grid<span class="op">.</span><span class="fu">asSingleSelect</span><span class="op">().</span><span class="fu">addValueChangeListener</span><span class="op">(</span>event <span class="op">-&gt;</span> <span class="op">{</span></span>
-<span id="cb4-106"><a href="#cb4-106"></a>            <span class="cf">if</span> <span class="op">(</span>event<span class="op">.</span><span class="fu">getValue</span><span class="op">()</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-107"><a href="#cb4-107"></a>                binder<span class="op">.</span><span class="fu">setBean</span><span class="op">(</span>event<span class="op">.</span><span class="fu">getValue</span><span class="op">());</span></span>
-<span id="cb4-108"><a href="#cb4-108"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb4-109"><a href="#cb4-109"></a>                <span class="fu">clearForm</span><span class="op">();</span></span>
-<span id="cb4-110"><a href="#cb4-110"></a>            <span class="op">}</span></span>
-<span id="cb4-111"><a href="#cb4-111"></a>        <span class="op">});</span></span>
-<span id="cb4-112"><a href="#cb4-112"></a>    <span class="op">}</span></span>
-<span id="cb4-113"><a href="#cb4-113"></a></span>
-<span id="cb4-114"><a href="#cb4-114"></a>    <span class="co">// Methods to save, delete, and clear the form</span></span>
-<span id="cb4-115"><a href="#cb4-115"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">saveCustomer</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb4-116"><a href="#cb4-116"></a>        Customer customer <span class="op">=</span> binder<span class="op">.</span><span class="fu">getBean</span><span class="op">();</span></span>
-<span id="cb4-117"><a href="#cb4-117"></a>        <span class="cf">if</span> <span class="op">(</span>customer <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-118"><a href="#cb4-118"></a>            customer <span class="op">=</span> <span class="kw">new</span> <span class="fu">Customer</span><span class="op">();</span></span>
-<span id="cb4-119"><a href="#cb4-119"></a>        <span class="op">}</span></span>
-<span id="cb4-120"><a href="#cb4-120"></a>        <span class="cf">if</span> <span class="op">(</span>customer<span class="op">.</span><span class="fu">getId</span><span class="op">()</span> <span class="op">==</span> <span class="kw">null</span> <span class="op">||</span> customer<span class="op">.</span><span class="fu">getId</span><span class="op">().</span><span class="fu">isEmpty</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb4-121"><a href="#cb4-121"></a>            customer<span class="op">.</span><span class="fu">setId</span><span class="op">(</span><span class="bu">UUID</span><span class="op">.</span><span class="fu">randomUUID</span><span class="op">().</span><span class="fu">toString</span><span class="op">());</span></span>
-<span id="cb4-122"><a href="#cb4-122"></a>        <span class="op">}</span></span>
-<span id="cb4-123"><a href="#cb4-123"></a>        binder<span class="op">.</span><span class="fu">writeBeanIfValid</span><span class="op">(</span>customer<span class="op">);</span></span>
-<span id="cb4-124"><a href="#cb4-124"></a>        customerRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>customer<span class="op">);</span></span>
-<span id="cb4-125"><a href="#cb4-125"></a>        <span class="fu">clearForm</span><span class="op">();</span></span>
-<span id="cb4-126"><a href="#cb4-126"></a>        <span class="fu">refreshGrid</span><span class="op">();</span></span>
-<span id="cb4-127"><a href="#cb4-127"></a>    <span class="op">}</span></span>
-<span id="cb4-128"><a href="#cb4-128"></a></span>
-<span id="cb4-129"><a href="#cb4-129"></a>    <span class="co">// Method to delete a customer</span></span>
-<span id="cb4-130"><a href="#cb4-130"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">deleteCustomer</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb4-131"><a href="#cb4-131"></a>        Customer customer <span class="op">=</span> binder<span class="op">.</span><span class="fu">getBean</span><span class="op">();</span></span>
-<span id="cb4-132"><a href="#cb4-132"></a>        <span class="cf">if</span> <span class="op">(</span>customer <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-133"><a href="#cb4-133"></a>            customerRepository<span class="op">.</span><span class="fu">delete</span><span class="op">(</span>customer<span class="op">);</span></span>
-<span id="cb4-134"><a href="#cb4-134"></a>            <span class="fu">clearForm</span><span class="op">();</span></span>
-<span id="cb4-135"><a href="#cb4-135"></a>            <span class="fu">refreshGrid</span><span class="op">();</span></span>
-<span id="cb4-136"><a href="#cb4-136"></a>        <span class="op">}</span></span>
-<span id="cb4-137"><a href="#cb4-137"></a>    <span class="op">}</span></span>
-<span id="cb4-138"><a href="#cb4-138"></a></span>
-<span id="cb4-139"><a href="#cb4-139"></a>    <span class="co">// Method to clear the form</span></span>
-<span id="cb4-140"><a href="#cb4-140"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">clearForm</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb4-141"><a href="#cb4-141"></a>        binder<span class="op">.</span><span class="fu">setBean</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Customer</span><span class="op">());</span></span>
-<span id="cb4-142"><a href="#cb4-142"></a>    <span class="op">}</span></span>
-<span id="cb4-143"><a href="#cb4-143"></a></span>
-<span id="cb4-144"><a href="#cb4-144"></a>    <span class="co">// Method to refresh the grid</span></span>
-<span id="cb4-145"><a href="#cb4-145"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">refreshGrid</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb4-146"><a href="#cb4-146"></a>        grid<span class="op">.</span><span class="fu">setItems</span><span class="op">(</span>customerRepository<span class="op">.</span><span class="fu">findAll</span><span class="op">());</span></span>
-<span id="cb4-147"><a href="#cb4-147"></a>    <span class="op">}</span></span>
-<span id="cb4-148"><a href="#cb4-148"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7" data-filename="CustomerView.java"><pre class="sourceCode numberSource java code-overflow-wrap number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">package</span><span class="im"> dev</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">restaurant</span><span class="op">.</span><span class="im">view</span><span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">component</span><span class="op">.</span><span class="im">Component</span><span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">component</span><span class="op">.</span><span class="im">button</span><span class="op">.</span><span class="im">Button</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">component</span><span class="op">.</span><span class="im">grid</span><span class="op">.</span><span class="im">Grid</span><span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">component</span><span class="op">.</span><span class="im">html</span><span class="op">.</span><span class="im">H2</span><span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">component</span><span class="op">.</span><span class="im">orderedlayout</span><span class="op">.</span><span class="im">HorizontalLayout</span><span class="op">;</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">component</span><span class="op">.</span><span class="im">orderedlayout</span><span class="op">.</span><span class="im">VerticalLayout</span><span class="op">;</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">component</span><span class="op">.</span><span class="im">textfield</span><span class="op">.</span><span class="im">TextField</span><span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">data</span><span class="op">.</span><span class="im">binder</span><span class="op">.</span><span class="im">Binder</span><span class="op">;</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="kw">import</span> <span class="im">com</span><span class="op">.</span><span class="im">vaadin</span><span class="op">.</span><span class="im">flow</span><span class="op">.</span><span class="im">router</span><span class="op">.</span><span class="im">Route</span><span class="op">;</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="kw">import</span> <span class="im">dev</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">restaurant</span><span class="op">.</span><span class="im">model</span><span class="op">.</span><span class="im">Customer</span><span class="op">;</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="kw">import</span> <span class="im">dev</span><span class="op">.</span><span class="im">example</span><span class="op">.</span><span class="im">restaurant</span><span class="op">.</span><span class="im">repository</span><span class="op">.</span><span class="im">CustomerRepository</span><span class="op">;</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">UUID</span><span class="op">;</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="at">@Route</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="kw">public</span> <span class="kw">class</span> CustomerView <span class="kw">extends</span> VerticalLayout <span class="op">{</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a></span>
+<span id="cb7-19"><a href="#cb7-19"></a>    <span class="kw">private</span> <span class="dt">final</span> CustomerRepository customerRepository<span class="op">;</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a>    <span class="kw">private</span> <span class="dt">final</span> Grid<span class="op">&lt;</span>Customer<span class="op">&gt;</span> grid <span class="op">=</span> <span class="kw">new</span> Grid<span class="op">&lt;&gt;(</span>Customer<span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">TextField</span> name <span class="op">=</span> <span class="kw">new</span> <span class="bu">TextField</span><span class="op">(</span><span class="st">"Name"</span><span class="op">);</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">TextField</span> email <span class="op">=</span> <span class="kw">new</span> <span class="bu">TextField</span><span class="op">(</span><span class="st">"Email"</span><span class="op">);</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">TextField</span> phoneNumber <span class="op">=</span> <span class="kw">new</span> <span class="bu">TextField</span><span class="op">(</span><span class="st">"Phone Number"</span><span class="op">);</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">Button</span> save <span class="op">=</span> <span class="kw">new</span> <span class="bu">Button</span><span class="op">(</span><span class="st">"Save"</span><span class="op">);</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">Button</span> delete <span class="op">=</span> <span class="kw">new</span> <span class="bu">Button</span><span class="op">(</span><span class="st">"Delete"</span><span class="op">);</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">Binder</span><span class="op">&lt;</span>Customer<span class="op">&gt;</span> binder <span class="op">=</span> <span class="kw">new</span> <span class="bu">Binder</span><span class="op">&lt;&gt;(</span>Customer<span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
+<span id="cb7-27"><a href="#cb7-27"></a></span>
+<span id="cb7-28"><a href="#cb7-28"></a>    <span class="kw">public</span> <span class="fu">CustomerView</span><span class="op">(</span>CustomerRepository customerRepository<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-29"><a href="#cb7-29"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">customerRepository</span> <span class="op">=</span> customerRepository<span class="op">;</span></span>
+<span id="cb7-30"><a href="#cb7-30"></a></span>
+<span id="cb7-31"><a href="#cb7-31"></a>        <span class="co">// Set up the main view properties</span></span>
+<span id="cb7-32"><a href="#cb7-32"></a>        <span class="fu">setSizeFull</span><span class="op">();</span></span>
+<span id="cb7-33"><a href="#cb7-33"></a>        <span class="fu">setPadding</span><span class="op">(</span><span class="kw">false</span><span class="op">);</span></span>
+<span id="cb7-34"><a href="#cb7-34"></a>        <span class="fu">setSpacing</span><span class="op">(</span><span class="kw">false</span><span class="op">);</span></span>
+<span id="cb7-35"><a href="#cb7-35"></a></span>
+<span id="cb7-36"><a href="#cb7-36"></a>        <span class="co">// Create and add the main layout</span></span>
+<span id="cb7-37"><a href="#cb7-37"></a>        <span class="fu">add</span><span class="op">(</span><span class="fu">createMainLayout</span><span class="op">());</span></span>
+<span id="cb7-38"><a href="#cb7-38"></a></span>
+<span id="cb7-39"><a href="#cb7-39"></a>        <span class="co">// Set up data binding</span></span>
+<span id="cb7-40"><a href="#cb7-40"></a>        binder<span class="op">.</span><span class="fu">bindInstanceFields</span><span class="op">(</span><span class="kw">this</span><span class="op">);</span></span>
+<span id="cb7-41"><a href="#cb7-41"></a></span>
+<span id="cb7-42"><a href="#cb7-42"></a>        <span class="co">// Set up event listeners</span></span>
+<span id="cb7-43"><a href="#cb7-43"></a>        <span class="fu">setupEventListeners</span><span class="op">();</span></span>
+<span id="cb7-44"><a href="#cb7-44"></a></span>
+<span id="cb7-45"><a href="#cb7-45"></a>        <span class="co">// Initialize the view</span></span>
+<span id="cb7-46"><a href="#cb7-46"></a>        <span class="fu">clearForm</span><span class="op">();</span></span>
+<span id="cb7-47"><a href="#cb7-47"></a>        <span class="fu">refreshGrid</span><span class="op">();</span></span>
+<span id="cb7-48"><a href="#cb7-48"></a>    <span class="op">}</span></span>
+<span id="cb7-49"><a href="#cb7-49"></a></span>
+<span id="cb7-50"><a href="#cb7-50"></a>    <span class="co">// Method to create the main layout</span></span>
+<span id="cb7-51"><a href="#cb7-51"></a>    <span class="kw">private</span> <span class="bu">Component</span> <span class="fu">createMainLayout</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-52"><a href="#cb7-52"></a>        <span class="co">// Create the 3-column layout</span></span>
+<span id="cb7-53"><a href="#cb7-53"></a>        HorizontalLayout mainLayout <span class="op">=</span> <span class="kw">new</span> <span class="fu">HorizontalLayout</span><span class="op">();</span></span>
+<span id="cb7-54"><a href="#cb7-54"></a>        mainLayout<span class="op">.</span><span class="fu">setSizeFull</span><span class="op">();</span></span>
+<span id="cb7-55"><a href="#cb7-55"></a>        mainLayout<span class="op">.</span><span class="fu">setPadding</span><span class="op">(</span><span class="kw">false</span><span class="op">);</span></span>
+<span id="cb7-56"><a href="#cb7-56"></a>        mainLayout<span class="op">.</span><span class="fu">setSpacing</span><span class="op">(</span><span class="kw">false</span><span class="op">);</span></span>
+<span id="cb7-57"><a href="#cb7-57"></a></span>
+<span id="cb7-58"><a href="#cb7-58"></a>        <span class="co">// Left column (empty for spacing)</span></span>
+<span id="cb7-59"><a href="#cb7-59"></a>        VerticalLayout leftColumn <span class="op">=</span> <span class="kw">new</span> <span class="fu">VerticalLayout</span><span class="op">();</span></span>
+<span id="cb7-60"><a href="#cb7-60"></a>        leftColumn<span class="op">.</span><span class="fu">setWidth</span><span class="op">(</span><span class="st">"20%"</span><span class="op">);</span></span>
+<span id="cb7-61"><a href="#cb7-61"></a></span>
+<span id="cb7-62"><a href="#cb7-62"></a>        <span class="co">// Center column (contains all the components)</span></span>
+<span id="cb7-63"><a href="#cb7-63"></a>        VerticalLayout centerColumn <span class="op">=</span> <span class="kw">new</span> <span class="fu">VerticalLayout</span><span class="op">();</span></span>
+<span id="cb7-64"><a href="#cb7-64"></a>        centerColumn<span class="op">.</span><span class="fu">setWidth</span><span class="op">(</span><span class="st">"60%"</span><span class="op">);</span></span>
+<span id="cb7-65"><a href="#cb7-65"></a>        centerColumn<span class="op">.</span><span class="fu">setAlignItems</span><span class="op">(</span>Alignment<span class="op">.</span><span class="fu">CENTER</span><span class="op">);</span></span>
+<span id="cb7-66"><a href="#cb7-66"></a></span>
+<span id="cb7-67"><a href="#cb7-67"></a>        <span class="co">// Right column (empty for spacing)</span></span>
+<span id="cb7-68"><a href="#cb7-68"></a>        VerticalLayout rightColumn <span class="op">=</span> <span class="kw">new</span> <span class="fu">VerticalLayout</span><span class="op">();</span></span>
+<span id="cb7-69"><a href="#cb7-69"></a>        rightColumn<span class="op">.</span><span class="fu">setWidth</span><span class="op">(</span><span class="st">"20%"</span><span class="op">);</span></span>
+<span id="cb7-70"><a href="#cb7-70"></a></span>
+<span id="cb7-71"><a href="#cb7-71"></a>        <span class="co">// Set up the grid</span></span>
+<span id="cb7-72"><a href="#cb7-72"></a>        grid<span class="op">.</span><span class="fu">setColumns</span><span class="op">(</span><span class="st">"id"</span><span class="op">,</span> <span class="st">"name"</span><span class="op">,</span> <span class="st">"email"</span><span class="op">,</span> <span class="st">"phoneNumber"</span><span class="op">);</span></span>
+<span id="cb7-73"><a href="#cb7-73"></a>        grid<span class="op">.</span><span class="fu">setSizeFull</span><span class="op">();</span></span>
+<span id="cb7-74"><a href="#cb7-74"></a></span>
+<span id="cb7-75"><a href="#cb7-75"></a>        <span class="co">// Create a form layout</span></span>
+<span id="cb7-76"><a href="#cb7-76"></a>        HorizontalLayout formLayout <span class="op">=</span> </span>
+<span id="cb7-77"><a href="#cb7-77"></a>            <span class="kw">new</span> <span class="fu">HorizontalLayout</span><span class="op">(</span>name<span class="op">,</span> email<span class="op">,</span> phoneNumber<span class="op">);</span></span>
+<span id="cb7-78"><a href="#cb7-78"></a>        formLayout<span class="op">.</span><span class="fu">setWidth</span><span class="op">(</span><span class="st">"100%"</span><span class="op">);</span></span>
+<span id="cb7-79"><a href="#cb7-79"></a>        formLayout<span class="op">.</span><span class="fu">setJustifyContentMode</span><span class="op">(</span>JustifyContentMode<span class="op">.</span><span class="fu">CENTER</span><span class="op">);</span></span>
+<span id="cb7-80"><a href="#cb7-80"></a></span>
+<span id="cb7-81"><a href="#cb7-81"></a>        <span class="co">// Create a button layout</span></span>
+<span id="cb7-82"><a href="#cb7-82"></a>        HorizontalLayout buttonLayout <span class="op">=</span> </span>
+<span id="cb7-83"><a href="#cb7-83"></a>            <span class="kw">new</span> <span class="fu">HorizontalLayout</span><span class="op">(</span>save<span class="op">,</span> delete<span class="op">);</span></span>
+<span id="cb7-84"><a href="#cb7-84"></a>        buttonLayout<span class="op">.</span><span class="fu">setJustifyContentMode</span><span class="op">(</span>JustifyContentMode<span class="op">.</span><span class="fu">CENTER</span><span class="op">);</span></span>
+<span id="cb7-85"><a href="#cb7-85"></a></span>
+<span id="cb7-86"><a href="#cb7-86"></a>        <span class="co">// Add components to the center column</span></span>
+<span id="cb7-87"><a href="#cb7-87"></a>        centerColumn<span class="op">.</span><span class="fu">add</span><span class="op">(</span></span>
+<span id="cb7-88"><a href="#cb7-88"></a>                <span class="kw">new</span> <span class="fu">H2</span><span class="op">(</span><span class="st">"Customer Management"</span><span class="op">),</span></span>
+<span id="cb7-89"><a href="#cb7-89"></a>                grid<span class="op">,</span></span>
+<span id="cb7-90"><a href="#cb7-90"></a>                formLayout<span class="op">,</span></span>
+<span id="cb7-91"><a href="#cb7-91"></a>                buttonLayout</span>
+<span id="cb7-92"><a href="#cb7-92"></a>        <span class="op">);</span></span>
+<span id="cb7-93"><a href="#cb7-93"></a></span>
+<span id="cb7-94"><a href="#cb7-94"></a>        <span class="co">// Add all columns to the main layout</span></span>
+<span id="cb7-95"><a href="#cb7-95"></a>        mainLayout<span class="op">.</span><span class="fu">add</span><span class="op">(</span>leftColumn<span class="op">,</span> centerColumn<span class="op">,</span> rightColumn<span class="op">);</span></span>
+<span id="cb7-96"><a href="#cb7-96"></a></span>
+<span id="cb7-97"><a href="#cb7-97"></a>        <span class="cf">return</span> mainLayout<span class="op">;</span></span>
+<span id="cb7-98"><a href="#cb7-98"></a>    <span class="op">}</span></span>
+<span id="cb7-99"><a href="#cb7-99"></a></span>
+<span id="cb7-100"><a href="#cb7-100"></a>    <span class="co">// Method to set up event listeners</span></span>
+<span id="cb7-101"><a href="#cb7-101"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">setupEventListeners</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-102"><a href="#cb7-102"></a>        save<span class="op">.</span><span class="fu">addClickListener</span><span class="op">(</span>e <span class="op">-&gt;</span> <span class="fu">saveCustomer</span><span class="op">());</span></span>
+<span id="cb7-103"><a href="#cb7-103"></a>        delete<span class="op">.</span><span class="fu">addClickListener</span><span class="op">(</span>e <span class="op">-&gt;</span> <span class="fu">deleteCustomer</span><span class="op">());</span></span>
+<span id="cb7-104"><a href="#cb7-104"></a></span>
+<span id="cb7-105"><a href="#cb7-105"></a>        grid<span class="op">.</span><span class="fu">asSingleSelect</span><span class="op">().</span><span class="fu">addValueChangeListener</span><span class="op">(</span>event <span class="op">-&gt;</span> <span class="op">{</span></span>
+<span id="cb7-106"><a href="#cb7-106"></a>            <span class="cf">if</span> <span class="op">(</span>event<span class="op">.</span><span class="fu">getValue</span><span class="op">()</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-107"><a href="#cb7-107"></a>                binder<span class="op">.</span><span class="fu">setBean</span><span class="op">(</span>event<span class="op">.</span><span class="fu">getValue</span><span class="op">());</span></span>
+<span id="cb7-108"><a href="#cb7-108"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb7-109"><a href="#cb7-109"></a>                <span class="fu">clearForm</span><span class="op">();</span></span>
+<span id="cb7-110"><a href="#cb7-110"></a>            <span class="op">}</span></span>
+<span id="cb7-111"><a href="#cb7-111"></a>        <span class="op">});</span></span>
+<span id="cb7-112"><a href="#cb7-112"></a>    <span class="op">}</span></span>
+<span id="cb7-113"><a href="#cb7-113"></a></span>
+<span id="cb7-114"><a href="#cb7-114"></a>    <span class="co">// Methods to save, delete, and clear the form</span></span>
+<span id="cb7-115"><a href="#cb7-115"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">saveCustomer</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-116"><a href="#cb7-116"></a>        Customer customer <span class="op">=</span> binder<span class="op">.</span><span class="fu">getBean</span><span class="op">();</span></span>
+<span id="cb7-117"><a href="#cb7-117"></a>        <span class="cf">if</span> <span class="op">(</span>customer <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-118"><a href="#cb7-118"></a>            customer <span class="op">=</span> <span class="kw">new</span> <span class="fu">Customer</span><span class="op">();</span></span>
+<span id="cb7-119"><a href="#cb7-119"></a>        <span class="op">}</span></span>
+<span id="cb7-120"><a href="#cb7-120"></a>        <span class="cf">if</span> <span class="op">(</span>customer<span class="op">.</span><span class="fu">getId</span><span class="op">()</span> <span class="op">==</span> <span class="kw">null</span> <span class="op">||</span> customer<span class="op">.</span><span class="fu">getId</span><span class="op">().</span><span class="fu">isEmpty</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb7-121"><a href="#cb7-121"></a>            customer<span class="op">.</span><span class="fu">setId</span><span class="op">(</span><span class="bu">UUID</span><span class="op">.</span><span class="fu">randomUUID</span><span class="op">().</span><span class="fu">toString</span><span class="op">());</span></span>
+<span id="cb7-122"><a href="#cb7-122"></a>        <span class="op">}</span></span>
+<span id="cb7-123"><a href="#cb7-123"></a>        binder<span class="op">.</span><span class="fu">writeBeanIfValid</span><span class="op">(</span>customer<span class="op">);</span></span>
+<span id="cb7-124"><a href="#cb7-124"></a>        customerRepository<span class="op">.</span><span class="fu">save</span><span class="op">(</span>customer<span class="op">);</span></span>
+<span id="cb7-125"><a href="#cb7-125"></a>        <span class="fu">clearForm</span><span class="op">();</span></span>
+<span id="cb7-126"><a href="#cb7-126"></a>        <span class="fu">refreshGrid</span><span class="op">();</span></span>
+<span id="cb7-127"><a href="#cb7-127"></a>    <span class="op">}</span></span>
+<span id="cb7-128"><a href="#cb7-128"></a></span>
+<span id="cb7-129"><a href="#cb7-129"></a>    <span class="co">// Method to delete a customer</span></span>
+<span id="cb7-130"><a href="#cb7-130"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">deleteCustomer</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-131"><a href="#cb7-131"></a>        Customer customer <span class="op">=</span> binder<span class="op">.</span><span class="fu">getBean</span><span class="op">();</span></span>
+<span id="cb7-132"><a href="#cb7-132"></a>        <span class="cf">if</span> <span class="op">(</span>customer <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-133"><a href="#cb7-133"></a>            customerRepository<span class="op">.</span><span class="fu">delete</span><span class="op">(</span>customer<span class="op">);</span></span>
+<span id="cb7-134"><a href="#cb7-134"></a>            <span class="fu">clearForm</span><span class="op">();</span></span>
+<span id="cb7-135"><a href="#cb7-135"></a>            <span class="fu">refreshGrid</span><span class="op">();</span></span>
+<span id="cb7-136"><a href="#cb7-136"></a>        <span class="op">}</span></span>
+<span id="cb7-137"><a href="#cb7-137"></a>    <span class="op">}</span></span>
+<span id="cb7-138"><a href="#cb7-138"></a></span>
+<span id="cb7-139"><a href="#cb7-139"></a>    <span class="co">// Method to clear the form</span></span>
+<span id="cb7-140"><a href="#cb7-140"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">clearForm</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-141"><a href="#cb7-141"></a>        binder<span class="op">.</span><span class="fu">setBean</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Customer</span><span class="op">());</span></span>
+<span id="cb7-142"><a href="#cb7-142"></a>    <span class="op">}</span></span>
+<span id="cb7-143"><a href="#cb7-143"></a></span>
+<span id="cb7-144"><a href="#cb7-144"></a>    <span class="co">// Method to refresh the grid</span></span>
+<span id="cb7-145"><a href="#cb7-145"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">refreshGrid</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-146"><a href="#cb7-146"></a>        grid<span class="op">.</span><span class="fu">setItems</span><span class="op">(</span>customerRepository<span class="op">.</span><span class="fu">findAll</span><span class="op">());</span></span>
+<span id="cb7-147"><a href="#cb7-147"></a>    <span class="op">}</span></span>
+<span id="cb7-148"><a href="#cb7-148"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </details>
 </div>
@@ -2367,10 +2418,10 @@ Code <code>CustomerView.java</code>
 <h1 data-number="4"><span class="header-section-number">4</span> Security</h1>
 <p><strong>Necessary Dependencies</strong></p>
 <p>The chat application is a Spring Boot application. Therefore, use Spring Security to secure it. Start by adding this dependency to your pom.xml file:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource xml number-lines code-with-copy"><code class="sourceCode xml"><span id="cb5-1"><a href="#cb5-1"></a>&lt;<span class="kw">dependency</span>&gt;</span>
-<span id="cb5-2"><a href="#cb5-2"></a>    &lt;<span class="kw">groupId</span>&gt;org.springframework.boot&lt;/<span class="kw">groupId</span>&gt;</span>
-<span id="cb5-3"><a href="#cb5-3"></a>    &lt;<span class="kw">artifactId</span>&gt;spring-boot-starter-security&lt;/<span class="kw">artifactId</span>&gt;</span>
-<span id="cb5-4"><a href="#cb5-4"></a>&lt;/<span class="kw">dependency</span>&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource xml number-lines code-with-copy"><code class="sourceCode xml"><span id="cb8-1"><a href="#cb8-1"></a>&lt;<span class="kw">dependency</span>&gt;</span>
+<span id="cb8-2"><a href="#cb8-2"></a>    &lt;<span class="kw">groupId</span>&gt;org.springframework.boot&lt;/<span class="kw">groupId</span>&gt;</span>
+<span id="cb8-3"><a href="#cb8-3"></a>    &lt;<span class="kw">artifactId</span>&gt;spring-boot-starter-security&lt;/<span class="kw">artifactId</span>&gt;</span>
+<span id="cb8-4"><a href="#cb8-4"></a>&lt;/<span class="kw">dependency</span>&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="../images/springboot/labsb08/lab08-2-security-steps.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="../images/springboot/labsb08/lab08-2-security-steps.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a></p>
@@ -2471,35 +2522,35 @@ Code <code>CustomerView.java</code>
 <p>Commits on Nov 14, 2024: <strong>Icon, Drawer with Login button and fake user isaac-1234</strong></p>
 <p>We create a new user: <code>isaac</code> and encrypt the password with <a href="https://bcrypt.online/" class="external" target="_blank">bcrypt</a>:</p>
 <div class="column-page-right">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="at">@Bean</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>    <span class="kw">public</span> UserDetailsService <span class="fu">users</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>        <span class="dt">var</span> alice <span class="op">=</span> User<span class="op">.</span><span class="fu">builder</span><span class="op">()</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>                <span class="op">.</span><span class="fu">username</span><span class="op">(</span><span class="st">"alice"</span><span class="op">)</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>                <span class="co">// password = password with this hash, don't tell anybody :-)</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a>                <span class="op">.</span><span class="fu">password</span><span class="op">(</span><span class="st">"{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW"</span><span class="op">)</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>                <span class="op">.</span><span class="fu">roles</span><span class="op">(</span>Roles<span class="op">.</span><span class="fu">USER</span><span class="op">)</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>                <span class="op">.</span><span class="fu">build</span><span class="op">();</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a>        <span class="dt">var</span> bob <span class="op">=</span> User<span class="op">.</span><span class="fu">builder</span><span class="op">()</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a>                <span class="op">.</span><span class="fu">username</span><span class="op">(</span><span class="st">"bob"</span><span class="op">)</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a>                <span class="co">// password = password with this hash, don't tell anybody :-)</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a>                <span class="op">.</span><span class="fu">password</span><span class="op">(</span><span class="st">"{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW"</span><span class="op">)</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a>                <span class="op">.</span><span class="fu">roles</span><span class="op">(</span>Roles<span class="op">.</span><span class="fu">USER</span><span class="op">)</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a>                <span class="op">.</span><span class="fu">build</span><span class="op">();</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a>        <span class="dt">var</span> isaac <span class="op">=</span> User<span class="op">.</span><span class="fu">builder</span><span class="op">()</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a>                <span class="op">.</span><span class="fu">username</span><span class="op">(</span><span class="st">"isaac"</span><span class="op">)</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a>                <span class="co">// password = password with this hash, don't tell anybody :-)</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a>                <span class="op">.</span><span class="fu">password</span><span class="op">(</span><span class="st">"{bcrypt}$2y$10$jaoj0Q2GRSxqwXaVB4yzSugTJJM8zuQf0NmLZU.iPhoC2CJBA.hsi"</span><span class="op">)</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a>                <span class="op">.</span><span class="fu">roles</span><span class="op">(</span>Roles<span class="op">.</span><span class="fu">ADMIN</span><span class="op">,</span> Roles<span class="op">.</span><span class="fu">USER</span><span class="op">)</span></span>
-<span id="cb6-20"><a href="#cb6-20"></a>                <span class="op">.</span><span class="fu">build</span><span class="op">();</span></span>
-<span id="cb6-21"><a href="#cb6-21"></a></span>
-<span id="cb6-22"><a href="#cb6-22"></a>        <span class="dt">var</span> admin <span class="op">=</span> User<span class="op">.</span><span class="fu">builder</span><span class="op">()</span></span>
-<span id="cb6-23"><a href="#cb6-23"></a>                <span class="op">.</span><span class="fu">username</span><span class="op">(</span><span class="st">"admin"</span><span class="op">)</span></span>
-<span id="cb6-24"><a href="#cb6-24"></a>                <span class="co">// password = password with this hash, don't tell anybody :-)</span></span>
-<span id="cb6-25"><a href="#cb6-25"></a>                <span class="op">.</span><span class="fu">password</span><span class="op">(</span><span class="st">"{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW"</span><span class="op">)</span></span>
-<span id="cb6-26"><a href="#cb6-26"></a>                <span class="op">.</span><span class="fu">roles</span><span class="op">(</span>Roles<span class="op">.</span><span class="fu">ADMIN</span><span class="op">,</span> Roles<span class="op">.</span><span class="fu">USER</span><span class="op">)</span></span>
-<span id="cb6-27"><a href="#cb6-27"></a>                <span class="op">.</span><span class="fu">build</span><span class="op">();</span></span>
-<span id="cb6-28"><a href="#cb6-28"></a>        <span class="cf">return</span> <span class="kw">new</span> <span class="fu">InMemoryUserDetailsManager</span><span class="op">(</span>alice<span class="op">,</span> bob<span class="op">,</span> admin<span class="op">,</span> isaac<span class="op">);</span></span>
-<span id="cb6-29"><a href="#cb6-29"></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a><span class="at">@Bean</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>    <span class="kw">public</span> UserDetailsService <span class="fu">users</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>        <span class="dt">var</span> alice <span class="op">=</span> User<span class="op">.</span><span class="fu">builder</span><span class="op">()</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>                <span class="op">.</span><span class="fu">username</span><span class="op">(</span><span class="st">"alice"</span><span class="op">)</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>                <span class="co">// password = password with this hash, don't tell anybody :-)</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>                <span class="op">.</span><span class="fu">password</span><span class="op">(</span><span class="st">"{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW"</span><span class="op">)</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>                <span class="op">.</span><span class="fu">roles</span><span class="op">(</span>Roles<span class="op">.</span><span class="fu">USER</span><span class="op">)</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>                <span class="op">.</span><span class="fu">build</span><span class="op">();</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>        <span class="dt">var</span> bob <span class="op">=</span> User<span class="op">.</span><span class="fu">builder</span><span class="op">()</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>                <span class="op">.</span><span class="fu">username</span><span class="op">(</span><span class="st">"bob"</span><span class="op">)</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>                <span class="co">// password = password with this hash, don't tell anybody :-)</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>                <span class="op">.</span><span class="fu">password</span><span class="op">(</span><span class="st">"{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW"</span><span class="op">)</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a>                <span class="op">.</span><span class="fu">roles</span><span class="op">(</span>Roles<span class="op">.</span><span class="fu">USER</span><span class="op">)</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a>                <span class="op">.</span><span class="fu">build</span><span class="op">();</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>        <span class="dt">var</span> isaac <span class="op">=</span> User<span class="op">.</span><span class="fu">builder</span><span class="op">()</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>                <span class="op">.</span><span class="fu">username</span><span class="op">(</span><span class="st">"isaac"</span><span class="op">)</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a>                <span class="co">// password = password with this hash, don't tell anybody :-)</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a>                <span class="op">.</span><span class="fu">password</span><span class="op">(</span><span class="st">"{bcrypt}$2y$10$jaoj0Q2GRSxqwXaVB4yzSugTJJM8zuQf0NmLZU.iPhoC2CJBA.hsi"</span><span class="op">)</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a>                <span class="op">.</span><span class="fu">roles</span><span class="op">(</span>Roles<span class="op">.</span><span class="fu">ADMIN</span><span class="op">,</span> Roles<span class="op">.</span><span class="fu">USER</span><span class="op">)</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a>                <span class="op">.</span><span class="fu">build</span><span class="op">();</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a></span>
+<span id="cb9-22"><a href="#cb9-22"></a>        <span class="dt">var</span> admin <span class="op">=</span> User<span class="op">.</span><span class="fu">builder</span><span class="op">()</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a>                <span class="op">.</span><span class="fu">username</span><span class="op">(</span><span class="st">"admin"</span><span class="op">)</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a>                <span class="co">// password = password with this hash, don't tell anybody :-)</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a>                <span class="op">.</span><span class="fu">password</span><span class="op">(</span><span class="st">"{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW"</span><span class="op">)</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a>                <span class="op">.</span><span class="fu">roles</span><span class="op">(</span>Roles<span class="op">.</span><span class="fu">ADMIN</span><span class="op">,</span> Roles<span class="op">.</span><span class="fu">USER</span><span class="op">)</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a>                <span class="op">.</span><span class="fu">build</span><span class="op">();</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a>        <span class="cf">return</span> <span class="kw">new</span> <span class="fu">InMemoryUserDetailsManager</span><span class="op">(</span>alice<span class="op">,</span> bob<span class="op">,</span> admin<span class="op">,</span> isaac<span class="op">);</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a>    <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>Drawer</code> with icons and login view in <code>MainLayout</code>:</p>
 <p><a href="../images/springboot/labsb08/lab08-2-login-icon-view.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img src="../images/springboot/labsb08/lab08-2-login-icon-view.png" class="img-fluid"></a></p>
@@ -3019,25 +3070,64 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         }
       };
     }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
+      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+      for (let i=0; i<annoteTargets.length; i++) {
+        const annoteTarget = annoteTargets[i];
+        const targetCell = annoteTarget.getAttribute("data-target-cell");
+        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+        const contentFn = () => {
+          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          if (content) {
+            const tipContent = content.cloneNode(true);
+            tipContent.classList.add("code-annotation-tip-content");
+            return tipContent.outerHTML;
           }
-        });
+        }
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          onShow: (instance) => {
+            selectCodeLines(instance.reference);
+            instance.reference.classList.add('code-annotation-active');
+            window.tippy.hideAll();
+          },
+          onHide: (instance) => {
+            unselectCodeLines();
+            instance.reference.classList.remove('code-annotation-active');
+          },
+          maxWidth: 300,
+          delay: [50, 0],
+          duration: [200, 0],
+          offset: [5, 10],
+          arrow: true,
+          appendTo: function(el) {
+            return el.parentElement.parentElement.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto',
+          placement: 'right',
+          popperOptions: {
+            modifiers: [
+            {
+              name: 'flip',
+              options: {
+                flipVariations: false, // true by default
+                allowedAutoPlacements: ['right'],
+                fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                mainAxis: false,
+                altAxis: false
+              }
+            }
+            ]        
+          }      
+        };
+        window.tippy(annoteTarget, config); 
       }
   const findCites = (el) => {
     const parentEl = el.parentElement;
