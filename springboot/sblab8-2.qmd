@@ -12,6 +12,7 @@ number-sections: true
 format:
   html:
     code-overflow: wrap
+code-annotations: hover
 ---
 
 :::: {.labs}
@@ -162,31 +163,86 @@ You should use this instance for all the fields in the form.
 
 **Client To Server: How to Bind Form Data**
 
-The following steps include everything needed to load, edit, and save values for a form. Java 8 method references are used.
+The following steps include everything needed to load, edit, and save values for a form. `Java 8 method references` are used.
+
+
 
 ``` java
-Binder<Person> binder = new Binder<>(Person.class);
 
-TextField titleField = new TextField();
+// Create a Binder instance for the Person class
+Binder<Person> binder = new Binder<>(Person.class); // <1>
 
-// Start by defining the Field instance to use
+// Create a TextField for the title
+TextField titleField = new TextField(); // <2>
+
+// Bind the titleField to the Person class
 binder.forField(titleField)
-        // Finalize by doing the actual binding
-        // to the Person class
-        .bind(
-                // Callback that loads the title
-                // from a person instance
-                Person::getTitle,
-                // Callback that saves the title
-                // in a person instance
-                Person::setTitle);
+       .bind(
+                // Callback that loads the title from a person instance
+                Person::getTitle, // <3>
+                // Callback that saves the title in a person instance
+                Person::setTitle); // <3>
 
-TextField nameField = new TextField();
+// Create a TextField for the name
+TextField nameField = new TextField(); // <4>
 
 // Shorthand for cases without extra configuration
-binder.bind(nameField, Person::getName,
-        Person::setName);
-```        
+binder.bind(nameField, Person::getName, // <5>
+        Person::setName); // <5>
+
+```
+
+
+1. Create a Binder instance for the Person class.
+2. Create a TextField for the title.
+3. Bind the titleField to the Person class using method references.
+4. Create a TextField for the name.
+5. Bind the nameField to the Person class using method references.
+
+<Details>
+<Summary>`Method references` are one-linners to simplify code </Summary>
+</br>
+`Method references` are used to **simplify the code and make it more readable**. Here are the key points:
+
+*Reference to an Instance Method of a Particular Object*
+
+- The method reference `binder.forField(titleField).bind(Person::getTitle, Person::setTitle)` is used. Here, `Person::getTitle` and `Person::setTitle` refer to the instance methods `getTitle` and `setTitle` of the `Person` class. This is equivalent to a lambda expression that calls these methods on a `Person` object.
+
+*Reference to an Instance Method of a Particular Object (Shorthand)*
+
+- The shorthand `binder.bind(nameField, Person::getName, Person::setName)` is used, which is another example of referencing instance methods `getName` and `setName` of the `Person` class.
+
+*Example Breakdown*
+
+```java
+binder.forField(titleField)
+      .bind(Person::getTitle, Person::setTitle);
+```
+
+This is equivalent to:
+
+```java
+binder.forField(titleField)
+      .bind(person -> person.getTitle(), (person, title) -> person.setTitle(title));
+```
+
+Similarly,
+
+```java
+binder.bind(nameField, Person::getName, Person::setName);
+```
+
+is equivalent to:
+
+```java
+binder.bind(nameField, person -> person.getName(), (person, name) -> person.setName(name));
+```
+
+`Method references` here replace the need for explicit `lambda` expressions, making the code more concise and easier to read.
+
+
+</Details>
+
 
 **Server to Client: Reading & Writing Automatically**
 
