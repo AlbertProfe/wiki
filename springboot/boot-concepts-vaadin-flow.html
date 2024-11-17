@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="albertprofe">
-<meta name="description" content="In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components Model - View -Controller">
+<meta name="description" content="In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components Model - View -Controller. Vaadin Flow is a pure Java option for view.">
 
-<title>Spring Boot: View – albertprofe wiki</title>
+<title>Spring Boot: Vaadin Flow – albertprofe wiki</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -32,8 +66,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../springboot/boot-concepts-th.html" rel="next">
-<link href="../springboot/boot-concepts-controller.html" rel="prev">
+<link href="../springboot/boot-concepts-vaadin-hilla.html" rel="next">
+<link href="../springboot/boot-concepts-th.html" rel="prev">
 <link href="..//images/home/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -1443,7 +1477,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/boot-concepts-injection.html">Spring Boot Concepts</a></li><li class="breadcrumb-item"><a href="../springboot/boot-concepts-view.html">Spring Boot: View</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/boot-concepts-injection.html">Spring Boot Concepts</a></li><li class="breadcrumb-item"><a href="../springboot/boot-concepts-vaadin-flow.html">Spring Boot: Vaadin Flow</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -1562,7 +1596,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../springboot/boot-concepts-view.html" class="sidebar-item-text sidebar-link active">
+  <a href="../springboot/boot-concepts-view.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Spring Boot: View</span></a>
   </div>
 </li>
@@ -1574,7 +1608,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../springboot/boot-concepts-vaadin-flow.html" class="sidebar-item-text sidebar-link">
+  <a href="../springboot/boot-concepts-vaadin-flow.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Spring Boot: Vaadin Flow</span></a>
   </div>
 </li>
@@ -1805,33 +1839,32 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#java-view" id="toc-java-view" class="nav-link active" data-scroll-target="#java-view"><span class="header-section-number">1</span> Java View</a>
+  <li><a href="#vaadin" id="toc-vaadin" class="nav-link active" data-scroll-target="#vaadin"><span class="header-section-number">1</span> Vaadin</a>
   <ul>
-  <li><a href="#html" id="toc-html" class="nav-link" data-scroll-target="#html"><span class="header-section-number">1.1</span> HTML</a></li>
-  <li><a href="#vaadin" id="toc-vaadin" class="nav-link" data-scroll-target="#vaadin"><span class="header-section-number">1.2</span> Vaadin</a></li>
-  <li><a href="#javafx" id="toc-javafx" class="nav-link" data-scroll-target="#javafx"><span class="header-section-number">1.3</span> JavaFX</a></li>
-  <li><a href="#swt" id="toc-swt" class="nav-link" data-scroll-target="#swt"><span class="header-section-number">1.4</span> SWT</a></li>
-  <li><a href="#other-alternatives" id="toc-other-alternatives" class="nav-link" data-scroll-target="#other-alternatives"><span class="header-section-number">1.5</span> Other Alternatives</a></li>
+  <li><a href="#atmosphere" id="toc-atmosphere" class="nav-link" data-scroll-target="#atmosphere"><span class="header-section-number">1.1</span> <code>atmosphere</code></a></li>
+  <li><a href="#binding" id="toc-binding" class="nav-link" data-scroll-target="#binding"><span class="header-section-number">1.2</span> Binding</a></li>
+  <li><a href="#create-vaadin-views" id="toc-create-vaadin-views" class="nav-link" data-scroll-target="#create-vaadin-views"><span class="header-section-number">1.3</span> Create Vaadin Views</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/boot-concepts-view.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/boot-concepts-vaadin-flow.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/boot-concepts-injection.html">Spring Boot Concepts</a></li><li class="breadcrumb-item"><a href="../springboot/boot-concepts-view.html">Spring Boot: View</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../springboot/boot-concepts-injection.html">Spring Boot Concepts</a></li><li class="breadcrumb-item"><a href="../springboot/boot-concepts-vaadin-flow.html">Spring Boot: Vaadin Flow</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Spring Boot: View</h1>
-<p class="subtitle lead">Spring Boot View</p>
+<h1 class="title">Spring Boot: Vaadin Flow</h1>
+<p class="subtitle lead">Spring Boot View Vaadin Flow</p>
   <div class="quarto-categories">
     <div class="quarto-category">Spring-Boot</div>
     <div class="quarto-category">View</div>
+    <div class="quarto-category">Flow</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components Model - View -Controller
+    In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components Model - View -Controller. Vaadin Flow is a pure Java option for view.
   </div>
 </div>
 
@@ -1867,85 +1900,204 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="summary">
-<p>📘 <strong>View</strong></p>
-<p>The <code>view</code> is responsible <strong>for presenting the data to the user.</strong></p>
-<p>Java developers have several options to create frontend applications, whether it’s the <strong>server-side</strong> approach of <code>Vaadin</code>, the rich<code>client capabilities</code> of <code>JavaFX</code> or <code>Thymeleaf</code>, or the native look and feel of <code>SWT</code>, there is a <code>Java-based</code> frontend solution to suit various development needs.</p>
-<p>An also pure Java <code>Vaadin</code> is a nice alternative in two flavors: <code>Hilla</code> and <code>Flow</code>.</p>
+<p>📘 <strong>Thymeleaf</strong></p>
+<p><code>Thymeleaf</code> is a <strong>modern server-side Java template engine</strong> for both web and standalone environments.</p>
 </div>
 <p><br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://hashstudioz.com/blog/wp-content/uploads/2024/01/Best-Java-Frameworks-for-Web-Development-1060x557.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Java Framewoks"><img src="https://hashstudioz.com/blog/wp-content/uploads/2024/01/Best-Java-Frameworks-for-Web-Development-1060x557.webp" class="img-fluid figure-img" alt="Java Framewoks"></a></p>
-<figcaption>Java Framewoks</figcaption>
+<p><a href="../images/springboot/springboot-architecture-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Spring Boot Request-Response Cycle"><img src="../images/springboot/springboot-architecture-6.png" class="img-fluid figure-img" style="width:80.0%" alt="Spring Boot Request-Response Cycle"></a></p>
+<figcaption>Spring Boot Request-Response Cycle</figcaption>
 </figure>
 </div>
-<section id="java-view" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Java View</h1>
+<section id="vaadin" class="level1 page-columns page-full" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Vaadin</h1>
+<p>Modern Java framework for building web applications</p>
 <blockquote class="blockquote">
-<p><code>Java</code>, although primarily <a href="https://hashstudioz.com/blog/java-frameworks-for-web-development/" class="external" target="_blank">known</a> for its backend capabilities, can be utilized in various ways to develop <strong>frontend applications.</strong></p>
-<p>Here are some notable frameworks and approaches that enable us to create robust frontend solutions with <code>Java</code> and <code>Spring Boot</code>.</p>
+<p><code>Vaadin</code> is a web application framework for Java that allows developers to build modern, interactive web applications using Java without having to write <code>HTML</code>, <code>CSS</code>, or <code>JavaScript</code>.</p>
 </blockquote>
-<section id="html" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="html"><span class="header-section-number">1.1</span> HTML</h2>
-<p>In Spring Boot <code>Server-Side HTML</code> version, views are typically implemented using template engines such as:</p>
+<p>Here are some key points about <code>Vaadin</code>:</p>
 <ul>
-<li><code>Thymeleaf</code>: <a href="../springboot/boot-concepts-th.html">Thymeleaf</a></li>
-<li><code>FreeMarker</code>: <a href="https://freemarker.apache.org/" class="external">Apache FreeMarker™</a> is a template engine: a Java library to generate text output (HTML web pages, e-mails, configuration files, source code, etc.) based on templates and changing data.</li>
-<li><code>Groovy</code>: Spring Boot officially provided starter to use <a href="http://groovy-lang.org/templating.html#_the_markuptemplateengine" class="external">Groovy Template for MVC</a> and offline rendering.</li>
+<li><a href="https://vaadin.com/" class="external" target="_blank">Vaadin Official Website</a></li>
+<li><a href="https://vaadin.com/docs/latest/" class="external" target="_blank">Vaadin Documentation</a></li>
+<li><a href="https://vaadin.com/docs/latest/flow/integrations/spring/" class="external" target="_blank">Vaadin Spring Boot Integration</a></li>
+<li><a href="https://vaadin.com/docs/latest/flow" class="external" target="_blank">Vaadin Flow</a></li>
+<li><a href="https://github.com/vaadin/tutorial/" class="external" target="_blank">GitHub Tutorial Vaadin 24</a></li>
+<li><a href="https://vaadin.com/docs/latest/getting-started/project/maven-archetype" class="external" target="_blank">Vaadin Maven CLI create a project</a></li>
 </ul>
-<p>The view can access the model and use it to generate the <code>HTML</code>, <code>JSON</code> or <code>XML</code> that is sent to the user’s browser.</p>
+<p><code>Vaadin</code> Flow lets a <mark>server-side Java application build a user interface from components in Java. These Java components are connected to web components running in the browser</mark>. Flow manages the relaying of user <a href="https://vaadin.com/docs/latest/flow/application" class="external" target="_blank">interaction back to the server-side application</a>, which can handle it with event listeners.</p>
+<blockquote class="blockquote">
+<p>Application views and their components are typically used to display and accept input of application data. This data is often stored in a backend service, such as a database. Application logic is often created using application frameworks, such as Spring.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://vaadin.com/docs/latest/_astro/application-architecture.BkkGoEuL_1Qhbrj.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://vaadin.com/docs/latest/_astro/application-architecture.BkkGoEuL_1Qhbrj.webp" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<code>Vaadin</code> offers two main flavors for web application development:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><strong>Hilla</strong>: A full-stack framework combining a Spring Boot backend with a React or Lit frontend. It provides type-safe communication between client and server, auto-generated TypeScript interfaces, and built-in security features.</p></li>
+<li><p><strong>Flow</strong>: A server-side Java framework for building web applications. It allows developers to create UIs using a component-based approach, with automatic server-client communication and state management.</p></li>
+</ol>
+<p>Both flavors leverage Vaadin’s extensive set of UI components and themes. <code>Hilla</code> is ideal for developers comfortable with modern <code>JavaScript</code> frameworks, while <code>Flow</code> suits those preferring a Java-centric approach.</p>
+<p>Both can be used to create responsive, feature-rich web applications with excellent performance and maintainability.</p>
+<p><a href="https://vaadin.com/docs/latest/hilla" class="external" target="_blank">Hilla</a> / <a href="https://vaadin.com/docs/latest/flow" class="external" target="_blank">Flow</a></p>
+</div>
+</div>
+<section id="atmosphere" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="atmosphere"><span class="header-section-number">1.1</span> <code>atmosphere</code></h2>
+<p><strong>Vaadin</strong> uses the <a href="https://github.com/Atmosphere/atmosphere">Atmosphere framework</a> to facilitate robust <mark>client-server communication, particularly for real-time and push-based features. </mark></p>
+<p><code>Atmosphere</code> is an open-source project that provides a powerful abstraction layer for various <strong>asynchronous communication protocols</strong>, including <code>WebSockets</code>, <code>Server-Sent Events</code>, and <code>long-polling</code>.</p>
+<p><code>Vaadin</code> integrates <code>Atmosphere</code> to handle its server <strong>push</strong> functionality, allowing servers to send updates to clients without the need for <strong>client-side polling</strong>. This integration enables <code>Vaadin</code> applications to create responsive, <strong>real-time user interfaces</strong> with minimal developer effort.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/labsb08/lab08-2-atmosphere.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="../images/springboot/labsb08/lab08-2-atmosphere.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></a></p>
+</figure>
+</div>
+<p><code>Atmosphere</code>’s key features utilized by Vaadin include:</p>
+<ol type="1">
+<li><strong>Protocol negotiation</strong> and fallback mechanisms</li>
+<li><strong>Automatic selection</strong> of the best available transport method</li>
+<li><strong>Handling of connection management</strong> and reconnection scenarios</li>
+<li><strong>Cross-browser compatibility</strong></li>
+</ol>
+<blockquote class="blockquote">
+<p>By building on Atmosphere, Vaadin abstracts away the complexities of low-level communication protocols, allowing developers to focus on application logic while still benefiting from efficient, real-time communication between client and server.</p>
+</blockquote>
 </section>
-<section id="vaadin" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="vaadin"><span class="header-section-number">1.2</span> Vaadin</h2>
-<p><strong>Vaadin Flow</strong></p>
-<p><code>Vaadin</code> Flow is a Java framework that allows developers to build rich, interactive web UIs entirely in Java. Here are its key features:</p>
+<section id="binding" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="binding"><span class="header-section-number">1.2</span> Binding</h2>
 <ul>
-<li><strong>UI Development in Java</strong>: Write UIs 100% in Java, eliminating the need to touch frontend technologies like HTML, CSS, and JavaScript.</li>
-<li><strong>Pre-built Components</strong>: Offers a vast collection of high-quality, pre-built components to enhance user experience.</li>
-<li><strong>Server-side Architecture</strong>: Simplifies security implementations and integrates well with Java EE and Spring ecosystems[5].</li>
+<li><a href="https://vaadin.com/docs/latest/flow/binding-data" class="external" target="_blank">Data Binding</a></li>
+<li><a href="https://vaadin.com/docs/latest/flow/binding-data/components-binder-load" class="external" target="_blank">Loading &amp; Saving Business Objects</a></li>
+<li><a href="https://vaadin.com/docs/latest/flow/binding-data/components-binder" class="external" target="_blank">Binding Data to Forms</a></li>
 </ul>
-<p><strong>Vaadin Hilla</strong></p>
-<p><code>Vaadin</code> Hilla is a newer approach that combines the strengths of <code>Vaadin</code> with modern frontend technologies. Here’s what it offers:</p>
-<ul>
-<li><strong>TypeScript and Java Integration</strong>: Allows developers to write frontend code in TypeScript while still leveraging Java for the backend.</li>
-<li><strong>Reactive Programming</strong>: Supports reactive programming models, making it easier to manage complex UI updates.</li>
-<li><strong>Interoperability</strong>: Enables seamless interaction between Java and TypeScript code, providing a hybrid development experience[5].</li>
-</ul>
+<p>In <code>Vaadin</code>, the <mark><strong>Binder</strong> is a data binding class used to <strong>connect UI components to Java beans</strong>. It is not a container but rather a <strong>utility</strong> that facilitates the transfer and validation of data between the user interface and backend objects.</mark></p>
+<p><strong>Binder</strong> reads values from business objects, converts them to the format required by UI fields, and vice versa, supporting validation to ensure <mark>data integrity</mark>. This makes it essential for creating dynamic and interactive forms in Vaadin applications.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+There can be only one Binder
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There can be only one <strong>Binder</strong> instance for each form.</p>
+<p>You should use this instance for all the fields in the form.</p>
+</div>
+</div>
+<p><strong>Client To Server: How to Bind Form Data</strong></p>
+<p>The following steps include everything needed to load, edit, and save values for a form. <code>Java 8 method references</code> are used.</p>
+<div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode numberSource java code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode java"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a></span>
+<span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a><span class="co">// Create a Binder instance for the Person class</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3"></a><span class="bu">Binder</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> binder <span class="op">=</span> <span class="kw">new</span> <span class="bu">Binder</span><span class="op">&lt;&gt;(</span>Person<span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
+<span id="annotated-cell-1-4"><a href="#annotated-cell-1-4"></a></span>
+<span id="annotated-cell-1-5"><a href="#annotated-cell-1-5"></a><span class="co">// Create a TextField for the title</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-6" class="code-annotation-target"><a href="#annotated-cell-1-6"></a><span class="bu">TextField</span> titleField <span class="op">=</span> <span class="kw">new</span> <span class="bu">TextField</span><span class="op">();</span></span>
+<span id="annotated-cell-1-7"><a href="#annotated-cell-1-7"></a></span>
+<span id="annotated-cell-1-8"><a href="#annotated-cell-1-8"></a><span class="co">// Bind the titleField to the Person class</span></span>
+<span id="annotated-cell-1-9"><a href="#annotated-cell-1-9"></a>binder<span class="op">.</span><span class="fu">forField</span><span class="op">(</span>titleField<span class="op">)</span></span>
+<span id="annotated-cell-1-10"><a href="#annotated-cell-1-10"></a>    <span class="op">.</span><span class="fu">bind</span><span class="op">(</span></span>
+<span id="annotated-cell-1-11"><a href="#annotated-cell-1-11"></a>        <span class="co">// Callback that loads the title from a person instance</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-1-12" class="code-annotation-target"><a href="#annotated-cell-1-12"></a>        Person<span class="op">::</span>getTitle<span class="op">,</span></span>
+<span id="annotated-cell-1-13"><a href="#annotated-cell-1-13"></a>        <span class="co">// Callback that saves the title in a person instance</span></span>
+<span id="annotated-cell-1-14"><a href="#annotated-cell-1-14"></a>        Person<span class="op">::</span>setTitle<span class="op">);</span></span>
+<span id="annotated-cell-1-15"><a href="#annotated-cell-1-15"></a></span>
+<span id="annotated-cell-1-16"><a href="#annotated-cell-1-16"></a><span class="co">// Create a TextField for the name</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-1-17" class="code-annotation-target"><a href="#annotated-cell-1-17"></a><span class="bu">TextField</span> nameField <span class="op">=</span> <span class="kw">new</span> <span class="bu">TextField</span><span class="op">();</span></span>
+<span id="annotated-cell-1-18"><a href="#annotated-cell-1-18"></a></span>
+<span id="annotated-cell-1-19"><a href="#annotated-cell-1-19"></a><span class="co">// Shorthand for cases without extra configuration</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-1-20" class="code-annotation-target"><a href="#annotated-cell-1-20"></a>binder<span class="op">.</span><span class="fu">bind</span><span class="op">(</span>nameField<span class="op">,</span> Person<span class="op">::</span>getName<span class="op">,</span></span>
+<span id="annotated-cell-1-21"><a href="#annotated-cell-1-21"></a>        Person<span class="op">::</span>setName<span class="op">);</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="3" data-code-annotation="1">Create a Binder instance for the Person class.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="6" data-code-annotation="2">Create a TextField for the title.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="12,14" data-code-annotation="3">Bind the titleField to the Person class using method references.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="17" data-code-annotation="4">Create a TextField for the name.</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="20,21" data-code-annotation="5">Bind the nameField to the Person class using method references.</span>
+</dd>
+</dl>
+<p><strong>Server to Client: Reading &amp; Writing Automatically</strong></p>
+<p>Writing automatically to business objects when the user makes changes in the UI is usually the most convenient option. You can bind the values directly to an instance by allowing Binder to save automatically values from the fields.</p>
+<p>In the example here, field values are saved automatically:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">Binder</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> binder <span class="op">=</span> <span class="kw">new</span> <span class="bu">Binder</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co">// Field binding configuration omitted.</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">// It should be done here.</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>Person person <span class="op">=</span> <span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"John Doe"</span><span class="op">,</span> <span class="dv">1957</span><span class="op">);</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">// Loads the values from the person instance.</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co">// Sets person to be updated when any bound field</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">// is updated.</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>binder<span class="op">.</span><span class="fu">setBean</span><span class="op">(</span>person<span class="op">);</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="bu">Button</span> saveButton <span class="op">=</span> <span class="kw">new</span> <span class="bu">Button</span><span class="op">(</span><span class="st">"Save"</span><span class="op">,</span> event <span class="op">-&gt;</span> <span class="op">{</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="cf">if</span> <span class="op">(</span>binder<span class="op">.</span><span class="fu">validate</span><span class="op">().</span><span class="fu">isOk</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>        <span class="co">// Person is always up-to-date as long as</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>        <span class="co">// there are no validation errors.</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a></span>
+<span id="cb1-18"><a href="#cb1-18"></a>        MyBackend<span class="op">.</span><span class="fu">updatePersonInDatabase</span><span class="op">(</span>person<span class="op">);</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>    <span class="op">}</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="op">});</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="javafx" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="javafx"><span class="header-section-number">1.3</span> JavaFX</h2>
-<p><code>JavaFX</code> is a set of graphics and media packages for designing, creating, and deploying rich client applications.</p>
-<ul>
-<li><strong>Cross-Platform Compatibility</strong>: Operates consistently across diverse platforms.</li>
-<li><strong>CSS Styling and FXML</strong>: Enhances customization and layout management with CSS styling and FXML support.</li>
-<li><strong>Built-in UI Components</strong>: Offers a comprehensive set of built-in UI components and 3D graphics support.</li>
-<li><strong>Performance</strong>: Better performance for complex UIs compared to Swing, although it has a steeper learning curve[5].</li>
-</ul>
-</section>
-<section id="swt" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="swt"><span class="header-section-number">1.4</span> SWT</h2>
-<p><code>SWT</code> (Standard Widget Toolkit) is a graphical widget toolkit developed by IBM and part of the <code>Eclipse</code> Foundation.</p>
-<ul>
-<li><strong>Native Look and Feel</strong>: Provides a native look and feel by using the underlying OS’s graphical control elements.</li>
-<li><strong>Performance</strong>: Generally offers better performance for GUI applications than Swing due to its use of native components.</li>
-<li><strong>Eclipse Integration</strong>: Tight integration with the <code>Eclipse IDE</code> makes it a preferred choice for developers working within that environment[5].</li>
-</ul>
-</section>
-<section id="other-alternatives" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="other-alternatives"><span class="header-section-number">1.5</span> Other Alternatives</h2>
-<p><strong>Blazor (via.NET and C#)</strong></p>
-<p>Although not directly a <code>Java framework</code>, <code>Blazor</code> can be an interesting alternative for <code>Java</code> developers familiar with.NET and C#.</p>
-<ul>
-<li><strong>C# to Web Assembly</strong>: Compile C# code to Web Assembly to run in the browser or server-side.</li>
-<li><strong>Interoperability</strong>: Interop with other JavaScript libraries such as React or Vue.</li>
-<li><strong>Cross-Platform</strong>: Build for web, mobile, desktop, and more using.NET[2].</li>
-</ul>
-<p><strong>Scala.js</strong></p>
-<p>For developers comfortable with <code>Scala</code>,<code>Scala.js</code> can be a viable option.</p>
-<ul>
-<li><strong>Scala to JavaScript</strong>: Transpile applications written in Scala into JavaScript.</li>
-<li><strong>Correctness, Performance, and Interoperability</strong>: Boasts correctness, performance, and interoperability with other JavaScript frameworks[2].</li>
-</ul>
+<section id="create-vaadin-views" class="level2 page-columns page-full" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="create-vaadin-views"><span class="header-section-number">1.3</span> Create Vaadin Views</h2>
+<p>To create the web interface of the system, create <code>Vaadin</code> views for each of the main functionalities. <strong>The views will be used to display the data and handle user interactions.</strong></p>
+<blockquote class="blockquote">
+<p><code>Vaadin</code> allows you to create rich, interactive UIs using <code>Java</code> code. It provides a wide range of UI components and layouts that you can use to build your application’s interface.</p>
+</blockquote>
+<p>Example of a simple <code>Vaadin</code> view:</p>
+<div class="column-page-right">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="at">@Route</span><span class="op">(</span><span class="st">"menu"</span><span class="op">)</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">public</span> <span class="kw">class</span> MenuView <span class="kw">extends</span> VerticalLayout <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="kw">private</span> <span class="dt">final</span> MenuService menuService<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="kw">public</span> <span class="fu">MenuView</span><span class="op">(</span>MenuService menuService<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">menuService</span> <span class="op">=</span> menuService<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>        </span>
+<span id="cb2-8"><a href="#cb2-8"></a>        H1 title <span class="op">=</span> <span class="kw">new</span> <span class="fu">H1</span><span class="op">(</span><span class="st">"Restaurant Menu"</span><span class="op">);</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>        Grid<span class="op">&lt;</span><span class="bu">Menu</span><span class="op">&gt;</span> grid <span class="op">=</span> <span class="kw">new</span> Grid<span class="op">&lt;&gt;(</span><span class="bu">Menu</span><span class="op">.</span><span class="fu">class</span><span class="op">);</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>        grid<span class="op">.</span><span class="fu">setItems</span><span class="op">(</span>menuService<span class="op">.</span><span class="fu">getAllMenuItems</span><span class="op">());</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>        </span>
+<span id="cb2-12"><a href="#cb2-12"></a>        <span class="fu">add</span><span class="op">(</span>title<span class="op">,</span> grid<span class="op">);</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>    <span class="op">}</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This view creates a page with a title and a grid showing all menu items.</p>
+<p>Key Vaadin Concepts:</p>
+<ol type="1">
+<li><p><strong>Server-side Architecture</strong>: Vaadin primarily runs on the server, which means your business logic stays secure and you can leverage the full power of Java.</p></li>
+<li><p><strong>Component-based UI</strong>: Build UIs by combining and customizing existing components or creating your own.</p></li>
+<li><p><strong>Data Binding</strong>: Easily bind UI components to data sources, including JPA entities.</p></li>
+<li><p><strong>Themes and Styling</strong>: Customize the look and feel of your application using CSS and Vaadin’s theming capabilities.</p></li>
+<li><p><strong>Integration with Spring Boot</strong>: Vaadin integrates seamlessly with Spring Boot, allowing you to use Spring’s dependency injection and other features.</p></li>
+</ol>
 
 
 </section>
@@ -2518,13 +2670,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../springboot/boot-concepts-controller.html" class="pagination-link" aria-label="Spring Boot: Controller">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Spring Boot: Controller</span>
+      <a href="../springboot/boot-concepts-th.html" class="pagination-link" aria-label="Spring Boot: Thymeleaf">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Spring Boot: Thymeleaf</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../springboot/boot-concepts-th.html" class="pagination-link" aria-label="Spring Boot: Thymeleaf">
-        <span class="nav-page-text">Spring Boot: Thymeleaf</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../springboot/boot-concepts-vaadin-hilla.html" class="pagination-link" aria-label="Spring Boot: Vaadin Hilla">
+        <span class="nav-page-text">Spring Boot: Vaadin Hilla</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -2536,7 +2688,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p>If you want to go far, walk slow / We love dukkha</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/boot-concepts-view.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/boot-concepts-vaadin-flow.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

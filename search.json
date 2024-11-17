@@ -1963,7 +1963,7 @@
     "href": "springboot/sblab8-2.html#binding",
     "title": "Lab#SB08-2: Vaadin",
     "section": "2.2 Binding",
-    "text": "2.2 Binding\n\nData Binding\nLoading & Saving Business Objects\nBinding Data to Forms\n\nIn Vaadin, the Binder is a data binding class used to connect UI components to Java beans. It is not a container but rather a utility that facilitates the transfer and validation of data between the user interface and backend objects.\nBinder reads values from business objects, converts them to the format required by UI fields, and vice versa, supporting validation to ensure data integrity. This makes it essential for creating dynamic and interactive forms in Vaadin applications.\n\n\n\n\n\n\nThere can be only one Binder\n\n\n\nThere can be only one Binder instance for each form.\nYou should use this instance for all the fields in the form.\n\n\nClient To Server: How to Bind Form Data\nThe following steps include everything needed to load, edit, and save values for a form. Java 8 method references are used.\n\n// Create a Binder instance for the Person class\n1Binder&lt;Person&gt; binder = new Binder&lt;&gt;(Person.class);\n\n// Create a TextField for the title\n2TextField titleField = new TextField();\n\n// Bind the titleField to the Person class\nbinder.forField(titleField)\n       .bind(\n                // Callback that loads the title from a person instance\n3                Person::getTitle,\n                // Callback that saves the title in a person instance\n                Person::setTitle);\n\n// Create a TextField for the name\n4TextField nameField = new TextField();\n\n// Shorthand for cases without extra configuration\n5binder.bind(nameField, Person::getName,\n        Person::setName);\n\n1\n\nCreate a Binder instance for the Person class.\n\n2\n\nCreate a TextField for the title.\n\n3\n\nBind the titleField to the Person class using method references.\n\n4\n\nCreate a TextField for the name.\n\n5\n\nBind the nameField to the Person class using method references.\n\n\n\n\nMethod references are one-linners to simplify code\n\n Method references are used to simplify the code and make it more readable. Here are the key points:\nReference to an Instance Method of a Particular Object\n\nThe method reference binder.forField(titleField).bind(Person::getTitle, Person::setTitle) is used. Here, Person::getTitle and Person::setTitle refer to the instance methods getTitle and setTitle of the Person class. This is equivalent to a lambda expression that calls these methods on a Person object.\n\nReference to an Instance Method of a Particular Object (Shorthand)\n\nThe shorthand binder.bind(nameField, Person::getName, Person::setName) is used, which is another example of referencing instance methods getName and setName of the Person class.\n\nExample Breakdown\nbinder.forField(titleField)\n      .bind(Person::getTitle, Person::setTitle);\nThis is equivalent to:\nbinder.forField(titleField)\n      .bind(person -&gt; person.getTitle(), (person, title) -&gt; person.setTitle(title));\nSimilarly,\nbinder.bind(nameField, Person::getName, Person::setName);\nis equivalent to:\nbinder.bind(nameField, person -&gt; person.getName(), (person, name) -&gt; person.setName(name));\nMethod references here replace the need for explicit lambda expressions, making the code more concise and easier to read.\n\nServer to Client: Reading & Writing Automatically\nWriting automatically to business objects when the user makes changes in the UI is usually the most convenient option. You can bind the values directly to an instance by allowing Binder to save automatically values from the fields.\nIn the example here, field values are saved automatically:\nBinder&lt;Person&gt; binder = new Binder&lt;&gt;();\n\n// Field binding configuration omitted.\n// It should be done here.\n\nPerson person = new Person(\"John Doe\", 1957);\n\n// Loads the values from the person instance.\n// Sets person to be updated when any bound field\n// is updated.\nbinder.setBean(person);\n\nButton saveButton = new Button(\"Save\", event -&gt; {\n    if (binder.validate().isOk()) {\n        // Person is always up-to-date as long as\n        // there are no validation errors.\n\n        MyBackend.updatePersonInDatabase(person);\n    }\n});",
+    "text": "2.2 Binding\n\nData Binding\nLoading & Saving Business Objects\nBinding Data to Forms\n\nIn Vaadin, the Binder is a data binding class used to connect UI components to Java beans. It is not a container but rather a utility that facilitates the transfer and validation of data between the user interface and backend objects.\nBinder reads values from business objects, converts them to the format required by UI fields, and vice versa, supporting validation to ensure data integrity. This makes it essential for creating dynamic and interactive forms in Vaadin applications.\n\n\n\n\n\n\nThere can be only one Binder\n\n\n\nThere can be only one Binder instance for each form.\nYou should use this instance for all the fields in the form.\n\n\nClient To Server: How to Bind Form Data\nThe following steps include everything needed to load, edit, and save values for a form. Java 8 method references are used.\n\n// Create a Binder instance for the Person class\n1Binder&lt;Person&gt; binder = new Binder&lt;&gt;(Person.class);\n\n// Create a TextField for the title\n2TextField titleField = new TextField();\n\n// Bind the titleField to the Person class\nbinder.forField(titleField)\n    .bind(\n        // Callback that loads the title from a person instance\n3        Person::getTitle,\n        // Callback that saves the title in a person instance\n        Person::setTitle);\n\n// Create a TextField for the name\n4TextField nameField = new TextField();\n\n// Shorthand for cases without extra configuration\n5binder.bind(nameField, Person::getName,\n        Person::setName);\n\n1\n\nCreate a Binder instance for the Person class.\n\n2\n\nCreate a TextField for the title.\n\n3\n\nBind the titleField to the Person class using method references.\n\n4\n\nCreate a TextField for the name.\n\n5\n\nBind the nameField to the Person class using method references.\n\n\n\n\nMethod references are one-linners to simplify code\n\n Method references are used to simplify the code and make it more readable. Here are the key points:\nReference to an Instance Method of a Particular Object\n\nThe method reference binder.forField(titleField).bind(Person::getTitle, Person::setTitle) is used. Here, Person::getTitle and Person::setTitle refer to the instance methods getTitle and setTitle of the Person class. This is equivalent to a lambda expression that calls these methods on a Person object.\n\nReference to an Instance Method of a Particular Object (Shorthand)\n\nThe shorthand binder.bind(nameField, Person::getName, Person::setName) is used, which is another example of referencing instance methods getName and setName of the Person class.\n\nExample Breakdown\nbinder.forField(titleField)\n      .bind(Person::getTitle, Person::setTitle);\nThis is equivalent to:\nbinder.forField(titleField)\n      .bind(person -&gt; person.getTitle(), (person, title) -&gt; person.setTitle(title));\nSimilarly,\nbinder.bind(nameField, Person::getName, Person::setName);\nis equivalent to:\nbinder.bind(nameField, person -&gt; person.getName(), (person, name) -&gt; person.setName(name));\nMethod references here replace the need for explicit lambda expressions, making the code more concise and easier to read.\n\nServer to Client: Reading & Writing Automatically\nWriting automatically to business objects when the user makes changes in the UI is usually the most convenient option. You can bind the values directly to an instance by allowing Binder to save automatically values from the fields.\nIn the example here, field values are saved automatically:\nBinder&lt;Person&gt; binder = new Binder&lt;&gt;();\n\n// Field binding configuration omitted.\n// It should be done here.\n\nPerson person = new Person(\"John Doe\", 1957);\n\n// Loads the values from the person instance.\n// Sets person to be updated when any bound field\n// is updated.\nbinder.setBean(person);\n\nButton saveButton = new Button(\"Save\", event -&gt; {\n    if (binder.validate().isOk()) {\n        // Person is always up-to-date as long as\n        // there are no validation errors.\n\n        MyBackend.updatePersonInDatabase(person);\n    }\n});",
     "crumbs": [
       "Spring Boot Laboratories",
       "Lab#SB08-2: Vaadin"
@@ -2205,7 +2205,7 @@
     "href": "springboot/boot-concepts-th.html",
     "title": "Spring Boot: Thymeleaf",
     "section": "",
-    "text": "In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components: Model - View -Controller",
+    "text": "📘 Thymeleaf\nThymeleaf is a modern server-side Java template engine for both web and standalone environments.",
     "crumbs": [
       "Spring Boot Concepts",
       "Spring Boot: Thymeleaf"
@@ -13306,7 +13306,7 @@
     "href": "springboot/boot-concepts-view.html",
     "title": "Spring Boot: View",
     "section": "",
-    "text": "In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components: Model - View -Controller",
+    "text": "📘 View\nThe view is responsible for presenting the data to the user.\nJava developers have several options to create frontend applications, whether it’s the server-side approach of Vaadin, the richclient capabilities of JavaFX or Thymeleaf, or the native look and feel of SWT, there is a Java-based frontend solution to suit various development needs.\nAn also pure Java Vaadin is a nice alternative in two flavors: Hilla and Flow.",
     "crumbs": [
       "Spring Boot Concepts",
       "Spring Boot: View"
@@ -15047,6 +15047,226 @@
     "crumbs": [
       "Spring Boot Laboratories",
       "Lab#SB08-2: Vaadin"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-vaadin-hilla.html",
+    "href": "springboot/boot-concepts-vaadin-hilla.html",
+    "title": "Spring Boot: Vaadin Hilla",
+    "section": "",
+    "text": "📘 Vaadin Hilla\nVaadin Hilla offers a powerful and flexible way to build modern web applications by combining the strengths of Java and TypeScript.\nWith its type-safe communication, built-in security features, and support for reactive programming, Hilla is an excellent choice for developers looking to create robust, interactive, and maintainable web applications.",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Vaadin Hilla"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-vaadin-flow.html",
+    "href": "springboot/boot-concepts-vaadin-flow.html",
+    "title": "Spring Boot: Vaadin Flow",
+    "section": "",
+    "text": "📘 Thymeleaf\nThymeleaf is a modern server-side Java template engine for both web and standalone environments.",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Vaadin Flow"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-vaadin-flow.html#atmosphere",
+    "href": "springboot/boot-concepts-vaadin-flow.html#atmosphere",
+    "title": "Spring Boot: Vaadin Flow",
+    "section": "1.1 atmosphere",
+    "text": "1.1 atmosphere\nVaadin uses the Atmosphere framework to facilitate robust client-server communication, particularly for real-time and push-based features. \nAtmosphere is an open-source project that provides a powerful abstraction layer for various asynchronous communication protocols, including WebSockets, Server-Sent Events, and long-polling.\nVaadin integrates Atmosphere to handle its server push functionality, allowing servers to send updates to clients without the need for client-side polling. This integration enables Vaadin applications to create responsive, real-time user interfaces with minimal developer effort.\n\n\n\n\n\nAtmosphere’s key features utilized by Vaadin include:\n\nProtocol negotiation and fallback mechanisms\nAutomatic selection of the best available transport method\nHandling of connection management and reconnection scenarios\nCross-browser compatibility\n\n\nBy building on Atmosphere, Vaadin abstracts away the complexities of low-level communication protocols, allowing developers to focus on application logic while still benefiting from efficient, real-time communication between client and server.",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Vaadin Flow"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-vaadin-flow.html#binding",
+    "href": "springboot/boot-concepts-vaadin-flow.html#binding",
+    "title": "Spring Boot: Vaadin Flow",
+    "section": "1.2 Binding",
+    "text": "1.2 Binding\n\nData Binding\nLoading & Saving Business Objects\nBinding Data to Forms\n\nIn Vaadin, the Binder is a data binding class used to connect UI components to Java beans. It is not a container but rather a utility that facilitates the transfer and validation of data between the user interface and backend objects.\nBinder reads values from business objects, converts them to the format required by UI fields, and vice versa, supporting validation to ensure data integrity. This makes it essential for creating dynamic and interactive forms in Vaadin applications.\n\n\n\n\n\n\nThere can be only one Binder\n\n\n\nThere can be only one Binder instance for each form.\nYou should use this instance for all the fields in the form.\n\n\nClient To Server: How to Bind Form Data\nThe following steps include everything needed to load, edit, and save values for a form. Java 8 method references are used.\n\n// Create a Binder instance for the Person class\n1Binder&lt;Person&gt; binder = new Binder&lt;&gt;(Person.class);\n\n// Create a TextField for the title\n2TextField titleField = new TextField();\n\n// Bind the titleField to the Person class\nbinder.forField(titleField)\n    .bind(\n        // Callback that loads the title from a person instance\n3        Person::getTitle,\n        // Callback that saves the title in a person instance\n        Person::setTitle);\n\n// Create a TextField for the name\n4TextField nameField = new TextField();\n\n// Shorthand for cases without extra configuration\n5binder.bind(nameField, Person::getName,\n        Person::setName);\n\n1\n\nCreate a Binder instance for the Person class.\n\n2\n\nCreate a TextField for the title.\n\n3\n\nBind the titleField to the Person class using method references.\n\n4\n\nCreate a TextField for the name.\n\n5\n\nBind the nameField to the Person class using method references.\n\n\nServer to Client: Reading & Writing Automatically\nWriting automatically to business objects when the user makes changes in the UI is usually the most convenient option. You can bind the values directly to an instance by allowing Binder to save automatically values from the fields.\nIn the example here, field values are saved automatically:\nBinder&lt;Person&gt; binder = new Binder&lt;&gt;();\n\n// Field binding configuration omitted.\n// It should be done here.\n\nPerson person = new Person(\"John Doe\", 1957);\n\n// Loads the values from the person instance.\n// Sets person to be updated when any bound field\n// is updated.\nbinder.setBean(person);\n\nButton saveButton = new Button(\"Save\", event -&gt; {\n    if (binder.validate().isOk()) {\n        // Person is always up-to-date as long as\n        // there are no validation errors.\n\n        MyBackend.updatePersonInDatabase(person);\n    }\n});",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Vaadin Flow"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-vaadin-flow.html#create-vaadin-views",
+    "href": "springboot/boot-concepts-vaadin-flow.html#create-vaadin-views",
+    "title": "Spring Boot: Vaadin Flow",
+    "section": "1.3 Create Vaadin Views",
+    "text": "1.3 Create Vaadin Views\nTo create the web interface of the system, create Vaadin views for each of the main functionalities. The views will be used to display the data and handle user interactions.\n\nVaadin allows you to create rich, interactive UIs using Java code. It provides a wide range of UI components and layouts that you can use to build your application’s interface.\n\nExample of a simple Vaadin view:\n\n@Route(\"menu\")\npublic class MenuView extends VerticalLayout {\n    private final MenuService menuService;\n\n    public MenuView(MenuService menuService) {\n        this.menuService = menuService;\n        \n        H1 title = new H1(\"Restaurant Menu\");\n        Grid&lt;Menu&gt; grid = new Grid&lt;&gt;(Menu.class);\n        grid.setItems(menuService.getAllMenuItems());\n        \n        add(title, grid);\n    }\n}\n\nThis view creates a page with a title and a grid showing all menu items.\nKey Vaadin Concepts:\n\nServer-side Architecture: Vaadin primarily runs on the server, which means your business logic stays secure and you can leverage the full power of Java.\nComponent-based UI: Build UIs by combining and customizing existing components or creating your own.\nData Binding: Easily bind UI components to data sources, including JPA entities.\nThemes and Styling: Customize the look and feel of your application using CSS and Vaadin’s theming capabilities.\nIntegration with Spring Boot: Vaadin integrates seamlessly with Spring Boot, allowing you to use Spring’s dependency injection and other features.",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Vaadin Flow"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-th.html#example1-model",
+    "href": "springboot/boot-concepts-th.html#example1-model",
+    "title": "Spring Boot: Thymeleaf",
+    "section": "9 Example1: Model",
+    "text": "9 Example1: Model\n&lt;!DOCTYPE html&gt;\n&lt;html xmlns:th=\"http://www.thymeleaf.org\"&gt;\n&lt;head&gt;\n    &lt;title&gt;Home&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n    &lt;h1 th:text=\"${message}\"&gt;Hello, World!&lt;/h1&gt;\n&lt;/body&gt;\n&lt;/html&gt;\nIn this template, the th:text attribute is used to set the text of the &lt;h1&gt; tag to the value of the message attribute in the model. The expression ${message} evaluates to the value of the message attribute.\nAssuming that this template is saved in a file named home.html in your application’s templates directory, the HomeController will render a message that says:\n\n“Welcome to my Spring Boot app!”\n\nwhen you visit theURL /\nThe value of the message attribute is set in the home() method of the controller.\nExample1 Controller",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Thymeleaf"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-th.html#example2-pathvariable-and-requestbody",
+    "href": "springboot/boot-concepts-th.html#example2-pathvariable-and-requestbody",
+    "title": "Spring Boot: Thymeleaf",
+    "section": "10 Example2: @PathVariable and @RequestBody",
+    "text": "10 Example2: @PathVariable and @RequestBody\nThymeleaf templates that can be used with the hello(), createUser(), and getUserById() methods:\nhello.html\n&lt;!DOCTYPE html&gt;\n&lt;html xmlns:th=\"http://www.thymeleaf.org\"&gt;\n&lt;head&gt;\n    &lt;title&gt;Hello&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n    &lt;h1 th:text=\"${message}\"&gt;Hello, World!&lt;/h1&gt;\n&lt;/body&gt;\n&lt;/html&gt;\nIn this template, the th:text attribute is used to set the text of the &lt;h1&gt; tag to the value of the message attribute in the model. The value of message is set in the hello() method of the controller.\nuser.html\n&lt;!DOCTYPE html&gt;\n&lt;html xmlns:th=\"http://www.thymeleaf.org\"&gt;\n&lt;head&gt;\n    &lt;title&gt;User&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n    &lt;h1 th:text=\"${user.name}\"&gt;User&lt;/h1&gt;\n    &lt;p th:text=\"${user.email}\"&gt;&lt;/p&gt;\n&lt;/body&gt;\n&lt;/html&gt;\nIn this template, the th:text attribute is used to set the text of the &lt;h1&gt; tag to the value of the name property of the user object in the model.\nThe th:text attribute of the &lt;p&gt; tag is used to set its text to the value of the email property of the user object in the model.\nAssuming that these templates are saved in files named hello.html and user.html, respectively, in your application’s templates directory, the hello() method will render a message that says:\n\n“Hello, World!”\n\nwhen you visit the URL /hello\nThe createUser() method doesn’t return a view, so it doesn’t need a Thymeleaf template.\nFinally, the getUserById() method will render a page that displays the details of a user when you visit the URL /users/{id}, where {id} is the ID of the user.\nThe details of the user are passed to the template using the model.addAttribute() method.\nThe th:text attribute is used to set the text of the &lt;h1&gt; tag to the name of the user, and the th:text attribute of the &lt;p&gt; tag is used to set its text to the email of the user.\nExample2 Controller",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Thymeleaf"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-th.html#example3-requestparam",
+    "href": "springboot/boot-concepts-th.html#example3-requestparam",
+    "title": "Spring Boot: Thymeleaf",
+    "section": "11 Example3: @RequestParam",
+    "text": "11 Example3: @RequestParam\n&lt;!DOCTYPE html&gt;\n&lt;html xmlns:th=\"http://www.thymeleaf.org\"&gt;\n&lt;head&gt;\n    &lt;title&gt;Example&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n    &lt;h1 th:text=\"'Hello, ' + ${message}\"&gt;Hello, World!&lt;/h1&gt;\n&lt;/body&gt;\n&lt;/html&gt;\nIn this template, the th:text attribute is used to set the text of the &lt;h1&gt; tag to the value of the message attribute in the model.\nThe expression 'Hello, ' + ${message} concatenates the string \"Hello, \" with the value of the message attribute.\nAssuming that this template is saved in a file named hello.html in your application’s templates directory, the ExampleController will render a message that says:\n\n\nFor example, if you visit the URL /hello?name=John, the message will say “Hello, John!”.\n\n“Hello, {name}!”\n\nwhen you visit the URL:\n\n/hello?name=John\n\nwhere {name} is the value of the name parameter in the query string.\nExample3 Controller",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Thymeleaf"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-th.html#thymeleaf",
+    "href": "springboot/boot-concepts-th.html#thymeleaf",
+    "title": "Spring Boot: Thymeleaf",
+    "section": "12 Thymeleaf",
+    "text": "12 Thymeleaf\n\nLibrary5 Documentation\nRepo GitHub Code\n\n\n12.1 ThymeLeaf Templates Engine\nMost Thymeleaf attributes allow their values to be set as or containing expressions, which we will call Standard Expressions because of the dialects they are used in. These can be of five types:\n\n\n\n\n\n\nThymeleaf expresssions\n\n\n\n\n${…} : Variable expressions.\n*{…} : Selection expressions.\n#{…} : Message (i18n) expressions.\n@... : Link (URL) expressions.\n~{…} : Fragment expressions.\n__{…} : use an element inside another\n\n\n\nAttributes th:\n\n\n\n\n\n\nThyemleaf attributes\n\n\n\n\nmessage: &lt;p th:text=\"#{msg.welcome}\"&gt;Welcome everyone!&lt;/p&gt;\nlist: &lt;li th:each=\"book : ${books}\" th:text=\"${book.title}\"&gt;En las Orillas del Sar&lt;/li&gt;\nlink: &lt;form th:action=\"@{/createOrder}\"&gt;\naction: &lt;input type=\"button\" th:value**=\"#{form.submit}\" /&gt;\npath: &lt;a th:href=\"@{/admin/users}\"&gt;\n\n\n\nHow to write th:\n\n\n\nThymeLeaf how TH: works (1/3)\n\n\n\n\n\nThymeLeaf how TH: works (2/3)\n\n\n\n\n\nThymeLeaf how TH: works (3/3)",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Thymeleaf"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-th.html#thymeleaf-templates-engine-1",
+    "href": "springboot/boot-concepts-th.html#thymeleaf-templates-engine-1",
+    "title": "Spring Boot: Thymeleaf",
+    "section": "9 ThymeLeaf Templates Engine",
+    "text": "9 ThymeLeaf Templates Engine\nMost Thymeleaf attributes allow their values to be set as or containing expressions, which we will call Standard Expressions because of the dialects they are used in. These can be of five types:\n\n\n\n\n\n\nThymeleaf expresssions\n\n\n\n\n${…} : Variable expressions.\n*{…} : Selection expressions.\n#{…} : Message (i18n) expressions.\n@... : Link (URL) expressions.\n~{…} : Fragment expressions.\n__{…} : use an element inside another\n\n\n\nAttributes th:\n\n\n\n\n\n\nThyemleaf attributes\n\n\n\n\nmessage: &lt;p th:text=\"#{msg.welcome}\"&gt;Welcome everyone!&lt;/p&gt;\nlist: &lt;li th:each=\"book : ${books}\" th:text=\"${book.title}\"&gt;En las Orillas del Sar&lt;/li&gt;\nlink: &lt;form th:action=\"@{/createOrder}\"&gt;\naction: &lt;input type=\"button\" th:value**=\"#{form.submit}\" /&gt;\npath: &lt;a th:href=\"@{/admin/users}\"&gt;\n\n\n\nHow to write th:\n\n\n\nThymeLeaf how TH: works (1/3)",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Thymeleaf"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-view.html#vaadin",
+    "href": "springboot/boot-concepts-view.html#vaadin",
+    "title": "Spring Boot: View",
+    "section": "1.2 Vaadin",
+    "text": "1.2 Vaadin\nVaadin Flow\nVaadin Flow is a Java framework that allows developers to build rich, interactive web UIs entirely in Java. Here are its key features:\n\nUI Development in Java: Write UIs 100% in Java, eliminating the need to touch frontend technologies like HTML, CSS, and JavaScript.\nPre-built Components: Offers a vast collection of high-quality, pre-built components to enhance user experience.\nServer-side Architecture: Simplifies security implementations and integrates well with Java EE and Spring ecosystems[5].\n\nVaadin Hilla\nVaadin Hilla is a newer approach that combines the strengths of Vaadin with modern frontend technologies. Here’s what it offers:\n\nTypeScript and Java Integration: Allows developers to write frontend code in TypeScript while still leveraging Java for the backend.\nReactive Programming: Supports reactive programming models, making it easier to manage complex UI updates.\nInteroperability: Enables seamless interaction between Java and TypeScript code, providing a hybrid development experience[5].",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: View"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-view.html#javafx",
+    "href": "springboot/boot-concepts-view.html#javafx",
+    "title": "Spring Boot: View",
+    "section": "1.3 JavaFX",
+    "text": "1.3 JavaFX\nJavaFX is a set of graphics and media packages for designing, creating, and deploying rich client applications.\n\nCross-Platform Compatibility: Operates consistently across diverse platforms.\nCSS Styling and FXML: Enhances customization and layout management with CSS styling and FXML support.\nBuilt-in UI Components: Offers a comprehensive set of built-in UI components and 3D graphics support.\nPerformance: Better performance for complex UIs compared to Swing, although it has a steeper learning curve[5].",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: View"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-view.html#swt-standard-widget-toolkit",
+    "href": "springboot/boot-concepts-view.html#swt-standard-widget-toolkit",
+    "title": "Spring Boot: View",
+    "section": "1.4 SWT (Standard Widget Toolkit)",
+    "text": "1.4 SWT (Standard Widget Toolkit)\nSWT is a graphical widget toolkit developed by IBM and part of the Eclipse Foundation.\n\nNative Look and Feel: Provides a native look and feel by using the underlying OS’s graphical control elements.\nPerformance: Generally offers better performance for GUI applications than Swing due to its use of native components.\nEclipse Integration: Tight integration with the Eclipse IDE makes it a preferred choice for developers working within that environment[5].",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: View"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-view.html#other-alternatives",
+    "href": "springboot/boot-concepts-view.html#other-alternatives",
+    "title": "Spring Boot: View",
+    "section": "1.5 Other Alternatives",
+    "text": "1.5 Other Alternatives\nBlazor (via.NET and C#)\nAlthough not directly a Java framework, Blazor can be an interesting alternative for Java developers familiar with.NET and C#.\n\nC# to Web Assembly: Compile C# code to Web Assembly to run in the browser or server-side.\nInteroperability: Interop with other JavaScript libraries such as React or Vue.\nCross-Platform: Build for web, mobile, desktop, and more using.NET[2].\n\nScala.js\nFor developers comfortable with Scala,Scala.js can be a viable option.\n\nScala to JavaScript: Transpile applications written in Scala into JavaScript.\nCorrectness, Performance, and Interoperability: Boasts correctness, performance, and interoperability with other JavaScript frameworks[2].",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: View"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-view.html#html",
+    "href": "springboot/boot-concepts-view.html#html",
+    "title": "Spring Boot: View",
+    "section": "1.1 HTML",
+    "text": "1.1 HTML\nIn Spring Boot Server-Side HTML version, views are typically implemented using template engines such as:\n\nThymeleaf: Thymeleaf\nFreeMarker: Apache FreeMarker™ is a template engine: a Java library to generate text output (HTML web pages, e-mails, configuration files, source code, etc.) based on templates and changing data.\nGroovy: Spring Boot officially provided starter to use Groovy Template for MVC and offline rendering.\n\nThe view can access the model and use it to generate the HTML, JSON or XML that is sent to the user’s browser.",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: View"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-vaadin-hilla.html#key-features",
+    "href": "springboot/boot-concepts-vaadin-hilla.html#key-features",
+    "title": "Spring Boot: Vaadin Hilla",
+    "section": "1.1 Key Features",
+    "text": "1.1 Key Features\nFull-Stack Development\n\nSpring Boot Backend: Hilla integrates seamlessly with Spring Boot, leveraging its powerful backend capabilities for dependency injection, security, and more.\nReact or Lit Frontend: Developers can use either React or Lit for the frontend, benefiting from the latest JavaScript frameworks and their extensive ecosystems.\n\nType-Safe Communication\n\nAuto-Generated TypeScript Interfaces: Hilla automatically generates TypeScript interfaces for your Java endpoints, ensuring type safety and reducing the risk of errors during development.\n\nSecurity\n\nBuilt-in Security Features: Hilla includes built-in security features to protect your application from common web vulnerabilities, making it easier to develop secure web applications.\n\nClient-Server Communication\n\nEfficient Data Exchange: Hilla facilitates efficient communication between the client and server, using Vaadin’s robust client-server communication mechanisms, such as those provided by the Atmosphere framework.",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Vaadin Hilla"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-vaadin-hilla.html#development-approach",
+    "href": "springboot/boot-concepts-vaadin-hilla.html#development-approach",
+    "title": "Spring Boot: Vaadin Hilla",
+    "section": "1.2 Development Approach",
+    "text": "1.2 Development Approach\n\nJava and TypeScript Integration: Hybrid Development, we can write backend code in Java and frontend code in TypeScript, allowing for a hybrid development approach that leverages the strengths of both languages.\n\nAlso, Reactive Models Hilla supports reactive programming models, making it easier to manage complex UI updates and ensure a responsive user interface.",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Vaadin Hilla"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-vaadin-hilla.html#example-usage",
+    "href": "springboot/boot-concepts-vaadin-hilla.html#example-usage",
+    "title": "Spring Boot: Vaadin Hilla",
+    "section": "1.3 Example Usage",
+    "text": "1.3 Example Usage\nHere is an example of how we might set up a simple Hilla application:\n// Java Backend\n@RestController\n@RequestMapping(\"/api\")\npublic class MyController {\n    @GetMapping(\"/data\")\n    public List&lt;MyData&gt; getData() {\n        // Return data from the backend\n        return myService.getData();\n    }\n}\n// TypeScript Frontend\nimport { fetch } from '@vaadin/hilla';\nimport { html, LitElement, property } from 'lit-element';\n\n@customElement('my-component')\nclass MyComponent extends LitElement {\n  @property({ type: Array }) data = [];\n\n  async connectedCallback() {\n    super.connectedCallback();\n    this.data = await fetch('/api/data').json();\n  }\n\n  render() {\n    return html`\n      &lt;ul&gt;\n        ${this.data.map(item =&gt; html`&lt;li&gt;${item.name}&lt;/li&gt;`)}\n      &lt;/ul&gt;\n    `;\n  }\n}",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Vaadin Hilla"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-vaadin-hilla.html#integration-and-tools",
+    "href": "springboot/boot-concepts-vaadin-hilla.html#integration-and-tools",
+    "title": "Spring Boot: Vaadin Hilla",
+    "section": "1.4 Integration and Tools",
+    "text": "1.4 Integration and Tools\nExtensive UI Components: Hilla applications can use Vaadin’s extensive set of UI components and themes, ensuring a consistent and professional look and feel. Spring Boot Integration.\nSeamless Integration: Hilla integrates seamlessly with Spring Boot, allowing developers to leverage Spring’s dependency injection, security features, and other capabilities.",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: Vaadin Hilla"
+    ]
+  },
+  {
+    "objectID": "springboot/boot-concepts-view.html#swt",
+    "href": "springboot/boot-concepts-view.html#swt",
+    "title": "Spring Boot: View",
+    "section": "1.4 SWT",
+    "text": "1.4 SWT\nSWT (Standard Widget Toolkit) is a graphical widget toolkit developed by IBM and part of the Eclipse Foundation.\n\nNative Look and Feel: Provides a native look and feel by using the underlying OS’s graphical control elements.\nPerformance: Generally offers better performance for GUI applications than Swing due to its use of native components.\nEclipse Integration: Tight integration with the Eclipse IDE makes it a preferred choice for developers working within that environment[5].",
+    "crumbs": [
+      "Spring Boot Concepts",
+      "Spring Boot: View"
     ]
   }
 ]

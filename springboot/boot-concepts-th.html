@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="albertprofe">
-<meta name="description" content="Spring Boot View">
+<meta name="description" content="In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components Model - View -Controller">
 
 <title>Spring Boot: Thymeleaf – albertprofe wiki</title>
 <style>
@@ -66,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../springboot/boot-concepts-model.html" rel="next">
+<link href="../springboot/boot-concepts-vaadin-flow.html" rel="next">
 <link href="../springboot/boot-concepts-view.html" rel="prev">
 <link href="..//images/home/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js"></script>
@@ -258,8 +258,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">DevOps: Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../devops/devops-what-overview.html">
- <span class="dropdown-text">DevOps: agile and microservices</span></a>
+    <a class="dropdown-item" href="../devops/devops-what-agile-microservice.html">
+ <span class="dropdown-text">DevOps: Agile and Microservices</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-what-infraascode.html">
+ <span class="dropdown-text">Infrastructure as code (IaC)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../devops/devops-what-immutable.html">
@@ -770,6 +774,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../springboot/boot-concepts-th.html">
  <span class="dropdown-text">Spring Boot: Thymeleaf</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-vaadin-flow.html">
+ <span class="dropdown-text">Spring Boot: Vaadin Flow</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-vaadin-hilla.html">
+ <span class="dropdown-text">Spring Boot: Vaadin Hilla</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../springboot/boot-concepts-model.html">
@@ -1411,6 +1423,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">IFCT116-24 Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-24.html">
+ <span class="dropdown-text">IFCT116 Official Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-deliveries-24.html">
+ <span class="dropdown-text">IFCT116 Calendar &amp; Deliveries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-backlog-sprint-24.html">
+ <span class="dropdown-text">IFCT116 Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-backlog-product-24.html">
+ <span class="dropdown-text">IFCT116 Product Backlog</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -1576,6 +1604,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../springboot/boot-concepts-th.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Spring Boot: Thymeleaf</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-vaadin-flow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Vaadin Flow</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../springboot/boot-concepts-vaadin-hilla.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Boot: Vaadin Hilla</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1807,6 +1847,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#fragments" id="toc-fragments" class="nav-link" data-scroll-target="#fragments"><span class="header-section-number">6</span> Fragments</a></li>
   <li><a href="#layout" id="toc-layout" class="nav-link" data-scroll-target="#layout"><span class="header-section-number">7</span> Layout</a></li>
   <li><a href="#cheatsheet" id="toc-cheatsheet" class="nav-link" data-scroll-target="#cheatsheet"><span class="header-section-number">8</span> CheatSheet</a></li>
+  <li><a href="#example1-model" id="toc-example1-model" class="nav-link" data-scroll-target="#example1-model"><span class="header-section-number">9</span> Example1: Model</a></li>
+  <li><a href="#example2-pathvariable-and-requestbody" id="toc-example2-pathvariable-and-requestbody" class="nav-link" data-scroll-target="#example2-pathvariable-and-requestbody"><span class="header-section-number">10</span> Example2: <code>@PathVariable</code> and <code>@RequestBody</code></a></li>
+  <li><a href="#example3-requestparam" id="toc-example3-requestparam" class="nav-link" data-scroll-target="#example3-requestparam"><span class="header-section-number">11</span> Example3: <code>@RequestParam</code></a></li>
+  <li><a href="#thymeleaf" id="toc-thymeleaf" class="nav-link" data-scroll-target="#thymeleaf"><span class="header-section-number">12</span> Thymeleaf</a>
+  <ul>
+  <li><a href="#thymeleaf-templates-engine-1" id="toc-thymeleaf-templates-engine-1" class="nav-link" data-scroll-target="#thymeleaf-templates-engine-1"><span class="header-section-number">12.1</span> ThymeLeaf <code>Templates Engine</code></a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/boot-concepts-th.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1826,7 +1873,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div>
   <div class="description">
-    Spring Boot View
+    In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components Model - View -Controller
   </div>
 </div>
 
@@ -1850,7 +1897,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, November 1, 2024</p>
+      <p class="date-modified">Sunday, November 17, 2024</p>
     </div>
   </div>
     
@@ -1861,7 +1908,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>In Spring Boot, the <strong>Model-View-Controller (MVC)</strong> pattern is used to separate the application logic into three components: Model - View -Controller</p>
 <div class="summary">
 <p>📘 <strong>Thymeleaf</strong></p>
 <p><code>Thymeleaf</code> is a <strong>modern server-side Java template engine</strong> for both web and standalone environments.</p>
@@ -1877,6 +1923,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figure class="figure">
 <p><a href="../images/springboot/thymeleaf_logo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Thymeleaf"><img src="../images/springboot/thymeleaf_logo.png" class="img-fluid figure-img" style="width:30.0%" alt="Thymeleaf"></a></p>
 <figcaption>Thymeleaf</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/springboot-architecture-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Spring Boot Request-Response Cycle"><img src="../images/springboot/springboot-architecture-6.png" class="img-fluid figure-img" style="width:80.0%" alt="Spring Boot Request-Response Cycle"></a></p>
+<figcaption>Spring Boot Request-Response Cycle</figcaption>
 </figure>
 </div>
 <section id="overview" class="level2" data-number="1">
@@ -2026,7 +2078,7 @@ Thyemleaf attributes
 <p>How to write <code>th:</code></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/springboot/howtagsTHworks.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="ThymeLeaf how TH: works (1/3)"><img src="../images/springboot/howtagsTHworks.png" class="img-fluid figure-img" style="width:80.0%" alt="ThymeLeaf how TH: works (1/3)"></a></p>
+<p><a href="../images/springboot/howtagsTHworks.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="ThymeLeaf how TH: works (1/3)"><img src="../images/springboot/howtagsTHworks.png" class="img-fluid figure-img" style="width:80.0%" alt="ThymeLeaf how TH: works (1/3)"></a></p>
 <figcaption>ThymeLeaf how TH: works (1/3)</figcaption>
 </figure>
 </div>
@@ -2224,8 +2276,163 @@ Thyemleaf attributes
 <li><a href="http://engma.github.io/thymeleaf-cheat-sheet/" class="external">A Cheat Sheet for using the Thymeleaf templating Engine</a></li>
 <li><a href="https://docs.java.en.sdacademy.pro/spring/mvc_thymeleaf/" class="external">MVC and Thymeleaf</a></li>
 </ul>
+</section>
+<section id="example1-model" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="example1-model"><span class="header-section-number">9</span> Example1: Model</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb12-1"><a href="#cb12-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> xmlns:th</span><span class="op">=</span><span class="st">"http://www.thymeleaf.org"</span><span class="dt">&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Home<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="ot"> th:text</span><span class="op">=</span><span class="st">"${message}"</span><span class="dt">&gt;</span>Hello, World!<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this template, the <code>th:text</code> attribute is used <strong>to set the text</strong> of the <code>&lt;h1&gt;</code> tag to the value of the message attribute in the model. The expression <code>${message}</code> evaluates to the value of the message attribute.</p>
+<p>Assuming that this template is saved in a file named <code>home.html</code> <strong>in your application’s templates directory</strong>, the <code>HomeController</code> will render a message that says:</p>
+<blockquote class="blockquote">
+<p>“Welcome to my Spring Boot app!”</p>
+</blockquote>
+<p>when you visit the<code>URL /</code></p>
+<p>The value of the message attribute is set in the <code>home()</code> method of the <strong>controller</strong>.</p>
+<p><a href="../springboot/boot-concepts-controller.html#example1-model">Example1 Controller</a></p>
+</section>
+<section id="example2-pathvariable-and-requestbody" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="example2-pathvariable-and-requestbody"><span class="header-section-number">10</span> Example2: <code>@PathVariable</code> and <code>@RequestBody</code></h2>
+<p><code>Thymeleaf</code> templates that can be used with the <code>hello()</code>, <code>createUser()</code>, and <code>getUserById()</code> methods:</p>
+<p><code>hello.html</code></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb13-1"><a href="#cb13-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> xmlns:th</span><span class="op">=</span><span class="st">"http://www.thymeleaf.org"</span><span class="dt">&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>    <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Hello<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="ot"> th:text</span><span class="op">=</span><span class="st">"${message}"</span><span class="dt">&gt;</span>Hello, World!<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this template, the th:text attribute is used to set the text of the <code>&lt;h1&gt;</code> tag to the value of the message attribute in the model. The value of message is set in the hello() method of the controller.</p>
+<p><code>user.html</code></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb14-1"><a href="#cb14-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> xmlns:th</span><span class="op">=</span><span class="st">"http://www.thymeleaf.org"</span><span class="dt">&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>    <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>User<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="ot"> th:text</span><span class="op">=</span><span class="st">"${user.name}"</span><span class="dt">&gt;</span>User<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> th:text</span><span class="op">=</span><span class="st">"${user.email}"</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this template, the <code>th:text</code> attribute is used <strong>to set the text of</strong> the <code>&lt;h1&gt;</code> tag to the value of the <code>name</code> property of the user object in the model.</p>
+<p>The <code>th:text</code> attribute of the <code>&lt;p&gt;</code> tag is used <strong>to set its text to the value</strong> of the <code>email</code> property of the user object in the model.</p>
+<p>Assuming that these templates are saved in files named <code>hello.html</code> and <code>user.html</code>, respectively, in your application’s templates directory, the <code>hello()</code> method will render a message that says:</p>
+<blockquote class="blockquote">
+<p>“Hello, World!”</p>
+</blockquote>
+<p>when you visit the URL <code>/hello</code></p>
+<p>The <code>createUser()</code> method doesn’t return a view, so it doesn’t need a <code>Thymeleaf template</code>.</p>
+<p>Finally, the <code>getUserById()</code> method <strong>will render a page that displays the details of a user</strong> when you visit the <code>URL</code> <code>/users/{id},</code> where <code>{id</code>} is the ID of the <strong>user</strong>.</p>
+<p>The details of the user are passed to the template using the <code>model.addAttribute()</code> method.</p>
+<p>The <code>th:text</code> attribute is used to set the text of the <code>&lt;h1&gt;</code> tag to the <strong>name</strong> of the user, and the th:text attribute of the <code>&lt;p&gt;</code> tag is used to set its text to the <strong>email</strong> of the user.</p>
+<p><a href="../springboot/boot-concepts-controller.html#example2-pathvariable-and-requestbody">Example2 Controller</a></p>
+</section>
+<section id="example3-requestparam" class="level2 page-columns page-full" data-number="11">
+<h2 data-number="11" class="anchored" data-anchor-id="example3-requestparam"><span class="header-section-number">11</span> Example3: <code>@RequestParam</code></h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb15-1"><a href="#cb15-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> xmlns:th</span><span class="op">=</span><span class="st">"http://www.thymeleaf.org"</span><span class="dt">&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>    <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Example<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="ot"> th:text</span><span class="op">=</span><span class="st">"'Hello, ' + ${message}"</span><span class="dt">&gt;</span>Hello, World!<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this template, the <code>th:text</code> attribute is used to set the text of the <code>&lt;h1&gt;</code> tag to the value of the message attribute in the <code>model</code>.</p>
+<p>The expression <code>'Hello, ' + ${message}</code> concatenates the string <code>"Hello, "</code> with the value of the message attribute.</p>
+<p>Assuming that this template is saved in a file named <code>hello.html</code> in your application’s templates directory, the <code>ExampleController</code> will render a message that says:</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>For example, if you visit the URL /hello?name=John, the message will say “Hello, John!”.</p>
+</div></div><blockquote class="blockquote">
+<p>“Hello, {name}!”</p>
+</blockquote>
+<p>when you visit the URL:</p>
+<blockquote class="blockquote">
+<p>/hello?name=John</p>
+</blockquote>
+<p>where <code>{name}</code> is the value of the name parameter in the query string.</p>
+<p><a href="../springboot/boot-concepts-controller.html#example3-requestparam">Example3 Controller</a></p>
+</section>
+<section id="thymeleaf" class="level2" data-number="12">
+<h2 data-number="12" class="anchored" data-anchor-id="thymeleaf"><span class="header-section-number">12</span> Thymeleaf</h2>
+<ul>
+<li><a href="https://github.com/AlbertProfe/cifojava2022-3/wiki/Library5:-ThymeLeaf-Web-Project" class="external">Library5 Documentation</a></li>
+<li><a href="https://github.com/AlbertProfe/cifojava2022-3/tree/master/library3" class="external">Repo GitHub Code</a></li>
+</ul>
+<section id="thymeleaf-templates-engine-1" class="level3" data-number="12.1">
+<h3 data-number="12.1" class="anchored" data-anchor-id="thymeleaf-templates-engine-1"><span class="header-section-number">12.1</span> ThymeLeaf <code>Templates Engine</code></h3>
+<p>Most Thymeleaf <strong>attributes allow their values to be set as or containing expressions</strong>, which we will call Standard Expressions because of the dialects they are used in. These can be of five types:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Thymeleaf expresssions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>${…} : Variable expressions.</li>
+<li>*{…} : Selection expressions.</li>
+<li>#{…} : Message (i18n) expressions.</li>
+<li><span class="citation" data-cites="...">@...</span> : Link (URL) expressions.</li>
+<li>~{…} : Fragment expressions.</li>
+<li>__{…} : use an element inside another</li>
+</ul>
+</div>
+</div>
+<p>Attributes <code>th:</code></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Thyemleaf attributes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>message: <code>&lt;p th:text="#{msg.welcome}"&gt;Welcome everyone!&lt;/p&gt;</code></li>
+<li>list: <code>&lt;li th:each="book : ${books}" th:text="${book.title}"&gt;En las Orillas del Sar&lt;/li&gt;</code></li>
+<li>link: <code>&lt;form th:action="@{/createOrder}"&gt;</code></li>
+<li>action: <code>&lt;input type="button" th:value**="#{form.submit}" /&gt;</code></li>
+<li>path: <code>&lt;a th:href="@{/admin/users}"&gt;</code></li>
+</ul>
+</div>
+</div>
+<p>How to write <code>th:</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/howtagsTHworks.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="ThymeLeaf how TH: works (1/3)"><img src="../images/springboot/howtagsTHworks.png" class="img-fluid figure-img" style="width:80.0%" alt="ThymeLeaf how TH: works (1/3)"></a></p>
+<figcaption>ThymeLeaf how TH: works (1/3)</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/howtagsTHworks2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="ThymeLeaf how TH: works (2/3)"><img src="../images/springboot/howtagsTHworks2.png" class="img-fluid figure-img" style="width:80.0%" alt="ThymeLeaf how TH: works (2/3)"></a></p>
+<figcaption>ThymeLeaf how TH: works (2/3)</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/springboot/howtagsTHworks3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="ThymeLeaf how TH: works (3/3)"><img src="../images/springboot/howtagsTHworks3.png" class="img-fluid figure-img" style="width:80.0%" alt="ThymeLeaf how TH: works (3/3)"></a></p>
+<figcaption>ThymeLeaf how TH: works (3/3)</figcaption>
+</figure>
+</div>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
@@ -2800,8 +3007,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../springboot/boot-concepts-model.html" class="pagination-link" aria-label="Spring Boot: Model">
-        <span class="nav-page-text">Spring Boot: Model</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../springboot/boot-concepts-vaadin-flow.html" class="pagination-link" aria-label="Spring Boot: Vaadin Flow">
+        <span class="nav-page-text">Spring Boot: Vaadin Flow</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
