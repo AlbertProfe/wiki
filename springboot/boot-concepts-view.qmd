@@ -5,7 +5,7 @@ author: albertprofe
 date: "06/01/2021"
 date-modified: last-modified
 date-format: full
-description:  Spring Boot View
+description: In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components Model - View -Controller
 categories: [Spring-Boot, View]
 toc: true
 number-sections: true
@@ -13,7 +13,7 @@ format:
   html
 ---
 
-In Spring Boot, the **Model-View-Controller (MVC)** pattern is used to separate the application logic into three components: Model - View -Controller
+
 
 ::: {.summary}
 
@@ -22,181 +22,84 @@ In Spring Boot, the **Model-View-Controller (MVC)** pattern is used to separate 
 
 The `view` is responsible **for presenting the data to the user.**
 
-In Spring Boot, views are typically implemented using template engines such as:
+Java developers have several options to create frontend applications, whether it's the **server-side** approach of `Vaadin`, the rich` client capabilities` of `JavaFX` or `Thymeleaf`, or the native look and feel of `SWT`, there is a `Java-based` frontend solution to suit various development needs.
 
-- `Thymeleaf`: [Thymeleaf](/springboot/boot-concepts-th.qmd)
-- `FreeMarker`: [Apache FreeMarker™](https://freemarker.apache.org/){.external} is a template engine: a Java library to generate text output (HTML web pages, e-mails, configuration files, source code, etc.) based on templates and changing data. 
-- `Groovy`: Spring Boot officially provided starter to use [Groovy Template for MVC](http://groovy-lang.org/templating.html#_the_markuptemplateengine){.external} and offline rendering.
-
-The view can access the model and use it to generate the `HTML`, `JSON` or `XML` that is sent to the user's browser. 
+An also pure Java `Vaadin` is a nice alternative in two flavors: `Hilla` and `Flow`.
 
 :::
 
 </br>
 
-![Spring Boot Request-Response Cycle](/images/springboot/springboot-architecture-6.png){width="80%"}
+![Java Framewoks](https://hashstudioz.com/blog/wp-content/uploads/2024/01/Best-Java-Frameworks-for-Web-Development-1060x557.webp)
+
+# Java View
+
+> `Java`, although primarily [known](https://hashstudioz.com/blog/java-frameworks-for-web-development/){.external target='_blank'} for its backend capabilities, can be utilized in various ways to develop **frontend applications.**
+>
+> Here are some notable frameworks and approaches that enable us to create robust frontend solutions with `Java` and `Spring Boot`.
 
 
-## Example1: Model
+## HTML
 
-```html
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Home</title>
-</head>
-<body>
-    <h1 th:text="${message}">Hello, World!</h1>
-</body>
-</html>
+In Spring Boot `Server-Side HTML` version, views are typically implemented using template engines such as:
 
-```
-In this template, the `th:text` attribute is used **to set the text** of the ``<h1>`` tag to the value of the message attribute in the model. The expression `${message}` evaluates to the value of the message attribute.
+- `Thymeleaf`: [Thymeleaf](/springboot/boot-concepts-th.qmd)
+- `FreeMarker`: [Apache FreeMarker™](https://freemarker.apache.org/){.external} is a template engine: a Java library to generate text output (HTML web pages, e-mails, configuration files, source code, etc.) based on templates and changing data.
+- `Groovy`: Spring Boot officially provided starter to use [Groovy Template for MVC](http://groovy-lang.org/templating.html#_the_markuptemplateengine){.external} and offline rendering.
 
-Assuming that this template is saved in a file named `home.html` **in your application's templates directory**, the `HomeController` will render a message that says:
+The view can access the model and use it to generate the `HTML`, `JSON` or `XML` that is sent to the user's browser.
 
-> "Welcome to my Spring Boot app!"
+## Vaadin
 
-when you visit the` URL /`
+**Vaadin Flow**
 
-The value of the message attribute is set in the `home()` method of the **controller**.
+`Vaadin` Flow is a Java framework that allows developers to build rich, interactive web UIs entirely in Java. Here are its key features:
 
-[Example1 Controller](/springboot/boot-concepts-controller.qmd#example1-model)
+- **UI Development in Java**: Write UIs 100% in Java, eliminating the need to touch frontend technologies like HTML, CSS, and JavaScript.
+- **Pre-built Components**: Offers a vast collection of high-quality, pre-built components to enhance user experience.
+- **Server-side Architecture**: Simplifies security implementations and integrates well with Java EE and Spring ecosystems[5].
 
-## Example2: ``@PathVariable`` and ``@RequestBody``
+**Vaadin Hilla**
 
-`Thymeleaf` templates that can be used with the `hello()`, `createUser()`, and `getUserById()` methods:
+`Vaadin` Hilla is a newer approach that combines the strengths of `Vaadin` with modern frontend technologies. Here’s what it offers:
 
-`hello.html`
+- **TypeScript and Java Integration**: Allows developers to write frontend code in TypeScript while still leveraging Java for the backend.
+- **Reactive Programming**: Supports reactive programming models, making it easier to manage complex UI updates.
+- **Interoperability**: Enables seamless interaction between Java and TypeScript code, providing a hybrid development experience[5].
 
-```html
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Hello</title>
-</head>
-<body>
-    <h1 th:text="${message}">Hello, World!</h1>
-</body>
-</html>
+## JavaFX
 
-```
-In this template, the th:text attribute is used to set the text of the ``<h1>`` tag to the value of the message attribute in the model. The value of message is set in the hello() method of the controller.
+`JavaFX` is a set of graphics and media packages for designing, creating, and deploying rich client applications.
 
-`user.html`
+- **Cross-Platform Compatibility**: Operates consistently across diverse platforms.
+- **CSS Styling and FXML**: Enhances customization and layout management with CSS styling and FXML support.
+- **Built-in UI Components**: Offers a comprehensive set of built-in UI components and 3D graphics support.
+- **Performance**: Better performance for complex UIs compared to Swing, although it has a steeper learning curve[5].
 
-``` html
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>User</title>
-</head>
-<body>
-    <h1 th:text="${user.name}">User</h1>
-    <p th:text="${user.email}"></p>
-</body>
-</html>
+## SWT
 
-```
+`SWT` (Standard Widget Toolkit) is a graphical widget toolkit developed by IBM and part of the `Eclipse` Foundation.
 
-In this template, the `th:text` attribute is used **to set the text of** the ``<h1>`` tag to the value of the `name` property of the user object in the model.
+- **Native Look and Feel**: Provides a native look and feel by using the underlying OS's graphical control elements.
+- **Performance**: Generally offers better performance for GUI applications than Swing due to its use of native components.
+- **Eclipse Integration**: Tight integration with the `Eclipse IDE` makes it a preferred choice for developers working within that environment[5].
 
-The `th:text` attribute of the ``<p>`` tag is used **to set its text to the value** of the `email` property of the user object in the model.
+## Other Alternatives
 
-Assuming that these templates are saved in files named `hello.html` and `user.html`, respectively, in your application's templates directory, the `hello()` method will render a message that says:
+**Blazor (via.NET and C#)**
 
-> "Hello, World!"
+Although not directly a `Java framework`, `Blazor` can be an interesting alternative for `Java` developers familiar with.NET and C#.
 
-when you visit the URL `/hello`
+- **C# to Web Assembly**: Compile C# code to Web Assembly to run in the browser or server-side.
+- **Interoperability**: Interop with other JavaScript libraries such as React or Vue.
+- **Cross-Platform**: Build for web, mobile, desktop, and more using.NET[2].
 
-The `createUser()` method doesn’t return a view, so it doesn’t need a `Thymeleaf template`.
+**Scala.js**
 
-Finally, the `getUserById()` method **will render a page that displays the details of a user** when you visit the `URL` `/users/{id},` where `{id`} is the ID of the **user**.
+For developers comfortable with `Scala`,` Scala.js` can be a viable option.
 
-The details of the user are passed to the template using the `model.addAttribute()` method.
-
-The `th:text` attribute is used to set the text of the `<h1>` tag to the **name** of the user, and the th:text attribute of the `<p>` tag is used to set its text to the **email** of the user.
-
-
-[Example2 Controller](/springboot/boot-concepts-controller.qmd#example2-pathvariable-and-requestbody)
-
-## Example3: `@RequestParam`
-
-
-```html
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Example</title>
-</head>
-<body>
-    <h1 th:text="'Hello, ' + ${message}">Hello, World!</h1>
-</body>
-</html>
-
-```
-
-In this template, the `th:text` attribute is used to set the text of the ``<h1>`` tag to the value of the message attribute in the `model`.
-
-The expression `'Hello, ' + ${message}` concatenates the string `"Hello, "` with the value of the message attribute.
-
-Assuming that this template is saved in a file named `hello.html` in your application's templates directory, the `ExampleController` will render a message that says:
-
-::: {.column-margin}
-
-For example, if you visit the URL /hello?name=John, the message will say "Hello, John!".
-:::
-
-> "Hello, {name}!" 
-
-when you visit the URL:
-
-> /hello?name=John
-
-where `{name}` is the value of the name parameter in the query string. 
-
-[Example3 Controller](/springboot/boot-concepts-controller.qmd#example3-requestparam)
-
-## Thymeleaf
-
-
-- [Library5 Documentation](https://github.com/AlbertProfe/cifojava2022-3/wiki/Library5:-ThymeLeaf-Web-Project){.external} 
-- [Repo GitHub Code](https://github.com/AlbertProfe/cifojava2022-3/tree/master/library3){.external} 
-
-### ThymeLeaf `Templates Engine`
-
-Most Thymeleaf **attributes allow their values to be set as or containing expressions**, which we will call Standard Expressions because of the dialects they are used in. These can be of five types:
-
-::: {.callout-note}
-## Thymeleaf expresssions
-- ${...} : Variable expressions.
-- *{...} : Selection expressions.
-- #{...} : Message (i18n) expressions.
-- @{...} : Link (URL) expressions.
-- ~{...} : Fragment expressions.
-- __{...} : use an element inside another
-:::
-
-Attributes `th:`
-
-::: {.callout-note}
-## Thyemleaf attributes
-- message: `<p th:text="#{msg.welcome}">Welcome everyone!</p>`
-- list: `<li th:each="book : ${books}" th:text="${book.title}">En las Orillas del Sar</li>`
-- link: `<form th:action="@{/createOrder}">`
-- action: `<input type="button" th:value**="#{form.submit}" />`
-- path: `<a th:href="@{/admin/users}">`
-:::
-
-How to write `th:`
-
-
-![ThymeLeaf how TH: works (1/3)](/images/springboot/howtagsTHworks.png){width="80%"}
-
-![ThymeLeaf how TH: works (2/3)](/images/springboot/howtagsTHworks2.png){width="80%"}
-
-![ThymeLeaf how TH: works (3/3)](/images/springboot/howtagsTHworks3.png){width="80%"}
-
+- **Scala to JavaScript**: Transpile applications written in Scala into JavaScript.
+- **Correctness, Performance, and Interoperability**: Boasts correctness, performance, and interoperability with other JavaScript frameworks[2].
 
 
 

@@ -1,0 +1,118 @@
+---
+title: "Spring Boot: Vaadin Hilla"
+subtitle: Spring Boot View Vaadin Hilla
+author: albertprofe
+date: "06/01/2021"
+date-modified: last-modified
+date-format: full
+description: In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components Model - View -Controller. Vaadin Hilla is a Typescript-Java nice option for view.
+categories: [Spring-Boot, View, Hilla]
+toc: true
+number-sections: true
+format:
+  html
+---
+
+
+
+::: {.summary}
+
+📘 **Vaadin Hilla**
+
+
+Vaadin Hilla offers a powerful and flexible way to build modern web applications by combining the strengths of `Java` and `TypeScript`.
+
+With its type-safe communication, built-in security features, and support for reactive programming, Hilla is an excellent choice for developers looking to create robust, interactive, and maintainable web applications.
+
+
+:::
+
+</br>
+
+![Spring Boot Request-Response Cycle](/images/springboot/springboot-architecture-6.png){width="80%"}
+
+
+
+# Vaadin Hilla
+
+**Overview**
+
+<mark>`Vaadin Hilla` is a full-stack framework that combines the strengths of `Vaadin` with modern frontend technologies, `React Typescript`, allowing us to build robust and interactive web applications.</mark>
+
+## Key Features
+
+**Full-Stack Development**
+
+- **Spring Boot Backend**: Hilla integrates seamlessly with Spring Boot, leveraging its powerful backend capabilities for dependency injection, security, and more.
+- **React or Lit Frontend**: Developers can use either React or Lit for the frontend, benefiting from the latest JavaScript frameworks and their extensive ecosystems.
+
+**Type-Safe Communication**
+
+- **Auto-Generated TypeScript Interfaces**: Hilla automatically generates TypeScript interfaces for your Java endpoints, ensuring type safety and reducing the risk of errors during development.
+
+**Security**
+
+- **Built-in Security Features**: Hilla includes built-in security features to protect your application from common web vulnerabilities, making it easier to develop secure web applications.
+
+**Client-Server Communication**
+
+- **Efficient Data Exchange**: Hilla facilitates efficient communication between the client and server, using Vaadin's robust client-server communication mechanisms, such as those provided by the Atmosphere framework.
+
+## Development Approach
+
+> `Java and TypeScript` Integration: **Hybrid Development**, we can write backend code in `Java` and frontend code in `TypeScript`, allowing for a hybrid development approach that leverages the strengths of both languages.
+
+Also, `Reactive Models Hilla` supports reactive programming models, making it easier to manage complex UI updates and ensure a responsive user interface.
+
+## Example Usage
+
+Here is an example of how we might set up a simple Hilla application:
+
+```java
+// Java Backend
+@RestController
+@RequestMapping("/api")
+public class MyController {
+    @GetMapping("/data")
+    public List<MyData> getData() {
+        // Return data from the backend
+        return myService.getData();
+    }
+}
+```
+
+```typescript
+// TypeScript Frontend
+import { fetch } from '@vaadin/hilla';
+import { html, LitElement, property } from 'lit-element';
+
+@customElement('my-component')
+class MyComponent extends LitElement {
+  @property({ type: Array }) data = [];
+
+  async connectedCallback() {
+    super.connectedCallback();
+    this.data = await fetch('/api/data').json();
+  }
+
+  render() {
+    return html`
+      <ul>
+        ${this.data.map(item => html`<li>${item.name}</li>`)}
+      </ul>
+    `;
+  }
+}
+```
+
+## Integration and Tools
+
+
+**Extensive UI Components**: Hilla applications can use Vaadin's extensive set of UI components and themes, ensuring a consistent and professional look and feel.
+Spring Boot Integration.
+
+**Seamless Integration**: Hilla integrates seamlessly with Spring Boot, allowing developers to leverage Spring's dependency injection, security features, and other capabilities.
+
+
+
+

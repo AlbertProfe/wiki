@@ -1,0 +1,224 @@
+---
+title: "Spring Boot: Vaadin Flow"
+subtitle: Spring Boot View Vaadin Flow
+author: albertprofe
+date: "06/01/2021"
+date-modified: last-modified
+date-format: full
+description:  In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components Model - View -Controller. Vaadin Flow is a pure Java option for view.
+categories: [Spring-Boot, View, Flow]
+toc: true
+number-sections: true
+format:
+  html
+---
+
+
+
+::: {.summary}
+
+📘 **Thymeleaf**
+
+``Thymeleaf`` is a **modern server-side Java template engine** for both web and standalone environments.
+
+
+:::
+
+</br>
+
+![Spring Boot Request-Response Cycle](/images/springboot/springboot-architecture-6.png){width="80%"}
+
+# Vaadin
+
+Modern Java framework for building web applications
+
+> `Vaadin` is a web application framework for Java that allows developers to build modern, interactive web applications using Java without having to write `HTML`, `CSS`, or `JavaScript`.
+
+Here are some key points about `Vaadin`:
+
+- [Vaadin Official Website](https://vaadin.com/){.external target='_blank'}
+- [Vaadin Documentation](https://vaadin.com/docs/latest/){.external target='_blank'}
+- [Vaadin Spring Boot Integration](https://vaadin.com/docs/latest/flow/integrations/spring/){.external target='_blank'}
+- [Vaadin Flow](https://vaadin.com/docs/latest/flow){.external target='_blank'}
+- [GitHub Tutorial Vaadin 24](https://github.com/vaadin/tutorial/){.external target='_blank'}
+- [Vaadin Maven CLI create a project](https://vaadin.com/docs/latest/getting-started/project/maven-archetype){.external target='_blank'}
+
+
+
+`Vaadin` Flow lets a <mark>server-side Java application build a user interface from components in Java. These Java components are connected to web components running in the browser</mark>. Flow manages the relaying of user [interaction back to the server-side application](https://vaadin.com/docs/latest/flow/application){.external target='_blank'}, which can handle it with event listeners.
+
+> Application views and their components are typically used to display and accept input of application data. This data is often stored in a backend service, such as a database. Application logic is often created using application frameworks, such as Spring.
+
+
+![](https://vaadin.com/docs/latest/_astro/application-architecture.BkkGoEuL_1Qhbrj.webp){fig-align="center" width="70%"}
+
+
+::: {.callout-note}
+# `Vaadin` offers two main flavors for web application development:
+
+1. **Hilla**: A full-stack framework combining a Spring Boot backend with a React or Lit frontend. It provides type-safe communication between client and server, auto-generated TypeScript interfaces, and built-in security features.
+
+
+2. **Flow**: A server-side Java framework for building web applications. It allows developers to create UIs using a component-based approach, with automatic server-client communication and state management.
+
+
+Both flavors leverage Vaadin's extensive set of UI components and themes. `Hilla` is ideal for developers comfortable with modern `JavaScript` frameworks, while `Flow` suits those preferring a Java-centric approach.
+
+Both can be used to create responsive, feature-rich web applications with excellent performance and maintainability.
+
+
+[Hilla](https://vaadin.com/docs/latest/hilla){.external target='_blank'} / [Flow](https://vaadin.com/docs/latest/flow){.external target='_blank'}
+
+:::
+
+
+## `atmosphere`
+
+**Vaadin** uses the [Atmosphere framework](https://github.com/Atmosphere/atmosphere) to facilitate robust <mark>client-server communication, particularly for real-time and push-based features. </mark>
+
+`Atmosphere` is an open-source project that provides a powerful abstraction layer for various **asynchronous communication protocols**, including `WebSockets`, `Server-Sent Events`, and `long-polling`.
+
+`Vaadin` integrates `Atmosphere` to handle its server **push** functionality, allowing servers to send updates to clients without the need for **client-side polling**. This integration enables `Vaadin` applications to create responsive, **real-time user interfaces** with minimal developer effort.
+
+![](/images/springboot/labsb08/lab08-2-atmosphere.png){fig-align="center" width="60%"}
+
+
+`Atmosphere`'s key features utilized by Vaadin include:
+
+1. **Protocol negotiation** and fallback mechanisms
+2. **Automatic selection** of the best available transport method
+3. **Handling of connection management** and reconnection scenarios
+4. **Cross-browser compatibility**
+
+> By building on Atmosphere, Vaadin abstracts away the complexities of low-level communication protocols, allowing developers to focus on application logic while still benefiting from efficient, real-time communication between client and server.
+
+## Binding
+
+- [Data Binding](https://vaadin.com/docs/latest/flow/binding-data){.external target='_blank'}
+- [Loading & Saving Business Objects](https://vaadin.com/docs/latest/flow/binding-data/components-binder-load){.external target='_blank'}
+- [Binding Data to Forms](https://vaadin.com/docs/latest/flow/binding-data/components-binder){.external target='_blank'}
+
+
+In `Vaadin`, the <mark>**Binder** is a data binding class used to **connect UI components to Java beans**. It is not a container but rather a **utility** that facilitates the transfer and validation of data between the user interface and backend objects.</mark>
+
+**Binder** reads values from business objects, converts them to the format required by UI fields, and vice versa, supporting validation to ensure <mark>data integrity</mark>. This makes it essential for creating dynamic and interactive forms in Vaadin applications.
+
+::: {.callout-note}
+# There can be only one Binder
+
+There can be only one **Binder** instance for each form.
+
+You should use this instance for all the fields in the form.
+:::
+
+**Client To Server: How to Bind Form Data**
+
+The following steps include everything needed to load, edit, and save values for a form. `Java 8 method references` are used.
+
+
+
+``` java
+
+// Create a Binder instance for the Person class
+Binder<Person> binder = new Binder<>(Person.class); // <1>
+
+// Create a TextField for the title
+TextField titleField = new TextField(); // <2>
+
+// Bind the titleField to the Person class
+binder.forField(titleField)
+    .bind(
+        // Callback that loads the title from a person instance
+        Person::getTitle, // <3>
+        // Callback that saves the title in a person instance
+        Person::setTitle); // <3>
+
+// Create a TextField for the name
+TextField nameField = new TextField(); // <4>
+
+// Shorthand for cases without extra configuration
+binder.bind(nameField, Person::getName, // <5>
+        Person::setName); // <5>
+
+```
+
+
+1. Create a Binder instance for the Person class.
+2. Create a TextField for the title.
+3. Bind the titleField to the Person class using method references.
+4. Create a TextField for the name.
+5. Bind the nameField to the Person class using method references.
+
+
+**Server to Client: Reading & Writing Automatically**
+
+Writing automatically to business objects when the user makes changes in the UI is usually the most convenient option. You can bind the values directly to an instance by allowing Binder to save automatically values from the fields.
+
+In the example here, field values are saved automatically:
+
+
+``` java
+Binder<Person> binder = new Binder<>();
+
+// Field binding configuration omitted.
+// It should be done here.
+
+Person person = new Person("John Doe", 1957);
+
+// Loads the values from the person instance.
+// Sets person to be updated when any bound field
+// is updated.
+binder.setBean(person);
+
+Button saveButton = new Button("Save", event -> {
+    if (binder.validate().isOk()) {
+        // Person is always up-to-date as long as
+        // there are no validation errors.
+
+        MyBackend.updatePersonInDatabase(person);
+    }
+});
+
+```
+
+
+## Create Vaadin Views
+
+To create the web interface of the system, create `Vaadin` views for each of the main functionalities. **The views will be used to display the data and handle user interactions.**
+
+> `Vaadin` allows you to create rich, interactive UIs using `Java` code. It provides a wide range of UI components and layouts that you can use to build your application's interface.
+
+Example of a simple `Vaadin` view:
+
+::: {.column-page-right}
+```java
+@Route("menu")
+public class MenuView extends VerticalLayout {
+    private final MenuService menuService;
+
+    public MenuView(MenuService menuService) {
+        this.menuService = menuService;
+        
+        H1 title = new H1("Restaurant Menu");
+        Grid<Menu> grid = new Grid<>(Menu.class);
+        grid.setItems(menuService.getAllMenuItems());
+        
+        add(title, grid);
+    }
+}
+```
+:::
+
+This view creates a page with a title and a grid showing all menu items.
+
+Key Vaadin Concepts:
+
+1. **Server-side Architecture**: Vaadin primarily runs on the server, which means your business logic stays secure and you can leverage the full power of Java.
+
+2. **Component-based UI**: Build UIs by combining and customizing existing components or creating your own.
+
+3. **Data Binding**: Easily bind UI components to data sources, including JPA entities.
+
+4. **Themes and Styling**: Customize the look and feel of your application using CSS and Vaadin's theming capabilities.
+
+5. **Integration with Spring Boot**: Vaadin integrates seamlessly with Spring Boot, allowing you to use Spring's dependency injection and other features.
