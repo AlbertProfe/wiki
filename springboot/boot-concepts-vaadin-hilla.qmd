@@ -5,7 +5,7 @@ author: albertprofe
 date: "06/01/2021"
 date-modified: last-modified
 date-format: full
-description: In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components Model - View -Controller. Vaadin Hilla is a Typescript-Java nice option for view.
+description: In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components; Vaadin Hilla is a Typescript-Java nice option for view.
 categories: [Spring-Boot, View, Hilla]
 toc: true
 number-sections: true
@@ -20,16 +20,16 @@ format:
 📘 **Vaadin Hilla**
 
 
-Vaadin Hilla offers a powerful and flexible way to build modern web applications by combining the strengths of `Java` and `TypeScript`.
+`Vaadin Hilla` offers a powerful and flexible way to build modern web applications by combining the strengths of `Java` and `TypeScript`.
 
-With its type-safe communication, built-in security features, and support for reactive programming, Hilla is an excellent choice for developers looking to create robust, interactive, and maintainable web applications.
+With its **type-safe communication, built-in security features, and support for reactive programming**, `Hilla` is an excellent choice for developers looking to create robust, interactive, and maintainable web applications.
 
 
 :::
 
 </br>
 
-![Spring Boot Request-Response Cycle](/images/springboot/springboot-architecture-6.png){width="80%"}
+![Spring Boot Request-Response Cycle](/images/springboot/springboot-architecture-6-hilla.png){width="80%"}
 
 
 
@@ -40,6 +40,9 @@ With its type-safe communication, built-in security features, and support for re
 <mark>`Vaadin Hilla` is a full-stack framework that combines the strengths of `Vaadin` with modern frontend technologies, `React Typescript`, allowing us to build robust and interactive web applications.</mark>
 
 ## Key Features
+
+
+![Vaadin Hilla Logo](/images/springboot/vaadin-hilla-log.png){fig-align="center" width="60%"}
 
 **Full-Stack Development**
 
@@ -71,39 +74,52 @@ Here is an example of how we might set up a simple Hilla application:
 ```java
 // Java Backend
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api") // <1>
 public class MyController {
-    @GetMapping("/data")
+    @GetMapping("/data") // <2>
     public List<MyData> getData() {
         // Return data from the backend
-        return myService.getData();
+        return myService.getData(); // <3>
     }
 }
 ```
+1. Specify the base URL for the REST controller.
+2. Define the HTTP GET endpoint to retrieve data.
+3. Call the service method to fetch and return the data.
+
 
 ```typescript
 // TypeScript Frontend
-import { fetch } from '@vaadin/hilla';
-import { html, LitElement, property } from 'lit-element';
+import { fetch } from '@vaadin/hilla'; // <1>
+import { html, LitElement, property } from 'lit-element'; // <2>
 
-@customElement('my-component')
+@customElement('my-component') // <3>
 class MyComponent extends LitElement {
-  @property({ type: Array }) data = [];
+  @property({ type: Array }) data = []; // <4>
 
   async connectedCallback() {
-    super.connectedCallback();
-    this.data = await fetch('/api/data').json();
+    super.connectedCallback(); // <5>
+    this.data = await fetch('/api/data').json(); // <6>
   }
 
   render() {
     return html`
       <ul>
-        ${this.data.map(item => html`<li>${item.name}</li>`)}
+        ${this.data.map(item => 
+            html`<li>${item.name}</li>`)} // <7>
       </ul>
     `;
   }
 }
 ```
+
+1. Import the fetch function from the @vaadin/hilla package.
+2. Import necessary functions and classes from lit-element.
+3. Define the custom element name for the component.
+4. Declare a property to store the data, initialized as an empty array.
+5. Call the parent class's connectedCallback method.
+6. Fetch data from the backend API and update the component's data property.
+7. Render a list of ite
 
 ## Integration and Tools
 
