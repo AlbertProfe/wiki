@@ -12529,7 +12529,7 @@
     "href": "springboot/boot-concepts-model.html",
     "title": "Spring Boot: Model",
     "section": "",
-    "text": "In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three components: Model - View -Controller",
+    "text": "In Spring Boot, the Model-View-Controller (MVC) pattern is used to separate the application logic into three layers: Model - View -Controller",
     "crumbs": [
       "Spring Boot Concepts",
       "Spring Boot: Model"
@@ -13306,7 +13306,7 @@
     "href": "springboot/boot-concepts-view.html",
     "title": "Spring Boot: View",
     "section": "",
-    "text": "📘 View\nThe view is responsible for presenting the data to the user.\nJava developers have several options to create frontend applications:\n\nwhether it’s the server-side approach of Vaadin (it is a nice alternative in two flavors: Hilla and Flow),\nthe richclient capabilities of JavaFX or Thymeleaf,\nor the native look and feel of SWT,\n\nthere is a Java-based frontend solution to suit various development needs.",
+    "text": "📘 View\nThe view is responsible for presenting the data to the user.\nJava developers have several options to create frontend applications:\n\nwhether it’s the server-side approach of Vaadin (it is a nice alternative in two flavors: Hilla and Flow),\nthe richclient capabilities of JavaFX,\nthe HTML server-side rendering Thymeleaf templates engine\nor the native look and feel of SWT,\n\nthere is a Java-based frontend solution to suit various development needs.",
     "crumbs": [
       "Spring Boot Concepts",
       "Spring Boot: View"
@@ -15065,7 +15065,7 @@
     "href": "springboot/boot-concepts-vaadin-flow.html",
     "title": "Spring Boot: Vaadin Flow",
     "section": "",
-    "text": "📘 Thymeleaf\nThymeleaf is a modern server-side Java template engine for both web and standalone environments.",
+    "text": "📘 Vaadin Flow\nModern Java framework for building web UI applications\nVaadin is a web application framework for Java that allows developers to build modern, interactive web applications using Java without having to write HTML, CSS, or JavaScript.",
     "crumbs": [
       "Spring Boot Concepts",
       "Spring Boot: Vaadin Flow"
@@ -15219,7 +15219,7 @@
     "href": "springboot/boot-concepts-vaadin-hilla.html#key-features",
     "title": "Spring Boot: Vaadin Hilla",
     "section": "1.1 Key Features",
-    "text": "1.1 Key Features\nFull-Stack Development\n\nSpring Boot Backend: Hilla integrates seamlessly with Spring Boot, leveraging its powerful backend capabilities for dependency injection, security, and more.\nReact or Lit Frontend: Developers can use either React or Lit for the frontend, benefiting from the latest JavaScript frameworks and their extensive ecosystems.\n\nType-Safe Communication\n\nAuto-Generated TypeScript Interfaces: Hilla automatically generates TypeScript interfaces for your Java endpoints, ensuring type safety and reducing the risk of errors during development.\n\nSecurity\n\nBuilt-in Security Features: Hilla includes built-in security features to protect your application from common web vulnerabilities, making it easier to develop secure web applications.\n\nClient-Server Communication\n\nEfficient Data Exchange: Hilla facilitates efficient communication between the client and server, using Vaadin’s robust client-server communication mechanisms, such as those provided by the Atmosphere framework.",
+    "text": "1.1 Key Features\n\n\n\n\n\n\n\nVaadin Hilla Logo\n\n\nFull-Stack Development\n\nSpring Boot Backend: Hilla integrates seamlessly with Spring Boot, leveraging its powerful backend capabilities for dependency injection, security, and more.\nReact or Lit Frontend: Developers can use either React or Lit for the frontend, benefiting from the latest JavaScript frameworks and their extensive ecosystems.\n\nType-Safe Communication\n\nAuto-Generated TypeScript Interfaces: Hilla automatically generates TypeScript interfaces for your Java endpoints, ensuring type safety and reducing the risk of errors during development.\n\nSecurity\n\nBuilt-in Security Features: Hilla includes built-in security features to protect your application from common web vulnerabilities, making it easier to develop secure web applications.\n\nClient-Server Communication\n\nEfficient Data Exchange: Hilla facilitates efficient communication between the client and server, using Vaadin’s robust client-server communication mechanisms, such as those provided by the Atmosphere framework.",
     "crumbs": [
       "Spring Boot Concepts",
       "Spring Boot: Vaadin Hilla"
@@ -15241,7 +15241,7 @@
     "href": "springboot/boot-concepts-vaadin-hilla.html#example-usage",
     "title": "Spring Boot: Vaadin Hilla",
     "section": "1.3 Example Usage",
-    "text": "1.3 Example Usage\nHere is an example of how we might set up a simple Hilla application:\n// Java Backend\n@RestController\n@RequestMapping(\"/api\")\npublic class MyController {\n    @GetMapping(\"/data\")\n    public List&lt;MyData&gt; getData() {\n        // Return data from the backend\n        return myService.getData();\n    }\n}\n// TypeScript Frontend\nimport { fetch } from '@vaadin/hilla';\nimport { html, LitElement, property } from 'lit-element';\n\n@customElement('my-component')\nclass MyComponent extends LitElement {\n  @property({ type: Array }) data = [];\n\n  async connectedCallback() {\n    super.connectedCallback();\n    this.data = await fetch('/api/data').json();\n  }\n\n  render() {\n    return html`\n      &lt;ul&gt;\n        ${this.data.map(item =&gt; html`&lt;li&gt;${item.name}&lt;/li&gt;`)}\n      &lt;/ul&gt;\n    `;\n  }\n}",
+    "text": "1.3 Example Usage\nHere is an example of how we might set up a simple Hilla application:\n// Java Backend\n@RestController\n1@RequestMapping(\"/api\")\npublic class MyController {\n2    @GetMapping(\"/data\")\n    public List&lt;MyData&gt; getData() {\n        // Return data from the backend\n3        return myService.getData();\n    }\n}\n\n1\n\nSpecify the base URL for the REST controller.\n\n2\n\nDefine the HTTP GET endpoint to retrieve data.\n\n3\n\nCall the service method to fetch and return the data.\n\n\n// TypeScript Frontend\n1import { fetch } from '@vaadin/hilla';\n2import { html, LitElement, property } from 'lit-element';\n\n3@customElement('my-component')\nclass MyComponent extends LitElement {\n4  @property({ type: Array }) data = [];\n\n  async connectedCallback() {\n5    super.connectedCallback();\n6    this.data = await fetch('/api/data').json();\n  }\n\n  render() {\n    return html`\n      &lt;ul&gt;\n        ${this.data.map(item =&gt; \n7            html`&lt;li&gt;${item.name}&lt;/li&gt;`)}\n      &lt;/ul&gt;\n    `;\n  }\n}\n\n1\n\nImport the fetch function from the @vaadin/hilla package.\n\n2\n\nImport necessary functions and classes from lit-element.\n\n3\n\nDefine the custom element name for the component.\n\n4\n\nDeclare a property to store the data, initialized as an empty array.\n\n5\n\nCall the parent class’s connectedCallback method.\n\n6\n\nFetch data from the backend API and update the component’s data property.\n\n7\n\nRender a list of ite",
     "crumbs": [
       "Spring Boot Concepts",
       "Spring Boot: Vaadin Hilla"
