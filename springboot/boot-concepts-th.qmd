@@ -28,11 +28,12 @@ format:
 
 ![Spring Boot Request-Response Cycle](/images/springboot/springboot-architecture-6.png){width="80%"}
 
-![Thymeleaf](/images/springboot/thymeleaf_logo.png){width="30%"}
 
-![Spring Boot Request-Response Cycle](/images/springboot/springboot-architecture-6.png){width="80%"}
 
 ## Overview
+
+![Thymeleaf](/images/springboot/thymeleaf_logo.png){width="30%"}
+
 
 ``Thymeleaf`` uses HTML attributes to add functionality and dynamic behavior to web pages, allowing for **server-side rendering and template processing.**
 
@@ -40,6 +41,8 @@ format:
 ```html
 <p th:text="'Thymeleaf will display this'">text</p>
 ```
+
+
 
 Here ``Thymeleaf`` **will process the text inside the th:text attribute**, and replace the contents of the ``<p>`` tag with it. 
 
@@ -76,7 +79,7 @@ In order to use thymeleaf in a project, we need to add the following starter to 
 </dependency>
 
 ```
-The starter s``pring-boot-starter-thymeleaf`` added to the project, thanks to the **auto-configuration mechanism**. Default values include:
+The starter ``spring-boot-starter-thymeleaf`` added to the project, thanks to the **auto-configuration mechanism**. Default values include:
 
 - ``HTML`` templates should be in the ``resources/templates`` directory (this is the so-called ``root``)
 - files should have the ``html`` extension (so we won't have to duplicate this information in the code)
@@ -84,7 +87,7 @@ The starter s``pring-boot-starter-thymeleaf`` added to the project, thanks to th
 
 ## Passing data to views: ``@Controller`` and View
 
-The ``@Controller`` [will retrun a String object](/springboot/boot-concepts-view.qmd#example1-model): it will display an HTML view with the appropriate message at the address:
+The ``@Controller`` [will return a String object](/springboot/boot-concepts-view.qmd#example1-model): it will display an HTML view with the appropriate message at the address:
 
 > http://localhost:8080/
 
@@ -130,7 +133,7 @@ In ``application.properties``, we should define ``locale``:
 
 > spring.mvc.locale=``en``
 
-We could add another lenguage by creating a new file named ``messages_fr.properties`` (``messages_cat.properties``, ``messages_es.properties``, ``messages_ja.properties``) in the same directory.
+We could add another language by creating a new file named ``messages_fr.properties`` (``messages_cat.properties``, ``messages_es.properties``, ``messages_ja.properties``) in the same directory.
 
 - [resources (examples)](https://github.com/AlbertProfe/CifoJava2023/tree/master/controllerView/src/main/resources){.external}
 
@@ -162,7 +165,7 @@ public void addInterceptors(InterceptorRegistry registry) {
 Most Thymeleaf **attributes allow their values to be set as or containing expressions**, which we will call Standard Expressions because of the dialects they are used in. These can be of five types:
 
 ::: {.callout-note}
-## Thymeleaf expresssions
+## Thymeleaf expressions
 - ${...} : Variable expressions.
 - *{...} : Selection expressions.
 - #{...} : Message (i18n) expressions.
@@ -174,7 +177,7 @@ Most Thymeleaf **attributes allow their values to be set as or containing expres
 Attributes `th:`
 
 ::: {.callout-note}
-## Thyemleaf attributes
+## Thymeleaf attributes
 - message: `<p th:text="#{msg.welcome}">Welcome everyone!</p>`
 - list: `<li th:each="book : ${books}" th:text="${book.title}">En las Orillas del Sar</li>`
 - link: `<form th:action="@{/createOrder}">`
