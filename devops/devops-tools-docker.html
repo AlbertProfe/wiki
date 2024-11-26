@@ -1771,7 +1771,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
   <li><a href="#what-is-docker" id="toc-what-is-docker" class="nav-link" data-scroll-target="#what-is-docker"><span class="header-section-number">2</span> What is Docker?</a></li>
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">3</span> Example</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">4</span> References</a></li>
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2"><span class="header-section-number">4</span> Example #2</a></li>
+  <li><a href="#example-3" id="toc-example-3" class="nav-link" data-scroll-target="#example-3"><span class="header-section-number">5</span> Example #3</a></li>
+  <li><a href="#docker-commands" id="toc-docker-commands" class="nav-link" data-scroll-target="#docker-commands"><span class="header-section-number">6</span> Docker commands</a>
+  <ul>
+  <li><a href="#mapping-multiple-ports" id="toc-mapping-multiple-ports" class="nav-link" data-scroll-target="#mapping-multiple-ports"><span class="header-section-number">6.1</span> Mapping Multiple Ports</a></li>
+  <li><a href="#explanation" id="toc-explanation" class="nav-link" data-scroll-target="#explanation"><span class="header-section-number">6.2</span> Explanation</a></li>
+  <li><a href="#steps-to-add-a-user-to-the-docker-group" id="toc-steps-to-add-a-user-to-the-docker-group" class="nav-link" data-scroll-target="#steps-to-add-a-user-to-the-docker-group"><span class="header-section-number">6.3</span> Steps to Add a User to the Docker Group</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">7</span> References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/devops/devops-tools-docker.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1814,7 +1822,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, November 1, 2024</p>
+      <p class="date-modified">Tuesday, November 26, 2024</p>
     </div>
   </div>
     
@@ -1881,11 +1889,218 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource terminal code-overflow-wrap number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>&gt; docker build</span>
 <span id="cb2-2"><a href="#cb2-2"></a>&gt; docker run</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="references" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> References</h1>
+<section id="example-2" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Example #2</h1>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource dockerfile number-lines code-with-copy"><code class="sourceCode dockerfile"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Use a Java 17 base image</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">FROM</span> openjdk:17-jdk-slim</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co"># Maintainer information</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">MAINTAINER</span> albertprofe</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co"># Copy the application JAR file to the container</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="kw">COPY</span> restaurant-0.0.1-SNAPSHOT.jar restVaadin.jar</span>
+<span id="cb3-9"><a href="#cb3-9"></a></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co"># Set the entry point to run the JAR file</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="kw">ENTRYPOINT</span> [<span class="st">"java"</span>, <span class="st">"-jar"</span>, <span class="st">"restVaadin.jar"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">docker</span> login</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">docker</span> build <span class="at">-t</span> restvaadinapp .</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="ex">docker</span> run <span class="at">-p</span> 8080:8080 restvaadinapp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example-3" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Example #3</h1>
+<ul>
+<li><strong>app.dockerfile</strong></li>
+<li><a href="https://cloud.albertprofe.dev/s/47P7c2ro5DHxw2e" class="external" target="_blank">Java jar booksPageable</a></li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource dockerfile number-lines code-with-copy"><code class="sourceCode dockerfile"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Use a Java 21 base image</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">FROM</span> openjdk:21-jdk-slim</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co"># Maintainer information</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">MAINTAINER</span> albertprofe</span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># Copy the application JAR file to the container</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="kw">COPY</span> BooksPageable-0.0.1-SNAPSHOT.jar books.jar</span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co"># Set the entry point to run the JAR file</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="kw">ENTRYPOINT</span> [<span class="st">"java"</span>, <span class="st">"-jar"</span>, <span class="st">"books.jar"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">docker</span> login</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">docker</span> build <span class="at">-t</span> books .</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="ex">docker</span> run <span class="at">-p</span> 8080:8080 books</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="docker-commands" class="level1 page-columns page-full" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Docker commands</h1>
+<div class="column-page-right">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>docker build</code></td>
+<td><code>-t, --tag</code></td>
+<td>Assigns a name and optionally a tag (e.g., <code>name:tag</code>) to the image.</td>
+</tr>
+<tr class="even">
+<td><code>docker build</code></td>
+<td><code>-f, --file</code></td>
+<td>Specifies the Dockerfile to use if it’s not named <code>Dockerfile</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>docker build</code></td>
+<td><code>--build-arg</code></td>
+<td>Passes build-time variables to the Dockerfile.</td>
+</tr>
+<tr class="even">
+<td><code>docker build</code></td>
+<td><code>--no-cache</code></td>
+<td>Ignores cached layers and forces a fresh build.</td>
+</tr>
+<tr class="odd">
+<td><code>docker build</code></td>
+<td><code>--target</code></td>
+<td>Builds a specific stage in a multi-stage Dockerfile.</td>
+</tr>
+<tr class="even">
+<td><code>docker build</code></td>
+<td><code>-q, --quiet</code></td>
+<td>Suppresses output, showing only the final image ID.</td>
+</tr>
+<tr class="odd">
+<td><code>docker run</code></td>
+<td><code>-d, --detach</code></td>
+<td>Runs the container in detached mode (in the background).</td>
+</tr>
+<tr class="even">
+<td><code>docker run</code></td>
+<td><code>-p, --publish</code></td>
+<td>Maps container ports to host ports (e.g., <code>8080:80</code>).</td>
+</tr>
+<tr class="odd">
+<td><code>docker run</code></td>
+<td><code>--name</code></td>
+<td>Assigns a name to the container for easier reference.</td>
+</tr>
+<tr class="even">
+<td><code>docker run</code></td>
+<td><code>-e, --env</code></td>
+<td>Sets environment variables inside the container.</td>
+</tr>
+<tr class="odd">
+<td><code>docker run</code></td>
+<td><code>--rm</code></td>
+<td>Automatically removes the container when it exits.</td>
+</tr>
+<tr class="even">
+<td><code>docker run</code></td>
+<td><code>-v, --volume</code></td>
+<td>Mounts host directories or volumes into the container.</td>
+</tr>
+<tr class="odd">
+<td><code>docker run</code></td>
+<td><code>--network</code></td>
+<td>Connects the container to a specified network.</td>
+</tr>
+<tr class="even">
+<td><code>docker run</code></td>
+<td><code>--cpus</code></td>
+<td>Limits the number of CPUs available to the container.</td>
+</tr>
+<tr class="odd">
+<td><code>docker run</code></td>
+<td><code>--memory</code></td>
+<td>Sets a memory limit for the container.</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Build a Docker image from the current directory's Dockerfile</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># -t: Tag the image with the name 'myapp' and version '1.0'</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="ex">docker</span> build <span class="at">-t</span> myapp:1.0 .</span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co"># Run a new container from the 'myapp' image</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co"># -d: Run the container in detached mode (in the background)</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co"># --name: Assign the name 'myapp_container' to the container</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co"># -p: Map port 8080 on the host to port 80 in the container</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">--name</span> myapp_container <span class="at">-p</span> 8080:80 myapp:1.0</span>
+<span id="cb7-10"><a href="#cb7-10"></a></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co"># List all running containers</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="ex">docker</span> ps</span>
+<span id="cb7-13"><a href="#cb7-13"></a></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co"># Show logs from 'myapp_container'</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="co"># -f: Follow log output in real-time</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="ex">docker</span> logs <span class="at">-f</span> myapp_container</span>
+<span id="cb7-17"><a href="#cb7-17"></a></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="co"># Display real-time statistics for all running containers</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="ex">docker</span> stats</span>
+<span id="cb7-20"><a href="#cb7-20"></a></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="co"># Stop the 'myapp_container'</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="ex">docker</span> stop myapp_container</span>
+<span id="cb7-23"><a href="#cb7-23"></a></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="co"># Remove the stopped 'myapp_container'</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="ex">docker</span> rm myapp_container</span>
+<span id="cb7-26"><a href="#cb7-26"></a></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="co"># Remove the 'myapp' image</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="ex">docker</span> rmi myapp:1.0</span>
+<span id="cb7-29"><a href="#cb7-29"></a></span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="co"># Clean up unused Docker resources (containers, networks, images)</span></span>
+<span id="cb7-31"><a href="#cb7-31"></a><span class="ex">docker</span> system prune <span class="at">-f</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="mapping-multiple-ports" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="mapping-multiple-ports"><span class="header-section-number">6.1</span> Mapping Multiple Ports</h2>
+<p>When you want to map multiple ports, you simply specify the&nbsp;<code>-p</code>&nbsp;option multiple times in your&nbsp;<code>docker run</code>&nbsp;command. Here is an example:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">`</span><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">--name</span> my_container <span class="at">-p</span> 8080:80 <span class="at">-p</span> 8443:443 nginx<span class="kw">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="explanation" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="explanation"><span class="header-section-number">6.2</span> Explanation</h2>
+<ul>
+<li><strong><code>-d</code></strong>: Runs the container in detached mode (in the background).</li>
+<li><strong><code>--name my_container</code></strong>: Assigns the name&nbsp;<code>my_container</code>&nbsp;to the running container.</li>
+<li><strong><code>-p 8080:80</code></strong>: Maps port 80 in the container to port 8080 on the host. This is typically used for HTTP traffic.</li>
+<li><strong><code>-p 8443:443</code></strong>: Maps port 443 in the container to port 8443 on the host. This is commonly used for HTTPS traffic</li>
+</ul>
+</section>
+<section id="steps-to-add-a-user-to-the-docker-group" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="steps-to-add-a-user-to-the-docker-group"><span class="header-section-number">6.3</span> Steps to Add a User to the Docker Group</h2>
+<ol type="1">
+<li><strong>Create the Docker Group (if it doesn’t exist)</strong>:- Run the following command to create the&nbsp;<code>docker</code>&nbsp;group if it hasn’t been created already:bash</li>
+</ol>
+<p><code>sudo groupadd docker</code></p>
+<ol start="2" type="1">
+<li><strong>Add Your User to the Docker Group</strong>:- Add your user to the&nbsp;<code>docker</code>&nbsp;group using the following command. Replace&nbsp;<code>${USER}</code>&nbsp;with your username if you’re not using an environment variable:bash</li>
+</ol>
+<p><code>sudo usermod -aG docker ${USER}</code></p>
+<ol start="3" type="1">
+<li><strong>Apply Changes</strong>:- Log out and log back in so that your group membership is re-evaluated.</li>
+</ol>
+<ul>
+<li><p>Alternatively, you can use the following command to apply the changes without logging out:bash</p>
+<p><code>newgrp docker</code></p></li>
+</ul>
+<ol start="4" type="1">
+<li><strong>Verify Docker Access</strong>:</li>
+</ol>
+<ul>
+<li><p>Test your Docker setup by running a simple command like&nbsp;<code>docker ps</code>&nbsp;without&nbsp;<code>sudo</code>:bash</p>
+<p><code>docker ps</code></p></li>
+<li><p>If this command runs successfully without errors, your setup is complete.</p></li>
+</ul>
+</section>
+</section>
+<section id="references" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> References</h1>
 <ul>
 <li><a href="https://sites.google.com/view/devopscifo/devops-tools/docker" class="external" target="_blank">docker</a></li>
 <li><a href="https://www.freecodecamp.org/news/how-docker-containers-work/" class="external" target="_blank">How Docker Containers Work – Explained for Beginners</a></li>
+<li><a href="https://docs.docker.com/desktop/setup/install/linux/ubuntu/" class="external" target="_blank">Install Docker Desktop on Ubuntu</a></li>
+<li><a href="https://www.docker.com/resources/cli-cheat-sheet/" class="external" target="_blank">CLI Cheat Sheet</a></li>
 </ul>
 
 
