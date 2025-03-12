@@ -1776,10 +1776,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#using-jpql-in-spring-data-jpa" id="toc-using-jpql-in-spring-data-jpa" class="nav-link" data-scroll-target="#using-jpql-in-spring-data-jpa"><span class="header-section-number">1.4</span> Using JPQL in Spring Data JPA</a></li>
   <li><a href="#benefits-of-jpql" id="toc-benefits-of-jpql" class="nav-link" data-scroll-target="#benefits-of-jpql"><span class="header-section-number">1.5</span> Benefits of JPQL</a></li>
   </ul></li>
-  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"><span class="header-section-number">2</span> Additional Resources</a>
+  <li><a href="#relevant-ways-to-query" id="toc-relevant-ways-to-query" class="nav-link" data-scroll-target="#relevant-ways-to-query"><span class="header-section-number">2</span> Relevant ways to Query</a>
   <ul>
-  <li><a href="#jpql" id="toc-jpql" class="nav-link" data-scroll-target="#jpql"><span class="header-section-number">2.1</span> JPQL</a></li>
-  <li><a href="#jpa-queries" id="toc-jpa-queries" class="nav-link" data-scroll-target="#jpa-queries"><span class="header-section-number">2.2</span> JPA Queries</a></li>
+  <li><a href="#derived-query-methods" id="toc-derived-query-methods" class="nav-link" data-scroll-target="#derived-query-methods"><span class="header-section-number">2.1</span> 1. Derived Query Methods</a></li>
+  </ul></li>
+  <li><a href="#query-annotation" id="toc-query-annotation" class="nav-link" data-scroll-target="#query-annotation"><span class="header-section-number">3</span> 2. <span class="citation" data-cites="Query">@Query</span> Annotation</a></li>
+  <li><a href="#specification-api-filters" id="toc-specification-api-filters" class="nav-link" data-scroll-target="#specification-api-filters"><span class="header-section-number">4</span> 3. Specification API: filters</a></li>
+  <li><a href="#query-by-example-qbe" id="toc-query-by-example-qbe" class="nav-link" data-scroll-target="#query-by-example-qbe"><span class="header-section-number">5</span> 4. Query by Example (QBE)</a></li>
+  <li><a href="#namedqueries-annotation" id="toc-namedqueries-annotation" class="nav-link" data-scroll-target="#namedqueries-annotation"><span class="header-section-number">6</span> 5. <span class="citation" data-cites="NamedQueries">@NamedQueries</span> annotation</a></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"><span class="header-section-number">7</span> Additional Resources</a>
+  <ul>
+  <li><a href="#jpql" id="toc-jpql" class="nav-link" data-scroll-target="#jpql"><span class="header-section-number">7.1</span> JPQL</a></li>
+  <li><a href="#jpa-queries" id="toc-jpa-queries" class="nav-link" data-scroll-target="#jpa-queries"><span class="header-section-number">7.2</span> JPA Queries</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/springboot/boot-concepts-jpa-4.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -1823,7 +1831,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Friday, November 1, 2024</p>
+      <p class="date-modified">Wednesday, March 12, 2025</p>
     </div>
   </div>
     
@@ -1943,10 +1951,187 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 </section>
 </section>
-<section id="additional-resources" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">2</span> Additional Resources</h2>
-<section id="jpql" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="jpql"><span class="header-section-number">2.1</span> JPQL</h3>
+<section id="relevant-ways-to-query" class="level2 page-columns page-full" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="relevant-ways-to-query"><span class="header-section-number">2</span> Relevant ways to Query</h2>
+<p>Spring Boot offers several ways to create queries when working with JPA repositories.</p>
+<div class="column-page-right">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 39%">
+<col style="width: 18%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Description</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Derived Query Methods</td>
+<td>Create queries by method names in repository interfaces</td>
+<td>- Easy to use for simple queries- No need to write SQL/JPQL- Automatic query generation</td>
+<td>- Limited to simple queries- Can lead to long method names for complex queries</td>
+</tr>
+<tr class="even">
+<td><span class="citation" data-cites="Query">@Query</span> Annotation</td>
+<td>Write custom JPQL or native SQL queries in repository interfaces</td>
+<td>- Allows complex queries- Supports both JPQL and native SQL- Can be more readable than derived queries</td>
+<td>- Queries are strings, so no compile-time checking- Can mix persistence logic with repository interface</td>
+</tr>
+<tr class="odd">
+<td>Specification API</td>
+<td>Build dynamic queries programmatically</td>
+<td>- Flexible for complex, dynamic queries- Type-safe- Reusable query parts</td>
+<td>- More verbose for simple queries- Requires more setup</td>
+</tr>
+<tr class="even">
+<td>Query by Example (QBE)</td>
+<td>Create queries using domain object instances as examples</td>
+<td>- Intuitive for simple queries- No need for query language- Works well with dynamic queries</td>
+<td>- Limited to equality and ‘like’ comparisons- Not suitable for complex conditions</td>
+</tr>
+<tr class="odd">
+<td><span class="citation" data-cites="NamedQueries">@NamedQueries</span></td>
+<td>Define queries at the entity level</td>
+<td>- Separates query logic from repository- Reusable across multiple repositories- Potentially better performance</td>
+<td>- Queries are strings, so no compile-time checking- Can clutter entity classes with query definitions</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Here are the <strong>five most relevant methods</strong>, along with examples for the <a href="https://github.com/AlbertProfe/userBorrowBook" class="external" target="_blank">userBorrowBook</a> entities:</p>
+<section id="derived-query-methods" class="level3 page-columns page-full" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="derived-query-methods"><span class="header-section-number">2.1</span> 1. Derived Query Methods</h3>
+<p><code>Derived query methods</code> allow you to create queries by simply declaring method names in your repository interface. <code>Spring Data JPA</code> automatically generates the query based on the method name.</p>
+<div class="column-page-right">
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">public</span> <span class="kw">interface</span> BookRepository <span class="kw">extends</span> JpaRepository <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="bu">List</span> <span class="fu">findByAuthorAndAvailableTrue</span><span class="op">(</span><span class="bu">String</span> author<span class="op">);</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>    Optional <span class="fu">findByIsbn</span><span class="op">(</span><span class="bu">String</span> isbn<span class="op">);</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="bu">List</span> <span class="fu">findByPublicationDateAfter</span><span class="op">(</span>LocalDate date<span class="op">);</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="op">}</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="kw">public</span> <span class="kw">interface</span> BorrowRepository <span class="kw">extends</span> JpaRepository <span class="op">{</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="bu">List</span> <span class="fu">findByUserAndIsReturnedFalse</span><span class="op">(</span>UserApp user<span class="op">);</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="bu">List</span> <span class="fu">findByBookAndReturnDateBefore</span><span class="op">(</span><span class="bu">Book</span> book<span class="op">,</span> LocalDate date<span class="op">);</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="op">}</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="kw">public</span> <span class="kw">interface</span> UserAppRepository <span class="kw">extends</span> JpaRepository <span class="op">{</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>    <span class="bu">List</span> <span class="fu">findByAgeGreaterThanAndIsArchivedFalse</span><span class="op">(</span><span class="dt">int</span> age<span class="op">);</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>    Optional <span class="fu">findByEmail</span><span class="op">(</span><span class="bu">String</span> email<span class="op">);</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="query-annotation" class="level2 page-columns page-full" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="query-annotation"><span class="header-section-number">3</span> 2. <span class="citation" data-cites="Query">@Query</span> Annotation</h2>
+<p>The <span class="citation" data-cites="Query">@Query</span> annotation allows you to write custom <code>JPQL</code> or native <code>SQL</code> queries directly in your repository interface.</p>
+<div class="column-page-right">
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">public</span> <span class="kw">interface</span> BookRepository <span class="kw">extends</span> JpaRepository <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="at">@Query</span><span class="op">(</span><span class="st">"SELECT b FROM Book b WHERE b.pagesQty &gt; :minPages AND b.available = true"</span><span class="op">)</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>    <span class="bu">List</span> <span class="fu">findAvailableBooksWithMoreThanPages</span><span class="op">(</span><span class="at">@Param</span><span class="op">(</span><span class="st">"minPages"</span><span class="op">)</span> <span class="dt">int</span> minPages<span class="op">);</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="op">}</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="kw">public</span> <span class="kw">interface</span> BorrowRepository <span class="kw">extends</span> JpaRepository <span class="op">{</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>    <span class="at">@Query</span><span class="op">(</span><span class="st">"SELECT b FROM Borrow b WHERE b.user.id = :userId AND b.isReturned = false"</span><span class="op">)</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>    <span class="bu">List</span> <span class="fu">findActiveUserBorrows</span><span class="op">(</span><span class="at">@Param</span><span class="op">(</span><span class="st">"userId"</span><span class="op">)</span> <span class="bu">String</span> userId<span class="op">);</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="op">}</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="kw">public</span> <span class="kw">interface</span> UserAppRepository <span class="kw">extends</span> JpaRepository <span class="op">{</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>    <span class="at">@Query</span><span class="op">(</span>value <span class="op">=</span> <span class="st">"SELECT * FROM user_app WHERE EXTRACT(YEAR FROM AGE(dob)) &gt; :age"</span><span class="op">,</span> nativeQuery <span class="op">=</span> <span class="kw">true</span><span class="op">)</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>    <span class="bu">List</span> <span class="fu">findUsersOlderThan</span><span class="op">(</span><span class="at">@Param</span><span class="op">(</span><span class="st">"age"</span><span class="op">)</span> <span class="dt">int</span> age<span class="op">);</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="specification-api-filters" class="level2 page-columns page-full" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="specification-api-filters"><span class="header-section-number">4</span> 3. Specification API: filters</h2>
+<p>The <code>Specification API</code> allows you to build <strong>dynamic queries programmatically</strong>. This is useful when you need to create complex queries based on multiple conditions.</p>
+<div class="column-page-right">
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">public</span> <span class="kw">interface</span> BookRepository <span class="kw">extends</span> JpaRepository<span class="op">,</span> JpaSpecificationExecutor <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="op">}</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="kw">public</span> <span class="kw">class</span> BookSpecifications <span class="op">{</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="kw">public</span> <span class="dt">static</span> Specification <span class="fu">isAvailable</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>        <span class="cf">return</span> <span class="op">(</span>root<span class="op">,</span> query<span class="op">,</span> cb<span class="op">)</span> <span class="op">-&gt;</span> cb<span class="op">.</span><span class="fu">isTrue</span><span class="op">(</span>root<span class="op">.</span><span class="fu">get</span><span class="op">(</span><span class="st">"available"</span><span class="op">));</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="op">}</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="kw">public</span> <span class="dt">static</span> Specification <span class="fu">hasAuthor</span><span class="op">(</span><span class="bu">String</span> author<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>        <span class="cf">return</span> <span class="op">(</span>root<span class="op">,</span> query<span class="op">,</span> cb<span class="op">)</span> <span class="op">-&gt;</span> cb<span class="op">.</span><span class="fu">equal</span><span class="op">(</span>root<span class="op">.</span><span class="fu">get</span><span class="op">(</span><span class="st">"author"</span><span class="op">),</span> author<span class="op">);</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>    <span class="op">}</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="op">}</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">// Usage</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="bu">List</span> availableBooksByAuthor <span class="op">=</span> bookRepository<span class="op">.</span><span class="fu">findAll</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="fu">isAvailable</span><span class="op">()).</span><span class="fu">and</span><span class="op">(</span><span class="fu">hasAuthor</span><span class="op">(</span><span class="st">"J.K. Rowling"</span><span class="op">)));</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="query-by-example-qbe" class="level2 page-columns page-full" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="query-by-example-qbe"><span class="header-section-number">5</span> 4. Query by Example (QBE)</h2>
+<p><code>Query by Example</code> allows you to create queries using domain object instances as examples.</p>
+<div class="column-page-right">
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">public</span> <span class="kw">interface</span> BookRepository <span class="kw">extends</span> JpaRepository<span class="op">,</span> QueryByExampleExecutor <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="op">}</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">// Usage</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="bu">Book</span> exampleBook <span class="op">=</span> <span class="kw">new</span> <span class="bu">Book</span><span class="op">();</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>exampleBook<span class="op">.</span><span class="fu">setAuthor</span><span class="op">(</span><span class="st">"George Orwell"</span><span class="op">);</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>exampleBook<span class="op">.</span><span class="fu">setAvailable</span><span class="op">(</span><span class="kw">true</span><span class="op">);</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a></span>
+<span id="cb10-9"><a href="#cb10-9"></a>Example example <span class="op">=</span> Example<span class="op">.</span><span class="fu">of</span><span class="op">(</span>exampleBook<span class="op">);</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="bu">List</span> books <span class="op">=</span> bookRepository<span class="op">.</span><span class="fu">findAll</span><span class="op">(</span>example<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="namedqueries-annotation" class="level2 page-columns page-full" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="namedqueries-annotation"><span class="header-section-number">6</span> 5. <span class="citation" data-cites="NamedQueries">@NamedQueries</span> annotation</h2>
+<p><code>@NamedQueries</code> is another powerful way to create queries in <code>Spring Boot JPA</code>. This method allows you to define queries at the entity level, separating the query definition from the repository interface.</p>
+<p>Here’s how you can use <code>@NamedQueries</code> with our entities:</p>
+<div class="column-page-right">
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1"></a><span class="at">@Entity</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="at">@NamedQueries</span><span class="op">({</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="at">@NamedQuery</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Book.findAvailableByAuthor"</span><span class="op">,</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>        query <span class="op">=</span> <span class="st">"SELECT b FROM Book b WHERE b.author = :author AND b.available = true"</span><span class="op">),</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>    <span class="at">@NamedQuery</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Book.countByPublicationYear"</span><span class="op">,</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>        query <span class="op">=</span> <span class="st">"SELECT COUNT(b) FROM Book b WHERE FUNCTION('YEAR', b.publicationDate) = :year"</span><span class="op">)</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="op">})</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="kw">public</span> <span class="kw">class</span> <span class="bu">Book</span> <span class="op">{</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>    <span class="co">// ... existing fields and methods</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="op">}</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="at">@Entity</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="at">@NamedQueries</span><span class="op">({</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a>    <span class="at">@NamedQuery</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Borrow.findOverdueBorrows"</span><span class="op">,</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a>        query <span class="op">=</span> <span class="st">"SELECT b FROM Borrow b WHERE b.returnDate  {</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a>    <span class="bu">List</span> <span class="fu">findAvailableByAuthor</span><span class="op">(</span><span class="at">@Param</span><span class="op">(</span><span class="st">"author"</span><span class="op">)</span> <span class="bu">String</span> author<span class="op">);</span></span>
+<span id="cb11-17"><a href="#cb11-17"></a>    <span class="dt">long</span> <span class="fu">countByPublicationYear</span><span class="op">(</span><span class="at">@Param</span><span class="op">(</span><span class="st">"year"</span><span class="op">)</span> <span class="dt">int</span> year<span class="op">);</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a><span class="op">}</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a></span>
+<span id="cb11-20"><a href="#cb11-20"></a><span class="kw">public</span> <span class="kw">interface</span> BorrowRepository <span class="kw">extends</span> JpaRepository <span class="op">{</span></span>
+<span id="cb11-21"><a href="#cb11-21"></a>    <span class="bu">List</span> <span class="fu">findOverdueBorrows</span><span class="op">();</span></span>
+<span id="cb11-22"><a href="#cb11-22"></a>    <span class="dt">int</span> <span class="fu">sumPointsByUser</span><span class="op">(</span><span class="at">@Param</span><span class="op">(</span><span class="st">"userId"</span><span class="op">)</span> <span class="bu">String</span> userId<span class="op">);</span></span>
+<span id="cb11-23"><a href="#cb11-23"></a><span class="op">}</span></span>
+<span id="cb11-24"><a href="#cb11-24"></a></span>
+<span id="cb11-25"><a href="#cb11-25"></a><span class="kw">public</span> <span class="kw">interface</span> UserAppRepository <span class="kw">extends</span> JpaRepository <span class="op">{</span></span>
+<span id="cb11-26"><a href="#cb11-26"></a>    <span class="bu">List</span> <span class="fu">findActiveUsersByAgeRange</span><span class="op">(</span><span class="at">@Param</span><span class="op">(</span><span class="st">"minAge"</span><span class="op">)</span> <span class="dt">int</span> minAge<span class="op">,</span> <span class="at">@Param</span><span class="op">(</span><span class="st">"maxAge"</span><span class="op">)</span> <span class="dt">int</span> maxAge<span class="op">);</span></span>
+<span id="cb11-27"><a href="#cb11-27"></a>    <span class="at">@Modifying</span></span>
+<span id="cb11-28"><a href="#cb11-28"></a>    <span class="at">@Query</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"UserApp.updateUserAddress"</span><span class="op">)</span></span>
+<span id="cb11-29"><a href="#cb11-29"></a>    <span class="dt">int</span> <span class="fu">updateUserAddress</span><span class="op">(</span><span class="at">@Param</span><span class="op">(</span><span class="st">"newAddress"</span><span class="op">)</span> <span class="bu">String</span> newAddress<span class="op">,</span> <span class="at">@Param</span><span class="op">(</span><span class="st">"userId"</span><span class="op">)</span> <span class="bu">String</span> userId<span class="op">);</span></span>
+<span id="cb11-30"><a href="#cb11-30"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Using <span class="citation" data-cites="NamedQueries">@NamedQueries</span> offers several advantages:</p>
+<ol type="1">
+<li>It separates query logic from the repository interface, improving code organization.</li>
+<li>It allows for easy reuse of complex queries across multiple repositories.</li>
+<li>It provides better performance as named queries are parsed and prepared when the persistence unit is created[1].</li>
+</ol>
+<p>Remember to follow the naming convention <code>.</code> for Spring Data JPA to automatically resolve and use the named queries.</p>
+</section>
+<section id="additional-resources" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">7</span> Additional Resources</h2>
+<section id="jpql" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="jpql"><span class="header-section-number">7.1</span> JPQL</h3>
 <ul>
 <li><a href="https://docs.oracle.com/javaee/6/tutorial/doc/bnbtg.html" class="external" target="_blank">JPQL - Java Persistence Query Language</a> <br></li>
 <li><a href="https://docs.oracle.com/javaee/7/tutorial/persistence-querylanguage.htm" class="external" target="_blank">JPA Query Language</a> <br></li>
@@ -1954,8 +2139,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation" class="external" target="_blank">Spring Data JPA - Query Creation</a></li>
 </ul>
 </section>
-<section id="jpa-queries" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="jpa-queries"><span class="header-section-number">2.2</span> JPA Queries</h3>
+<section id="jpa-queries" class="level3" data-number="7.2">
+<h3 data-number="7.2" class="anchored" data-anchor-id="jpa-queries"><span class="header-section-number">7.2</span> JPA Queries</h3>
 <p>For more information on Spring Boot JPA query methods, check out these resources:</p>
 <ul>
 <li><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html" class="external" target="_blank">Defining Query Methods</a> <br></li>
