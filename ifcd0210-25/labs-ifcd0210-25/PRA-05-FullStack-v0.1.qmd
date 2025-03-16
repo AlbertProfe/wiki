@@ -1,0 +1,1533 @@
+# PRA#05-FullStack: Airport App
+
+## CIFO La Violeta - FullStack IFCD0210-25 MF02
+
+> This guide outlines how to create a full-stack Airport Application using Spring Boot for the backend and React for the frontend.
+
+## Project Overview
+
+- Create a `Spring Boot` and `React` project from scratch
+- Implement a `RESTful API`
+- Use `H2` database locally or `PostgreSQL` with Neon in cloud
+- Plan to use `NoSQL` in the near future
+- Feature CRUD operations with `React` frontend
+- Implement state management with `hooks` and `useContext`
+- Use `Material UI` for styling with sidebar and navigation
+
+## Technology Stack
+
+### Backend
+
+- [Spring Boot](https://spring.io/projects/spring-boot) - Java-based framework
+- [Spring Data JPA](https://spring.io/projects/spring-data-jpa) - Data persistence
+- [Lombok](https://projectlombok.org/) - Reduce boilerplate code
+- [H2 Database](https://www.h2database.com/) - In-memory database for development
+- [PostgreSQL](https://www.postgresql.org/) with [Neon](https://neon.tech/) - Cloud database option
+
+### Frontend
+
+- [React](https://reactjs.org/) - JavaScript library for building user interfaces
+- [Axios](https://axios-http.com/) - HTTP client for API requests
+- [Material UI](https://mui.com/) - React component library
+- [React Router DOM](https://reactrouter.com/) - Routing for React application Tasks for Students Before Backend Skeleton Implementation
+
+## Tasks
+
+### Backend Tasks
+
+1. **Set Up the Spring Boot Project**: Create a new Spring Boot project using Spring Initializr. Include dependencies like Spring Web, Spring Data JPA, Lombok, and H2/PostgreSQL.
+2. **Configure the Database**: Set up the database connection in the `application.properties` file. Configure H2 for local development or PostgreSQL with Neon for cloud deployment.
+3. **Create Entity Classes**: Define the `Airport`, `Flight`, and `Plane` entity classes with appropriate annotations for JPA and Lombok.
+4. **Implement Repository Interfaces**: Create repository interfaces for each entity (`AirportRepository`, `FlightRepository`, `PlaneRepository`) that extend `JpaRepository` and `JpaSpecificationExecutor`.
+5. **Set Up Service & Controller Layer**: Implement service classes (`AirportService`, `FlightService`, `PlaneService`) to handle business logic and interact with the repositories.
+
+### Frontend Tasks
+
+1. **Set Up the React Project**: Create a new React project using `create-react-app` and install necessary dependencies like Material UI, Axios, and React Router DOM.
+2. **Create Project Structure**: Organize the project into folders like `components`, `pages`, `context`, `hooks`, and `services` for better maintainability.
+3. **Set Up API Context**: Implement an `ApiContext` to manage API requests, loading states, and errors across the application.
+4. **Create Custom Hooks**: Develop custom hooks like `useAirports`, `useFlights`, and `usePlanes` to fetch and manage data from the backend.
+5. **Implement Basic Layout**: Create layout components like `Header`, `Sidebar`, and `Footer` using Material UI. Set up routing using React Router DOM.
+
+> These tasks will prepare us for implementing the backend and frontend skeletons, ensuring we have a solid foundation to build the full-stack Airport Application.
+
+## Backend Skeleton Implementation
+
+### Java Entity Classes
+
+#### Airport Entity
+
+```java
+package com.airport.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Airport {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String code;
+    private String city;
+    private String country;
+
+    @OneToMany(mappedBy = "departureAirport", cascade = CascadeType.ALL)
+    private List<Flight> departingFlights;
+
+    @OneToMany(mappedBy = "arrivalAirport", cascade = CascadeType.ALL)
+    private List<Flight> arrivingFlights;
+}
+```
+
+#### Flight Entity
+
+```java
+package com.airport.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Flight {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String flightNumber;
+    private LocalDateTime departureTime;
+    private LocalDateTime arrivalTime;
+    private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "departure_airport_id")
+    private Airport departureAirport;
+
+    @ManyToOne
+    @JoinColumn(name = "arrival_airport_id")
+    private Airport arrivalAirport;
+
+    @ManyToOne
+    @JoinColumn(name = "plane_id")
+    private Plane plane;
+}
+```
+
+#### Plane Entity
+
+```java
+package com.airport.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Plane {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String model;
+    private String manufacturer;
+    private String registrationNumber;
+    private Integer capacity;
+    private Integer yearOfManufacture;
+
+    @OneToMany(mappedBy = "plane", cascade = CascadeType.ALL)
+    private List<Flight> flights;
+}
+```
+
+### Repository Interfaces
+
+```java
+package com.airport.repository;
+
+import com.airport.model.Airport;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface AirportRepository extends JpaRepository<Airport, Long>, JpaSpecificationExecutor<Airport> {
+
+    // Find airports by country
+    List<Airport> findByCountry(String country);
+
+    // Find airports by city
+    List<Airport> findByCity(String city);
+
+    // Find airport by code
+    Airport findByCode(String code);
+
+    // Custom query example
+    @Query("SELECT a FROM Airport a WHERE a.name LIKE %:keyword% OR a.code LIKE %:keyword%")
+    List<Airport> searchAirports(@Param("keyword") String keyword);
+}
+```
+
+```java
+package com.airport.repository;
+
+import com.airport.model.Flight;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Repository
+public interface FlightRepository extends JpaRepository<Flight, Long>, JpaSpecificationExecutor<Flight> {
+
+    // Find flights by departure airport code
+    List<Flight> findByDepartureAirport_Code(String airportCode);
+
+    // Find flights by arrival airport code
+    List<Flight> findByArrivalAirport_Code(String airportCode);
+
+    // Find flights by flight number
+    Flight findByFlightNumber(String flightNumber);
+
+    // Find flights departing between times
+    List<Flight> findByDepartureTimeBetween(LocalDateTime start, LocalDateTime end);
+
+    // Find flights with pagination
+    Page<Flight> findByStatus(String status, Pageable pageable);
+
+    // Custom query to find delayed flights
+    @Query("SELECT f FROM Flight f WHERE f.departureTime < CURRENT_TIMESTAMP AND f.status != 'DEPARTED'")
+    List<Flight> findDelayedFlights();
+}
+```
+
+### Service Implementation
+
+```java
+package com.airport.service;
+
+import com.airport.model.Airport;
+import com.airport.repository.AirportRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class AirportService {
+
+    private final AirportRepository airportRepository;
+
+    @Autowired
+    public AirportService(AirportRepository airportRepository) {
+        this.airportRepository = airportRepository;
+    }
+
+    public List<Airport> findAll() {
+        return airportRepository.findAll();
+    }
+
+    public Page<Airport> findAll(Pageable pageable) {
+        return airportRepository.findAll(pageable);
+    }
+
+    public Page<Airport> findAll(Specification<Airport> spec, Pageable pageable) {
+        return airportRepository.findAll(spec, pageable);
+    }
+
+    public Optional<Airport> findById(Long id) {
+        return airportRepository.findById(id);
+    }
+
+    public Airport save(Airport airport) {
+        return airportRepository.save(airport);
+    }
+
+    public void deleteById(Long id) {
+        airportRepository.deleteById(id);
+    }
+
+    public List<Airport> findByCountry(String country) {
+        return airportRepository.findByCountry(country);
+    }
+
+    public List<Airport> findByCity(String city) {
+        return airportRepository.findByCity(city);
+    }
+
+    public Airport findByCode(String code) {
+        return airportRepository.findByCode(code);
+    }
+
+    public List<Airport> searchAirports(String keyword) {
+        return airportRepository.searchAirports(keyword);
+    }
+}
+```
+
+### Controllers
+
+```java
+package com.airport.controller;
+
+import com.airport.model.Airport;
+import com.airport.projection.AirportSummary;
+import com.airport.service.AirportService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/airports")
+@CrossOrigin(origins = "http://localhost:3000")
+public class AirportController {
+
+    private final AirportService airportService;
+
+    @Autowired
+    public AirportController(AirportService airportService) {
+        this.airportService = airportService;
+    }
+
+    @GetMapping
+    public Page<Airport> getAllAirports(Pageable pageable) {
+        return airportService.findAll(pageable);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Airport> getAirportById(@PathVariable Long id) {
+        return airportService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public Airport createAirport(@RequestBody Airport airport) {
+        return airportService.save(airport);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Airport> updateAirport(@PathVariable Long id, @RequestBody Airport airport) {
+        return airportService.findById(id)
+                .map(existingAirport -> {
+                    airport.setId(id);
+                    return ResponseEntity.ok(airportService.save(airport));
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAirport(@PathVariable Long id) {
+        return airportService.findById(id)
+                .map(airport -> {
+                    airportService.deleteById(id);
+                    return ResponseEntity.ok().<Void>build();
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/search")
+    public List<Airport> searchAirports(@RequestParam String keyword) {
+        return airportService.searchAirports(keyword);
+    }
+}
+```
+
+### Projections for Data Transfer
+
+```java
+package com.airport.projection;
+
+public interface AirportSummary {
+    Long getId();
+    String getName();
+    String getCode();
+    String getCity();
+    String getCountry();
+}
+```
+
+### Specifications for Dynamic Queries
+
+```java
+package com.airport.specification;
+
+import com.airport.model.Airport;
+import org.springframework.data.jpa.domain.Specification;
+
+public class AirportSpecifications {
+
+    public static Specification<Airport> hasName(String name) {
+        return (root, query, criteriaBuilder) ->
+                name == null ? null : criteriaBuilder.like(root.get("name"), "%" + name + "%");
+    }
+
+    public static Specification<Airport> inCountry(String country) {
+        return (root, query, criteriaBuilder) ->
+                country == null ? null : criteriaBuilder.equal(root.get("country"), country);
+    }
+
+    public static Specification<Airport> inCity(String city) {
+        return (root, query, criteriaBuilder) ->
+                city == null ? null : criteriaBuilder.equal(root.get("city"), city);
+    }
+}
+```
+
+## Frontend Skeleton Implementation
+
+### Project Structure
+
+```
+frontend/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── airports/
+│   │   │   ├── AirportList.js
+│   │   │   ├── AirportForm.js
+│   │   │   └── AirportDetails.js
+│   │   ├── flights/
+│   │   │   ├── FlightList.js
+│   │   │   ├── FlightForm.js
+│   │   │   └── FlightDetails.js
+│   │   ├── planes/
+│   │   │   ├── PlaneList.js
+│   │   │   ├── PlaneForm.js
+│   │   │   └── PlaneDetails.js
+│   │   ├── layout/
+│   │   │   ├── Sidebar.js
+│   │   │   ├── Header.js
+│   │   │   └── Footer.js
+│   ├── context/
+│   │   └── ApiContext.js
+│   ├── hooks/
+│   │   ├── useApi.js
+│   │   ├── useAirports.js
+│   │   ├── useFlights.js
+│   │   └── usePlanes.js
+│   ├── pages/
+│   │   ├── Home.js
+│   │   ├── Airports.js
+│   │   ├── Flights.js
+│   │   └── Planes.js
+│   ├── services/
+│   │   └── api.js
+│   ├── App.js
+│   ├── index.js
+│   └── routes.js
+└── package.json
+```
+
+### API Context Setup
+
+```jsx
+// src/context/ApiContext.js
+import React, { createContext, useState } from 'react';
+import axios from 'axios';
+
+export const ApiContext = createContext();
+
+const API_BASE_URL = 'http://localhost:8080/api';
+
+export const ApiProvider = ({ children }) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const apiClient = axios.create({
+    baseURL: API_BASE_URL,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const get = async (endpoint, params = {}) => {
+    setLoading(true);
+    try {
+      const response = await apiClient.get(endpoint, { params });
+      setLoading(false);
+      return response.data;
+    } catch (err) {
+      setError(err.response?.data || 'An error occurred');
+      setLoading(false);
+      throw err;
+    }
+  };
+
+  const post = async (endpoint, data = {}) => {
+    setLoading(true);
+    try {
+      const response = await apiClient.post(endpoint, data);
+      setLoading(false);
+      return response.data;
+    } catch (err) {
+      setError(err.response?.data || 'An error occurred');
+      setLoading(false);
+      throw err;
+    }
+  };
+
+  const put = async (endpoint, data = {}) => {
+    setLoading(true);
+    try {
+      const response = await apiClient.put(endpoint, data);
+      setLoading(false);
+      return response.data;
+    } catch (err) {
+      setError(err.response?.data || 'An error occurred');
+      setLoading(false);
+      throw err;
+    }
+  };
+
+  const remove = async (endpoint) => {
+    setLoading(true);
+    try {
+      const response = await apiClient.delete(endpoint);
+      setLoading(false);
+      return response.data;
+    } catch (err) {
+      setError(err.response?.data || 'An error occurred');
+      setLoading(false);
+      throw err;
+    }
+  };
+return (
+    <ApiContext.Provider
+      value={{
+        loading,
+        error,
+        get,
+        post,
+        put,
+        remove,
+        setError
+      }}
+    >
+      {children}
+    </ApiContext.Provider>
+  );
+};
+```
+
+### Custom Hooks
+
+#### useApi Hook
+
+```jsx
+// src/hooks/useApi.js
+import { useContext } from 'react';
+import { ApiContext } from '../context/ApiContext';
+
+export const useApi = () => {
+  const context = useContext(ApiContext);
+
+  if (!context) {
+    throw new Error('useApi must be used within an ApiProvider');
+  }
+
+  return context;
+};
+```
+
+#### useAirports Hook
+
+```jsx
+// src/hooks/useAirports.js
+import { useState, useEffect, useCallback } from 'react';
+import { useApi } from './useApi';
+
+export const useAirports = () => {
+  const { get, post, put, remove, loading } = useApi();
+  const [airports, setAirports] = useState([]);
+  const [pagination, setPagination] = useState({
+    page: 0,
+    size: 10,
+    totalElements: 0,
+    totalPages: 0
+  });
+
+  const fetchAirports = useCallback(async (page = 0, size = 10) => {
+    try {
+      const response = await get('/airports', { page, size });
+      setAirports(response.content);
+      setPagination({
+        page: response.number,
+        size: response.size,
+        totalElements: response.totalElements,
+        totalPages: response.totalPages
+      });
+      return response;
+    } catch (error) {
+      console.error('Error fetching airports:', error);
+      return null;
+    }
+  }, [get]);
+
+  const getAirportById = useCallback(async (id) => {
+    try {
+      return await get(`/airports/${id}`);
+    } catch (error) {
+      console.error(`Error fetching airport with id ${id}:`, error);
+      return null;
+    }
+  }, [get]);
+
+  const createAirport = useCallback(async (airportData) => {
+    try {
+      const newAirport = await post('/airports', airportData);
+      setAirports(prevAirports => [...prevAirports, newAirport]);
+      return newAirport;
+    } catch (error) {
+      console.error('Error creating airport:', error);
+      return null;
+    }
+  }, [post]);
+
+  const updateAirport = useCallback(async (id, airportData) => {
+    try {
+      const updatedAirport = await put(`/airports/${id}`, airportData);
+      setAirports(prevAirports => 
+        prevAirports.map(airport => 
+          airport.id === id ? updatedAirport : airport
+        )
+      );
+      return updatedAirport;
+    } catch (error) {
+      console.error(`Error updating airport with id ${id}:`, error);
+      return null;
+    }
+  }, [put]);
+
+  const deleteAirport = useCallback(async (id) => {
+    try {
+      await remove(`/airports/${id}`);
+      setAirports(prevAirports => 
+        prevAirports.filter(airport => airport.id !== id)
+      );
+      return true;
+    } catch (error) {
+      console.error(`Error deleting airport with id ${id}:`, error);
+      return false;
+    }
+  }, [remove]);
+
+  const searchAirports = useCallback(async (keyword) => {
+    try {
+      return await get('/airports/search', { keyword });
+    } catch (error) {
+      console.error('Error searching airports:', error);
+      return [];
+    }
+  }, [get]);
+
+  useEffect(() => {
+    fetchAirports();
+  }, [fetchAirports]);
+
+  return {
+    airports,
+    pagination,
+    loading,
+    fetchAirports,
+    getAirportById,
+    createAirport,
+    updateAirport,
+    deleteAirport,
+    searchAirports
+  };
+};
+```
+
+### Components Implementation
+
+#### App Component with Routing
+
+```jsx
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { CssBaseline, Box } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ApiProvider } from './context/ApiContext';
+import Header from './components/layout/Header';
+import Sidebar from './components/layout/Sidebar';
+import Footer from './components/layout/Footer';
+import Home from './pages/Home';
+import Airports from './pages/Airports';
+import AirportDetails from './components/airports/AirportDetails';
+import Flights from './pages/Flights';
+import FlightDetails from './components/flights/FlightDetails';
+import Planes from './pages/Planes';
+import PlaneDetails from './components/planes/PlaneDetails';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1976d2',
+    },
+    secondary: {
+      main: '#dc004e',
+    },
+  },
+});
+
+function App() {
+  return (
+    <ApiProvider>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <CssBaseline />
+          <Box sx={{ display: 'flex' }}>
+            <Header />
+            <Sidebar />
+            <Box
+              component="main"
+              sx={{
+                flexGrow: 1,
+                p: 3,
+                width: { sm: `calc(100% - 240px)` },
+                ml: { sm: '240px' },
+                mt: '64px',
+              }}
+            >
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/airports" element={<Airports />} />
+                <Route path="/airports/:id" element={<AirportDetails />} />
+                <Route path="/flights" element={<Flights />} />
+                <Route path="/flights/:id" element={<FlightDetails />} />
+                <Route path="/planes" element={<Planes />} />
+                <Route path="/planes/:id" element={<PlaneDetails />} />
+              </Routes>
+              <Footer />
+            </Box>
+          </Box>
+        </Router>
+      </ThemeProvider>
+    </ApiProvider>
+  );
+}
+
+export default App;
+```
+
+#### Layout Components
+
+```jsx
+// src/components/layout/Sidebar.js
+import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+  Toolbar,
+} from '@mui/material';
+import {
+  Home as HomeIcon,
+  Flight as FlightIcon,
+  LocationOn as AirportIcon,
+  AirplanemodeActive as PlaneIcon,
+} from '@mui/icons-material';
+
+const drawerWidth = 240;
+
+const Sidebar = () => {
+  const menuItems = [
+    { text: 'Home', icon: <HomeIcon />, path: '/' },
+    { text: 'Airports', icon: <AirportIcon />, path: '/airports' },
+    { text: 'Flights', icon: <FlightIcon />, path: '/flights' },
+    { text: 'Planes', icon: <PlaneIcon />, path: '/planes' },
+  ];
+
+  return (
+    <Drawer
+      variant="permanent"
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        ['& .MuiDrawer-paper']: {
+          width: drawerWidth,
+          boxSizing: 'border-box',
+        },
+      }}
+    >
+      <Toolbar />
+      <Divider />
+      <List>
+        {menuItems.map((item) => (
+          <ListItem button key={item.text} component={RouterLink} to={item.path}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItem>
+        ))}
+      </List>
+    </Drawer>
+  );
+};
+
+export default Sidebar;
+```
+
+#### Airport Components
+
+```jsx
+// src/components/airports/AirportList.js
+import React, { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TablePagination,
+  Button,
+  IconButton,
+  TextField,
+  Box,
+} from '@mui/material';
+import {
+  Edit as EditIcon,
+  Delete as DeleteIcon,
+  Search as SearchIcon,
+} from '@mui/icons-material';
+import { useAirports } from '../../hooks/useAirports';
+
+const AirportList = () => {
+  const {
+    airports,
+    pagination,
+    loading,
+    fetchAirports,
+    deleteAirport,
+    searchAirports,
+  } = useAirports();
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(null);
+
+  const handleChangePage = (event, newPage) => {
+    fetchAirports(newPage, pagination.size);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    const newSize = parseInt(event.target.value, 10);
+    fetchAirports(0, newSize);
+  };
+
+  const handleSearch = async () => {
+    if (searchTerm.trim()) {
+      const results = await searchAirports(searchTerm);
+      // Handle search results
+    } else {
+      fetchAirports();
+    }
+  };
+
+  const handleDelete = async (id) => {
+    const success = await deleteAirport(id);
+    if (success) {
+      setShowDeleteConfirm(null);
+    }
+  };
+
+  return (
+    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <TextField
+            variant="outlined"
+            size="small"
+            placeholder="Search airports..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            sx={{ mr: 1 }}
+          />
+          <IconButton onClick={handleSearch}>
+            <SearchIcon />
+          </IconButton>
+        </Box>
+        <Button
+          variant="contained"
+          color="primary"
+          component={RouterLink}
+          to="/airports/new"
+        >
+          Add Airport
+        </Button>
+      </Box>
+
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader>
+          <TableHead>
+            <TableRow>
+              <TableCell>Code</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>City</TableCell>
+              <TableCell>Country</TableCell>
+              <TableCell align="right">Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {loading ? (
+              <TableRow>
+                <TableCell colSpan={5} align="center">
+                  Loading...
+                </TableCell>
+              </TableRow>
+            ) : airports.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={5} align="center">
+                  No airports found
+                </TableCell>
+              </TableRow>
+            ) : (
+              airports.map((airport) => (
+                <TableRow key={airport.id}>
+                  <TableCell>{airport.code}</TableCell>
+                  <TableCell>{airport.name}</TableCell>
+                  <TableCell>{airport.city}</TableCell>
+                  <TableCell>{airport.country}</TableCell>
+                  <TableCell align="right">
+                    <IconButton 
+                      component={RouterLink}
+                      to={`/airports/${airport.id}`}
+                      size="small"
+                    >
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton
+                      size="small"
+                      onClick={() => setShowDeleteConfirm(airport.id)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={pagination.totalElements}
+        rowsPerPage={pagination.size}
+        page={pagination.page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
+  );
+};
+
+export default AirportList;
+```
+
+```jsx
+// src/components/airports/AirportForm.js
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import {
+  Paper,
+  TextField,
+  Button,
+  Grid,
+  Typography,
+  Box,
+  CircularProgress,
+} from '@mui/material';
+import { useAirports } from '../../hooks/useAirports';
+
+const AirportForm = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { getAirportById, createAirport, updateAirport, loading } = useAirports();
+
+  const [formData, setFormData] = useState({
+    name: '',
+    code: '',
+    city: '',
+    country: '',
+  });
+
+  const [errors, setErrors] = useState({});
+  const isEditMode = Boolean(id);
+
+  useEffect(() => {
+    const fetchAirport = async () => {
+      if (isEditMode) {
+        const airport = await getAirportById(id);
+        if (airport) {
+          setFormData({
+            name: airport.name,
+            code: airport.code,
+            city: airport.city,
+            country: airport.country,
+          });
+        }
+      }
+    };
+
+    fetchAirport();
+  }, [getAirportById, id, isEditMode]);
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!formData.code.trim()) {
+      newErrors.code = 'Code is required';
+    } else if (!/^[A-Z]{3}$/.test(formData.code)) {
+      newErrors.code = 'Code must be 3 uppercase letters';
+    }
+
+    if (!formData.city.trim()) {
+      newErrors.city = 'City is required';
+    }
+
+    if (!formData.country.trim()) {
+      newErrors.country = 'Country is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    let result;
+
+    if (isEditMode) {
+      result = await updateAirport(id, formData);
+    } else {
+      result = await createAirport(formData);
+    }
+
+    if (result) {
+      navigate('/airports');
+    }
+  };
+
+  return (
+    <Paper sx={{ p: 3 }}>
+      <Typography variant="h5" gutterBottom>
+        {isEditMode ? 'Edit Airport' : 'Add New Airport'}
+      </Typography>
+
+      <form onSubmit={handleSubmit}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              error={Boolean(errors.name)}
+              helperText={errors.name}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Code (3 letters)"
+              name="code"
+              value={formData.code}
+              onChange={handleChange}
+              error={Boolean(errors.code)}
+              helperText={errors.code}
+              inputProps={{ maxLength: 3, style: { textTransform: 'uppercase' } }}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="City"
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+              error={Boolean(errors.city)}
+              helperText={errors.city}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Country"
+              name="country"
+              value={formData.country}
+              onChange={handleChange}
+              error={Boolean(errors.country)}
+              helperText={errors.country}
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
+              <Button 
+                variant="outlined" 
+                onClick={() => navigate('/airports')}
+              >
+                Cancel
+              </Button>
+              <Button 
+                type="submit" 
+                variant="contained" 
+                color="primary"
+                disabled={loading}
+              >
+                {loading ? <CircularProgress size={24} /> : isEditMode ? 'Update' : 'Create'}
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
+      </form>
+    </Paper>
+  );
+};
+
+export default AirportForm;
+```
+
+### Pages Implementation
+
+```jsx
+// src/pages/Home.js
+import React from 'react';
+import { Typography, Paper, Grid, Card, CardContent, CardActions, Button } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import { Flight, LocationOn, AirplanemodeActive } from '@mui/icons-material';
+
+const Home = () => {
+  return (
+    <>
+      <Paper sx={{ p: 3, mb: 3 }}>
+        <Typography variant="h4" gutterBottom>
+          Airport Management System
+        </Typography>
+        <Typography variant="body1">
+          Welcome to the Airport Management System. This application allows you to manage airports, flights, and planes through an intuitive interface.
+        </Typography>
+      </Paper>
+
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={4}>
+          <Card>
+            <CardContent>
+              <LocationOn fontSize="large" color="primary" />
+              <Typography variant="h5" component="div">
+                Airports
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Manage airport information including codes, locations, and contact details.
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small" component={RouterLink} to="/airports">
+                View Airports
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
+
+        <Grid item xs={12} md={4}>
+          <Card>
+            <CardContent>
+              <Flight fontSize="large" color="primary" />
+              <Typography variant="h5" component="div">
+                Flights
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Track and manage flight schedules, statuses, and associated information.
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small" component={RouterLink} to="/flights">
+                View Flights
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
+
+        <Grid item xs={12} md={4}>
+          <Card>
+            <CardContent>
+              <AirplanemodeActive fontSize="large" color="primary" />
+              <Typography variant="h5" component="div">
+                Planes
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Manage aircraft fleet information, maintenance records, and availability.
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small" component={RouterLink} to="/planes">
+                View Planes
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
+      </Grid>
+    </>
+  );
+};
+
+export default Home;
+```
+
+```jsx
+// src/pages/Airports.js
+import React from 'react';
+import { Typography, Box } from '@mui/material';
+import AirportList from '../components/airports/AirportList';
+
+const Airports = () => {
+  return (
+    <Box>
+      <Typography variant="h4" gutterBottom>
+        Airports
+      </Typography>
+      <AirportList />
+    </Box>
+  );
+};
+
+export default Airports;
+```
+
+## Project Configuration
+
+### Backend Configuration
+
+#### application.properties for H2 Database
+
+```properties
+# H2 Database Configuration
+spring.datasource.url=jdbc:h2:mem:airportdb
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=password
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+# JPA Configuration
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+# Server Configuration
+server.port=8080
+```
+
+#### application.properties for PostgreSQL with Neon
+
+```properties
+# PostgreSQL with Neon Configuration
+spring.datasource.url=jdbc:postgresql://${NEON_HOST}/${NEON_DATABASE}
+spring.datasource.username=${NEON_USERNAME}
+spring.datasource.password=${NEON_PASSWORD}
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+
+# JPA Configuration
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+# Server Configuration
+server.port=8080
+```
+
+### Frontend Configuration
+
+#### package.json
+
+```json
+{
+  "name": "airport-app-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.1",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
+```
+
+## Getting Started
+
+### Setting Up the Backend
+
+1. Create a new Spring Boot project:
+   
+   - Use Spring Initializr (https://start.spring.io/)
+   - Add dependencies: Spring Web, Spring Data JPA, Lombok, H2 or PostgreSQL
+
+2. Configure the database connection in `application.properties`
+
+3. Create entity classes, repositories, services, and controllers
+
+4. Run the Spring Boot application:
+   
+   ```bash
+   mvn spring-boot:run
+   ```
+
+### Setting Up the Frontend
+
+1. Create a new React project:
+   
+   ```bash
+   npx create-react-app airport-app-frontend
+   // or
+   npm create vite@latest
+   ```
+
+2. Install required dependencies:
+   
+   ```bash
+   npm install @mui/material @emotion/react @emotion/styled @mui/icons-material react-router-dom axios
+   ```
+
+3. Create the component structure and implement the components
+
+4. Run the React application:
+   
+   ```bash
+   npm start
+   ```
+
+## Best Practices
+
+1. **Backend**:
+   
+   - Use DTOs (Data Transfer Objects) /Projections to separate API layer from domain model
+   - Implement exception handling with @ControllerAdvice
+   - Add validation for request bodies
+   - Use Swagger/OpenAPI/Postman for API documentation
+   - Implement pagination for large datasets
+   - Use proper HTTP status codes
+   - Create JPA Derivate Queries to perform operations upon DB.
+   - Use ResponseEntity, Optional, etc..
+
+2. **Frontend**:
+   
+   - Keep components small and focused
+   - Separate state management from presentation
+   - Handle loading states and errors gracefully
+   - Use env variables for API URLs
+   - Implement proper form validation
+   - Add confirmation for destructive actions
+
+## Additional Features
+
+1. **Authentication and Authorization**:
+   
+   - Implement JWT-based authentication
+   - Add role-based access control
+   - Secure endpoints with Spring Security
+
+2. **Advanced Filtering**:
+   
+   - Implement complex search criteria
+   - Add sorting and filtering options
+
+3. **Reporting**:
+   
+   - Generate flight statistics
+   - Export data to PDF or Excel
+
+4. **Real-time Updates**:
+   
+   - Implement WebSocket for flight status updates
+   - Show notifications for status changes
+
+5. **Library Leaflet Map for locations**
+   
+   - Implent library to add maps for each airport
+     6- **Scale entities**
+     1-  user, role, passanger, ticket, crew, baggage
+
+## Deployment
+
+1. **Containerization with Docker**:
+   
+   - Create a `Dockerfile` for the Spring Boot backend and React frontend.
+   
+   - Use Docker Compose to orchestrate the backend, frontend, and database containers.
+   
+   - Example `Dockerfile` for Spring Boot:
+     
+     ```dockerfile
+     Copy
+     
+     FROM openjdk:17-jdk-alpine
+     VOLUME /tmp
+     COPY target/airport-app-backend-0.0.1-SNAPSHOT.jar app.jar
+     ENTRYPOINT ["java","-jar","/app.jar"]
+     ```
+   
+   - Example `docker-compose.yml`:
+     
+     ```yaml
+     version: '3.8'
+     services:
+       backend:
+         build: ./backend
+         ports:
+           - "8080:8080"
+         depends_on:
+           - db
+       frontend:
+         build: ./frontend
+         ports:
+           - "3000:3000"
+       db:
+         image: postgres:13
+         environment:
+           POSTGRES_USER: admin
+           POSTGRES_PASSWORD: password
+           POSTGRES_DB: airportdb
+         ports:
+           - "5432:5432"
+     ```
+
+2. **Cloud Deployment**:
+   
+   - Deploy the backend to a cloud platform like AWS, Google Cloud, or Heroku.
+   
+   - Use services like AWS Elastic Beanstalk or Google App Engine for Spring Boot.
+   
+   - Deploy the React frontend to platforms like Vercel or Netlify.
+
+3. **Load Balancing and Scaling**:
+   
+   - Use a load balancer (e.g., NGINX) to distribute traffic across multiple backend instances.
+   
+   - Implement horizontal scaling using Kubernetes (K8s) for container orchestration.
+
+4. **Database Scaling**:
+   
+   - Use a managed PostgreSQL service like AWS RDS or Google Cloud SQL.
+   
+   - Implement database connection pooling with HikariCP in Spring Boot.
+
+## Resources
+
+- [Spring Boot Documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/)
+- [Spring Data JPA Documentation](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/)
+- [React Documentation](https://reactjs.org/docs/getting-started.html)
+- [Material UI Documentation](https://mui.com/material-ui/getting-started/overview/)
+- [React Router Documentation](https://reactrouter.com/en/main)
+- [Axios Documentation](https://axios-http.com/docs/intro)
+- [Lombok Documentation](https://projectlombok.org/features/)
+- [H2 Database Documentation](https://www.h2database.com/html/main.html)
+- [Neon Documentation](https://neon.tech/docs/introduction)
