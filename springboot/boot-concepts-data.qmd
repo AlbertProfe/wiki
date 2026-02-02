@@ -1,0 +1,167 @@
+---
+title: "Spring Boot: Data & DB"
+subtitle: Spring Boot Data & DB
+author: albertprofe
+date: "06/01/2021"
+date-modified: last-modified
+date-format: full
+description:  Spring Boot Data
+categories: [Spring-Boot, data]
+toc: true
+number-sections: true
+format:
+  html
+---
+
+
+::: {.summary}
+
+📘 **Data**
+
+Spring Data’s mission is to provide a familiar and consistent, **Spring-based programming model for data access**.
+
+It makes it easy to use **data access** technologies, ``relational`` and ``non-relational`` databases, ``map-reduce frameworks``, and ``cloud-based`` data services.
+
+This is an **umbrella project which contains many subprojects** that are specific to a given database.
+
+The projects are developed by working together with many of the companies and developers that are behind these exciting technologies.
+
+:::
+
+</br>
+
+![Spring Boot Request-Response Cycle](/images/springboot/springboot-architecture-7.png){width="80%"}
+
+## Overview
+
+![Spring Data](/images/springboot/springdata.png){width="60%"}
+
+- [Spring Boot Data](https://spring.io/projects/spring-data#overview){.external}
+
+::: {.callout-note}
+``Spring Data`` is a collection of frameworks that provide developers with a simple and consistent way to access data from various databases and data stores. 
+:::
+
+It helps reduce boilerplate code and enables rapid development of data-driven applications by providing abstractions for common data access tasks such as CRUD operations, query creation, and pagination. Features:
+
+- Powerful repository and **custom object-mapping abstractions**
+- **Dynamic query derivation** from repository method names
+- Implementation **domain base classes** providing basic properties
+- Support for transparent **auditing** (created, last changed)
+
+::: {.column-margin}
+**Secondary features:**
+Possibility to integrate custom repository code - Easy Spring integration via JavaConfig and custom XML namespaces - Advanced integration with Spring MVC controllers - Experimental support for cross-store persistence 
+:::
+
+
+
+
+``Spring Boot`` provides support for both ``SQL`` and ``NoSQ``L databases through its ``Spring Data`` module.
+
+
+::: {.column-margin}
+Spring Boot supports both SQL and NoSQL databases through its Spring Data module, making it easy to work with different types of databases in your application.
+:::
+
+> For ``SQL`` databases, Spring Data provides support for popular relational databases like **MySQL, PostgreSQL, Oracle, and SQL Server**. The SQL support in Spring Boot is primarily based on the **Java Persistence API (JPA)** and provides easy-to-use abstractions for querying and manipulating data in a relational database.
+
+> On the other hand, for ``NoSQL`` databases like **MongoDB or DynamoDB**, Spring Data provides a consistent interface for working with various NoSQL data stores. The NoSQL support in Spring Boot is built on top of the Spring Data MongoDB module and offers features like **object mapping, query building, and integration with the Spring Framework.**
+
+To use Spring Data in your Spring Boot application, you can add the appropriate Spring Data dependency to your project and configure the data source properties in your ``application.properties`` or ``application.yml`` file.
+
+Once configured, you can use **Spring Data repositories to interact with your database and perform CRUD operations on your data**.
+
+## Database or store?
+
+- [Book: PIOTR FULMAŃSKI, NoSQL Theory and examples](https://fulmanski.pl/books/doc/nosql_theory_and_examples_excerpt.pdf){.external}
+
+**A datastore (store) is, as the name indicates, a place where data is stored.** The simplest example of a store is a flat file saved on your disk.
+
+You can also save data in a database, in which the data are stored physically in files, but those files are managed by some, very often sophisticated, **management system**. 
+
+> Viewed from this perspective, **database are a special type of datastore.**
+
+Not all `NoSQL` databases have a builtin "manager", or their functionality is very limited, so the management is done in the application level. That is why you may see them just as an another one storage system. Simply speaking, simple `NoSQL` databases **(for example key-value)** are very often referred as a store while those more complicated (graph for example) as a database, but this is not rule of the thumb.
+
+
+## SQL
+
+![Database model used by SQL](/images/springboot/db-sql.png){width="80%"}
+
+We can classify database-management systems according to the database models that they support. Not going far into the past we can say that *first large-scale used model, dominant in the market for more
+than 20 years, were relational databases arise in the 1970s.* 
+
+We refer them as **SQL databases because Structured Query Language** was used by the vast majority of them for writing and querying data. `SQL (in a sense: SQL databases)` utilizes Edgar F. Codd’s [relational model based](https://www.sqlshack.com/learn-sql-types-of-relations/){.external} on tabular data representation:
+
+
+
+![SQL is relationnal](/images/springboot/many-to-many-relation%20(1).png){width="80%"}
+
+## NoSQL
+
+- [What is NoSQL?](https://www.mongodb.com/nosql-explained){.external}
+
+
+`NoSQL` databases (aka "not only SQL") are **non-tabular databases and store data differently than relational tables.**
+
+`NoSQL` databases come in a variety of types based on their data model. The main types are document, key-value, wide-column, document-oriented and graph.
+
+![What is NoSQL?](/images/springboot/db-nosql.png){width="80%"}
+
+
+
+They provide flexible schemas and **scale easily with large amounts of data and high user loads.**
+
+::: {.column-margin}
+**Denormalization** can be defined as the **copying of the same data into multiple documents or tables** in order to **simplify/optimize query processing** or to fit the user’s data into a particular data model.
+:::
+
+![employee NoSQL](/images/springboot/nosql_employee.png){width="80%"}
+
+- [Google sheet Employee template](https://docs.google.com/spreadsheets/d/1X4r6_FaPeXt11Wil_D9j6fqxJDhAzvL4KJUithBVqGQ/edit?usp=sharing){.external}
+
+## SQL vs NoSQL
+
+![NoSQL vs. SQL: Important Differences ](/images/springboot/sqlvsnosql.png){width="50%"}
+
+
+> Examples of [SQL](https://en.wikipedia.org/wiki/SQL){.external} database engine are: [MySQL](https://www.mysql.com/){.external}, [PostgreSQL](https://www.postgresql.org/){.external}, [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server){.external}, [SQLite](https://www.sqlite.org/index.html){.external} and [H2 Database](https://www.h2database.com/){.external}.
+
+> Examples of [Non-Relational](https://en.wikipedia.org/wiki/NoSQL){.external} database engines are: [MongoDB](https://www.mongodb.com/){.external}, [Apache Cassandra](https://cassandra.apache.org/){.external}, [Redis](https://redis.io/){.external}, [Couchbase](https://www.couchbase.com/){.external}, [Apache HBase](https://hbase.apache.org/){.external} and [DynamoDB AWS](https://aws.amazon.com/dynamodb/){.external}. 
+
+
+### Comparative table
+                    
+| Concept       | SQL                                    | NoSQL                                      |
+|---------------|----------------------------------------|--------------------------------------------|
+| Data Model    | Relational                             | Document, Key-Value, Column-Family, Graph  |
+| Query Language| Structured Query Language (SQL)        | Query APIs, sometimes proprietary         |
+| Scalability   | Vertical                               | Horizontal                                 |
+| Data Consistency | Strong                             | Eventual                                   |
+| Transactional Support | ACID compliance                | Limited                                   |
+| Schema Definition | Required                            | Optional                                  |
+| Query Flexibility | Limited                              | Flexible                                  |
+| Join Operations | Complex                               | Not supported                              |
+| Data Modeling  | Fixed schema                          | Dynamic schema                             |
+| Availability and Fault Tolerance | Low                  | High                                      |
+
+
+
+
+## Examples
+
+- [Evolution of SQL DB mapping in Spring](https://github.com/AlbertProfe/cifojava2022-4/wiki){.external}
+- [Lab#SB04-1: JPA Inherence strategies](/springboot/sblab4.qmd)
+- [Lab#SB01-1: DataBase](/springboot/sblab1.qmd)
+
+
+
+
+
+
+
+
+
+
+
