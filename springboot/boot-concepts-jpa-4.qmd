@@ -31,22 +31,70 @@ It supports `JPQL (Java Persistence Query Language)` for object-oriented queries
 
 </br>
 
+## Java Queries
+
+> In modern JPA (`Java Persistence API`), the vast majority of queries fall into (or are derived from) these categories evolved from the original `string`-based and native SQL.
+
+These three fundamental categories
+
+**Native SQL queries**
+
+> Direct SQL strings executed via `EntityManager.createNativeQuery(...)` or in Spring Data `JPA` via `@Query(nativeQuery = true)`.
+
+This is "raw" database SQL
+
+→ full power (database-specific functions, CTEs, window functions, performance tweaks, etc.), but zero portability between databases, no type safety, and refactoring breaks easily because table/column names are hardcoded strings.
+
+**JPQL (Java Persistence Query Language)**
+
+> The classic string-based query language in JPA (very similar to SQL but operating on entities, attributes, and relationships instead of tables/columns).
+
+Examples:
+```sql
+Static via @NamedQuery or directly via createQuery("SELECT e FROM Employee e WHERE e.salary > :min")
+```
+
+In Spring Data JPA: `@Query("SELECT e FROM Employee e WHERE e.department = ?1")` or derived query methods (`findByDepartment(...)`) that Spring parses into JPQL under the hood.
+
+→ Very readable for simple-to-medium complexity queries, portable across databases (as long as you stay within standard JPQL), but still string-based
+
+→ typos in entity names, properties, or JPQL syntax
+
+→ only caught at runtime.
+
+**Criteria API (also called typesafe Criteria queries)**
+
+> The fully programmatic, compile-time typesafe way to build queries using `CriteriaBuilder`, `CriteriaQuery`, `Root`, `Path`, `Predicate`, etc.
+Introduced in JPA 2.0 (2009) precisely to solve the runtime-error problem of string-based JPQL.
+
+Example (very simplified):
+```java
+JavaCriteriaBuilder cb = em.getCriteriaBuilder();
+CriteriaQuery<Employee> cq = cb.createQuery(Employee.class);
+Root<Employee> emp = cq.from(Employee.class);
+cq.select(emp)
+  .where(cb.greaterThan(emp.get("salary"), new BigDecimal("50000")));
+```
+→ Errors like wrong property name (`emp.get("sallary")`) → compile-time failure (if using metamodel classes), not runtime. Also allows dynamic query construction (adding **predicates** conditionally), but is very verbose for simple queries → often not the first choice for static queries.
+
+→ Excellent for dynamic queries (building `WHERE` clause based on user input, pagination, sorting, etc.)
+
+→ Very verbose for simple cases → usually not the first choice for static queries
 
 
 ## JPQL (Java Persistence Query Language)
 
 `JPQL (Java Persistence Query Language)` is an <mark>object-oriented query language used to define queries for entities and their relationships in `JPA (Java Persistence API)`</mark>. It's similar to `SQL` but operates on `JPA entity objects` rather than database tables.
 
-Criteria API for type-safe programmatic queries, and native SQL for database-specific operations. JPA also allows named queries, parameterized queries, and various operations like filtering, sorting, and joining entities.
 
-### Key Characteristics of JPQL
+Key Characteristics of JPQL
 
 1. **Object-Oriented**: Works with Java objects and their properties, not database tables and columns.
 2. **Database-Independent**: Queries can work across different database systems without modification.
 3. **Supports JPA Relationships**: Can easily navigate entity relationships.
 4. **Powerful**: Supports complex operations like joins, aggregations, and subqueries.
 
-### JPQL vs SQL
+**JPQL vs SQL**
 
 Here's a comparison between JPQL and SQL:
 
@@ -57,7 +105,7 @@ Here's a comparison between JPQL and SQL:
 | Portability | Database-independent | May contain database-specific syntax |
 | Join syntax | Simplified using relationships | Requires explicit join conditions |
 
-### JPQL Syntax Examples
+**JPQL Syntax Examples**
 
 1. Basic Select Query:
 
@@ -83,7 +131,7 @@ SELECT AVG(e.salary) FROM Employee e WHERE e.department.name = 'IT'
 SELECT e FROM Employee e WHERE e.salary > (SELECT AVG(emp.salary) FROM Employee emp)
 ```
 
-### Using JPQL in Spring Data JPA
+Using JPQL in Spring Data JPA
 
 1. With `@Query` annotation:
 
@@ -94,7 +142,7 @@ User findActiveUserByEmail(String email);
 ```
 :::
 
-1. With `EntityManager`:
+2. With `EntityManager`:
 
 ::: {.column-page-right}
 ```java
@@ -105,7 +153,7 @@ List<Product> products = entityManager.createQuery(jpql, Product.class)
 ```
 :::
 
-### Benefits of JPQL
+Benefits of JPQL:
 
 1. Type-safety: Works with Java types, reducing runtime errors.
 2. Abstraction: Shields developers from database-specific details.
@@ -131,7 +179,7 @@ Spring Boot offers several ways to create queries when working with JPA reposito
 
 Here are the **five most relevant methods**, along with examples for the [userBorrowBook](https://github.com/AlbertProfe/userBorrowBook){.external target='_blank'} entities:
 
-### 1. Derived Query Methods
+### Derived Query Methods
 
 `Derived query methods` allow you to create queries by simply declaring method names in your repository interface. `Spring Data JPA` automatically generates the query based on the method name.
 
@@ -155,7 +203,7 @@ public interface UserAppRepository extends JpaRepository {
 ```
 :::
 
-## 2. @Query Annotation
+## @Query Annotation
 
 The @Query annotation allows you to write custom `JPQL` or native `SQL` queries directly in your repository interface.
 
@@ -178,7 +226,9 @@ public interface UserAppRepository extends JpaRepository {
 ```
 :::
 
-## 3. Specification API: filters
+## Specification API: filters
+
+> Criteria API for type-safe programmatic queries, and native SQL for database-specific operations. JPA also allows named queries, parameterized queries, and various operations like filtering, sorting, and joining entities.
 
 The `Specification API` allows you to build **dynamic queries programmatically**. This is useful when you need to create complex queries based on multiple conditions.
 
@@ -202,7 +252,7 @@ List availableBooksByAuthor = bookRepository.findAll(where(isAvailable()).and(ha
 ```
 :::
 
-## 4. Query by Example (QBE)
+## Query by Example (QBE)
 
 `Query by Example` allows you to create queries using domain object instances as examples.
 
@@ -221,7 +271,7 @@ List books = bookRepository.findAll(example);
 ```
 :::
 
-## 5. @NamedQueries annotation
+## @NamedQueries annotation
 
 `@NamedQueries` is another powerful way to create queries in `Spring Boot JPA`. This method allows you to define queries at the entity level, separating the query definition from the repository interface.
 
