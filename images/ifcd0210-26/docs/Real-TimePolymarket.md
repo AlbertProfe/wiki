@@ -1,12 +1,69 @@
+---
+title: "Lab Polymarket"
+categories: [labs]
+toc: true
+number-sections: false
+format:
+  html
+---
+
 # Real-Time Polymarket Dashboard using Spring Boot, GraphQL, and React
 
-**Objective**
+## Objective
 
 > Build a full-stack real-time application that fetches prediction market data from Polymarket and displays selected markets with live price and volume updates using GraphQL Queries, Mutations, and Subscriptions.
 >
 >The users can browse Polymarket prediction markets, select a specific market, and choose one or more outcomes (bets). Once selected, the web application must automatically notify the user in real time with live price and volume updates for the chosen market using GraphQL Subscriptions over WebSocket.
 
-**Requirements**
+
+## Features
+
+Let's start with 3 basic features, these three features form a solid and progressive scope for the project:
+
+- **Feature 0** handles security and user management.
+- **Feature 1** focuses on discovery and real-time data display.
+- **Feature 2** adds user interaction and personalization.
+
+### Feature 0: Authentication System (Login / Register)
+
+**Description**:  
+Implement a user authentication system that allows new users to create an account and existing users to log in. The system must securely handle user registration and login using email and password. Once authenticated, users gain access to personalized features such as saving favorites and making predictions. JWT-based authentication is recommended for securing the backend APIs.
+
+**Main Requirements**:
+- User registration with email, password, and username.
+- User login with email and password.
+- Password hashing and secure token generation.
+- Protected routes for authenticated users only.
+- Basic profile information (optional).
+
+
+## Feature 1: Dashboard – Most Relevant Markets Summary
+
+**Description**:  
+Develop a clean and informative dashboard that displays a summary of the **10 most relevant active markets** from Polymarket. The dashboard serves as the main landing page after login, giving users a quick overview of trending or high-volume prediction markets.
+
+**Main Requirements**:
+- Show the top 10 markets sorted by volume, liquidity, or activity (students can choose the best criteria).
+- For each market, display: question/title, category, current volume, liquidity, end date, and the top 2–3 outcomes with their current prices.
+- Responsive and visually appealing card-based layout.
+- Clicking on any market card redirects the user to the detailed market view.
+- Data must be fetched from Polymarket Gamma API and refreshed periodically.
+
+### Feature 2: Favorites & Make a Prediction
+
+**Description**:  
+Allow authenticated users to add interesting markets to their personal **Favorites** list and make a prediction (simulate placing a bet) on a selected outcome within a chosen market.
+
+**Main Requirements**:
+- Users can add or remove a market from their Favorites list (using GraphQL Mutations).
+- A dedicated “My Favorites” section where saved markets are displayed with live price updates.
+- In the market detail view, users can select one outcome and “make a prediction” by specifying an amount (simulation only – no real trading).
+- Store the user’s favorite markets and prediction history in the backend database.
+- After making a prediction, show a confirmation message and update the user interface in real time where applicable.
+- The selected market must continue receiving live price updates via GraphQL Subscription.
+
+
+## Requirements
 
 **Backend (Spring Boot + GraphQL)**
 
@@ -117,7 +174,7 @@ type SelectedMarket {
   - Viewing real-time price and volume updates for the selected market’s outcomes
 - Use GraphQL Queries to load initial data, Mutations for user actions (select/refresh), and Subscriptions for live updates.
 
-**Lab Tasks**
+## Lab Tasks
 
 1. Implement the complete GraphQL backend layer:
    
