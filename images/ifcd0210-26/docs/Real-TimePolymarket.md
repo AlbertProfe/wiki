@@ -26,23 +26,27 @@ Let's start with 3 basic features, these three features form a solid and progres
 
 ### Feature 0: Authentication System (Login / Register)
 
-**Description**:  
-Implement a user authentication system that allows new users to create an account and existing users to log in. The system must securely handle user registration and login using email and password. Once authenticated, users gain access to personalized features such as saving favorites and making predictions. JWT-based authentication is recommended for securing the backend APIs.
+**Description**:
+
+>Implement a user authentication system that allows new users to create an account and existing users to log in. The system must securely handle user registration and login using email and password. Once authenticated, users gain access to personalized features such as saving favorites and making predictions. JWT-based authentication is recommended for securing the backend APIs.
+> If you do not want to use JWT you can proopose and alternative.
 
 **Main Requirements**:
+
 - User registration with email, password, and username.
 - User login with email and password.
 - Password hashing and secure token generation.
 - Protected routes for authenticated users only.
 - Basic profile information (optional).
 
-
 ## Feature 1: Dashboard – Most Relevant Markets Summary
 
-**Description**:  
-Develop a clean and informative dashboard that displays a summary of the **10 most relevant active markets** from Polymarket. The dashboard serves as the main landing page after login, giving users a quick overview of trending or high-volume prediction markets.
+**Description**:
+
+> Develop a clean and informative dashboard that displays a summary of the **10 most relevant active markets** from Polymarket. The dashboard serves as the main landing page after login, giving users a quick overview of trending or high-volume prediction markets.
 
 **Main Requirements**:
+
 - Show the top 10 markets sorted by volume, liquidity, or activity (students can choose the best criteria).
 - For each market, display: question/title, category, current volume, liquidity, end date, and the top 2–3 outcomes with their current prices.
 - Responsive and visually appealing card-based layout.
@@ -51,17 +55,18 @@ Develop a clean and informative dashboard that displays a summary of the **10 mo
 
 ### Feature 2: Favorites & Make a Prediction
 
-**Description**:  
-Allow authenticated users to add interesting markets to their personal **Favorites** list and make a prediction (simulate placing a bet) on a selected outcome within a chosen market.
+**Description**:
 
-**Main Requirements**:
+> Allow authenticated users to add interesting markets to their personal **Favorites** list and make a prediction (simulate placing a bet) on a selected outcome within a chosen market.
+
+**Main Requirements**
+
 - Users can add or remove a market from their Favorites list (using GraphQL Mutations).
 - A dedicated “My Favorites” section where saved markets are displayed with live price updates.
 - In the market detail view, users can select one outcome and “make a prediction” by specifying an amount (simulation only – no real trading).
 - Store the user’s favorite markets and prediction history in the backend database.
 - After making a prediction, show a confirmation message and update the user interface in real time where applicable.
 - The selected market must continue receiving live price updates via GraphQL Subscription.
-
 
 ## Requirements
 
@@ -212,7 +217,7 @@ type SelectedMarket {
   - GraphiQL / Altair showing queries, mutations, and active subscription
   - React dashboard with live updating prices
 
-**Estimated Time**: 18–24 hours (3 dyas of work)
+**Estimated Time**: 18–24 hours (3 days of work (focused)/ 4 weeks - 4 sprints (shared time))
 
 Good luck! Focus on understanding how Queries, Mutations, and Subscriptions work together in a real-time GraphQL application.
 
