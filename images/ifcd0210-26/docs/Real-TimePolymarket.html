@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>real-timepolymarket – albertprofe wiki</title>
+<title>Lab Polymarket – albertprofe wiki</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -1429,24 +1429,86 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#real-time-polymarket-dashboard-using-spring-boot-graphql-and-react" id="toc-real-time-polymarket-dashboard-using-spring-boot-graphql-and-react" class="nav-link active" data-scroll-target="#real-time-polymarket-dashboard-using-spring-boot-graphql-and-react">Real-Time Polymarket Dashboard using Spring Boot, GraphQL, and React</a></li>
+  <li><a href="#real-time-polymarket-dashboard-using-spring-boot-graphql-and-react" id="toc-real-time-polymarket-dashboard-using-spring-boot-graphql-and-react" class="nav-link active" data-scroll-target="#real-time-polymarket-dashboard-using-spring-boot-graphql-and-react">Real-Time Polymarket Dashboard using Spring Boot, GraphQL, and React</a>
+  <ul>
+  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">Objective</a></li>
+  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a>
+  <ul>
+  <li><a href="#feature-0-authentication-system-login-register" id="toc-feature-0-authentication-system-login-register" class="nav-link" data-scroll-target="#feature-0-authentication-system-login-register">Feature 0: Authentication System (Login / Register)</a></li>
+  </ul></li>
+  <li><a href="#feature-1-dashboard-most-relevant-markets-summary" id="toc-feature-1-dashboard-most-relevant-markets-summary" class="nav-link" data-scroll-target="#feature-1-dashboard-most-relevant-markets-summary">Feature 1: Dashboard – Most Relevant Markets Summary</a>
+  <ul>
+  <li><a href="#feature-2-favorites-make-a-prediction" id="toc-feature-2-favorites-make-a-prediction" class="nav-link" data-scroll-target="#feature-2-favorites-make-a-prediction">Feature 2: Favorites &amp; Make a Prediction</a></li>
+  </ul></li>
+  <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements">Requirements</a></li>
+  <li><a href="#lab-tasks" id="toc-lab-tasks" class="nav-link" data-scroll-target="#lab-tasks">Lab Tasks</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/images/ifcd0210-26/docs/Real-TimePolymarket.md" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lab Polymarket</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">labs</div>
+  </div>
+  </div>
 
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
 
 
 <section id="real-time-polymarket-dashboard-using-spring-boot-graphql-and-react" class="level1">
 <h1>Real-Time Polymarket Dashboard using Spring Boot, GraphQL, and React</h1>
-<p><strong>Objective</strong></p>
+<section id="objective" class="level2">
+<h2 class="anchored" data-anchor-id="objective">Objective</h2>
 <blockquote class="blockquote">
 <p>Build a full-stack real-time application that fetches prediction market data from Polymarket and displays selected markets with live price and volume updates using GraphQL Queries, Mutations, and Subscriptions.</p>
 <p>The users can browse Polymarket prediction markets, select a specific market, and choose one or more outcomes (bets). Once selected, the web application must automatically notify the user in real time with live price and volume updates for the chosen market using GraphQL Subscriptions over WebSocket.</p>
 </blockquote>
-<p><strong>Requirements</strong></p>
+</section>
+<section id="features" class="level2">
+<h2 class="anchored" data-anchor-id="features">Features</h2>
+<p>Let’s start with 3 basic features, these three features form a solid and progressive scope for the project:</p>
+<ul>
+<li><strong>Feature 0</strong> handles security and user management.</li>
+<li><strong>Feature 1</strong> focuses on discovery and real-time data display.</li>
+<li><strong>Feature 2</strong> adds user interaction and personalization.</li>
+</ul>
+<section id="feature-0-authentication-system-login-register" class="level3">
+<h3 class="anchored" data-anchor-id="feature-0-authentication-system-login-register">Feature 0: Authentication System (Login / Register)</h3>
+<p><strong>Description</strong>:<br>
+Implement a user authentication system that allows new users to create an account and existing users to log in. The system must securely handle user registration and login using email and password. Once authenticated, users gain access to personalized features such as saving favorites and making predictions. JWT-based authentication is recommended for securing the backend APIs.</p>
+<p><strong>Main Requirements</strong>: - User registration with email, password, and username. - User login with email and password. - Password hashing and secure token generation. - Protected routes for authenticated users only. - Basic profile information (optional).</p>
+</section>
+</section>
+<section id="feature-1-dashboard-most-relevant-markets-summary" class="level2">
+<h2 class="anchored" data-anchor-id="feature-1-dashboard-most-relevant-markets-summary">Feature 1: Dashboard – Most Relevant Markets Summary</h2>
+<p><strong>Description</strong>:<br>
+Develop a clean and informative dashboard that displays a summary of the <strong>10 most relevant active markets</strong> from Polymarket. The dashboard serves as the main landing page after login, giving users a quick overview of trending or high-volume prediction markets.</p>
+<p><strong>Main Requirements</strong>: - Show the top 10 markets sorted by volume, liquidity, or activity (students can choose the best criteria). - For each market, display: question/title, category, current volume, liquidity, end date, and the top 2–3 outcomes with their current prices. - Responsive and visually appealing card-based layout. - Clicking on any market card redirects the user to the detailed market view. - Data must be fetched from Polymarket Gamma API and refreshed periodically.</p>
+<section id="feature-2-favorites-make-a-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="feature-2-favorites-make-a-prediction">Feature 2: Favorites &amp; Make a Prediction</h3>
+<p><strong>Description</strong>:<br>
+Allow authenticated users to add interesting markets to their personal <strong>Favorites</strong> list and make a prediction (simulate placing a bet) on a selected outcome within a chosen market.</p>
+<p><strong>Main Requirements</strong>: - Users can add or remove a market from their Favorites list (using GraphQL Mutations). - A dedicated “My Favorites” section where saved markets are displayed with live price updates. - In the market detail view, users can select one outcome and “make a prediction” by specifying an amount (simulation only – no real trading). - Store the user’s favorite markets and prediction history in the backend database. - After making a prediction, show a confirmation message and update the user interface in real time where applicable. - The selected market must continue receiving live price updates via GraphQL Subscription.</p>
+</section>
+</section>
+<section id="requirements" class="level2">
+<h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
 <p><strong>Backend (Spring Boot + GraphQL)</strong></p>
 <ul>
 <li>Create a <code>Spring Boot</code> application that communicates with the <code>Polymarket Gamma API</code> (<code>https://gamma-api.polymarket.com</code>).</li>
@@ -1548,7 +1610,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>Use GraphQL Queries to load initial data, Mutations for user actions (select/refresh), and Subscriptions for live updates.</li>
 </ul>
-<p><strong>Lab Tasks</strong></p>
+</section>
+<section id="lab-tasks" class="level2">
+<h2 class="anchored" data-anchor-id="lab-tasks">Lab Tasks</h2>
 <ol type="1">
 <li><p>Implement the complete GraphQL backend layer:</p>
 <ul>
@@ -1591,6 +1655,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Good luck! Focus on understanding how Queries, Mutations, and Subscriptions work together in a real-time GraphQL application.</p>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
