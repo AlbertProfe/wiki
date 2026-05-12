@@ -1,0 +1,174 @@
+# LAB#05: Implementing Zone Access Control Logic
+
+## 🎯 Learning Objectives
+
+- Understand <mark>different approaches to implementing complex business logic</mark>
+- Practice <mark>breaking down a decision tree</mark> into clean, maintainable code
+- Compare <mark>trade-offs between code </mark>styles (readability, testability, maintainability)
+- Learn how to separate <mark>business logic from UI</mark> in a React Native app
+
+## 📋 Scenario
+
+> You are building a wristband access control system for a large venue (festival, conference, stadium, etc.).
+
+When a wristband is scanned at a checkpoint, the system must decide whether to **GRANT** or **DENY** access based on the flowchart provided.
+
+  **Files:**
+
+- `ZONE_ACCESS-flow.png` → Complete flowchart
+
+## 🔄 The Four Approaches
+
+  You will implement the **same logic** using **four different styles**:
+
+1. **Nested If/Else** (Simple but messy)
+2. **Composable Pure Functions** (Focused, testable functions.)
+3. **Declarative Rules Array** (Policy-based)
+4. **State Machine** (Conceptual / XState style)
+
+## 📌 Requirements
+
+  Create a function `evaluateWristbandAccess(wristband, checkpoint)` that returns:
+
+```ts
+type AccessResult = {
+  granted: boolean;
+  code: string;
+  message: string;
+  metadata?: Record<string, any>;
+};
+```
+
+**Core Rules (from flowchart):**
+
+- If `checkpoint.direction === 'OUT'` → Always **GRANTED**
+- If `direction === 'IN'`:
+  - Check if `wristband.type` is in `checkpoint.allowedTypes`
+  - If **not** → `TYPE_NOT_ALLOWED`
+  - If **yes** → Check Bypass Policy
+    - If bypass active → **GRANTED**
+    - Else → Check Zone Config
+      - If no config → `ZONE_CONFIG_MISSING`
+      - If `enterPermission === false` → `NO_PERMISSION`
+      - Else → Check Capacity
+        - If full → `CAPACITY_FULL`
+        - Else → **GRANTED**
+
+## 🛠️ Exercise Tasks
+
+### Task 1: Nested If/Else Approach
+
+**Goal**: Implement the logic using nested `if/else` statements.
+
+**Clues:**
+
+- Start with the direction check (early exit)
+- Be careful with indentation
+- Try to avoid deep nesting where possible
+
+### Task 2: Composable Pure Functions
+
+**Goal**: Break the logic into small, focused, testable functions.
+
+**Clues:**
+
+- Create helper functions like:
+  - `isExit(checkpoint)`
+  - `isTypeAllowed(wristband, allowedTypes)`
+  - `hasActiveBypass(wristband)`
+  - `getZoneConfig(zoneId)` (async)
+  - `isCapacityAvailable(config)`
+- Build a clean `evaluateAccess` orchestrator that calls them in sequence
+- Each function should do **one thing**
+
+### Task 3: Declarative Rules Array
+
+**Goal**: Create a list of rules that are evaluated in order.
+
+**Clues:**
+
+```js
+const rules = [
+  {
+    condition: (w, c) => c.direction === 'OUT',
+    result: () => ({ granted: true, code: 'GRANTED', message: 'Exit allowed' })
+  },
+  // ... more rules
+];
+```
+
+- Rules are evaluated from top to bottom (first match wins)
+- Good for non-developers to understand
+
+### Task 4: State Machine Style
+
+**Goal**: Model the flowchart as a state machine (conceptual or using XState).
+
+**Clues:**
+
+- States could be: `scanned`, `checkingDirection`, `checkingType`, `checkingBypass`, `checkingCapacity`, `granted`, `denied`
+- Transitions based on conditions
+- Excellent for complex flows with side effects
+
+## 📝 Deliverables
+
+For each approach, create a file:
+
+- `approach-1-nested.js`
+- `approach-2-composable.js`
+- `approach-3-declarative.js`
+- `approach-4-state-machine.js`
+
+Include:
+
+1. The implementation
+2. A short comment at the top explaining pros & cons
+3. At least **2 unit tests** per approach (using Jest)
+
+## 💡 Bonus Challenges
+
+1. Add proper **TypeScript** types
+2. Make the logic fully **async** (simulate network calls for zone config and capacity)
+3. Add **audit logging** for every decision
+4. Create a **React Native component** that uses your favorite approach
+5. Implement **error handling** (network failure → fail closed)
+
+## 🔍 Evaluation Criteria
+
+- Correctness (matches flowchart)
+- Code readability & organization
+- Separation of concerns
+- Test coverage
+- Comments & explanations
+
+## 🚀 Starter Template
+
+```js
+// approach-2-composable.js
+
+function isExit(checkpoint) {
+  // your code
+}
+
+function isTypeAllowed(wristband, allowedTypes) {
+  // your code
+}
+
+// ... more helpers
+
+async function evaluateWristbandAccess(wristband, checkpoint) {
+  // orchestrator
+}
+```
+
+**Good luck!**
+
+Think about:
+
+- Which approach feels easiest to <mark>test and debug</mark>?
+- Which approach feels easiest to <mark>maintain and understand</mark>?
+- Which one would be easiest to <mark>scale</mark> and add new features?
+- Which one would be easiest for a <mark>non-developer</mark> to review?
+- Which one would you choose for a <mark>real production app</mark>? Why?
+
+
