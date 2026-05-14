@@ -1,0 +1,183 @@
+# Nested if/else approaches
+
+**✅ Four Ways to Implement Access Control Logic**
+
+Here's a clean comparison using the **wristband zone access** flowchart. All examples implement the **same simplified logic**:
+
+- If direction = OUT → always GRANTED
+- If direction = IN:
+  - Check if type is allowed
+  - If bypass active → GRANTED
+  - Else check zone config + permission + capacity
+
+### 1. Big Nested If/Else (The "Quick & Dirty" Way)
+
+```js
+function evaluateAccess(wristband, checkpoint) {
+  if (checkpoint.direction === 'OUT') {
+    return { granted: true, code: 'GRANTED', message: 'Exit allowed' };
+  } 
+
+  // Direction is IN
+  if (!checkpoint.allowedTypes.includes(wristband.type)) {
+    return { granted: false, code: 'TYPE_NOT_ALLOWED', 
+             message: `Type ${wristband.type} not allowed` };
+  }
+
+  if (hasActiveBypass(wristband)) {
+    return { granted: true, code: 'GRANTED', message: 'Bypass active' };
+  }
+
+  const config = getZoneConfig(checkpoint.zoneId);
+  if (!config) {
+    return { granted: false, code: 'ZONE_CONFIG_MISSING' };
+  }
+
+  if (!config.enterPermission) {
+    return { granted: false, code: 'NO_PERMISSION' };
+  }
+
+  if (config.currentCount >= config.maxCapacity) {
+    return { granted: false, code: 'CAPACITY_FULL', 
+             message: `Capacity full (${config.currentCount}/${config.maxCapacity})` };
+  }
+
+  return { granted: true, code: 'GRANTED', message: 'Welcome!' };
+}
+```
+
+**Pros**: Simple to write initially.  
+**Cons**: Becomes a "pyramid of doom", hard to test and maintain.
+
+### 2. Composable Pure Functions (Recommended for most cases)
+
+```js
+// Small, focused, testable functions
+function isExit(checkpoint) {
+  return checkpoint.direction === 'OUT';
+}
+
+function isTypeAllowed(wristband, allowedTypes) {
+  return allowedTypes.includes(wristband.type);
+}
+
+function hasActiveBypass(wristband) {
+  return wristband.bypassUntil && new Date(wristband.bypassUntil) > new Date();
+}
+
+function getAccessResult(granted, code, message, metadata = {}) {
+  return { granted, code, message, metadata };
+}
+
+// Main orchestrator (clean and readable)
+async function evaluateAccess(wristband, checkpoint) {
+  if (isExit(checkpoint)) {
+    return getAccessResult(true, 'GRANTED', 'Exit allowed');
+  }
+
+  if (!isTypeAllowed(wristband, checkpoint.allowedTypes)) {
+    return getAccessResult(false, 'TYPE_NOT_ALLOWED', 
+      `Type ${wristband.type} not allowed in this zone`);
+  }
+
+  if (hasActiveBypass(wristband)) {
+    return getAccessResult(true, 'GRANTED', 'Bypass active');
+  }
+
+  const config = await getZoneConfig(checkpoint.zoneId);
+  if (!config) {
+    return getAccessResult(false, 'ZONE_CONFIG_MISSING');
+  }
+
+  if (!config.enterPermission) {
+    return getAccessResult(false, 'NO_PERMISSION');
+  }
+
+  if (config.currentCount >= config.maxCapacity) {
+    return getAccessResult(false, 'CAPACITY_FULL', 
+      `Capacity full (${config.currentCount}/${config.maxCapacity})`);
+  }
+
+  return getAccessResult(true, 'GRANTED', 'Access granted');
+}
+```
+
+**Best for**: Readability + unit testing.
+
+### 3. Declarative Rules Array / Policy Engine
+
+```js
+const accessRules = [
+  {
+    condition: (w, c) => c.direction === 'OUT',
+    result: () => ({ granted: true, code: 'GRANTED', message: 'Exit allowed' })
+  },
+  {
+    condition: (w, c) => !c.allowedTypes.includes(w.type),
+    result: (w) => ({ granted: false, code: 'TYPE_NOT_ALLOWED', 
+                     message: `Type ${w.type} not allowed` })
+  },
+  {
+    condition: (w) => hasActiveBypass(w),
+    result: () => ({ granted: true, code: 'GRANTED', message: 'Bypass active' })
+  },
+  // ... more rules
+];
+
+function evaluateAccess(wristband, checkpoint) {
+  for (const rule of accessRules) {
+    if (rule.condition(wristband, checkpoint)) {
+      return rule.result(wristband, checkpoint);
+    }
+  }
+  // Default / final checks (capacity, etc.)
+  return { granted: true, code: 'GRANTED', message: 'Access granted' };
+}
+```
+
+**Best for**: When non-developers (ops/product) need to tweak rules.
+
+### 4. State Machine Style (Conceptual - XState)
+
+```js
+// Pseudo-code (real XState is more verbose but very powerful)
+const accessMachine = {
+  initial: 'scanned',
+  states: {
+    scanned: {
+      on: {
+        CHECK_DIRECTION: [
+          { target: 'granted', cond: 'isExit' },
+          { target: 'checkType' }
+        ]
+      }
+    },
+    checkType: {
+      on: {
+        TYPE_ALLOWED: 'checkBypass',
+        TYPE_DENIED: 'denied'
+      }
+    },
+    checkBypass: {
+      on: {
+        BYPASS_ACTIVE: 'granted',
+        NO_BYPASS: 'checkZoneConfig'
+      }
+    },
+    // ... checkZoneConfig, checkCapacity, granted, denied
+  }
+};
+```
+
+**Best for**: Very complex flows with many side effects, retries, or parallel checks.
+
+### Summary Table for Students
+
+| Approach               | Readability | Testability | Maintainability | Best When...                 |
+| ---------------------- | ----------- | ----------- | --------------- | ---------------------------- |
+| Nested If/Else         | Low         | Low         | Poor            | Very small scripts           |
+| Composable Functions   | High        | Excellent   | Excellent       | Most real apps (Recommended) |
+| Declarative Rules      | High        | Good        | Excellent       | Rules change often           |
+| State Machine (XState) | Medium      | Excellent   | Excellent       | Complex multi-step flows     |
+
+**Decision-making Tip**: Start with the nested `if/else`, then refactor it together into the **composable functions** version — students will immediately see the improvement!
