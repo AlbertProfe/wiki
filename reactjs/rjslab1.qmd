@@ -117,7 +117,47 @@ The two ``Open Library API`` **endpoints** we are going to use are:
 - [Open Library Books](https://openlibrary.org/dev/docs/api/books)
 This endpoint provides documentation for the Open Library Books API. It includes information on how to use the API to search for books, retrieve book details, and access other book-related information.
 - [Open Library Books: get 100 books](https://openlibrary.org/search.json?q=*&limit=100)
-This endpoint is used to retrieve a list of up to 100 books from the Open Library API. The ``q=* `` parameter is used to search for all books, and the limit=100 parameter limits the results to 100 books. The response data is in JSON format and includes information like the book title, author, publication date, and more.
+  - This is an old endpoint (<2026), it is legacy documentation, jump to next section to see the new endpoint.
+  - This endpoint is used to retrieve a list of up to 100 books from the Open Library API. The ``q=* `` parameter is used to search for all books, and the limit=100 parameter limits the results to 100 books. The response data is in JSON format and includes information like the book title, author, publication date, and more.
+
+
+
+### openlibrary update 2026: what changed
+
+**old query**: https://openlibrary.org/search.json?q=*&limit=100
+
+`q=*` (and other very short / low-value queries) used to work, but the endpoint now rejects them with:
+
+```json
+{
+  "detail": [
+    {
+      "type": "value_error",
+      "loc": ["query", "q"],
+      "msg": "Value error, Query too short, must be at least 3 characters",
+      "input": "*"
+    }
+  ]
+}
+```
+
+This is a deliberate backend validation (visible in the FastAPI layer they migrated to). It was added as part of performance work because short/wildcard-only queries (especially `*`, single characters, or stop-words like “the”) were expensive on Solr and caused problems.
+
+> The official Search API docs (`https://openlibrary.org/dev/docs/api/search`) still don’t explicitly document the 3-character minimum, but the live endpoint enforces it.
+
+#### Notes
+
+- The old Books API page (`/dev/docs/api/books`) is about the older/legacy Books API and Work/Edition/ISBN endpoints — it is **not** the Search API.
+- Even some 3-letter stop words can be rejected (e.g. `q=the` currently fails with an “Invalid query” message). A normal term like `q=book` works fine.
+
+We must use a real search term of at least 3 characters:
+
+```
+https://openlibrary.org/search.json?q=book&limit=100
+https://openlibrary.org/search.json?q=the+lord+of+the+rings&limit=100
+```
+
+Or use fielded queries / other filters instead of a bare `*`.
 
 ## Create app
 
