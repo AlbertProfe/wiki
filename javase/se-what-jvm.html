@@ -80,6 +80,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-8654f46d95255d4aca9b36c8f0882426.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -2015,18 +2018,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#compiled-hello-world-binary-sizes-explained" id="toc-compiled-hello-world-binary-sizes-explained" class="nav-link" data-scroll-target="#compiled-hello-world-binary-sizes-explained"><span class="header-section-number">2</span> Compiled “Hello World” Binary Sizes — Explained</a>
+  <li><a href="#compiled-hello-world-binary-size" id="toc-compiled-hello-world-binary-size" class="nav-link" data-scroll-target="#compiled-hello-world-binary-size"><span class="header-section-number">2</span> Compiled “Hello World” Binary Size</a>
   <ul>
   <li><a href="#tiny-end-native-minimal-runtime" id="toc-tiny-end-native-minimal-runtime" class="nav-link" data-scroll-target="#tiny-end-native-minimal-runtime"><span class="header-section-number">2.1</span> Tiny end (native, minimal runtime)</a></li>
   <li><a href="#small-to-medium-compiled-languages" id="toc-small-to-medium-compiled-languages" class="nav-link" data-scroll-target="#small-to-medium-compiled-languages"><span class="header-section-number">2.2</span> Small-to-medium compiled languages</a></li>
-  <li><a href="#languages-with-substantial-runtimes-or-static-linking-of-the-whole-environment" id="toc-languages-with-substantial-runtimes-or-static-linking-of-the-whole-environment" class="nav-link" data-scroll-target="#languages-with-substantial-runtimes-or-static-linking-of-the-whole-environment"><span class="header-section-number">2.3</span> Languages with substantial runtimes or static linking of the whole environment</a></li>
+  <li><a href="#languages-with-runtimes" id="toc-languages-with-runtimes" class="nav-link" data-scroll-target="#languages-with-runtimes"><span class="header-section-number">2.3</span> Languages with runtimes</a></li>
   <li><a href="#interpreted-vm-full-runtime-packaging" id="toc-interpreted-vm-full-runtime-packaging" class="nav-link" data-scroll-target="#interpreted-vm-full-runtime-packaging"><span class="header-section-number">2.4</span> Interpreted / VM / full-runtime packaging</a></li>
   <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">2.5</span> Key takeaways</a></li>
   </ul></li>
   <li><a href="#what-is-a-virtual-machine" id="toc-what-is-a-virtual-machine" class="nav-link" data-scroll-target="#what-is-a-virtual-machine"><span class="header-section-number">3</span> What Is a Virtual Machine?</a>
   <ul>
-  <li><a href="#system-hardware-virtual-machines" id="toc-system-hardware-virtual-machines" class="nav-link" data-scroll-target="#system-hardware-virtual-machines"><span class="header-section-number">3.1</span> System (Hardware) Virtual Machines</a></li>
-  <li><a href="#process-application-virtual-machines" id="toc-process-application-virtual-machines" class="nav-link" data-scroll-target="#process-application-virtual-machines"><span class="header-section-number">3.2</span> Process (Application) Virtual Machines</a></li>
+  <li><a href="#process-application-virtual-machines" id="toc-process-application-virtual-machines" class="nav-link" data-scroll-target="#process-application-virtual-machines"><span class="header-section-number">3.1</span> Process (Application) Virtual Machines</a></li>
   </ul></li>
   <li><a href="#why-is-it-called-a-virtual-machine" id="toc-why-is-it-called-a-virtual-machine" class="nav-link" data-scroll-target="#why-is-it-called-a-virtual-machine"><span class="header-section-number">4</span> Why Is It Called a “Virtual Machine”?</a></li>
   <li><a href="#precise-definition-of-the-jvm" id="toc-precise-definition-of-the-jvm" class="nav-link" data-scroll-target="#precise-definition-of-the-jvm"><span class="header-section-number">5</span> Precise Definition of the JVM</a>
@@ -2035,9 +2037,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#how-the-jvm-executes-code" id="toc-how-the-jvm-executes-code" class="nav-link" data-scroll-target="#how-the-jvm-executes-code"><span class="header-section-number">6</span> How the JVM Executes Code</a>
   <ul>
-  <li><a href="#from-source-to-bytecode-ahead-of-time" id="toc-from-source-to-bytecode-ahead-of-time" class="nav-link" data-scroll-target="#from-source-to-bytecode-ahead-of-time"><span class="header-section-number">6.1</span> From Source to Bytecode (Ahead of Time)</a></li>
-  <li><a href="#execution-model-for-small-and-large-programs" id="toc-execution-model-for-small-and-large-programs" class="nav-link" data-scroll-target="#execution-model-for-small-and-large-programs"><span class="header-section-number">6.2</span> Execution Model for Small and Large Programs</a></li>
-  <li><a href="#concrete-example-three-layers" id="toc-concrete-example-three-layers" class="nav-link" data-scroll-target="#concrete-example-three-layers"><span class="header-section-number">6.3</span> Concrete Example – Three Layers</a></li>
+  <li><a href="#concrete-example-three-layers" id="toc-concrete-example-three-layers" class="nav-link" data-scroll-target="#concrete-example-three-layers"><span class="header-section-number">6.1</span> Concrete Example – Three Layers</a></li>
   </ul></li>
   <li><a href="#mental-model-of-the-jvm" id="toc-mental-model-of-the-jvm" class="nav-link" data-scroll-target="#mental-model-of-the-jvm"><span class="header-section-number">7</span> Mental Model of the JVM</a></li>
   <li><a href="#key-takeaways-1" id="toc-key-takeaways-1" class="nav-link" data-scroll-target="#key-takeaways-1"><span class="header-section-number">8</span> Key Takeaways</a></li>
@@ -2101,7 +2101,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>📘 <strong>Java JVM</strong></p>
 <p>The Java Virtual Machine (JVM) is a <strong>process virtual machine</strong> that executes Java bytecode. It is the cornerstone of the Java platform, enabling Java programs to run on any device or operating system that has a compatible JVM implementation.</p>
 </div>
-<p><br><br></p>
+<p><br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/javase/jvm-title.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../images/javase/jvm-title.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:40.0%"></a></p>
+</figure>
+</div>
 <p>When we write a simple <code>“Hello, World!”</code> program, the size of the final executable (or packaged runtime) varies enormously depending on the language. This difference reveals a fundamental trade-off between <strong>control, safety, productivity, and runtime overhead</strong>.</p>
 <p>Here is a typical ranking of compiled (or packaged) <code>“Hello World”</code> binary sizes (<code>builds</code>), from smallest to largest:</p>
 <table class="caption-top table">
@@ -2202,16 +2207,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p><strong>What this table tells us</strong></p>
 <ul>
-<li>Languages at the top (Assembly, Zig, C) produce almost pure machine code with almost no extra runtime.</li>
-<li>Languages in the middle (Rust, Go, Nim) include useful features (memory safety, garbage collection, concurrency) and therefore ship a larger runtime.</li>
-<li>Languages at the bottom (Java, Python, Node.js, etc.) include a complete execution engine, standard libraries, garbage collector, and often an entire virtual machine. The price of high productivity and portability is a significantly larger binary or distribution size.</li>
+<li>Languages at the <strong>top</strong> (<code>Assembly</code>, <code>Zig</code>, <code>C</code>) produce almost pure machine code with almost no extra runtime.</li>
+<li>Languages in the <strong>middle</strong> (<code>Rust</code>, <code>Go</code>, <code>Nim</code>) include useful features (memory safety, garbage collection, concurrency) and therefore ship a larger runtime.</li>
+<li>Languages at the <strong>bottom</strong> (<code>Java</code>, <code>Python</code>, <code>Node.js</code>, etc.) include a complete execution engine, standard libraries, garbage collector, and often an entire <code>virtual machine</code>. The price of high productivity and portability is a significantly larger binary or distribution size.</li>
 </ul>
 <blockquote class="blockquote">
 <p><code>Java</code> sits in the “managed runtime” group. The component responsible for this managed execution model is the <strong>Java Virtual Machine (JVM)</strong>.</p>
 </blockquote>
 </section>
-<section id="compiled-hello-world-binary-sizes-explained" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="compiled-hello-world-binary-sizes-explained"><span class="header-section-number">2</span> Compiled “Hello World” Binary Sizes — Explained</h2>
+<section id="compiled-hello-world-binary-size" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="compiled-hello-world-binary-size"><span class="header-section-number">2</span> Compiled “Hello World” Binary Size</h2>
 <section id="tiny-end-native-minimal-runtime" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="tiny-end-native-minimal-runtime"><span class="header-section-number">2.1</span> Tiny end (native, minimal runtime)</h3>
 <ul>
@@ -2228,8 +2233,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Crystal (~800 KB)</strong>: Ruby-like syntax with a GC and richer runtime. More overhead than Rust/Nim for the same “hello”.</p></li>
 </ul>
 </section>
-<section id="languages-with-substantial-runtimes-or-static-linking-of-the-whole-environment" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="languages-with-substantial-runtimes-or-static-linking-of-the-whole-environment"><span class="header-section-number">2.3</span> Languages with substantial runtimes or static linking of the whole environment</h3>
+<section id="languages-with-runtimes" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="languages-with-runtimes"><span class="header-section-number">2.3</span> Languages with runtimes</h3>
+<p>Languages with substantial runtimes or static linking of the whole environment</p>
 <ul>
 <li><p><strong>Go (~1.2 MB)</strong>: The Go runtime (garbage collector, goroutine scheduler, reflection, etc.) is statically linked into every binary by default. This is deliberate: single-file deployment with almost no external dependencies. You can shave size with build flags (<code>-ldflags="-s -w"</code>), but the runtime is still there.</p></li>
 <li><p><strong>C# (~2 MB), Swift (~2.5 MB), Dart (~5 MB)</strong>: Ahead-of-time (AOT) or native compilation still pulls in a sizable core library / runtime (GC, reflection, standard collections, platform interop). Swift especially tends to include core framework pieces.</p></li>
@@ -2255,16 +2261,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="what-is-a-virtual-machine" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="what-is-a-virtual-machine"><span class="header-section-number">3</span> What Is a Virtual Machine?</h2>
+<blockquote class="blockquote">
 <p>The term “virtual machine” is used for two quite different things in computing. Understanding the distinction is essential.</p>
-<section id="system-hardware-virtual-machines" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="system-hardware-virtual-machines"><span class="header-section-number">3.1</span> System (Hardware) Virtual Machines</h3>
-<p>Examples: Oracle VirtualBox, VMware, Hyper-V, QEMU/KVM.</p>
+</blockquote>
+<p><strong>System (Hardware) Virtual Machines</strong>:</p>
+<p>Examples: <code>Oracle VirtualBox</code>, <code>VMware</code>, <code>Hyper-V</code>, <code>QEMU/KVM</code>.</p>
 <p>These create a <strong>complete virtual computer</strong>: - Fake CPU - Fake memory - Fake disk - Fake network card - Fake BIOS</p>
 <p>You can install a full operating system (Windows, Linux, etc.) inside them. They are heavy and emulate an entire machine.</p>
-</section>
-<section id="process-application-virtual-machines" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="process-application-virtual-machines"><span class="header-section-number">3.2</span> Process (Application) Virtual Machines</h3>
-<p>Examples: JVM, .NET CLR, Python interpreter (to some extent), Lua VM, WebAssembly engines.</p>
+<section id="process-application-virtual-machines" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="process-application-virtual-machines"><span class="header-section-number">3.1</span> Process (Application) Virtual Machines</h3>
+<p>Examples: <code>JVM</code>, <code>.NET CLR</code>, <code>Python interpreter</code> (to some extent), <code>Lua VM</code>, <code>WebAssembly engines</code>.</p>
 <p>These do <strong>not</strong> emulate a whole computer. They only provide a specialized runtime environment for one family of programs. They run as ordinary processes on top of a real operating system.</p>
 <p><strong>The JVM belongs to the second category.</strong></p>
 <table class="caption-top table">
@@ -2308,34 +2314,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<hr>
 </section>
 </section>
 <section id="why-is-it-called-a-virtual-machine" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="why-is-it-called-a-virtual-machine"><span class="header-section-number">4</span> Why Is It Called a “Virtual Machine”?</h2>
-<p>Even though the JVM is not a full system emulator like VirtualBox, the name is technically accurate for historical and architectural reasons.</p>
-<p>A real CPU has: - An instruction set - Registers - A stack - Memory organization - Execution rules</p>
+<p>Even though the <code>JVM</code> is not a full system emulator like <code>VirtualBox</code>, the name is technically accurate for historical and architectural reasons.</p>
+<p>A real <code>CPU</code> has: - An <code>instruction</code> set - <code>Registers</code> - A <code>stack</code> - <code>Memory</code> organization - Execution <code>rules</code></p>
 <p>The JVM defines <strong>exactly the same concepts</strong>, but in software:</p>
 <ul>
-<li>Its own instruction set → <strong>Java bytecode</strong></li>
-<li>Its own stack and local variables</li>
-<li>Its own memory model (heap, method area, etc.)</li>
-<li>Its own rules for class loading, exception handling, threading, and security</li>
+<li>Its own <code>instruction</code> set → <strong>Java bytecode</strong></li>
+<li>Its own <code>stack</code> and <code>local variables</code></li>
+<li>Its own <code>memory</code> model (heap, method area, etc.)</li>
+<li>Its own <code>rules</code> for class loading, exception handling, threading, and security</li>
 </ul>
-<p>When a Java program runs, it is executing instructions on this <strong>abstract machine</strong>, not directly on the physical CPU. The real CPU only appears later, when the JVM translates bytecode into native machine code (via an interpreter or a Just-In-Time compiler).</p>
-<p>“Virtual” simply means the machine is not real hardware — it exists as a specification and as software that implements that specification.</p>
+<p>When a <code>Java</code> program runs, it is executing instructions on this <strong>abstract machine</strong>, not directly on the physical <code>CPU</code>. The real <code>CPU</code> only appears later, when the <code>JVM</code> translates bytecode into native machine code (via an interpreter or a <code>Just-In-Time compiler</code>).</p>
+<p>“Virtual” simply means the machine <strong>is not real hardware</strong> — it exists as a specification and as software that implements that specification.</p>
 <p>This design was deliberate. In the early 1990s the creators of Java wanted a single compiled program to run on any device that possessed an implementation of this abstract machine. Calling it a virtual machine was the natural and precise term.</p>
-<hr>
 </section>
 <section id="precise-definition-of-the-jvm" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="precise-definition-of-the-jvm"><span class="header-section-number">5</span> Precise Definition of the JVM</h2>
 <p><strong>Best technical definition:</strong></p>
 <blockquote class="blockquote">
-<p>The Java Virtual Machine (JVM) is a <strong>process virtual machine</strong> (also called an application virtual machine or managed runtime) that executes Java bytecode.</p>
+<p>The <code>Java Virtual Machine (JVM)</code> is a <strong>process virtual machine</strong> (also called an application virtual machine or managed runtime) that executes Java bytecode.</p>
 </blockquote>
 <p>A more practical description:</p>
 <blockquote class="blockquote">
-<p>The JVM is a <strong>managed runtime engine</strong> that comes with a rich set of supporting services: garbage collection, security, threading, dynamic class loading, the standard libraries, and more.</p>
+<p>The <code>JVM</code> is a <strong>managed runtime engine</strong> that comes with a rich set of supporting services: garbage collection, security, threading, dynamic class loading, the standard libraries, and more.</p>
 </blockquote>
 <section id="relationship-between-the-main-components" class="level3" data-number="5.1">
 <h3 data-number="5.1" class="anchored" data-anchor-id="relationship-between-the-main-components"><span class="header-section-number">5.1</span> Relationship Between the Main Components</h3>
@@ -2380,24 +2384,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/javase/jvm-composition.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="../images/javase/jvm-composition.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a></p>
+</figure>
+</div>
 </section>
 </section>
 <section id="how-the-jvm-executes-code" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="how-the-jvm-executes-code"><span class="header-section-number">6</span> How the JVM Executes Code</h2>
-<section id="from-source-to-bytecode-ahead-of-time" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="from-source-to-bytecode-ahead-of-time"><span class="header-section-number">6.1</span> From Source to Bytecode (Ahead of Time)</h3>
-<p>You write Java source code and compile it with <code>javac</code> (or a build tool). The result is one or more <code>.class</code> files containing <strong>platform-independent bytecode</strong>. At this stage nothing is running yet.</p>
-</section>
-<section id="execution-model-for-small-and-large-programs" class="level3" data-number="6.2">
-<h3 data-number="6.2" class="anchored" data-anchor-id="execution-model-for-small-and-large-programs"><span class="header-section-number">6.2</span> Execution Model for Small and Large Programs</h3>
-<p>Modern JVMs (HotSpot and its derivatives) use a <strong>mixed-mode</strong> approach:</p>
+<p>From Source to Bytecode (Ahead of Time):</p>
+<blockquote class="blockquote">
+<p>We write <code>Java</code> source code and compile it with <code>javac</code> (or a build tool). The result is one or more <code>.class</code> files containing <strong>platform-independent bytecode</strong>. At this stage nothing is running yet.</p>
+</blockquote>
+<p>Execution Model for Small and Large Programs:</p>
+<p>Modern <code>JVMs</code> (<code>HotSpot</code> and its derivatives) use a <strong>mixed-mode</strong> approach:</p>
 <ol type="1">
 <li><strong>Class loading</strong> – Classes are loaded lazily, only when first needed.</li>
-<li><strong>Interpretation</strong> – At the beginning the JVM reads bytecode instruction by instruction and executes it. This is relatively slow but starts immediately.</li>
+<li><strong>Interpretation</strong> – At the beginning the <code>JVM</code> reads bytecode instruction by instruction and executes it. This is relatively slow but starts immediately.</li>
 <li><strong>Profiling</strong> – The JVM continuously observes which methods are executed most frequently (“hot” methods).</li>
 <li><strong>Just-In-Time (JIT) compilation</strong> – Hot methods are compiled in the background into highly optimized native machine code for the real CPU.</li>
-<li><strong>Native execution</strong> – Once a method has been JIT-compiled, subsequent calls run at near-native speed.</li>
+<li><strong>Native execution</strong> – Once a method has been <code>JIT</code>-compiled, subsequent calls run at near-native speed.</li>
 <li><strong>Tiered compilation</strong> – Very hot methods can be re-compiled later with even more aggressive optimizations.</li>
 </ol>
 <p><strong>Important consequences for a large application (for example 10 000 lines and 20 classes):</strong></p>
@@ -2408,9 +2415,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Frequently executed methods become native code and run much faster after a warm-up period.</li>
 <li>Class loading, garbage collection, and JIT compilation all happen concurrently with normal program execution.</li>
 </ul>
-</section>
-<section id="concrete-example-three-layers" class="level3" data-number="6.3">
-<h3 data-number="6.3" class="anchored" data-anchor-id="concrete-example-three-layers"><span class="header-section-number">6.3</span> Concrete Example – Three Layers</h3>
+<section id="concrete-example-three-layers" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="concrete-example-three-layers"><span class="header-section-number">6.1</span> Concrete Example – Three Layers</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/javase/jvm-layers.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="../images/javase/jvm-layers.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a></p>
+</figure>
+</div>
 <p><strong>Java source</strong></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">public</span> <span class="kw">class</span> Hello <span class="op">{</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
@@ -2436,18 +2447,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><a href="https://youtu.be/Ui6QyzcD3_E?si=SOPE-h46_Cl7hBA3" class="external" target="_blank">How computer processors run conditions and loops</a></li>
 </ul>
-<hr>
 </section>
 </section>
 <section id="mental-model-of-the-jvm" class="level2" data-number="7">
 <h2 data-number="7" class="anchored" data-anchor-id="mental-model-of-the-jvm"><span class="header-section-number">7</span> Mental Model of the JVM</h2>
-<pre><code>Your Java source code
-        ↓
-    javac compiler
-        ↓
-Java bytecode (.class / .jar)          ← platform-independent
-        ↓
-      JVM
+<pre><code>        Your Java source code
+              ↓
+         javac compiler
+              ↓
+    Java bytecode (.class / .jar)          ← platform-independent
+              ↓
+             JVM
    ┌──────────────────────────────┐
    │  Interpreter + JIT compiler  │
    │  Garbage Collector           │
@@ -2455,11 +2465,11 @@ Java bytecode (.class / .jar)          ← platform-independent
    │  Security &amp; threading        │
    │  Standard libraries          │
    └──────────────────────────────┘
-        ↓
-Native machine code + OS system calls
-        ↓
-Real operating system kernel
-        ↓
+              ↓
+ Native machine code + OS system calls
+              ↓
+     Real operating system kernel
+              ↓
 Physical hardware (CPU, memory, disk…)</code></pre>
 <hr>
 </section>
@@ -2468,11 +2478,13 @@ Physical hardware (CPU, memory, disk…)</code></pre>
 <ul>
 <li>The JVM is <strong>not</strong> a full system virtual machine like VirtualBox. It is a <strong>process virtual machine</strong> specialized for running Java bytecode.</li>
 <li>It is best described as a <strong>managed runtime engine</strong> that provides automatic memory management, safety, portability, and a rich set of libraries.</li>
-<li>The name “virtual machine” is justified because the JVM defines its own abstract computer (instruction set, memory model, execution rules).</li>
-<li>Execution is a hybrid of interpretation and Just-In-Time compilation: cold code stays interpreted, hot code becomes highly optimized native machine code.</li>
-<li>The relatively large size of a Java “Hello World” distribution is the visible cost of this rich managed environment — the same cost that gives Java its famous <code>“write once, run anywhere”</code> property and its strong productivity features.</li>
+<li>The name <code>“virtual machine”</code> is justified because the <code>JVM</code> defines its own <code>abstract computer</code>: - instruction set, - memory model, - execution rules.</li>
+<li><code>Execution</code> is a hybrid of interpretation and <code>Just-In-Time compilation</code>: <strong>cold</strong> code stays interpreted, <strong>hot</strong> code becomes highly optimized native machine code.</li>
+<li>The relatively large size of a <code>Java</code> “Hello World” distribution is the visible cost of this rich managed environment — the same cost that gives <code>Java</code> its famous <code>“write once, run anywhere”</code> property and its strong productivity features.</li>
 </ul>
-<p>This combination of portability, safety, performance (after warm-up), and a mature ecosystem is the reason the JVM remains one of the most important runtime platforms in software engineering.</p>
+<blockquote class="blockquote">
+<p>This combination of <code>portability</code>, <code>safety</code>, <code>performance</code> (after warm-up), and a <code>mature</code> ecosystem is the reason the <code>JVM</code> remains one of the most important runtime platforms in software engineering.</p>
+</blockquote>
 
 
 </section>
@@ -3081,6 +3093,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
