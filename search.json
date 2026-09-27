@@ -17049,5 +17049,159 @@
       "IFCD021-26 Docs",
       "IFCD0021-26 Sprint Backlog"
     ]
+  },
+  {
+    "objectID": "javase/se-what-jvm.html",
+    "href": "javase/se-what-jvm.html",
+    "title": "Java Standard Edition: JVM",
+    "section": "",
+    "text": "📘 Java JVM\nThe Java Virtual Machine (JVM) is a process virtual machine that executes Java bytecode. It is the cornerstone of the Java platform, enabling Java programs to run on any device or operating system that has a compatible JVM implementation.\n\n\nWhen we write a simple “Hello, World!” program, the size of the final executable (or packaged runtime) varies enormously depending on the language. This difference reveals a fundamental trade-off between control, safety, productivity, and runtime overhead.\nHere is a typical ranking of compiled (or packaged) “Hello World” binary sizes (builds), from smallest to largest:\n\n\n\n\n\n\n\n\nLanguage / Runtime\nApproximate Size\nCategory\n\n\n\n\nAssembly\n~300 Bytes\nRaw machine code\n\n\nZig\n~5 KB\nSystems language, minimal runtime\n\n\nC\n~15 KB\nClassic compiled language\n\n\nC++\n~18 KB\nCompiled + some standard library\n\n\nNim\n~150 KB\nCompiled with GC\n\n\nRust\n~300 KB\nMemory-safe systems language\n\n\nCrystal\n~800 KB\nRuby-like syntax with GC\n\n\nGo\n~1.2 MB\nStatically linked runtime\n\n\nC#\n~2 MB\nManaged language (AOT/JIT)\n\n\nSwift\n~2.5 MB\nManaged + rich core libraries\n\n\nDart\n~5 MB\nManaged runtime\n\n\nPython\n~12 MB\nInterpreter + standard library\n\n\nJava\n~14 MB\nFull managed runtime (JVM)\n\n\nBun\n~55 MB\nJavaScript runtime packaged\n\n\nDeno\n~70 MB\nJavaScript runtime packaged\n\n\nNode.js\n~85 MB\nFull JavaScript engine packaged\n\n\n\nWhat this table tells us\n\nLanguages at the top (Assembly, Zig, C) produce almost pure machine code with almost no extra runtime.\nLanguages in the middle (Rust, Go, Nim) include useful features (memory safety, garbage collection, concurrency) and therefore ship a larger runtime.\nLanguages at the bottom (Java, Python, Node.js, etc.) include a complete execution engine, standard libraries, garbage collector, and often an entire virtual machine. The price of high productivity and portability is a significantly larger binary or distribution size.\n\n\nJava sits in the “managed runtime” group. The component responsible for this managed execution model is the Java Virtual Machine (JVM).",
+    "crumbs": [
+      "What is Java SE",
+      "Java Standard Edition: JVM"
+    ]
+  },
+  {
+    "objectID": "javase/se-what-jvm.html#introduction",
+    "href": "javase/se-what-jvm.html#introduction",
+    "title": "Java Standard Edition: JVM",
+    "section": "",
+    "text": "📘 Java JVM\nThe Java Virtual Machine (JVM) is a process virtual machine that executes Java bytecode. It is the cornerstone of the Java platform, enabling Java programs to run on any device or operating system that has a compatible JVM implementation.\n\n\nWhen we write a simple “Hello, World!” program, the size of the final executable (or packaged runtime) varies enormously depending on the language. This difference reveals a fundamental trade-off between control, safety, productivity, and runtime overhead.\nHere is a typical ranking of compiled (or packaged) “Hello World” binary sizes (builds), from smallest to largest:\n\n\n\n\n\n\n\n\nLanguage / Runtime\nApproximate Size\nCategory\n\n\n\n\nAssembly\n~300 Bytes\nRaw machine code\n\n\nZig\n~5 KB\nSystems language, minimal runtime\n\n\nC\n~15 KB\nClassic compiled language\n\n\nC++\n~18 KB\nCompiled + some standard library\n\n\nNim\n~150 KB\nCompiled with GC\n\n\nRust\n~300 KB\nMemory-safe systems language\n\n\nCrystal\n~800 KB\nRuby-like syntax with GC\n\n\nGo\n~1.2 MB\nStatically linked runtime\n\n\nC#\n~2 MB\nManaged language (AOT/JIT)\n\n\nSwift\n~2.5 MB\nManaged + rich core libraries\n\n\nDart\n~5 MB\nManaged runtime\n\n\nPython\n~12 MB\nInterpreter + standard library\n\n\nJava\n~14 MB\nFull managed runtime (JVM)\n\n\nBun\n~55 MB\nJavaScript runtime packaged\n\n\nDeno\n~70 MB\nJavaScript runtime packaged\n\n\nNode.js\n~85 MB\nFull JavaScript engine packaged\n\n\n\nWhat this table tells us\n\nLanguages at the top (Assembly, Zig, C) produce almost pure machine code with almost no extra runtime.\nLanguages in the middle (Rust, Go, Nim) include useful features (memory safety, garbage collection, concurrency) and therefore ship a larger runtime.\nLanguages at the bottom (Java, Python, Node.js, etc.) include a complete execution engine, standard libraries, garbage collector, and often an entire virtual machine. The price of high productivity and portability is a significantly larger binary or distribution size.\n\n\nJava sits in the “managed runtime” group. The component responsible for this managed execution model is the Java Virtual Machine (JVM).",
+    "crumbs": [
+      "What is Java SE",
+      "Java Standard Edition: JVM"
+    ]
+  },
+  {
+    "objectID": "javase/se-what-jvm.html#what-is-a-virtual-machine",
+    "href": "javase/se-what-jvm.html#what-is-a-virtual-machine",
+    "title": "Java Standard Edition: JVM",
+    "section": "3 What Is a Virtual Machine?",
+    "text": "3 What Is a Virtual Machine?\nThe term “virtual machine” is used for two quite different things in computing. Understanding the distinction is essential.\n\n3.1 System (Hardware) Virtual Machines\nExamples: Oracle VirtualBox, VMware, Hyper-V, QEMU/KVM.\nThese create a complete virtual computer: - Fake CPU - Fake memory - Fake disk - Fake network card - Fake BIOS\nYou can install a full operating system (Windows, Linux, etc.) inside them. They are heavy and emulate an entire machine.\n\n\n3.2 Process (Application) Virtual Machines\nExamples: JVM, .NET CLR, Python interpreter (to some extent), Lua VM, WebAssembly engines.\nThese do not emulate a whole computer. They only provide a specialized runtime environment for one family of programs. They run as ordinary processes on top of a real operating system.\nThe JVM belongs to the second category.\n\n\n\n\n\n\n\n\nAspect\nSystem VM (VirtualBox)\nProcess VM (JVM)\n\n\n\n\nWhat it emulates\nEntire computer\nRuntime environment for one language\n\n\nWhat runs inside\nFull guest operating system\nOnly programs written for that VM\n\n\nResource usage\nHeavy\nMuch lighter\n\n\nGoal\nRun another complete OS\nRun programs of a specific language\n\n\nHardware access\nEmulated or virtualized hardware\nReal host OS + hardware via system calls",
+    "crumbs": [
+      "What is Java SE",
+      "Java Standard Edition: JVM"
+    ]
+  },
+  {
+    "objectID": "javase/se-what-jvm.html#why-is-it-called-a-virtual-machine",
+    "href": "javase/se-what-jvm.html#why-is-it-called-a-virtual-machine",
+    "title": "Java Standard Edition: JVM",
+    "section": "4 Why Is It Called a “Virtual Machine”?",
+    "text": "4 Why Is It Called a “Virtual Machine”?\nEven though the JVM is not a full system emulator like VirtualBox, the name is technically accurate for historical and architectural reasons.\nA real CPU has: - An instruction set - Registers - A stack - Memory organization - Execution rules\nThe JVM defines exactly the same concepts, but in software:\n\nIts own instruction set → Java bytecode\nIts own stack and local variables\nIts own memory model (heap, method area, etc.)\nIts own rules for class loading, exception handling, threading, and security\n\nWhen a Java program runs, it is executing instructions on this abstract machine, not directly on the physical CPU. The real CPU only appears later, when the JVM translates bytecode into native machine code (via an interpreter or a Just-In-Time compiler).\n“Virtual” simply means the machine is not real hardware — it exists as a specification and as software that implements that specification.\nThis design was deliberate. In the early 1990s the creators of Java wanted a single compiled program to run on any device that possessed an implementation of this abstract machine. Calling it a virtual machine was the natural and precise term.",
+    "crumbs": [
+      "What is Java SE",
+      "Java Standard Edition: JVM"
+    ]
+  },
+  {
+    "objectID": "javase/se-what-jvm.html#precise-definition-of-the-jvm",
+    "href": "javase/se-what-jvm.html#precise-definition-of-the-jvm",
+    "title": "Java Standard Edition: JVM",
+    "section": "5 Precise Definition of the JVM",
+    "text": "5 Precise Definition of the JVM\nBest technical definition:\n\nThe Java Virtual Machine (JVM) is a process virtual machine (also called an application virtual machine or managed runtime) that executes Java bytecode.\n\nA more practical description:\n\nThe JVM is a managed runtime engine that comes with a rich set of supporting services: garbage collection, security, threading, dynamic class loading, the standard libraries, and more.\n\n\n5.1 Relationship Between the Main Components\n\n\n\n\n\n\n\n\nComponent\nWhat it is\nPurpose\n\n\n\n\nJVM\nThe core execution engine\nRuns bytecode, manages memory, threads, etc.\n\n\nGarbage Collector\nService inside the JVM\nAutomatically reclaims unused memory\n\n\nJRE\nJVM + core libraries + supporting files\nEverything needed to run Java programs\n\n\nStandard Libraries\nLarge collection of ready-made classes\nCommon functionality (I/O, collections, etc.)\n\n\nJDK\nJRE + compilers, debuggers, and tools\nEverything needed to develop Java programs",
+    "crumbs": [
+      "What is Java SE",
+      "Java Standard Edition: JVM"
+    ]
+  },
+  {
+    "objectID": "javase/se-what-jvm.html#how-the-jvm-executes-code",
+    "href": "javase/se-what-jvm.html#how-the-jvm-executes-code",
+    "title": "Java Standard Edition: JVM",
+    "section": "6 How the JVM Executes Code",
+    "text": "6 How the JVM Executes Code\n\n6.1 From Source to Bytecode (Ahead of Time)\nYou write Java source code and compile it with javac (or a build tool). The result is one or more .class files containing platform-independent bytecode. At this stage nothing is running yet.\n\n\n6.2 Execution Model for Small and Large Programs\nModern JVMs (HotSpot and its derivatives) use a mixed-mode approach:\n\nClass loading – Classes are loaded lazily, only when first needed.\nInterpretation – At the beginning the JVM reads bytecode instruction by instruction and executes it. This is relatively slow but starts immediately.\nProfiling – The JVM continuously observes which methods are executed most frequently (“hot” methods).\nJust-In-Time (JIT) compilation – Hot methods are compiled in the background into highly optimized native machine code for the real CPU.\nNative execution – Once a method has been JIT-compiled, subsequent calls run at near-native speed.\nTiered compilation – Very hot methods can be re-compiled later with even more aggressive optimizations.\n\nImportant consequences for a large application (for example 10 000 lines and 20 classes):\n\nThe entire program is never compiled to native code in one go.\nCompilation happens per method (or small groups of methods).\nRarely used methods may stay interpreted forever.\nFrequently executed methods become native code and run much faster after a warm-up period.\nClass loading, garbage collection, and JIT compilation all happen concurrently with normal program execution.\n\n\n\n6.3 Concrete Example – Three Layers\nJava source\npublic class Hello {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }\n}\nBytecode (simplified view obtained with javap -c)\n0: getstatic     #7   // Field java/lang/System.out\n3: ldc           #13  // String Hello, World!\n5: invokevirtual #15  // Method println\n8: return\nApproximate native x86-64 assembly (conceptual result after JIT or a similar translation on Linux)\nmov     rax, 1          ; sys_write\nmov     rdi, 1          ; stdout\nmov     rsi, msg        ; address of \"Hello, World!\\n\"\nmov     rdx, 14         ; length\nsyscall\n\nmov     rax, 60         ; sys_exit\nxor     rdi, rdi\nsyscall\nThe JVM sits in the middle: it understands the bytecode and eventually produces (or interprets into) real CPU instructions.\n\nHow computer processors run conditions and loops",
+    "crumbs": [
+      "What is Java SE",
+      "Java Standard Edition: JVM"
+    ]
+  },
+  {
+    "objectID": "javase/se-what-jvm.html#mental-model-of-the-jvm",
+    "href": "javase/se-what-jvm.html#mental-model-of-the-jvm",
+    "title": "Java Standard Edition: JVM",
+    "section": "7 Mental Model of the JVM",
+    "text": "7 Mental Model of the JVM\nYour Java source code\n        ↓\n    javac compiler\n        ↓\nJava bytecode (.class / .jar)          ← platform-independent\n        ↓\n      JVM\n   ┌──────────────────────────────┐\n   │  Interpreter + JIT compiler  │\n   │  Garbage Collector           │\n   │  Class loaders               │\n   │  Security & threading        │\n   │  Standard libraries          │\n   └──────────────────────────────┘\n        ↓\nNative machine code + OS system calls\n        ↓\nReal operating system kernel\n        ↓\nPhysical hardware (CPU, memory, disk…)",
+    "crumbs": [
+      "What is Java SE",
+      "Java Standard Edition: JVM"
+    ]
+  },
+  {
+    "objectID": "javase/se-what-jvm.html#key-takeaways",
+    "href": "javase/se-what-jvm.html#key-takeaways",
+    "title": "Java Standard Edition: JVM",
+    "section": "7 Key takeaways",
+    "text": "7 Key takeaways\n\nLower-level / systems languages give you fine control and tiny binaries when you want them.\nHigher-level languages trade binary size for productivity, safety, concurrency primitives, garbage collection, rich standard libraries, and easier deployment (especially the static single-binary ones like Go).\nStatic linking makes deployment trivial (“just copy the file”) at the cost of size; dynamic linking keeps the on-disk executable smaller but requires the right shared libraries on the target system.\nMost of these sizes can be reduced with effort (strip symbols, LTO, size optimization, no-std/freestanding modes, alternative linkers, UPX compression, etc.). The list reflects relatively normal or “canonical” builds rather than the absolute smallest possible art projects.\n\nIn short: the jump from a few hundred bytes to tens of megabytes is almost entirely the cost of the language’s runtime and the features it provides out of the box. For a real program the relative differences often shrink, but the “Hello World” ranking remains a useful illustration of the spectrum.",
+    "crumbs": [
+      "What is Java SE",
+      "Java Standard Edition: JVM"
+    ]
+  },
+  {
+    "objectID": "javase/se-what-jvm.html#tiny-end-native-minimal-runtime",
+    "href": "javase/se-what-jvm.html#tiny-end-native-minimal-runtime",
+    "title": "Java Standard Edition: JVM",
+    "section": "3 Tiny end (native, minimal runtime)",
+    "text": "3 Tiny end (native, minimal runtime)\n\nAssembly (~300 bytes): You write the exact machine instructions (syscalls for write + exit on Linux, or the Windows equivalents). No compiler runtime, no libraries, no safety checks. Can be hand-tuned even smaller (under 200 bytes in extreme cases).\nZig (~5 KB): Designed for small, controllable binaries. Excellent size-focused modes (ReleaseSmall), optional freestanding/no-std style, and strong dead-code elimination. Often beats or matches carefully tuned C.\nC (~15 KB) / C++ (~18 KB): Classic compiled languages. With a small libc (or musl) + stripping + size optimization they stay tiny. C++ is a bit larger because of name mangling, exception tables, or libstdc++ bits even for simple programs. Dynamic linking makes them even smaller on disk (the C library is shared), but the list usually measures the self-contained case.",
+    "crumbs": [
+      "What is Java SE",
+      "Java Standard Edition: JVM"
+    ]
+  },
+  {
+    "objectID": "javase/se-what-jvm.html#small-to-medium-compiled-languages",
+    "href": "javase/se-what-jvm.html#small-to-medium-compiled-languages",
+    "title": "Java Standard Edition: JVM",
+    "section": "3 Small-to-medium compiled languages",
+    "text": "3 Small-to-medium compiled languages\n\nNim (~150 KB): Compiles to C (or C++/JS), so it inherits a decent amount of the C runtime plus its own GC and standard library. Still relatively lean when optimized.\nRust (~300 KB): Memory safety, panic/unwind support, monomorphization of generics, and a richer standard library add weight. Default release builds include more than pure C; aggressive LTO + strip + opt-level=z can shrink it a lot, but the “canonical” size sits higher.\nCrystal (~800 KB): Ruby-like syntax with a GC and richer runtime. More overhead than Rust/Nim for the same “hello”.\n\n\n3.1 Languages with substantial runtimes or static linking of the whole environment\n\nGo (~1.2 MB): The Go runtime (garbage collector, goroutine scheduler, reflection, etc.) is statically linked into every binary by default. This is deliberate: single-file deployment with almost no external dependencies. You can shave size with build flags (-ldflags=\"-s -w\"), but the runtime is still there.\nC# (~2 MB), Swift (~2.5 MB), Dart (~5 MB): Ahead-of-time (AOT) or native compilation still pulls in a sizable core library / runtime (GC, reflection, standard collections, platform interop). Swift especially tends to include core framework pieces.\n\n\n\n3.2 Interpreted / VM / full-runtime packaging\n\nPython (~12 MB), Java (~14 MB): These are usually the size of a minimal self-contained distribution or AOT-compiled image (GraalVM native image for Java, or a frozen Python interpreter + stdlib). The “binary” includes the entire virtual machine / interpreter.\nBun (~55 MB), Deno (~70 MB), Node.js (~85 MB): These package the full JavaScript runtime (V8 or equivalent engine, standard library, module system, etc.) into a single executable. Even a one-line “hello” carries the entire JS engine. Tools exist to produce smaller native JS binaries, but the mainstream “compile/package to binary” path is large.\n\n\n\n3.3 Key takeaways\n\nLower-level / systems languages give you fine control and tiny binaries when you want them.\nHigher-level languages trade binary size for productivity, safety, concurrency primitives, garbage collection, rich standard libraries, and easier deployment (especially the static single-binary ones like Go).\nStatic linking makes deployment trivial (“just copy the file”) at the cost of size; dynamic linking keeps the on-disk executable smaller but requires the right shared libraries on the target system.\nMost of these sizes can be reduced with effort (strip symbols, LTO, size optimization, no-std/freestanding modes, alternative linkers, UPX compression, etc.). The list reflects relatively normal or “canonical” builds rather than the absolute smallest possible art projects.\n\nIn short: the jump from a few hundred bytes to tens of megabytes is almost entirely the cost of the language’s runtime and the features it provides out of the box. For a real program the relative differences often shrink, but the “Hello World” ranking remains a useful illustration of the spectrum.",
+    "crumbs": [
+      "What is Java SE",
+      "Java Standard Edition: JVM"
+    ]
+  },
+  {
+    "objectID": "javase/se-what-jvm.html#languages-with-substantial-runtimes-or-static-linking-of-the-whole-environment",
+    "href": "javase/se-what-jvm.html#languages-with-substantial-runtimes-or-static-linking-of-the-whole-environment",
+    "title": "Java Standard Edition: JVM",
+    "section": "5 Languages with substantial runtimes or static linking of the whole environment",
+    "text": "5 Languages with substantial runtimes or static linking of the whole environment\n\nGo (~1.2 MB): The Go runtime (garbage collector, goroutine scheduler, reflection, etc.) is statically linked into every binary by default. This is deliberate: single-file deployment with almost no external dependencies. You can shave size with build flags (-ldflags=\"-s -w\"), but the runtime is still there.\nC# (~2 MB), Swift (~2.5 MB), Dart (~5 MB): Ahead-of-time (AOT) or native compilation still pulls in a sizable core library / runtime (GC, reflection, standard collections, platform interop). Swift especially tends to include core framework pieces.",
+    "crumbs": [
+      "What is Java SE",
+      "Java Standard Edition: JVM"
+    ]
+  },
+  {
+    "objectID": "javase/se-what-jvm.html#interpreted-vm-full-runtime-packaging",
+    "href": "javase/se-what-jvm.html#interpreted-vm-full-runtime-packaging",
+    "title": "Java Standard Edition: JVM",
+    "section": "6 Interpreted / VM / full-runtime packaging",
+    "text": "6 Interpreted / VM / full-runtime packaging\n\nPython (~12 MB), Java (~14 MB): These are usually the size of a minimal self-contained distribution or AOT-compiled image (GraalVM native image for Java, or a frozen Python interpreter + stdlib). The “binary” includes the entire virtual machine / interpreter.\nBun (~55 MB), Deno (~70 MB), Node.js (~85 MB): These package the full JavaScript runtime (V8 or equivalent engine, standard library, module system, etc.) into a single executable. Even a one-line “hello” carries the entire JS engine. Tools exist to produce smaller native JS binaries, but the mainstream “compile/package to binary” path is large.",
+    "crumbs": [
+      "What is Java SE",
+      "Java Standard Edition: JVM"
+    ]
+  },
+  {
+    "objectID": "javase/se-what-jvm.html#key-takeaways-1",
+    "href": "javase/se-what-jvm.html#key-takeaways-1",
+    "title": "Java Standard Edition: JVM",
+    "section": "8 Key Takeaways",
+    "text": "8 Key Takeaways\n\nThe JVM is not a full system virtual machine like VirtualBox. It is a process virtual machine specialized for running Java bytecode.\nIt is best described as a managed runtime engine that provides automatic memory management, safety, portability, and a rich set of libraries.\nThe name “virtual machine” is justified because the JVM defines its own abstract computer (instruction set, memory model, execution rules).\nExecution is a hybrid of interpretation and Just-In-Time compilation: cold code stays interpreted, hot code becomes highly optimized native machine code.\nThe relatively large size of a Java “Hello World” distribution is the visible cost of this rich managed environment — the same cost that gives Java its famous “write once, run anywhere” property and its strong productivity features.\n\nThis combination of portability, safety, performance (after warm-up), and a mature ecosystem is the reason the JVM remains one of the most important runtime platforms in software engineering.",
+    "crumbs": [
+      "What is Java SE",
+      "Java Standard Edition: JVM"
+    ]
+  },
+  {
+    "objectID": "javase/se-what-jvm.html#compiled-hello-world-binary-sizes-explained",
+    "href": "javase/se-what-jvm.html#compiled-hello-world-binary-sizes-explained",
+    "title": "Java Standard Edition: JVM",
+    "section": "2 Compiled “Hello World” Binary Sizes — Explained",
+    "text": "2 Compiled “Hello World” Binary Sizes — Explained\n\n2.1 Tiny end (native, minimal runtime)\n\nAssembly (~300 bytes): You write the exact machine instructions (syscalls for write + exit on Linux, or the Windows equivalents). No compiler runtime, no libraries, no safety checks. Can be hand-tuned even smaller (under 200 bytes in extreme cases).\nZig (~5 KB): Designed for small, controllable binaries. Excellent size-focused modes (ReleaseSmall), optional freestanding/no-std style, and strong dead-code elimination. Often beats or matches carefully tuned C.\nC (~15 KB) / C++ (~18 KB): Classic compiled languages. With a small libc (or musl) + stripping + size optimization they stay tiny. C++ is a bit larger because of name mangling, exception tables, or libstdc++ bits even for simple programs. Dynamic linking makes them even smaller on disk (the C library is shared), but the list usually measures the self-contained case.\n\n\n\n2.2 Small-to-medium compiled languages\n\nNim (~150 KB): Compiles to C (or C++/JS), so it inherits a decent amount of the C runtime plus its own GC and standard library. Still relatively lean when optimized.\nRust (~300 KB): Memory safety, panic/unwind support, monomorphization of generics, and a richer standard library add weight. Default release builds include more than pure C; aggressive LTO + strip + opt-level=z can shrink it a lot, but the “canonical” size sits higher.\nCrystal (~800 KB): Ruby-like syntax with a GC and richer runtime. More overhead than Rust/Nim for the same “hello”.\n\n\n\n2.3 Languages with substantial runtimes or static linking of the whole environment\n\nGo (~1.2 MB): The Go runtime (garbage collector, goroutine scheduler, reflection, etc.) is statically linked into every binary by default. This is deliberate: single-file deployment with almost no external dependencies. You can shave size with build flags (-ldflags=\"-s -w\"), but the runtime is still there.\nC# (~2 MB), Swift (~2.5 MB), Dart (~5 MB): Ahead-of-time (AOT) or native compilation still pulls in a sizable core library / runtime (GC, reflection, standard collections, platform interop). Swift especially tends to include core framework pieces.\n\n\n\n2.4 Interpreted / VM / full-runtime packaging\n\nPython (~12 MB), Java (~14 MB): These are usually the size of a minimal self-contained distribution or AOT-compiled image (GraalVM native image for Java, or a frozen Python interpreter + stdlib). The “binary” includes the entire virtual machine / interpreter.\nBun (~55 MB), Deno (~70 MB), Node.js (~85 MB): These package the full JavaScript runtime (V8 or equivalent engine, standard library, module system, etc.) into a single executable. Even a one-line “hello” carries the entire JS engine. Tools exist to produce smaller native JS binaries, but the mainstream “compile/package to binary” path is large.\n\n\n\n2.5 Key takeaways\n\nLower-level / systems languages give you fine control and tiny binaries when you want them.\nHigher-level languages trade binary size for productivity, safety, concurrency primitives, garbage collection, rich standard libraries, and easier deployment (especially the static single-binary ones like Go).\nStatic linking makes deployment trivial (“just copy the file”) at the cost of size; dynamic linking keeps the on-disk executable smaller but requires the right shared libraries on the target system.\nMost of these sizes can be reduced with effort (strip symbols, LTO, size optimization, no-std/freestanding modes, alternative linkers, UPX compression, etc.). The list reflects relatively normal or “canonical” builds rather than the absolute smallest possible art projects.\n\nIn short: the jump from a few hundred bytes to tens of megabytes is almost entirely the cost of the language’s runtime and the features it provides out of the box. For a real program the relative differences often shrink, but the “Hello World” ranking remains a useful illustration of the spectrum.",
+    "crumbs": [
+      "What is Java SE",
+      "Java Standard Edition: JVM"
+    ]
   }
 ]
