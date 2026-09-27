@@ -20,8 +20,9 @@ format:
 
 The Java Virtual Machine (JVM) is a **process virtual machine** that executes Java bytecode. It is the cornerstone of the Java platform, enabling Java programs to run on any device or operating system that has a compatible JVM implementation.
 :::
+</br>
 
-</br></br>
+![](/images/javase/jvm-title.png){.lightbox width=40% fig-align="center"}
 
 When we write a simple `“Hello, World!”` program, the size of the final executable (or packaged runtime) varies enormously depending on the language. This difference reveals a fundamental trade-off between **control, safety, productivity, and runtime overhead**.
 
@@ -48,14 +49,14 @@ Here is a typical ranking of compiled (or packaged) `“Hello World”` binary s
 
 **What this table tells us**
 
-- Languages at the top (Assembly, Zig, C) produce almost pure machine code with almost no extra runtime.
-- Languages in the middle (Rust, Go, Nim) include useful features (memory safety, garbage collection, concurrency) and therefore ship a larger runtime.
-- Languages at the bottom (Java, Python, Node.js, etc.) include a complete execution engine, standard libraries, garbage collector, and often an entire virtual machine. The price of high productivity and portability is a significantly larger binary or distribution size.
+- Languages at the **top** (`Assembly`, `Zig`, `C`) produce almost pure machine code with almost no extra runtime.
+- Languages in the **middle** (`Rust`, `Go`, `Nim`) include useful features (memory safety, garbage collection, concurrency) and therefore ship a larger runtime.
+- Languages at the **bottom** (`Java`, `Python`, `Node.js`, etc.) include a complete execution engine, standard libraries, garbage collector, and often an entire `virtual machine`. The price of high productivity and portability is a significantly larger binary or distribution size.
 
 > `Java` sits in the “managed runtime” group. The component responsible for this managed execution model is the **Java Virtual Machine (JVM)**.
 
 
-## Compiled “Hello World” Binary Sizes — Explained
+## Compiled “Hello World” Binary Size
 
 ### Tiny end (native, minimal runtime)
 
@@ -73,7 +74,9 @@ Here is a typical ranking of compiled (or packaged) `“Hello World”` binary s
 
 * **Crystal (~800 KB)**: Ruby-like syntax with a GC and richer runtime. More overhead than Rust/Nim for the same “hello”.
 
-### Languages with substantial runtimes or static linking of the whole environment
+### Languages with runtimes
+
+Languages with substantial runtimes or static linking of the whole environment
 
 * **Go (~1.2 MB)**: The Go runtime (garbage collector, goroutine scheduler, reflection, etc.) is statically linked into every binary by default. This is deliberate: single-file deployment with almost no external dependencies. You can shave size with build flags (`-ldflags="-s -w"`), but the runtime is still there.
 
@@ -99,11 +102,11 @@ Here is a typical ranking of compiled (or packaged) `“Hello World”` binary s
 
 ## What Is a Virtual Machine?
 
-The term “virtual machine” is used for two quite different things in computing. Understanding the distinction is essential.
+> The term “virtual machine” is used for two quite different things in computing. Understanding the distinction is essential.
 
-### System (Hardware) Virtual Machines
+**System (Hardware) Virtual Machines**:
 
-Examples: Oracle VirtualBox, VMware, Hyper-V, QEMU/KVM.
+Examples: `Oracle VirtualBox`, `VMware`, `Hyper-V`, `QEMU/KVM`.
 
 These create a **complete virtual computer**:
 - Fake CPU
@@ -116,7 +119,7 @@ You can install a full operating system (Windows, Linux, etc.) inside them. They
 
 ### Process (Application) Virtual Machines
 
-Examples: JVM, .NET CLR, Python interpreter (to some extent), Lua VM, WebAssembly engines.
+Examples: `JVM`, `.NET CLR`, `Python interpreter` (to some extent), `Lua VM`, `WebAssembly engines`.
 
 These do **not** emulate a whole computer. They only provide a specialized runtime environment for one family of programs. They run as ordinary processes on top of a real operating system.
 
@@ -130,43 +133,42 @@ These do **not** emulate a whole computer. They only provide a specialized runti
 | Goal                    | Run another complete OS             | Run programs of a specific language       |
 | Hardware access         | Emulated or virtualized hardware    | Real host OS + hardware via system calls  |
 
----
+
 
 ## Why Is It Called a “Virtual Machine”?
 
-Even though the JVM is not a full system emulator like VirtualBox, the name is technically accurate for historical and architectural reasons.
+Even though the `JVM` is not a full system emulator like `VirtualBox`, the name is technically accurate for historical and architectural reasons.
 
-A real CPU has:
-- An instruction set
-- Registers
-- A stack
-- Memory organization
-- Execution rules
+A real `CPU` has:
+- An `instruction` set
+- `Registers`
+- A `stack`
+- `Memory` organization
+- Execution `rules`
 
 The JVM defines **exactly the same concepts**, but in software:
 
-- Its own instruction set → **Java bytecode**
-- Its own stack and local variables
-- Its own memory model (heap, method area, etc.)
-- Its own rules for class loading, exception handling, threading, and security
+- Its own `instruction` set → **Java bytecode**
+- Its own `stack` and `local variables`
+- Its own `memory` model (heap, method area, etc.)
+- Its own `rules` for class loading, exception handling, threading, and security
 
-When a Java program runs, it is executing instructions on this **abstract machine**, not directly on the physical CPU. The real CPU only appears later, when the JVM translates bytecode into native machine code (via an interpreter or a Just-In-Time compiler).
+When a `Java` program runs, it is executing instructions on this **abstract machine**, not directly on the physical `CPU`. The real `CPU` only appears later, when the `JVM` translates bytecode into native machine code (via an interpreter or a `Just-In-Time compiler`).
 
-“Virtual” simply means the machine is not real hardware — it exists as a specification and as software that implements that specification.
+“Virtual” simply means the machine **is not real hardware** — it exists as a specification and as software that implements that specification.
 
 This design was deliberate. In the early 1990s the creators of Java wanted a single compiled program to run on any device that possessed an implementation of this abstract machine. Calling it a virtual machine was the natural and precise term.
 
----
 
 ## Precise Definition of the JVM
 
 **Best technical definition:**
 
-> The Java Virtual Machine (JVM) is a **process virtual machine** (also called an application virtual machine or managed runtime) that executes Java bytecode.
+> The `Java Virtual Machine (JVM)` is a **process virtual machine** (also called an application virtual machine or managed runtime) that executes Java bytecode.
 
 A more practical description:
 
-> The JVM is a **managed runtime engine** that comes with a rich set of supporting services: garbage collection, security, threading, dynamic class loading, the standard libraries, and more.
+> The `JVM` is a **managed runtime engine** that comes with a rich set of supporting services: garbage collection, security, threading, dynamic class loading, the standard libraries, and more.
 
 ### Relationship Between the Main Components
 
@@ -178,23 +180,23 @@ A more practical description:
 | **Standard Libraries** | Large collection of ready-made classes          | Common functionality (I/O, collections, etc.)|
 | **JDK**                | JRE + compilers, debuggers, and tools           | Everything needed to **develop** Java programs|
 
----
+![](/images/javase/jvm-composition.jpg){.lightbox width=80% fig-align="center"}
 
 ## How the JVM Executes Code
 
-### From Source to Bytecode (Ahead of Time)
+From Source to Bytecode (Ahead of Time):
 
-You write Java source code and compile it with `javac` (or a build tool). The result is one or more `.class` files containing **platform-independent bytecode**. At this stage nothing is running yet.
+> We write `Java` source code and compile it with `javac` (or a build tool). The result is one or more `.class` files containing **platform-independent bytecode**. At this stage nothing is running yet.
 
-### Execution Model for Small and Large Programs
+Execution Model for Small and Large Programs:
 
-Modern JVMs (HotSpot and its derivatives) use a **mixed-mode** approach:
+Modern `JVMs` (`HotSpot` and its derivatives) use a **mixed-mode** approach:
 
 1. **Class loading** – Classes are loaded lazily, only when first needed.
-2. **Interpretation** – At the beginning the JVM reads bytecode instruction by instruction and executes it. This is relatively slow but starts immediately.
+2. **Interpretation** – At the beginning the `JVM` reads bytecode instruction by instruction and executes it. This is relatively slow but starts immediately.
 3. **Profiling** – The JVM continuously observes which methods are executed most frequently (“hot” methods).
 4. **Just-In-Time (JIT) compilation** – Hot methods are compiled in the background into highly optimized native machine code for the real CPU.
-5. **Native execution** – Once a method has been JIT-compiled, subsequent calls run at near-native speed.
+5. **Native execution** – Once a method has been `JIT`-compiled, subsequent calls run at near-native speed.
 6. **Tiered compilation** – Very hot methods can be re-compiled later with even more aggressive optimizations.
 
 **Important consequences for a large application (for example 10 000 lines and 20 classes):**
@@ -206,6 +208,8 @@ Modern JVMs (HotSpot and its derivatives) use a **mixed-mode** approach:
 - Class loading, garbage collection, and JIT compilation all happen concurrently with normal program execution.
 
 ### Concrete Example – Three Layers
+
+![](/images/javase/jvm-layers.jpg){.lightbox width=80% fig-align="center"}
 
 **Java source**
 ```java
@@ -241,18 +245,16 @@ The JVM sits in the middle: it understands the bytecode and eventually produces 
 
 - [How computer processors run conditions and loops](https://youtu.be/Ui6QyzcD3_E?si=SOPE-h46_Cl7hBA3){.external target='_blank'}
 
----
-
 ## Mental Model of the JVM
 
 ```
-Your Java source code
-        ↓
-    javac compiler
-        ↓
-Java bytecode (.class / .jar)          ← platform-independent
-        ↓
-      JVM
+        Your Java source code
+              ↓
+         javac compiler
+              ↓
+    Java bytecode (.class / .jar)          ← platform-independent
+              ↓
+             JVM
    ┌──────────────────────────────┐
    │  Interpreter + JIT compiler  │
    │  Garbage Collector           │
@@ -260,11 +262,11 @@ Java bytecode (.class / .jar)          ← platform-independent
    │  Security & threading        │
    │  Standard libraries          │
    └──────────────────────────────┘
-        ↓
-Native machine code + OS system calls
-        ↓
-Real operating system kernel
-        ↓
+              ↓
+ Native machine code + OS system calls
+              ↓
+     Real operating system kernel
+              ↓
 Physical hardware (CPU, memory, disk…)
 ```
 
@@ -274,8 +276,11 @@ Physical hardware (CPU, memory, disk…)
 
 - The JVM is **not** a full system virtual machine like VirtualBox. It is a **process virtual machine** specialized for running Java bytecode.
 - It is best described as a **managed runtime engine** that provides automatic memory management, safety, portability, and a rich set of libraries.
-- The name “virtual machine” is justified because the JVM defines its own abstract computer (instruction set, memory model, execution rules).
-- Execution is a hybrid of interpretation and Just-In-Time compilation: cold code stays interpreted, hot code becomes highly optimized native machine code.
-- The relatively large size of a Java “Hello World” distribution is the visible cost of this rich managed environment — the same cost that gives Java its famous `“write once, run anywhere”` property and its strong productivity features.
+- The name `“virtual machine”` is justified because the `JVM` defines its own `abstract computer`:
+        - instruction set,
+        - memory model,
+        - execution rules.
+- `Execution` is a hybrid of interpretation and `Just-In-Time compilation`: **cold** code stays interpreted, **hot** code becomes highly optimized native machine code.
+- The relatively large size of a `Java` “Hello World” distribution is the visible cost of this rich managed environment — the same cost that gives `Java` its famous `“write once, run anywhere”` property and its strong productivity features.
 
-This combination of portability, safety, performance (after warm-up), and a mature ecosystem is the reason the JVM remains one of the most important runtime platforms in software engineering.
+> This combination of `portability`, `safety`, `performance` (after warm-up), and a `mature` ecosystem is the reason the `JVM` remains one of the most important runtime platforms in software engineering.
