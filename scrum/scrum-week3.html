@@ -78,6 +78,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -480,6 +509,10 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="../javase/se-what-principles.html">
  <span class="dropdown-text">Java Standard Edition: Principles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-what-jvm.html">
+ <span class="dropdown-text">Java Standard Edition: JVM</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../javase/se-what-moochelsinki.html">
@@ -1181,6 +1214,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../scrum/scrum-articles-dellusion.html">
  <span class="dropdown-text">Article: Delusion and the Divided Mind</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-articles-rest.html">
+ <span class="dropdown-text">Article: Rest – The Mechanics of Mindful Repose</span></a>
+  </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">SCRUM: Laboratories</li>
         <li>
@@ -1308,6 +1345,26 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Training</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-training">    
+        <li class="dropdown-header">IFCD021-26 Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifcd0021-26/ifcd0021-26.html">
+ <span class="dropdown-text">IFCD0021-26 Official Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0021-26/ifcd0021-backlog-sprint-26.html">
+ <span class="dropdown-text">IFCD0021-26 Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0021-26/ifcd0021-backlog-product-26.html">
+ <span class="dropdown-text">IFCD0021-26 Product Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0021-26/ifcd0021-deliveries-26.html">
+ <span class="dropdown-text">IFCD0021-26 Calendar &amp; Deliveries</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Archived</li>
+        <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">IFCD044-26 Docs</li>
         <li>
     <a class="dropdown-item" href="../ifcd044-26/ifcd044-26.html">
@@ -1321,8 +1378,6 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../ifcd044-26/ifcd044-backlog-product-26.html">
  <span class="dropdown-text">IFCD044 Product Backlog</span></a>
   </li>  
-        <li><hr class="dropdown-divider"></li>
-        <li class="dropdown-header">Archived</li>
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">IFCD0210-26 Docs</li>
         <li>
@@ -1710,6 +1765,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Article: Delusion and the Divided Mind</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../scrum/scrum-articles-rest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Article: Rest – The Mechanics of Mindful Repose</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -1796,16 +1857,24 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#writing" id="toc-writing" class="nav-link" data-scroll-target="#writing"><span class="header-section-number">2.3</span> Writing</a></li>
   <li><a href="#speaking" id="toc-speaking" class="nav-link" data-scroll-target="#speaking"><span class="header-section-number">2.4</span> Speaking</a></li>
   </ul></li>
-  <li><a href="#clues-to-communicate" id="toc-clues-to-communicate" class="nav-link" data-scroll-target="#clues-to-communicate"><span class="header-section-number">3</span> Clues to communicate</a>
+  <li><a href="#how-to-articulate-complex-ideas-into-simple-communication" id="toc-how-to-articulate-complex-ideas-into-simple-communication" class="nav-link" data-scroll-target="#how-to-articulate-complex-ideas-into-simple-communication"><span class="header-section-number">3</span> How to Articulate Complex Ideas into Simple Communication</a>
   <ul>
-  <li><a href="#warmth-competence" id="toc-warmth-competence" class="nav-link" data-scroll-target="#warmth-competence"><span class="header-section-number">3.1</span> Warmth &amp; Competence</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">3.1</span> Introduction</a></li>
+  <li><a href="#necessary-the-foundation" id="toc-necessary-the-foundation" class="nav-link" data-scroll-target="#necessary-the-foundation"><span class="header-section-number">3.2</span> Necessary (the foundation)</a></li>
+  <li><a href="#sufficient-the-skill" id="toc-sufficient-the-skill" class="nav-link" data-scroll-target="#sufficient-the-skill"><span class="header-section-number">3.3</span> Sufficient (the skill)</a></li>
+  <li><a href="#practical-sequence" id="toc-practical-sequence" class="nav-link" data-scroll-target="#practical-sequence"><span class="header-section-number">3.4</span> Practical sequence</a></li>
+  <li><a href="#example-machine-learning" id="toc-example-machine-learning" class="nav-link" data-scroll-target="#example-machine-learning"><span class="header-section-number">3.5</span> Example: Machine Learning</a></li>
   </ul></li>
-  <li><a href="#focus-to-deliver-value" id="toc-focus-to-deliver-value" class="nav-link" data-scroll-target="#focus-to-deliver-value"><span class="header-section-number">4</span> Focus to deliver value</a>
+  <li><a href="#clues-to-communicate" id="toc-clues-to-communicate" class="nav-link" data-scroll-target="#clues-to-communicate"><span class="header-section-number">4</span> Clues to communicate</a>
   <ul>
-  <li><a href="#pareto-principle" id="toc-pareto-principle" class="nav-link" data-scroll-target="#pareto-principle"><span class="header-section-number">4.1</span> Pareto Principle</a></li>
-  <li><a href="#multitasking" id="toc-multitasking" class="nav-link" data-scroll-target="#multitasking"><span class="header-section-number">4.2</span> Multitasking</a></li>
+  <li><a href="#warmth-competence" id="toc-warmth-competence" class="nav-link" data-scroll-target="#warmth-competence"><span class="header-section-number">4.1</span> Warmth &amp; Competence</a></li>
   </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">5</span> References</a></li>
+  <li><a href="#focus-to-deliver-value" id="toc-focus-to-deliver-value" class="nav-link" data-scroll-target="#focus-to-deliver-value"><span class="header-section-number">5</span> Focus to deliver value</a>
+  <ul>
+  <li><a href="#pareto-principle" id="toc-pareto-principle" class="nav-link" data-scroll-target="#pareto-principle"><span class="header-section-number">5.1</span> Pareto Principle</a></li>
+  <li><a href="#multitasking" id="toc-multitasking" class="nav-link" data-scroll-target="#multitasking"><span class="header-section-number">5.2</span> Multitasking</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">6</span> References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/scrum/scrum-week3.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1849,7 +1918,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Saturday, January 11, 2025</p>
+      <p class="date-modified">Thursday, October 15, 2026</p>
     </div>
   </div>
     
@@ -1963,16 +2032,107 @@ Tip
 </ul>
 </section>
 </section>
-<section id="clues-to-communicate" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Clues to communicate</h1>
+<section id="how-to-articulate-complex-ideas-into-simple-communication" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> How to Articulate Complex Ideas into Simple Communication</h1>
+<section id="introduction" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">3.1</span> Introduction</h2>
+<blockquote class="blockquote">
+<p><strong>Deep understanding and vocabulary are necessary but not sufficient</strong> for clear <span class="math inline">\(communication\)</span>.</p>
+<p>The real skill is translating internal complexity into external clarity without losing fidelity.</p>
+<p>This requires both a <strong>solid foundation</strong> and a <strong>specific cognitive movement</strong>: traveling up and down the ladder of abstraction.</p>
+</blockquote>
+</section>
+<section id="necessary-the-foundation" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="necessary-the-foundation"><span class="header-section-number">3.2</span> Necessary (the foundation)</h2>
+<ul>
+<li><strong>Topic vocabulary</strong> — precise terms for the domain so you don’t smuggle in vagueness.</li>
+<li><strong>General vocabulary</strong> — ordinary words strong enough to carry weight without sounding childish.</li>
+<li><strong>Mental model understanding</strong> — you actually <em>see</em> how the pieces fit and move.</li>
+<li><strong>Core model</strong> — the minimal structure that still generates the phenomenon (the “engine”).</li>
+<li><strong>Good simplification choices</strong> — a living metaphor <em>plus</em> a one-sentence core.</li>
+<li><strong>WH-questions answered</strong> — What is it? How does it work? Why does it matter? When/where does it apply? What breaks it?</li>
+</ul>
+<p>These are required. Without them you are either inaccurate or empty.</p>
+</section>
+<section id="sufficient-the-skill" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sufficient-the-skill"><span class="header-section-number">3.3</span> Sufficient (the skill)</h2>
+<blockquote class="blockquote">
+<p>The core skill that turns the foundation into communication.</p>
+</blockquote>
+<p><strong>Moving up and down the ladder of abstraction — right hemisphere → left hemisphere → right hemisphere again.</strong></p>
+<p>This is the actual flow (operating system).</p>
+<ol type="1">
+<li><p><strong>Right hemisphere first</strong> Grasp the whole as a living pattern. Feel the shape, the tension, the “what it’s like.” This is pre-verbal or lightly verbal. You sense the core model before you can fully name its parts.</p></li>
+<li><p><strong>Left hemisphere</strong> Climb down the ladder into analysis: break it into components, define terms, answer the WH-questions rigorously, test the metaphor for leaks, write the one-sentence core, check causal links. This is where precision and vocabulary do their work.</p></li>
+<li><p><strong>Back to right hemisphere</strong> Climb back up. Re-embody the analyzed idea so it becomes a living whole again — now clearer, more robust, and speakable. The explanation should feel natural and inevitable, not like a list of bullet points.</p></li>
+</ol>
+<p>Most people get stuck in one hemisphere:</p>
+<ul>
+<li>Pure right: <mark>poetic but vague or wrong</mark>.</li>
+<li>Pure left:<mark> precise but dead, fragmented, and hard to follow</mark>.</li>
+</ul>
+<blockquote class="blockquote">
+<p>The skilled communicator repeatedly travels the full circuit. Each pass tightens the core model and improves the simplification.</p>
+</blockquote>
+</section>
+<section id="practical-sequence" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="practical-sequence"><span class="header-section-number">3.4</span> Practical sequence</h2>
+<ol type="1">
+<li>Sit with the phenomenon until you can feel its shape (right).</li>
+<li>Force a one-sentence core and a strong metaphor (still partly right, beginning left).</li>
+<li>Stress-test both by answering every relevant WH-question and looking for counter-examples (left).</li>
+<li>Discard everything that is not load-bearing.</li>
+<li>Speak or write the idea as a living whole again, using the cleaned core and metaphor (return to right).</li>
+<li>Watch the listener’s face or ask them to reflect it back. Adjust.</li>
+</ol>
+<p>When you can move fluidly up and down the ladder — concrete example ↔︎ mid-level mechanism ↔︎ high-level principle — and do so while staying faithful to the core model, the communication becomes both simple <em>and</em> true.</p>
+<p>That movement is the sufficient condition. Everything else is preparation for it.</p>
+</section>
+<section id="example-machine-learning" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="example-machine-learning"><span class="header-section-number">3.5</span> Example: Machine Learning</h2>
+<p><strong>One-sentence core</strong></p>
+<blockquote class="blockquote">
+<p>Machine learning is a method that lets computers get better at a task by finding patterns in data, rather than following fixed rules written by humans.</p>
+</blockquote>
+<p><strong>Metaphor</strong></p>
+<blockquote class="blockquote">
+<p>It is like teaching a child to recognize dogs. You do not hand the child a long list of rules (“if it has four legs, fur, a tail, and barks…”). Instead you show thousands of pictures of dogs and not-dogs. Over time the child builds an internal sense of “dog-ness.” Machine learning does the same thing with data and mathematics.</p>
+</blockquote>
+<p><mark>Moving down the ladder (how it actually works)</mark></p>
+<p>A <code>machine-learning</code> system is given:</p>
+<ul>
+<li><code>Examples</code> (data)</li>
+<li>A <code>goal</code> (for example: “predict the correct label” or “minimize error”)</li>
+<li>A <code>flexible mathematical structure</code> (usually a model with many adjustable numbers, called parameters)</li>
+</ul>
+<p>The system repeatedly adjusts those numbers so that its predictions get closer to the correct answers in the data. This adjustment process is called training. Once trained, the model can make predictions on new, unseen examples.</p>
+<p>Common types:</p>
+<ul>
+<li><strong>Supervised learning</strong>: The data comes with correct answers (<code>labeled</code>). The model learns the mapping from input to output.</li>
+<li><strong>Unsupervised learning</strong>: <code>No labels</code>. The model looks for natural structure or groupings in the data.</li>
+<li><strong>Reinforcement learning</strong>: The model learns by <code>trial and error</code>, receiving rewards or penalties for its actions.</li>
+</ul>
+<p><mark>Moving back up the ladder (why it matters)</mark></p>
+<p>Instead of programmers having to anticipate every possible case and write explicit <code>rules</code>, the computer discovers <code>useful patterns</code> itself. This is powerful for problems that are too <code>complex</code>, too <code>variable</code>, or too <code>poorly understood</code> for hand-written rules — recognizing speech, recommending products, detecting diseases in medical images, translating languages, or driving cars.</p>
+<p><strong>Simple test of understanding</strong> If you can answer these clearly, you have the core:</p>
+<ul>
+<li>What is the computer actually <code>learning</code>? (Patterns / a function from inputs to outputs)</li>
+<li><code>Where do the “rules” come from</code>? (They are discovered from data, not written by people)</li>
+<li>What makes a <code>model</code> good? (It performs well on new data it has never seen)</li>
+</ul>
+<p>That is <code>machine learning</code> at its essence.</p>
+</section>
+</section>
+<section id="clues-to-communicate" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Clues to communicate</h1>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/VHUrdELKjDw?feature=shared" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>This interview with <strong>Vanessa van Edwards</strong>, an expert in body language and communication, explains <mark>how nonverbal cues, such as posture, gestures, and tone of voice, influence first impressions and social and professional success</mark>.</p>
 <p><strong>Van Edwards</strong> presents scientific research highlighting the importance of nonverbal communication, offering practical advice and techniques to enhance human interactions.</p>
 <blockquote class="blockquote">
 <p>The interview delves into the <strong>impact of “cues” on confidence, relationships, and the perception of competence and warmth</strong>, suggesting strategies to manage these cues and build more authentic connections.</p>
 </blockquote>
-<section id="warmth-competence" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="warmth-competence"><span class="header-section-number">3.1</span> Warmth &amp; Competence</h2>
+<section id="warmth-competence" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="warmth-competence"><span class="header-section-number">4.1</span> Warmth &amp; Competence</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="../images/scrum/Whats-Your-Communication-Style.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Whats Your Communication Style"><img src="../images/scrum/Whats-Your-Communication-Style.jpg" class="img-fluid figure-img" alt="Whats Your Communication Style"></a></p>
@@ -2003,8 +2163,8 @@ Tip
 </ul>
 </section>
 </section>
-<section id="focus-to-deliver-value" class="level1 page-columns page-full" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Focus to deliver value</h1>
+<section id="focus-to-deliver-value" class="level1 page-columns page-full" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Focus to deliver value</h1>
 <blockquote class="blockquote">
 <p>Avoiding multitasking and applying the Pareto Principle can significantly enhance focus in communication.</p>
 </blockquote>
@@ -2019,8 +2179,8 @@ Tip
 <li>By concentrating on these high-value interactions and avoiding distractions, you can communicate more effectively, fostering deeper understanding and trust.</li>
 </ul></li>
 </ul>
-<section id="pareto-principle" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="pareto-principle"><span class="header-section-number">4.1</span> Pareto Principle</h2>
+<section id="pareto-principle" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="pareto-principle"><span class="header-section-number">5.1</span> Pareto Principle</h2>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2053,8 +2213,8 @@ Important
 <li><strong>Fund Raising</strong>: The Pareto principle applies to raising funds: 20% of the donors contribute 80% of the total .</li>
 </ul>
 </section>
-<section id="multitasking" class="level2 page-columns page-full" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="multitasking"><span class="header-section-number">4.2</span> Multitasking</h2>
+<section id="multitasking" class="level2 page-columns page-full" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="multitasking"><span class="header-section-number">5.2</span> Multitasking</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2099,8 +2259,8 @@ Tip
 <p>And there are more negative side-effects: because of our brains’ plasticity, when we consistently engage in multi-tasking we reshape our brains for the worse, and we become habituated to this counterproductive way of working.</p>
 </section>
 </section>
-<section id="references" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> References</h1>
+<section id="references" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> References</h1>
 <ul>
 <li><a href="https://sites.google.com/view/gestioprojectes/llegir/setmana3" class="external">Week 3: Communication and value</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Pareto_principle">Pareto Wikipedia definition</a> / <a href="https://sites.google.com/view/gestioprojectes/llegir/setmana3/pareto">Pareto</a></li>
