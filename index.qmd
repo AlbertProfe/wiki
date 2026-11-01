@@ -42,7 +42,7 @@ format:
     --pill-bg: rgba(37,99,235,.08); --pill-border: rgba(37,99,235,.22); --pill-hover-bg: rgba(37,99,235,.16); --link-hover: #1e40af;
     --sprint-grad: linear-gradient(135deg, rgba(37,99,235,.06), rgba(147,51,234,.05)); --sprint-border: rgba(37,99,235,.20);
     --day-bg: #ffffff; --final-tint: rgba(37,99,235,.06);
-    --particle: rgba(30,58,138,.28);
+    --particle: rgba(30,64,175,.68); --particle-line: rgba(30,64,175,.30);
     --shadow: 0 1px 2px rgba(15,23,42,.04), 0 4px 16px -4px rgba(15,23,42,.08);
     --shadow-hover: 0 2px 4px rgba(15,23,42,.04), 0 16px 32px -10px rgba(37,99,235,.22);
     --header-shadow: 0 1px 12px rgba(15,23,42,.05); --header-blur: blur(16px) saturate(1.4);
@@ -63,7 +63,7 @@ format:
     --pill-bg: rgba(59,130,246,.12); --pill-border: rgba(59,130,246,.25); --pill-hover-bg: rgba(59,130,246,.25); --link-hover: #fff;
     --sprint-grad: linear-gradient(135deg, rgba(59,130,246,.10), rgba(168,85,247,.08)); --sprint-border: rgba(96,165,250,.25);
     --day-bg: rgba(11,15,26,.7); --final-tint: rgba(59,130,246,.07);
-    --particle: #60a5fa;
+    --particle: #60a5fa; --particle-line: rgba(96,165,250,0);
     --shadow: none; --shadow-hover: none; --header-shadow: none; --header-blur: blur(16px);
   }
   #quarto-header, .nav-footer, #quarto-margin-sidebar, .quarto-title-block { display: none !important; }
@@ -76,36 +76,67 @@ format:
   #lp a { text-decoration: none; }
   #lp p { margin: 0; }
   #lp h1, #lp h2, #lp h3 { color: var(--text); border: 0; margin-top: 0; }
-  #lp-particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-  #lp .particle { position: absolute; background: var(--particle); border-radius: 50%; animation: lp-float linear infinite; }
-  @keyframes lp-float {
-    0% { transform: translateY(100vh) scale(0); opacity: 0; } 10% { opacity: 1; }
-    90% { opacity: 1; } 100% { transform: translateY(-10vh) scale(1); opacity: 0; }
-  }
+  #lp-particles { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: block; pointer-events: none; z-index: 0; }
   /* header */
   #lp .lp-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--header-bg);
     backdrop-filter: var(--header-blur); -webkit-backdrop-filter: var(--header-blur); border-bottom: 1px solid var(--header-border);
     box-shadow: var(--header-shadow);
-    padding: .8rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-  #lp .lp-logo { display: flex; align-items: center; gap: .6rem; font-weight: 700; font-size: 1.2rem; letter-spacing: -.02em; color: var(--text); }
+    padding: .75rem 2rem; display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 1rem; }
+  #lp .lp-logo { flex-shrink: 0; display: flex; align-items: center; gap: .6rem; font-weight: 700; font-size: 1.2rem; line-height: 1; letter-spacing: -.02em; color: var(--text); white-space: nowrap; }
   #lp .lp-logo span { color: var(--accent-light); }
-  #lp .lp-logo-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  #lp .lp-logo span.lp-logo-w { color: inherit; }
+  #lp .lp-logo-icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
     background: linear-gradient(135deg, var(--accent), var(--accent-3)); font-size: 1.05rem; color: var(--on-accent); }
-  #lp .lp-nav { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
-  #lp .lp-nav a { color: var(--text-muted); font-size: .9rem; font-weight: 500; transition: color .2s; }
+  /* nav: middle/right, never wraps */
+  #lp .lp-nav { flex: 1 1 auto; min-width: 0; display: flex; flex-wrap: nowrap; align-items: center; justify-content: flex-end; gap: 1.5rem; }
+  #lp .lp-nav a { color: var(--text-muted); font-size: .9rem; font-weight: 500; line-height: 1; white-space: nowrap; transition: color .2s; }
   #lp .lp-nav a:hover { color: var(--text); }
-  /* sun/moon toggle: same switch as the Quarto navbar toggle */
-  #lp .lp-theme { flex-shrink: 0; width: 36px; height: 36px; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center;
+  /* right-hand group: menu button (small screens) + theme toggle + Sprint CTA */
+  #lp .lp-actions { flex-shrink: 0; display: flex; flex-wrap: nowrap; align-items: center; gap: .75rem; }
+  #lp .lp-actions .lp-btn { white-space: nowrap; padding: .6rem 1.25rem; font-size: .9rem; line-height: 1; }
+  /* sun/moon toggle + hamburger: same round icon button */
+  #lp .lp-theme, #lp .lp-menu-btn { flex-shrink: 0; width: 36px; height: 36px; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center;
     background: transparent; border: 1px solid var(--outline); color: var(--text-muted); cursor: pointer; padding: 0; transition: all .2s; }
-  #lp .lp-theme:hover { color: var(--accent-light); border-color: var(--accent-light); }
-  #lp .lp-theme svg { width: 18px; height: 18px; }
+  #lp .lp-theme:hover, #lp .lp-menu-btn:hover, #lp .lp-menu-btn[aria-expanded="true"] { color: var(--accent-light); border-color: var(--accent-light); }
+  #lp .lp-theme:focus-visible, #lp .lp-menu-btn:focus-visible, #lp .lp-nav a:focus-visible { outline: 2px solid var(--accent-light); outline-offset: 2px; }
+  #lp .lp-theme svg, #lp .lp-menu-btn svg { width: 18px; height: 18px; }
   #lp .lp-theme .lp-sun { display: none; }
   body.quarto-dark #lp .lp-theme .lp-sun { display: block; }
   body.quarto-dark #lp .lp-theme .lp-moon { display: none; }
-  @media (max-width: 860px) { #lp .lp-nav a.lp-hide-sm { display: none; } }
+  #lp .lp-menu-btn { display: none; }
+  #lp .lp-menu-btn .lp-x { display: none; }
+  #lp .lp-menu-btn[aria-expanded="true"] .lp-x { display: block; }
+  #lp .lp-menu-btn[aria-expanded="true"] .lp-bars { display: none; }
+  /* 760-1100px: tighter, hide lower-priority links */
+  @media (max-width: 1100px) {
+    #lp .lp-header { padding: .7rem 1.25rem; }
+    #lp .lp-logo { font-size: 1.1rem; }
+    #lp .lp-nav { gap: 1rem; }
+    #lp .lp-nav a { font-size: .85rem; }
+    #lp .lp-nav a.lp-pri-low { display: none; }
+    #lp .lp-actions { gap: .6rem; }
+    #lp .lp-actions .lp-btn { padding: .55rem 1.05rem; font-size: .85rem; }
+  }
+  /* below 760px: links collapse into a dropdown under the header */
+  @media (max-width: 760px) {
+    #lp .lp-header { padding: .6rem 1rem; gap: .5rem; }
+    #lp .lp-logo { font-size: 1.05rem; gap: .5rem; }
+    #lp .lp-logo-icon { width: 32px; height: 32px; font-size: .95rem; }
+    #lp .lp-menu-btn { display: inline-flex; }
+    #lp .lp-theme, #lp .lp-menu-btn { width: 34px; height: 34px; }
+    #lp .lp-actions { gap: .5rem; }
+    #lp .lp-actions .lp-btn { padding: .5rem .85rem; font-size: .8rem; }
+    #lp .lp-cta-arrow { display: none; }
+    #lp .lp-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0;
+      padding: .4rem 1rem .8rem; background: var(--bg); border-bottom: 1px solid var(--header-border); box-shadow: 0 12px 24px -12px rgba(15,23,42,.25); }
+    #lp .lp-nav.lp-open { display: flex; }
+    #lp .lp-nav a, #lp .lp-nav a.lp-pri-low { display: block; padding: .8rem .25rem; font-size: 1rem; border-bottom: 1px solid var(--line-10); }
+    #lp .lp-nav a:last-child { border-bottom: 0; }
+  }
+  @media (max-width: 440px) { #lp .lp-logo-w { display: none; } }
+  @media (max-width: 340px) { #lp .lp-logo-icon { display: none; } }
   #lp .lp-current { margin: 0 0 1.5rem; padding: 1rem 1.25rem; border: 1px solid var(--green-border); border-radius: 14px; background: var(--green-soft); display: grid; gap: .5rem; }
   #lp a.lp-badge { text-decoration: none; }
-  @media (max-width: 560px) { #lp .lp-header { padding: .7rem 1rem; } #lp .lp-nav { flex-wrap: nowrap; gap: .9rem; } #lp .lp-nav a:not(.lp-btn) { display: none; } #lp .lp-nav .lp-btn { white-space: nowrap; padding: .5rem 1rem; font-size: .85rem; } #lp .lp-logo { font-size: 1.05rem; white-space: nowrap; } }
   /* buttons */
   #lp .lp-btn { display: inline-flex; align-items: center; gap: .4rem; padding: .7rem 1.5rem; border-radius: 9999px;
     font-weight: 600; font-size: .95rem; transition: all .25s; border: none; }
@@ -201,7 +232,7 @@ format:
   #lp .lp-footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
   #lp .lp-reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
   #lp .lp-reveal.lp-in { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) { #lp .particle { display: none; } #lp .lp-reveal { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { #lp .lp-reveal { opacity: 1; transform: none; } }
 </style>
 <script>
   /* apply the saved scheme before first paint (Quarto itself only sets the body class on DOMContentLoaded) */
@@ -217,25 +248,31 @@ format:
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
 <div id="lp">
-  <div id="lp-particles"></div>
+  <canvas id="lp-particles" aria-hidden="true"></canvas>
 
   <!-- Header (replaces the Quarto navbar on this page only) -->
   <header class="lp-header">
-    <a class="lp-logo" href="./index.html"><div class="lp-logo-icon">⌘</div>albert<span>profe</span>&nbsp;wiki</a>
-    <nav class="lp-nav">
+    <a class="lp-logo" href="./index.html"><div class="lp-logo-icon">⌘</div>albert<span>profe</span><span class="lp-logo-w">&nbsp;wiki</span></a>
+    <nav class="lp-nav" id="lp-nav" aria-label="Landing sections">
       <a href="#now">Now</a>
-      <a href="#sprint" class="lp-hide-sm">Sprint</a>
-      <a href="#path" class="lp-hide-sm">The path</a>
+      <a href="#sprint">Sprint</a>
+      <a href="#path">The path</a>
       <a href="#courses">Courses</a>
-      <a href="#library" class="lp-hide-sm">Library</a>
-      <a href="https://ml.albertprofe.dev" target="_blank" class="lp-hide-sm">ML wiki ↗</a>
-      <a href="https://github.com/AlbertProfe/wiki" target="_blank" class="lp-hide-sm">GitHub</a>
-      <a href="ifcd0021-26/ifcd0021-backlog-sprint-26.html" class="lp-btn lp-btn-primary">Sprint#08 →</a>
+      <a href="#library" class="lp-pri-low">Library</a>
+      <a href="https://ml.albertprofe.dev" target="_blank">ML wiki ↗</a>
+      <a href="https://github.com/AlbertProfe/wiki" target="_blank" class="lp-pri-low">GitHub</a>
+    </nav>
+    <div class="lp-actions">
+      <button type="button" class="lp-menu-btn" id="lp-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="lp-nav">
+        <svg class="lp-bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg class="lp-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
       <button type="button" class="lp-theme" id="lp-theme" title="Toggle dark mode" aria-label="Toggle dark mode">
         <svg class="lp-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
         <svg class="lp-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
       </button>
-    </nav>
+      <a href="ifcd0021-26/ifcd0021-backlog-sprint-26.html" class="lp-btn lp-btn-primary">Sprint#08<span class="lp-cta-arrow">→</span></a>
+    </div>
   </header>
 
   <!-- Hero -->
@@ -479,17 +516,69 @@ format:
 
 <script>
 (function () {
-  var box = document.getElementById('lp-particles');
-  for (var i = 0; i < 32; i++) {
-    var p = document.createElement('div');
-    p.className = 'particle';
-    p.style.left = Math.random() * 100 + '%';
-    p.style.animationDuration = (9 + Math.random() * 16) + 's';
-    p.style.animationDelay = (Math.random() * 12) + 's';
-    p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
-    p.style.opacity = 0.2 + Math.random() * 0.4;
-    box.appendChild(p);
-  }
+  // particle background: one canvas, DPR-aware; colours come from --particle / --particle-line and follow the theme
+  (function () {
+    var cv = document.getElementById('lp-particles');
+    if (!cv || !cv.getContext) return;
+    var ctx = cv.getContext('2d');
+    var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    var W = 0, H = 0, dots = [], dot = '#60a5fa', line = 'rgba(0,0,0,0)', lineOn = false, raf = 0, LINK = 120;
+    function readColours() {
+      var cs = getComputedStyle(document.body);
+      dot = (cs.getPropertyValue('--particle') || '#60a5fa').trim();
+      line = (cs.getPropertyValue('--particle-line') || '').trim();
+      lineOn = !!line && !/,\s*0\)$/.test(line.replace(/\s/g, ''));
+    }
+    function size() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = window.innerWidth; H = window.innerHeight;
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      cv.style.width = W + 'px'; cv.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var n = Math.max(28, Math.min(80, Math.round(W * H / 16000)));
+      while (dots.length < n) dots.push(make(Math.random() * H));
+      dots.length = n;
+    }
+    function make(y) {
+      return { x: Math.random() * W, y: y, r: 1.2 + Math.random() * 1.6,
+               vx: (Math.random() - .5) * .15, vy: -(.15 + Math.random() * .35), a: .8 + Math.random() * .2 };
+    }
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      var i, j, p, q, dx, dy, d;
+      if (lineOn) {
+        ctx.strokeStyle = line; ctx.lineWidth = 1;
+        for (i = 0; i < dots.length; i++) for (j = i + 1; j < dots.length; j++) {
+          p = dots[i]; q = dots[j]; dx = p.x - q.x; dy = p.y - q.y; d = Math.sqrt(dx * dx + dy * dy);
+          if (d < LINK) { ctx.globalAlpha = 1 - d / LINK; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke(); }
+        }
+      }
+      ctx.fillStyle = dot;
+      for (i = 0; i < dots.length; i++) {
+        p = dots[i]; ctx.globalAlpha = p.a; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2832); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+    function step() {
+      for (var i = 0; i < dots.length; i++) {
+        var p = dots[i]; p.x += p.vx; p.y += p.vy;
+        if (p.y < -10) { dots[i] = make(H + 10); }
+        if (p.x < -10) p.x = W + 10; else if (p.x > W + 10) p.x = -10;
+      }
+      draw();
+      raf = window.requestAnimationFrame(step);
+    }
+    function start() {
+      if (raf) { window.cancelAnimationFrame(raf); raf = 0; }
+      if ((mq && mq.matches) || document.hidden) { draw(); return; }  // reduced motion: static dots, not nothing
+      raf = window.requestAnimationFrame(step);
+    }
+    readColours(); size(); start();
+    window.addEventListener('resize', function () { size(); draw(); });
+    document.addEventListener('visibilitychange', start);
+    if (mq) { if (mq.addEventListener) mq.addEventListener('change', start); else if (mq.addListener) mq.addListener(start); }
+    new MutationObserver(function () { readColours(); draw(); }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  })();
   // sun/moon toggle: use Quarto's own switch so the choice is shared with the whole site
   var tbtn = document.getElementById('lp-theme');
   if (tbtn) tbtn.addEventListener('click', function () {
@@ -499,6 +588,16 @@ format:
     document.body.classList.toggle('quarto-dark', dark);
     document.body.classList.toggle('quarto-light', !dark);
   });
+  // hamburger menu (below 760px)
+  var mbtn = document.getElementById('lp-menu-btn'), mnav = document.getElementById('lp-nav');
+  function lpMenu(open) { mnav.classList.toggle('lp-open', open); mbtn.setAttribute('aria-expanded', open ? 'true' : 'false'); mbtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
+  if (mbtn && mnav) {
+    mbtn.addEventListener('click', function () { lpMenu(mbtn.getAttribute('aria-expanded') !== 'true'); });
+    mnav.addEventListener('click', function (e) { if (e.target.closest('a')) lpMenu(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && mbtn.getAttribute('aria-expanded') === 'true') { lpMenu(false); mbtn.focus(); } });
+    document.addEventListener('click', function (e) { if (!e.target.closest('.lp-header')) lpMenu(false); });
+    window.addEventListener('resize', function () { if (window.innerWidth > 760) lpMenu(false); });
+  }
   // rotating word, same list as the previous home page
   var words = ['JAVA','REACT','SPRING BOOT','UML','BASH','MINDSET','SCRUM','LINUX','API REST','DEVOPS','AWS','MARKDOWN','QUARTO'];
   var spin = document.getElementById('lp-spin'), k = 0;
