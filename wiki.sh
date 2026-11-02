@@ -147,10 +147,9 @@ require_session() {
 }
 
 # Quarto extensions the pages need. They are committed in _extensions/ (pinned, so
-# every machine renders the same); as a safety net, install them only when missing. Without them render fails
-# (lightbox filter) or prints raw {{< fa >}} / {{< tweet >}} shortcodes.
+# every machine renders the same); as a safety net, install them only when missing. Without them render
+# prints raw {{< fa >}} / {{< tweet >}} shortcodes. Lightbox is built into Quarto 1.6 (lightbox: auto), not an extension.
 readonly EXTENSIONS=(
-  "quarto-ext/lightbox|https://github.com/quarto-ext/lightbox/archive/19f97b6ff7e8542b348cbbb2464879b3de3d67d3.zip"
   "quarto-ext/fontawesome|https://github.com/quarto-ext/fontawesome/archive/refs/tags/v1.2.0.zip"
   "social-embeds|https://github.com/sellorm/quarto-social-embeds/archive/26c70ec45d574c3bec7b44b8ce6840a82e3ad271.zip"
 )
