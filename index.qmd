@@ -3,6 +3,9 @@ title: ""
 page-layout: custom
 toc: false
 repo-actions: false
+resources:
+  - images/landing/hero-orbit.jpg
+  - images/landing/hero-orbit-light.jpg
 format:
   html:
     toc: false
@@ -17,6 +20,7 @@ format:
     - 84 book pages   -> books/*.qmd
     - 11 course editions -> ifc*/ folders
     - 1,673 commits since 2022-12-08 -> git log
+    - 165 students -> about 15 per course edition x 11 editions (Albert's figure)
     - Per-area page counts -> git ls-files '<area>/*.qmd'
   Course facts (260h, 14/09-27/11/2026, 11 weeks, Sprint#08 days 26-29) are copied from
   ifcd0021-26/*.qmd. Update the "Now" + "Sprint" blocks every week when the sprint rolls over.
@@ -42,7 +46,6 @@ format:
     --pill-bg: rgba(37,99,235,.08); --pill-border: rgba(37,99,235,.22); --pill-hover-bg: rgba(37,99,235,.16); --link-hover: #1e40af;
     --sprint-grad: linear-gradient(135deg, rgba(37,99,235,.06), rgba(147,51,234,.05)); --sprint-border: rgba(37,99,235,.20);
     --day-bg: #ffffff; --final-tint: rgba(37,99,235,.06);
-    --particle: rgba(30,64,175,.68); --particle-line: rgba(30,64,175,.30);
     --shadow: 0 1px 2px rgba(15,23,42,.04), 0 4px 16px -4px rgba(15,23,42,.08);
     --shadow-hover: 0 2px 4px rgba(15,23,42,.04), 0 16px 32px -10px rgba(37,99,235,.22);
     --header-shadow: 0 1px 12px rgba(15,23,42,.05); --header-blur: blur(16px) saturate(1.4);
@@ -63,7 +66,6 @@ format:
     --pill-bg: rgba(59,130,246,.12); --pill-border: rgba(59,130,246,.25); --pill-hover-bg: rgba(59,130,246,.25); --link-hover: #fff;
     --sprint-grad: linear-gradient(135deg, rgba(59,130,246,.10), rgba(168,85,247,.08)); --sprint-border: rgba(96,165,250,.25);
     --day-bg: rgba(11,15,26,.7); --final-tint: rgba(59,130,246,.07);
-    --particle: #60a5fa; --particle-line: rgba(96,165,250,0);
     --shadow: none; --shadow-hover: none; --header-shadow: none; --header-blur: blur(16px);
   }
   #quarto-header, .nav-footer, #quarto-margin-sidebar, .quarto-title-block { display: none !important; }
@@ -76,7 +78,6 @@ format:
   #lp a { text-decoration: none; }
   #lp p { margin: 0; }
   #lp h1, #lp h2, #lp h3 { color: var(--text); border: 0; margin-top: 0; }
-  #lp-particles { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: block; pointer-events: none; z-index: 0; }
   /* header */
   #lp .lp-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--header-bg);
     backdrop-filter: var(--header-blur); -webkit-backdrop-filter: var(--header-blur); border-bottom: 1px solid var(--header-border);
@@ -163,10 +164,76 @@ format:
   #lp .lp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 0 0 rgba(34,197,94,.7); animation: lp-pulse 2s infinite; }
   @keyframes lp-pulse { 70% { box-shadow: 0 0 0 10px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
   #lp .lp-grad-code { color: var(--accent-light); } #lp .lp-grad-learn { color: var(--accent-2); } #lp .lp-grad-build { color: var(--accent-3); }
-  #lp .lp-spin { display: inline-block; min-width: 9ch; padding: .1rem .7rem; border-radius: 10px; background: var(--spin-bg);
-    border: 1px solid var(--spin-border); color: var(--spin-fg); font-weight: 700; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  #lp .lp-spin { display: inline-block; width: 13ch; text-align: center; white-space: nowrap; vertical-align: middle; line-height: 1.5;
+    padding: .05rem .5rem; border-radius: 10px; background: var(--spin-bg); border: 1px solid var(--spin-border); color: var(--spin-fg);
+    font-weight: 700; font-size: .95em; font-family: 'JetBrains Mono', ui-monospace, monospace; transition: opacity .25s ease; }
+  #lp .lp-hero-sub { display: block; margin-top: 1.4rem; }
+  /* cinematic hero: image, orbiting chips, glass card (dark in both themes) */
+  #lp .lp-cine { max-width: 1280px; min-height: min(92vh, 780px); padding: 7rem 2.5rem 3.5rem; display: flex; flex-direction: row;
+    align-items: center; justify-content: flex-start; text-align: left; isolation: isolate;
+    --text: #f8fafc; --text-muted: #c4b5fd; --strong: #fff; --outline: rgba(196,181,253,.35); --accent-light: #60a5fa;
+    --spin-bg: rgba(168,85,247,.18); --spin-border: rgba(196,181,253,.35); --spin-fg: #fff;
+    --green-bg: rgba(34,197,94,.14); --green-border: rgba(34,197,94,.35); --green-fg: #86efac;
+    --chip-fg: #fff; --chip-bg: rgba(30,27,75,.55); --cine-img: url("images/landing/hero-orbit.jpg"); }
+  #lp .lp-cine-media { position: absolute; inset: 5rem 1rem 1rem; border-radius: 1.5rem; overflow: hidden; z-index: -1;
+    background: #0b0f1a var(--cine-img) right center / cover no-repeat;
+    box-shadow: 0 30px 80px -30px rgba(88,28,135,.55); }
+  #lp .lp-cine-media::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(90deg, rgba(11,15,26,.78) 0%, rgba(11,15,26,.35) 42%, rgba(11,15,26,0) 70%); }
+  #lp .lp-orbit { position: absolute; inset: 0; z-index: 1; }
+  #lp .lp-chip { position: absolute; left: 0; top: 0; display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap;
+    padding: .36rem .8rem .36rem .55rem; border-radius: 9999px; font-size: .84rem; font-weight: 600; letter-spacing: .01em;
+    color: var(--chip-fg); background: var(--chip-bg); border: 1px solid color-mix(in srgb, var(--c) 55%, transparent);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--c) 35%, transparent), inset 0 0 10px color-mix(in srgb, var(--c) 12%, transparent);
+    will-change: transform, opacity; }
+  #lp .lp-chip svg { width: 1.15em; height: 1.15em; fill: none; stroke: var(--c); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+    filter: drop-shadow(0 0 4px var(--c)); flex: none; }
+  #lp .lp-glass { position: relative; z-index: 2; max-width: 540px; padding: 2.2rem 2.3rem; border-radius: 1.5rem;
+    background: rgba(17,12,40,.55); border: 1px solid rgba(196,181,253,.28);
+    backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,.6); }
+  #lp .lp-cine h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); margin-bottom: 1.1rem; }
+  #lp .lp-cine .lp-lead { font-size: 1.08rem; color: #e9e5ff; margin-bottom: 0; }
+  #lp .lp-cine .lp-badge { margin-bottom: 1.4rem; }
+  #lp .lp-cine .lp-hero-ctas { justify-content: flex-start; margin-top: 1.8rem; }
+  #lp .lp-cine .lp-stats { justify-content: flex-start; gap: 1.8rem; margin-top: 2rem; }
+  #lp .lp-cine .lp-stat { text-align: left; }
+  #lp .lp-cine .lp-stat-value { font-size: 1.25rem; }
+  #lp .lp-cine .lp-stat-label { color: #c4b5fd; font-size: .75rem; }
+  body:not(.quarto-dark) #lp .lp-cine {
+    --text: #0f172a; --text-muted: #4c1d95; --strong: #0f172a; --outline: rgba(91,33,182,.30); --accent-light: #2563eb;
+    --spin-bg: rgba(147,51,234,.10); --spin-border: rgba(147,51,234,.30); --spin-fg: #4c1d95;
+    --green-bg: rgba(22,163,74,.10); --green-border: rgba(22,163,74,.30); --green-fg: #15803d;
+    --chip-fg: #1e1b4b; --chip-bg: rgba(255,255,255,.72); --cine-img: url("images/landing/hero-orbit-light.jpg"); }
+  body:not(.quarto-dark) #lp .lp-cine-media { background-color: #f5f3ff; box-shadow: 0 30px 80px -35px rgba(91,33,182,.35); }
+  body:not(.quarto-dark) #lp .lp-cine-media::after { background: linear-gradient(90deg, rgba(248,250,252,.75) 0%, rgba(248,250,252,.25) 42%, rgba(248,250,252,0) 70%); }
+  body:not(.quarto-dark) #lp .lp-glass { background: rgba(255,255,255,.62); border-color: rgba(147,51,234,.22); box-shadow: 0 20px 60px -25px rgba(76,29,149,.35); }
+  body:not(.quarto-dark) #lp .lp-cine .lp-lead { color: #334155; }
+  body:not(.quarto-dark) #lp .lp-cine .lp-stat-label { color: #6d28d9; }
+  body:not(.quarto-dark) #lp .lp-chip svg { filter: none; }
+  @media (max-width: 900px) {
+    #lp .lp-cine { flex-direction: column; padding: 5.5rem 1rem 2rem; min-height: 0; }
+    #lp .lp-cine-media { position: relative; inset: auto; width: 100%; aspect-ratio: 16 / 9; background-position: 70% center; }
+    #lp .lp-cine-media::after { background: linear-gradient(180deg, rgba(11,15,26,0) 55%, rgba(11,15,26,.55) 100%); }
+    body:not(.quarto-dark) #lp .lp-cine-media::after { background: none; }
+    #lp .lp-glass { max-width: none; width: 100%; margin-top: -2.5rem; padding: 1.6rem 1.4rem; }
+    #lp .lp-chip { font-size: .72rem; padding: .28rem .6rem; }
+  }
+  @media (max-width: 480px) { #lp .lp-chip { font-size: .64rem; } }
   #lp .lp-hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 2.2rem; }
   #lp .lp-stats { display: flex; gap: 3rem; margin-top: 4rem; flex-wrap: wrap; justify-content: center; }
+  #lp .lp-numbers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; margin-top: 2rem; }
+  #lp .lp-num { background: var(--bg-card); border: 1px solid var(--line-12); border-radius: 1rem; padding: 1.4rem 1.5rem;
+    box-shadow: var(--shadow); transition: transform .2s, border-color .2s, box-shadow .2s; }
+  #lp .lp-num:hover { transform: translateY(-3px); border-color: var(--hover-border); box-shadow: var(--shadow-hover); }
+  #lp .lp-num-icon { font-size: 1.3rem; line-height: 1; margin-bottom: .7rem; }
+  #lp .lp-num-value { font-size: 2.4rem; font-weight: 800; line-height: 1.05; letter-spacing: -.02em;
+    background: linear-gradient(135deg, var(--accent-light), var(--accent-3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  #lp .lp-num-label { font-size: 1rem; font-weight: 600; color: var(--text); margin-top: .35rem; }
+  #lp .lp-num-src { font-size: .82rem; color: var(--text-muted); margin-top: .15rem; }
+  @media (max-width: 860px) { #lp .lp-numbers { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 420px) { #lp .lp-numbers { gap: .75rem; } #lp .lp-num { padding: 1.1rem; } #lp .lp-num-value { font-size: 1.9rem; } }
   #lp .lp-stat { text-align: center; }
   #lp .lp-stat-value { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, var(--accent-light), var(--accent-3));
     -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
@@ -248,7 +315,6 @@ format:
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
 <div id="lp">
-  <canvas id="lp-particles" aria-hidden="true"></canvas>
 
   <!-- Header (replaces the Quarto navbar on this page only) -->
   <header class="lp-header">
@@ -276,13 +342,26 @@ format:
   </header>
 
   <!-- Hero -->
-  <section class="lp-hero">
+  <section class="lp-hero lp-cine">
+    <div class="lp-cine-media" role="img" aria-label="A teacher and a student face each other while Java, Spring Boot, React, DevOps, Linux, Scrum, labs and books orbit around them">
+      <div class="lp-orbit" id="lp-orbit" aria-hidden="true">
+        <span class="lp-chip" style="--c:#60a5fa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10h11v4a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 3c-1 1.2 1 1.8 0 3.2M11.5 3c-1 1.2 1 1.8 0 3.2"/></svg>Java</span>
+        <span class="lp-chip" style="--c:#4ade80"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"/><path d="M5 19 13 11"/></svg>Spring Boot</span>
+        <span class="lp-chip" style="--c:#60a5fa"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1.6"/><ellipse cx="12" cy="12" rx="9.5" ry="3.8"/><ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(120 12 12)"/></svg>React</span>
+        <span class="lp-chip" style="--c:#c084fc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c-2-2.6-3.5-4-5.5-4a4 4 0 0 0 0 8c2 0 3.5-1.4 5.5-4zm0 0c2 2.6 3.5 4 5.5 4a4 4 0 0 0 0-8c-2 0-3.5 1.4-5.5 4z"/></svg>DevOps</span>
+        <span class="lp-chip" style="--c:#4ade80"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="m7 10 3 2.5L7 15M12.5 15H17"/></svg>Linux</span>
+        <span class="lp-chip" style="--c:#c084fc"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M9 4v16M15 4v16"/><path d="M5 8h2M11 8h2M11 11.5h2M17 8h2"/></svg>Scrum</span>
+        <span class="lp-chip" style="--c:#4ade80"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 3h5M10.5 3v6L5 19a1.4 1.4 0 0 0 1.2 2h11.6A1.4 1.4 0 0 0 19 19l-5.5-10V3"/><path d="M7.5 15h9"/></svg>Labs</span>
+        <span class="lp-chip" style="--c:#c084fc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5V5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5 2.5 2.5 0 0 0 6.5 23H20"/><path d="M8 7.5h8"/></svg>Books</span>
+      </div>
+    </div>
+    <div class="lp-glass">
     <a class="lp-badge" href="ifcd0021-26/ifcd0021-26.html"><span class="lp-dot"></span> Live classroom · IFCD0021-26 · Sprint#08 running</a>
     <h1><span class="lp-grad-code">Code.</span> <span class="lp-grad-learn">Learn.</span><br><span class="lp-grad-build">Build.</span></h1>
     <p class="lp-lead">
-      Code <span class="lp-spin" id="lp-spin">JAVA</span> learn.<br>
-      The shared path for the Fullstack Java &amp; React courses: sprint backlogs, product history,
-      labs and reference articles, all in one living wiki.
+      Code <span class="lp-spin" id="lp-spin">JAVA</span> Learn.
+      <span class="lp-hero-sub">One living wiki for every course I teach: Java SE, Spring Boot, React, DevOps, Linux,
+      Scrum and more, with sprint backlogs, product history, hands-on labs, book notes and reference articles.</span>
     </p>
     <div class="lp-hero-ctas">
       <a href="ifcd0021-26/ifcd0021-backlog-sprint-26.html" class="lp-btn lp-btn-primary">Current Sprint Backlog →</a>
@@ -293,19 +372,21 @@ format:
       <div class="lp-stat"><div class="lp-stat-value">11 weeks</div><div class="lp-stat-label">260h · IFCD0021-26</div></div>
       <div class="lp-stat"><div class="lp-stat-value">++ / ----</div><div class="lp-stat-label">new topic / pending to future</div></div>
     </div>
+    </div>
   </section>
 
   <!-- Now: stats computed from the repo -->
   <section id="now" class="lp-reveal">
     <div class="lp-label">Now</div>
     <h2>The wiki, in numbers</h2>
-    <p class="lp-lead">Counted straight from the repository, not estimated. Every lab and article below is one click away.</p>
-    <div class="lp-stats" style="margin-top:2rem; justify-content:flex-start; gap:3.5rem;">
-      <div class="lp-stat"><div class="lp-stat-value">415</div><div class="lp-stat-label">pages (.qmd)</div></div>
-      <div class="lp-stat"><div class="lp-stat-value">77</div><div class="lp-stat-label">hands-on labs</div></div>
-      <div class="lp-stat"><div class="lp-stat-value">84</div><div class="lp-stat-label">book notes</div></div>
-      <div class="lp-stat"><div class="lp-stat-value">11</div><div class="lp-stat-label">course editions documented</div></div>
-      <div class="lp-stat"><div class="lp-stat-value">1,673</div><div class="lp-stat-label">commits since Dec 2022</div></div>
+    <p class="lp-lead">Counted from the repository and the classroom. Every lab and article below is one click away.</p>
+    <div class="lp-numbers">
+      <div class="lp-num"><div class="lp-num-icon">📄</div><div class="lp-num-value">415</div><div class="lp-num-label">pages</div><div class="lp-num-src">.qmd files in the repo</div></div>
+      <div class="lp-num"><div class="lp-num-icon">🧪</div><div class="lp-num-value">77</div><div class="lp-num-label">hands-on labs</div><div class="lp-num-src">step-by-step, with code</div></div>
+      <div class="lp-num"><div class="lp-num-icon">📚</div><div class="lp-num-value">84</div><div class="lp-num-label">book notes</div><div class="lp-num-src">reading notes and summaries</div></div>
+      <div class="lp-num"><div class="lp-num-icon">🎓</div><div class="lp-num-value">11</div><div class="lp-num-label">course editions</div><div class="lp-num-src">each one fully documented</div></div>
+      <div class="lp-num"><div class="lp-num-icon">👩‍💻</div><div class="lp-num-value">165</div><div class="lp-num-label">students</div><div class="lp-num-src">across all course editions</div></div>
+      <div class="lp-num"><div class="lp-num-icon">🔁</div><div class="lp-num-value">1,673</div><div class="lp-num-label">commits</div><div class="lp-num-src">since December 2022</div></div>
     </div>
 
     <h3 style="margin-top:3.5rem;">Latest updates</h3>
@@ -318,7 +399,7 @@ format:
     </ul>
   </section>
 
-  <!-- Current sprint highlight (copied from ifcd0021-26/ifcd0021-backlog-sprint-26.qmd) -->
+  <!-- Current course: links only, the sprint content lives in the Sprint Backlog page -->
   <section id="sprint" class="lp-reveal">
     <div class="lp-label">This week</div>
     <h2>Current course &amp; sprint</h2>
@@ -328,36 +409,7 @@ format:
       <div class="lp-muted">Modules: Intro to programming with Java (5h) · OOP with Java (75h) · SQL databases, MySQL (30h) · APIs with Spring (75h) · Web UI (75h)</div>
       <div class="lp-pills"><a class="lp-pill" href="ifcd0021-26/ifcd0021-26.html">Official docs</a><a class="lp-pill" href="ifcd0021-26/ifcd0021-backlog-product-26.html">Product backlog</a><a class="lp-pill" href="ifcd0021-26/ifcd0021-deliveries-26.html">Calendar</a></div>
     </div>
-    <div class="lp-sprint">
-      <div class="lp-sprint-title">Sprint#08: CompassMap JPA Tasks 2 and 3 · 2–6 November 2026</div>
-      <div class="lp-days">
-        <div class="lp-day">
-          <div class="lp-day-head"><span>Day 26</span><span>Mon 02/11</span></div>
-          <h4>Plan Sprint#08 · review the JPA model</h4>
-          <p class="lp-muted">Focus on task 2 <code>CustomerProfile</code>: fields, ids, validation, relationship ownership. UML before code.</p>
-          <div style="margin-top:.6rem"><a href="https://github.com/AlbertProfe/compassMap/blob/master/docs/compassMap_v2.md" target="_blank">masterDoc v2</a> · <a href="springboot/boot-concepts-jpa-3.html">JPA relationships</a></div>
-        </div>
-        <div class="lp-day">
-          <div class="lp-day-head"><span>Day 27</span><span>Tue 03/11</span></div>
-          <h4>JPA task 2: <code>CustomerProfile</code></h4>
-          <p class="lp-muted">Entity + repository, uni- vs bidirectional mapping, service &amp; API, check the JSON shape.</p>
-          <div style="margin-top:.6rem"><a href="https://github.com/AlbertProfe/ApartmentPredictor/blob/master/docs/appends/JPA_Relationships_Guide.md" target="_blank">JPA Relationships Guide</a> · <a href="https://documenter.getpostman.com/view/7473960/2sBYHSy1U9" target="_blank">Postman</a></div>
-        </div>
-        <div class="lp-day">
-          <div class="lp-day-head"><span>Day 28</span><span>Thu 05/11</span></div>
-          <h4>JPA task 3: <code>AssessmentView</code></h4>
-          <p class="lp-muted">Keep entities apart from API/view models, <code>@RestController</code>, avoid recursive JSON.</p>
-          <div style="margin-top:.6rem"><a href="https://github.com/AlbertProfe/ApartmentPredictor/blob/master/docs/appends/JPA_RelationshipsImplementation_Rule.md" target="_blank">Implementation Rule</a> · <a href="https://github.com/AlbertProfe/compassMap/tree/65889308f4f2517e996226bf2bf61e200e14a2e5/docs/diagrams/JPA" target="_blank">JPA diagrams</a></div>
-        </div>
-        <div class="lp-day">
-          <div class="lp-day-head"><span>Day 29</span><span>Fri 06/11</span></div>
-          <h4>React intro · <code>compassMap-react</code></h4>
-          <p class="lp-muted">Vite project, JSX &amp; components, props, <code>.map()</code> with a stable <code>key</code>, Axios, <code>useState</code>/<code>useEffect</code>.</p>
-          <div style="margin-top:.6rem"><a href="reactjs/reactjs-what-principles.html">React principles</a> · <a href="reactjs/rjslab7-1.html">Vite lab</a></div>
-        </div>
-      </div>
-      <div style="margin-top:1.75rem"><a href="ifcd0021-26/ifcd0021-backlog-sprint-26.html" class="lp-btn lp-btn-primary">Open the full Sprint Backlog →</a></div>
-    </div>
+    <div style="margin-top:1.75rem"><a href="ifcd0021-26/ifcd0021-backlog-sprint-26.html" class="lp-btn lp-btn-primary">Open the current Sprint Backlog →</a></div>
   </section>
 
   <!-- The problem -->
@@ -516,68 +568,34 @@ format:
 
 <script>
 (function () {
-  // particle background: one canvas, DPR-aware; colours come from --particle / --particle-line and follow the theme
+  // hero orbit: chips travel on a tilted ellipse around teacher and student; front = bigger and brighter
   (function () {
-    var cv = document.getElementById('lp-particles');
-    if (!cv || !cv.getContext) return;
-    var ctx = cv.getContext('2d');
+    var box = document.getElementById('lp-orbit'); if (!box) return;
+    var chips = box.querySelectorAll('.lp-chip'), n = chips.length, t0 = performance.now(), raf = 0;
     var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-    var W = 0, H = 0, dots = [], dot = '#60a5fa', line = 'rgba(0,0,0,0)', lineOn = false, raf = 0, LINK = 120;
-    function readColours() {
-      var cs = getComputedStyle(document.body);
-      dot = (cs.getPropertyValue('--particle') || '#60a5fa').trim();
-      line = (cs.getPropertyValue('--particle-line') || '').trim();
-      lineOn = !!line && !/,\s*0\)$/.test(line.replace(/\s/g, ''));
-    }
-    function size() {
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      W = window.innerWidth; H = window.innerHeight;
-      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
-      cv.style.width = W + 'px'; cv.style.height = H + 'px';
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      var n = Math.max(28, Math.min(80, Math.round(W * H / 16000)));
-      while (dots.length < n) dots.push(make(Math.random() * H));
-      dots.length = n;
-    }
-    function make(y) {
-      return { x: Math.random() * W, y: y, r: 1.2 + Math.random() * 1.6,
-               vx: (Math.random() - .5) * .15, vy: -(.15 + Math.random() * .35), a: .8 + Math.random() * .2 };
-    }
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      var i, j, p, q, dx, dy, d;
-      if (lineOn) {
-        ctx.strokeStyle = line; ctx.lineWidth = 1;
-        for (i = 0; i < dots.length; i++) for (j = i + 1; j < dots.length; j++) {
-          p = dots[i]; q = dots[j]; dx = p.x - q.x; dy = p.y - q.y; d = Math.sqrt(dx * dx + dy * dy);
-          if (d < LINK) { ctx.globalAlpha = 1 - d / LINK; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke(); }
-        }
+    function place(now) {
+      var W = box.clientWidth, H = box.clientHeight, narrow = W < 900;
+      var cx = W * (narrow ? .62 : .64), cy = H * .52, rx = W * (narrow ? .33 : .27), ry = H * (narrow ? .30 : .26), tilt = -0.18;
+      var t = (now - t0) / 1000 * 0.16;
+      for (var i = 0; i < n; i++) {
+        var a = t + i * 2 * Math.PI / n, x = Math.cos(a) * rx, y = Math.sin(a) * ry;
+        var X = cx + x * Math.cos(tilt) - y * Math.sin(tilt), Y = cy + x * Math.sin(tilt) + y * Math.cos(tilt);
+        var depth = (Math.sin(a) + 1) / 2, c = chips[i];
+        c.style.transform = 'translate(' + (X - c.offsetWidth / 2).toFixed(1) + 'px,' + (Y - c.offsetHeight / 2).toFixed(1) + 'px) scale(' + (0.78 + depth * 0.32).toFixed(3) + ')';
+        c.style.opacity = (0.45 + depth * 0.55).toFixed(2);
+        c.style.zIndex = depth > .5 ? 3 : 1;
       }
-      ctx.fillStyle = dot;
-      for (i = 0; i < dots.length; i++) {
-        p = dots[i]; ctx.globalAlpha = p.a; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2832); ctx.fill();
-      }
-      ctx.globalAlpha = 1;
     }
-    function step() {
-      for (var i = 0; i < dots.length; i++) {
-        var p = dots[i]; p.x += p.vx; p.y += p.vy;
-        if (p.y < -10) { dots[i] = make(H + 10); }
-        if (p.x < -10) p.x = W + 10; else if (p.x > W + 10) p.x = -10;
-      }
-      draw();
-      raf = window.requestAnimationFrame(step);
-    }
+    function loop(now) { place(now); raf = requestAnimationFrame(loop); }
     function start() {
-      if (raf) { window.cancelAnimationFrame(raf); raf = 0; }
-      if ((mq && mq.matches) || document.hidden) { draw(); return; }  // reduced motion: static dots, not nothing
-      raf = window.requestAnimationFrame(step);
+      if (raf) { cancelAnimationFrame(raf); raf = 0; }
+      if ((mq && mq.matches) || document.hidden) { place(t0); return; }
+      raf = requestAnimationFrame(loop);
     }
-    readColours(); size(); start();
-    window.addEventListener('resize', function () { size(); draw(); });
+    start();
+    window.addEventListener('resize', function () { place(performance.now()); });
     document.addEventListener('visibilitychange', start);
-    if (mq) { if (mq.addEventListener) mq.addEventListener('change', start); else if (mq.addListener) mq.addListener(start); }
-    new MutationObserver(function () { readColours(); draw(); }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    if (mq && mq.addEventListener) mq.addEventListener('change', start);
   })();
   // sun/moon toggle: use Quarto's own switch so the choice is shared with the whole site
   var tbtn = document.getElementById('lp-theme');
@@ -601,7 +619,7 @@ format:
   // rotating word, same list as the previous home page
   var words = ['JAVA','REACT','SPRING BOOT','UML','BASH','MINDSET','SCRUM','LINUX','API REST','DEVOPS','AWS','MARKDOWN','QUARTO'];
   var spin = document.getElementById('lp-spin'), k = 0;
-  setInterval(function () { k = (k + 1) % words.length; spin.textContent = words[k]; }, 1400);
+  setInterval(function () { spin.style.opacity = 0; setTimeout(function () { k = (k + 1) % words.length; spin.textContent = words[k]; spin.style.opacity = 1; }, 250); }, 1600);
   // reveal on scroll
   var els = document.querySelectorAll('#lp .lp-reveal');
   if ('IntersectionObserver' in window) {
