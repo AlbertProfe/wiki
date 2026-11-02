@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-23504dfa93b9834cc4e0ed111f21ac64.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8654f46d95255d4aca9b36c8f0882426.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6af661746bd53b0cf089e92a1100d4e9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -1543,870 +1543,633 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-layout-custom page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
 
 
 
 
-<p><link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto"></p>
+<!--
+  albertprofe.dev long-scroll landing (PREVIEW, branch landing-preview).
+  Adapted from wiki-team/landing/landing-prototype.html.
+  All numbers below were computed from the repo on 2026-11-01 (commit fd2575d7):
+    - 415 .qmd pages  -> git ls-files '*.qmd' | wc -l
+    - 77 labs         -> selab*, sblab*, rjslab*, lilab*, scrumlab*, mulab*, devops-lab-*
+    - 84 book pages   -> books/*.qmd
+    - 11 course editions -> ifc*/ folders
+    - 1,673 commits since 2022-12-08 -> git log
+    - 165 students -> about 15 per course edition x 11 editions (Albert's figure)
+    - Per-area page counts -> git ls-files '<area>/*.qmd'
+  Course facts (260h, 14/09-27/11/2026, 11 weeks, Sprint#08 days 26-29) are copied from
+  ifcd0021-26/*.qmd. Update the "Now" + "Sprint" blocks every week when the sprint rolls over.
+-->
 <style>
-
-.animated-text {
-  font-size: 90px;
-  color: #000;
-  font-family; 'Roboto';
-  text-align: center;
-}
-
-@keyframes letterAnimation {
-  0% { opacity: 0; transform: translateY(-10px); }
-  10% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(10px); }
-}
-
-#spin {
-  color:white;
-}
-#spin:after {
-  content:"";
-  padding: 15px;
-  border-radius: 20px;
-  animation: spin 16s linear infinite;
-}
-@keyframes spin {
-  0% { content: "JAVA";background-color:blue;}
-  10% { content:"REACT"; }
-  18% { content:"SPRING BOOT"; }
-  23% { content: "UML"; }
-  30% { content:"BASH"; }
-  36% { content:"MINDSET"; }
-  43% { content:"SCRUM";}
-  50% { content: "LINUX"; }
-  62% { content: "API REST"; }
-  74% { content: "DEVOPS"; }
-  86% { content: "AWS"; }
-  95% { content: "MARKDOWN"; }
-  100% { content: "QUARTO";background-color: red; }
-}
-
-
+  /* ---------- landing only: scoped under #lp so the rest of the site keeps cosmo/darkly ---------- */
+  /* Palette follows Quarto's toggle: body.quarto-light (cosmo) / body.quarto-dark (darkly).
+     Light is the default, like Quarto (darkModeDefault = false). Dark values = the original dark landing. */
+  body {
+    --bg: #f8fafc; --bg-card: #ffffff; --bg-card-hover: #ffffff;
+    --accent: #2563eb; --accent-light: #2563eb; --accent-2: #16a34a; --accent-3: #9333ea;
+    --text: #0f172a; --text-muted: #475569; --strong: #0f172a; --on-accent: #ffffff;
+    --header-bg: rgba(255,255,255,.78); --header-border: rgba(15,23,42,.08);
+    --line-08: rgba(15,23,42,.07); --line-10: rgba(15,23,42,.08); --line-12: rgba(15,23,42,.09); --line-15: rgba(15,23,42,.12);
+    --outline: rgba(15,23,42,.18);
+    --code-bg: rgba(37,99,235,.08); --code-fg: #1e40af;
+    --green-bg: rgba(22,163,74,.10); --green-border: rgba(22,163,74,.35); --green-fg: #15803d; --green-soft: rgba(22,163,74,.06);
+    --live-border: rgba(22,163,74,.45);
+    --spin-bg: rgba(37,99,235,.09); --spin-border: rgba(37,99,235,.30); --spin-fg: #1e3a8a;
+    --hover-border: rgba(37,99,235,.30); --btn-shadow: rgba(37,99,235,.30);
+    --pill-bg: rgba(37,99,235,.08); --pill-border: rgba(37,99,235,.22); --pill-hover-bg: rgba(37,99,235,.16); --link-hover: #1e40af;
+    --sprint-grad: linear-gradient(135deg, rgba(37,99,235,.06), rgba(147,51,234,.05)); --sprint-border: rgba(37,99,235,.20);
+    --day-bg: #ffffff; --final-tint: rgba(37,99,235,.06);
+    --shadow: 0 1px 2px rgba(15,23,42,.04), 0 4px 16px -4px rgba(15,23,42,.08);
+    --shadow-hover: 0 2px 4px rgba(15,23,42,.04), 0 16px 32px -10px rgba(37,99,235,.22);
+    --header-shadow: 0 1px 12px rgba(15,23,42,.05); --header-blur: blur(16px) saturate(1.4);
+    background: var(--bg) !important; overflow-x: hidden;
+  }
+  body.quarto-dark {
+    --bg: #0b0f1a; --bg-card: #111827; --bg-card-hover: #1a2236;
+    --accent: #3b82f6; --accent-light: #60a5fa; --accent-2: #22c55e; --accent-3: #a855f7;
+    --text: #f8fafc; --text-muted: #94a3b8; --strong: #fff; --on-accent: #f8fafc;
+    --header-bg: rgba(11,15,26,.82); --header-border: rgba(59,130,246,.15);
+    --line-08: rgba(148,163,184,.08); --line-10: rgba(148,163,184,.1); --line-12: rgba(148,163,184,.12); --line-15: rgba(148,163,184,.15);
+    --outline: rgba(148,163,184,.3);
+    --code-bg: rgba(96,165,250,.12); --code-fg: #bfdbfe;
+    --green-bg: rgba(34,197,94,.12); --green-border: rgba(34,197,94,.3); --green-fg: #86efac; --green-soft: rgba(34,197,94,.06);
+    --live-border: rgba(34,197,94,.35);
+    --spin-bg: rgba(59,130,246,.15); --spin-border: rgba(59,130,246,.35); --spin-fg: #fff;
+    --hover-border: rgba(59,130,246,.3); --btn-shadow: rgba(59,130,246,.4);
+    --pill-bg: rgba(59,130,246,.12); --pill-border: rgba(59,130,246,.25); --pill-hover-bg: rgba(59,130,246,.25); --link-hover: #fff;
+    --sprint-grad: linear-gradient(135deg, rgba(59,130,246,.10), rgba(168,85,247,.08)); --sprint-border: rgba(96,165,250,.25);
+    --day-bg: rgba(11,15,26,.7); --final-tint: rgba(59,130,246,.07);
+    --shadow: none; --shadow-hover: none; --header-shadow: none; --header-blur: blur(16px);
+  }
+  #quarto-header, .nav-footer, #quarto-margin-sidebar, .quarto-title-block { display: none !important; }
+  #quarto-content, main.content, #quarto-document-content { padding: 0 !important; margin: 0 !important; max-width: none !important; }
+  #lp {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.6; font-size: 16px;
+  }
+  #lp * { box-sizing: border-box; }
+  #lp a { text-decoration: none; }
+  #lp p { margin: 0; }
+  #lp h1, #lp h2, #lp h3 { color: var(--text); border: 0; margin-top: 0; }
+  /* header */
+  #lp .lp-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--header-bg);
+    backdrop-filter: var(--header-blur); -webkit-backdrop-filter: var(--header-blur); border-bottom: 1px solid var(--header-border);
+    box-shadow: var(--header-shadow);
+    padding: .75rem 2rem; display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 1rem; }
+  #lp .lp-logo { flex-shrink: 0; display: flex; align-items: center; gap: .6rem; font-weight: 700; font-size: 1.2rem; line-height: 1; letter-spacing: -.02em; color: var(--text); white-space: nowrap; }
+  #lp .lp-logo span { color: var(--accent-light); }
+  #lp .lp-logo span.lp-logo-w { color: inherit; }
+  #lp .lp-logo-icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--accent), var(--accent-3)); font-size: 1.05rem; color: var(--on-accent); }
+  /* nav: middle/right, never wraps */
+  #lp .lp-nav { flex: 1 1 auto; min-width: 0; display: flex; flex-wrap: nowrap; align-items: center; justify-content: flex-end; gap: 1.5rem; }
+  #lp .lp-nav a { color: var(--text-muted); font-size: .9rem; font-weight: 500; line-height: 1; white-space: nowrap; transition: color .2s; }
+  #lp .lp-nav a:hover { color: var(--text); }
+  /* right-hand group: menu button (small screens) + theme toggle + Sprint CTA */
+  #lp .lp-actions { flex-shrink: 0; display: flex; flex-wrap: nowrap; align-items: center; gap: .75rem; }
+  #lp .lp-actions .lp-btn { white-space: nowrap; padding: .6rem 1.25rem; font-size: .9rem; line-height: 1; }
+  /* sun/moon toggle + hamburger: same round icon button */
+  #lp .lp-theme, #lp .lp-menu-btn { flex-shrink: 0; width: 36px; height: 36px; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center;
+    background: transparent; border: 1px solid var(--outline); color: var(--text-muted); cursor: pointer; padding: 0; transition: all .2s; }
+  #lp .lp-theme:hover, #lp .lp-menu-btn:hover, #lp .lp-menu-btn[aria-expanded="true"] { color: var(--accent-light); border-color: var(--accent-light); }
+  #lp .lp-theme:focus-visible, #lp .lp-menu-btn:focus-visible, #lp .lp-nav a:focus-visible { outline: 2px solid var(--accent-light); outline-offset: 2px; }
+  #lp .lp-theme svg, #lp .lp-menu-btn svg { width: 18px; height: 18px; }
+  #lp .lp-theme .lp-sun { display: none; }
+  body.quarto-dark #lp .lp-theme .lp-sun { display: block; }
+  body.quarto-dark #lp .lp-theme .lp-moon { display: none; }
+  #lp .lp-menu-btn { display: none; }
+  #lp .lp-menu-btn .lp-x { display: none; }
+  #lp .lp-menu-btn[aria-expanded="true"] .lp-x { display: block; }
+  #lp .lp-menu-btn[aria-expanded="true"] .lp-bars { display: none; }
+  /* 760-1100px: tighter, hide lower-priority links */
+  @media (max-width: 1100px) {
+    #lp .lp-header { padding: .7rem 1.25rem; }
+    #lp .lp-logo { font-size: 1.1rem; }
+    #lp .lp-nav { gap: 1rem; }
+    #lp .lp-nav a { font-size: .85rem; }
+    #lp .lp-nav a.lp-pri-low { display: none; }
+    #lp .lp-actions { gap: .6rem; }
+    #lp .lp-actions .lp-btn { padding: .55rem 1.05rem; font-size: .85rem; }
+  }
+  /* below 760px: links collapse into a dropdown under the header */
+  @media (max-width: 760px) {
+    #lp .lp-header { padding: .6rem 1rem; gap: .5rem; }
+    #lp .lp-logo { font-size: 1.05rem; gap: .5rem; }
+    #lp .lp-logo-icon { width: 32px; height: 32px; font-size: .95rem; }
+    #lp .lp-menu-btn { display: inline-flex; }
+    #lp .lp-theme, #lp .lp-menu-btn { width: 34px; height: 34px; }
+    #lp .lp-actions { gap: .5rem; }
+    #lp .lp-actions .lp-btn { padding: .5rem .85rem; font-size: .8rem; }
+    #lp .lp-cta-arrow { display: none; }
+    #lp .lp-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0;
+      padding: .4rem 1rem .8rem; background: var(--bg); border-bottom: 1px solid var(--header-border); box-shadow: 0 12px 24px -12px rgba(15,23,42,.25); }
+    #lp .lp-nav.lp-open { display: flex; }
+    #lp .lp-nav a, #lp .lp-nav a.lp-pri-low { display: block; padding: .8rem .25rem; font-size: 1rem; border-bottom: 1px solid var(--line-10); }
+    #lp .lp-nav a:last-child { border-bottom: 0; }
+  }
+  @media (max-width: 440px) { #lp .lp-logo-w { display: none; } }
+  @media (max-width: 340px) { #lp .lp-logo-icon { display: none; } }
+  #lp .lp-current { margin: 0 0 1.5rem; padding: 1rem 1.25rem; border: 1px solid var(--green-border); border-radius: 14px; background: var(--green-soft); display: grid; gap: .5rem; }
+  #lp a.lp-badge { text-decoration: none; }
+  /* buttons */
+  #lp .lp-btn { display: inline-flex; align-items: center; gap: .4rem; padding: .7rem 1.5rem; border-radius: 9999px;
+    font-weight: 600; font-size: .95rem; transition: all .25s; border: none; }
+  #lp .lp-btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-3)); color: #fff !important; }
+  #lp .lp-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px var(--btn-shadow); }
+  #lp .lp-btn-outline { background: transparent; color: var(--text) !important; border: 1px solid var(--outline); }
+  #lp .lp-btn-outline:hover { border-color: var(--accent-light); color: var(--accent-light) !important; }
+  /* sections */
+  #lp section { position: relative; z-index: 1; padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+  #lp .lp-label { display: inline-block; font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--accent-light); margin-bottom: 1rem; }
+  #lp h1 { font-size: clamp(2.8rem, 6vw, 4.4rem); font-weight: 800; line-height: 1.1; letter-spacing: -.03em; margin-bottom: 1.5rem; }
+  #lp h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; letter-spacing: -.02em; margin-bottom: 1.25rem; }
+  #lp h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: .6rem; }
+  #lp .lp-lead { font-size: 1.2rem; color: var(--text-muted); max-width: 680px; margin-bottom: 2rem; }
+  #lp .lp-muted { color: var(--text-muted); font-size: .95rem; }
+  #lp code { background: var(--code-bg); color: var(--code-fg); padding: .1rem .35rem; border-radius: 4px; font-size: .88em; }
+  /* hero */
+  #lp .lp-hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding-top: 6rem; }
+  #lp .lp-badge { display: inline-flex; align-items: center; gap: .5rem; background: var(--green-bg);
+    border: 1px solid var(--green-border); color: var(--green-fg); padding: .4rem 1rem; border-radius: 9999px; font-size: .85rem;
+    font-weight: 500; margin-bottom: 2rem; }
+  #lp .lp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 0 0 rgba(34,197,94,.7); animation: lp-pulse 2s infinite; }
+  @keyframes lp-pulse { 70% { box-shadow: 0 0 0 10px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
+  #lp .lp-grad-code { color: var(--accent-light); } #lp .lp-grad-learn { color: var(--accent-2); } #lp .lp-grad-build { color: var(--accent-3); }
+  #lp .lp-spin { display: inline-block; width: 13ch; text-align: center; white-space: nowrap; vertical-align: middle; line-height: 1.5;
+    padding: .05rem .5rem; border-radius: 10px; background: var(--spin-bg); border: 1px solid var(--spin-border); color: var(--spin-fg);
+    font-weight: 700; font-size: .95em; font-family: 'JetBrains Mono', ui-monospace, monospace; transition: opacity .25s ease; }
+  #lp .lp-hero-sub { display: block; margin-top: 1.4rem; }
+  /* cinematic hero: image, orbiting chips, glass card (dark in both themes) */
+  #lp .lp-cine { max-width: 1280px; min-height: min(92vh, 780px); padding: 7rem 2.5rem 3.5rem; display: flex; flex-direction: row;
+    align-items: center; justify-content: flex-start; text-align: left; isolation: isolate;
+    --text: #f8fafc; --text-muted: #c4b5fd; --strong: #fff; --outline: rgba(196,181,253,.35); --accent-light: #60a5fa;
+    --spin-bg: rgba(168,85,247,.18); --spin-border: rgba(196,181,253,.35); --spin-fg: #fff;
+    --green-bg: rgba(34,197,94,.14); --green-border: rgba(34,197,94,.35); --green-fg: #86efac;
+    --chip-fg: #fff; --chip-bg: rgba(30,27,75,.55); --cine-img: url("images/landing/hero-orbit.jpg"); }
+  #lp .lp-cine-media { position: absolute; inset: 5rem 1rem 1rem; border-radius: 1.5rem; overflow: hidden; z-index: -1;
+    background: #0b0f1a var(--cine-img) right center / cover no-repeat;
+    box-shadow: 0 30px 80px -30px rgba(88,28,135,.55); }
+  #lp .lp-cine-media::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(90deg, rgba(11,15,26,.78) 0%, rgba(11,15,26,.35) 42%, rgba(11,15,26,0) 70%); }
+  #lp .lp-orbit { position: absolute; inset: 0; z-index: 1; }
+  #lp .lp-chip { position: absolute; left: 0; top: 0; display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap;
+    padding: .36rem .8rem .36rem .55rem; border-radius: 9999px; font-size: .84rem; font-weight: 600; letter-spacing: .01em;
+    color: var(--chip-fg); background: var(--chip-bg); border: 1px solid color-mix(in srgb, var(--c) 55%, transparent);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--c) 35%, transparent), inset 0 0 10px color-mix(in srgb, var(--c) 12%, transparent);
+    will-change: transform, opacity; }
+  #lp .lp-chip svg { width: 1.15em; height: 1.15em; fill: none; stroke: var(--c); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+    filter: drop-shadow(0 0 4px var(--c)); flex: none; }
+  #lp .lp-glass { position: relative; z-index: 2; max-width: 540px; padding: 2.2rem 2.3rem; border-radius: 1.5rem;
+    background: rgba(17,12,40,.55); border: 1px solid rgba(196,181,253,.28);
+    backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,.6); }
+  #lp .lp-cine h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); margin-bottom: 1.1rem; }
+  #lp .lp-cine .lp-lead { font-size: 1.08rem; color: #e9e5ff; margin-bottom: 0; }
+  #lp .lp-cine .lp-badge { margin-bottom: 1.4rem; }
+  #lp .lp-cine .lp-hero-ctas { justify-content: flex-start; margin-top: 1.8rem; }
+  #lp .lp-cine .lp-stats { justify-content: flex-start; gap: 1.8rem; margin-top: 2rem; }
+  #lp .lp-cine .lp-stat { text-align: left; }
+  #lp .lp-cine .lp-stat-value { font-size: 1.25rem; }
+  #lp .lp-cine .lp-stat-label { color: #c4b5fd; font-size: .75rem; }
+  body:not(.quarto-dark) #lp .lp-cine {
+    --text: #0f172a; --text-muted: #4c1d95; --strong: #0f172a; --outline: rgba(91,33,182,.30); --accent-light: #2563eb;
+    --spin-bg: rgba(147,51,234,.10); --spin-border: rgba(147,51,234,.30); --spin-fg: #4c1d95;
+    --green-bg: rgba(22,163,74,.10); --green-border: rgba(22,163,74,.30); --green-fg: #15803d;
+    --chip-fg: #1e1b4b; --chip-bg: rgba(255,255,255,.72); --cine-img: url("images/landing/hero-orbit-light.jpg"); }
+  body:not(.quarto-dark) #lp .lp-cine-media { background-color: #f5f3ff; box-shadow: 0 30px 80px -35px rgba(91,33,182,.35); }
+  body:not(.quarto-dark) #lp .lp-cine-media::after { background: linear-gradient(90deg, rgba(248,250,252,.75) 0%, rgba(248,250,252,.25) 42%, rgba(248,250,252,0) 70%); }
+  body:not(.quarto-dark) #lp .lp-glass { background: rgba(255,255,255,.62); border-color: rgba(147,51,234,.22); box-shadow: 0 20px 60px -25px rgba(76,29,149,.35); }
+  body:not(.quarto-dark) #lp .lp-cine .lp-lead { color: #334155; }
+  body:not(.quarto-dark) #lp .lp-cine .lp-stat-label { color: #6d28d9; }
+  body:not(.quarto-dark) #lp .lp-chip svg { filter: none; }
+  @media (max-width: 900px) {
+    #lp .lp-cine { flex-direction: column; padding: 5.5rem 1rem 2rem; min-height: 0; }
+    #lp .lp-cine-media { position: relative; inset: auto; width: 100%; aspect-ratio: 16 / 9; background-position: 70% center; }
+    #lp .lp-cine-media::after { background: linear-gradient(180deg, rgba(11,15,26,0) 55%, rgba(11,15,26,.55) 100%); }
+    body:not(.quarto-dark) #lp .lp-cine-media::after { background: none; }
+    #lp .lp-glass { max-width: none; width: 100%; margin-top: -2.5rem; padding: 1.6rem 1.4rem; }
+    #lp .lp-chip { font-size: .72rem; padding: .28rem .6rem; }
+  }
+  @media (max-width: 480px) { #lp .lp-chip { font-size: .64rem; } }
+  #lp .lp-hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 2.2rem; }
+  #lp .lp-stats { display: flex; gap: 3rem; margin-top: 4rem; flex-wrap: wrap; justify-content: center; }
+  #lp .lp-numbers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; margin-top: 2rem; }
+  #lp .lp-num { background: var(--bg-card); border: 1px solid var(--line-12); border-radius: 1rem; padding: 1.4rem 1.5rem;
+    box-shadow: var(--shadow); transition: transform .2s, border-color .2s, box-shadow .2s; }
+  #lp .lp-num:hover { transform: translateY(-3px); border-color: var(--hover-border); box-shadow: var(--shadow-hover); }
+  #lp .lp-num-icon { font-size: 1.3rem; line-height: 1; margin-bottom: .7rem; }
+  #lp .lp-num-value { font-size: 2.4rem; font-weight: 800; line-height: 1.05; letter-spacing: -.02em;
+    background: linear-gradient(135deg, var(--accent-light), var(--accent-3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  #lp .lp-num-label { font-size: 1rem; font-weight: 600; color: var(--text); margin-top: .35rem; }
+  #lp .lp-num-src { font-size: .82rem; color: var(--text-muted); margin-top: .15rem; }
+  @media (max-width: 860px) { #lp .lp-numbers { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 420px) { #lp .lp-numbers { gap: .75rem; } #lp .lp-num { padding: 1.1rem; } #lp .lp-num-value { font-size: 1.9rem; } }
+  #lp .lp-stat { text-align: center; }
+  #lp .lp-stat-value { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, var(--accent-light), var(--accent-3));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  #lp .lp-stat-label { font-size: .85rem; color: var(--text-muted); margin-top: .25rem; }
+  /* cards */
+  #lp .lp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+  #lp .lp-card { display: block; background: var(--bg-card); border: 1px solid var(--line-10); border-radius: 1rem;
+    padding: 1.75rem; transition: all .25s; color: var(--text); box-shadow: var(--shadow); }
+  #lp a.lp-card:hover, #lp .lp-card:hover { background: var(--bg-card-hover); border-color: var(--hover-border); transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  #lp .lp-card.lp-live { border-color: var(--live-border); }
+  #lp .lp-live-tag { font-size: .75rem; color: var(--green-fg); vertical-align: middle; }
+  #lp .lp-card-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  #lp .lp-card-meta { font-size: .8rem; color: var(--accent-light); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; margin-top: 1rem; }
+  #lp ul.lp-list { list-style: none; padding: 0; margin: 1rem 0 0; }
+  #lp ul.lp-list li { font-size: .95rem; color: var(--text-muted); padding: .3rem 0; display: flex; gap: .5rem; }
+  #lp ul.lp-list li::before { content: "→"; color: var(--accent-light); font-weight: 600; }
+  #lp .lp-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.5rem; }
+  @media (max-width: 760px) { #lp .lp-split { grid-template-columns: 1fr; } #lp section { padding: 4.5rem 1.25rem; } }
+  #lp .lp-split-card { background: var(--bg-card); border-radius: 1rem; padding: 2rem; border: 1px solid var(--line-10); box-shadow: var(--shadow); }
+  #lp .lp-split-card.teacher { border-top: 3px solid var(--accent); }
+  #lp .lp-split-card.student { border-top: 3px solid var(--accent-2); }
+  /* steps */
+  #lp .lp-steps { display: grid; gap: 1.25rem; margin-top: 2.5rem; }
+  #lp .lp-step { display: flex; gap: 1.5rem; align-items: flex-start; background: var(--bg-card); border-radius: 1rem;
+    padding: 1.5rem 1.75rem; border: 1px solid var(--line-08); box-shadow: var(--shadow); }
+  #lp .lp-step-num { flex-shrink: 0; width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center;
+    justify-content: center; font-weight: 700; color: var(--on-accent); background: linear-gradient(135deg, var(--accent), var(--accent-3)); }
+  #lp .lp-marks { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem; }
+  #lp .lp-mark { font-family: ui-monospace, monospace; background: var(--bg-card); border: 1px solid var(--line-15);
+    border-radius: .6rem; padding: .5rem .9rem; color: var(--text-muted); font-size: .9rem; box-shadow: var(--shadow); }
+  #lp .lp-mark b { color: var(--text); margin-right: .4rem; }
+  /* pills */
+  #lp .lp-pills { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.25rem; }
+  #lp .lp-pill { background: var(--pill-bg); border: 1px solid var(--pill-border); color: var(--accent-light);
+    padding: .4rem 1rem; border-radius: 9999px; font-size: .85rem; font-weight: 500; transition: all .2s; }
+  #lp .lp-pill:hover { background: var(--pill-hover-bg); color: var(--link-hover); }
+  /* sprint timeline */
+  #lp .lp-sprint { background: var(--sprint-grad); border: 1px solid var(--sprint-border);
+    border-radius: 1.25rem; padding: 2rem; margin-top: 2rem; }
+  #lp .lp-sprint-title { font-family: ui-monospace, monospace; font-size: 1.1rem; color: var(--strong); }
+  #lp .lp-days { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  #lp .lp-day { background: var(--day-bg); border: 1px solid var(--line-12); border-radius: .9rem; padding: 1.1rem 1.2rem; box-shadow: var(--shadow); }
+  #lp .lp-day-head { display: flex; justify-content: space-between; font-size: .8rem; color: var(--accent-light); font-weight: 600; margin-bottom: .4rem; }
+  #lp .lp-day h4 { font-size: 1rem; color: var(--text); margin: 0 0 .4rem; font-weight: 600; }
+  #lp .lp-day a { color: var(--accent-light); font-size: .85rem; }
+  #lp .lp-day a:hover { color: var(--link-hover); }
+  /* news */
+  #lp .lp-news { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: .75rem; }
+  #lp .lp-news li { display: grid; grid-template-columns: 80px 120px 1fr; gap: 1rem; align-items: baseline; background: var(--bg-card);
+    border: 1px solid var(--line-08); border-radius: .8rem; padding: .9rem 1.2rem; box-shadow: var(--shadow); }
+  #lp .lp-news .d { color: var(--text-muted); font-family: ui-monospace, monospace; font-size: .85rem; }
+  #lp .lp-news .t { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--accent-2); }
+  #lp .lp-news a { color: var(--text); font-weight: 600; } #lp .lp-news a:hover { color: var(--accent-light); }
+  #lp .lp-news span.c { color: var(--text-muted); font-size: .9rem; }
+  @media (max-width: 700px) { #lp .lp-news li { grid-template-columns: 1fr; gap: .2rem; } }
+  /* final + footer */
+  #lp .lp-final { text-align: center; max-width: none; background: linear-gradient(180deg, transparent, var(--final-tint)); }
+  #lp .lp-final .lp-lead { margin: 0 auto 2rem; }
+  #lp .lp-footer { position: relative; z-index: 1; border-top: 1px solid var(--line-10); padding: 2.5rem 2rem; display: flex;
+    flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+    color: var(--text-muted); font-size: .9rem; }
+  #lp .lp-footer a { color: var(--text-muted); } #lp .lp-footer a:hover { color: var(--text); }
+  #lp .lp-footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  #lp .lp-reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  #lp .lp-reveal.lp-in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { #lp .lp-reveal { opacity: 1; transform: none; } }
 </style>
-<div class="column-screen">
-<div class="animated-text">
-<p>
-Code <br><b><span id="spin"></span></b><br>Learn
-</p>
+<script>
+  /* apply the saved scheme before first paint (Quarto itself only sets the body class on DOMContentLoaded) */
+  (function () {
+    var dark = false;
+    try { dark = window.localStorage.getItem('quarto-color-scheme') === 'alternate'; } catch (e) {}
+    document.body.classList.add(dark ? 'quarto-dark' : 'quarto-light');
+    document.body.classList.remove(dark ? 'quarto-light' : 'quarto-dark');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+
+<div id="lp">
+
+  <!-- Header (replaces the Quarto navbar on this page only) -->
+  <header class="lp-header">
+    <a class="lp-logo" href="./index.html"><div class="lp-logo-icon">⌘</div>albert<span>profe</span><span class="lp-logo-w">&nbsp;wiki</span></a>
+    <nav class="lp-nav" id="lp-nav" aria-label="Landing sections">
+      <a href="#now">Now</a>
+      <a href="#sprint">Sprint</a>
+      <a href="#path">The path</a>
+      <a href="#courses">Courses</a>
+      <a href="#library" class="lp-pri-low">Library</a>
+      <a href="https://ml.albertprofe.dev" target="_blank">ML wiki ↗</a>
+      <a href="https://github.com/AlbertProfe/wiki" target="_blank" class="lp-pri-low">GitHub</a>
+    </nav>
+    <div class="lp-actions">
+      <button type="button" class="lp-menu-btn" id="lp-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="lp-nav">
+        <svg class="lp-bars" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg class="lp-x" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+      <button type="button" class="lp-theme" id="lp-theme" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <svg class="lp-moon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+        <svg class="lp-sun" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <a href="ifcd0021-26/ifcd0021-backlog-sprint-26.html" class="lp-btn lp-btn-primary">Sprint#08<span class="lp-cta-arrow">→</span></a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="lp-hero lp-cine">
+    <div class="lp-cine-media" role="img" aria-label="A teacher and a student face each other while Java, Spring Boot, React, DevOps, Linux, Scrum, labs and books orbit around them">
+      <div class="lp-orbit" id="lp-orbit" aria-hidden="true">
+        <span class="lp-chip" style="--c:#60a5fa"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M5 10h11v4a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"></path><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"></path><path d="M8 3c-1 1.2 1 1.8 0 3.2M11.5 3c-1 1.2 1 1.8 0 3.2"></path></svg>Java</span>
+        <span class="lp-chip" style="--c:#4ade80"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"></path><path d="M5 19 13 11"></path></svg>Spring Boot</span>
+        <span class="lp-chip" style="--c:#60a5fa"><svg viewbox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1.6"></circle><ellipse cx="12" cy="12" rx="9.5" ry="3.8"></ellipse><ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(60 12 12)"></ellipse><ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(120 12 12)"></ellipse></svg>React</span>
+        <span class="lp-chip" style="--c:#c084fc"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M12 12c-2-2.6-3.5-4-5.5-4a4 4 0 0 0 0 8c2 0 3.5-1.4 5.5-4zm0 0c2 2.6 3.5 4 5.5 4a4 4 0 0 0 0-8c-2 0-3.5 1.4-5.5 4z"></path></svg>DevOps</span>
+        <span class="lp-chip" style="--c:#4ade80"><svg viewbox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.5"></rect><path d="m7 10 3 2.5L7 15M12.5 15H17"></path></svg>Linux</span>
+        <span class="lp-chip" style="--c:#c084fc"><svg viewbox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"></rect><path d="M9 4v16M15 4v16"></path><path d="M5 8h2M11 8h2M11 11.5h2M17 8h2"></path></svg>Scrum</span>
+        <span class="lp-chip" style="--c:#4ade80"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M9.5 3h5M10.5 3v6L5 19a1.4 1.4 0 0 0 1.2 2h11.6A1.4 1.4 0 0 0 19 19l-5.5-10V3"></path><path d="M7.5 15h9"></path></svg>Labs</span>
+        <span class="lp-chip" style="--c:#c084fc"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M4 19.5V5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5 2.5 2.5 0 0 0 6.5 23H20"></path><path d="M8 7.5h8"></path></svg>Books</span>
+      </div>
+    </div>
+    <div class="lp-glass">
+    <a class="lp-badge" href="ifcd0021-26/ifcd0021-26.html"><span class="lp-dot"></span> Live classroom · IFCD0021-26 · Sprint#08 running</a>
+    <h1><span class="lp-grad-code">Code.</span> <span class="lp-grad-learn">Learn.</span><br><span class="lp-grad-build">Build.</span></h1>
+    <p class="lp-lead">
+      Code <span class="lp-spin" id="lp-spin">JAVA</span> Learn.
+      <span class="lp-hero-sub">One living wiki for every course I teach: Java SE, Spring Boot, React, DevOps, Linux,
+      Scrum and more, with sprint backlogs, product history, hands-on labs, book notes and reference articles.</span>
+    </p>
+    <div class="lp-hero-ctas">
+      <a href="ifcd0021-26/ifcd0021-backlog-sprint-26.html" class="lp-btn lp-btn-primary">Current Sprint Backlog →</a>
+      <a href="ifcd0021-26/ifcd0021-backlog-product-26.html" class="lp-btn lp-btn-outline">Product Backlog</a>
+    </div>
+    <div class="lp-stats">
+      <div class="lp-stat"><div class="lp-stat-value">Sprint#08</div><div class="lp-stat-label">CompassMap JPA tasks 2 &amp; 3</div></div>
+      <div class="lp-stat"><div class="lp-stat-value">11 weeks</div><div class="lp-stat-label">260h · IFCD0021-26</div></div>
+      <div class="lp-stat"><div class="lp-stat-value">++ / ----</div><div class="lp-stat-label">new topic / pending to future</div></div>
+    </div>
+    </div>
+  </section>
+
+  <!-- Now: stats computed from the repo -->
+  <section id="now" class="lp-reveal">
+    <div class="lp-label">Now</div>
+    <h2>The wiki, in numbers</h2>
+    <p class="lp-lead">Counted from the repository and the classroom. Every lab and article below is one click away.</p>
+    <div class="lp-numbers">
+      <div class="lp-num"><div class="lp-num-icon">📄</div><div class="lp-num-value">415</div><div class="lp-num-label">pages</div><div class="lp-num-src">.qmd files in the repo</div></div>
+      <div class="lp-num"><div class="lp-num-icon">🧪</div><div class="lp-num-value">77</div><div class="lp-num-label">hands-on labs</div><div class="lp-num-src">step-by-step, with code</div></div>
+      <div class="lp-num"><div class="lp-num-icon">📚</div><div class="lp-num-value">84</div><div class="lp-num-label">book notes</div><div class="lp-num-src">reading notes and summaries</div></div>
+      <div class="lp-num"><div class="lp-num-icon">🎓</div><div class="lp-num-value">11</div><div class="lp-num-label">course editions</div><div class="lp-num-src">each one fully documented</div></div>
+      <div class="lp-num"><div class="lp-num-icon">👩‍💻</div><div class="lp-num-value">165</div><div class="lp-num-label">students</div><div class="lp-num-src">across all course editions</div></div>
+      <div class="lp-num"><div class="lp-num-icon">🔁</div><div class="lp-num-value">1,673</div><div class="lp-num-label">commits</div><div class="lp-num-src">since December 2022</div></div>
+    </div>
+
+    <h3 style="margin-top:3.5rem;">Latest updates</h3>
+    <ul class="lp-news">
+      <li><span class="d">10/2026</span><span class="t">Java SE</span><span><a href="https://github.com/AlbertProfe/PersonCarDog/tree/master" target="_blank">PersonCarDog</a> <span class="c">· Maven project to sandbox the request-response cycle via CLI · <a href="https://albertprofe.github.io/PersonCarDog/" target="_blank" style="font-weight:400">diagrams</a></span></span></li>
+      <li><span class="d">10/2026</span><span class="t">Gist</span><span><a href="https://gist.github.com/AlbertProfe/f29acc707e4577850d99b5c70a38640d" target="_blank">git</a> <span class="c">· the git cheat-sheet we use in class</span></span></li>
+      <li><span class="d">09/2026</span><span class="t">Java EE</span><span><a href="https://github.com/AlbertProfe/compassMap" target="_blank">CompassMap</a> <span class="c">· Spring Boot to help students navigate their profile/roadmap: JPA, H2, API REST</span></span></li>
+      <li><span class="d">09/2026</span><span class="t">News</span><span><a href="images/ifcd0021-26/docs/IFCD0021-1-25-cat.pdf">Summary IFCD0021-25 (pdf)</a> <span class="c">· and <a href="images/ifcd0021-26/docs/IFCD0021-1-24-cat.pdf" style="font-weight:400">2024 (pdf)</a>: what last year's FullStack groups did</span></span></li>
+      <li><span class="d">09/2026</span><span class="t">Calendar</span><span><a href="ifcd0021-26/ifcd0021-deliveries-26.html">Calendar &amp; Deliveries</a> <span class="c">· dates, evaluation weights, how to deliver</span></span></li>
+    </ul>
+  </section>
+
+  <!-- Current course: links only, the sprint content lives in the Sprint Backlog page -->
+  <section id="sprint" class="lp-reveal">
+    <div class="lp-label">This week</div>
+    <h2>Current course &amp; sprint</h2>
+    <p class="lp-lead">What we do in class this week, the same table students open every morning.</p>
+    <div class="lp-current">
+      <div><strong>IFCD0021-26</strong> · Fullstack júnior web developer amb Java · 14/09 – 27/11/2026 · 260h</div>
+      <div class="lp-muted">Modules: Intro to programming with Java (5h) · OOP with Java (75h) · SQL databases, MySQL (30h) · APIs with Spring (75h) · Web UI (75h)</div>
+      <div class="lp-pills"><a class="lp-pill" href="ifcd0021-26/ifcd0021-26.html">Official docs</a><a class="lp-pill" href="ifcd0021-26/ifcd0021-backlog-product-26.html">Product backlog</a><a class="lp-pill" href="ifcd0021-26/ifcd0021-deliveries-26.html">Calendar</a></div>
+    </div>
+    <div style="margin-top:1.75rem"><a href="ifcd0021-26/ifcd0021-backlog-sprint-26.html" class="lp-btn lp-btn-primary">Open the current Sprint Backlog →</a></div>
+  </section>
+
+  <!-- The problem -->
+  <section id="path" class="lp-reveal">
+    <div class="lp-label">Why this wiki</div>
+    <h2>Learning fails when the path is invisible</h2>
+    <p class="lp-lead">Class notes get lost. Sprint goals stay only in the teacher's head. Students don't see the full journey, and the link between "today" and "the whole course" breaks.</p>
+    <div class="lp-split">
+      <div class="lp-split-card teacher">
+        <h3>What the teacher needs</h3>
+        <ul class="lp-list">
+          <li>A living Sprint Backlog that is easy to update every day</li>
+          <li>A Product Backlog that keeps the full history</li>
+          <li>Clear marks: <code>++</code> new topic, <code>----</code> pending to future</li>
+          <li>One place that links commits, masterDocs, diagrams and labs</li>
+        </ul>
+      </div>
+      <div class="lp-split-card student">
+        <h3>What the student needs</h3>
+        <ul class="lp-list">
+          <li>Know exactly what we did today and what comes next</li>
+          <li>See the whole roadmap, not only the current day</li>
+          <li>Find reference articles and previous labs quickly</li>
+          <li>Feel progress instead of guessing</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- The solution -->
+  <section class="lp-reveal">
+    <div class="lp-label">The connection</div>
+    <h2>One shared path. Visible to both.</h2>
+    <p class="lp-lead">Every course edition follows the same pattern: Official docs · Sprint Backlog · Product Backlog · Calendar &amp; Deliveries. The Sprint is the live plan for the week; when the week ends it is pasted into the Product Backlog and a new Sprint starts.</p>
+    <div class="lp-grid">
+      <a class="lp-card" href="ifcd0021-26/ifcd0021-backlog-sprint-26.html"><div class="lp-card-icon">🗂</div><h3>Sprint Backlog</h3>
+        <p class="lp-muted">The plan for this week, day by day, with numbered steps. <code>++</code> for new topics, <code>----</code> for what moves to the future.</p></a>
+      <a class="lp-card" href="ifcd0021-26/ifcd0021-backlog-product-26.html"><div class="lp-card-icon">🗃</div><h3>Product Backlog</h3>
+        <p class="lp-muted">The permanent history. Every finished week is pasted here, month by month, so the full journey stays visible.</p></a>
+      <a class="lp-card" href="ifcd0021-26/ifcd0021-deliveries-26.html"><div class="lp-card-icon">📅</div><h3>Calendar &amp; Deliveries</h3>
+        <p class="lp-muted">Official dates, evaluation weights (30% continuous, 70% final) and how to deliver the exercises.</p></a>
+      <a class="lp-card" href="ifcd0021-26/ifcd0021-26.html"><div class="lp-card-icon">📜</div><h3>Official Docs</h3>
+        <p class="lp-muted">The Certificat de Professionalitat: modules, hours and the general competence of the course.</p></a>
+    </div>
+  </section>
+
+  <!-- Methodology -->
+  <section id="method" class="lp-reveal">
+    <div class="lp-label">The weekly rhythm</div>
+    <h2>How we keep the path alive</h2>
+    <div class="lp-steps">
+      <div class="lp-step"><div class="lp-step-num">1</div><div><h3>Plan the Sprint</h3><p class="lp-muted">Monday: write the sprint header and the daily topics with numbered steps.</p></div></div>
+      <div class="lp-step"><div class="lp-step-num">2</div><div><h3>Update every day</h3><p class="lp-muted">Mark progress, add <code>++</code> for new topics, strike what we skip, link the commit and the masterDoc.</p></div></div>
+      <div class="lp-step"><div class="lp-step-num">3</div><div><h3>Close the week</h3><p class="lp-muted">Paste the finished week into the Product Backlog. Start a fresh Sprint.</p></div></div>
+      <div class="lp-step"><div class="lp-step-num">4</div><div><h3>Students always see the truth</h3><p class="lp-muted">The pages the teacher updates are the pages students open. No hidden plan. <a href="scrum/scrum-what-concepts.html" style="color:var(--accent-light)">Why SCRUM →</a></p></div></div>
+    </div>
+    <div class="lp-marks">
+      <div class="lp-mark"><b>-</b>topic planned or done</div>
+      <div class="lp-mark"><b>----</b>topic pending to future</div>
+      <div class="lp-mark"><b>++</b>new topic not planned</div>
+    </div>
+  </section>
+
+  <!-- Courses -->
+  <section id="courses" class="lp-reveal">
+    <div class="lp-label">Courses</div>
+    <h2>Right now in the classroom</h2>
+    <p class="lp-lead">One live edition, and the same documentation pattern for every edition before it.</p>
+    <div class="lp-grid">
+      <div class="lp-card lp-live">
+        <div class="lp-card-icon">☕</div><h3>IFCD0021-26 <span class="lp-live-tag">● LIVE</span></h3>
+        <p class="lp-muted">Fullstack júnior web developer amb Java · 14/09 – 27/11/2026 · 260h</p>
+        <div class="lp-pills">
+          <a class="lp-pill" href="ifcd0021-26/ifcd0021-backlog-sprint-26.html">Sprint#08</a>
+          <a class="lp-pill" href="ifcd0021-26/ifcd0021-backlog-product-26.html">Product</a>
+          <a class="lp-pill" href="ifcd0021-26/ifcd0021-deliveries-26.html">Calendar</a>
+          <a class="lp-pill" href="ifcd0021-26/ifcd0021-26.html">Official</a>
+        </div>
+      </div>
+      <div class="lp-card">
+        <div class="lp-card-icon">📋</div><h3>IFCD044-26</h3>
+        <p class="lp-muted">Desenvolupament de programari amb metodologies àgils: SCRUM · 01/07 – 24/07/2026 · 100h · 4 sprints</p>
+        <div class="lp-pills">
+          <a class="lp-pill" href="ifcd044-26/ifcd044-backlog-sprint-26.html">Sprint</a>
+          <a class="lp-pill" href="ifcd044-26/ifcd044-backlog-product-26.html">Product</a>
+          <a class="lp-pill" href="ifcd044-26/ifcd044-26.html">Official</a>
+        </div>
+      </div>
+      <div class="lp-card">
+        <div class="lp-card-icon">🌐</div><h3>IFCD0210-26</h3>
+        <p class="lp-muted">Desenvolupament d'aplicacions amb tecnologies web · from 12/01/2026 · 600h</p>
+        <div class="lp-pills">
+          <a class="lp-pill" href="ifcd0210-26/ifcd0210-backlog-sprint-26.html">Sprint</a>
+          <a class="lp-pill" href="ifcd0210-26/ifcd0210-backlog-product-26.html">Product</a>
+          <a class="lp-pill" href="ifcd0210-26/ifcd0210-deliveries-26.html">Calendar</a>
+          <a class="lp-pill" href="ifcd0210-26/ifcd0210-26.html">Official</a>
+        </div>
+      </div>
+    </div>
+    <p class="lp-muted" style="margin-top:1.5rem">Archive:
+      <a href="ifcd0021-1-25/ifcd0021-1-25.html" style="color:var(--accent-light)">IFCD0021-1-25</a> ·
+      <a href="ifcd0210-25/ifcd0210-25.html" style="color:var(--accent-light)">IFCD0210-25</a> ·
+      <a href="ifct116-24/ifct116-24.html" style="color:var(--accent-light)">IFCT116-24</a> ·
+      <a href="ifcd0021-24/ifcd0021-24.html" style="color:var(--accent-light)">IFCD0021-24</a> ·
+      <a href="ifcd0210-24/ifcd0210-24.html" style="color:var(--accent-light)">IFCD0210-24</a> ·
+      <a href="ifcd044/ifcd044.html" style="color:var(--accent-light)">IFCD044</a> ·
+      <a href="ifct034po/ifct034po.html" style="color:var(--accent-light)">IFCT034PO</a> ·
+      <a href="ifcd0210/ifcd0210.html" style="color:var(--accent-light)">IFCD0210</a>
+    </p>
+  </section>
+
+  <!-- Library / topic cards -->
+  <section id="library" class="lp-reveal">
+    <div class="lp-label">Reference library</div>
+    <h2>Not only the daily plan, also the knowledge behind it</h2>
+    <p class="lp-lead">Durable articles and labs live in their own sections. The Sprint Backlog points to them; they never get mixed with the day-to-day noise.</p>
+    <div class="lp-grid">
+      <a class="lp-card" href="javase/se-what-basics.html"><div class="lp-card-icon">☕</div><h3>Java SE</h3>
+        <p class="lp-muted">OOP principles, Maven, TDD, design patterns, UML.</p><div class="lp-card-meta">50 pages · 15 labs</div></a>
+      <a class="lp-card" href="springboot/boot-what-basics.html"><div class="lp-card-icon">🌱</div><h3>Spring Boot</h3>
+        <p class="lp-muted">Controllers, Thymeleaf &amp; Vaadin, API REST, JPA relationships, scaling.</p><div class="lp-card-meta">45 pages · 20 labs</div></a>
+      <a class="lp-card" href="reactjs/reactjs-what-principles.html"><div class="lp-card-icon">⚛️</div><h3>React JS</h3>
+        <p class="lp-muted">JSX, props, ES6, hooks (<code>useState</code>, <code>useEffect</code>, context), router.</p><div class="lp-card-meta">48 pages · 18 labs</div></a>
+      <a class="lp-card" href="scrum/scrum-what-concepts.html"><div class="lp-card-icon">🔁</div><h3>SCRUM</h3>
+        <p class="lp-muted">Agile manifesto, the guide, 15 weeks of mindset, team dynamics and beyond Scrum.</p><div class="lp-card-meta">29 pages · 6 labs</div></a>
+      <a class="lp-card" href="linux/linux-what-basics.html"><div class="lp-card-icon">🐧</div><h3>Linux OS</h3>
+        <p class="lp-muted">Bash, sudo, pipes, file system, VMs and distros.</p><div class="lp-card-meta">24 pages · 11 labs</div></a>
+      <a class="lp-card" href="devops/devops-what-intro.html"><div class="lp-card-icon">🚀</div><h3>DevOps</h3>
+        <p class="lp-muted">Network protocols, git &amp; GitHub, Docker, k8s, AWS deploys.</p><div class="lp-card-meta">39 pages · 6 labs</div></a>
+      <a class="lp-card" href="markup/markup-lang-intro.html"><div class="lp-card-icon">📝</div><h3>MarkUp &amp; Quarto</h3>
+        <p class="lp-muted">HTML, Markdown, CSS and Quarto, the tool this wiki is built with.</p><div class="lp-card-meta">16 pages · 1 lab</div></a>
+      <a class="lp-card" href="learning/learning-how-questions.html"><div class="lp-card-icon">🧠</div><h3>Learning &amp; Books</h3>
+        <p class="lp-muted">Learn to learn: questions, notes, writing, vocabulary, and 84 book notes.</p><div class="lp-card-meta">19 pages · 84 books</div></a>
+      <a class="lp-card" href="https://ml.albertprofe.dev" target="_blank"><div class="lp-card-icon">🤖</div><h3>Machine Learning ↗</h3>
+        <p class="lp-muted">The sister wiki: algorithms, ANN, deep learning, generative AI and Python labs.</p><div class="lp-card-meta">ml.albertprofe.dev</div></a>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="lp-final lp-reveal" id="start">
+    <h2>Open the current path</h2>
+    <p class="lp-lead">Sprint#08 is live: CompassMap JPA tasks, then React on Friday. Teacher and students looking at the same page.</p>
+    <a href="ifcd0021-26/ifcd0021-backlog-sprint-26.html" class="lp-btn lp-btn-primary" style="font-size:1.05rem; padding:.95rem 2.2rem;">Go to the Sprint Backlog →</a>
+  </section>
+
+  <footer class="lp-footer">
+    <div class="lp-logo"><div class="lp-logo-icon" style="width:28px;height:28px;font-size:.9rem;">⌘</div>albert<span>profe</span></div>
+    <div style="font-style:italic">If you want to go far, walk slow &nbsp;/&nbsp; We love dukkha</div>
+    <div class="lp-footer-links">
+      <a href="about/about-this-me.html">About</a>
+      <a href="https://github.com/AlbertProfe/wiki" target="_blank">GitHub</a>
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
+    </div>
+  </footer>
 </div>
-</div>
-<div style="text-align:center;color:grey" class="page-columns page-full">
-<p><br><br></p>
-<div class="column-page">
-<table class="table-striped table-hover caption-top table">
-<caption>New / updated articles</caption>
-<colgroup>
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 50%">
-<col style="width: 30%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Date</th>
-<th>Type</th>
-<th style="text-align: left;">Article</th>
-<th style="text-align: left;">Content</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>10/2026</td>
-<td>Documentation</td>
-<td style="text-align: left;">📜 <a href="https://albertprofe.github.io/PersonCarDog/">Java SE Maven Diagrams</a></td>
-<td style="text-align: left;">Java SE/EE Maven Diagrams</td>
-</tr>
-<tr class="even">
-<td>10/2026</td>
-<td>Documentation</td>
-<td style="text-align: left;">📜 <a href="https://gist.github.com/AlbertProfe/f29acc707e4577850d99b5c70a38640d">Gist: git</a></td>
-<td style="text-align: left;">Gist: git</td>
-</tr>
-<tr class="odd">
-<td>10/2026</td>
-<td><mark>Java SE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/PersonCarDog/tree/master" class="external" target="_blank">PersonCarDog</a></td>
-<td style="text-align: left;">Java SE Maven project to sandbox request-response cycle via CLI</td>
-</tr>
-<tr class="even">
-<td>09/2025</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/compassMap" class="external" target="_blank">CompassMap</a></td>
-<td style="text-align: left;">Java Spring <strong>Boot</strong> to help students navigating its <code>profile/roadmap</code> with JPA H2, api rest, no view</td>
-</tr>
-<tr class="odd">
-<td>09/2026</td>
-<td>📜 News</td>
-<td style="text-align: left;">Starting FullStack IFCD021-26 <strong>14/09 Monday</strong></td>
-<td style="text-align: left;">Starting FullStack Java/React</td>
-</tr>
-<tr class="even">
-<td>09/2026</td>
-<td>📜 News</td>
-<td style="text-align: left;">FullStack <a href="./images/ifcd0021-26/docs/IFCD0021-1-24-cat.pdf">Summary IFCD021-24 pdf</a> / <a href="./images/ifcd0021-26/docs/IFCD0021-1-25-cat.pdf">Summary IFCD021-25 pdf</a></td>
-<td style="text-align: left;">Summary FullStack Java/React 2024 / 2025</td>
-</tr>
-<tr class="odd">
-<td>09/2026</td>
-<td>Documentation</td>
-<td style="text-align: left;">📜 <a href="./ifcd0021-26/ifcd0021-26.html">IFCD021-26</a></td>
-<td style="text-align: left;">Official documents IFCD021-26 course</td>
-</tr>
-<tr class="even">
-<td>09/2026</td>
-<td><strong>Backlog</strong></td>
-<td style="text-align: left;">🗂 <a href="./ifcd0021-26/ifcd0021-backlog-sprint-26.html">Sprint Backlog</a></td>
-<td style="text-align: left;">Sprint Backlog IFCD021-26</td>
-</tr>
-<tr class="odd">
-<td>09/2026</td>
-<td><strong>Backlog</strong></td>
-<td style="text-align: left;">🗃 <a href="./ifcd0021-26/ifcd0021-backlog-product-26.html">Product Backlog</a></td>
-<td style="text-align: left;">Product Backlog IFCD021-26</td>
-</tr>
-<tr class="even">
-<td>09/2026</td>
-<td><strong>Calendar</strong></td>
-<td style="text-align: left;"><a href="./ifcd0021-26/ifcd0021-deliveries-26.html">Calendar and Deliveries</a></td>
-<td style="text-align: left;">Calendar and Deliveries IFCD021-26</td>
-</tr>
-</tbody>
-</table>
-<br>
-<details>
-<summary>
-Old articles 2026 (IFCD044-26)
-</summary>
-<table class="table-striped table-hover caption-top table">
-<caption>New / updated articles</caption>
-<colgroup>
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 50%">
-<col style="width: 30%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Date</th>
-<th>Type</th>
-<th style="text-align: left;">Article</th>
-<th style="text-align: left;">Content</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>07/2026</td>
-<td>📜 News</td>
-<td style="text-align: left;">Starting Scrum/Agile IFCD044-26 <strong>01/17 Wednesday</strong></td>
-<td style="text-align: left;">Starting Scrum/Agile</td>
-</tr>
-<tr class="even">
-<td>07/2026</td>
-<td>Documentation</td>
-<td style="text-align: left;">📜 <a href="./ifcd044-26/ifcd044-26.html">IFCD044-26</a></td>
-<td style="text-align: left;">Official documents IFCD044-26 course</td>
-</tr>
-<tr class="odd">
-<td>07/2026</td>
-<td><strong>Backlog</strong></td>
-<td style="text-align: left;">🗂 <a href="./ifcd044-26/ifcd044-backlog-sprint-26.html">Sprint Backlog</a></td>
-<td style="text-align: left;">Sprint Backlog IFCD044-26</td>
-</tr>
-<tr class="even">
-<td>07/2026</td>
-<td><strong>Backlog</strong></td>
-<td style="text-align: left;">🗃 <a href="./ifcd044-26/ifcd044-backlog-product-26.html">Product Backlog</a></td>
-<td style="text-align: left;">Product Backlog IFCD044-26</td>
-</tr>
-</tbody>
-</table>
-</details>
-<br>
-<details>
-<summary>
-Old articles 2026 (IFCD0210-26)
-</summary>
-<table class="table-striped table-hover caption-top table">
-<caption>New / updated articles</caption>
-<colgroup>
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 50%">
-<col style="width: 30%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Date</th>
-<th>Type</th>
-<th style="text-align: left;">Article</th>
-<th style="text-align: left;">Content</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>12/2025</td>
-<td>📜 News</td>
-<td style="text-align: left;">Starting Web App IFCD0210-26 <strong>01/12 Monday</strong></td>
-<td style="text-align: left;">Starting Web App <strong>Desenvolupament d’aplicacions amb tecnologies web</strong></td>
-</tr>
-<tr class="even">
-<td>12/2025</td>
-<td>Documentation</td>
-<td style="text-align: left;">📜 <a href="./ifcd0210-26/ifcd0210-26.html">IFCD0210-26</a></td>
-<td style="text-align: left;">Official documents IFCD0210-26 course</td>
-</tr>
-<tr class="odd">
-<td>12/2025</td>
-<td><strong>Backlog</strong></td>
-<td style="text-align: left;">🗂 <a href="./ifcd0210-26/ifcd0210-backlog-sprint-26.html">Sprint Backlog</a></td>
-<td style="text-align: left;">Sprint Backlog IFCD0210-26</td>
-</tr>
-<tr class="even">
-<td>12/2025</td>
-<td><strong>Backlog</strong></td>
-<td style="text-align: left;">🗃 <a href="./ifcd0210-26/ifcd0210-backlog-product-26.html">Product Backlog</a></td>
-<td style="text-align: left;">Product Backlog IFCD0210-26</td>
-</tr>
-<tr class="odd">
-<td>12/2025</td>
-<td><strong>Calendar</strong></td>
-<td style="text-align: left;"><a href="./ifcd0210-26/ifcd0210-deliveries-26.html">Calendar and Deliveries</a></td>
-<td style="text-align: left;">Product Backlog IFCD0210-26</td>
-</tr>
-<tr class="even">
-<td>12/2025</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/ApartmentPredictor/tree/master" class="external" target="_blank">AparmentPredictor</a></td>
-<td style="text-align: left;">Java Spring <strong>Boot</strong> for <em>price Apartment predicton</em> (possible with XGBoost) and JPA H2, no view</td>
-</tr>
-<tr class="odd">
-<td>01/2026</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"><a href="https://github.com/AlbertProfe/ApartmentPredictor-React" class="external" target="_blank">ApartmentPredictor-React</a></td>
-<td style="text-align: left;">Project <strong>Apartment Predictor for React</strong>: React project with <code>useState</code>, <code>useEffect</code>, and <code>axios</code> to fetch data from the backend</td>
-</tr>
-<tr class="even">
-<td>12/2025</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/ApartmentPredictor/blob/master/docs/ApartmentPrediction_masterDoc_v1.md" class="external" target="_blank">AparmentPredictor: masterDoc:v1</a></td>
-<td style="text-align: left;">Java Spring <strong>MasterDoc_v1</strong> JPA H2, no view</td>
-</tr>
-<tr class="odd">
-<td>01/2026</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"><a href="https://github.com/AlbertProfe/ApartmentPredictor-React/blob/master/docs/ApartmentPredictorReact_masterDoc_v1.md" class="external" target="_blank">ApartmentPredictor-React: masterDoc:v1</a></td>
-<td style="text-align: left;">Project <strong>MasterDoc_v1</strong>: Apartment Predictor for React</td>
-</tr>
-<tr class="even">
-<td>01/2026</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/ApartmentPredictor/blob/master/docs/ApartmentPrediction_masterDoc_v2.md" class="external" target="_blank">AparmentPredictor: masterDoc:v2</a></td>
-<td style="text-align: left;">Java Spring <strong>MasterDoc_v2</strong> for <em>price Apartment predicton</em> (possible with XGBoost) and JPA H2, no view</td>
-</tr>
-<tr class="odd">
-<td>04/2026</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/noSqlPerson" class="external" target="_blank">noSqlPerson</a></td>
-<td style="text-align: left;">Java Spring + React graphQL + dynamodb project</td>
-</tr>
-<tr class="even">
-<td>05/2026</td>
-<td><strong>openCodeAI</strong></td>
-<td style="text-align: left;"><a href="https://github.com/AlbertProfe/openCodeAI" class="external" target="_blank">openCodeAI</a></td>
-<td style="text-align: left;">openCodeAI project</td>
-</tr>
-</tbody>
-</table>
-</details>
-<br>
-<details>
-<summary>
-Old articles 2025 (IFCD0021-1)
-</summary>
-<table class="table-striped table-hover caption-top table">
-<caption>New / updated articles</caption>
-<colgroup>
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 50%">
-<col style="width: 30%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Date</th>
-<th>Type</th>
-<th style="text-align: left;">Article</th>
-<th style="text-align: left;">Content</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>09/2025</td>
-<td>📜 News</td>
-<td style="text-align: left;">Starting Java Full Stack IFCD0021-1-25 <strong>15/09 Monday</strong></td>
-<td style="text-align: left;">Starting Java Full Stack <strong>Fullstack júnior web developer amb Java</strong></td>
-</tr>
-<tr class="even">
-<td>09/2025</td>
-<td>Documentation</td>
-<td style="text-align: left;">📜 <a href="./ifcd0021-1-25/ifcd0021-1-25.html">IFCD0021-1-25</a></td>
-<td style="text-align: left;">Official documents IFCD0021-1-25 course</td>
-</tr>
-<tr class="odd">
-<td>09/2025</td>
-<td><strong>Backlog</strong></td>
-<td style="text-align: left;">🗂 <a href="./ifcd0021-1-25/ifcd0021-backlog-sprint-1-25.html">Sprint Backlog</a></td>
-<td style="text-align: left;">Sprint Backlog IFCD0021-1-25</td>
-</tr>
-<tr class="even">
-<td>09/2025</td>
-<td><strong>Backlog</strong></td>
-<td style="text-align: left;">🗃 <a href="./ifcd0021-1-25/ifcd0021-backlog-product-1-25.html">Product Backlog</a></td>
-<td style="text-align: left;">Product Backlog IFCD0021-1-25</td>
-</tr>
-<tr class="odd">
-<td>09/2025</td>
-<td><strong>Calendar</strong></td>
-<td style="text-align: left;"><a href="./ifcd0021-1-25/ifcd0021-deliveries-1-25.html">Calendar and Deliveries</a></td>
-<td style="text-align: left;">Product Backlog IFCD0021-1-25</td>
-</tr>
-<tr class="even">
-<td>10/2025</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/rentingCarTest" class="external" target="_blank">rentngCarTest</a></td>
-<td style="text-align: left;">Java Maven and Spring Boot to test MOdel, JPA, JUnit, Vaadin and some features to rent a car</td>
-</tr>
-<tr class="odd">
-<td>10/2025</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/rentingCarTest/tree/master/docs" class="external" target="_blank">rentngCarTest Docs</a></td>
-<td style="text-align: left;">Java Maven, Spring Boot and Vaadin docs, at <code>/docs</code> folder</td>
-</tr>
-<tr class="even">
-<td>11/2025</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/sculptures/wiki" class="external" target="_blank">Sculptures Wiki</a></td>
-<td style="text-align: left;">Project <strong>sculptures</strong>: codeSandbox &amp; docs at GitHub wiki, React <code>useState</code>, updating objects and array Lab</td>
-</tr>
-<tr class="odd">
-<td>11/2025</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"><a href="https://codesandbox.io/p/sandbox/fetch-data-example-vqk726" class="external" target="_blank">spaceX codesandbox launches</a></td>
-<td style="text-align: left;">Project <strong>spaceX launches</strong>: codeSandbox for <code>useEffect</code></td>
-</tr>
-</tbody>
-</table>
-</details>
-<br>
-<details>
-<summary>
-Old articles 2025 (IFCD0210-25)
-</summary>
-<table class="table-striped table-hover caption-top table">
-<caption>New / updated articles</caption>
-<colgroup>
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 50%">
-<col style="width: 30%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Date</th>
-<th>Type</th>
-<th style="text-align: left;">Article</th>
-<th style="text-align: left;">Content</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>06/2025</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/mathsWebCognito" class="external" target="_blank">mathsWebCognito</a></td>
-<td style="text-align: left;">Java Spring Boot Vaadin Hilla Cognito Auth</td>
-</tr>
-<tr class="even">
-<td>05/2025</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/mathsWeb" class="external" target="_blank">mathsWeb</a></td>
-<td style="text-align: left;">React Material UI project to test themes</td>
-</tr>
-<tr class="odd">
-<td>05/2025</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/easyLearning" class="external" target="_blank">easyLearning</a></td>
-<td style="text-align: left;">Java Spring Boot Vaadin React Auth</td>
-</tr>
-<tr class="even">
-<td>04/2025</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/rentingCar" class="external" target="_blank">rentingCar</a></td>
-<td style="text-align: left;">Spring Boot repo for <strong>Vaadin Hilla</strong> project</td>
-</tr>
-<tr class="odd">
-<td>04/2025</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/stars/AlbertProfe/lists/userborrowbook" class="external" target="_blank">userBorrowBook</a></td>
-<td style="text-align: left;">Projects List fro <strong>userBorrowBook</strong></td>
-</tr>
-<tr class="even">
-<td>03/2025</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/userBorrowBookFront" class="external" target="_blank">userBorrowBookFront</a></td>
-<td style="text-align: left;">React JS repo to practice how <strong>userBorrowBookFront</strong> CRUD and axios with context/custom hook works, data fromm <a href="https://github.com/AlbertProfe/userBorrowBookBack" class="external" target="_blank">userBorrowBookBack</a></td>
-</tr>
-<tr class="odd">
-<td>03/2025</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/userBorrowBookBack" class="external" target="_blank">userBorrowBookBack</a></td>
-<td style="text-align: left;">Spring Boot repo to publish API Rest data for <a href="https://github.com/AlbertProfe/userBorrowBookFront" class="external" target="_blank">userBorrowBookFront</a></td>
-</tr>
-<tr class="even">
-<td>03/2025</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/howContextWorks" class="external" target="_blank">howContextWorks</a></td>
-<td style="text-align: left;">React JS repo to practice how <strong>useContext</strong> works</td>
-</tr>
-<tr class="odd">
-<td>03/2025</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/userBorrowBookFilter" class="external" target="_blank">userBorrowBookFilter</a></td>
-<td style="text-align: left;">Spring Boot repo sandbox JPA Criteria specification: <strong>filters</strong> and queries</td>
-</tr>
-<tr class="even">
-<td>03/2025</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/easyLearning" class="external" target="_blank">easyLearning</a></td>
-<td style="text-align: left;">Spring Boot repo Vaadin, <strong>Flow and Hilla</strong></td>
-</tr>
-<tr class="odd">
-<td>02/2025</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><strong>CodeSandbox</strong> <img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="https://codesandbox.io/p/sandbox/nt8zkz?file=%2Fsrc%2FFAQ.jsx" class="external" target="_blank">accordion</a></td>
-<td style="text-align: left;">React JS codeSandbox to practice how <strong>sharing state</strong> works</td>
-</tr>
-<tr class="even">
-<td>03/2025</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/userBorrowBook" class="external" target="_blank">userBorrowBook</a></td>
-<td style="text-align: left;">Spring Boot repo sandbox <strong>JPA relationships</strong>: bi/unidirectional, owner, etc..</td>
-</tr>
-<tr class="odd">
-<td>02/2025</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/todoApp" class="external" target="_blank">todoApp</a></td>
-<td style="text-align: left;">React JS repo to practice how <strong>useReducer</strong> works</td>
-</tr>
-<tr class="even">
-<td>02/2025</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/weatherApp" class="external" target="_blank">weatherApp</a></td>
-<td style="text-align: left;">React JS repo to practice how API Rest and form works with <a href="https://openweathermap.org/" class="external" target="_blank">OpenWeatherMap</a></td>
-</tr>
-<tr class="odd">
-<td>02/2025</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/howRenderCycleWorks" class="external" target="_blank">howRenderCycleWorks</a></td>
-<td style="text-align: left;">React JS repo to practice how render cycle works</td>
-</tr>
-<tr class="even">
-<td>02/2025</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/basicRegisterForm" class="external" target="_blank">basicRegisterForm</a></td>
-<td style="text-align: left;">React JS repo to practice how a form works</td>
-</tr>
-<tr class="odd">
-<td>02/2025</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/stateFormPra" class="external" target="_blank">stateFormPra</a></td>
-<td style="text-align: left;">React JS repo to practice useState</td>
-</tr>
-<tr class="even">
-<td>02/2025</td>
-<td>Gist</td>
-<td style="text-align: left;"><a href="https://gist.github.com/AlbertProfe/5df0fbb6655a5fae331bf16a9c14b249" class="external" target="_blank">GitHub Repository books, scripts and links</a></td>
-<td style="text-align: left;">Git &amp; GH Repository Scripts</td>
-</tr>
-<tr class="odd">
-<td>01/2025</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/pronunciationApp/tree/master" class="external" target="_blank">Lab#pronunciationApp</a></td>
-<td style="text-align: left;">Spring Boot pronunciationApp</td>
-</tr>
-<tr class="even">
-<td>01/2025</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="./springboot/sblab8-1.html">Lab#SE08-1</a></td>
-<td style="text-align: left;">Spring Boot Restaurant Management Reference Project to pronunciationApp</td>
-</tr>
-<tr class="odd">
-<td>12/2024</td>
-<td>📜 News</td>
-<td style="text-align: left;"><img src="./images/home/new-icon-1497910_1280.png" class="img-fluid" style="width:6.0%"> <a href="./scrum/scrum-week14.html#the-scrum-and-agile-identity-crisis-2025" class="external" target="_blank">Scrum Crisis 2025</a></td>
-<td style="text-align: left;">Beyond Scrum 2025: identity crisis</td>
-</tr>
-<tr class="even">
-<td>12/2024</td>
-<td>📜 News</td>
-<td style="text-align: left;"><img src="./images/home/new-icon-1497910_1280.png" class="img-fluid" style="width:6.0%"> <a href="https://spring.io/projects/spring-boot" class="external" target="_blank">Spring Boot 3.4.1</a></td>
-<td style="text-align: left;">Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can “just run”</td>
-</tr>
-<tr class="odd">
-<td>12/2024</td>
-<td>📜 News</td>
-<td style="text-align: left;"><img src="./images/home/new-icon-1497910_1280.png" class="img-fluid" style="width:6.0%"> <a href="https://github.com/openai/openai-java" class="external" target="_blank">openAI Java</a></td>
-<td style="text-align: left;">The OpenAI Java SDK provides convenient access to the OpenAI REST API from applications written in Java</td>
-</tr>
-<tr class="even">
-<td>12/2024</td>
-<td><mark>Markdown</mark></td>
-<td style="text-align: left;"><a href="https://github.com/AlbertProfe/markdown_PRA/tree/master" class="external" target="_blank">markdown_PRA</a></td>
-<td style="text-align: left;">markdown labs and resources: roadmaps, plannings, guides, cheatshhets</td>
-</tr>
-<tr class="odd">
-<td>12/2024</td>
-<td>📜 News</td>
-<td style="text-align: left;"><img src="./images/home/new-icon-1497910_1280.png" class="img-fluid" style="width:6.0%"> <a href="https://spring.io/blog/2024/12/10/spring-ai-amazon-bedrock-nova" class="external" target="_blank">Bedrock Chat Spring</a> / <a href="https://github.com/tzolov/spring-ai-bedrock-nova-demo" class="external" target="_blank">GitHub</a> / <a href="https://pbs.twimg.com/media/GebVT0aWgAAdAsZ?format=jpg&amp;name=4096x4096" class="external" target="_blank">Image</a></td>
-<td style="text-align: left;">Bedrock AWS AI service integrates its language models with real-time</td>
-</tr>
-<tr class="even">
-<td>12/2024</td>
-<td>Documentation</td>
-<td style="text-align: left;">📜 <a href="./ifcd0210-25/ifcd0210-25.html">IFCD0210-25</a></td>
-<td style="text-align: left;">Official documents IFCD0210-25 course</td>
-</tr>
-<tr class="odd">
-<td>12/2024</td>
-<td><strong>Backlog</strong></td>
-<td style="text-align: left;">🗂 <a href="./ifcd0210-25/ifcd0210-backlog-sprint-25.html">Sprint Backlog</a></td>
-<td style="text-align: left;">Sprint Backlog IFCD0210-25</td>
-</tr>
-<tr class="even">
-<td>12/2024</td>
-<td><strong>Backlog</strong></td>
-<td style="text-align: left;">🗃 <a href="./ifcd0210-25/ifcd0210-backlog-product-25.html">Product Backlog</a></td>
-<td style="text-align: left;">Product Backlog IFCD0210-25</td>
-</tr>
-<tr class="odd">
-<td>12/2024</td>
-<td><strong>Calendar</strong></td>
-<td style="text-align: left;"><a href="./ifcd0210-25/ifcd0210-deliveries-25.html">Calendar and Deliveries</a></td>
-<td style="text-align: left;">Product Backlog IFCD0210-25</td>
-</tr>
-<tr class="even">
-<td>11/2024</td>
-<td><mark>DevOps</mark></td>
-<td style="text-align: left;"><a href="https://github.com/AlbertProfe/DevOps_PRA/tree/master/Resources/AWS/%20ECR-ECS-Publish-DockerContainer" class="external" target="_blank">DevOps_PRA: AWS ECS Service</a></td>
-<td style="text-align: left;">DewOps labs and resources: ECS Service</td>
-</tr>
-</tbody>
-</table>
-</details>
-<br>
-<details>
-<summary>
-Old articles 2024 (IFCT116exp-24)
-</summary>
-<table class="table-striped table-hover caption-top table">
-<caption>New / updated articles</caption>
-<colgroup>
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 50%">
-<col style="width: 30%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Date</th>
-<th>Type</th>
-<th style="text-align: left;">Article</th>
-<th style="text-align: left;">Content</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>11/2024</td>
-<td>📜 News</td>
-<td style="text-align: left;"><img src="./images/home/new-icon-1497910_1280.png" class="img-fluid" style="width:6.0%"> <a href="https://docs.spring.io/spring-ai/reference/api/chat/perplexity-chat.html" class="external" target="_blank">Perplexity Chat Spring</a></td>
-<td style="text-align: left;">Perplexity AI service integrates its language models with real-time</td>
-</tr>
-<tr class="even">
-<td>11/2024</td>
-<td>📘 <strong>Book</strong></td>
-<td style="text-align: left;"><img src="./images/home/new-icon-1497910_1280.png" class="img-fluid" style="width:6.0%"> <a href="http://dockerparadevops.com/">Docker para DevOps</a></td>
-<td style="text-align: left;">De noob a experrto</td>
-</tr>
-<tr class="odd">
-<td>11/2024</td>
-<td>Gist</td>
-<td style="text-align: left;"><a href="https://gist.github.com/AlbertProfe/4f9d89ffe14beb62d166730929070e9a" class="external" target="_blank">Authomate Sync to Local</a></td>
-<td style="text-align: left;">Git &amp; GH Sync Owner/Forked/Local</td>
-</tr>
-<tr class="even">
-<td>11/2024</td>
-<td><mark>DevOps</mark></td>
-<td style="text-align: left;"><a href="hhttps://github.com/AlbertProfe/DevOps_PRA/commits/master/" class="external" target="_blank">DevOps_PRA: commits</a></td>
-<td style="text-align: left;">DewOps labs and resources commits</td>
-</tr>
-<tr class="odd">
-<td>11/2024</td>
-<td><mark>DevOps</mark></td>
-<td style="text-align: left;"><a href="https://github.com/AlbertProfe/DevOps_PRA" class="external" target="_blank">DevOps_PRA</a></td>
-<td style="text-align: left;">DewOps labs and resources</td>
-</tr>
-<tr class="even">
-<td>11/2024</td>
-<td>Documentation</td>
-<td style="text-align: left;">📜 <a href="./ifct116-24/ifct116-24.html">IFCT116-24</a></td>
-<td style="text-align: left;">Official documents IFCT116exp-24 course</td>
-</tr>
-<tr class="odd">
-<td>11/2024</td>
-<td><strong>Backlog</strong></td>
-<td style="text-align: left;">🗂 <a href="./ifct116-24/ifct116-backlog-sprint-24.html">Sprint Backlog</a></td>
-<td style="text-align: left;">Sprint Backlog IFCT116exp-24</td>
-</tr>
-<tr class="even">
-<td>11/2024</td>
-<td><strong>Backlog</strong></td>
-<td style="text-align: left;">🗃 <a href="./ifct116-24/ifct116-backlog-product-24.html">Product Backlog</a></td>
-<td style="text-align: left;">Product Backlog IFCT116exp-24</td>
-</tr>
-<tr class="odd">
-<td>11/2024</td>
-<td><strong>Calendar</strong></td>
-<td style="text-align: left;"><a href="./ifct116-24/ifct116-deliveries-24.html">Calendar and Deliveries</a></td>
-<td style="text-align: left;">Product Backlog IFCT116exp-24</td>
-</tr>
-</tbody>
-</table>
-</details>
-<br>
-<details>
-<summary>
-Old articles 2024 (IFCD0021-24)
-</summary>
-<table class="table-striped table-hover caption-top table">
-<caption>New / updated articles</caption>
-<colgroup>
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 50%">
-<col style="width: 30%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Date</th>
-<th>Type</th>
-<th style="text-align: left;">Article</th>
-<th style="text-align: left;">Content</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>11/2024</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="./springboot/sblab9-1.html">Lab#SE09-1</a></td>
-<td style="text-align: left;">Spring Boot SpringIO Conferences</td>
-</tr>
-<tr class="even">
-<td>11/2024</td>
-<td>Gist</td>
-<td style="text-align: left;"><a href="https://gist.github.com/AlbertProfe/262beaa9b9965df80241049923a77dee" class="external" target="_blank">Git Repository Test Management Scripts</a></td>
-<td style="text-align: left;">Git &amp; GH Repository Test Creation and Deletion Scripts</td>
-</tr>
-<tr class="odd">
-<td>10/2024</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="./springboot/sblab8-1.html">Lab#SE08-1</a></td>
-<td style="text-align: left;">Spring Boot Restaurant Managament</td>
-</tr>
-<tr class="even">
-<td>09/2024</td>
-<td>Gist</td>
-<td style="text-align: left;"><a href="https://gist.github.com/AlbertProfe/ae6bf1af9cee2ccf77d6c400556d18c7" class="external" target="_blank">Projects UML</a></td>
-<td style="text-align: left;">Java SE UML 10 projects class exercise</td>
-</tr>
-<tr class="odd">
-<td>09/2024</td>
-<td><mark>Java SE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/restaurant">Lab#Restaurant</a></td>
-<td style="text-align: left;">Java SE UML &amp; project lab</td>
-</tr>
-<tr class="even">
-<td>09/2024</td>
-<td>Documentation</td>
-<td style="text-align: left;">📜 <a href="./ifcd0021-24/ifcd0021-24.html">IFCD0021-24</a></td>
-<td style="text-align: left;">Official documents IFCD0021-24 course</td>
-</tr>
-<tr class="odd">
-<td>09/2024</td>
-<td><strong>Backlog</strong></td>
-<td style="text-align: left;">🗂 <a href="./ifcd0021-24/ifcd0021backlog-sprint-24.html">Sprint Backlog</a></td>
-<td style="text-align: left;">Sprint Backlog IFCD0021-24</td>
-</tr>
-<tr class="even">
-<td>09/2024</td>
-<td><strong>Backlog</strong></td>
-<td style="text-align: left;">🗃 <a href="./ifcd0021-24/ifcd0021backlog-product-24.html">Product Backlog</a></td>
-<td style="text-align: left;">Product Backlog IFCD0021-24</td>
-</tr>
-</tbody>
-</table>
-</details>
-<br>
-<details>
-<summary>
-Old articles 2024 (IFCD0210-24)
-</summary>
-<table class="table-striped table-hover caption-top table">
-<caption>Old articles</caption>
-<colgroup>
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 50%">
-<col style="width: 30%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Date</th>
-<th>Type</th>
-<th style="text-align: left;">Article</th>
-<th style="text-align: left;">Content</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>06/2024</td>
-<td><strong>Backlog</strong></td>
-<td style="text-align: left;">🗂 <a href="./ifcd0210-24/ifcd0210backlog-sprint-24.html">Sprint Backlog</a></td>
-<td style="text-align: left;">Sprint Backlog IFCD0210-24</td>
-</tr>
-<tr class="even">
-<td>06/2024</td>
-<td><strong>Backlog</strong></td>
-<td style="text-align: left;">🗃 <a href="./ifcd0210-24/ifcd0210backlog-product-24.html">Product Backlog</a></td>
-<td style="text-align: left;">Product Backlog IFCD0210-24</td>
-</tr>
-<tr class="odd">
-<td>06/2024</td>
-<td><mark>Next JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/next-flix-router/wiki">NextJS movies next-flix-router project</a></td>
-<td style="text-align: left;">NextJS &amp; mongoDB router</td>
-</tr>
-<tr class="even">
-<td>06/2024</td>
-<td><mark>Next JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/next-flix/wiki">NextJS movies next-flix project</a></td>
-<td style="text-align: left;">NextJS &amp; mongoDB pages</td>
-</tr>
-<tr class="odd">
-<td>06/2024</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/securityDeploy/wiki">Spring Boot Security &amp; Deploy AWS EC2</a></td>
-<td style="text-align: left;">Spring Boot Security &amp; Deploy AWS EC2 with SSH</td>
-</tr>
-<tr class="even">
-<td>06/2024</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/AssistantAI/wiki">Spring Boot Assistant AI</a></td>
-<td style="text-align: left;">Spring Boot Assistant AI</td>
-</tr>
-<tr class="odd">
-<td>06/2024</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/simulations/wiki/simulations-v1.1">Spring Boot JPA: JPQL &amp; queries</a></td>
-<td style="text-align: left;">Spring Boot Queries</td>
-</tr>
-<tr class="even">
-<td>05/2024</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/authReactCognitoJS/wiki">Authentication ReactJS Cognito Identity User Pool AWS SDK JS v3</a></td>
-<td style="text-align: left;">React JS AWS SDK, Auth, Cognito lab</td>
-</tr>
-<tr class="odd">
-<td>05/2024</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/Chat/wiki">Chat React JS &amp; AWS Server</a></td>
-<td style="text-align: left;">React JS AWS, WebSocket, Semantic CSS lab</td>
-</tr>
-<tr class="even">
-<td>04/2024</td>
-<td>📘 <strong>Book</strong></td>
-<td style="text-align: left;"><img src="./images/home/new-icon-1497910_1280.png" class="img-fluid" style="width:6.0%"> <a href="./books/j2ee.html">Expert One-on-One J2EE™ Design and Development</a></td>
-<td style="text-align: left;">New added book on programming Java EE</td>
-</tr>
-<tr class="odd">
-<td>04/2024</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="./spring/spring-basics.html#boot-2024">Spring Framework &amp; Boot is now 20 &amp; 10 years old: 2004-2014-2024</a></td>
-<td style="text-align: left;">Spring timeline</td>
-</tr>
-<tr class="even">
-<td>03/2024</td>
-<td><mark>Java EE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="https://github.com/AlbertProfe/simulations/wiki">Simulation wiki github</a></td>
-<td style="text-align: left;">Spring Boot, JPA, H2 DB, API Rest</td>
-</tr>
-<tr class="odd">
-<td>03/2024</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="./reactjs/rjslab7-1.html">Lab#RE07-1: traffic lights Simulation</a></td>
-<td style="text-align: left;">React JS data, form and hooks lab</td>
-</tr>
-<tr class="even">
-<td>02/2024</td>
-<td>📜 News</td>
-<td style="text-align: left;"><img src="./images/home/new-icon-1497910_1280.png" class="img-fluid" style="width:6.0%"> <a href="https://www.oreilly.com/radar/technology-trends-for-2024/" class="external" target="_blank">Technology Trends for 2024</a></td>
-<td style="text-align: left;">Where the Industry Is Headed</td>
-</tr>
-<tr class="odd">
-<td>02/2024</td>
-<td>📘 <strong>Book</strong></td>
-<td style="text-align: left;"><img src="./images/home/new-icon-1497910_1280.png" class="img-fluid" style="width:6.0%"> <a href="./books/playingtowin.html">Playing to win</a></td>
-<td style="text-align: left;">New added book on strategy</td>
-</tr>
-<tr class="even">
-<td>01/2024</td>
-<td><mark>Java SE</mark></td>
-<td style="text-align: left;"><img src="./images/home/java-logo.png" class="img-fluid" style="width:5.0%"> <a href="./javase/selab4-1.html">Lab#SE04-1: healthyFood Restaurant, Core Model</a></td>
-<td style="text-align: left;">Java SE UML lab</td>
-</tr>
-<tr class="odd">
-<td>01/2024</td>
-<td><mark>React JS</mark></td>
-<td style="text-align: left;"><img src="./images/home/react-log.png" class="img-fluid" style="width:5.0%"> <a href="./reactjs/rjslab6-1.html">Lab#RE06-1: healthyFood Restaurant</a></td>
-<td style="text-align: left;">React JS composition lab</td>
-</tr>
-</tbody>
-</table>
-</details>
-</div>
-<p><br><br></p>
-<p><a href="./scrum/scrum-what-concepts.html">SCRUM</a> agile framework | <a href="./scrum/scrum-week10.html">Before SCRUM</a> management | SCRUM of SCRUM: <a href="./scrum/scrum-week14.html#scrum-of-scrum-less">Less</a> | Team Work, What is it? | <a href="./scrum/scrum-week11.html">Team Dynamics</a>, how to manage | <a href="./scrum/scrum-week5.html">Mindset</a>, the key for everything | <a href="./scrum/scrum-week12.html">Emotions</a> and Thoughts | Managing mind and <a href="./scrum/scrum-week7.html">time</a> | <a href="./scrum/scrum-week14.html">Beyond SCRUM</a></p>
-<p>DDD: Domain-driven design | <a href="https://dotnet.microsoft.com/download/e-book/microservices-architecture/pdf">Microservices</a> design system | <a href="https://spring.io/">Spring Boot</a> framework | SPA, Single Page App | Multi-page and server side rendering | Cloud serveless: <a href="https://aws.amazon.com/">AWS</a> | APIs: REST, Websockets, SOAP, GraphQL | <a href="https://kafka.apache.org/intro">Kafka</a>, event streaming</p>
-<p>Scripting: <a href="./linux/linux-what-bash.html">BASH</a>, (short for “Bourne again shell”) is a Unix shell | Structured and Procedural: C | OOP (Object-Oriented Programming): <a href="https://java-programming.mooc.fi/">Java SE</a> | COP (Components-Oriented Programming): <a href="https://reactjs.org/">React JS</a> and <a href="https://www.typescriptlang.org/docs/handbook/react.html">React TS</a></p>
-<p><a href="./devops/devops-vc-git.html">Git</a>, a version control system | <a href="https://git-scm.com/">Git</a> is used for source code management | <a href="https://github.com/">GitHub</a> git on cloud | GitLab / Subversion | <a href="./devops/devops-vc-ideagithub.html">Idea</a> and GitHub 2023 | <a href="./devops/devops-vc-gitgh.html">Git and GitHub 2023 CLI</a> | <a href="https://cli.github.com/">CLI gH</a>, to your terminal | IDE: <a href="./devops/devops-ide-visualcode.html">Visual Code</a> / IntellJ Idea</p>
-<p><a href="./about/about-this-site.html">about this site</a>, for documentation example. | <a href="https://junit.org/junit5/">JUnit for Spring Boot</a> | <a href="https://jestjs.io/">Jest for JS React</a> | Deploy on Heroku, Netlify, AWS Amplify | <a href="https://www.jenkins.io/">Jenkins</a>, <a href="https://www.docker.com/">Docker</a> and <a href="https://kubernetes.io/">k8s</a></p>
-<p><a href="https://www.investopedia.com/terms/a/artificial-intelligence-ai.asp">Artificial Intelligence (AI):</a> What It Is and How It Is Used | Machine Learning | Natural language &amp; prompts | <a href="https://www.investopedia.com/openai-rolls-out-upgraded-ai-image-generation-tool-with-dall-e-3-7972607">DALL-E</a> text-to-image tool | <a href="https://openai.com/blog/chatgpt">ChatGPT</a> | Artificial General Intelligence (AGI) | AI is categorized into four types</p>
-</div>
+
+<script>
+(function () {
+  // hero orbit: chips travel on a tilted ellipse around teacher and student; front = bigger and brighter
+  (function () {
+    var box = document.getElementById('lp-orbit'); if (!box) return;
+    var chips = box.querySelectorAll('.lp-chip'), n = chips.length, t0 = performance.now(), raf = 0;
+    var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    function place(now) {
+      var W = box.clientWidth, H = box.clientHeight, narrow = W < 900;
+      var cx = W * (narrow ? .62 : .64), cy = H * .52, rx = W * (narrow ? .33 : .27), ry = H * (narrow ? .30 : .26), tilt = -0.18;
+      var t = (now - t0) / 1000 * 0.16;
+      for (var i = 0; i < n; i++) {
+        var a = t + i * 2 * Math.PI / n, x = Math.cos(a) * rx, y = Math.sin(a) * ry;
+        var X = cx + x * Math.cos(tilt) - y * Math.sin(tilt), Y = cy + x * Math.sin(tilt) + y * Math.cos(tilt);
+        var depth = (Math.sin(a) + 1) / 2, c = chips[i];
+        c.style.transform = 'translate(' + (X - c.offsetWidth / 2).toFixed(1) + 'px,' + (Y - c.offsetHeight / 2).toFixed(1) + 'px) scale(' + (0.78 + depth * 0.32).toFixed(3) + ')';
+        c.style.opacity = (0.45 + depth * 0.55).toFixed(2);
+        c.style.zIndex = depth > .5 ? 3 : 1;
+      }
+    }
+    function loop(now) { place(now); raf = requestAnimationFrame(loop); }
+    function start() {
+      if (raf) { cancelAnimationFrame(raf); raf = 0; }
+      if ((mq && mq.matches) || document.hidden) { place(t0); return; }
+      raf = requestAnimationFrame(loop);
+    }
+    start();
+    window.addEventListener('resize', function () { place(performance.now()); });
+    document.addEventListener('visibilitychange', start);
+    if (mq && mq.addEventListener) mq.addEventListener('change', start);
+  })();
+  // sun/moon toggle: use Quarto's own switch so the choice is shared with the whole site
+  var tbtn = document.getElementById('lp-theme');
+  if (tbtn) tbtn.addEventListener('click', function () {
+    if (typeof window.quartoToggleColorScheme === 'function') { window.quartoToggleColorScheme(); return; }
+    var dark = !document.body.classList.contains('quarto-dark');
+    try { window.localStorage.setItem('quarto-color-scheme', dark ? 'alternate' : 'default'); } catch (e) {}
+    document.body.classList.toggle('quarto-dark', dark);
+    document.body.classList.toggle('quarto-light', !dark);
+  });
+  // hamburger menu (below 760px)
+  var mbtn = document.getElementById('lp-menu-btn'), mnav = document.getElementById('lp-nav');
+  function lpMenu(open) { mnav.classList.toggle('lp-open', open); mbtn.setAttribute('aria-expanded', open ? 'true' : 'false'); mbtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
+  if (mbtn && mnav) {
+    mbtn.addEventListener('click', function () { lpMenu(mbtn.getAttribute('aria-expanded') !== 'true'); });
+    mnav.addEventListener('click', function (e) { if (e.target.closest('a')) lpMenu(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && mbtn.getAttribute('aria-expanded') === 'true') { lpMenu(false); mbtn.focus(); } });
+    document.addEventListener('click', function (e) { if (!e.target.closest('.lp-header')) lpMenu(false); });
+    window.addEventListener('resize', function () { if (window.innerWidth > 760) lpMenu(false); });
+  }
+  // rotating word, same list as the previous home page
+  var words = ['JAVA','REACT','SPRING BOOT','UML','BASH','MINDSET','SCRUM','LINUX','API REST','DEVOPS','AWS','MARKDOWN','QUARTO'];
+  var spin = document.getElementById('lp-spin'), k = 0;
+  setInterval(function () { spin.style.opacity = 0; setTimeout(function () { k = (k + 1) % words.length; spin.textContent = words[k]; spin.style.opacity = 1; }, 250); }, 1600);
+  // reveal on scroll
+  var els = document.querySelectorAll('#lp .lp-reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('lp-in'); io.unobserve(e.target); } }); }, { threshold: 0.12 });
+    els.forEach(function (el) { io.observe(el); });
+  } else { els.forEach(function (el) { el.classList.add('lp-in'); }); }
+})();
+</script>
 
 
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
