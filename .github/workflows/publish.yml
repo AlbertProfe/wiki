@@ -1,0 +1,46 @@
+# Publish albertprofe.dev from GitHub (e.g. from the iPad: Actions tab > "Publish wiki" > Run workflow).
+# Manual only: pushes to master never publish by themselves.
+name: Publish wiki
+
+on:
+  workflow_dispatch:
+    inputs:
+      full:
+        description: "Full render (always true in Actions: the runner has no _site)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write   # push gh-pages and the 'live' tag with GITHUB_TOKEN
+
+concurrency:
+  group: publish-wiki
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out master with full history and tags
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Set up Quarto 1.6.32 (pinned, never latest)
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.6.32
+
+      # _extensions/ is committed (pinned lightbox, fontawesome and social-embeds
+      # for tweets); wiki.sh only reinstalls one if it is ever missing.
+      - name: Git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Publish (full render + gh-pages + move 'live' tag)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./wiki.sh publish --all
