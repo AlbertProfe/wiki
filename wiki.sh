@@ -3,6 +3,8 @@
 #
 # Same script for every publisher: Grok Bot's box, Albert's Linux VM and the GitHub Action.
 # Run `./wiki.sh -h` for the command reference.
+# Worktrees (box): each bot works in its own git worktree, /workspace/wiki-team/repos/wt/<bot>,
+# with WIKI_BOT=<bot>; shared preview/publish steps are serialised with flock locks. See FLOW.md "Worktrees".
 set -euo pipefail
 
 # ----------------------------------------------------------------------------- constants
@@ -21,12 +23,19 @@ PREVIEW_UP="${WIKI_PREVIEW_UP:-/workspace/wiki-team/landing/preview-up.sh}"
 PREVIEW_URL="${WIKI_PREVIEW_URL:-https://unpenetrating-loura-overresolutely.ngrok-free.dev}"
 PREVIEW_PORT="${WIKI_PREVIEW_PORT:-8787}"   # must match preview-up.sh
 QUARTO="${QUARTO:-quarto}"
+WT_ROOT="${WIKI_WT_ROOT:-/workspace/wiki-team/repos/wt}"   # bot worktrees on the box
+LOCK_DIR="${WIKI_LOCK_DIR:-}"                                 # default set in preflight
 if [[ -d "$HOME/.local/bin" ]]; then PATH="$HOME/.local/bin:$PATH"; fi
 
 DRY_RUN=0
 ENVIRONMENT=""
 REPO=""
 GIT_DIR_ABS=""
+GIT_COMMON_ABS=""
+IS_WORKTREE=0      # 1 = running in a linked worktree (a bot folder), not the main clone
+MAIN_WT=""         # path of the main clone (first entry of git worktree list)
+BOT=""             # who is running: $WIKI_BOT, else the worktree folder name
+declare -A HELD_LOCKS=()
 
 # ----------------------------------------------------------------------------- output
 if [[ -t 1 && -z "${NO_COLOR:-}" ]]; then
@@ -55,22 +64,31 @@ wiki.sh - workflow for albertprofe.dev (Quarto 1.6.32 only)
 
 Usage: ./wiki.sh [--dry-run] <command> [options]
 
+Worktrees (box): run it from your own folder, e.g.
+  cd /workspace/wiki-team/repos/wt/wiki-ops && WIKI_BOT=wiki-ops ./wiki.sh start
+  Between sessions a worktree is detached at origin/master; start creates the session branch.
+  Locks in /workspace/wiki-team/locks: preview (the one ngrok tunnel), publish (merge/publish/ship).
+
 Session (box or Albert's VM):
-  start                       pull master, create session/YYYY-MM-DD-N (next free N)
-  preview [--all] [--tunnel] [files.qmd...]   (preview --stop: stop server + ngrok)
+  start                       pull master, create session/YYYY-MM-DD-N (next free N);
+                              in a worktree: fetch, branch from origin/master
+  preview [--all] [--tunnel] [files.qmd...]   (preview --stop: stop your server + ngrok)
                               render given .qmd files (default: .qmd changed vs master,
                               committed + uncommitted + untracked) into _site;
-                              --all = full render; --tunnel = serve _site on ngrok (box only)
+                              --all = full render; --tunnel = serve this folder's _site on
+                              ngrok (box only; refused while another bot holds the tunnel)
   save [--any-message] "msg"  stage content changes (never _site/.quarto/stray CSS),
                               check the message convention, commit, push the session branch
   merge                       rebase session onto origin/master if master moved,
-                              fast-forward master, push master (never force)
-  publish [--all]             on master: render what changed since the last publish,
+                              fast-forward master, push master (never force); in a worktree:
+                              push HEAD:master, then detach at origin/master
+  publish [--all]             on master (or a worktree detached at origin/master):
+                              render what changed since the last publish,
                               quarto publish gh-pages --no-render, move tag 'live'.
                               Escalates to a full render automatically when needed.
   ship                        merge + publish + delete the session branch (local + remote)
   status                      branch, dirty files, quarto, environment, commits ahead of live,
-                              preview/ngrok state
+                              preview/ngrok state, worktrees, lock holders
 
 Courses (on a session branch; changes _quarto.yml, so the next publish is full):
   course new <code> <edition> [--from <folder>]   e.g. course new ifcd0021 27
@@ -103,10 +121,20 @@ preflight() {
   cd "$REPO"
   [[ -f _quarto.yml ]] || die "$REPO has no _quarto.yml; run wiki.sh from the wiki repo"
   GIT_DIR_ABS="$(git rev-parse --absolute-git-dir)"
+  GIT_COMMON_ABS="$(cd "$(git rev-parse --git-common-dir)" && pwd -P)"
+  [[ "$(cd "$GIT_DIR_ABS" && pwd -P)" != "$GIT_COMMON_ABS" ]] && IS_WORKTREE=1
+  MAIN_WT="$(git worktree list --porcelain | sed -n '1s/^worktree //p')"
   command -v "$QUARTO" >/dev/null 2>&1 || die "quarto not found on PATH (need $QUARTO_REQUIRED; never install another version)"
   local v; v="$("$QUARTO" --version 2>/dev/null | tr -d '[:space:]')"
   [[ "$v" == "$QUARTO_REQUIRED" ]] || die "quarto is $v, required $QUARTO_REQUIRED. Do not upgrade; fix PATH instead."
   detect_env
+  BOT="${WIKI_BOT:-$(basename "$REPO")}"
+  if (( IS_WORKTREE )) && [[ -n "${WIKI_BOT:-}" && "$WIKI_BOT" != "$(basename "$REPO")" ]]; then
+    warn "WIKI_BOT=$WIKI_BOT but this is the $(basename "$REPO") worktree ($REPO): are you in the right folder?"
+  fi
+  if [[ -z "$LOCK_DIR" ]]; then
+    if [[ "$ENVIRONMENT" == "box" ]]; then LOCK_DIR="/workspace/wiki-team/locks"; else LOCK_DIR="$GIT_COMMON_ABS/wiki-locks"; fi
+  fi
   if [[ "$ENVIRONMENT" == "github-actions" && -z "$(git config user.name || true)" ]]; then
     run git config user.name "github-actions[bot]"
     run git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -125,6 +153,63 @@ require_not_actions() {
 }
 
 current_branch() { git symbolic-ref --quiet --short HEAD || echo "(detached)"; }
+
+# Base the session is compared with: origin/master in a worktree (it has no master checkout), else master.
+base_ref() { if (( IS_WORKTREE )); then echo "origin/$MAIN_BRANCH"; else echo "$MAIN_BRANCH"; fi; }
+
+# "On main": on master, or detached exactly at origin/master (a worktree between sessions).
+on_main() {
+  local b; b="$(current_branch)"
+  [[ "$b" == "$MAIN_BRANCH" ]] && return 0
+  [[ "$b" == "(detached)" ]] && [[ "$(git rev-parse HEAD)" == "$(git rev-parse -q --verify "origin/$MAIN_BRANCH" || true)" ]]
+}
+
+has_linked_worktrees() { (( $(git worktree list --porcelain | grep -c '^worktree ') > 1 )); }
+
+# ----------------------------------------------------------------------------- locks
+# flock locks in $LOCK_DIR, shared by all worktrees. A lock lives as long as the open fd: it is
+# released when wiki.sh exits, or (preview) when the server + ngrok it started exit, because they
+# inherit the fd. The lock file's first line says who holds it.
+lock_file()  { echo "$LOCK_DIR/$1.lock"; }
+lock_owner() { local f; f="$(lock_file "$1")"; if [[ -s "$f" ]]; then head -n1 "$f"; else echo "unknown"; fi; }
+lock_is_held() {   # held by any process (including our own children)
+  local f fd; f="$(lock_file "$1")"
+  [[ -e "$f" ]] && command -v flock >/dev/null 2>&1 || return 1
+  [[ -n "${HELD_LOCKS[$1]:-}" ]] && return 0
+  exec {fd}<"$f"
+  if flock -n "$fd"; then flock -u "$fd"; exec {fd}<&-; return 1; fi
+  exec {fd}<&-; return 0
+}
+take_lock() {   # take_lock <name>: non-blocking; refuses (dies) naming the holder
+  local name="$1" f fd
+  [[ -n "${HELD_LOCKS[$name]:-}" ]] && return 0          # re-entrant (ship = merge + publish)
+  if (( DRY_RUN )); then
+    if lock_is_held "$name"; then warn "[dry-run] $name lock is held by: $(lock_owner "$name") (the real run would stop here)"
+    else info "[dry-run] would take the $name lock ($(lock_file "$name"))"; fi
+    return 0
+  fi
+  if ! command -v flock >/dev/null 2>&1; then warn "flock not found: running without the $name lock"; return 0; fi
+  mkdir -p "$LOCK_DIR"; f="$(lock_file "$name")"
+  exec {fd}<>"$f"
+  if ! flock -n "$fd"; then
+    exec {fd}>&-
+    die "the $name lock is held by: $(lock_owner "$name")
+Wait until it is released (./wiki.sh status shows it), or ask that bot. Never kill another bot's processes."
+  fi
+  printf '%s pid=%s worktree=%s since=%s\n' "$BOT" "$$" "$REPO" "$(date '+%F %H:%M %Z')" > "$f"
+  HELD_LOCKS[$name]=$fd
+}
+
+# Fast-forward the main clone's master to origin/master (best effort; it is only the shared base).
+sync_main_clone() {
+  (( IS_WORKTREE )) || return 0
+  [[ -n "$MAIN_WT" && -d "$MAIN_WT" ]] || return 0
+  local b; b="$(git -C "$MAIN_WT" symbolic-ref --quiet --short HEAD || true)"
+  if [[ "$b" != "$MAIN_BRANCH" ]]; then warn "main clone $MAIN_WT is on '${b:-detached}', not $MAIN_BRANCH: left as is"; return 0; fi
+  git merge-base --is-ancestor "origin/$MAIN_BRANCH" "$MAIN_BRANCH" && return 0   # already up to date
+  if [[ -n "$(cd "$MAIN_WT" && dirty_files)" ]]; then warn "main clone $MAIN_WT has local changes: its $MAIN_BRANCH was not fast-forwarded"; return 0; fi
+  run git -C "$MAIN_WT" merge --ff-only --quiet "origin/$MAIN_BRANCH" || warn "could not fast-forward $MAIN_BRANCH in $MAIN_WT"
+}
 
 # Porcelain status minus the known stray CSS.
 dirty_files() {
@@ -170,29 +255,49 @@ site_stamp_file()   { echo "$GIT_DIR_ABS/wiki-site-stamp"; }      # commit that 
 preview_dirty_file(){ echo "$GIT_DIR_ABS/wiki-preview-dirty"; }   # pages rendered from session branches
 
 # ----------------------------------------------------------------------------- start
+# Next free session/YYYY-MM-DD-N, counting local branches (shared by all worktrees), branches checked
+# out in any worktree, remote-tracking branches and what origin has right now.
+next_session_name() {
+  local day n=1 taken
+  day="$(date +%F)"
+  taken="$( {
+    git for-each-ref --format='%(refname:lstrip=2)' "refs/heads/session/$day-*"
+    git for-each-ref --format='%(refname:lstrip=3)' "refs/remotes/origin/session/$day-*"
+    git worktree list --porcelain | sed -n 's#^branch refs/heads/##p'
+    git ls-remote --heads origin 2>/dev/null | sed -n 's#^.*refs/heads/##p'
+  } | sort -u )"
+  while grep -qxF "session/$day-$n" <<<"$taken"; do n=$((n + 1)); done
+  echo "session/$day-$n"
+}
+
 cmd_start() {
   require_not_actions start
   require_clean
-  run git checkout "$MAIN_BRANCH"
-  run git pull --ff-only origin "$MAIN_BRANCH"
-  local day n=1 name
-  day="$(date +%F)"
-  git fetch --quiet origin || warn "fetch failed; checking remote branches with ls-remote only"
-  while :; do
-    name="session/$day-$n"
-    if git show-ref --verify --quiet "refs/heads/$name" || remote_has_branch "$name"; then
-      n=$((n + 1)); continue
+  local name
+  if (( IS_WORKTREE )); then
+    take_lock start   # two bots starting at once must not pick the same N
+    git fetch --quiet --prune origin || die "git fetch failed"
+    sync_main_clone
+    name="$(next_session_name)"
+    run git switch --quiet --no-track -c "$name" "origin/$MAIN_BRANCH"
+  else
+    if [[ "$ENVIRONMENT" == "box" ]] && has_linked_worktrees; then
+      die "$REPO is the shared main clone; bots work in their own worktree:
+  cd $WT_ROOT/<bot> && WIKI_BOT=<bot> ./wiki.sh start"
     fi
-    break
-  done
-  run git checkout -b "$name"
-  ok "session branch $name ready"
+    run git checkout "$MAIN_BRANCH"
+    run git pull --ff-only origin "$MAIN_BRANCH"
+    git fetch --quiet origin || warn "fetch failed; checking remote branches with ls-remote only"
+    name="$(next_session_name)"
+    run git checkout -b "$name"
+  fi
+  ok "session branch $name ready in $REPO"
 }
 
 # ----------------------------------------------------------------------------- preview
 changed_qmd_vs_main() {
   {
-    git diff --name-only "$MAIN_BRANCH"...HEAD 2>/dev/null || true
+    git diff --name-only "$(base_ref)"...HEAD 2>/dev/null || true
     git diff --name-only HEAD
     git ls-files --others --exclude-standard
   } | grep -E '\.qmd$' | grep -Ev '^(_|\.)' | sort -u | while IFS= read -r f; do
@@ -208,59 +313,90 @@ cmd_preview() {
   while (($#)); do
     case "$1" in
       --tunnel) tunnel=1 ;;
-      --stop)
-        info "stopping preview server + ngrok"
-        run pkill -f "http.server $PREVIEW_PORT" || true
-        run pkill -f "ngrok http $PREVIEW_PORT" || true
-        ok "preview stopped"; return 0 ;;
+      --stop) preview_stop; return 0 ;;
       --all) all=1 ;;
       -*) die "preview: unknown option $1" ;;
       *) files+=("$1") ;;
     esac
     shift
   done
+  if (( tunnel )); then   # check (and take) the tunnel before spending time on renders
+    [[ "$ENVIRONMENT" == "box" ]] || die "--tunnel only works on the box"
+    [[ -x "$PREVIEW_UP" ]] || die "preview script not found: $PREVIEW_UP"
+    # One ngrok URL for the whole team: the preview lock says whose _site it serves.
+    if (( ! DRY_RUN )) && lock_is_held preview && [[ "$(lock_owner preview | cut -d' ' -f1)" == "$BOT" ]]; then
+      info "you already hold the tunnel: restarting it on $REPO/_site"
+      kill_preview_processes
+      local _w; for _w in $(seq 1 10); do lock_is_held preview || break; sleep 1; done
+    fi
+    take_lock preview
+  fi
   ensure_extensions
   if (( all )); then
     info "full render into _site (about 10 minutes)"
     run "$QUARTO" render
     (( DRY_RUN )) || git rev-parse HEAD > "$(site_stamp_file)"
-    [[ "$(current_branch)" == "$MAIN_BRANCH" ]] || { (( DRY_RUN )) || echo "__FULL__" >> "$(preview_dirty_file)"; }
+    on_main || { (( DRY_RUN )) || echo "__FULL__" >> "$(preview_dirty_file)"; }
   else
     if ((${#files[@]} == 0)); then
       mapfile -t files < <(changed_qmd_vs_main)
-      ((${#files[@]})) || info "no changed .qmd files vs $MAIN_BRANCH; nothing to render"
+      ((${#files[@]})) || info "no changed .qmd files vs $(base_ref); nothing to render"
     fi
-    if git diff --name-only "$MAIN_BRANCH"...HEAD -- _quarto.yml | grep -q . || ! git diff --quiet HEAD -- _quarto.yml; then
+    if git diff --name-only "$(base_ref)"...HEAD -- _quarto.yml | grep -q . || ! git diff --quiet HEAD -- _quarto.yml; then
       warn "_quarto.yml changed: sidebar/nav only update with ./wiki.sh preview --all"
     fi
     local f
     for f in "${files[@]}"; do
       [[ -f "$f" && "$f" == *.qmd ]] || die "not a .qmd file: $f"
       render_one "$f"
-      if (( ! DRY_RUN )) && [[ "$(current_branch)" != "$MAIN_BRANCH" ]]; then
+      if (( ! DRY_RUN )) && ! on_main; then
         echo "$f" >> "$(preview_dirty_file)"
       fi
     done
     if ((${#files[@]})); then ok "rendered ${#files[@]} page(s) into _site"; fi
   fi
   if (( tunnel )); then
-    [[ "$ENVIRONMENT" == "box" ]] || die "--tunnel only works on the box"
-    [[ -x "$PREVIEW_UP" ]] || die "preview script not found: $PREVIEW_UP"
-    info "starting preview server + ngrok (detached)"
+    local log="/tmp/wiki-preview-up-$BOT.log"
+    info "starting preview server + ngrok (detached) for $BOT, serving $REPO/_site"
     if (( DRY_RUN )); then
       run env SITE="$REPO/_site" setsid nohup "$PREVIEW_UP"
     else
-      SITE="$REPO/_site" setsid nohup "$PREVIEW_UP" > /tmp/wiki-preview-up.log 2>&1 < /dev/null &
+      # The server and ngrok inherit the lock fd, so the lock stays held until they stop.
+      SITE="$REPO/_site" setsid nohup "$PREVIEW_UP" > "$log" 2>&1 < /dev/null &
       local code="000"
       for _ in $(seq 1 15); do
         sleep 2
         code="$(curl -s -o /dev/null -w '%{http_code}' -H 'ngrok-skip-browser-warning: 1' "$PREVIEW_URL/" || true)"
         [[ "$code" == "200" ]] && break
       done
-      [[ "$code" == "200" ]] || die "preview not reachable (HTTP $code); see /tmp/wiki-preview-up.log"
-      ok "preview up: $PREVIEW_URL (HTTP 200)"
+      [[ "$code" == "200" ]] || die "preview not reachable (HTTP $code); see $log"
+      ok "preview up: $PREVIEW_URL (HTTP 200), held by $BOT; stop it with ./wiki.sh preview --stop"
     fi
   fi
+}
+
+kill_preview_processes() {
+  run pkill -f "http.server $PREVIEW_PORT" || true
+  run pkill -f "ngrok http $PREVIEW_PORT" || true
+}
+
+# Stop the tunnel only if it is ours (or nobody holds the lock: leftovers from a crash or an old run).
+preview_stop() {
+  local owner
+  if lock_is_held preview; then
+    owner="$(lock_owner preview)"
+    [[ "${owner%% *}" == "$BOT" ]] || die "the preview tunnel belongs to: $owner
+Only that bot stops it (WIKI_BOT=${owner%% *} ./wiki.sh preview --stop from its folder). Not stopping it."
+    info "stopping your preview server + ngrok ($BOT)"
+  else
+    info "preview lock is free: stopping any leftover server/ngrok on port $PREVIEW_PORT"
+  fi
+  kill_preview_processes
+  if (( ! DRY_RUN )); then   # preview-up.sh may still be in its final checks for a few seconds
+    local _w; for _w in $(seq 1 15); do lock_is_held preview || break; sleep 1; done
+    lock_is_held preview && warn "preview lock still held by: $(lock_owner preview)"
+  fi
+  ok "preview stopped"
 }
 
 # ----------------------------------------------------------------------------- save
@@ -336,6 +472,7 @@ cmd_merge() {
   require_not_actions merge
   require_session
   require_clean
+  take_lock publish   # one bot at a time pushes master / publishes
   local branch; branch="$(current_branch)"
   git fetch --quiet origin   # read-only for origin; also in dry-run so the plan is accurate
   if ! git merge-base --is-ancestor "origin/$MAIN_BRANCH" HEAD; then
@@ -353,6 +490,15 @@ cmd_merge() {
       run git push --force-with-lease origin "$branch"   # session branch only, never master
     fi
   fi
+  if (( IS_WORKTREE )); then
+    # master is checked out in the main clone, so push the rebased session straight to it.
+    # No force: the remote refuses anything that is not a fast-forward.
+    run git push origin "HEAD:refs/heads/$MAIN_BRANCH"
+    sync_main_clone
+    run git checkout --quiet --detach "origin/$MAIN_BRANCH"   # between sessions: detached at origin/master
+    ok "$branch fast-forwarded into $MAIN_BRANCH and pushed; $(basename "$REPO") is now detached at origin/$MAIN_BRANCH"
+    return 0
+  fi
   run git checkout "$MAIN_BRANCH"
   run git merge --ff-only "origin/$MAIN_BRANCH"
   run git merge --ff-only "$branch"
@@ -369,10 +515,20 @@ cmd_publish() {
     case "$1" in --all) all=1 ;; *) die "publish: unknown option $1" ;; esac
     shift
   done
-  [[ "$(current_branch)" == "$MAIN_BRANCH" ]] || die "publish runs on $MAIN_BRANCH (now on $(current_branch)). Use ./wiki.sh ship from a session branch."
   require_clean
+  take_lock publish   # one publish at a time (quarto publish gh-pages + tag live)
   git fetch --quiet origin --tags --force   # also in dry-run
+  if (( IS_WORKTREE )); then
+    [[ "$(current_branch)" == "(detached)" ]] || die "publish runs in a worktree detached at origin/$MAIN_BRANCH (now on $(current_branch)). Use ./wiki.sh ship from a session branch."
+    if [[ "$(git rev-parse HEAD)" != "$(git rev-parse "origin/$MAIN_BRANCH")" ]]; then
+      git merge-base --is-ancestor HEAD "origin/$MAIN_BRANCH" || die "HEAD is not an ancestor of origin/$MAIN_BRANCH"
+      run git checkout --quiet --detach "origin/$MAIN_BRANCH"
+    fi
+  else
+    [[ "$(current_branch)" == "$MAIN_BRANCH" ]] || die "publish runs on $MAIN_BRANCH (now on $(current_branch)). Use ./wiki.sh ship from a session branch."
+  fi
   local head; head="$(git rev-parse HEAD)"
+  (( IS_WORKTREE )) && head="$(git rev-parse "origin/$MAIN_BRANCH")"   # what the checkout above lands on (also in dry-run)
   if (( ! DRY_RUN )); then
     [[ "$head" == "$(git rev-parse "origin/$MAIN_BRANCH")" ]] \
       || die "$MAIN_BRANCH is not equal to origin/$MAIN_BRANCH (pull or push first)"
@@ -389,8 +545,8 @@ cmd_publish() {
   local base="" stamp=""
   if (( ! full )); then
     stamp="$(cat "$(site_stamp_file)" 2>/dev/null || true)"
-    if ! git merge-base --is-ancestor "$live" HEAD 2>/dev/null; then full=1; reason="tag $LIVE_TAG is not an ancestor of HEAD"
-    elif [[ -z "$stamp" ]] || ! git merge-base --is-ancestor "$stamp" HEAD 2>/dev/null; then
+    if ! git merge-base --is-ancestor "$live" "$head" 2>/dev/null; then full=1; reason="tag $LIVE_TAG is not an ancestor of HEAD"
+    elif [[ -z "$stamp" ]] || ! git merge-base --is-ancestor "$stamp" "$head" 2>/dev/null; then
       full=1; reason="_site has no stamp from a $MAIN_BRANCH render (unknown state)"
     else
       # diff from the older of (live, stamp): covers commits published elsewhere and not yet in this _site
@@ -424,7 +580,7 @@ cmd_publish() {
         *) full=1; reason="unknown change $st $p1" ;;
       esac
       if (( full )); then break; fi
-    done < <(git diff --name-status -M "$base" HEAD)
+    done < <(git diff --name-status -M "$base" "$head")
     # pages rendered from session branches into _site must be re-rendered from master
     if (( ! full )) && [[ -s "$(preview_dirty_file)" ]]; then
       local f
@@ -444,7 +600,7 @@ cmd_publish() {
     if ((${#pages[@]} == 0 && ${#copies[@]} == 0)); then
       if [[ "$live" == "$head" ]]; then ok "nothing to publish: $LIVE_TAG is already at HEAD"; return 0; fi
       info "no page or image changes since $LIVE_TAG; only moving the tag"
-      run git tag -f "$LIVE_TAG" HEAD
+      run git tag -f "$LIVE_TAG" "$head"
       run git push -f origin "refs/tags/$LIVE_TAG"
       return 0
     fi
@@ -458,9 +614,9 @@ cmd_publish() {
     echo "$head" > "$(site_stamp_file)"
     : > "$(preview_dirty_file)"
   fi
-  run git tag -f "$LIVE_TAG" HEAD
+  run git tag -f "$LIVE_TAG" "$head"
   run git push -f origin "refs/tags/$LIVE_TAG"      # force only on the tag, never on a branch
-  ok "published ${head:0:8} ($(git log -1 --format=%s HEAD)); tag $LIVE_TAG moved"
+  ok "published ${head:0:8} ($(git log -1 --format=%s "$head")); tag $LIVE_TAG moved"
 }
 
 # ----------------------------------------------------------------------------- ship
@@ -470,7 +626,7 @@ cmd_ship() {
   local branch; branch="$(current_branch)"
   cmd_merge
   if (( DRY_RUN )); then
-    warn "dry-run: still on $branch, so publish is shown as a plan only"
+    warn "dry-run: the merge above was only planned, so publish is shown as a plan only"
     printf '%s[dry-run]%s ./wiki.sh publish  (render changes since %s, quarto publish gh-pages --no-render, move %s)\n' "$C_YEL" "$C_OFF" "$LIVE_TAG" "$LIVE_TAG"
   else
     # shellcheck disable=SC2119
@@ -485,7 +641,8 @@ cmd_ship() {
 cmd_status() {
   local b live d
   b="$(current_branch)"
-  echo "repo         $REPO"
+  echo "repo         $REPO$( (( IS_WORKTREE )) && echo "  (worktree; main clone $MAIN_WT)")"
+  echo "bot          $BOT$( [[ -z "${WIKI_BOT:-}" ]] && echo "  (from folder name; set WIKI_BOT=<bot>)")"
   echo "environment  $ENVIRONMENT"
   echo "quarto       $("$QUARTO" --version)"
   echo "branch       $b"
@@ -503,6 +660,13 @@ cmd_status() {
   if [[ -s "$(preview_dirty_file)" ]]; then
     echo "previewed from session branches (re-rendered on next publish): $(sort -u "$(preview_dirty_file)" | tr '\n' ' ')"
   fi
+  if has_linked_worktrees; then
+    echo "worktrees:"; git worktree list | sed 's/^/    /'
+  fi
+  local l
+  for l in preview publish; do
+    if lock_is_held "$l"; then echo "lock $l: held by $(lock_owner "$l")"; else echo "lock $l: free"; fi
+  done
   if [[ "$ENVIRONMENT" == "box" ]]; then
     local code
     if pgrep -f "ngrok http" >/dev/null 2>&1; then
