@@ -251,8 +251,70 @@ ensure_extensions() {
 
 remote_has_branch() { [[ -n "$(git ls-remote --heads origin "refs/heads/$1" 2>/dev/null)" ]]; }
 
-site_stamp_file()   { echo "$GIT_DIR_ABS/wiki-site-stamp"; }      # commit that _site reflects
-preview_dirty_file(){ echo "$GIT_DIR_ABS/wiki-preview-dirty"; }   # pages rendered from session branches
+site_stamp_file()   { echo "$GIT_DIR_ABS/wiki-site-stamp"; }      # "tree <hash>": source tree _site was fully built from
+preview_dirty_file(){ echo "$GIT_DIR_ABS/wiki-preview-dirty"; }   # "<page> <blob>": pages rendered on top of that tree
+WIKI_JOBS="${WIKI_JOBS:-4}"                                        # parallel full render (1 = plain quarto render)
+
+# Tree hash of the sources exactly as they are on disk (tracked + untracked, outputs and stray CSS excluded).
+source_tree() {
+  local idx; idx="$(mktemp)"
+  GIT_INDEX_FILE="$idx" git read-tree HEAD
+  GIT_INDEX_FILE="$idx" git add -A -- . ':(exclude)_site' ':(exclude).quarto' ':(exclude)_freeze/site_libs' >/dev/null 2>&1
+  GIT_INDEX_FILE="$idx" git write-tree
+  rm -f "$idx"
+}
+# Tree that _site was built from ("" if unknown). Old stamps held a commit: use its tree.
+stamp_tree() {
+  local s; s="$(cat "$(site_stamp_file)" 2>/dev/null || true)"
+  case "$s" in
+    tree\ *) echo "${s#tree }" ;;
+    "") echo "" ;;
+    *) git rev-parse -q --verify "$s^{tree}" 2>/dev/null || echo "" ;;
+  esac
+}
+# Blob a page was last rendered from on top of the stamp ("" if never).
+dirty_blob() { awk -v p="$1" '$1 == p { b = $2 } END { print b }' "$(preview_dirty_file)" 2>/dev/null; }
+
+render_full() {
+  if (( WIKI_JOBS > 1 )); then
+    info "full render, $WIKI_JOBS parallel workers (about 5 minutes)"
+    run python3 tools/prender.py --jobs "$WIKI_JOBS"
+  else
+    info "full render (about 10 minutes)"
+    run "$QUARTO" render
+  fi
+  if (( ! DRY_RUN )); then
+    echo "tree $(source_tree)" > "$(site_stamp_file)"
+    : > "$(preview_dirty_file)"
+  fi
+}
+
+# True when the only _quarto.yml changes between two trees are website.navbar / page-footer (sidebar changes need a full render).
+nav_only_change() {
+  python3 - "$(git show "$1:_quarto.yml")" "$(cat _quarto.yml)" <<'PY'
+import sys, yaml
+a, b = (yaml.safe_load(x) or {} for x in sys.argv[1:3])
+for y in (a, b):
+    # sidebar changes are NOT nav-only: they change prev/next links and breadcrumbs,
+    # which the nav patch does not update (tested 2026-11-04), so they get a full render
+    for k in ("navbar", "page-footer"):
+        (y.get("website") or {}).pop(k, None)
+sys.exit(0 if a == b else 1)
+PY
+}
+
+# Apply a nav-only _quarto.yml change: render one page per distinct header/sidebar, splice the rest.
+nav_patch() {
+  local reps old; old="$(mktemp -d)"
+  mapfile -t reps < <(python3 tools/navpatch.py plan _site)
+  info "nav patch: ${#reps[@]} representative page(s), splicing the rest"
+  local p; for p in "${reps[@]}"; do install -D -m 0644 "_site/$p" "$old/$p"; done
+  run python3 tools/prender.py --jobs "$WIKI_JOBS" --only "${reps[@]/%.html/.qmd}"
+  if ! run python3 tools/navpatch.py apply _site "$old" _site; then
+    rm -rf "$old"; return 1
+  fi
+  rm -rf "$old"
+}
 
 # ----------------------------------------------------------------------------- start
 # Next free session/YYYY-MM-DD-N, counting local branches (shared by all worktrees), branches checked
@@ -333,25 +395,29 @@ cmd_preview() {
   fi
   ensure_extensions
   if (( all )); then
-    info "full render into _site (about 10 minutes)"
-    run "$QUARTO" render
-    (( DRY_RUN )) || git rev-parse HEAD > "$(site_stamp_file)"
-    on_main || { (( DRY_RUN )) || echo "__FULL__" >> "$(preview_dirty_file)"; }
+    render_full
   else
     if ((${#files[@]} == 0)); then
       mapfile -t files < <(changed_qmd_vs_main)
       ((${#files[@]})) || info "no changed .qmd files vs $(base_ref); nothing to render"
     fi
-    if git diff --name-only "$(base_ref)"...HEAD -- _quarto.yml | grep -q . || ! git diff --quiet HEAD -- _quarto.yml; then
-      warn "_quarto.yml changed: sidebar/nav only update with ./wiki.sh preview --all"
+    local st yb; st="$(stamp_tree)"; yb="$(git hash-object _quarto.yml)"
+    if [[ -n "$st" ]] && [[ "$(git rev-parse "$st:_quarto.yml")" != "$yb" && "$(dirty_blob _quarto.yml)" != "$yb" ]]; then
+      if nav_only_change "$st"; then
+        if nav_patch; then
+          (( DRY_RUN )) || echo "_quarto.yml $yb" >> "$(preview_dirty_file)"
+        else
+          warn "nav patch failed: full render"; render_full
+        fi
+      else
+        warn "_quarto.yml changed beyond navbar/footer (sidebar changes need a full render): run ./wiki.sh preview --all"
+      fi
     fi
     local f
     for f in "${files[@]}"; do
       [[ -f "$f" && "$f" == *.qmd ]] || die "not a .qmd file: $f"
       render_one "$f"
-      if (( ! DRY_RUN )) && ! on_main; then
-        echo "$f" >> "$(preview_dirty_file)"
-      fi
+      (( DRY_RUN )) || echo "$f $(git hash-object "$f")" >> "$(preview_dirty_file)"
     done
     if ((${#files[@]})); then ok "rendered ${#files[@]} page(s) into _site"; fi
   fi
@@ -542,29 +608,32 @@ cmd_publish() {
   if (( ! full )) && [[ "$ENVIRONMENT" == "github-actions" ]]; then full=1; reason="GitHub Actions has no _site"; fi
   if (( ! full )) && [[ ! -f _site/index.html ]]; then full=1; reason="_site is missing"; fi
 
-  local base="" stamp=""
+  # _site is pushed whole, so what matters is the tree it was built from (the stamp), not the live tag.
+  # A session previewed here and fast-forwarded has stamp == HEAD's tree: nothing to render again.
+  local base=""
   if (( ! full )); then
-    stamp="$(cat "$(site_stamp_file)" 2>/dev/null || true)"
+    base="$(stamp_tree)"
     if ! git merge-base --is-ancestor "$live" "$head" 2>/dev/null; then full=1; reason="tag $LIVE_TAG is not an ancestor of HEAD"
-    elif [[ -z "$stamp" ]] || ! git merge-base --is-ancestor "$stamp" "$head" 2>/dev/null; then
-      full=1; reason="_site has no stamp from a $MAIN_BRANCH render (unknown state)"
-    else
-      # diff from the older of (live, stamp): covers commits published elsewhere and not yet in this _site
-      if git merge-base --is-ancestor "$stamp" "$live"; then base="$stamp"; else base="$live"; fi
+    elif [[ -z "$base" ]] || ! git cat-file -e "$base" 2>/dev/null; then
+      full=1; reason="_site has no render stamp (unknown state)"
     fi
   fi
 
-  local pages=() copies=() st p1 p2
+  local pages=() copies=() st p1 p2 navp=0
   if (( ! full )); then
-    info "changes since ${base:0:8} ($(git log -1 --format=%s "$base"))"
+    info "changes between the tree _site was built from (${base:0:8}) and HEAD"
     while IFS=$'\t' read -r st p1 p2; do
       case "$st" in
         M*|T*)
           case "$p1" in
-            _quarto.yml|_metadata.yml|*.scss|*.css|CNAME|_extensions/*) full=1; reason="$p1 changed" ;;
+            _quarto.yml)
+              if [[ "$(dirty_blob _quarto.yml)" == "$(git rev-parse "$head:_quarto.yml")" ]]; then :   # nav patched at preview
+              elif nav_only_change "$base"; then navp=1
+              else full=1; reason="$p1 changed"; fi ;;
+            _metadata.yml|*.scss|*.css|CNAME|_extensions/*) full=1; reason="$p1 changed" ;;
             _freeze/*|_templates/*|.github/*|wiki.sh|README.md|FLOW.md|.gitignore) ;;
             _*) ;;
-            *.qmd) pages+=("$p1") ;;
+            *.qmd) [[ "$(dirty_blob "$p1")" == "$(git rev-parse "$head:$p1")" ]] || pages+=("$p1") ;;
             images/*) copies+=("$p1") ;;
             *) full=1; reason="$p1 changed (not a page or image)" ;;
           esac ;;
@@ -580,24 +649,31 @@ cmd_publish() {
         *) full=1; reason="unknown change $st $p1" ;;
       esac
       if (( full )); then break; fi
-    done < <(git diff --name-status -M "$base" "$head")
-    # pages rendered from session branches into _site must be re-rendered from master
+    done < <(git diff --name-status -M "$base" "$head^{tree}")
+    # pages rendered on top of the stamp from content that is not what HEAD has: render again
     if (( ! full )) && [[ -s "$(preview_dirty_file)" ]]; then
-      local f
-      while IFS= read -r f; do
-        if [[ "$f" == "__FULL__" ]]; then full=1; reason="a full preview render happened on a session branch"; break; fi
-        if [[ -f "$f" ]]; then pages+=("$f"); else full=1; reason="previewed page no longer on $MAIN_BRANCH: $f"; break; fi
+      local f b
+      while read -r f b; do
+        if [[ "$f" == "__FULL__" ]]; then full=1; reason="full preview render recorded by the old wiki.sh"; break; fi
+        [[ "$f" == *.qmd ]] || continue
+        if [[ ! -f "$f" ]]; then full=1; reason="previewed page no longer on $MAIN_BRANCH: $f"; break; fi
+        [[ "$(dirty_blob "$f")" == "$(git rev-parse "$head:$f" 2>/dev/null)" ]] || pages+=("$f")
       done < "$(preview_dirty_file)"
     fi
   fi
 
   ensure_extensions
+  if (( ! full && navp )); then nav_patch || { full=1; reason="nav patch failed"; }; fi
   if (( full )); then
-    info "FULL render (${reason}) - about 10 minutes"
-    run "$QUARTO" render
+    info "FULL render (${reason})"
+    render_full
   else
     mapfile -t pages < <(printf '%s\n' "${pages[@]}" | grep . | sort -u || true)
-    if ((${#pages[@]} == 0 && ${#copies[@]} == 0)); then
+    local site_changes=""
+    site_changes="$(git diff --name-only "$live" "$head" | grep -Ev '^(\.github/|_templates/|wiki\.sh$|tools/|README\.md$|FLOW\.md$|\.gitignore$)' || true)"
+    if ((${#pages[@]} == 0 && ${#copies[@]} == 0)) && [[ -n "$site_changes" ]]; then
+      info "_site already matches HEAD (built at preview time): publishing it without rendering"
+    elif ((${#pages[@]} == 0 && ${#copies[@]} == 0)); then
       if [[ "$live" == "$head" ]]; then ok "nothing to publish: $LIVE_TAG is already at HEAD"; return 0; fi
       info "no page or image changes since $LIVE_TAG; only moving the tag"
       run git tag -f "$LIVE_TAG" "$head"
@@ -611,7 +687,7 @@ cmd_publish() {
   fi
   run "$QUARTO" publish gh-pages --no-render --no-prompt
   if (( ! DRY_RUN )); then
-    echo "$head" > "$(site_stamp_file)"
+    echo "tree $(git rev-parse "$head^{tree}")" > "$(site_stamp_file)"
     : > "$(preview_dirty_file)"
   fi
   run git tag -f "$LIVE_TAG" "$head"
@@ -656,9 +732,9 @@ cmd_status() {
     echo "ahead of live on $MAIN_BRANCH: $(git rev-list --count "$live..$MAIN_BRANCH" 2>/dev/null || echo '?') commit(s)"
     git log --format='    %h %s' "$live..$MAIN_BRANCH" 2>/dev/null | head -n 20
   fi
-  echo "_site stamp  $(cut -c1-8 "$(site_stamp_file)" 2>/dev/null || echo none)"
+  echo "_site stamp  $(cut -c1-13 "$(site_stamp_file)" 2>/dev/null || echo none)  (HEAD tree $(git rev-parse --short HEAD^{tree}))"
   if [[ -s "$(preview_dirty_file)" ]]; then
-    echo "previewed from session branches (re-rendered on next publish): $(sort -u "$(preview_dirty_file)" | tr '\n' ' ')"
+    echo "pages rendered on top of the stamp: $(cut -d' ' -f1 "$(preview_dirty_file)" | sort -u | tr '\n' ' ')"
   fi
   if has_linked_worktrees; then
     echo "worktrees:"; git worktree list | sed 's/^/    /'
