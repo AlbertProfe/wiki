@@ -76,12 +76,38 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<style>
+/* This page only. On a phone the ByteByteGo figure stays in the column and scrolls sideways, so the labels stay readable. */
+@media (max-width: 767.98px) {
+  #how-is-data-sent {
+    min-width: 0;
+  }
+  #how-is-data-sent .quarto-figure:has(img[src*="osi-model-encapsulation"]),
+  #how-is-data-sent figure:has(img[src*="osi-model-encapsulation"]) {
+    max-width: 100%;
+    min-width: 0;
+  }
+  #how-is-data-sent figure:has(img[src*="osi-model-encapsulation"]) > p {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 0.5rem;
+  }
+  #how-is-data-sent figure:has(img[src*="osi-model-encapsulation"]) img {
+    width: 720px !important;
+    max-width: none !important;
+    height: auto;
+  }
+}
+</style>
 
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -1921,14 +1947,19 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#what-is-a-network" id="toc-what-is-a-network" class="nav-link active" data-scroll-target="#what-is-a-network"><span class="header-section-number">1</span> What is a Network?</a></li>
-  <li><a href="#internet-working-devices-used-on-a-network" id="toc-internet-working-devices-used-on-a-network" class="nav-link" data-scroll-target="#internet-working-devices-used-on-a-network"><span class="header-section-number">2</span> Internet working Devices used on a network</a></li>
-  <li><a href="#understanding-tcpip-layers" id="toc-understanding-tcpip-layers" class="nav-link" data-scroll-target="#understanding-tcpip-layers"><span class="header-section-number">3</span> Understanding TCP/IP layers</a></li>
+  <li><a href="#internetworking-devices-used-on-a-network" id="toc-internetworking-devices-used-on-a-network" class="nav-link" data-scroll-target="#internetworking-devices-used-on-a-network"><span class="header-section-number">2</span> Internetworking devices used on a network</a></li>
+  <li><a href="#understanding-tcpip-layers" id="toc-understanding-tcpip-layers" class="nav-link" data-scroll-target="#understanding-tcpip-layers"><span class="header-section-number">3</span> Understanding TCP/IP layers</a>
+  <ul>
+  <li><a href="#how-is-data-sent" id="toc-how-is-data-sent" class="nav-link" data-scroll-target="#how-is-data-sent"><span class="header-section-number">3.1</span> How is data sent?</a></li>
+  <li><a href="#mac-address-ip-address-and-port" id="toc-mac-address-ip-address-and-port" class="nav-link" data-scroll-target="#mac-address-ip-address-and-port"><span class="header-section-number">3.2</span> MAC address, IP address, and port</a></li>
+  <li><a href="#tcp-and-udp" id="toc-tcp-and-udp" class="nav-link" data-scroll-target="#tcp-and-udp"><span class="header-section-number">3.3</span> TCP and UDP</a></li>
+  </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">4</span> References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/devops/devops-network-basics.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../devops/devops-network-basics.html">Network protocols</a></li><li class="breadcrumb-item"><a href="../devops/devops-network-basics.html">Network: Basics</a></li></ol></nav>
 <div class="quarto-title">
@@ -1967,7 +1998,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Monday, November 2, 2026</p>
+      <p class="date-modified">Friday, November 6, 2026</p>
     </div>
   </div>
     
@@ -1980,48 +2011,198 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="what-is-a-network" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> What is a Network?</h1>
-<p>A network is defined as a two or more independent devices or computers that are linked to share resources (such as printers and CDs), exchange files, or allow electronic communications.</p>
+<p>A network is two or more independent devices or computers linked so they can share resources (such as printers and CDs), exchange files, or communicate electronically.</p>
 <p>For example, the computers on a network may be linked through telephone lines, cables, satellites, radio waves, or infrared light beams.</p>
-<p>The two very common types of network include:</p>
+<p>Two very common types of network are:</p>
 <ul>
 <li>Local Area Network (LAN)</li>
 <li>Wide Area Network (WAN)</li>
 </ul>
-<p>From OSI reference model, the layer 3, i.e., Network layer is involved in networking. This layer is responsible for packet forwarding, routing through intermediate routers, recognizing and forwarding local host domain messages to transport layer (layer 4), etc.</p>
-<p>The network operates by connecting computers and peripherals using two pieces of equipment include routing and switches. If two devices or computers are connected on the same link, then there is no need for a network layer.</p>
+<p>In the OSI reference model, layer 3 — the network layer — forwards packets and routes them through intermediate routers. When a packet is for the local host, this layer passes it up to the transport layer (layer 4).</p>
+<p>Computers and peripherals are connected through equipment such as routers and switches. If two devices are connected on the same link, they can exchange frames without a router.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Summary">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Summary
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A network links devices so they can share resources and communicate. A LAN covers a small area, such as a home or an office. A WAN spans a much wider area. The network layer routes packets between networks. On a single link, a router is not required.</p>
+</div>
+</div>
 </section>
-<section id="internet-working-devices-used-on-a-network" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Internet working Devices used on a network</h1>
+<section id="internetworking-devices-used-on-a-network" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Internetworking devices used on a network</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="../images/devops/Network_devices.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Network Devices (Hub, Repeater, Bridge, Switch, Router, Gateways and Brouter)"><img src="../images/devops/Network_devices.jpg" class="img-fluid figure-img" alt="Network Devices (Hub, Repeater, Bridge, Switch, Router, Gateways and Brouter)"></a></p>
 <figcaption>Network Devices (Hub, Repeater, Bridge, Switch, Router, Gateways and Brouter)</figcaption>
 </figure>
 </div>
-<p>For connecting internet, we require various internetworking devices. Some of the common devices used in building up Internet are.</p>
+<p>Connecting a network, and connecting that network to the Internet, takes several kinds of device. Some of the common ones are below.</p>
 <ul>
-<li><p><strong>NIC</strong>: Network Interface Card or NIC are printed circuit boards that are installed in workstations. It represents the physical connection between the workstation and network cable. Although NIC operates at the physical layer of the OSI model, it is also considered as a data link layer device. Part of the NIC’s is to facilitate information between the workstation and the network. It also controls the transmission of data onto the wire</p></li>
-<li><p><strong>Hubs</strong>: A hub helps to extend the length of a network cabling system by amplifying the signal and then re-transmitting it. They are basically multiport repeaters and not concerned about the data at all. The hub connects workstations and sends a transmission to all the connected workstations.</p></li>
-<li><p><strong>Bridges</strong>: As network grow larger, they often get difficult to handle. To manage these growing network, they are often divided into smaller LANs. These smaller LANS are connected to each other through bridges. This helps not only to reduce traffic drain on the network but also monitors packets as they move between segments. It keeps the track of the MAC address that is associated with various ports.</p></li>
-<li><p><strong>Switches</strong>: Switches are used in the option to bridges. It is becoming the more common way to connect network as they are simply faster and more intelligent than bridges. It is capable of transmitting information to specific workstations. Switches enable each workstation to transmit information over the network independent of the other workstations. It is like a modern phone line, where several private conversation takes place at one time.</p></li>
-<li><p><strong>Routers</strong>: The aim of using a router is to direct data along the most efficient and economical route to the destination device. They operate at Network layer 3, which means they communicate through IP address and not physical (MAC) address. Routers connect two or more different networks together, such as an Internet Protocol network. Routers can link different network types such as Ethernet, FDDI, and Token Ring.</p></li>
-<li><p><strong>Brouters</strong>: It is a combination of both routers and bridge. Brouter act as a filter that enables some data into the local network and redirects unknown data to the other network.</p></li>
-<li><p><strong>Modems</strong>: It is a device that converts the computer-generated digital signals of a computer into analog signals, traveling via phone lines.</p></li>
+<li><p><strong>NIC</strong>: A network interface card (NIC) is a printed circuit board installed in a workstation. It is the physical connection between the workstation and the network cable. Although a NIC operates at the physical layer of the OSI model, it is also considered a data-link layer device. Part of the NIC’s job is to pass information between the workstation and the network. It also controls the transmission of data onto the wire.</p></li>
+<li><p><strong>Hubs</strong>: A hub extends the reach of a cabling system by amplifying the signal and then retransmitting it. Hubs are basically multiport repeaters and are not concerned with the data at all. A hub connects workstations and sends every transmission to all of the connected workstations.</p></li>
+<li><p><strong>Bridges</strong>: As networks grow, they often become difficult to manage. A growing network is often divided into smaller LANs, and those LANs are connected through bridges. This cuts down the traffic on each segment. A bridge also watches frames as they move between segments and keeps track of the MAC address associated with each port.</p></li>
+<li><p><strong>Switches</strong>: Switches are used instead of bridges. They are the usual way to connect a network now, because they are faster and more intelligent than bridges. A switch can send a frame to a specific workstation, so each workstation can transmit independently of the others. It is like a modern phone system, in which several private conversations take place at once.</p></li>
+<li><p><strong>Routers</strong>: A router directs data along the most efficient and economical route to the destination. Routers operate at network layer 3, so they forward by IP address rather than by physical (MAC) address. They connect two or more networks. They can also link different network types, such as Ethernet, FDDI, and Token Ring.</p></li>
+<li><p><strong>Brouters</strong>: A brouter combines a router and a bridge. It acts as a filter: it lets some data onto the local network and redirects unknown data to the other network.</p></li>
+<li><p><strong>Modems</strong>: A modem converts a computer’s digital signals into analog signals that travel over phone lines.</p></li>
 </ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Summary">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Summary
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These devices do different jobs. A hub repeats a signal to every port. A bridge or a switch forwards frames by MAC address. A router forwards packets by IP address and joins separate networks. A modem converts between digital signals and the analog signals on a phone line.</p>
+</div>
+</div>
 </section>
-<section id="understanding-tcpip-layers" class="level1" data-number="3">
+<section id="understanding-tcpip-layers" class="level1 page-columns page-full" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Understanding TCP/IP layers</h1>
+
+<div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/devops/OSI.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Headers accumulate as data moves down the OSI stack"><img src="../images/devops/OSI.png" class="img-fluid figure-img" alt="Schematic of encapsulation. The sender's seven OSI layers are on the left and the receiver's are on the right. In the center, a block of data gains another header cell at each lower layer, from the application layer down to the physical layer. Arrows show the sender building the message downward and the receiver reading it upward."></a></p>
+<figcaption>Headers accumulate as data moves down the OSI stack</figcaption>
+</figure>
+</div></div><p>TCP/IP stands for Transmission Control Protocol/Internet Protocol. It describes how a computer connects to other computers and how data is transmitted between them.</p>
+<ul>
+<li><strong>TCP</strong> breaks data into segments before they are sent, and reassembles those segments when they arrive.</li>
+<li><strong>IP</strong> (Internet Protocol) addresses each packet and routes it from the source host to the destination host.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Summary">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Summary
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>TCP/IP is the stack used on the Internet. IP addresses a packet and routes it. TCP adds reliable, ordered delivery on top of IP. The layers below carry that packet as a frame and then as bits on a cable, fiber, or radio link.</p>
+</div>
+</div>
+<section id="how-is-data-sent" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="how-is-data-sent"><span class="header-section-number">3.1</span> How is data sent?</h2>
+<p>How does data actually cross the network, and why does the model use so many layers?</p>
+<p><mark>Each layer has one job. It adds a header, or removes one, and it treats everything inside as payload it does not need to interpret.</mark></p>
+<p>The figure below follows one message from device A to device B. On the way out the message is encapsulated: each layer wraps the layer above. On the way in it is de-encapsulated: each layer unwraps its own header. The running example is <strong>HTTP/1.1 over TCP</strong>, the usual web request. HTTP/1.1 and HTTP/2 travel over TCP. HTTP/3 uses QUIC, and QUIC runs over UDP.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/devops/OSI.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="What is OSI Model"><img src="../images/devops/OSI.png" class="img-fluid figure-img" alt="What is OSI Model"></a></p>
-<figcaption>What is OSI Model</figcaption>
+<p><a href="../images/devops/osi-model-encapsulation-bytebytego.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Encapsulation and de-encapsulation of an HTTP message. Source: ByteByteGo, blog.bytebytego.com."><img src="../images/devops/osi-model-encapsulation-bytebytego.png" class="img-fluid figure-img" alt="ByteByteGo diagram titled What is OSI model, with a blog.bytebytego.com watermark. Device A sends data to device B. Going down the stack, the message gains an HTTP header, then a TCP header, then an IP header, then a MAC header, and is sent as binary bits. Going up, device B removes those headers until the application can read the data. Three notes list MAC addresses and frame control, IP addresses, and the source port, destination port, and sequence number."></a></p>
+<figcaption>Encapsulation and de-encapsulation of an HTTP message. Source: ByteByteGo, blog.bytebytego.com.</figcaption>
 </figure>
 </div>
-<p>TCP/IP stands for Transmission Control Protocol/ Internet Protocol. It determines how a computer should be connected to the Internet and how data should be transmitted between them.</p>
-<ul>
-<li>TCP: It is responsible for breaking data down into small packets before they can be sent on the network. Also, for assembling the packets again when they arrive.</li>
-<li>IP (Internet Protocol): It is responsible for addressing, sending and receiving the data packets over the internet.</li>
-</ul>
+<p>The numbered circles in the figure are the steps below. On a narrow screen, scroll the figure sideways to read the labels, or select it to open a larger copy. The stack drawn on the left lists all seven OSI layers. This example only adds a header where the Internet suite has one, so the presentation and session layers appear in the key and do not grow a header of their own.</p>
+<p><strong>Step 1.</strong> Device A has data for device B. At the application layer, HTTP adds an HTTP header: the request or the status line, plus fields such as <code>Host</code>. That header is for HTTP. Lower layers do not read it.</p>
+<p><strong>Step 2.</strong> The transport layer adds its own header. With TCP, the header carries the source port, the destination port, and sequence numbers, and the unit is a <strong>TCP segment</strong>. TCP uses the sequence numbers to put bytes back in order and to notice anything that was lost. UDP, if it is used instead, carries the source and destination ports and does not carry sequence numbers. Its unit is a <strong>UDP datagram</strong>. The figure labels this row “TCP segment / UDP packet” and writes “sequence number” beside the ports. Read that sequence number as a TCP field.</p>
+<p><strong>Step 3.</strong> The network layer wraps the segment (or the UDP datagram) in an IP header. The header carries the source and destination IP addresses, and the result is an <strong>IP datagram</strong>. Routers forward it by those addresses. They do not have to understand the TCP header or the HTTP message inside.</p>
+<p><strong>Step 4.</strong> The data-link layer wraps the datagram in a <strong>frame</strong>. The frame begins with a MAC header, which carries the source and destination MAC addresses. On a link such as Ethernet it also ends with a trailer, including a frame check sequence (FCS), so the receiver can detect a damaged frame. The figure draws the MAC header, which is the part to learn first. It does not draw the trailer.</p>
+<p><strong>Step 5.</strong> The physical layer sends the frame as bits: electrical signals, light, or radio. The bits in the figure (<code>10010111…</code>) are that transmission. This layer does not add another address.</p>
+<p><strong>Steps 6–10.</strong> Device B reverses the path. The bits arrive and the frame is rebuilt (step 6). The data-link layer checks the frame and removes the MAC header and trailer (step 7). The network layer removes the IP header (step 8). The transport layer removes the TCP or UDP header (step 9). The application layer removes the HTTP header and reads the data (step 10). Each layer removes only the header it understands.</p>
+<p>That split is why the stack has so many layers. A switch can forward a frame by MAC address and never look at HTTP. A router can forward an IP datagram and never read the TCP payload.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="A note on the figure">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A note on the figure
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is a simplified teaching map onto the OSI layers, from <a href="https://blog.bytebytego.com/p/network-protocols-run-the-internet" class="external">ByteByteGo, “Network Protocols Run the Internet”</a>. One label does not match the model. The presentation layer is marked “JPEG MPEG IMAP…”. JPEG and MPEG are encoding formats, which is the idea of that layer. IMAP is not. IMAP is an application-layer protocol for reading mail. On the Internet, TCP/IP also folds OSI layers 5, 6, and 7 into the application, so those three rows are not separate headers in a normal web request.</p>
+</div>
+</div>
+</section>
+<section id="mac-address-ip-address-and-port" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="mac-address-ip-address-and-port"><span class="header-section-number">3.2</span> MAC address, IP address, and port</h2>
+<p>The three notes under the figure answer “where is this going?” in three different ways.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Layer</th>
+<th>What it identifies</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MAC address</td>
+<td>Data link</td>
+<td>One interface on the local link</td>
+</tr>
+<tr class="even">
+<td>IP address</td>
+<td>Network</td>
+<td>A host, including a host beyond the local link</td>
+</tr>
+<tr class="odd">
+<td>Port</td>
+<td>Transport</td>
+<td>A program on that host, such as a web server on port 443</td>
+</tr>
+</tbody>
+</table>
+<p>A laptop can have one MAC address on its Wi-Fi interface, one IP address given to that interface, and many ports open for different programs. The MAC address changes at each hop, because each link has its own interfaces. The IP addresses identify the two ends of the journey. The ports identify the programs at those ends.</p>
+<p>Two labels on the figure are easy to over-read. The left-hand note lists frame control and sequence control next to the MAC addresses. Those extra fields depend on the link technology (they show up on Wi-Fi). On Ethernet, remember the two MAC addresses and the FCS trailer. The middle note says “datagram sequence order”. Ordinary IP forwarding does not put packets back in order. Ordering is TCP’s job. IP numbers the pieces only when a datagram has been fragmented.</p>
+</section>
+<section id="tcp-and-udp" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="tcp-and-udp"><span class="header-section-number">3.3</span> TCP and UDP</h2>
+<p>TCP and UDP share the transport layer, and then they make opposite promises.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>TCP</th>
+<th>UDP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Connection</td>
+<td>A handshake, then a stream of bytes</td>
+<td>None. Each datagram stands alone</td>
+</tr>
+<tr class="even">
+<td>Unit</td>
+<td>Segment</td>
+<td>Datagram</td>
+</tr>
+<tr class="odd">
+<td>Sequence numbers</td>
+<td>Yes. Lost data can be sent again, and the stream is put back in order</td>
+<td>No.&nbsp;The application copes if a datagram is lost or arrives late</td>
+</tr>
+<tr class="even">
+<td>A familiar case</td>
+<td>HTTP/1.1 and HTTP/2, email, file transfer</td>
+<td>DNS queries, voice and video, HTTP/3 (QUIC over UDP)</td>
+</tr>
+</tbody>
+</table>
+<p>The <a href="../devops/devops-network-udp.html">UDP</a> page goes further. The picture to keep is the one in the figure: ports at this layer, IP addresses one layer down, MAC addresses one layer below that.</p>
+</section>
 </section>
 <section id="references" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> References</h1>
@@ -2029,6 +2210,7 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://www.guru99.com/introduction-ccna.html" class="external">CCNA Tutorial: Learn Networking Basics</a></li>
 <li><a href="https://www.cisco.com/c/en/us/training-events/training-certifications/certifications/associate/ccna.html" class="external">CCNA certification</a></li>
 <li><a href="https://www.netacad.com/courses/packet-tracer" class="external">Cisco Packet Tracer</a></li>
+<li><a href="https://blog.bytebytego.com/p/network-protocols-run-the-internet" class="external">Network Protocols Run the Internet</a></li>
 </ul>
 
 
