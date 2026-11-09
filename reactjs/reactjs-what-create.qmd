@@ -98,13 +98,51 @@ npx create-react-app my-app
 ```
 ![Create project](/images/reactjs/createproject.svg)
 
-## Install `create-react-app`
+### Install `create-react-app`
 
 Updating your build tooling is typically a daunting and time-consuming task. When new versions of Create React App are released, you can upgrade using a single command:
 
 ``` bash
 npm install react-scripts@latest
 ```
+
+## Create a project with Vite
+
+[Vite](https://vite.dev/){.external} (French for “quick”, pronounced *veet*) is a modern frontend build tool. In development it serves your app over **native ES modules** with very fast Hot Module Replacement. For production it builds optimized static assets (with **Rolldown**; earlier Vite stacks used esbuild and Rollup).
+
+The React team **deprecated Create React App in February 2025**. For new React apps, Vite is a recommended replacement.
+
+To scaffold a React app called `my-app`:
+
+``` bash
+# JavaScript template (npm 7+: the extra `--` is required)
+npm create vite@latest my-app -- --template react
+
+# TypeScript template
+npm create vite@latest my-app -- --template react-ts
+```
+
+Then:
+
+``` bash
+cd my-app
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # production build into dist/
+npm run preview  # locally preview the production build
+```
+
+A Vite + React project typically looks like this:
+
+- `index.html` — at the **project root** (Vite’s entry point, not under `public/`)
+- `src/main.jsx` — bootstraps React and mounts the app
+- `src/App.jsx` — root component
+- `vite.config.js` — Vite configuration
+- `package.json` — scripts: `dev`, `build`, `preview`
+
+::: {.callout-tip}
+Official guide: [Getting Started with Vite](https://vite.dev/guide/){.external}. Templates include `react`, `react-ts`, and more.
+:::
 
 ## React Developer Tools
 
