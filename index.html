@@ -1619,8 +1619,10 @@ ul.task-list li input[type="checkbox"] {
     - 1,673 commits since 2022-12-08 -> git log
     - 165 students -> about 15 per course edition x 11 editions (Albert's figure)
     - Per-area page counts -> git ls-files '<area>/*.qmd'
-  Course facts (260h, 14/09-27/11/2026, 11 weeks, Sprint#09 days 31-34) are copied from
-  ifcd0021-26/*.qmd. Update the "Now" + "Sprint" blocks every week when the sprint rolls over.
+  Course facts (260h, 14/09–27/11/2026, 11 weeks, Sprint#09) are hardcoded from courses-db
+  (courses + calendar tabs; local db/*.csv copies must match). Hours/sprints-done % is
+  recomputed when the sprint rolls: class hours through today / 260, completed sprints / 11.
+  Update the "Now" + hero stats every week when the sprint rolls over.
 -->
 <style>
   /* ---------- landing only: scoped under #lp so the rest of the site keeps cosmo/darkly ---------- */
@@ -1775,13 +1777,17 @@ ul.task-list li input[type="checkbox"] {
     box-shadow: 0 30px 80px -30px rgba(88,28,135,.55); }
   #lp .lp-cine-media::after { content: ""; position: absolute; inset: 0; pointer-events: none;
     background: linear-gradient(90deg, rgba(11,15,26,.78) 0%, rgba(11,15,26,.35) 42%, rgba(11,15,26,0) 70%); }
-  #lp .lp-orbit { position: absolute; inset: 0; z-index: 1; }
+  #lp .lp-orbit { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
   #lp .lp-chip { position: absolute; left: 0; top: 0; display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap;
     padding: .36rem .8rem .36rem .55rem; border-radius: 9999px; font-size: .84rem; font-weight: 600; letter-spacing: .01em;
     color: var(--chip-fg); background: var(--chip-bg); border: 1px solid color-mix(in srgb, var(--c) 55%, transparent);
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     box-shadow: 0 0 16px color-mix(in srgb, var(--c) 35%, transparent), inset 0 0 10px color-mix(in srgb, var(--c) 12%, transparent);
-    will-change: transform, opacity; }
+    will-change: transform, opacity; pointer-events: auto; text-decoration: none; }
+  #lp a.lp-chip { cursor: pointer; }
+  #lp a.lp-chip:hover { color: var(--chip-fg); filter: brightness(1.12); box-shadow: 0 0 22px color-mix(in srgb, var(--c) 55%, transparent), inset 0 0 12px color-mix(in srgb, var(--c) 18%, transparent); }
+  #lp a.lp-chip:focus-visible { outline: 2px solid var(--c, #60a5fa); outline-offset: 3px; }
+  #lp .lp-orbit .lp-chip { pointer-events: auto; }
   #lp .lp-chip svg { width: 1.15em; height: 1.15em; fill: none; stroke: var(--c); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
     filter: drop-shadow(0 0 4px var(--c)); flex: none; }
   #lp .lp-glass { position: relative; z-index: 2; max-width: 540px; padding: 2.2rem 2.3rem; border-radius: 1.5rem;
@@ -1792,7 +1798,13 @@ ul.task-list li input[type="checkbox"] {
   #lp .lp-cine .lp-lead { font-size: 1.08rem; color: #e9e5ff; margin-bottom: 0; }
   #lp .lp-cine .lp-badge { margin-bottom: 1.4rem; }
   #lp .lp-cine .lp-hero-ctas { justify-content: flex-start; margin-top: 1.8rem; }
-  #lp .lp-cine .lp-stats { justify-content: flex-start; gap: 1.8rem; margin-top: 2rem; }
+  #lp .lp-cine .lp-stats {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-content: stretch; align-items: start; gap: 1.15rem 1.6rem; margin-top: 2rem; width: 100%; max-width: 34rem;
+  }
+  @media (max-width: 520px) {
+    #lp .lp-cine .lp-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.1rem; }
+  }
   #lp .lp-cine .lp-stat { text-align: left; }
   #lp .lp-cine .lp-stat-value { font-size: 1.25rem; }
   #lp .lp-cine .lp-stat-label { color: #c4b5fd; font-size: .75rem; }
@@ -1885,31 +1897,36 @@ ul.task-list li input[type="checkbox"] {
     #lp .lp-dd-menu a { padding: .65rem .25rem .65rem 1rem; border-bottom: 1px solid var(--line-10); }
   }
 
-  /* Jump-to strip BELOW the whole hero card */
+  /* Jump-to strip BELOW the whole hero card — one line on desktop ≥~1000px */
   #lp .lp-topics-wrap {
-    position: relative; z-index: 2; max-width: 1280px; margin: -0.4rem auto 0; padding: 0 1.5rem 1.5rem;
+    position: relative; z-index: 2; max-width: 1280px; margin: -0.4rem auto 0; padding: 0 1rem 1.5rem;
     display: flex; justify-content: center;
   }
   #lp .lp-topics {
-    display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .55rem .65rem;
-    width: 100%; max-width: 980px; padding: 0; border-radius: 0;
+    display: flex; flex-wrap: nowrap; align-items: center; justify-content: center; gap: .35rem .4rem;
+    width: 100%; max-width: 1180px; padding: 0; border-radius: 0;
     background: transparent; border: 0; box-shadow: none;
   }
   #lp .lp-topics-label {
-    font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-right: .15rem; font-weight: 600;
+    font-size: .68rem; letter-spacing: .07em; text-transform: uppercase; color: var(--text-muted);
+    margin-right: .1rem; font-weight: 600; flex: none; white-space: nowrap;
   }
   #lp .lp-topic {
-    display: inline-flex; align-items: center; gap: .35rem; text-decoration: none;
-    font-size: .86rem; font-weight: 600; color: var(--text); padding: .32rem .75rem; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: .28rem; text-decoration: none; white-space: nowrap; flex: none;
+    font-size: .74rem; font-weight: 600; color: var(--text); padding: .22rem .55rem; border-radius: 999px;
     background: color-mix(in srgb, var(--c, #60a5fa) 10%, transparent);
     border: 1px solid color-mix(in srgb, var(--c, #60a5fa) 35%, transparent);
     transition: background .15s ease, border-color .15s ease, transform .15s ease;
   }
   #lp .lp-topic:hover { background: color-mix(in srgb, var(--c, #60a5fa) 18%, transparent); transform: translateY(-1px); color: var(--text); }
-  #lp .lp-topic svg { width: 1em; height: 1em; fill: none; stroke: var(--c, #60a5fa); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  #lp .lp-topic svg { width: .9em; height: .9em; fill: none; stroke: var(--c, #60a5fa); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  @media (max-width: 999px) {
+    #lp .lp-topics { flex-wrap: wrap; justify-content: center; }
+  }
   @media (max-width: 760px) {
     #lp .lp-topics-wrap { padding: 0 1rem 1.25rem; margin-top: .25rem; }
-    #lp .lp-topic { font-size: .78rem; padding: .28rem .6rem; }
+    #lp .lp-topics { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; padding-bottom: .15rem; }
+    #lp .lp-topic { font-size: .7rem; padding: .2rem .5rem; }
   }
 
   /* compact Topics sitemap in landing footer */
@@ -2030,16 +2047,16 @@ ul.task-list li input[type="checkbox"] {
 
   <!-- Hero -->
   <section class="lp-hero lp-cine">
-    <div class="lp-cine-media" role="img" aria-label="A teacher and a student face each other while Java, Spring Boot, React, DevOps, Linux, Scrum, labs and books orbit around them">
-      <div class="lp-orbit" id="lp-orbit" aria-hidden="true">
-        <span class="lp-chip" style="--c:#60a5fa"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M5 10h11v4a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"></path><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"></path><path d="M8 3c-1 1.2 1 1.8 0 3.2M11.5 3c-1 1.2 1 1.8 0 3.2"></path></svg>Java</span>
-        <span class="lp-chip" style="--c:#4ade80"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"></path><path d="M5 19 13 11"></path></svg>Spring Boot</span>
-        <span class="lp-chip" style="--c:#60a5fa"><svg viewbox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1.6"></circle><ellipse cx="12" cy="12" rx="9.5" ry="3.8"></ellipse><ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(60 12 12)"></ellipse><ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(120 12 12)"></ellipse></svg>React</span>
-        <span class="lp-chip" style="--c:#c084fc"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M12 12c-2-2.6-3.5-4-5.5-4a4 4 0 0 0 0 8c2 0 3.5-1.4 5.5-4zm0 0c2 2.6 3.5 4 5.5 4a4 4 0 0 0 0-8c-2 0-3.5 1.4-5.5 4z"></path></svg>DevOps</span>
-        <span class="lp-chip" style="--c:#4ade80"><svg viewbox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.5"></rect><path d="m7 10 3 2.5L7 15M12.5 15H17"></path></svg>Linux</span>
-        <span class="lp-chip" style="--c:#c084fc"><svg viewbox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"></rect><path d="M9 4v16M15 4v16"></path><path d="M5 8h2M11 8h2M11 11.5h2M17 8h2"></path></svg>Scrum</span>
-        <span class="lp-chip" style="--c:#4ade80"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M9.5 3h5M10.5 3v6L5 19a1.4 1.4 0 0 0 1.2 2h11.6A1.4 1.4 0 0 0 19 19l-5.5-10V3"></path><path d="M7.5 15h9"></path></svg>Labs</span>
-        <span class="lp-chip" style="--c:#c084fc"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M4 19.5V5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5 2.5 2.5 0 0 0 6.5 23H20"></path><path d="M8 7.5h8"></path></svg>Books</span>
+    <div class="lp-cine-media" aria-label="A teacher and a student face each other while topic chips for Java, Spring Boot, React, DevOps, Linux, Scrum, labs and books orbit around them">
+      <div class="lp-orbit" id="lp-orbit">
+        <a class="lp-chip" style="--c:#60a5fa" href="javase/se-what-basics.html" aria-label="Java SE"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M5 10h11v4a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"></path><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"></path><path d="M8 3c-1 1.2 1 1.8 0 3.2M11.5 3c-1 1.2 1 1.8 0 3.2"></path></svg>Java</a>
+        <a class="lp-chip" style="--c:#4ade80" href="springboot/boot-what-basics.html" aria-label="Spring Boot"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"></path><path d="M5 19 13 11"></path></svg>Spring Boot</a>
+        <a class="lp-chip" style="--c:#60a5fa" href="reactjs/reactjs-what-principles.html" aria-label="React"><svg viewbox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1.6"></circle><ellipse cx="12" cy="12" rx="9.5" ry="3.8"></ellipse><ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(60 12 12)"></ellipse><ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(120 12 12)"></ellipse></svg>React</a>
+        <a class="lp-chip" style="--c:#c084fc" href="devops/devops-what-intro.html" aria-label="DevOps"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M12 12c-2-2.6-3.5-4-5.5-4a4 4 0 0 0 0 8c2 0 3.5-1.4 5.5-4zm0 0c2 2.6 3.5 4 5.5 4a4 4 0 0 0 0-8c-2 0-3.5 1.4-5.5 4z"></path></svg>DevOps</a>
+        <a class="lp-chip" style="--c:#4ade80" href="linux/linux-what-basics.html" aria-label="Linux OS"><svg viewbox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.5"></rect><path d="m7 10 3 2.5L7 15M12.5 15H17"></path></svg>Linux</a>
+        <a class="lp-chip" style="--c:#c084fc" href="scrum/scrum-what-concepts.html" aria-label="SCRUM"><svg viewbox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"></rect><path d="M9 4v16M15 4v16"></path><path d="M5 8h2M11 8h2M11 11.5h2M17 8h2"></path></svg>Scrum</a>
+        <span class="lp-chip" style="--c:#4ade80" aria-hidden="true"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M9.5 3h5M10.5 3v6L5 19a1.4 1.4 0 0 0 1.2 2h11.6A1.4 1.4 0 0 0 19 19l-5.5-10V3"></path><path d="M7.5 15h9"></path></svg>Labs</span>
+        <a class="lp-chip" style="--c:#c084fc" href="learning/learning-listing-card-books.html" aria-label="Books"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M4 19.5V5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5 2.5 2.5 0 0 0 6.5 23H20"></path><path d="M8 7.5h8"></path></svg>Books</a>
       </div>
     </div>
     <div class="lp-glass">
@@ -2057,9 +2074,12 @@ ul.task-list li input[type="checkbox"] {
     <div class="lp-stats">
       <div class="lp-stat"><div class="lp-stat-value">Sprint#09</div><div class="lp-stat-label">CompassMap React</div></div>
       <div class="lp-stat"><div class="lp-stat-value">11 weeks</div><div class="lp-stat-label">260h · IFCD0021-26</div></div>
-      <div class="lp-stat"><div class="lp-stat-value">++ / ----</div><div class="lp-stat-label">new topic / pending to future</div></div>
-      <div class="lp-stat"><div class="lp-stat-value">14/09 – 27/11</div><div class="lp-stat-label">2026 · course start / end</div></div>
+      <div class="lp-stat"><div class="lp-stat-value">++ / ----</div><div class="lp-stat-label">new topic / pending</div></div>
+      <div class="lp-stat"><div class="lp-stat-value">14/09</div><div class="lp-stat-label">2026 · course start</div></div>
+      <div class="lp-stat"><div class="lp-stat-value">27/11</div><div class="lp-stat-label">2026 · course end</div></div>
+      <div class="lp-stat"><div class="lp-stat-value">74% · 8/11</div><div class="lp-stat-label">hours / sprints done</div></div>
     </div>
+
     </div>
   </section>
 
@@ -2074,6 +2094,7 @@ ul.task-list li input[type="checkbox"] {
       <a class="lp-topic" style="--c:#c084fc" href="scrum/scrum-what-concepts.html"><svg viewbox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"></rect><path d="M9 4v16M15 4v16"></path></svg>SCRUM</a>
       <a class="lp-topic" style="--c:#60a5fa" href="markup/markup-lang-intro.html"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"></path></svg>MarkUp</a>
       <a class="lp-topic" style="--c:#c084fc" href="learning/learning-vocab-general.html"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M9.5 3h5M10.5 3v6L5 19a1.4 1.4 0 0 0 1.2 2h11.6A1.4 1.4 0 0 0 19 19l-5.5-10V3"></path></svg>Learning</a>
+      <a class="lp-topic" style="--c:#c084fc" href="learning/learning-listing-card-books.html"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M4 19.5V5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5 2.5 2.5 0 0 0 6.5 23H20"></path><path d="M8 7.5h8"></path></svg>Books</a>
     </nav>
   </div>
 
@@ -2287,16 +2308,70 @@ ul.task-list li input[type="checkbox"] {
     var box = document.getElementById('lp-orbit'); if (!box) return;
     var chips = box.querySelectorAll('.lp-chip'), n = chips.length, t0 = performance.now(), raf = 0;
     var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    var RETURN_MS = 750;
+    // per-chip state: { frozen: bool, fromX, fromY, fromS, fromO, returnStart }
+    var st = [];
+    for (var i = 0; i < n; i++) st[i] = { frozen: false, fromX: 0, fromY: 0, fromS: 1, fromO: 1, returnStart: 0 };
+    function readPose(c) {
+      var tr = c.style.transform || '';
+      var m = tr.match(/translate\(([-\d.]+)px,\s*([-\d.]+)px\)\s*scale\(([-\d.]+)\)/);
+      return {
+        x: m ? parseFloat(m[1]) : 0,
+        y: m ? parseFloat(m[2]) : 0,
+        s: m ? parseFloat(m[3]) : 1,
+        o: parseFloat(c.style.opacity || '1')
+      };
+    }
+    function freeze(i) {
+      var pose = readPose(chips[i]);
+      st[i].frozen = true;
+      st[i].fromX = pose.x; st[i].fromY = pose.y; st[i].fromS = pose.s; st[i].fromO = pose.o;
+      st[i].returnStart = 0;
+    }
+    function unfreeze(i, now) {
+      if (!st[i].frozen && !st[i].returnStart) return;
+      var pose = readPose(chips[i]);
+      st[i].frozen = false;
+      st[i].fromX = pose.x; st[i].fromY = pose.y; st[i].fromS = pose.s; st[i].fromO = pose.o;
+      st[i].returnStart = (mq && mq.matches) ? 0 : now; // reduced motion: snap via immediate live update
+    }
+    chips.forEach(function (c, i) {
+      c.addEventListener('mouseenter', function () { freeze(i); });
+      c.addEventListener('mouseleave', function () { unfreeze(i, performance.now()); });
+      c.addEventListener('focus', function () { freeze(i); });
+      c.addEventListener('blur', function () { unfreeze(i, performance.now()); });
+    });
+    function easeOutCubic(u) { return 1 - Math.pow(1 - u, 3); }
     function place(now) {
       var W = box.clientWidth, H = box.clientHeight, narrow = W < 900;
       var cx = W * (narrow ? .62 : .64), cy = H * .52, rx = W * (narrow ? .33 : .27), ry = H * (narrow ? .30 : .26), tilt = -0.18;
       var t = (now - t0) / 1000 * 0.16;
       for (var i = 0; i < n; i++) {
+        var c = chips[i], s = st[i];
         var a = t + i * 2 * Math.PI / n, x = Math.cos(a) * rx, y = Math.sin(a) * ry;
         var X = cx + x * Math.cos(tilt) - y * Math.sin(tilt), Y = cy + x * Math.sin(tilt) + y * Math.cos(tilt);
-        var depth = (Math.sin(a) + 1) / 2, c = chips[i];
-        c.style.transform = 'translate(' + (X - c.offsetWidth / 2).toFixed(1) + 'px,' + (Y - c.offsetHeight / 2).toFixed(1) + 'px) scale(' + (0.78 + depth * 0.32).toFixed(3) + ')';
-        c.style.opacity = (0.45 + depth * 0.55).toFixed(2);
+        var depth = (Math.sin(a) + 1) / 2;
+        var liveX = X - c.offsetWidth / 2, liveY = Y - c.offsetHeight / 2;
+        var liveS = 0.78 + depth * 0.32, liveO = 0.45 + depth * 0.55;
+        if (s.frozen) {
+          c.style.zIndex = 5;
+          continue; // keep current transform/opacity
+        }
+        if (s.returnStart) {
+          var u = (now - s.returnStart) / RETURN_MS;
+          if (u >= 1) { s.returnStart = 0; u = 1; }
+          else u = easeOutCubic(Math.max(0, u));
+          var ix = s.fromX + (liveX - s.fromX) * u;
+          var iy = s.fromY + (liveY - s.fromY) * u;
+          var isc = s.fromS + (liveS - s.fromS) * u;
+          var io = s.fromO + (liveO - s.fromO) * u;
+          c.style.transform = 'translate(' + ix.toFixed(1) + 'px,' + iy.toFixed(1) + 'px) scale(' + isc.toFixed(3) + ')';
+          c.style.opacity = io.toFixed(2);
+          c.style.zIndex = 4;
+          continue;
+        }
+        c.style.transform = 'translate(' + liveX.toFixed(1) + 'px,' + liveY.toFixed(1) + 'px) scale(' + liveS.toFixed(3) + ')';
+        c.style.opacity = liveO.toFixed(2);
         c.style.zIndex = depth > .5 ? 3 : 1;
       }
     }
