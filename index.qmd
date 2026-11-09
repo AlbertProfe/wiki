@@ -252,6 +252,82 @@ format:
   #lp ul.lp-list li::before { content: "→"; color: var(--accent-light); font-weight: 600; }
   #lp .lp-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.5rem; }
   @media (max-width: 760px) { #lp .lp-split { grid-template-columns: 1fr; } #lp section { padding: 4.5rem 1.25rem; } }
+
+  /* Topics dropdown in landing header */
+  #lp .lp-dd { position: relative; display: flex; align-items: center; }
+  #lp .lp-dd-btn {
+    appearance: none; background: transparent; border: 0; cursor: pointer; padding: 0;
+    color: var(--text-muted); font: inherit; font-size: .9rem; font-weight: 500; line-height: 1;
+    display: inline-flex; align-items: center; gap: .3rem; white-space: nowrap; transition: color .2s;
+  }
+  #lp .lp-dd-btn:hover, #lp .lp-dd.open .lp-dd-btn, #lp .lp-dd:hover .lp-dd-btn { color: var(--text); }
+  #lp .lp-dd-btn .lp-caret { font-size: .7em; opacity: .8; transition: transform .15s; }
+  #lp .lp-dd.open .lp-dd-btn .lp-caret, #lp .lp-dd:hover .lp-dd-btn .lp-caret { transform: rotate(180deg); }
+  #lp .lp-dd-menu {
+    display: none; position: absolute; top: calc(100% + .55rem); right: 0; min-width: 13.5rem; z-index: 1100;
+    margin: 0; padding: .4rem 0; list-style: none;
+    background: var(--bg-card, #fff); color: var(--text); border: 1px solid var(--line-12, rgba(0,0,0,.12));
+    border-radius: .65rem; box-shadow: 0 14px 40px -18px rgba(0,0,0,.45);
+  }
+  body.quarto-dark #lp .lp-dd-menu { background: #1e293b; border-color: rgba(255,255,255,.12); }
+  #lp .lp-dd:hover .lp-dd-menu, #lp .lp-dd.open .lp-dd-menu { display: block; }
+  #lp .lp-dd-menu a {
+    display: flex; align-items: center; gap: .55rem; padding: .55rem .95rem; color: var(--text);
+    font-size: .9rem; font-weight: 500; text-decoration: none; white-space: nowrap;
+  }
+  #lp .lp-dd-menu a:hover { background: color-mix(in srgb, var(--accent-light) 14%, transparent); color: var(--text); }
+  #lp .lp-dd-menu i.bi { font-size: 1rem; width: 1.1rem; text-align: center; color: var(--text-muted); }
+  @media (max-width: 760px) {
+    #lp .lp-dd { display: block; width: 100%; border-bottom: 1px solid var(--line-10); }
+    #lp .lp-dd-btn { display: flex; width: 100%; justify-content: space-between; padding: .8rem .25rem; font-size: 1rem; }
+    #lp .lp-dd-menu {
+      position: static; display: none; min-width: 0; box-shadow: none; border: 0; border-radius: 0;
+      background: transparent; padding: 0 0 .4rem 0;
+    }
+    #lp .lp-dd.open .lp-dd-menu { display: block; }
+    #lp .lp-dd:hover .lp-dd-menu { display: none; }
+    #lp .lp-dd.open:hover .lp-dd-menu { display: block; }
+    #lp .lp-dd-menu a { padding: .65rem .25rem .65rem 1rem; border-bottom: 1px solid var(--line-10); }
+  }
+
+  /* Jump-to strip BELOW the whole hero card */
+  #lp .lp-topics-wrap {
+    position: relative; z-index: 2; max-width: 1280px; margin: -0.4rem auto 0; padding: 0 1.5rem 1.5rem;
+    display: flex; justify-content: center;
+  }
+  #lp .lp-topics {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .55rem .65rem;
+    width: 100%; max-width: 980px; padding: 0; border-radius: 0;
+    background: transparent; border: 0; box-shadow: none;
+  }
+  #lp .lp-topics-label {
+    font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-right: .15rem; font-weight: 600;
+  }
+  #lp .lp-topic {
+    display: inline-flex; align-items: center; gap: .35rem; text-decoration: none;
+    font-size: .86rem; font-weight: 600; color: var(--text); padding: .32rem .75rem; border-radius: 999px;
+    background: color-mix(in srgb, var(--c, #60a5fa) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--c, #60a5fa) 35%, transparent);
+    transition: background .15s ease, border-color .15s ease, transform .15s ease;
+  }
+  #lp .lp-topic:hover { background: color-mix(in srgb, var(--c, #60a5fa) 18%, transparent); transform: translateY(-1px); color: var(--text); }
+  #lp .lp-topic svg { width: 1em; height: 1em; fill: none; stroke: var(--c, #60a5fa); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  @media (max-width: 760px) {
+    #lp .lp-topics-wrap { padding: 0 1rem 1.25rem; margin-top: .25rem; }
+    #lp .lp-topic { font-size: .78rem; padding: .28rem .6rem; }
+  }
+
+  /* compact Topics sitemap in landing footer */
+  #lp .lp-footer { flex-wrap: wrap; gap: 1rem 1.5rem; }
+  #lp .lp-footer-sitemap {
+    flex: 1 1 100%; order: 5; margin-top: .35rem; padding-top: 1rem; border-top: 1px solid var(--line-10);
+    font-size: .88rem; color: var(--text-muted); line-height: 1.7; text-align: center;
+  }
+  #lp .lp-footer-sitemap .lp-sitemap-label { font-weight: 600; letter-spacing: .04em; text-transform: uppercase; font-size: .75rem; margin-right: .45rem; color: var(--text-muted); }
+  #lp .lp-footer-sitemap a { color: var(--text-muted); text-decoration: none; }
+  #lp .lp-footer-sitemap a:hover { color: var(--text); }
+  #lp .lp-footer-sitemap .sep { opacity: .45; margin: 0 .28rem; }
+
   #lp .lp-split-card { background: var(--bg-card); border-radius: 1rem; padding: 2rem; border: 1px solid var(--line-10); box-shadow: var(--shadow); }
   #lp .lp-split-card.teacher { border-top: 3px solid var(--accent); }
   #lp .lp-split-card.student { border-top: 3px solid var(--accent-2); }
@@ -312,6 +388,7 @@ format:
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
 <div id="lp">
@@ -324,6 +401,20 @@ format:
       <a href="#sprint">Sprint</a>
       <a href="#path">The path</a>
       <a href="#courses">Courses</a>
+      <div class="lp-dd" id="lp-topics-dd">
+        <button type="button" class="lp-dd-btn" id="lp-topics-btn" aria-expanded="false" aria-haspopup="true" aria-controls="lp-topics-menu">Topics <span class="lp-caret" aria-hidden="true">▾</span></button>
+        <ul class="lp-dd-menu" id="lp-topics-menu" role="menu">
+          <li role="none"><a role="menuitem" href="linux/linux-what-basics.html"><i class="bi bi-terminal" aria-hidden="true"></i>Linux OS</a></li>
+          <li role="none"><a role="menuitem" href="devops/devops-what-intro.html"><i class="bi bi-gear-wide-connected" aria-hidden="true"></i>DevOps</a></li>
+          <li role="none"><a role="menuitem" href="markup/markup-lang-intro.html"><i class="bi bi-code-slash" aria-hidden="true"></i>MarkUp</a></li>
+          <li role="none"><a role="menuitem" href="javase/se-what-basics.html"><i class="bi bi-cup-hot" aria-hidden="true"></i>Java SE</a></li>
+          <li role="none"><a role="menuitem" href="springboot/boot-what-basics.html"><i class="bi bi-box-seam" aria-hidden="true"></i>Spring Boot</a></li>
+          <li role="none"><a role="menuitem" href="reactjs/reactjs-what-principles.html"><i class="bi bi-lightning" aria-hidden="true"></i>React</a></li>
+          <li role="none"><a role="menuitem" href="scrum/scrum-what-concepts.html"><i class="bi bi-kanban" aria-hidden="true"></i>SCRUM</a></li>
+          <li role="none"><a role="menuitem" href="learning/learning-vocab-general.html"><i class="bi bi-lightbulb" aria-hidden="true"></i>Learning</a></li>
+          <li role="none"><a role="menuitem" href="learning/learning-listing-card-books.html"><i class="bi bi-book" aria-hidden="true"></i>Books</a></li>
+        </ul>
+      </div>
       <a href="#library" class="lp-pri-low">Library</a>
       <a href="https://ml.albertprofe.dev" target="_blank">ML wiki ↗</a>
       <a href="https://github.com/AlbertProfe/wiki/discussions" target="_blank" rel="noopener">Discussions ↗</a>
@@ -376,6 +467,20 @@ format:
     </div>
     </div>
   </section>
+
+  <div class="lp-topics-wrap">
+    <nav class="lp-topics" aria-label="Jump to topics">
+      <span class="lp-topics-label">Jump to</span>
+      <a class="lp-topic" style="--c:#c084fc" href="devops/devops-what-intro.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c-2-2.6-3.5-4-5.5-4a4 4 0 0 0 0 8c2 0 3.5-1.4 5.5-4zm0 0c2 2.6 3.5 4 5.5 4a4 4 0 0 0 0-8c-2 0-3.5 1.4-5.5 4z"/></svg>DevOps</a>
+      <a class="lp-topic" style="--c:#60a5fa" href="javase/se-what-basics.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10h11v4a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/></svg>Java SE</a>
+      <a class="lp-topic" style="--c:#4ade80" href="springboot/boot-what-basics.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"/><path d="M5 19 13 11"/></svg>Spring Boot</a>
+      <a class="lp-topic" style="--c:#4ade80" href="linux/linux-what-basics.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="m7 10 3 2.5L7 15M12.5 15H17"/></svg>Linux</a>
+      <a class="lp-topic" style="--c:#60a5fa" href="reactjs/reactjs-what-principles.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1.6"/><ellipse cx="12" cy="12" rx="9.5" ry="3.8"/><ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(120 12 12)"/></svg>React</a>
+      <a class="lp-topic" style="--c:#c084fc" href="scrum/scrum-what-concepts.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M9 4v16M15 4v16"/></svg>SCRUM</a>
+      <a class="lp-topic" style="--c:#60a5fa" href="markup/markup-lang-intro.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg>MarkUp</a>
+      <a class="lp-topic" style="--c:#c084fc" href="learning/learning-vocab-general.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 3h5M10.5 3v6L5 19a1.4 1.4 0 0 0 1.2 2h11.6A1.4 1.4 0 0 0 19 19l-5.5-10V3"/></svg>Learning</a>
+    </nav>
+  </div>
 
   <!-- Now: stats computed from the repo -->
   <section id="now" class="lp-reveal">
@@ -565,6 +670,18 @@ format:
       <a href="https://github.com/AlbertProfe/wiki" target="_blank">GitHub</a>
       <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
     </div>
+    <div class="lp-footer-sitemap" aria-label="Topics sitemap">
+      <span class="lp-sitemap-label">Topics</span>
+      <a href="linux/linux-what-basics.html">Linux</a><span class="sep">·</span>
+      <a href="devops/devops-what-intro.html">DevOps</a><span class="sep">·</span>
+      <a href="markup/markup-lang-intro.html">MarkUp</a><span class="sep">·</span>
+      <a href="javase/se-what-basics.html">Java SE</a><span class="sep">·</span>
+      <a href="springboot/boot-what-basics.html">Spring Boot</a><span class="sep">·</span>
+      <a href="reactjs/reactjs-what-principles.html">React</a><span class="sep">·</span>
+      <a href="scrum/scrum-what-concepts.html">SCRUM</a><span class="sep">·</span>
+      <a href="learning/learning-vocab-general.html">Learning</a><span class="sep">·</span>
+      <a href="learning/learning-listing-card-books.html">Books</a>
+    </div>
   </footer>
 </div>
 
@@ -613,10 +730,23 @@ format:
   function lpMenu(open) { mnav.classList.toggle('lp-open', open); mbtn.setAttribute('aria-expanded', open ? 'true' : 'false'); mbtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
   if (mbtn && mnav) {
     mbtn.addEventListener('click', function () { lpMenu(mbtn.getAttribute('aria-expanded') !== 'true'); });
-    mnav.addEventListener('click', function (e) { if (e.target.closest('a')) lpMenu(false); });
+    mnav.addEventListener('click', function (e) { if (e.target.closest('a') && !e.target.closest('.lp-dd-menu')) lpMenu(false); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && mbtn.getAttribute('aria-expanded') === 'true') { lpMenu(false); mbtn.focus(); } });
     document.addEventListener('click', function (e) { if (!e.target.closest('.lp-header')) lpMenu(false); });
     window.addEventListener('resize', function () { if (window.innerWidth > 760) lpMenu(false); });
+  }
+  // Topics dropdown: click toggle (needed on touch/mobile; desktop also gets CSS :hover)
+  var tdd = document.getElementById('lp-topics-dd'), tbtn = document.getElementById('lp-topics-btn');
+  function lpTopics(open) {
+    if (!tdd || !tbtn) return;
+    tdd.classList.toggle('open', open);
+    tbtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  if (tdd && tbtn) {
+    tbtn.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); lpTopics(tbtn.getAttribute('aria-expanded') !== 'true'); });
+    tdd.addEventListener('click', function (e) { if (e.target.closest('a')) { lpTopics(false); if (mbtn && window.innerWidth <= 760) lpMenu(false); } });
+    document.addEventListener('click', function (e) { if (!e.target.closest('#lp-topics-dd')) lpTopics(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lpTopics(false); });
   }
   // rotating word, same list as the previous home page
   var words = ['JAVA','REACT','SPRING BOOT','UML','BASH','MINDSET','SCRUM','LINUX','API REST','DEVOPS','AWS','MARKDOWN','QUARTO'];
