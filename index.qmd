@@ -186,15 +186,12 @@ format:
   #lp .lp-chip { position: absolute; left: 0; top: 0; display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap;
     padding: .36rem .8rem .36rem .55rem; border-radius: 9999px; font-size: .84rem; font-weight: 600; letter-spacing: .01em;
     color: var(--chip-fg); background: var(--chip-bg); border: 1px solid color-mix(in srgb, var(--c) 55%, transparent);
-    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-    box-shadow: 0 0 16px color-mix(in srgb, var(--c) 35%, transparent), inset 0 0 10px color-mix(in srgb, var(--c) 12%, transparent);
-    will-change: transform, opacity; pointer-events: auto; text-decoration: none; }
+    will-change: transform, opacity; pointer-events: auto; text-decoration: none; backface-visibility: hidden; }
   #lp a.lp-chip { cursor: pointer; }
-  #lp a.lp-chip:hover { color: var(--chip-fg); filter: brightness(1.12); box-shadow: 0 0 22px color-mix(in srgb, var(--c) 55%, transparent), inset 0 0 12px color-mix(in srgb, var(--c) 18%, transparent); }
+  #lp a.lp-chip:hover, #lp a.lp-chip.is-frozen { color: var(--chip-fg); background: color-mix(in srgb, var(--c) 22%, var(--chip-bg)); }
   #lp a.lp-chip:focus-visible { outline: 2px solid var(--c, #60a5fa); outline-offset: 3px; }
   #lp .lp-orbit .lp-chip { pointer-events: auto; }
-  #lp .lp-chip svg { width: 1.15em; height: 1.15em; fill: none; stroke: var(--c); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
-    filter: drop-shadow(0 0 4px var(--c)); flex: none; }
+  #lp .lp-chip svg { width: 1.15em; height: 1.15em; fill: none; stroke: var(--c); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex: none; }
   #lp .lp-glass { position: relative; z-index: 2; max-width: 540px; padding: 2.2rem 2.3rem; border-radius: 1.5rem;
     background: rgba(17,12,40,.55); border: 1px solid rgba(196,181,253,.28);
     backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3);
@@ -223,7 +220,6 @@ format:
   body:not(.quarto-dark) #lp .lp-glass { background: rgba(255,255,255,.62); border-color: rgba(147,51,234,.22); box-shadow: 0 20px 60px -25px rgba(76,29,149,.35); }
   body:not(.quarto-dark) #lp .lp-cine .lp-lead { color: #334155; }
   body:not(.quarto-dark) #lp .lp-cine .lp-stat-label { color: #6d28d9; }
-  body:not(.quarto-dark) #lp .lp-chip svg { filter: none; }
   @media (max-width: 900px) {
     #lp .lp-cine { flex-direction: column; padding: 5.5rem 1rem 2rem; min-height: 0; }
     #lp .lp-cine-media { position: relative; inset: auto; width: 100%; aspect-ratio: 16 / 9; background-position: 70% center; }
@@ -708,37 +704,56 @@ format:
 
 <script>
 (function () {
-  // hero orbit: chips travel on a tilted ellipse around teacher and student; front = bigger and brighter
+  // hero orbit: one throttled rAF loop, transform/opacity only; pause off-screen
   (function () {
     var box = document.getElementById('lp-orbit'); if (!box) return;
-    var chips = box.querySelectorAll('.lp-chip'), n = chips.length, t0 = performance.now(), raf = 0;
+    var chips = box.querySelectorAll('.lp-chip'), n = chips.length;
+    if (!n) return;
+    var t0 = performance.now(), raf = 0, last = 0, onScreen = true;
+    var FRAME_MS = 33, RETURN_MS = 750;
+    var COS_T = Math.cos(-0.18), SIN_T = Math.sin(-0.18);
     var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-    var RETURN_MS = 750;
-    // per-chip state: { frozen: bool, fromX, fromY, fromS, fromO, returnStart }
-    var st = [];
-    for (var i = 0; i < n; i++) st[i] = { frozen: false, fromX: 0, fromY: 0, fromS: 1, fromO: 1, returnStart: 0 };
-    function readPose(c) {
-      var tr = c.style.transform || '';
-      var m = tr.match(/translate\(([-\d.]+)px,\s*([-\d.]+)px\)\s*scale\(([-\d.]+)\)/);
-      return {
-        x: m ? parseFloat(m[1]) : 0,
-        y: m ? parseFloat(m[2]) : 0,
-        s: m ? parseFloat(m[3]) : 1,
-        o: parseFloat(c.style.opacity || '1')
-      };
+    var st = [], mw = [], mh = [], boxW = 0, boxH = 0;
+    for (var i = 0; i < n; i++) {
+      st[i] = { frozen: false, x: 0, y: 0, s: 1, o: 1, fromX: 0, fromY: 0, fromS: 1, fromO: 1, returnStart: 0 };
+      mw[i] = 0; mh[i] = 0;
+    }
+    function measure() {
+      boxW = box.clientWidth; boxH = box.clientHeight;
+      for (var i = 0; i < n; i++) { mw[i] = chips[i].offsetWidth; mh[i] = chips[i].offsetHeight; }
+    }
+    function write(i, x, y, s, o, z) {
+      var rec = st[i];
+      rec.x = x; rec.y = y; rec.s = s; rec.o = o;
+      chips[i].style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) scale(' + s.toFixed(3) + ')';
+      chips[i].style.opacity = o.toFixed(2);
+      chips[i].style.zIndex = z;
     }
     function freeze(i) {
-      var pose = readPose(chips[i]);
       st[i].frozen = true;
-      st[i].fromX = pose.x; st[i].fromY = pose.y; st[i].fromS = pose.s; st[i].fromO = pose.o;
       st[i].returnStart = 0;
+      chips[i].classList.add('is-frozen');
     }
     function unfreeze(i, now) {
       if (!st[i].frozen && !st[i].returnStart) return;
-      var pose = readPose(chips[i]);
-      st[i].frozen = false;
-      st[i].fromX = pose.x; st[i].fromY = pose.y; st[i].fromS = pose.s; st[i].fromO = pose.o;
-      st[i].returnStart = (mq && mq.matches) ? 0 : now; // reduced motion: snap via immediate live update
+      var rec = st[i];
+      rec.frozen = false;
+      rec.fromX = rec.x; rec.fromY = rec.y; rec.fromS = rec.s; rec.fromO = rec.o;
+      rec.returnStart = (mq && mq.matches) ? 0 : now;
+      chips[i].classList.remove('is-frozen');
+    }
+    function resetInteractions() {
+      for (var i = 0; i < n; i++) {
+        st[i].frozen = false;
+        st[i].returnStart = 0;
+        chips[i].classList.remove('is-frozen');
+        chips[i].blur();
+      }
+      var ae = document.activeElement;
+      if (ae && ae.classList && ae.classList.contains('lp-chip')) ae.blur();
+      box.style.pointerEvents = 'none';
+      void box.offsetWidth;
+      box.style.pointerEvents = '';
     }
     chips.forEach(function (c, i) {
       c.addEventListener('mouseenter', function () { freeze(i); });
@@ -748,48 +763,71 @@ format:
     });
     function easeOutCubic(u) { return 1 - Math.pow(1 - u, 3); }
     function place(now) {
-      var W = box.clientWidth, H = box.clientHeight, narrow = W < 900;
-      var cx = W * (narrow ? .62 : .64), cy = H * .52, rx = W * (narrow ? .33 : .27), ry = H * (narrow ? .30 : .26), tilt = -0.18;
+      var W = boxW, H = boxH;
+      if (!W || !H) return;
+      var narrow = W < 900;
+      var cx = W * (narrow ? .62 : .64), cy = H * .52;
+      var rx = W * (narrow ? .33 : .27), ry = H * (narrow ? .30 : .26);
       var t = (now - t0) / 1000 * 0.16;
       for (var i = 0; i < n; i++) {
-        var c = chips[i], s = st[i];
+        var rec = st[i];
         var a = t + i * 2 * Math.PI / n, x = Math.cos(a) * rx, y = Math.sin(a) * ry;
-        var X = cx + x * Math.cos(tilt) - y * Math.sin(tilt), Y = cy + x * Math.sin(tilt) + y * Math.cos(tilt);
+        var X = cx + x * COS_T - y * SIN_T, Y = cy + x * SIN_T + y * COS_T;
         var depth = (Math.sin(a) + 1) / 2;
-        var liveX = X - c.offsetWidth / 2, liveY = Y - c.offsetHeight / 2;
+        var liveX = X - mw[i] / 2, liveY = Y - mh[i] / 2;
         var liveS = 0.78 + depth * 0.32, liveO = 0.45 + depth * 0.55;
-        if (s.frozen) {
-          c.style.zIndex = 5;
-          continue; // keep current transform/opacity
-        }
-        if (s.returnStart) {
-          var u = (now - s.returnStart) / RETURN_MS;
-          if (u >= 1) { s.returnStart = 0; u = 1; }
+        if (rec.frozen) { chips[i].style.zIndex = 5; continue; }
+        if (rec.returnStart) {
+          var u = (now - rec.returnStart) / RETURN_MS;
+          if (u >= 1) { rec.returnStart = 0; u = 1; }
           else u = easeOutCubic(Math.max(0, u));
-          var ix = s.fromX + (liveX - s.fromX) * u;
-          var iy = s.fromY + (liveY - s.fromY) * u;
-          var isc = s.fromS + (liveS - s.fromS) * u;
-          var io = s.fromO + (liveO - s.fromO) * u;
-          c.style.transform = 'translate(' + ix.toFixed(1) + 'px,' + iy.toFixed(1) + 'px) scale(' + isc.toFixed(3) + ')';
-          c.style.opacity = io.toFixed(2);
-          c.style.zIndex = 4;
+          write(i, rec.fromX + (liveX - rec.fromX) * u, rec.fromY + (liveY - rec.fromY) * u,
+            rec.fromS + (liveS - rec.fromS) * u, rec.fromO + (liveO - rec.fromO) * u, 4);
           continue;
         }
-        c.style.transform = 'translate(' + liveX.toFixed(1) + 'px,' + liveY.toFixed(1) + 'px) scale(' + liveS.toFixed(3) + ')';
-        c.style.opacity = liveO.toFixed(2);
-        c.style.zIndex = depth > .5 ? 3 : 1;
+        write(i, liveX, liveY, liveS, liveO, depth > .5 ? 3 : 1);
       }
     }
-    function loop(now) { place(now); raf = requestAnimationFrame(loop); }
-    function start() {
+    function loop(now) {
+      raf = requestAnimationFrame(loop);
+      if (now - last < FRAME_MS) return;
+      last = now;
+      place(now);
+    }
+    function stop() {
       if (raf) { cancelAnimationFrame(raf); raf = 0; }
-      if ((mq && mq.matches) || document.hidden) { place(t0); return; }
+    }
+    function start() {
+      stop();
+      measure();
+      if (mq && mq.matches) { place(t0); return; }
+      if (document.hidden || !onScreen) return;
+      place(performance.now());
+      last = 0;
       raf = requestAnimationFrame(loop);
     }
+    function onVisible() {
+      resetInteractions();
+      start();
+    }
     start();
-    window.addEventListener('resize', function () { place(performance.now()); });
-    document.addEventListener('visibilitychange', start);
+    window.addEventListener('resize', function () { measure(); place(performance.now()); });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop(); else onVisible();
+    });
+    window.addEventListener('pageshow', function (e) {
+      if (e.persisted) onVisible();
+    });
+    window.addEventListener('pagehide', stop);
     if (mq && mq.addEventListener) mq.addEventListener('change', start);
+    if ('IntersectionObserver' in window) {
+      var hero = box.closest('.lp-cine') || box;
+      var io = new IntersectionObserver(function (entries) {
+        onScreen = !!(entries[0] && entries[0].isIntersecting);
+        if (onScreen) start(); else stop();
+      }, { threshold: 0.08 });
+      io.observe(hero);
+    }
   })();
   // sun/moon toggle: use Quarto's own switch so the choice is shared with the whole site
   var tbtn = document.getElementById('lp-theme');
