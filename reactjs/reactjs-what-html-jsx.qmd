@@ -1,0 +1,208 @@
+---
+title: "React JS: from HTML to JSX"
+subtitle: HTML for React (4/5)
+author: albertprofe
+date: "11/16/2026"
+date-modified: last-modified
+date-format: full
+description: How HTML maps to React JSX, covering className, htmlFor, camelCase events with functions, the style object, self-closing tags, fragments and a full form example.
+categories: [reactjs, html, jsx]
+toc: true
+number-sections: true
+format:
+  html
+---
+
+## Overview
+
+::: {.summary}
+
+📘 **HTML to JSX**
+JSX is a **syntax extension for JavaScript** that lets us write HTML-like markup inside a component. It **looks like HTML but it is JavaScript**: Babel/Vite turn every tag into a function call (`React.createElement` / `jsx()`), and React renders real HTML elements into the DOM.
+
+Because it is JavaScript, a few HTML habits must change: reserved words, camelCase names, functions instead of strings, objects instead of CSS strings, and every tag closed.
+
+:::
+
+---
+
+## HTML vs JSX
+
+JSX looks like HTML, but it is JavaScript, so a few things change:
+
+| HTML                          | React JSX                               |
+|-------------------------------|-----------------------------------------|
+| `class="card"`                | `className="card"`                      |
+| `for="name"`                  | `htmlFor="name"`                        |
+| `onclick="doIt()"` (string)   | `onClick={doIt}` (a function)           |
+| `onchange`, `onsubmit`        | `onChange`, `onSubmit` (camelCase)      |
+| `style="color:red"`           | `style={{ color: "red" }}` (an object)  |
+| `<br>`, `<img src="a.png">`   | `<br />`, `<img src="a.png" />`         |
+| `return false` / `preventDefault()` | always `event.preventDefault()`   |
+
+: HTML vs JSX {.striped .hover}
+
+::: {.callout-tip}
+## Pass the function, don't call it
+`onClick={handleClick}` ✅ passes the function and React calls it on click.
+`onClick={handleClick()}` ❌ calls it immediately on every render.
+If you need arguments, wrap it: `onClick={() => handleClick(id)}`.
+:::
+
+## `className` and `htmlFor`
+
+`class` and `for` are **reserved words** in JavaScript (`class Person {}`, `for (...)`), so JSX uses the DOM property names instead:
+
+``` {.jsx .code-overflow-wrap filename="Field.jsx"}
+<div className="field">
+  <label htmlFor="email">Email</label>
+  <input id="email" type="email" className="input" />
+</div>
+```
+
+The browser still receives `class="field"` and `for="email"`.
+
+## Events: camelCase and functions
+
+| HTML                                  | JSX                                    |
+|---------------------------------------|----------------------------------------|
+| `<button onclick="save()">`           | `<button onClick={save}>`              |
+| `<input onchange="check(this)">`      | `<input onChange={(e) => check(e.target)} />` |
+| `<form onsubmit="return send()">`     | `<form onSubmit={handleSubmit}>`       |
+| `<div onmouseover="...">`             | `<div onMouseOver={...}>`              |
+
+- Event names are **camelCase**: `onClick`, `onChange`, `onSubmit`, `onKeyDown`, `onMouseOver`.
+- The value is a **function** between curly braces, not a string of code.
+- `return false` does not cancel anything in React: call `event.preventDefault()`.
+- In React `onChange` fires **on every keystroke** (like the HTML `input` event).
+
+## The `style` attribute is an object
+
+In HTML `style` is a CSS string. In JSX it is a **JavaScript object** with **camelCase** property names:
+
+``` {.jsx .code-overflow-wrap filename="Badge.jsx"}
+// HTML: <span style="background-color: gold; font-size: 14px">New</span>
+
+const badgeStyle = { backgroundColor: "gold", fontSize: 14, padding: "2px 6px" };
+
+export default function Badge() {
+  return <span style={badgeStyle}>New</span>;
+}
+
+// or inline: the outer braces are JSX, the inner braces are the object
+<span style={{ backgroundColor: "gold", fontSize: 14 }}>New</span>
+```
+
+Numbers without units are treated as `px` (`fontSize: 14` → `14px`). For most styling, prefer CSS classes: see [CSS basics for React](/reactjs/reactjs-what-html-css.qmd).
+
+## Close every tag
+
+HTML forgives `<br>`, `<img>`, `<input>`, `<hr>` and even an unclosed `<li>`. JSX doesn't:
+
+``` {.jsx .code-overflow-wrap filename="Profile.jsx"}
+<img src="/avatar.png" alt="Avatar" />
+<br />
+<input type="text" />
+<MyComponent />          {/* components can self-close too */}
+```
+
+## One root element and fragments
+
+A component must **return a single root element**. If you don't want an extra `<div>` in the DOM, use a **fragment** `<>...</>`:
+
+``` {.jsx .code-overflow-wrap filename="Header.jsx"}
+export default function Header() {
+  return (
+    <>
+      <h1>My shop</h1>
+      <nav>
+        <a href="/">Home</a>
+      </nav>
+    </>
+  );
+}
+```
+
+When you render a list of fragments with `map()`, use the long form so you can pass a `key`: `<Fragment key={item.id}>...</Fragment>`.
+
+## JavaScript in curly braces
+
+Inside JSX, `{ }` opens a window to JavaScript: variables, expressions, function calls, `map()`, ternaries.
+
+``` {.jsx .code-overflow-wrap filename="List.jsx"}
+const user = { name: "Ada", avatar: "/ada.png" };
+const items = ["HTML", "CSS", "JS"];
+
+<div>
+  <h2>Hello {user.name}</h2>
+  <img src={user.avatar} alt={user.name} />
+  <ul>
+    {items.map((item) => <li key={item}>{item}</li>)}
+  </ul>
+  {items.length > 2 ? <p>Busy week!</p> : <p>Easy week</p>}
+</div>
+```
+
+::: {.callout-note}
+## Comments in JSX
+HTML comments `<!-- -->` don't work in JSX. Use `{/* comment */}`.
+:::
+
+## Full example: a signup form
+
+The signup form from [HTML forms](/reactjs/reactjs-what-html-forms.qmd), now as a React component with state and events:
+
+``` {.jsx .code-overflow-wrap filename="SignupForm.jsx"}
+import { useState } from "react";
+
+export default function SignupForm() {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+
+  function handleSubmit(event) {
+    event.preventDefault();               // same as in plain JS: no page reload
+    setMessage(`Welcome, ${name}!`);
+  }
+
+  return (
+    <form className="signup" onSubmit={handleSubmit}>
+      <label htmlFor="name">Name</label>
+      <input
+        id="name"
+        type="text"
+        value={name}
+        onChange={(event) => setName(event.target.value)}
+      />
+
+      <button type="submit" onMouseOver={() => console.log("hover")}>
+        Send
+      </button>
+
+      {message && <p>{message}</p>}
+    </form>
+  );
+}
+```
+
+- `onSubmit`, `onChange` and `onMouseOver` are the same DOM events, written in **camelCase** and receiving a **function**.
+- The handler receives an **event object** (React wraps the native one in a *SyntheticEvent* with the same API: `target`, `key`, `preventDefault()`, `stopPropagation()`).
+- In React `onChange` fires **on every keystroke**, like the HTML `input` event.
+- We don't use `getElementById` or `addEventListener`: React updates the DOM for us when the **state** changes.
+
+More about JSX in [React JS: JSX](/reactjs/reactjs-what-jsx.qmd), about components in [React JS: Components](/reactjs/reactjs-what-components.qmd) and about state in [React JS: useState](/reactjs/reactjs-hook-state.qmd).
+
+::: {.callout-note}
+## HTML for React
+[1. HTML basics](/reactjs/reactjs-what-html.qmd) · [2. Forms](/reactjs/reactjs-what-html-forms.qmd) · [3. Events and the DOM](/reactjs/reactjs-what-html-events.qmd) · **4. From HTML to JSX** · [5. CSS basics](/reactjs/reactjs-what-html-css.qmd)
+
+⬅️ Previous: [Events and the DOM](/reactjs/reactjs-what-html-events.qmd) · Next ➡️ [CSS basics for React](/reactjs/reactjs-what-html-css.qmd)
+:::
+
+## References
+
+- [W3Schools: React JSX](https://www.w3schools.com/react/react_jsx.asp){.external}
+- [W3Schools: React Events](https://www.w3schools.com/react/react_events.asp){.external}
+- [W3Schools: React Forms](https://www.w3schools.com/react/react_forms.asp){.external}
+- [React: Writing Markup with JSX](https://react.dev/learn/writing-markup-with-jsx){.external}
+- [React: Responding to Events](https://react.dev/learn/responding-to-events){.external}
+- [React: Fragment](https://react.dev/reference/react/Fragment){.external}

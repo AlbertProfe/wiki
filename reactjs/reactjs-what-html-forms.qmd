@@ -1,0 +1,251 @@
+---
+title: "React JS: HTML forms"
+subtitle: HTML for React (2/5)
+author: albertprofe
+date: "11/16/2026"
+date-modified: last-modified
+date-format: full
+description: HTML forms for React students, covering form, label, input types, select, textarea, button, input attributes, built-in validation and accessibility basics.
+categories: [reactjs, html, forms]
+toc: true
+number-sections: true
+format:
+  html
+---
+
+## Overview
+
+::: {.summary}
+
+📘 **forms**
+An HTML form **collects user input**: a login, a search box, a signup, a shopping cart. The `<form>` element wraps **input controls** (text fields, checkboxes, radio buttons, drop-downs, buttons) and, when it is submitted, sends their values to a server.
+
+In React, forms are where **state and events** meet: every keystroke is an event and every field value becomes state. So first we need to know the plain HTML form very well.
+
+:::
+
+---
+
+## The `<form>` element
+
+``` {.html .code-overflow-wrap filename="form.html"}
+<form action="/register" method="post">
+  <!-- form controls go here -->
+</form>
+```
+
+- `action`: the URL where the data is sent when the form is submitted. If it is missing, the form is sent to the current page.
+- `method`: how the data is sent:
+  - `get` (default): data goes in the URL (`/search?q=react`). Good for searches, **never for passwords**.
+  - `post`: data goes in the body of the HTTP request. Use it for anything private or that changes data.
+- When the form is submitted, the browser builds a list of `name=value` pairs, one for each control **that has a `name`**.
+
+::: {.callout-important}
+## No `name`, no data
+A control without a `name` attribute is **not sent** with the form. In plain HTML `name` is the key of each value; in React we'll often use it to know which field changed.
+:::
+
+## A complete form
+
+``` {.html .code-overflow-wrap filename="signup.html"}
+<form action="/register" method="post">
+  <label for="name">Name</label>
+  <input type="text" id="name" name="name" placeholder="Your name" required>
+
+  <label for="email">Email</label>
+  <input type="email" id="email" name="email" required>
+
+  <label for="pwd">Password</label>
+  <input type="password" id="pwd" name="pwd" minlength="8" required>
+
+  <label for="age">Age</label>
+  <input type="number" id="age" name="age" min="16" max="99">
+
+  <fieldset>
+    <legend>Level</legend>
+    <label><input type="radio" name="level" value="junior" checked> Junior</label>
+    <label><input type="radio" name="level" value="senior"> Senior</label>
+  </fieldset>
+
+  <label><input type="checkbox" name="news" value="yes"> Send me news</label>
+
+  <label for="course">Course</label>
+  <select id="course" name="course">
+    <option value="">-- choose one --</option>
+    <option value="react">React</option>
+    <option value="spring">Spring Boot</option>
+  </select>
+
+  <label for="msg">Message</label>
+  <textarea id="msg" name="msg" rows="4" cols="40"></textarea>
+
+  <button type="submit">Send</button>
+  <button type="reset">Clear</button>
+</form>
+```
+
+## Form elements
+
+### `<label>`
+
+`<label>` gives a **visible name** to a control. Link it with `for` = the `id` of the input, or wrap the input inside the label:
+
+``` html
+<label for="email">Email</label>
+<input type="email" id="email" name="email">
+
+<label><input type="checkbox" name="terms"> I accept the terms</label>
+```
+
+Clicking the label focuses (or toggles) the control: a bigger click target, which really helps on mobile and for small checkboxes and radio buttons.
+
+### `<input>` and its types
+
+`<input>` is the most important form element, and it is **empty** (no end tag). What it shows depends on its `type`:
+
+| `type`      | What it shows                                         |
+|-------------|-------------------------------------------------------|
+| `text`      | One-line text field (the default)                     |
+| `email`     | Text field that must contain an email address         |
+| `password`  | Text field with hidden characters                     |
+| `number`    | Numeric field with up/down arrows                     |
+| `date`, `time` | A date or time picker                              |
+| `checkbox`  | On/off box; many can be selected                      |
+| `radio`     | Option button; only one per `name` group can be selected |
+| `range`     | A slider between `min` and `max`                      |
+| `color`     | A colour picker                                       |
+| `file`      | A button to choose a file to upload                   |
+| `search`, `tel`, `url` | Text fields with special keyboards on mobile |
+| `hidden`    | Not shown, but its value is sent                      |
+| `submit`, `reset`, `button` | Buttons (prefer `<button>`)           |
+
+: Most used input types {.striped .hover}
+
+::: {.column-margin}
+On a phone, `type="email"`, `type="tel"` or `type="number"` opens the right keyboard. Choosing the correct type is free usability.
+:::
+
+### `<select>` and `<option>`
+
+A drop-down list. The `value` of the selected `<option>` is what gets sent. Add `selected` to preselect one, or `multiple` on `<select>` to allow several.
+
+### `<textarea>`
+
+A multi-line text field. Its size is set with `rows` and `cols` (or with CSS). Unlike `<input>`, in HTML its initial text goes **between the tags**.
+
+### `<button>`
+
+| `type`     | What it does                                   |
+|------------|------------------------------------------------|
+| `submit`   | Submits the form (the **default** inside a form) |
+| `reset`    | Resets all controls to their initial values    |
+| `button`   | Does nothing by itself: you add a click handler |
+
+::: {.callout-warning}
+## The default type is `submit`
+A `<button>` inside a `<form>` with no `type` is a submit button. A "Show password" or "Add item" button will suddenly submit (and reload) the page. Always write `type="button"` for buttons that should not submit.
+:::
+
+### `<fieldset>` and `<legend>`
+
+`<fieldset>` groups related controls (like a group of radio buttons) and `<legend>` gives the group a caption.
+
+## Input attributes
+
+| Attribute     | What it does                                                   |
+|---------------|----------------------------------------------------------------|
+| `name`        | Key of the value when the form is sent                         |
+| `value`       | Initial value (or the value sent for checkboxes/radios)        |
+| `placeholder` | Hint text shown while the field is empty (not a label!)        |
+| `required`    | The field must be filled in before submitting                  |
+| `min` / `max` | Minimum / maximum for `number`, `range`, `date`                |
+| `minlength` / `maxlength` | Minimum / maximum number of characters             |
+| `pattern`     | A regular expression the value must match                      |
+| `step`        | Allowed step for numbers (`step="0.01"` for prices)            |
+| `checked`     | Preselects a checkbox or radio                                 |
+| `disabled`    | Field can't be used **and is not sent**                        |
+| `readonly`    | Field can't be edited, but it is sent                          |
+| `autofocus`   | Gets the focus when the page loads                             |
+| `autocomplete`| Lets the browser autofill (`email`, `name`, `off`...)          |
+
+: Most used input attributes {.striped .hover}
+
+## Built-in validation
+
+The browser can **validate a form for free** before sending it: if a rule fails, it shows a message and does not submit.
+
+``` {.html .code-overflow-wrap filename="validation.html"}
+<form>
+  <!-- must not be empty -->
+  <input type="text" name="user" required>
+
+  <!-- must look like an email -->
+  <input type="email" name="email" required>
+
+  <!-- between 1 and 10 -->
+  <input type="number" name="qty" min="1" max="10">
+
+  <!-- a Spanish postcode: exactly 5 digits -->
+  <input type="text" name="cp" pattern="[0-9]{5}" title="5 digits, e.g. 08001">
+
+  <button type="submit">Send</button>
+</form>
+```
+
+- The `title` text is shown in the error message when `pattern` fails.
+- CSS can style the state with the `:valid` and `:invalid` pseudo-classes.
+- JavaScript can check it too: `input.checkValidity()` and `input.validity`.
+- `novalidate` on `<form>` turns browser validation off (useful when you write your own in React).
+
+::: {.callout-important}
+## Validate on the server too
+Client validation is for **user experience**. Anyone can skip it (dev tools, Postman, curl), so the backend (Spring Boot, for example) must validate again.
+:::
+
+## Accessibility basics
+
+- **Every control needs a label.** A `placeholder` disappears when you type, so it is not a label.
+- Link label and input with `for`/`id` (or wrap the input).
+- Group radio buttons and checkboxes with `<fieldset>` and `<legend>`.
+- Use the **right element**: `<button>` for actions, `<a>` for navigation, never a clickable `<div>`.
+- Use the correct `type` and `autocomplete` so browsers, password managers and screen readers understand the field.
+- Keep the **keyboard** working: Tab moves between fields, Enter submits, Space toggles checkboxes. Native elements give you this for free.
+
+## Forms in React
+
+In React the same elements are used, with two changes:
+
+1. The form is usually handled in JavaScript: we listen to `onSubmit` and call `event.preventDefault()` so the page does not reload (see [Events and the DOM](/reactjs/reactjs-what-html-events.qmd)).
+2. Each field is often a **controlled input**: its `value` comes from state and `onChange` updates that state.
+
+``` {.jsx .code-overflow-wrap filename="NameField.jsx"}
+const [name, setName] = useState("");
+
+<input
+  type="text"
+  name="name"
+  value={name}
+  onChange={(e) => setName(e.target.value)}
+  required
+/>
+```
+
+The full example is in [From HTML to JSX](/reactjs/reactjs-what-html-jsx.qmd). See also [React JS: useState](/reactjs/reactjs-hook-state.qmd) and [React JS App: events](/reactjs/reactjs-app-events.qmd).
+
+::: {.callout-note}
+## HTML for React
+[1. HTML basics](/reactjs/reactjs-what-html.qmd) · **2. Forms** · [3. Events and the DOM](/reactjs/reactjs-what-html-events.qmd) · [4. From HTML to JSX](/reactjs/reactjs-what-html-jsx.qmd) · [5. CSS basics](/reactjs/reactjs-what-html-css.qmd)
+
+⬅️ Previous: [HTML basics](/reactjs/reactjs-what-html.qmd) · Next ➡️ [Events and the DOM](/reactjs/reactjs-what-html-events.qmd)
+:::
+
+## References
+
+- [W3Schools: HTML Forms](https://www.w3schools.com/html/html_forms.asp){.external}
+- [W3Schools: HTML Form Attributes](https://www.w3schools.com/html/html_form_attributes_form.asp){.external}
+- [W3Schools: HTML Form Elements](https://www.w3schools.com/html/html_form_elements.asp){.external}
+- [W3Schools: HTML Input Types](https://www.w3schools.com/html/html_form_input_types.asp){.external}
+- [W3Schools: HTML Input Attributes](https://www.w3schools.com/html/html_form_attributes.asp){.external}
+- [W3Schools: JavaScript Form Validation](https://www.w3schools.com/js/js_validation.asp){.external}
+- [W3Schools: React Forms](https://www.w3schools.com/react/react_forms.asp){.external}
+- [React: `<input>` and controlled inputs](https://react.dev/reference/react-dom/components/input){.external}

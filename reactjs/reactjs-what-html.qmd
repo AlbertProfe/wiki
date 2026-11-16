@@ -1,0 +1,270 @@
+---
+title: "React JS: HTML basics"
+subtitle: HTML for React (1/5)
+author: albertprofe
+date: "11/16/2026"
+date-modified: last-modified
+date-format: full
+description: An introduction to HTML for React students, covering document structure, the most relevant tags, attributes and semantic layout.
+categories: [reactjs, html]
+toc: true
+number-sections: true
+format:
+  html
+---
+
+## Overview
+
+::: {.summary}
+
+📘 **HTML**
+HyperText Markup Language is the **standard markup language for creating web pages**. It describes the **structure** of a page as a tree of **elements**: "this is a heading", "this is a paragraph", "this is a link", and so on.
+
+React does not replace HTML: every React component ends up **rendering HTML elements into the DOM**. JSX is just HTML-like syntax inside JavaScript, so **knowing HTML well is the first step to writing good JSX**.
+
+:::
+
+---
+
+## Why HTML before React?
+
+When we write a component like this:
+
+``` {.jsx .code-overflow-wrap filename="Hello.jsx"}
+export default function Hello() {
+  return <h1 className="title">Hello, students!</h1>;
+}
+```
+
+the browser never sees JSX. React translates it and finally the DOM contains a plain `<h1 class="title">`. So:
+
+- the **tags** we use in JSX are HTML tags (`div`, `p`, `ul`, `form`, `button`...),
+- the **attributes** are (almost) HTML attributes (`src`, `alt`, `href`, `type`...),
+- the **events** we handle in React (`onClick`, `onChange`, `onSubmit`) are the browser's HTML DOM events (see [Events and the DOM](/reactjs/reactjs-what-html-events.qmd)).
+
+::: {.callout-tip}
+## HTML is the output of React
+If you know which HTML you want in the browser, writing the JSX is easy. If you don't, React only makes it harder.
+:::
+
+## HTML document structure
+
+A minimal HTML5 document looks like this:
+
+``` {.html .code-overflow-wrap filename="index.html"}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My first page</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <h1>My first heading</h1>
+    <p>My first paragraph.</p>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+```
+
+- `<!DOCTYPE html>` tells the browser this is an **HTML5** document.
+- `<html>` is the **root element** of the page.
+- `<head>` holds **meta information**, not shown on the page:
+  - `<meta charset>`: character encoding (use `UTF-8`).
+  - `<meta name="viewport">`: makes the page responsive on mobile.
+  - `<title>`: the text in the browser tab (and in search results).
+  - `<link>`: links external resources, mostly CSS stylesheets.
+  - `<script>`: JavaScript, inline or from a file (`src`). It can also go at the end of `<body>`.
+- `<body>` contains **everything visible**: headings, paragraphs, images, links, tables, lists...
+
+### Elements, tags and empty elements
+
+An **element** is a start tag, some content and an end tag:
+
+``` html
+<p>This is a paragraph.</p>
+<!-- start tag ^      ^ end tag -->
+```
+
+Elements can be **nested** (an element inside another element), and that nesting is what builds the **DOM tree**.
+
+Some elements have **no content** and no end tag: they are **empty elements**, like `<br>`, `<img>`, `<input>`, `<meta>` or `<link>`.
+
+::: {.callout-important}
+## In JSX every tag must be closed
+HTML accepts `<br>` and `<img src="a.png">`, but JSX does not. In React you must write `<br />` and `<img src="a.png" />`.
+:::
+
+## The most relevant tags
+
+### Text
+
+``` html
+<h1>Main title</h1>          <!-- h1 ... h6: headings, h1 is the most important -->
+<h2>Section title</h2>
+<p>A paragraph with <strong>important</strong> and <em>emphasised</em> text.<br>
+   And a line break.</p>
+<hr>                          <!-- a thematic break (horizontal line) -->
+```
+
+- Use **one `<h1>` per page** and keep headings in order (`h1` → `h2` → `h3`): search engines and screen readers use them to understand the page.
+- `<strong>` and `<em>` add **meaning** (importance, emphasis), not only bold or italic style.
+- Browsers ignore extra spaces and line breaks in the source: use `<p>` and `<br>`.
+
+### Links and images
+
+``` html
+<a href="https://www.w3schools.com/html/" target="_blank">W3Schools HTML tutorial</a>
+<a href="/reactjs/reactjs-what-jsx.html">Relative link to another page</a>
+
+<img src="images/react-logo.png" alt="React logo" width="200">
+```
+
+- `<a>` (anchor) creates a **hyperlink**; `href` is the destination and `target="_blank"` opens it in a new tab.
+- `<img>` is empty; `src` is the path to the image and `alt` is the **alternative text**, shown if the image fails and read by screen readers. Always write an `alt`.
+
+### Lists
+
+``` html
+<ul>                <!-- unordered list (bullets) -->
+  <li>HTML</li>
+  <li>CSS</li>
+</ul>
+
+<ol>                <!-- ordered list (numbers) -->
+  <li>Learn HTML</li>
+  <li>Learn React</li>
+</ol>
+```
+
+Lists are everywhere in React: a todo list, a menu, a list of products. Later you will render them with `array.map()`.
+
+### Tables
+
+``` html
+<table>
+  <thead>
+    <tr><th>Name</th><th>Role</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Ada</td><td>Frontend</td></tr>
+    <tr><td>Linus</td><td>Backend</td></tr>
+  </tbody>
+</table>
+```
+
+- `<tr>` is a table row, `<th>` a header cell and `<td>` a data cell.
+- `<thead>` and `<tbody>` group the header rows and the body rows.
+
+### Containers: `div` and `span`
+
+``` html
+<div class="card">
+  <h3>Card title</h3>
+  <p>Some text with a <span class="highlight">highlighted</span> word.</p>
+</div>
+```
+
+- `<div>` is a **block-level** element: it always starts on a new line and takes the full width.
+- `<span>` is an **inline** element: it only takes the width it needs and stays inside the text.
+- Neither has any meaning: they are generic boxes to group content and style it with CSS.
+
+### Semantic elements (layout)
+
+**Semantic** elements are elements **with meaning**: the name tells the browser and the developer what the content is. Instead of `<div id="nav">` or `<div class="footer">`, HTML5 gives us:
+
+``` {.html .code-overflow-wrap filename="layout.html"}
+<body>
+  <header>
+    <h1>My shop</h1>
+    <nav>
+      <a href="/">Home</a> | <a href="/products">Products</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>New products</h2>
+      <article>
+        <h3>Keyboard</h3>
+        <p>Mechanical keyboard, 45 €.</p>
+      </article>
+    </section>
+    <aside>Offers of the week</aside>
+  </main>
+
+  <footer>© 2026 My shop</footer>
+</body>
+```
+
+| Element     | Meaning                                                    |
+|-------------|------------------------------------------------------------|
+| `<header>`  | Introductory content: logo, title, navigation              |
+| `<nav>`     | A block of navigation links                                |
+| `<main>`    | The main content of the page (only one per page)           |
+| `<section>` | A thematic group of content, usually with a heading        |
+| `<article>` | Independent, self-contained content (a post, a product)    |
+| `<aside>`   | Content aside from the main content (a sidebar)            |
+| `<footer>`  | Footer of the page or of a section: author, copyright, links |
+
+::: {.column-margin}
+In React, a page layout is usually split into components with the same names: `<Header />`, `<Nav />`, `<Main />`, `<Footer />`. Each component returns its semantic HTML element.
+:::
+
+## Attributes
+
+Attributes give **extra information** about an element. They always go in the **start tag** as `name="value"`.
+
+| Attribute | Used on               | What it does                                              |
+|-----------|-----------------------|-----------------------------------------------------------|
+| `id`      | any element           | A **unique** identifier in the page (for CSS, JS, labels) |
+| `class`   | any element           | One or more class names, shared by many elements (CSS)    |
+| `style`   | any element           | Inline CSS: `style="color:red; font-size:20px"`           |
+| `href`    | `<a>`, `<link>`       | URL of the link or resource                               |
+| `src`     | `<img>`, `<script>`   | Path of the image or script                               |
+| `alt`     | `<img>`               | Alternative text for the image                            |
+| `type`    | `<input>`, `<button>` | Kind of input or button                                   |
+| `name`    | form fields           | Key of the field when the form is sent                    |
+| `value`   | form fields           | Current or initial value of the field                     |
+| `lang`    | `<html>`              | Language of the page                                      |
+
+: Most common HTML attributes {.striped .hover}
+
+## Summary
+
+| Group       | Tags                                                                 |
+|-------------|----------------------------------------------------------------------|
+| Structure   | `<!DOCTYPE html>`, `<html>`, `<head>`, `<body>`, `<meta>`, `<title>`, `<link>`, `<script>` |
+| Text        | `<h1>`–`<h6>`, `<p>`, `<strong>`, `<em>`, `<br>`, `<hr>`             |
+| Links/media | `<a>`, `<img>`                                                       |
+| Lists       | `<ul>`, `<ol>`, `<li>`                                               |
+| Tables      | `<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, `<td>`              |
+| Containers  | `<div>` (block), `<span>` (inline)                                   |
+| Semantic    | `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>` |
+
+: HTML tags cheat sheet {.striped .hover}
+
+Forms have their own article: [HTML forms](/reactjs/reactjs-what-html-forms.qmd).
+
+::: {.callout-note}
+## HTML for React
+**1. HTML basics** · [2. Forms](/reactjs/reactjs-what-html-forms.qmd) · [3. Events and the DOM](/reactjs/reactjs-what-html-events.qmd) · [4. From HTML to JSX](/reactjs/reactjs-what-html-jsx.qmd) · [5. CSS basics](/reactjs/reactjs-what-html-css.qmd)
+
+Next ➡️ [HTML forms](/reactjs/reactjs-what-html-forms.qmd)
+:::
+
+## References
+
+- [W3Schools: HTML Introduction](https://www.w3schools.com/html/html_intro.asp){.external}
+- [W3Schools: HTML Basic Examples](https://www.w3schools.com/html/html_basic.asp){.external}
+- [W3Schools: HTML Elements](https://www.w3schools.com/html/html_elements.asp){.external}
+- [W3Schools: HTML Attributes](https://www.w3schools.com/html/html_attributes.asp){.external}
+- [W3Schools: HTML Headings](https://www.w3schools.com/html/html_headings.asp){.external} and [Paragraphs](https://www.w3schools.com/html/html_paragraphs.asp){.external}
+- [W3Schools: HTML Links](https://www.w3schools.com/html/html_links.asp){.external} and [Images](https://www.w3schools.com/html/html_images.asp){.external}
+- [W3Schools: HTML Lists](https://www.w3schools.com/html/html_lists.asp){.external} and [Tables](https://www.w3schools.com/html/html_tables.asp){.external}
+- [W3Schools: HTML Block and Inline Elements](https://www.w3schools.com/html/html_blocks.asp){.external}
+- [W3Schools: HTML Layout](https://www.w3schools.com/html/html_layout.asp){.external} and [Semantic Elements](https://www.w3schools.com/html/html5_semantic_elements.asp){.external}
+- [W3Schools: HTML Head](https://www.w3schools.com/html/html_head.asp){.external}
+- [React JS: JSX](/reactjs/reactjs-what-jsx.qmd) and [React JS: render virtual DOM](/reactjs/reactjs-what-render-dom.qmd)

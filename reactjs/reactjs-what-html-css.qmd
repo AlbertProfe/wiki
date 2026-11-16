@@ -1,0 +1,233 @@
+---
+title: "React JS: CSS basics"
+subtitle: HTML for React (5/5)
+author: albertprofe
+date: "11/16/2026"
+date-modified: last-modified
+date-format: full
+description: CSS basics for React students, covering selectors, class vs id, the box model, Flexbox essentials, a brief look at Grid, and how to style React components.
+categories: [reactjs, html, css]
+toc: true
+number-sections: true
+format:
+  html
+---
+
+## Overview
+
+::: {.summary}
+
+📘 **CSS**
+CSS (Cascading Style Sheets) describes **how HTML elements are displayed**: colours, fonts, spacing, size and layout. HTML gives the **structure**, CSS gives the **look**, JavaScript gives the **behaviour**.
+
+In React we write the same CSS. The only difference is **how we attach it** to components: `className`, imported CSS files, style objects or CSS modules.
+
+:::
+
+---
+
+## CSS syntax and where to put it
+
+A CSS **rule** is a **selector** plus a block of **declarations** (`property: value;`):
+
+``` {.css .code-overflow-wrap filename="styles.css"}
+h1 {
+  color: navy;
+  font-size: 2rem;
+}
+```
+
+There are three ways to add CSS to HTML:
+
+1. **External** file (the usual one): `<link rel="stylesheet" href="styles.css">` in the `<head>`.
+2. **Internal**: a `<style>` block in the `<head>`.
+3. **Inline**: a `style` attribute on one element: `<p style="color:red">`.
+
+When several rules hit the same element, the **cascade** decides: more specific selectors win, and if they are equal, the last one wins. Inline styles beat stylesheet rules.
+
+## Selectors
+
+| Selector          | Example              | Selects                                         |
+|-------------------|----------------------|-------------------------------------------------|
+| Element           | `p`                  | All `<p>` elements                              |
+| Class             | `.card`              | All elements with `class="card"`                |
+| Id                | `#header`            | The element with `id="header"`                  |
+| Universal         | `*`                  | Every element                                   |
+| Group             | `h1, h2`             | All `<h1>` and all `<h2>`                       |
+| Descendant        | `.card p`            | `<p>` anywhere inside `.card`                   |
+| Child             | `ul > li`            | `<li>` that are direct children of `<ul>`       |
+| Attribute         | `input[type="email"]`| Inputs with that attribute value                |
+| Pseudo-class      | `a:hover`, `li:first-child`, `input:invalid` | Elements in a state or position |
+| Pseudo-element    | `p::first-line`, `.req::after` | A part of an element                  |
+
+: Common CSS selectors {.striped .hover}
+
+### `class` vs `id`
+
+``` {.html .code-overflow-wrap filename="index.html"}
+<header id="main-header">...</header>
+
+<div class="card">...</div>
+<div class="card featured">...</div>
+```
+
+- An `id` must be **unique** in the page. Use it for one specific element (anchors `#section`, `label for`, `getElementById`).
+- A `class` can be **reused** on many elements, and one element can have **several** classes (`class="card featured"`).
+- For styling, **prefer classes**: they are reusable and have lower specificity, so they are easier to override. In React this means `className`, and ids are rarely needed (remember that components can be rendered many times).
+
+## The box model
+
+Every element is a **box** made of four layers, from inside out:
+
+```
++------------------------------- margin -------------------------------+
+|  +---------------------------- border ----------------------------+  |
+|  |  +------------------------- padding -------------------------+  |  |
+|  |  |                         content                          |  |  |
+|  |  +-----------------------------------------------------------+  |  |
+|  +-----------------------------------------------------------------+  |
++-----------------------------------------------------------------------+
+```
+
+- **content**: the text or image, sized with `width` and `height`,
+- **padding**: space **inside** the border, it takes the background colour,
+- **border**: the line around the padding,
+- **margin**: space **outside** the border, transparent, it separates boxes.
+
+``` {.css .code-overflow-wrap filename="styles.css"}
+* {
+  box-sizing: border-box;   /* width includes padding and border: much easier maths */
+}
+
+.card {
+  width: 300px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 12px auto;        /* 12px top/bottom, centred horizontally */
+}
+```
+
+::: {.callout-tip}
+## Use `box-sizing: border-box`
+By default `width` is only the content, so a `300px` card with `16px` padding and a `1px` border is really `334px` wide. With `border-box` it stays `300px`. Almost every project sets it globally.
+:::
+
+## Flexbox essentials
+
+**Flexbox** lays out items in **one dimension**, a row or a column. You turn it on in the **parent** (the flex container) and the children become flex items.
+
+``` {.css .code-overflow-wrap filename="styles.css"}
+.navbar {
+  display: flex;
+  flex-direction: row;            /* row (default) | column */
+  justify-content: space-between; /* main axis: flex-start | center | flex-end | space-between | space-around */
+  align-items: center;            /* cross axis: stretch (default) | flex-start | center | flex-end */
+  gap: 16px;                      /* space between items */
+  flex-wrap: wrap;                /* allow items to go to a new line */
+}
+
+.navbar .search {
+  flex: 1;                        /* this item grows to fill the free space */
+}
+```
+
+| Property          | On        | What it does                                      |
+|-------------------|-----------|---------------------------------------------------|
+| `display: flex`   | container | Turns on Flexbox                                  |
+| `flex-direction`  | container | Main axis: `row` or `column`                      |
+| `justify-content` | container | Alignment along the **main** axis                 |
+| `align-items`     | container | Alignment along the **cross** axis                |
+| `gap`             | container | Space between items                               |
+| `flex-wrap`       | container | Lets items wrap to new lines                      |
+| `flex`            | item      | How an item grows/shrinks (`flex: 1`)             |
+
+: Flexbox cheat sheet {.striped .hover}
+
+::: {.column-margin}
+The classic trick to centre anything: `display: flex; justify-content: center; align-items: center;` on the parent.
+:::
+
+## Grid (briefly)
+
+**CSS Grid** lays out in **two dimensions**, rows and columns at the same time. Perfect for page layouts and card galleries:
+
+``` {.css .code-overflow-wrap filename="styles.css"}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+```
+
+This creates as many `200px`+ columns as fit, sharing the free space (`1fr` = one fraction). Rule of thumb: **Flexbox for a row or column of things, Grid for a whole layout**.
+
+## Styling in React
+
+### 1. Import a CSS file and use `className`
+
+The most common way with Vite: write a normal `.css` file and import it. The styles are **global**.
+
+``` {.css .code-overflow-wrap filename="Card.css"}
+.card { padding: 16px; border: 1px solid #ddd; border-radius: 8px; }
+.card.featured { border-color: gold; }
+```
+
+``` {.jsx .code-overflow-wrap filename="Card.jsx"}
+import "./Card.css";
+
+export default function Card({ title, featured }) {
+  return (
+    <div className={featured ? "card featured" : "card"}>
+      <h3>{title}</h3>
+    </div>
+  );
+}
+```
+
+### 2. Inline style object
+
+Good for **dynamic values** computed in JavaScript (a width, a colour from data). Property names are camelCase and the value is an object:
+
+``` {.jsx .code-overflow-wrap filename="ProgressBar.jsx"}
+export default function ProgressBar({ percent }) {
+  return (
+    <div style={{ width: `${percent}%`, height: 8, backgroundColor: "seagreen" }} />
+  );
+}
+```
+
+Inline styles can't do `:hover`, media queries or animations, so don't use them for everything.
+
+### 3. CSS Modules
+
+A file named `*.module.css` gets **locally scoped** class names: no clashes between components. Vite supports it out of the box.
+
+``` {.jsx .code-overflow-wrap filename="Button.jsx"}
+import styles from "./Button.module.css";
+
+export default function Button({ children }) {
+  return <button className={styles.primary}>{children}</button>;
+}
+```
+
+There are also libraries (Tailwind CSS, styled-components, component libraries like MUI). They all build on the CSS above. More in [React JS App: styling](/reactjs/reactjs-app-styling.qmd).
+
+::: {.callout-note}
+## HTML for React
+[1. HTML basics](/reactjs/reactjs-what-html.qmd) · [2. Forms](/reactjs/reactjs-what-html-forms.qmd) · [3. Events and the DOM](/reactjs/reactjs-what-html-events.qmd) · [4. From HTML to JSX](/reactjs/reactjs-what-html-jsx.qmd) · **5. CSS basics**
+
+⬅️ Previous: [From HTML to JSX](/reactjs/reactjs-what-html-jsx.qmd)
+:::
+
+## References
+
+- [W3Schools: CSS Introduction](https://www.w3schools.com/css/css_intro.asp){.external}
+- [W3Schools: How to add CSS](https://www.w3schools.com/css/css_howto.asp){.external}
+- [W3Schools: CSS Selectors](https://www.w3schools.com/css/css_selectors.asp){.external}
+- [W3Schools: HTML class](https://www.w3schools.com/html/html_classes.asp){.external} and [HTML id](https://www.w3schools.com/html/html_id.asp){.external}
+- [W3Schools: CSS Box Model](https://www.w3schools.com/css/css_boxmodel.asp){.external}
+- [W3Schools: CSS Flexbox](https://www.w3schools.com/css/css3_flexbox.asp){.external}
+- [W3Schools: CSS Grid](https://www.w3schools.com/css/css_grid.asp){.external}
+- [W3Schools: Styling React Using CSS](https://www.w3schools.com/react/react_css_styling.asp){.external}
+- [W3Schools: React CSS Modules](https://www.w3schools.com/react/react_css_modules.asp){.external}
