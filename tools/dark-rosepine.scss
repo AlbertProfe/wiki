@@ -1,0 +1,124 @@
+/*-- scss:defaults --*/
+// Rosé Pine Moon — dark-mode layer only (paired with Darkly).
+// Light mode (Cosmo + Catppuccin Latte) is unchanged.
+
+// Palette
+$rp-base: #232136;
+$rp-surface: #2a273f;
+$rp-overlay: #393552;
+$rp-muted: #6e6a86;
+$rp-subtle: #908caa;
+$rp-text: #e0def4;
+$rp-love: #eb6f92;
+$rp-gold: #f6c177;
+$rp-rose: #ea9a97;
+$rp-pine: #3e8fb0;
+$rp-foam: #9ccfd8;
+$rp-iris: #c4a7e7;
+$rp-hl-low: #2a283e;
+$rp-hl-med: #44415a;
+$rp-hl-high: #56526e;
+
+// Core surfaces and type. No !default: these must win over Darkly.
+$body-bg: $rp-base;
+$body-color: $rp-text;
+$link-color: $rp-foam;
+$link-hover-color: $rp-iris;
+$text-muted: $rp-muted;
+$primary: $rp-pine;
+$border-color: $rp-hl-med;
+$table-border-color: $rp-hl-med;
+$input-border-color: $rp-overlay;
+
+// Navbar + sidebar (Darkly's $sidebar-bg defaults to $light ≈ #6f6f6f).
+// Do not set $sidebar-hl: Quarto's nav SCSS has `if($sidebar-hl, sidebar-hl, …)`
+// (missing $) and would break if that variable is already a color.
+$navbar-bg: $rp-surface;
+$navbar-fg: $rp-text;
+$sidebar-bg: $rp-surface;
+$sidebar-fg: $rp-subtle;
+$sidebar-active-color: $rp-iris;
+$sidebar-hover-color: $rp-foam;
+
+// TOC active uses $toc-color (defaults to $link-color).
+$toc-color: $rp-iris;
+
+// Code. A color (not the boolean `true`) becomes $code-block-bg-color as-is,
+// instead of Darkly's rgba(67,67,67,.65) derived from $progress-bg.
+$code-block-bg: $rp-base;
+$code-color: $rp-iris;
+$code-bg: $rp-overlay;
+
+// Callout accents: muted Moon tones, not Darkly's heavy orange/green.
+$callout-color-note: $rp-pine;
+$callout-color-tip: $rp-foam;
+$callout-color-warning: $rp-gold;
+$callout-color-important: $rp-love;
+$callout-color-caution: $rp-rose;
+
+/*-- scss:rules --*/
+
+// Filename header bar: Quarto hardcodes `.quarto-dark .code-with-filename-file { #555 }`.
+body.quarto-dark .code-with-filename .code-with-filename-file,
+.quarto-dark .code-with-filename .code-with-filename-file {
+  background-color: $rp-overlay;
+  color: $rp-subtle;
+  border-color: $rp-hl-med;
+}
+
+// Callout bodies: tinted surface, not a solid warning fill.
+div.callout.callout-style-default {
+  background-color: $rp-surface;
+  border-color: $rp-overlay;
+}
+
+div.callout-note.callout-style-default > .callout-header {
+  background-color: rgba(62, 143, 176, 0.16);
+  color: $rp-text;
+}
+div.callout-tip.callout-style-default > .callout-header {
+  background-color: rgba(156, 207, 216, 0.16);
+  color: $rp-text;
+}
+div.callout-warning.callout-style-default > .callout-header {
+  background-color: rgba(246, 193, 119, 0.16);
+  color: $rp-text;
+}
+div.callout-important.callout-style-default > .callout-header {
+  background-color: rgba(235, 111, 146, 0.16);
+  color: $rp-text;
+}
+div.callout-caution.callout-style-default > .callout-header {
+  background-color: rgba(234, 154, 151, 0.16);
+  color: $rp-text;
+}
+
+// Navbar stays surface even if website.navbar.background: secondary wins in defaults.
+.navbar {
+  background-color: $rp-surface;
+  color: $rp-text;
+}
+
+// Sidebar text is subtle; the current page is iris, hover is foam.
+div.sidebar-item-container {
+  color: $rp-subtle;
+}
+div.sidebar-item-container:hover,
+div.sidebar-item-container:focus {
+  color: $rp-foam;
+}
+div.sidebar-item-container .active,
+div.sidebar-item-container .show > .nav-link,
+div.sidebar-item-container .sidebar-link.active {
+  color: $rp-iris;
+}
+
+.sidebar nav[role="doc-toc"] ul > li > a.active,
+.sidebar nav[role="doc-toc"] ul > li > ul > li > a.active {
+  border-left: 1px solid $rp-iris;
+  color: $rp-iris !important;
+}
+.sidebar nav[role="doc-toc"] ul > li > a:hover,
+.sidebar nav[role="doc-toc"] ul > li > ul > li > a:hover {
+  color: $rp-foam !important;
+}
