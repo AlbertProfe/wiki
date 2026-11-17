@@ -154,3 +154,52 @@ img {
 } 
 
 
+
+/* Code-block backgrounds from the highlight themes.
+   Light (Catppuccin Latte) is scoped so it cannot leak into dark mode.
+   Dark (Rosé Pine Moon) is compiled into bootstrap-dark via tools/dark-rosepine.scss;
+   the rules below are a fallback with a selector that matches any .quarto-dark ancestor. */
+body.quarto-light div.sourceCode,
+body:not(.quarto-dark) div.sourceCode {
+  background-color: #eff1f5;
+}
+.quarto-dark div.sourceCode,
+body.quarto-dark div.sourceCode {
+  background-color: #232136;
+}
+
+
+/* Dark mode overrides for always-on styles.css rules.
+   This file is not color-scheme-swapped and loads last, so the unscoped
+   `a { color: rgb(88, 88, 212) }` and `.summary { background: #a2f868 }`
+   were winning over the Rosé Pine Moon theme layer. Light rules above
+   are unchanged. */
+body.quarto-dark a,
+.quarto-dark a {
+  color: #9ccfd8;
+}
+body.quarto-dark a:visited,
+body.quarto-dark a:hover,
+.quarto-dark a:visited,
+.quarto-dark a:hover {
+  color: #c4a7e7;
+}
+
+body.quarto-dark .summary,
+.quarto-dark .summary {
+  background-color: #2a273f;
+  border: 1px solid #3e8fb0;
+  color: #e0def4;
+}
+
+body.quarto-dark .keywords,
+.quarto-dark .keywords {
+  background-color: #2a273f;
+  border: 1px solid #393552;
+  color: #e0def4;
+}
+
+body.quarto-dark .homecard,
+.quarto-dark .homecard {
+  color: #e0def4;
+}
