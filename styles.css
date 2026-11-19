@@ -203,3 +203,71 @@ body.quarto-dark .homecard,
 .quarto-dark .homecard {
   color: #e0def4;
 }
+
+/* Dark mode tables.
+   Sprint backlog pages embed unscoped page-local rules such as
+   `.heatMap th { background: #f4f4f4 }`,
+   `tr:hover { background-color: #f4f4f4 }`,
+   `tr:nth-child(N) { background-color: #f4f4f4 }` (some with
+   `#b2b2b2 !important`), and `th, td { border-bottom: 1px solid #ddd }`.
+   Those are not color-scheme-swapped, so hovered or "selected" rows
+   and headers go near-white in dark mode and wash out Rosé Pine text
+   and links. Light mode is unchanged. */
+body.quarto-dark table,
+.quarto-dark table {
+  --bs-table-color: #e0def4;
+  --bs-table-bg: #232136;
+  --bs-table-border-color: #44415a;
+  --bs-table-striped-bg: #2a273f;
+  --bs-table-striped-color: #e0def4;
+  --bs-table-active-bg: #393552;
+  --bs-table-active-color: #e0def4;
+  --bs-table-hover-bg: #44415a;
+  --bs-table-hover-color: #e0def4;
+  color: #e0def4;
+}
+
+body.quarto-dark table th,
+body.quarto-dark table td,
+.quarto-dark table th,
+.quarto-dark table td {
+  border-color: #44415a;
+  border-bottom-color: #44415a;
+  color: #e0def4;
+}
+
+body.quarto-dark table thead th,
+body.quarto-dark .heatMap th,
+.quarto-dark table thead th,
+.quarto-dark .heatMap th {
+  background-color: #2a273f !important;
+  color: #908caa !important;
+}
+
+/* Neutralize hardcoded light "current day" fills on the row itself.
+   Higher specificity + !important also covers older backlog pages
+   that use `#b2b2b2 !important`. */
+body.quarto-dark tbody tr,
+.quarto-dark tbody tr {
+  background-color: transparent !important;
+  color: #e0def4;
+}
+
+body.quarto-dark tr:hover,
+body.quarto-dark tr:hover > th,
+body.quarto-dark tr:hover > td,
+.quarto-dark tr:hover,
+.quarto-dark tr:hover > th,
+.quarto-dark tr:hover > td {
+  background-color: #44415a !important;
+  color: #e0def4 !important;
+  box-shadow: none;
+}
+
+/* Keep inline code chips readable on the hover/selected fill
+   (overlay + iris, same as the rest of dark mode). */
+body.quarto-dark tr:hover code,
+.quarto-dark tr:hover code {
+  background-color: #393552;
+  color: #c4a7e7;
+}
