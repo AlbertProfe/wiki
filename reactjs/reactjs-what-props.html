@@ -111,6 +111,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -2135,6 +2138,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#example2" id="toc-example2" class="nav-link" data-scroll-target="#example2"><span class="header-section-number">1.2</span> Example2</a></li>
   </ul></li>
   <li><a href="#the-children-prop" id="toc-the-children-prop" class="nav-link" data-scroll-target="#the-children-prop"><span class="header-section-number">2</span> The <code>children</code> prop</a></li>
+  <li><a href="#example-passing-props-down-state-up" id="toc-example-passing-props-down-state-up" class="nav-link" data-scroll-target="#example-passing-props-down-state-up"><span class="header-section-number">3</span> Example: passing props down, state up</a>
+  <ul>
+  <li><a href="#from-the-click-to-the-next-render" id="toc-from-the-click-to-the-next-render" class="nav-link" data-scroll-target="#from-the-click-to-the-next-render"><span class="header-section-number">3.1</span> From the click to the next render</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/reactjs/reactjs-what-props.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -2308,9 +2315,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="the-children-prop" class="level2" data-number="2">
+<section id="the-children-prop" class="level2 page-columns page-full" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="the-children-prop"><span class="header-section-number">2</span> The <code>children</code> prop</h2>
-<p><code>children</code> is a <strong>special prop</strong>: whatever you nest between a component’s opening and closing tags is passed to that component as <code>children</code>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><a href="https://react.dev/reference/react/Children" class="external" target="_blank">React Children API (react.dev reference)</a></p>
+<p><a href="https://react.dev/reference/react/Children#alternatives" class="external" target="_blank">Alternatives to Children</a></p>
+</div></div><p><code>children</code> is a <strong>special prop</strong>: whatever you nest between a component’s opening and closing tags is passed to that component as <code>children</code>.</p>
 <p>A wrapper component receives that nested JSX and can render it inside its own markup.</p>
 <p>Without <a href="../reactjs/reactjs-es6-destructuring.html">destructuring</a>, you read it from the <code>props</code> object: <code>props.children</code>.</p>
 <p>With object <code>destructuring</code>, you can pull <code>children</code> (and any other props) out of the <code>props</code> object in the function parameter:</p>
@@ -2350,9 +2361,120 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">&lt;Avatar</span> <span class="ot">person</span><span class="op">=</span><span class="va">{</span>person<span class="va">}</span> <span class="ot">size</span><span class="op">=</span><span class="va">{</span><span class="dv">100</span><span class="va">}</span> <span class="fu">/&gt;</span></span>
 <span id="cb10-3"><a href="#cb10-3"></a><span class="fu">&lt;/Card&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="example-passing-props-down-state-up" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="example-passing-props-down-state-up"><span class="header-section-number">3</span> Example: passing props down, state up</h2>
+<div class="summary">
+<p>📘 <strong>Props down, state up</strong></p>
+<p>The parent <strong>owns the state</strong>. It <strong>passes data and handlers down</strong> as <code>props</code>. Children <strong>call the handler</strong> to lift the change back up.</p>
+</div>
+<p>This Accordion example shows it clearly.</p>
+<p><code>Accordion</code> holds <code>activeIndex</code> in state. It passes an <code>isActive</code> <code>prop</code> down to each <code>Panel</code>.</p>
+<ul>
+<li>Initially, <code>activeIndex</code> is <code>0</code>, so the first <code>Panel</code> receives <code>isActive = true</code> and the second receives <code>isActive = false</code>.</li>
+<li>When <code>activeIndex</code> changes to <code>1</code>, the first <code>Panel</code> receives <code>false</code> and the second receives <code>true</code>.</li>
+</ul>
+<p>The <code>Panel</code> does not own that state. It only receives <code>isActive</code>. To open a panel, the child <strong>calls a handler</strong> passed down as a <code>prop</code>, and the parent updates <code>activeIndex</code>. That is <strong>props down, state up</strong>.</p>
+<p><a href="https://react.dev/learn/sharing-state-between-components" class="external" target="_blank">Sharing state between components</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/ifcd0210-26/react-accordion.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Initially, Accordion’s activeIndex is 0, so the first Panel receives isActive = true. When Accordion’s activeIndex changes to 1, the second Panel receives isActive = true instead."><img src="../images/ifcd0210-26/react-accordion.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%" alt="Initially, Accordion’s activeIndex is 0, so the first Panel receives isActive = true. When Accordion’s activeIndex changes to 1, the second Panel receives isActive = true instead."></a></p>
+</figure>
+</div>
+<figcaption>Initially, Accordion’s activeIndex is 0, so the first Panel receives isActive = true. When Accordion’s activeIndex changes to 1, the second Panel receives isActive = true instead.</figcaption>
+</figure>
+</div>
+<p>Here is the code that runs it, from <a href="https://react.dev/learn/sharing-state-between-components" class="external" target="_blank">Sharing state between components</a>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource jsx number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb11-1"><a href="#cb11-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Accordion</span>() {</span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="kw">const</span> [activeIndex<span class="op">,</span> setActiveIndex] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span> <span class="co">// parent owns the state</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="cf">return</span> (</span>
+<span id="cb11-7"><a href="#cb11-7"></a>    <span class="kw">&lt;&gt;</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>      <span class="kw">&lt;h2&gt;</span>Almaty, Kazakhstan<span class="kw">&lt;/h2&gt;</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>      <span class="fu">&lt;Panel</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>        <span class="ot">title</span><span class="op">=</span><span class="st">"About"</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>        <span class="ot">isActive</span><span class="op">=</span><span class="va">{</span>activeIndex <span class="op">===</span> <span class="dv">0</span><span class="va">}</span>          <span class="co">// props down</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a>        <span class="ot">onShow</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> <span class="fu">setActiveIndex</span>(<span class="dv">0</span>)<span class="va">}</span>      <span class="co">// handler down, state up</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a>      <span class="fu">&gt;</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a>        With a population of about 2 million, Almaty is Kazakhstan's largest city.</span>
+<span id="cb11-15"><a href="#cb11-15"></a>        From 1929 to 1997, it was its capital city.</span>
+<span id="cb11-16"><a href="#cb11-16"></a>      <span class="fu">&lt;/Panel&gt;</span></span>
+<span id="cb11-17"><a href="#cb11-17"></a>      <span class="fu">&lt;Panel</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a>        <span class="ot">title</span><span class="op">=</span><span class="st">"Etymology"</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a>        <span class="ot">isActive</span><span class="op">=</span><span class="va">{</span>activeIndex <span class="op">===</span> <span class="dv">1</span><span class="va">}</span>          <span class="co">// props down</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a>        <span class="ot">onShow</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> <span class="fu">setActiveIndex</span>(<span class="dv">1</span>)<span class="va">}</span>      <span class="co">// handler down, state up</span></span>
+<span id="cb11-21"><a href="#cb11-21"></a>      <span class="fu">&gt;</span></span>
+<span id="cb11-22"><a href="#cb11-22"></a>        The name comes from алма, the Kazakh word for "apple", often translated as "full of apples".</span>
+<span id="cb11-23"><a href="#cb11-23"></a>      <span class="fu">&lt;/Panel&gt;</span></span>
+<span id="cb11-24"><a href="#cb11-24"></a>    <span class="kw">&lt;/&gt;</span></span>
+<span id="cb11-25"><a href="#cb11-25"></a>  )<span class="op">;</span></span>
+<span id="cb11-26"><a href="#cb11-26"></a>}</span>
+<span id="cb11-27"><a href="#cb11-27"></a></span>
+<span id="cb11-28"><a href="#cb11-28"></a><span class="kw">function</span> <span class="fu">Panel</span>({ title<span class="op">,</span> children<span class="op">,</span> isActive<span class="op">,</span> onShow }) {</span>
+<span id="cb11-29"><a href="#cb11-29"></a>  <span class="cf">return</span> (</span>
+<span id="cb11-30"><a href="#cb11-30"></a>    <span class="kw">&lt;section</span> <span class="ot">className</span><span class="op">=</span><span class="st">"panel"</span><span class="kw">&gt;</span></span>
+<span id="cb11-31"><a href="#cb11-31"></a>      <span class="kw">&lt;h3&gt;</span><span class="va">{</span>title<span class="va">}</span><span class="kw">&lt;/h3&gt;</span></span>
+<span id="cb11-32"><a href="#cb11-32"></a>      <span class="va">{</span>isActive <span class="op">?</span> (</span>
+<span id="cb11-33"><a href="#cb11-33"></a>        <span class="kw">&lt;p&gt;</span><span class="va">{</span>children<span class="va">}</span><span class="kw">&lt;/p&gt;</span></span>
+<span id="cb11-34"><a href="#cb11-34"></a>      ) <span class="op">:</span> (</span>
+<span id="cb11-35"><a href="#cb11-35"></a>        <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>onShow<span class="va">}</span><span class="kw">&gt;</span>Show<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb11-36"><a href="#cb11-36"></a>      )<span class="va">}</span></span>
+<span id="cb11-37"><a href="#cb11-37"></a>    <span class="kw">&lt;/section&gt;</span></span>
+<span id="cb11-38"><a href="#cb11-38"></a>  )<span class="op">;</span></span>
+<span id="cb11-39"><a href="#cb11-39"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="from-the-click-to-the-next-render" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="from-the-click-to-the-next-render"><span class="header-section-number">3.1</span> From the click to the next render</h3>
+<p>Assume <code>activeIndex</code> is <code>0</code>: the first <code>Panel</code> is open, the second shows a <strong>Show</strong> button. The user clicks <strong>Show</strong> on panel 2.</p>
+<p><strong>1. The click fires <code>onShow</code>.</strong> The button’s <code>onClick</code> is the <code>onShow</code> prop:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource jsx number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>onShow<span class="va">}</span><span class="kw">&gt;</span>Show<span class="kw">&lt;/button&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>2. State goes up.</strong> The child calls the parent’s handler:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource jsx number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb13-1"><a href="#cb13-1"></a>onShow<span class="op">=</span>{() <span class="kw">=&gt;</span> <span class="fu">setActiveIndex</span>(<span class="dv">1</span>)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>3. React schedules a re-render.</strong> <code>setActiveIndex(1)</code> does <strong>not</strong> change <code>activeIndex</code> in the current render. It queues the update and React schedules a re-render of <code>Accordion</code>. That is the trigger in the <a href="../reactjs/reactjs-what-immutability.html">render cycle</a>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource jsx number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">setActiveIndex</span>(<span class="dv">1</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>4. <code>Accordion</code> re-runs.</strong> In this new render, <code>activeIndex</code> is <code>1</code>:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource jsx number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">const</span> [activeIndex<span class="op">,</span> setActiveIndex] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co">// activeIndex is now 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>5. Props go down.</strong> The parent computes the new <code>isActive</code> values:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource jsx number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb16-1"><a href="#cb16-1"></a>isActive<span class="op">=</span>{activeIndex <span class="op">===</span> <span class="dv">0</span>}  <span class="co">// false</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>isActive<span class="op">=</span>{activeIndex <span class="op">===</span> <span class="dv">1</span>}  <span class="co">// true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>6. Each <code>Panel</code> re-renders</strong> with its new <code>isActive</code>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource jsx number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">function</span> <span class="fu">Panel</span>({ title<span class="op">,</span> children<span class="op">,</span> isActive<span class="op">,</span> onShow }) {</span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="co">// panel 1: isActive === false  -&gt;  button</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="co">// panel 2: isActive === true   -&gt;  content</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>7. React commits the DOM.</strong> Only the differences are written to the page: panel 1 now shows its <strong>Show</strong> button, and panel 2 shows its content. That is the commit in the <a href="../reactjs/reactjs-what-immutability.html">render cycle</a>.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">sequenceDiagram
+  actor User
+  participant Panel2 as Panel 2
+  participant Accordion
+  participant React
+  User-&gt;&gt;Panel2: click Show
+  Panel2-&gt;&gt;Accordion: onShow / setActiveIndex(1)
+  Note right of Accordion: state up
+  Accordion-&gt;&gt;React: queue update, schedule render
+  React-&gt;&gt;Accordion: re-render, activeIndex is 1
+  Accordion-&gt;&gt;Panel2: isActive true
+  Note right of Accordion: props down
+  React-&gt;&gt;React: commit DOM
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <p>See also: <a href="../reactjs/reactjs-what-immutability.html">React JS: render cycle</a>.</p>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
