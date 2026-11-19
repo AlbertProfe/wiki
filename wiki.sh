@@ -25,6 +25,7 @@ PREVIEW_PORT="${WIKI_PREVIEW_PORT:-8787}"   # must match preview-up.sh
 QUARTO="${QUARTO:-quarto}"
 WT_ROOT="${WIKI_WT_ROOT:-/workspace/wiki-team/repos/wt}"   # bot worktrees on the box
 LOCK_DIR="${WIKI_LOCK_DIR:-}"                                 # default set in preflight
+SHARED_SITE="${WIKI_SHARED_SITE:-}"   # team's shared build (box only; default set in preflight; "off" disables)
 if [[ -d "$HOME/.local/bin" ]]; then PATH="$HOME/.local/bin:$PATH"; fi
 
 DRY_RUN=0
@@ -36,6 +37,8 @@ IS_WORKTREE=0      # 1 = running in a linked worktree (a bot folder), not the ma
 MAIN_WT=""         # path of the main clone (first entry of git worktree list)
 BOT=""             # who is running: $WIKI_BOT, else the worktree folder name
 declare -A HELD_LOCKS=()
+# Set by plan_publish: what publish must render to bring a _site built from one tree up to HEAD.
+P_FULL=0; P_REASON=""; P_NAVP=0; P_PAGES=(); P_COPIES=()
 
 # ----------------------------------------------------------------------------- output
 if [[ -t 1 && -z "${NO_COLOR:-}" ]]; then
@@ -68,6 +71,9 @@ Worktrees (box): run it from your own folder, e.g.
   cd /workspace/wiki-team/repos/wt/wiki-ops && WIKI_BOT=wiki-ops ./wiki.sh start
   Between sessions a worktree is detached at origin/master; start creates the session branch.
   Locks in /workspace/wiki-team/locks: preview (the one ngrok tunnel), publish (merge/publish/ship).
+  Shared build: every publish on the box saves its _site to /workspace/wiki-team/cache/wiki-site;
+  when your own _site would need a FULL render (styles.css, _quarto.yml... changed since you last
+  built) publish and preview copy that build in and render only your pages. WIKI_SHARED_SITE=off disables.
 
 Session (box or Albert's VM):
   start                       pull master, create session/YYYY-MM-DD-N (next free N);
@@ -135,6 +141,10 @@ preflight() {
   if [[ -z "$LOCK_DIR" ]]; then
     if [[ "$ENVIRONMENT" == "box" ]]; then LOCK_DIR="/workspace/wiki-team/locks"; else LOCK_DIR="$GIT_COMMON_ABS/wiki-locks"; fi
   fi
+  if [[ -z "$SHARED_SITE" && "$ENVIRONMENT" == "box" ]]; then
+    SHARED_SITE="/workspace/wiki-team/cache/$(basename "${MAIN_WT:-$REPO}")-site"   # e.g. cache/wiki-site
+  fi
+  [[ "$SHARED_SITE" == "off" ]] && SHARED_SITE=""
   if [[ "$ENVIRONMENT" == "github-actions" && -z "$(git config user.name || true)" ]]; then
     run git config user.name "github-actions[bot]"
     run git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -198,6 +208,23 @@ Wait until it is released (./wiki.sh status shows it), or ask that bot. Never ki
   fi
   printf '%s pid=%s worktree=%s since=%s\n' "$BOT" "$$" "$REPO" "$(date '+%F %H:%M %Z')" > "$f"
   HELD_LOCKS[$name]=$fd
+}
+try_lock() {    # try_lock <name>: like take_lock, but returns 1 instead of dying when it is held
+  local name="$1" f fd
+  [[ -n "${HELD_LOCKS[$name]:-}" ]] && return 0
+  command -v flock >/dev/null 2>&1 || return 0
+  mkdir -p "$LOCK_DIR"; f="$(lock_file "$name")"
+  exec {fd}<>"$f"
+  if ! flock -n "$fd"; then exec {fd}>&-; return 1; fi
+  printf '%s pid=%s worktree=%s since=%s\n' "$BOT" "$$" "$REPO" "$(date '+%F %H:%M %Z')" > "$f"
+  HELD_LOCKS[$name]=$fd
+}
+release_lock() {   # release_lock <name>: drop a lock taken with try_lock/take_lock before exit
+  local fd="${HELD_LOCKS[$1]:-}"
+  [[ -n "$fd" ]] || return 0
+  flock -u "$fd" 2>/dev/null || true
+  exec {fd}>&-
+  unset "HELD_LOCKS[$1]"
 }
 
 # Fast-forward the main clone's master to origin/master (best effort; it is only the shared base).
@@ -316,6 +343,150 @@ nav_patch() {
   rm -rf "$old"
 }
 
+# ----------------------------------------------------------------------------- shared build
+# Team rule 12 (Albert, 2026-11-19): "global changes must be shared, reuse changes from one bot to team".
+# Every successful publish on the box copies its _site (plus .quarto idx/listing/xref) to $SHARED_SITE,
+# stamped with the source tree it matches (= the published HEAD). When a worktree's own _site would need a
+# FULL render (a global file changed since it was built: styles.css, _quarto.yml, *.scss, _extensions...),
+# publish/preview check whether the shared build already covers HEAD's global files; if so they copy it in,
+# adopt its stamp and render only the pages that differ. Anything that does not match -> full render as before.
+# Reads and writes of $SHARED_SITE happen under the publish lock.
+
+# Short hash of the global files of a tree: what forces a full render when it changes.
+globals_key() {
+  git ls-tree -r "$1" | awk -F'\t' '
+    $2 ~ /^(_quarto\.yml|_metadata\.yml|CNAME)$/ || $2 ~ /^_extensions\// || $2 ~ /^tools\/.*\.theme$/ ||
+    ($2 ~ /\.s?css$/ && $2 !~ /^(_templates|_freeze|_site)\//)' | git hash-object --stdin | cut -c1-12
+}
+# Tree the shared build was made from ("" if none, being written, or not of this repo).
+shared_tree() {
+  [[ -n "$SHARED_SITE" ]] || return 0
+  local s t; s="$(head -n1 "$SHARED_SITE/stamp" 2>/dev/null || true)"
+  [[ "$s" == "tree "* ]] || return 0
+  t="${s#tree }"
+  [[ -f "$SHARED_SITE/site/index.html" ]] && git cat-file -e "$t^{tree}" 2>/dev/null && echo "$t"
+  return 0
+}
+shared_who() { sed -n 's/^by //p' "$SHARED_SITE/stamp" 2>/dev/null || true; }
+# Make directory $2 identical to $1 (keeps $2 itself, so a preview server on it keeps working).
+sync_dir() {
+  python3 - "$1" "$2" <<'PY'
+import os, shutil, sys
+src, dst = sys.argv[1:3]
+os.makedirs(dst, exist_ok=True)
+want, n, gone = set(), 0, 0
+for d, _, files in os.walk(src):
+    for f in files:
+        rel = os.path.normpath(os.path.relpath(os.path.join(d, f), src)); want.add(rel)
+        s, t = os.path.join(src, rel), os.path.join(dst, rel)
+        ss = os.stat(s)
+        try:
+            ts = os.stat(t)
+            if ts.st_size == ss.st_size and ts.st_mtime_ns == ss.st_mtime_ns: continue
+        except FileNotFoundError:
+            pass
+        os.makedirs(os.path.dirname(t), exist_ok=True)
+        shutil.copy2(s, t); n += 1
+for d, _, files in os.walk(dst):
+    for f in files:
+        rel = os.path.normpath(os.path.relpath(os.path.join(d, f), dst))
+        if rel not in want: os.remove(os.path.join(dst, rel)); gone += 1
+print(f"  {src} -> {dst}: {n} file(s) copied, {gone} stale output file(s) removed")
+PY
+}
+# After a publish: save this _site as the team's shared build (caller holds the publish lock).
+shared_site_save() {
+  [[ -n "$SHARED_SITE" ]] || return 0
+  local t d; t="$(git rev-parse "$1^{tree}")"
+  if (( DRY_RUN )); then info "[dry-run] would save this _site as the team's shared build ($SHARED_SITE, tree ${t:0:8})"; return 0; fi
+  info "saving this _site as the team's shared build ($SHARED_SITE)"
+  mkdir -p "$SHARED_SITE"
+  echo "pending $BOT $(date '+%F %H:%M %Z')" > "$SHARED_SITE/stamp"   # unusable until complete
+  sync_dir _site "$SHARED_SITE/site" || return 1
+  for d in idx listing xref; do
+    if [[ -d ".quarto/$d" ]]; then sync_dir ".quarto/$d" "$SHARED_SITE/quarto/$d" || return 1; fi
+  done
+  printf 'tree %s\nglobals %s\ncommit %s\nby %s %s\n' "$t" "$(globals_key "$t")" "$(git rev-parse "$1")" "$BOT" "$(date '+%F %H:%M %Z')" > "$SHARED_SITE/stamp"
+  ok "shared build = tree ${t:0:8} (globals $(globals_key "$t")); other bots reuse it instead of a full render"
+}
+# Copy the shared build (tree $1) into this worktree and adopt its stamp (caller holds the publish lock).
+shared_site_adopt() {
+  local t="$1" d
+  if (( DRY_RUN )); then info "[dry-run] would copy the shared build into _site and stamp it tree ${t:0:8}"; return 0; fi
+  echo "adopting" > "$(site_stamp_file)"   # if anything fails below, the stamp is unknown -> full render next time
+  sync_dir "$SHARED_SITE/site" _site || return 1
+  for d in idx listing xref; do
+    if [[ -d "$SHARED_SITE/quarto/$d" ]]; then sync_dir "$SHARED_SITE/quarto/$d" ".quarto/$d" || return 1; fi
+  done
+  [[ "$(shared_tree)" == "$t" ]] || return 1   # changed while copying (should not happen under the lock)
+  echo "tree $t" > "$(site_stamp_file)"
+  : > "$(preview_dirty_file)"
+  ok "_site is now the shared build (tree ${t:0:8})"
+}
+
+# plan_publish <base-tree> <head-commit> <use-dirty 0|1>: what must be rendered to bring a _site built from
+# <base-tree> (plus, with use-dirty, the pages previewed on top of it) up to <head>. Sets P_*.
+plan_publish() {
+  local base="$1" head="$2" usedirty="$3" st p1 p2 db
+  P_FULL=0; P_REASON=""; P_NAVP=0; P_PAGES=(); P_COPIES=()
+  while IFS=$'\t' read -r st p1 p2; do
+    db=""; if (( usedirty )); then db="$(dirty_blob "$p1")"; fi
+    case "$st" in
+      M*|T*)
+        case "$p1" in
+          _quarto.yml)
+            if [[ -n "$db" && "$db" == "$(git rev-parse "$head:_quarto.yml")" ]]; then :   # nav patched at preview
+            elif nav_only_change "$base"; then P_NAVP=1
+            else P_FULL=1; P_REASON="$p1 changed"; fi ;;
+          _metadata.yml|*.scss|*.css|CNAME|_extensions/*) P_FULL=1; P_REASON="$p1 changed" ;;
+          _freeze/*|_templates/*|.github/*|wiki.sh|README.md|FLOW.md|.gitignore) ;;
+          _*) ;;
+          *.qmd) [[ -n "$db" && "$db" == "$(git rev-parse "$head:$p1")" ]] || P_PAGES+=("$p1") ;;
+          images/*) P_COPIES+=("$p1") ;;
+          *) P_FULL=1; P_REASON="$p1 changed (not a page or image)" ;;
+        esac ;;
+      A*)
+        case "$p1" in
+          *.qmd) [[ "$p1" == _* ]] || { P_FULL=1; P_REASON="page added: $p1"; } ;;
+          images/*) P_COPIES+=("$p1") ;;
+          _freeze/*|_templates/*|.github/*|wiki.sh|README.md|FLOW.md) ;;
+          *) P_FULL=1; P_REASON="file added: $p1" ;;
+        esac ;;
+      D*) case "$p1" in _freeze/*|.github/*) ;; *) P_FULL=1; P_REASON="file deleted: $p1" ;; esac ;;
+      R*|C*) P_FULL=1; P_REASON="file renamed: $p1 -> $p2" ;;
+      *) P_FULL=1; P_REASON="unknown change $st $p1" ;;
+    esac
+    if (( P_FULL )); then return 0; fi
+  done < <(git diff --name-status -M "$base" "$head^{tree}")
+  # pages rendered on top of the stamp from content that is not what HEAD has: render again
+  if (( usedirty )) && [[ -s "$(preview_dirty_file)" ]]; then
+    local f b
+    while read -r f b; do
+      if [[ "$f" == "__FULL__" ]]; then P_FULL=1; P_REASON="full preview render recorded by the old wiki.sh"; return 0; fi
+      [[ "$f" == *.qmd ]] || continue
+      if [[ ! -f "$f" ]]; then P_FULL=1; P_REASON="previewed page no longer on $MAIN_BRANCH: $f"; return 0; fi
+      [[ "$(dirty_blob "$f")" == "$(git rev-parse "$head:$f" 2>/dev/null)" ]] || P_PAGES+=("$f")
+    done < "$(preview_dirty_file)"
+  fi
+  return 0
+}
+
+# Preview: if this _site predates a global change that the shared build already has, adopt the shared build
+# first, so the preview shows the current styles without a full render. Best effort; never fatal.
+preview_use_shared() {
+  [[ -n "$SHARED_SITE" ]] || return 0
+  local shared own src; shared="$(shared_tree)"; [[ -n "$shared" ]] || return 0
+  own="$(stamp_tree)"; src="$(source_tree)"
+  [[ "$own" == "$shared" ]] && return 0
+  [[ "$(globals_key "$shared")" == "$(globals_key "$src")" ]] || return 0               # shared build is not on your global files
+  if [[ -n "$own" ]] && git cat-file -e "$own" 2>/dev/null && [[ "$(globals_key "$own")" == "$(globals_key "$src")" ]]; then return 0; fi   # yours already is
+  info "your _site predates a global change; the team's shared build (tree ${shared:0:8}, by $(shared_who)) has it"
+  if (( DRY_RUN )); then shared_site_adopt "$shared"; return 0; fi
+  if ! try_lock publish; then warn "publish lock held by $(lock_owner publish): not copying the shared build now (styles may look old in this preview)"; return 0; fi
+  shared_site_adopt "$shared" || warn "copying the shared build failed; run ./wiki.sh preview --all if the preview looks wrong"
+  release_lock publish
+}
+
 # ----------------------------------------------------------------------------- start
 # Next free session/YYYY-MM-DD-N, counting local branches (shared by all worktrees), branches checked
 # out in any worktree, remote-tracking branches and what origin has right now.
@@ -401,6 +572,7 @@ cmd_preview() {
       mapfile -t files < <(changed_qmd_vs_main)
       ((${#files[@]})) || info "no changed .qmd files vs $(base_ref); nothing to render"
     fi
+    preview_use_shared
     local st yb; st="$(stamp_tree)"; yb="$(git hash-object _quarto.yml)"
     if [[ -n "$st" ]] && [[ "$(git rev-parse "$st:_quarto.yml")" != "$yb" && "$(dirty_blob _quarto.yml)" != "$yb" ]]; then
       if nav_only_change "$st"; then
@@ -599,13 +771,13 @@ cmd_publish() {
     [[ "$head" == "$(git rev-parse "origin/$MAIN_BRANCH")" ]] \
       || die "$MAIN_BRANCH is not equal to origin/$MAIN_BRANCH (pull or push first)"
   fi
-  local live="" reason="" full=$all
+  local live="" reason="" full=$all can_share=1
   live="$(git rev-parse -q --verify "refs/tags/$LIVE_TAG^{commit}" || true)"
-  (( all )) && reason="--all requested"
+  (( all )) && { reason="--all requested"; can_share=0; }
   if [[ -z "$live" && $full -eq 0 ]]; then
     die "no '$LIVE_TAG' tag yet: run ./wiki.sh publish --all once to set the baseline"
   fi
-  if (( ! full )) && [[ "$ENVIRONMENT" == "github-actions" ]]; then full=1; reason="GitHub Actions has no _site"; fi
+  if (( ! full )) && [[ "$ENVIRONMENT" == "github-actions" ]]; then full=1; reason="GitHub Actions has no _site"; can_share=0; fi
   if (( ! full )) && [[ ! -f _site/index.html ]]; then full=1; reason="_site is missing"; fi
 
   # _site is pushed whole, so what matters is the tree it was built from (the stamp), not the live tag.
@@ -613,54 +785,38 @@ cmd_publish() {
   local base=""
   if (( ! full )); then
     base="$(stamp_tree)"
-    if ! git merge-base --is-ancestor "$live" "$head" 2>/dev/null; then full=1; reason="tag $LIVE_TAG is not an ancestor of HEAD"
+    if ! git merge-base --is-ancestor "$live" "$head" 2>/dev/null; then full=1; reason="tag $LIVE_TAG is not an ancestor of HEAD"; can_share=0
     elif [[ -z "$base" ]] || ! git cat-file -e "$base" 2>/dev/null; then
       full=1; reason="_site has no render stamp (unknown state)"
     fi
   fi
-
-  local pages=() copies=() st p1 p2 navp=0
   if (( ! full )); then
     info "changes between the tree _site was built from (${base:0:8}) and HEAD"
-    while IFS=$'\t' read -r st p1 p2; do
-      case "$st" in
-        M*|T*)
-          case "$p1" in
-            _quarto.yml)
-              if [[ "$(dirty_blob _quarto.yml)" == "$(git rev-parse "$head:_quarto.yml")" ]]; then :   # nav patched at preview
-              elif nav_only_change "$base"; then navp=1
-              else full=1; reason="$p1 changed"; fi ;;
-            _metadata.yml|*.scss|*.css|CNAME|_extensions/*) full=1; reason="$p1 changed" ;;
-            _freeze/*|_templates/*|.github/*|wiki.sh|README.md|FLOW.md|.gitignore) ;;
-            _*) ;;
-            *.qmd) [[ "$(dirty_blob "$p1")" == "$(git rev-parse "$head:$p1")" ]] || pages+=("$p1") ;;
-            images/*) copies+=("$p1") ;;
-            *) full=1; reason="$p1 changed (not a page or image)" ;;
-          esac ;;
-        A*)
-          case "$p1" in
-            *.qmd) [[ "$p1" == _* ]] || { full=1; reason="page added: $p1"; } ;;
-            images/*) copies+=("$p1") ;;
-            _freeze/*|_templates/*|.github/*|wiki.sh|README.md|FLOW.md) ;;
-            *) full=1; reason="file added: $p1" ;;
-          esac ;;
-        D*) case "$p1" in _freeze/*|.github/*) ;; *) full=1; reason="file deleted: $p1" ;; esac ;;
-        R*|C*) full=1; reason="file renamed: $p1 -> $p2" ;;
-        *) full=1; reason="unknown change $st $p1" ;;
-      esac
-      if (( full )); then break; fi
-    done < <(git diff --name-status -M "$base" "$head^{tree}")
-    # pages rendered on top of the stamp from content that is not what HEAD has: render again
-    if (( ! full )) && [[ -s "$(preview_dirty_file)" ]]; then
-      local f b
-      while read -r f b; do
-        if [[ "$f" == "__FULL__" ]]; then full=1; reason="full preview render recorded by the old wiki.sh"; break; fi
-        [[ "$f" == *.qmd ]] || continue
-        if [[ ! -f "$f" ]]; then full=1; reason="previewed page no longer on $MAIN_BRANCH: $f"; break; fi
-        [[ "$(dirty_blob "$f")" == "$(git rev-parse "$head:$f" 2>/dev/null)" ]] || pages+=("$f")
-      done < "$(preview_dirty_file)"
+    plan_publish "$base" "$head" 1
+    full=$P_FULL; reason="$P_REASON"
+  fi
+
+  # Shared build (team rule 12): your _site needs a full render, but maybe another bot already built
+  # and published these global files. Then copy its _site in and render only what differs from it.
+  if (( full && can_share )) && [[ -n "$SHARED_SITE" ]]; then
+    local shared; shared="$(shared_tree)"
+    if [[ -z "$shared" ]]; then
+      info "no usable shared build in $SHARED_SITE (none yet, or being written)"
+    else
+      info "your _site needs a FULL render (${reason}); checking the team's shared build: tree ${shared:0:8} (globals $(globals_key "$shared"), HEAD globals $(globals_key "$head"), by $(shared_who))"
+      plan_publish "$shared" "$head" 0
+      if (( P_FULL )); then
+        info "shared build not reusable (${P_REASON})"
+        full=1   # keep your own reason
+      else
+        info "reusing the shared build: its global files match HEAD; only ${#P_PAGES[@]} page(s) and ${#P_COPIES[@]} image(s) differ"
+        if shared_site_adopt "$shared"; then base="$shared"; full=0; reason=""
+        else full=1; reason="copying the shared build failed"; fi
+      fi
     fi
   fi
+  local pages=() copies=() navp=0
+  if (( ! full )); then pages=("${P_PAGES[@]}"); copies=("${P_COPIES[@]}"); navp=$P_NAVP; fi
 
   ensure_extensions
   if (( ! full && navp )); then nav_patch || { full=1; reason="nav patch failed"; }; fi
@@ -690,6 +846,7 @@ cmd_publish() {
     echo "tree $(git rev-parse "$head^{tree}")" > "$(site_stamp_file)"
     : > "$(preview_dirty_file)"
   fi
+  shared_site_save "$head" || warn "could not update the shared build in $SHARED_SITE (left marked pending, so nobody uses it)"
   run git tag -f "$LIVE_TAG" "$head"
   run git push -f origin "refs/tags/$LIVE_TAG"      # force only on the tag, never on a branch
   ok "published ${head:0:8} ($(git log -1 --format=%s "$head")); tag $LIVE_TAG moved"
@@ -733,6 +890,11 @@ cmd_status() {
     git log --format='    %h %s' "$live..$MAIN_BRANCH" 2>/dev/null | head -n 20
   fi
   echo "_site stamp  $(cut -c1-13 "$(site_stamp_file)" 2>/dev/null || echo none)  (HEAD tree $(git rev-parse --short HEAD^{tree}))"
+  if [[ -n "$SHARED_SITE" ]]; then
+    local sh; sh="$(shared_tree)"
+    if [[ -n "$sh" ]]; then echo "shared build tree ${sh:0:8} globals $(globals_key "$sh") by $(shared_who)  (yours: globals $( [[ -n "$(stamp_tree)" ]] && git cat-file -e "$(stamp_tree)" 2>/dev/null && globals_key "$(stamp_tree)" || echo '?'))"
+    else echo "shared build none yet ($SHARED_SITE)"; fi
+  fi
   if [[ -s "$(preview_dirty_file)" ]]; then
     echo "pages rendered on top of the stamp: $(cut -d' ' -f1 "$(preview_dirty_file)" | sort -u | tr '\n' ' ')"
   fi
