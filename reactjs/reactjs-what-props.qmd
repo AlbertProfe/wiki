@@ -150,6 +150,12 @@ export default function Carla() {
 
 ## The ``children`` prop
 
+::: {.column-margin}
+[React Children API (react.dev reference)](https://react.dev/reference/react/Children){.external target="_blank"}
+
+[Alternatives to Children](https://react.dev/reference/react/Children#alternatives){.external target="_blank"}
+:::
+
 ``children`` is a **special prop**: whatever you nest between a component’s opening and closing tags is passed to that component as ``children``.
 
 A wrapper component receives that nested JSX and can render it inside its own markup.
@@ -188,6 +194,136 @@ You then nest content inside ``Card`` like this:
 <Card title="Profile">
   <Avatar person={person} size={100} />
 </Card>
+```
+
+## Example: passing props down, state up
+
+::: {.summary}
+
+📘 **Props down, state up**
+
+The parent **owns the state**. It **passes data and handlers down** as ``props``. Children **call the handler** to lift the change back up.
+
+:::
+
+This Accordion example shows it clearly.
+
+``Accordion`` holds ``activeIndex`` in state. It passes an ``isActive`` ``prop`` down to each ``Panel``.
+
+- Initially, ``activeIndex`` is ``0``, so the first ``Panel`` receives ``isActive = true`` and the second receives ``isActive = false``.
+- When ``activeIndex`` changes to ``1``, the first ``Panel`` receives ``false`` and the second receives ``true``.
+
+The ``Panel`` does not own that state. It only receives ``isActive``. To open a panel, the child **calls a handler** passed down as a ``prop``, and the parent updates ``activeIndex``. That is **props down, state up**.
+
+[Sharing state between components](https://react.dev/learn/sharing-state-between-components){.external target="_blank"}
+
+![Initially, Accordion’s activeIndex is 0, so the first Panel receives isActive = true. When Accordion’s activeIndex changes to 1, the second Panel receives isActive = true instead.](/images/ifcd0210-26/react-accordion.png){.lightbox width="90%" fig-align="center"}
+
+Here is the code that runs it, from [Sharing state between components](https://react.dev/learn/sharing-state-between-components){.external target="_blank"}:
+
+```jsx
+import { useState } from 'react';
+
+export default function Accordion() {
+  const [activeIndex, setActiveIndex] = useState(0); // parent owns the state
+
+  return (
+    <>
+      <h2>Almaty, Kazakhstan</h2>
+      <Panel
+        title="About"
+        isActive={activeIndex === 0}          // props down
+        onShow={() => setActiveIndex(0)}      // handler down, state up
+      >
+        With a population of about 2 million, Almaty is Kazakhstan's largest city.
+        From 1929 to 1997, it was its capital city.
+      </Panel>
+      <Panel
+        title="Etymology"
+        isActive={activeIndex === 1}          // props down
+        onShow={() => setActiveIndex(1)}      // handler down, state up
+      >
+        The name comes from алма, the Kazakh word for "apple", often translated as "full of apples".
+      </Panel>
+    </>
+  );
+}
+
+function Panel({ title, children, isActive, onShow }) {
+  return (
+    <section className="panel">
+      <h3>{title}</h3>
+      {isActive ? (
+        <p>{children}</p>
+      ) : (
+        <button onClick={onShow}>Show</button>
+      )}
+    </section>
+  );
+}
+```
+
+### From the click to the next render
+
+Assume ``activeIndex`` is ``0``: the first ``Panel`` is open, the second shows a **Show** button. The user clicks **Show** on panel 2.
+
+**1. The click fires ``onShow``.** The button’s ``onClick`` is the ``onShow`` prop:
+
+```jsx
+<button onClick={onShow}>Show</button>
+```
+
+**2. State goes up.** The child calls the parent’s handler:
+
+```jsx
+onShow={() => setActiveIndex(1)}
+```
+
+**3. React schedules a re-render.** ``setActiveIndex(1)`` does **not** change ``activeIndex`` in the current render. It queues the update and React schedules a re-render of ``Accordion``. That is the trigger in the [render cycle](/reactjs/reactjs-what-immutability.qmd).
+
+```jsx
+setActiveIndex(1);
+```
+
+**4. ``Accordion`` re-runs.** In this new render, ``activeIndex`` is ``1``:
+
+```jsx
+const [activeIndex, setActiveIndex] = useState(0);
+// activeIndex is now 1
+```
+
+**5. Props go down.** The parent computes the new ``isActive`` values:
+
+```jsx
+isActive={activeIndex === 0}  // false
+isActive={activeIndex === 1}  // true
+```
+
+**6. Each ``Panel`` re-renders** with its new ``isActive``:
+
+```jsx
+function Panel({ title, children, isActive, onShow }) {
+  // panel 1: isActive === false  ->  button
+  // panel 2: isActive === true   ->  content
+}
+```
+
+**7. React commits the DOM.** Only the differences are written to the page: panel 1 now shows its **Show** button, and panel 2 shows its content. That is the commit in the [render cycle](/reactjs/reactjs-what-immutability.qmd).
+
+```{mermaid}
+sequenceDiagram
+  actor User
+  participant Panel2 as Panel 2
+  participant Accordion
+  participant React
+  User->>Panel2: click Show
+  Panel2->>Accordion: onShow / setActiveIndex(1)
+  Note right of Accordion: state up
+  Accordion->>React: queue update, schedule render
+  React->>Accordion: re-render, activeIndex is 1
+  Accordion->>Panel2: isActive true
+  Note right of Accordion: props down
+  React->>React: commit DOM
 ```
 
 See also: [React JS: render cycle](/reactjs/reactjs-what-immutability.qmd).

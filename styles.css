@@ -271,3 +271,178 @@ body.quarto-dark tr:hover code,
   background-color: #393552;
   color: #c4a7e7;
 }
+
+/* Dark mode mermaid (sequence, flowchart, and other diagrams).
+   Quarto 1.6 injects mermaid-init defaultCSS that ties .messageText and
+   arrow strokes to --mermaid-edge-color, and hardcodes
+   `.noteText > tspan { fill: #000 }`. In the Rosé Pine Moon dark
+   stylesheet those edge/label vars were too dark (#3f3d53 / pine #3e8fb0)
+   and mermaid's default note fill stayed bright yellow. Light mode is
+   unchanged. Mermaid also emits a per-SVG style (and sometimes inline
+   fills), so the class rules use !important. */
+body.quarto-dark,
+.quarto-dark {
+  --mermaid-bg-color: #232136;
+  --mermaid-fg-color: #e0def4;
+  --mermaid-fg-color--lighter: #908caa;
+  --mermaid-fg-color--lightest: #393552;
+  --mermaid-edge-color: #908caa;
+  --mermaid-label-bg-color: #2a273f;
+  --mermaid-label-fg-color: #e0def4;
+  --mermaid-node-bg-color: #2a273f;
+  --mermaid-node-fg-color: #e0def4;
+}
+
+body.quarto-dark .mermaidContent,
+.quarto-dark .mermaidContent {
+  background-color: #232136;
+}
+
+/* Sequence: message labels and arrows */
+body.quarto-dark .messageText,
+body.quarto-dark .messageText tspan,
+.quarto-dark .messageText,
+.quarto-dark .messageText tspan {
+  fill: #e0def4 !important;
+  stroke: none !important;
+  color: #e0def4 !important;
+}
+
+body.quarto-dark .messageLine0,
+body.quarto-dark .messageLine1,
+.quarto-dark .messageLine0,
+.quarto-dark .messageLine1 {
+  stroke: #908caa !important;
+}
+
+body.quarto-dark #arrowhead path,
+body.quarto-dark marker#arrowhead path,
+body.quarto-dark marker path,
+.quarto-dark #arrowhead path,
+.quarto-dark marker#arrowhead path,
+.quarto-dark marker path {
+  fill: #908caa !important;
+  stroke: none !important;
+}
+
+/* Actors and lifelines */
+body.quarto-dark .actor,
+.quarto-dark .actor {
+  fill: #2a273f !important;
+  stroke: #44415a !important;
+}
+
+body.quarto-dark text.actor,
+body.quarto-dark text.actor tspan,
+.quarto-dark text.actor,
+.quarto-dark text.actor tspan {
+  fill: #e0def4 !important;
+  stroke: none !important;
+  color: #e0def4 !important;
+}
+
+body.quarto-dark .actor-line,
+.quarto-dark .actor-line,
+body.quarto-dark line.actor-line,
+.quarto-dark line.actor-line {
+  stroke: #44415a !important;
+  fill: none !important;
+}
+
+/* Notes */
+body.quarto-dark .note,
+body.quarto-dark .note rect,
+.quarto-dark .note,
+.quarto-dark .note rect {
+  fill: #393552 !important;
+  stroke: #c4a7e7 !important;
+}
+
+body.quarto-dark .noteText,
+body.quarto-dark .noteText tspan,
+.quarto-dark .noteText,
+.quarto-dark .noteText tspan {
+  fill: #e0def4 !important;
+  stroke: none !important;
+  color: #e0def4 !important;
+}
+
+/* Loop / self-message / activation labels */
+body.quarto-dark .labelText,
+body.quarto-dark .labelText tspan,
+body.quarto-dark .labelText > span,
+body.quarto-dark .loopText,
+body.quarto-dark .loopText tspan,
+.quarto-dark .labelText,
+.quarto-dark .labelText tspan,
+.quarto-dark .labelText > span,
+.quarto-dark .loopText,
+.quarto-dark .loopText tspan {
+  fill: #e0def4 !important;
+  stroke: none !important;
+  color: #e0def4 !important;
+}
+
+body.quarto-dark .labelBox,
+body.quarto-dark .loopLine,
+.quarto-dark .labelBox,
+.quarto-dark .loopLine {
+  fill: #2a273f !important;
+  stroke: #44415a !important;
+}
+
+/* Flowcharts and other diagrams: node and edge labels */
+body.quarto-dark .nodeLabel,
+body.quarto-dark .nodeLabel span,
+body.quarto-dark .edgeLabel,
+body.quarto-dark .edgeLabel span,
+body.quarto-dark .label,
+body.quarto-dark .label text,
+body.quarto-dark .label div .edgeLabel,
+.quarto-dark .nodeLabel,
+.quarto-dark .nodeLabel span,
+.quarto-dark .edgeLabel,
+.quarto-dark .edgeLabel span,
+.quarto-dark .label,
+.quarto-dark .label text,
+.quarto-dark .label div .edgeLabel {
+  color: #e0def4 !important;
+  fill: #e0def4 !important;
+}
+
+body.quarto-dark .node rect,
+body.quarto-dark .node circle,
+body.quarto-dark .node ellipse,
+body.quarto-dark .node polygon,
+body.quarto-dark .node path,
+.quarto-dark .node rect,
+.quarto-dark .node circle,
+.quarto-dark .node ellipse,
+.quarto-dark .node polygon,
+.quarto-dark .node path {
+  fill: #2a273f !important;
+  stroke: #44415a !important;
+}
+
+body.quarto-dark .edgePath .path,
+body.quarto-dark .flowchart-link,
+.quarto-dark .edgePath .path,
+.quarto-dark .flowchart-link {
+  stroke: #908caa !important;
+}
+
+body.quarto-dark .edgePath .arrowheadPath,
+body.quarto-dark .edgePath marker path,
+.quarto-dark .edgePath .arrowheadPath,
+.quarto-dark .edgePath marker path {
+  fill: #908caa !important;
+  stroke: none !important;
+}
+
+body.quarto-dark g.classGroup text,
+body.quarto-dark .classLabel .label,
+.quarto-dark g.classGroup text,
+.quarto-dark .classLabel .label {
+  fill: #e0def4 !important;
+  color: #e0def4 !important;
+}
