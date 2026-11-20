@@ -154,6 +154,10 @@ export default function Carla() {
 [React Children API (react.dev reference)](https://react.dev/reference/react/Children){.external target="_blank"}
 
 [Alternatives to Children](https://react.dev/reference/react/Children#alternatives){.external target="_blank"}
+
+![React docs pitfall on the Children API](/images/reactjs/react-children-pitfall.png){.lightbox}
+
+Using ``Children`` is uncommon and can lead to fragile code. [See common alternatives.](https://react.dev/reference/react/Children#alternatives){.external target="_blank"}
 :::
 
 ``children`` is a **special prop**: whatever you nest between a component’s opening and closing tags is passed to that component as ``children``.
@@ -218,6 +222,12 @@ The ``Panel`` does not own that state. It only receives ``isActive``. To open a 
 [Sharing state between components](https://react.dev/learn/sharing-state-between-components){.external target="_blank"}
 
 ![Initially, Accordion’s activeIndex is 0, so the first Panel receives isActive = true. When Accordion’s activeIndex changes to 1, the second Panel receives isActive = true instead.](/images/ifcd0210-26/react-accordion.png){.lightbox width="90%" fig-align="center"}
+
+::: {.column-margin}
+
+![Accordion code annotated: the parent passes ``isActive`` and ``onShow`` down to each ``Panel`` (1, 2), and ``Panel`` destructures ``title``, ``children``, ``isActive`` and ``onShow``.](/images/reactjs/accordion-code-annotated.png){.lightbox}
+
+:::
 
 Here is the code that runs it, from [Sharing state between components](https://react.dev/learn/sharing-state-between-components){.external target="_blank"}:
 
