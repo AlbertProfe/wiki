@@ -2184,7 +2184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">Thursday, November 19, 2026</p>
+      <p class="date-modified">Friday, November 20, 2026</p>
     </div>
   </div>
     
@@ -2321,6 +2321,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="no-row-height column-margin column-container"><div class="">
 <p><a href="https://react.dev/reference/react/Children" class="external" target="_blank">React Children API (react.dev reference)</a></p>
 <p><a href="https://react.dev/reference/react/Children#alternatives" class="external" target="_blank">Alternatives to Children</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/react-children-pitfall.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="React docs pitfall on the Children API"><img src="../images/reactjs/react-children-pitfall.png" class="img-fluid figure-img" alt="React docs pitfall on the Children API"></a></p>
+<figcaption>React docs pitfall on the Children API</figcaption>
+</figure>
+</div>
+<p>Using <code>Children</code> is uncommon and can lead to fragile code. <a href="https://react.dev/reference/react/Children#alternatives" class="external" target="_blank">See common alternatives.</a></p>
 </div></div><p><code>children</code> is a <strong>special prop</strong>: whatever you nest between a component’s opening and closing tags is passed to that component as <code>children</code>.</p>
 <p>A wrapper component receives that nested JSX and can render it inside its own markup.</p>
 <p>Without <a href="../reactjs/reactjs-es6-destructuring.html">destructuring</a>, you read it from the <code>props</code> object: <code>props.children</code>.</p>
@@ -2362,7 +2369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-3"><a href="#cb10-3"></a><span class="fu">&lt;/Card&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="example-passing-props-down-state-up" class="level2" data-number="3">
+<section id="example-passing-props-down-state-up" class="level2 page-columns page-full" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="example-passing-props-down-state-up"><span class="header-section-number">3</span> Example: passing props down, state up</h2>
 <div class="summary">
 <p>📘 <strong>Props down, state up</strong></p>
@@ -2380,13 +2387,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/ifcd0210-26/react-accordion.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Initially, Accordion’s activeIndex is 0, so the first Panel receives isActive = true. When Accordion’s activeIndex changes to 1, the second Panel receives isActive = true instead."><img src="../images/ifcd0210-26/react-accordion.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%" alt="Initially, Accordion’s activeIndex is 0, so the first Panel receives isActive = true. When Accordion’s activeIndex changes to 1, the second Panel receives isActive = true instead."></a></p>
+<p><a href="../images/ifcd0210-26/react-accordion.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Initially, Accordion’s activeIndex is 0, so the first Panel receives isActive = true. When Accordion’s activeIndex changes to 1, the second Panel receives isActive = true instead."><img src="../images/ifcd0210-26/react-accordion.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%" alt="Initially, Accordion’s activeIndex is 0, so the first Panel receives isActive = true. When Accordion’s activeIndex changes to 1, the second Panel receives isActive = true instead."></a></p>
 </figure>
 </div>
 <figcaption>Initially, Accordion’s activeIndex is 0, so the first Panel receives isActive = true. When Accordion’s activeIndex changes to 1, the second Panel receives isActive = true instead.</figcaption>
 </figure>
 </div>
-<p>Here is the code that runs it, from <a href="https://react.dev/learn/sharing-state-between-components" class="external" target="_blank">Sharing state between components</a>:</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/accordion-code-annotated.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Accordion code annotated: the parent passes isActive and onShow down to each Panel (1, 2), and Panel destructures title, children, isActive and onShow."><img src="../images/reactjs/accordion-code-annotated.png" class="img-fluid figure-img" alt="Accordion code annotated: the parent passes isActive and onShow down to each Panel (1, 2), and Panel destructures title, children, isActive and onShow."></a></p>
+<figcaption>Accordion code annotated: the parent passes <code>isActive</code> and <code>onShow</code> down to each <code>Panel</code> (1, 2), and <code>Panel</code> destructures <code>title</code>, <code>children</code>, <code>isActive</code> and <code>onShow</code>.</figcaption>
+</figure>
+</div>
+</div></div><p>Here is the code that runs it, from <a href="https://react.dev/learn/sharing-state-between-components" class="external" target="_blank">Sharing state between components</a>:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode numberSource jsx number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb11-1"><a href="#cb11-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">'react'</span><span class="op">;</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">Accordion</span>() {</span>
