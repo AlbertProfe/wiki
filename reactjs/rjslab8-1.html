@@ -2235,18 +2235,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>By the end of this lab, you’ll have a working shop where <strong>Add to cart</strong> in the main column updates the badge in the header, and you’ll know <em>why</em> that works.</p>
 </div>
 <p><br></p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">All components</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Context only</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/cart-context-tree-diagram.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Tree diagram: App mounts CartProvider, which provides CartContext to two branches. Header contains CartBadge; Main contains ProductList and CartSummary."><img src="../images/reactjs/cart-context-tree-diagram.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Tree diagram: App mounts CartProvider, which provides CartContext to two branches. Header contains CartBadge; Main contains ProductList and CartSummary."></a></p>
+<p><a href="../images/reactjs/cart-context-tree-all.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Tree diagram: App mounts CartProvider, which provides CartContext to two branches. Header contains CartBadge; Main contains ProductList and CartSummary."><img src="../images/reactjs/cart-context-tree-all.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Tree diagram: App mounts CartProvider, which provides CartContext to two branches. Header contains CartBadge; Main contains ProductList and CartSummary."></a></p>
 </figure>
 </div>
 <figcaption>Tree diagram: App mounts CartProvider, which provides CartContext to two branches. Header contains CartBadge; Main contains ProductList and CartSummary.</figcaption>
 </figure>
 </div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/cart-context-tree-context-only.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Tree diagram, context only: App, Header, Main and ProductList are greyed out because they never touch the context."><img src="../images/reactjs/cart-context-tree-context-only.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Tree diagram, context only: App, Header, Main and ProductList are greyed out because they never touch the context."></a></p>
+</figure>
+</div>
+<figcaption>Tree diagram, context only: App, Header, Main and ProductList are greyed out because they never touch the context.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 <p><a href="../images/reactjs/docs/cart-context-visuals.html" class="external" target="_blank">Open the interactive Cart Context Demo</a></p>
-<p>The still above is the component tree. The demo is the same diagram, live: boxes flash when that component re-renders.</p>
+<p>The diagrams above are the component tree. Use the tabs to see which components never touch the context. The demo is the same diagram, live: boxes flash when that component re-renders.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><a href="https://yalebooks.yale.edu/book/9780300245929/the-master-and-his-emissary/" class="external" target="_blank"><em>The Master and His Emissary</em></a>, by Iain McGilchrist (Yale University Press, 2009). Two kinds of attention: the right for the whole, the left for the parts.</p>
+</div></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The method
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before we write a line of code, it helps to see the method this lab follows. Iain McGilchrist, in <em>The Master and His Emissary</em>, is not making a pop-psychology claim about “left brain versus right brain”. He is describing two kinds of attention, and we keep passing the work between them.</p>
+<p>We start with the <strong>right hemisphere’s</strong> kind of attention: broad, open, and a little ambiguous. The feature is still a rough draft of the whole app — a shop where “Add to cart” updates a badge in the header. We can feel the idea without pinning every part down.</p>
+<p>Then we switch to the <strong>left hemisphere’s</strong> kind of attention: narrow and focused. We break the idea into a component tree, then into context and state. The tabs above are that move. <strong>All components</strong> is the full tree; <strong>Context only</strong> greys out the parts that never touch the cart, so you can see who owns or consumes the state.</p>
+<p>When the pieces fit, we come <strong>back to the right</strong>. The shop works as a whole again and waits for the next feature. Then the cycle repeats: another vague idea, another careful breakdown, another working whole.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/cart-context-method-cycle.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="One feature, one cycle: from a rough whole idea, to the component tree, context and state, and back to a working whole. After Iain McGilchrist, The Master and His Emissary."><img src="../images/reactjs/cart-context-method-cycle.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="One feature, one cycle: from a rough whole idea, to the component tree, context and state, and back to a working whole. After Iain McGilchrist, The Master and His Emissary."></a></p>
+</figure>
+</div>
+<figcaption>One feature, one cycle: from a rough whole idea, to the component tree, context and state, and back to a working whole. After Iain McGilchrist, <em>The Master and His Emissary</em>.</figcaption>
+</figure>
+</div>
 <section id="references" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> References</h1>
 <ul>
@@ -2311,7 +2359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/cart-context-branches-diagram.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Playground render of the live UI, nested by component. This is an illustration of the demo, not a spec for the code."><img src="../images/reactjs/cart-context-branches-diagram.png" class="img-fluid figure-img" alt="Playground render of the live UI, nested by component. This is an illustration of the demo, not a spec for the code."></a></p>
+<p><a href="../images/reactjs/cart-context-branches-diagram.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Playground render of the live UI, nested by component. This is an illustration of the demo, not a spec for the code."><img src="../images/reactjs/cart-context-branches-diagram.png" class="img-fluid figure-img" alt="Playground render of the live UI, nested by component. This is an illustration of the demo, not a spec for the code."></a></p>
 <figcaption>Playground render of the live UI, nested by component. This is an illustration of the demo, not a spec for the code.</figcaption>
 </figure>
 </div>
@@ -2338,6 +2386,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
+<p>The official API is on <a href="https://react.dev/reference/react/createContext" class="external" target="_blank">createContext</a> at react.dev. Starting in React 19 you can render <code>&lt;CartContext value={...}&gt;</code> as the provider.</p>
+</div></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What this code does
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>createContext()</code> makes the shared “box”: a context object that other components can provide or read. The box itself does not hold the count yet.</li>
+<li><code>CartProvider</code> is a wrapper component. You put it around a part of the tree (for example around <code>&lt;App /&gt;</code>).</li>
+<li><code>useState(0)</code> is where the count actually lives. Only the provider <em>owns</em> that state.</li>
+<li><code>value={{ count, setCount }}</code> is what gets passed down through the context, to any depth.</li>
+<li><code>{children}</code> is whatever you wrap — the inner tree. Any component inside can call <code>useContext(CartContext)</code> (or our <code>useCart()</code> hook) and read or update the count, with no prop drilling through <code>Header</code> or <code>Main</code>.</li>
+</ul>
+<section id="is-this-legacy" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="is-this-legacy">Is this legacy?</h3>
+<p>Two different things get mixed up here.</p>
+<p>The <code>children</code> <strong>prop</strong> is not legacy. Passing JSX as <code>children</code> is still the normal way to compose components: <code>&lt;CartProvider&gt;&lt;App /&gt;&lt;/CartProvider&gt;</code>. What <em>is</em> on the <a href="https://react.dev/reference/react/legacy" class="external" target="_blank">legacy APIs</a> list is <code>Children</code> (<code>React.Children.map</code> and friends) and <code>cloneElement</code>. Those inspect or clone the children you already received. We do not use them in this lab.</p>
+<p><code>&lt;CartContext.Provider&gt;</code> is a slightly different story. On the <a href="https://react.dev/reference/react/createContext" class="external" target="_blank">createContext</a> page, React already calls <code>.Provider</code> the way to provide context <em>before React 19</em>. Starting in React 19 you can write this instead:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource jsx number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">&lt;CartContext</span> <span class="ot">value</span><span class="op">=</span><span class="va">{</span>{ count<span class="op">,</span> setCount }<span class="va">}</span><span class="fu">&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="va">{</span>children<span class="va">}</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">&lt;/CartContext&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>&lt;CartContext.Provider&gt;</code> still works. You will keep seeing it in React 18 codebases, in tutorials, in AI-generated code, and in libraries that must run on older React. It works everywhere, so this lab uses that form.</p>
+</section>
+</div>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
 <p>The provider is the only place that <em>owns</em> the count. Everyone else either reads it, updates it, or just passes children through.</p>
 </div></div></section>
 <section id="the-usecart-hook" class="level2" data-number="4.2">
@@ -2347,10 +2430,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>src/hooks/useCart.js</strong></pre>
 </div>
-<div class="sourceCode" id="cb4" data-filename="src/hooks/useCart.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> { useContext } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="im">import</span> { CartContext } <span class="im">from</span> <span class="st">"../context/CartContext"</span><span class="op">;</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="im">export</span> <span class="kw">const</span> useCart <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="fu">useContext</span>(CartContext)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5" data-filename="src/hooks/useCart.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">import</span> { useContext } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="im">import</span> { CartContext } <span class="im">from</span> <span class="st">"../context/CartContext"</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="im">export</span> <span class="kw">const</span> useCart <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="fu">useContext</span>(CartContext)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="branch-a-header" class="level2" data-number="4.3">
@@ -2360,27 +2443,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>src/Header/Header.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb5" data-filename="src/Header/Header.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">import</span> { CartBadge } <span class="im">from</span> <span class="st">"../CartBadge/CartBadge"</span><span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">Header</span>() {</span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="cf">return</span> (</span>
-<span id="cb5-5"><a href="#cb5-5"></a>    <span class="kw">&lt;header&gt;</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>      <span class="kw">&lt;h1&gt;</span>My Shop<span class="kw">&lt;/h1&gt;</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>      <span class="fu">&lt;CartBadge</span> <span class="fu">/&gt;</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>    <span class="kw">&lt;/header&gt;</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>  )<span class="op">;</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6" data-filename="src/Header/Header.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb6-1"><a href="#cb6-1"></a><span class="im">import</span> { CartBadge } <span class="im">from</span> <span class="st">"../CartBadge/CartBadge"</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">Header</span>() {</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="cf">return</span> (</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="kw">&lt;header&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>      <span class="kw">&lt;h1&gt;</span>My Shop<span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>      <span class="fu">&lt;CartBadge</span> <span class="fu">/&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>    <span class="kw">&lt;/header&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>  )<span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>src/CartBadge/CartBadge.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb6" data-filename="src/CartBadge/CartBadge.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb6-1"><a href="#cb6-1"></a><span class="im">import</span> { useCart } <span class="im">from</span> <span class="st">"../hooks/useCart"</span><span class="op">;</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">CartBadge</span>() {</span>
-<span id="cb6-4"><a href="#cb6-4"></a>  <span class="kw">const</span> { count } <span class="op">=</span> <span class="fu">useCart</span>()<span class="op">;</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>  <span class="cf">return </span><span class="kw">&lt;span&gt;</span>🛒 <span class="va">{</span>count<span class="va">}</span><span class="kw">&lt;/span&gt;</span><span class="op">;</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7" data-filename="src/CartBadge/CartBadge.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">import</span> { useCart } <span class="im">from</span> <span class="st">"../hooks/useCart"</span><span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">CartBadge</span>() {</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="kw">const</span> { count } <span class="op">=</span> <span class="fu">useCart</span>()<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="cf">return </span><span class="kw">&lt;span&gt;</span>🛒 <span class="va">{</span>count<span class="va">}</span><span class="kw">&lt;/span&gt;</span><span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="branch-b-main-content" class="level2" data-number="4.4">
@@ -2390,64 +2473,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>src/Main/Main.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb7" data-filename="src/Main/Main.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">import</span> { ProductList } <span class="im">from</span> <span class="st">"../ProductList/ProductList"</span><span class="op">;</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="im">import</span> { CartSummary } <span class="im">from</span> <span class="st">"../CartSummary/CartSummary"</span><span class="op">;</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">Main</span>() {</span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="cf">return</span> (</span>
-<span id="cb7-6"><a href="#cb7-6"></a>    <span class="kw">&lt;main&gt;</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a>      <span class="fu">&lt;ProductList</span> <span class="fu">/&gt;</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a>      <span class="fu">&lt;CartSummary</span> <span class="fu">/&gt;</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a>    <span class="kw">&lt;/main&gt;</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a>  )<span class="op">;</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8" data-filename="src/Main/Main.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> { ProductList } <span class="im">from</span> <span class="st">"../ProductList/ProductList"</span><span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="im">import</span> { CartSummary } <span class="im">from</span> <span class="st">"../CartSummary/CartSummary"</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">Main</span>() {</span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="cf">return</span> (</span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="kw">&lt;main&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>      <span class="fu">&lt;ProductList</span> <span class="fu">/&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>      <span class="fu">&lt;CartSummary</span> <span class="fu">/&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>    <span class="kw">&lt;/main&gt;</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>  )<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>src/ProductList/ProductList.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb8" data-filename="src/ProductList/ProductList.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> { Product } <span class="im">from</span> <span class="st">"../Product/Product"</span><span class="op">;</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">ProductList</span>() {</span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="cf">return</span> (</span>
-<span id="cb8-5"><a href="#cb8-5"></a>    <span class="kw">&lt;ul&gt;</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a>      <span class="fu">&lt;Product</span> <span class="ot">name</span><span class="op">=</span><span class="st">"Keyboard"</span> <span class="fu">/&gt;</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a>      <span class="fu">&lt;Product</span> <span class="ot">name</span><span class="op">=</span><span class="st">"Mouse"</span> <span class="fu">/&gt;</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a>    <span class="kw">&lt;/ul&gt;</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a>  )<span class="op">;</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9" data-filename="src/ProductList/ProductList.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb9-1"><a href="#cb9-1"></a><span class="im">import</span> { Product } <span class="im">from</span> <span class="st">"../Product/Product"</span><span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">ProductList</span>() {</span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="cf">return</span> (</span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="kw">&lt;ul&gt;</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>      <span class="fu">&lt;Product</span> <span class="ot">name</span><span class="op">=</span><span class="st">"Keyboard"</span> <span class="fu">/&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>      <span class="fu">&lt;Product</span> <span class="ot">name</span><span class="op">=</span><span class="st">"Mouse"</span> <span class="fu">/&gt;</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>    <span class="kw">&lt;/ul&gt;</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>  )<span class="op">;</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>src/Product/Product.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb9" data-filename="src/Product/Product.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb9-1"><a href="#cb9-1"></a><span class="im">import</span> { useCart } <span class="im">from</span> <span class="st">"../hooks/useCart"</span><span class="op">;</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">Product</span>({ name }) {</span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="kw">const</span> { setCount } <span class="op">=</span> <span class="fu">useCart</span>()<span class="op">;</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>  <span class="cf">return</span> (</span>
-<span id="cb9-6"><a href="#cb9-6"></a>    <span class="kw">&lt;li&gt;</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a>      <span class="va">{</span>name<span class="va">}{</span><span class="st">" "</span><span class="va">}</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> <span class="fu">setCount</span>((c) <span class="kw">=&gt;</span> c <span class="op">+</span> <span class="dv">1</span>)<span class="va">}</span><span class="kw">&gt;</span>Add to cart<span class="kw">&lt;/button&gt;</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a>    <span class="kw">&lt;/li&gt;</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a>  )<span class="op">;</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10" data-filename="src/Product/Product.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb10-1"><a href="#cb10-1"></a><span class="im">import</span> { useCart } <span class="im">from</span> <span class="st">"../hooks/useCart"</span><span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">Product</span>({ name }) {</span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="kw">const</span> { setCount } <span class="op">=</span> <span class="fu">useCart</span>()<span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="cf">return</span> (</span>
+<span id="cb10-6"><a href="#cb10-6"></a>    <span class="kw">&lt;li&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>      <span class="va">{</span>name<span class="va">}{</span><span class="st">" "</span><span class="va">}</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> <span class="fu">setCount</span>((c) <span class="kw">=&gt;</span> c <span class="op">+</span> <span class="dv">1</span>)<span class="va">}</span><span class="kw">&gt;</span>Add to cart<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>    <span class="kw">&lt;/li&gt;</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>  )<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>src/CartSummary/CartSummary.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb10" data-filename="src/CartSummary/CartSummary.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb10-1"><a href="#cb10-1"></a><span class="im">import</span> { useCart } <span class="im">from</span> <span class="st">"../hooks/useCart"</span><span class="op">;</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">CartSummary</span>() {</span>
-<span id="cb10-4"><a href="#cb10-4"></a>  <span class="kw">const</span> { count<span class="op">,</span> setCount } <span class="op">=</span> <span class="fu">useCart</span>()<span class="op">;</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>  <span class="cf">return</span> (</span>
-<span id="cb10-6"><a href="#cb10-6"></a>    <span class="kw">&lt;div&gt;</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a>      <span class="kw">&lt;p&gt;</span>Items in cart: <span class="va">{</span>count<span class="va">}</span><span class="kw">&lt;/p&gt;</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> <span class="fu">setCount</span>(<span class="dv">0</span>)<span class="va">}</span><span class="kw">&gt;</span>Clear<span class="kw">&lt;/button&gt;</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a>    <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a>  )<span class="op">;</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11" data-filename="src/CartSummary/CartSummary.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb11-1"><a href="#cb11-1"></a><span class="im">import</span> { useCart } <span class="im">from</span> <span class="st">"../hooks/useCart"</span><span class="op">;</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">CartSummary</span>() {</span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="kw">const</span> { count<span class="op">,</span> setCount } <span class="op">=</span> <span class="fu">useCart</span>()<span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="cf">return</span> (</span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="kw">&lt;div&gt;</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>      <span class="kw">&lt;p&gt;</span>Items in cart: <span class="va">{</span>count<span class="va">}</span><span class="kw">&lt;/p&gt;</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>      <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> <span class="fu">setCount</span>(<span class="dv">0</span>)<span class="va">}</span><span class="kw">&gt;</span>Clear<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>  )<span class="op">;</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="root-app" class="level2" data-number="4.5">
@@ -2457,21 +2540,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>src/App.jsx</strong></pre>
 </div>
-<div class="sourceCode" id="cb11" data-filename="src/App.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb11-1"><a href="#cb11-1"></a><span class="im">import</span> { CartProvider } <span class="im">from</span> <span class="st">"./context/CartContext"</span><span class="op">;</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="im">import</span> { Header } <span class="im">from</span> <span class="st">"./Header/Header"</span><span class="op">;</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="im">import</span> { Main } <span class="im">from</span> <span class="st">"./Main/Main"</span><span class="op">;</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="im">import</span> <span class="st">"./App.css"</span><span class="op">;</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="kw">function</span> <span class="fu">App</span>() {</span>
-<span id="cb11-7"><a href="#cb11-7"></a>  <span class="cf">return</span> (</span>
-<span id="cb11-8"><a href="#cb11-8"></a>    <span class="fu">&lt;CartProvider&gt;</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a>      <span class="fu">&lt;Header</span> <span class="fu">/&gt;</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a>      <span class="fu">&lt;Main</span> <span class="fu">/&gt;</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a>    <span class="fu">&lt;/CartProvider&gt;</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a>  )<span class="op">;</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a>}</span>
-<span id="cb11-14"><a href="#cb11-14"></a></span>
-<span id="cb11-15"><a href="#cb11-15"></a><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12" data-filename="src/App.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb12-1"><a href="#cb12-1"></a><span class="im">import</span> { CartProvider } <span class="im">from</span> <span class="st">"./context/CartContext"</span><span class="op">;</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="im">import</span> { Header } <span class="im">from</span> <span class="st">"./Header/Header"</span><span class="op">;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="im">import</span> { Main } <span class="im">from</span> <span class="st">"./Main/Main"</span><span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="im">import</span> <span class="st">"./App.css"</span><span class="op">;</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="kw">function</span> <span class="fu">App</span>() {</span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="cf">return</span> (</span>
+<span id="cb12-8"><a href="#cb12-8"></a>    <span class="fu">&lt;CartProvider&gt;</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>      <span class="fu">&lt;Header</span> <span class="fu">/&gt;</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>      <span class="fu">&lt;Main</span> <span class="fu">/&gt;</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>    <span class="fu">&lt;/CartProvider&gt;</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>  )<span class="op">;</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a>}</span>
+<span id="cb12-14"><a href="#cb12-14"></a></span>
+<span id="cb12-15"><a href="#cb12-15"></a><span class="im">export</span> <span class="im">default</span> App<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The entry file stays the Vite default: <code>createRoot</code> and <code>StrictMode</code> in <code>src/main.jsx</code>.</p>
 </section>
@@ -2534,7 +2617,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../images/reactjs/cart-context-demo-v01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="The v0.1 build running on GitHub Pages."><img src="../images/reactjs/cart-context-demo-v01.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="The v0.1 build running on GitHub Pages."></a></p>
+<p><a href="../images/reactjs/cart-context-demo-v01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="The v0.1 build running on GitHub Pages."><img src="../images/reactjs/cart-context-demo-v01.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="The v0.1 build running on GitHub Pages."></a></p>
 </figure>
 </div>
 <figcaption>The v0.1 build running on GitHub Pages.</figcaption>

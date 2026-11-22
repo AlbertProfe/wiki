@@ -114,6 +114,20 @@
   .diagram .edge.dashed { stroke-dasharray: 5 4; }
   .diagram .lbl { fill: var(--muted); font-family: var(--font-body); font-size: 11px; text-anchor: middle; }
   .dnode.flash .bg { animation: nodehot 0.9s ease-out; }
+  :root { --dim-bg: #dde1e7; --dim-fg: #8a93a2; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --dim-bg: #252a32; --dim-fg: #687181; }
+  }
+  :root[data-theme="dark"] { --dim-bg: #252a32; --dim-fg: #687181; }
+  .diagtools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 10px; }
+  .diagtools .treekey { margin: 0; }
+  .seg { display: inline-flex; border: 1.5px solid var(--accent); border-radius: 6px; overflow: hidden; }
+  .seg button { border: 0; border-radius: 0; background: transparent; color: var(--accent); padding: 6px 14px; }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+  .seg button:focus-visible { outline: 3px solid var(--fg); outline-offset: -3px; }
+  .dnode .bg, .dnode .nm, .dnode .cap { transition: fill 0.25s ease; }
+  .diagram.ctx-only .dnode.unrel .bg { fill: var(--dim-bg); }
+  .diagram.ctx-only .dnode.unrel .nm, .diagram.ctx-only .dnode.unrel .cap { fill: var(--dim-fg); }
   .lglist { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 0.8125rem; color: var(--muted); }
   .lglist li { display: inline-flex; align-items: center; gap: 8px; }
   .lg { width: 22px; height: 16px; border-radius: 4px; background: var(--node-bg); position: relative; flex: none; }
@@ -130,7 +144,7 @@
   .who td:first-child { font-family: var(--font-mono); font-size: 0.8125rem; white-space: nowrap; }
   .who td:nth-child(2) { white-space: nowrap; }
   @keyframes nodehot { 0% { fill: var(--node-hot); } 100% { fill: var(--node-bg); } }
-  @media (prefers-reduced-motion: reduce) { .box.flash, .node.flash, .dnode.flash .bg { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .box.flash, .node.flash, .dnode.flash .bg { animation: none; } .dnode .bg, .dnode .nm, .dnode .cap { transition: none; } }
 </style>
 
 <main class="wrap">
@@ -187,7 +201,14 @@
   <section class="treewrap" aria-labelledby="diagram-h">
     <h2 id="diagram-h">Tree diagram</h2>
     <div class="diagwrap">
-      <svg class="diagram" viewBox="0 0 900 540" role="img" aria-label="Component tree with context roles. CartContext is created at module level and used by CartProvider. App contains CartProvider, which provides the cart state. CartProvider contains Header and Main, which only pass through. Header contains CartBadge, which reads count. Main contains ProductList, which passes through, and CartSummary, which reads count and calls setCount. ProductList contains three Product components, which call setCount.">
+      <div class="diagtools" role="group" aria-label="Diagram view">
+        <div class="seg">
+          <button type="button" id="view-all" aria-pressed="true">All components</button>
+          <button type="button" id="view-ctx" aria-pressed="false">Context only</button>
+        </div>
+        <p class="treekey" id="view-note">Showing every component.</p>
+      </div>
+      <svg id="tree-svg" class="diagram" viewBox="0 0 900 540" role="img" aria-label="Component tree with context roles. CartContext is created at module level and used by CartProvider. App contains CartProvider, which provides the cart state. CartProvider contains Header and Main, which only pass through. Header contains CartBadge, which reads count. Main contains ProductList, which passes through, and CartSummary, which reads count and calls setCount. ProductList contains three Product components, which call setCount.">
         <path class="edge" d="M398 78 V130"/>
         <path class="edge" d="M398 188 V214 H150 V240"/>
         <path class="edge" d="M398 188 V214 H645 V240"/>
@@ -206,7 +227,7 @@
           <text class="cap" x="105" y="174">createContext()</text>
         </g>
 
-        <g class="dnode" data-node="App">
+        <g class="dnode unrel" data-node="App">
           <rect class="bg" x="328" y="20" width="140" height="58" rx="6"/>
           <text class="nm" x="398" y="45">App</text>
           <text class="cap" x="398" y="64">mounts the provider</text>
@@ -219,13 +240,13 @@
           <text class="cap" x="398" y="174">owns state, provides value</text>
         </g>
 
-        <g class="dnode" data-node="Header">
+        <g class="dnode unrel" data-node="Header">
           <rect class="bg" x="85" y="240" width="130" height="58" rx="6"/>
           <text class="nm" x="150" y="265">Header</text>
           <text class="cap" x="150" y="284">passes through</text>
         </g>
 
-        <g class="dnode" data-node="Main">
+        <g class="dnode unrel" data-node="Main">
           <rect class="bg" x="590" y="240" width="110" height="58" rx="6"/>
           <text class="nm" x="645" y="265">Main</text>
           <text class="cap" x="645" y="284">passes through</text>
@@ -239,7 +260,7 @@
           <text class="cap" x="150" y="394">reads count</text>
         </g>
 
-        <g class="dnode" data-node="ProductList">
+        <g class="dnode unrel" data-node="ProductList">
           <rect class="bg" x="420" y="350" width="160" height="58" rx="6"/>
           <text class="nm" x="500" y="375">ProductList</text>
           <text class="cap" x="500" y="394">passes through</text>
@@ -423,6 +444,24 @@
   }
 
   ReactDOM.createRoot(document.getElementById("root")).render(h(App));
+})();
+</script>
+<script>
+(function () {
+  var svg = document.getElementById("tree-svg");
+  var all = document.getElementById("view-all");
+  var ctx = document.getElementById("view-ctx");
+  var note = document.getElementById("view-note");
+  function setView(contextOnly) {
+    svg.classList.toggle("ctx-only", contextOnly);
+    all.setAttribute("aria-pressed", String(!contextOnly));
+    ctx.setAttribute("aria-pressed", String(contextOnly));
+    note.textContent = contextOnly
+      ? "Grey boxes never touch the context: App, Header, Main and ProductList."
+      : "Showing every component.";
+  }
+  all.addEventListener("click", function () { setView(false); });
+  ctx.addEventListener("click", function () { setView(true); });
 })();
 </script>
 
