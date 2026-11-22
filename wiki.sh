@@ -4,7 +4,8 @@
 # Same script for every publisher: Grok Bot's box, Albert's Linux VM and the GitHub Action.
 # Run `./wiki.sh -h` for the command reference.
 # Worktrees (box): each bot works in its own git worktree, /workspace/wiki-team/repos/wt/<bot>,
-# with WIKI_BOT=<bot>; shared preview/publish steps are serialised with flock locks. See FLOW.md "Worktrees".
+# with WIKI_BOT=<bot>; publish is serialised with a flock. The preview lock is only for the one ngrok URL;
+# fallback previews (publiclocal, localhost.run) can run in parallel, one per bot. See FLOW.md "Worktrees".
 set -euo pipefail
 
 # ----------------------------------------------------------------------------- constants
@@ -70,7 +71,8 @@ Usage: ./wiki.sh [--dry-run] <command> [options]
 Worktrees (box): run it from your own folder, e.g.
   cd /workspace/wiki-team/repos/wt/wiki-ops && WIKI_BOT=wiki-ops ./wiki.sh start
   Between sessions a worktree is detached at origin/master; start creates the session branch.
-  Locks in /workspace/wiki-team/locks: preview (the one ngrok tunnel), publish (merge/publish/ship).
+  Locks in /workspace/wiki-team/locks: preview (exclusive ngrok URL on port 8787), publish (merge/publish/ship).
+  Fallback previews do not take that lock: each bot gets its own port (8788+) and URL.
   Shared build: every publish on the box saves its _site to /workspace/wiki-team/cache/wiki-site;
   when your own _site would need a FULL render (styles.css, _quarto.yml... changed since you last
   built) publish and preview copy that build in and render only your pages. WIKI_SHARED_SITE=off disables.
@@ -78,11 +80,18 @@ Worktrees (box): run it from your own folder, e.g.
 Session (box or Albert's VM):
   start                       pull master, create session/YYYY-MM-DD-N (next free N);
                               in a worktree: fetch, branch from origin/master
-  preview [--all] [--tunnel] [files.qmd...]   (preview --stop: stop your server + ngrok)
+  preview [--all] [--tunnel] [files.qmd...]   (preview --stop: stop only your preview)
                               render given .qmd files (default: .qmd changed vs master,
                               committed + uncommitted + untracked) into _site;
-                              --all = full render; --tunnel = serve this folder's _site on
-                              ngrok (box only; refused while another bot holds the tunnel)
+                              --all = full render; --tunnel = serve this folder's _site
+                              (box only). Tries ngrok first (exclusive lock, stable URL).
+                              If the ngrok lock is held or ngrok is unhealthy, does not wait:
+                              falls through to publiclocal.app, then localhost.run, on a
+                              free port (8788+). Several bots can preview at once this way.
+                              SSH fallbacks auto-reconnect if the tunnel drops; the public
+                              URL may change. status flags a dead tunnel (pid gone or URL
+                              not HTTP 200). WIKI_PREVIEW_BACKEND=ngrok|publiclocal|localhost.run
+                              forces one.
   save [--any-message] "msg"  stage content changes (never _site/.quarto/stray CSS),
                               check the message convention, commit, push the session branch
   merge                       rebase session onto origin/master if master moved,
@@ -94,7 +103,7 @@ Session (box or Albert's VM):
                               Escalates to a full render automatically when needed.
   ship                        merge + publish + delete the session branch (local + remote)
   status                      branch, dirty files, quarto, environment, commits ahead of live,
-                              preview/ngrok state, worktrees, lock holders
+                              preview/tunnel state, worktrees, lock holders
 
 Courses (on a session branch; changes _quarto.yml, so the next publish is full):
   course new <code> <edition> [--from <folder>]   e.g. course new ifcd0021 27
@@ -178,8 +187,9 @@ has_linked_worktrees() { (( $(git worktree list --porcelain | grep -c '^worktree
 
 # ----------------------------------------------------------------------------- locks
 # flock locks in $LOCK_DIR, shared by all worktrees. A lock lives as long as the open fd: it is
-# released when wiki.sh exits, or (preview) when the server + ngrok it started exit, because they
-# inherit the fd. The lock file's first line says who holds it.
+# released when wiki.sh exits, or (ngrok preview) when the server + ngrok it started exit, because
+# they inherit the fd. The lock file's first line says who holds it. Fallback previews do not
+# take this lock.
 lock_file()  { echo "$LOCK_DIR/$1.lock"; }
 lock_owner() { local f; f="$(lock_file "$1")"; if [[ -s "$f" ]]; then head -n1 "$f"; else echo "unknown"; fi; }
 lock_is_held() {   # held by any process (including our own children)
@@ -527,6 +537,56 @@ cmd_start() {
   ok "session branch $name ready in $REPO"
 }
 
+
+preview_url_file() { echo "$LOCK_DIR/preview-$BOT.url"; }
+
+current_preview_field() {
+  local key="$1" f; f="$(preview_url_file)"
+  if [[ -s "$f" ]]; then awk -F= -v k="$key" '$1==k{print $2; exit}' "$f"; fi
+}
+
+current_preview_backend() { current_preview_field backend; }
+current_preview_url() {
+  local u; u="$(current_preview_field url)"
+  if [[ -n "$u" ]]; then printf '%s\n' "$u"; else printf '%s\n' "$PREVIEW_URL"; fi
+}
+
+preview_curl_code() {   # preview_curl_code <url> [backend]
+  local url="$1" backend="${2:-}"
+  if [[ "$backend" == "ngrok" || ( -z "$backend" && "$url" == *ngrok* ) ]]; then
+    curl -s -m 10 -o /dev/null -w '%{http_code}' -H 'ngrok-skip-browser-warning: 1' "$url/" || true
+  else
+    curl -s -m 10 -o /dev/null -w '%{http_code}' "$url/" || true
+  fi
+}
+
+# Kill a pid and every descendant (script(1) puts ssh in a new session).
+kill_tree() {
+  local pid="$1" c
+  [[ -n "${pid:-}" && "$pid" =~ ^[0-9]+$ ]] || return 0
+  for c in $(pgrep -P "$pid" 2>/dev/null || true); do
+    kill_tree "$c"
+  done
+  if kill -0 "$pid" 2>/dev/null; then
+    kill -- "-$pid" 2>/dev/null || true
+    kill "$pid" 2>/dev/null || true
+    local i
+    for i in 1 2 3 4 5; do
+      kill -0 "$pid" 2>/dev/null || return 0
+      sleep 0.15
+    done
+    kill -9 -- "-$pid" 2>/dev/null || kill -9 "$pid" 2>/dev/null || true
+  fi
+}
+
+stop_pidfile() {
+  local f="$1" pid
+  [[ -f "$f" ]] || return 0
+  pid="$(cat "$f" 2>/dev/null || true)"
+  rm -f "$f"
+  kill_tree "$pid"
+}
+
 # ----------------------------------------------------------------------------- preview
 changed_qmd_vs_main() {
   {
@@ -553,16 +613,16 @@ cmd_preview() {
     esac
     shift
   done
-  if (( tunnel )); then   # check (and take) the tunnel before spending time on renders
+  if (( tunnel )); then
     [[ "$ENVIRONMENT" == "box" ]] || die "--tunnel only works on the box"
     [[ -x "$PREVIEW_UP" ]] || die "preview script not found: $PREVIEW_UP"
-    # One ngrok URL for the whole team: the preview lock says whose _site it serves.
-    if (( ! DRY_RUN )) && lock_is_held preview && [[ "$(lock_owner preview | cut -d' ' -f1)" == "$BOT" ]]; then
-      info "you already hold the tunnel: restarting it on $REPO/_site"
+    [[ "$BOT" =~ ^[A-Za-z0-9._-]+$ ]] || die "WIKI_BOT must be a short name (got ${BOT:-empty})"
+    # Restart only this bot's preview. Do not take the ngrok lock here: if it is
+    # held, preview-up.sh skips ngrok immediately and uses a fallback on another port.
+    if (( ! DRY_RUN )) && [[ -s "$(preview_url_file)" ]]; then
+      info "restarting your preview ($BOT) on $REPO/_site"
       kill_preview_processes
-      local _w; for _w in $(seq 1 10); do lock_is_held preview || break; sleep 1; done
     fi
-    take_lock preview
   fi
   ensure_extensions
   if (( all )); then
@@ -595,44 +655,71 @@ cmd_preview() {
   fi
   if (( tunnel )); then
     local log="/tmp/wiki-preview-up-$BOT.log"
-    info "starting preview server + ngrok (detached) for $BOT, serving $REPO/_site"
+    info "starting preview server + tunnel (detached) for $BOT, serving $REPO/_site"
     if (( DRY_RUN )); then
-      run env SITE="$REPO/_site" setsid nohup "$PREVIEW_UP"
+      run env SITE="$REPO/_site" REPO="$REPO" WIKI_BOT="$BOT" WIKI_LOCK_DIR="$LOCK_DIR" WIKI_PREVIEW_PORT="$PREVIEW_PORT" WIKI_PREVIEW_URL="$PREVIEW_URL" WIKI_PREVIEW_BACKEND="${WIKI_PREVIEW_BACKEND:-}" setsid nohup "$PREVIEW_UP"
     else
-      # The server and ngrok inherit the lock fd, so the lock stays held until they stop.
-      SITE="$REPO/_site" setsid nohup "$PREVIEW_UP" > "$log" 2>&1 < /dev/null &
-      local code="000"
-      for _ in $(seq 1 15); do
+      # ngrok, if used, inherits the preview.lock fd from preview-up.sh. Fallbacks do not take that lock.
+      SITE="$REPO/_site" REPO="$REPO" WIKI_BOT="$BOT" WIKI_LOCK_DIR="$LOCK_DIR" WIKI_PREVIEW_PORT="$PREVIEW_PORT" \
+        WIKI_PREVIEW_URL="$PREVIEW_URL" WIKI_PREVIEW_BACKEND="${WIKI_PREVIEW_BACKEND:-}" \
+        setsid nohup "$PREVIEW_UP" > "$log" 2>&1 < /dev/null &
+      local up_pid=$! code="000" url="" backend=""
+      for _ in $(seq 1 45); do
         sleep 2
-        code="$(curl -s -o /dev/null -w '%{http_code}' -H 'ngrok-skip-browser-warning: 1' "$PREVIEW_URL/" || true)"
-        [[ "$code" == "200" ]] && break
+        if [[ -s "$(preview_url_file)" ]]; then
+          url="$(current_preview_url)"
+          backend="$(current_preview_backend)"
+          code="$(preview_curl_code "$url" "$backend")"
+          [[ "$code" == "200" ]] && break
+        elif ! kill -0 "$up_pid" 2>/dev/null; then
+          break
+        fi
       done
-      [[ "$code" == "200" ]] || die "preview not reachable (HTTP $code); see $log"
-      ok "preview up: $PREVIEW_URL (HTTP 200), held by $BOT; stop it with ./wiki.sh preview --stop"
+      if [[ "$code" != "200" ]]; then
+        kill_preview_processes
+        die "preview not reachable (HTTP $code); see $log"
+      fi
+      ok "preview up: $url (HTTP 200, backend ${backend:-unknown}, bot $BOT); stop it with ./wiki.sh preview --stop"
     fi
   fi
 }
 
 kill_preview_processes() {
-  run pkill -f "http.server $PREVIEW_PORT" || true
-  run pkill -f "ngrok http $PREVIEW_PORT" || true
+  # Only this bot's pidfiles and --bot=$BOT command lines. Never a generic ssh or another bot's server.
+  # Stop file first so a reconnecting supervisor does not bring the tunnel back.
+  local stopf="$LOCK_DIR/preview-$BOT.stop" tpid
+  : > "$stopf"
+  if [[ -f "$LOCK_DIR/preview-$BOT.tunnel.pid" ]]; then
+    tpid="$(cat "$LOCK_DIR/preview-$BOT.tunnel.pid" 2>/dev/null || true)"
+    if [[ "${tpid:-}" =~ ^[0-9]+$ ]]; then
+      kill "$tpid" 2>/dev/null || true
+    fi
+  fi
+  stop_pidfile "$LOCK_DIR/preview-$BOT.ngrok.pid"
+  stop_pidfile "$LOCK_DIR/preview-$BOT.tunnel.pid"
+  stop_pidfile "$LOCK_DIR/preview-$BOT.http.pid"
+  # Matches both `preview-tunnel-ssh --bot=X` and script -c `preview-tunnel-ssh' --bot=X`.
+  run pkill -f "preview-tunnel-ssh.*--bot=${BOT}( |$)" || true
+  rm -f "$(preview_url_file)" "$stopf"
 }
 
-# Stop the tunnel only if it is ours (or nobody holds the lock: leftovers from a crash or an old run).
+# Stop only this bot's preview. Another bot may keep ngrok or its own fallback running.
 preview_stop() {
-  local owner
-  if lock_is_held preview; then
-    owner="$(lock_owner preview)"
-    [[ "${owner%% *}" == "$BOT" ]] || die "the preview tunnel belongs to: $owner
-Only that bot stops it (WIKI_BOT=${owner%% *} ./wiki.sh preview --stop from its folder). Not stopping it."
-    info "stopping your preview server + ngrok ($BOT)"
-  else
-    info "preview lock is free: stopping any leftover server/ngrok on port $PREVIEW_PORT"
-  fi
+  info "stopping your preview ($BOT)"
   kill_preview_processes
-  if (( ! DRY_RUN )); then   # preview-up.sh may still be in its final checks for a few seconds
-    local _w; for _w in $(seq 1 15); do lock_is_held preview || break; sleep 1; done
-    lock_is_held preview && warn "preview lock still held by: $(lock_owner preview)"
+  if (( ! DRY_RUN )); then
+    local _w
+    for _w in $(seq 1 10); do
+      pgrep -f "preview-tunnel-ssh.*--bot=${BOT}( |$)" >/dev/null 2>&1 || break
+      sleep 0.3
+    done
+    # If we had ngrok, wait a moment for the exclusive lock to drop; if someone else holds it, leave it.
+    if lock_is_held preview && [[ "$(lock_owner preview | cut -d' ' -f1)" == "$BOT" ]]; then
+      for _w in $(seq 1 10); do lock_is_held preview || break; sleep 0.3; done
+      if lock_is_held preview && [[ "$(lock_owner preview | cut -d' ' -f1)" == "$BOT" ]]; then
+        warn "ngrok/preview lock still held by: $(lock_owner preview)"
+      fi
+    fi
   fi
   ok "preview stopped"
 }
@@ -906,13 +993,40 @@ cmd_status() {
     if lock_is_held "$l"; then echo "lock $l: held by $(lock_owner "$l")"; else echo "lock $l: free"; fi
   done
   if [[ "$ENVIRONMENT" == "box" ]]; then
-    local code
-    if pgrep -f "ngrok http" >/dev/null 2>&1; then
-      code="$(curl -s -m 10 -o /dev/null -w '%{http_code}' -H 'ngrok-skip-browser-warning: 1' "$PREVIEW_URL/" || true)"
-      echo "ngrok        up (HTTP $code) $PREVIEW_URL"
-    else
-      echo "ngrok        down"
-    fi
+    local f bot backend url port code any=0 tpid http_pid ngpid tun_ok http_ok state
+    echo "ngrok lock   $(if lock_is_held preview; then echo "held by $(lock_owner preview)"; else echo free; fi)"
+    shopt -s nullglob
+    for f in "$LOCK_DIR"/preview-*.url; do
+      bot="$(awk -F= '/^bot=/{print $2; exit}' "$f")"
+      [[ -n "$bot" ]] || bot="$(basename "$f" .url | sed 's/^preview-//')"
+      backend="$(awk -F= '/^backend=/{print $2; exit}' "$f")"
+      url="$(awk -F= '/^url=/{print $2; exit}' "$f")"
+      port="$(awk -F= '/^port=/{print $2; exit}' "$f")"
+      code="$(preview_curl_code "$url" "$backend")"
+      tpid="$(cat "$LOCK_DIR/preview-$bot.tunnel.pid" 2>/dev/null || true)"
+      http_pid="$(cat "$LOCK_DIR/preview-$bot.http.pid" 2>/dev/null || true)"
+      if [[ "$backend" == "ngrok" ]]; then
+        ngpid="$(cat "$LOCK_DIR/preview-$bot.ngrok.pid" 2>/dev/null || true)"
+        [[ "${ngpid:-}" =~ ^[0-9]+$ ]] && tpid="$ngpid"
+      fi
+      tun_ok=0 http_ok=0
+      [[ "${tpid:-}" =~ ^[0-9]+$ ]] && kill -0 "$tpid" 2>/dev/null && tun_ok=1
+      [[ "${http_pid:-}" =~ ^[0-9]+$ ]] && kill -0 "$http_pid" 2>/dev/null && http_ok=1
+      if (( ! tun_ok )); then
+        state="DOWN (tunnel process gone"
+        [[ "$code" != "200" ]] && state+=", public URL HTTP $code"
+        (( ! http_ok )) && state+=", http.server gone"
+        state+=")"
+      elif [[ "$code" != "200" ]]; then
+        state="STALE (process up, public URL HTTP $code)"
+      else
+        state="up"
+      fi
+      echo "preview      bot=$bot backend=${backend:-unknown} port=${port:--} $state HTTP $code $url"
+      any=1
+    done
+    shopt -u nullglob
+    (( any )) || echo "preview      down (no per-bot preview.url files)"
   fi
 }
 
