@@ -1,0 +1,429 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Cart Context Demo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: a provider box wrapping two sibling branches (Header, Main); each component is a box that flashes when it re-renders. */
+  :root {
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --fg: #1a2130;
+    --muted: #5d6676;
+    --line: #d5d9e0;
+    --accent: #0f6b5c;
+    --accent-ink: #ffffff;
+    --flash: #ffe58a;
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111519; --surface: #1a1f26; --fg: #e8ebf0; --muted: #98a1b0;
+      --line: #333b47; --accent: #46c2ab; --accent-ink: #0b1b17; --flash: #6b5a12;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111519; --surface: #1a1f26; --fg: #e8ebf0; --muted: #98a1b0;
+    --line: #333b47; --accent: #46c2ab; --accent-ink: #0b1b17; --flash: #6b5a12;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: var(--font-body); font-size: 15px; line-height: 1.5;
+    padding-block: 24px 40px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  main.wrap { max-width: 880px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+  h1 { font-size: 1.5rem; line-height: 1.2; margin: 0; text-wrap: balance; }
+  .intro { color: var(--muted); max-width: 65ch; margin: 6px 0 0; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 0.8125rem; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .swatch { width: 12px; height: 12px; border-radius: 3px; border: 1.5px solid var(--line); background: var(--surface); }
+  .swatch.flash { background: var(--flash); border-color: var(--accent); }
+  .swatch.dashed { border-style: dashed; }
+
+  .box { border: 1.5px solid var(--line); background: var(--surface); border-radius: 8px; padding: 10px 12px 12px; min-width: 0; }
+  .box.provider { border-style: dashed; border-color: var(--accent); background: transparent; }
+  .boxhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+  .name { font-family: var(--font-mono); font-weight: 500; font-size: 0.875rem; }
+  .note { font-size: 0.75rem; color: var(--muted); }
+  .count { margin-left: auto; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .boxbody { margin-top: 10px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .box.flash { animation: flash 0.9s ease-out; }
+  @keyframes flash {
+    0% { background: var(--flash); border-color: var(--accent); }
+    100% { background: var(--surface); }
+  }
+  .provider.flash { animation: none; }
+
+  .branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 12px; }
+  .branches > * { min-width: 0; }
+  .branchlabel { font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px 2px; }
+
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .pill { font-variant-numeric: tabular-nums; font-weight: 600; background: var(--accent); color: var(--accent-ink); padding: 2px 12px; border-radius: 999px; min-width: 2.5ch; text-align: center; }
+  .big { font-size: 1.25rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+  button {
+    font: inherit; font-size: 0.875rem; font-weight: 500; cursor: pointer;
+    border: 1.5px solid var(--accent); background: var(--accent); color: var(--accent-ink);
+    padding: 6px 12px; border-radius: 6px;
+  }
+  button.ghost { background: transparent; color: var(--accent); }
+  button:focus-visible { outline: 3px solid var(--fg); outline-offset: 2px; }
+  .takeaways { margin: 0; padding-left: 1.2em; color: var(--muted); max-width: 70ch; display: flex; flex-direction: column; gap: 6px; }
+  .takeaways b { color: var(--fg); font-weight: 600; }
+  code { font-family: var(--font-mono); font-size: 0.85em; }
+  /* Component tree: root at the top, children indented below with connector lines */
+  .treewrap { display: flex; flex-direction: column; gap: 10px; }
+  .treewrap h2 { font-size: 1.0625rem; line-height: 1.3; margin: 0; }
+  .treebox { background: var(--surface); border: 1.5px solid var(--line); border-radius: 8px; padding: 14px 14px 14px 12px; overflow-x: auto; }
+  .tree, .tree ul { list-style: none; margin: 0; padding: 0; }
+  .tree ul { margin-left: 14px; padding-left: 20px; }
+  .tree li { position: relative; padding: 5px 0; }
+  .tree ul > li::before { content: ""; position: absolute; left: -20px; top: 21px; width: 20px; border-top: 1.5px solid var(--line); }
+  .tree ul > li::after { content: ""; position: absolute; left: -20px; top: 0; bottom: 0; border-left: 1.5px solid var(--line); }
+  .tree ul > li:last-child::after { bottom: auto; height: 21px; }
+  .node { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; padding: 4px 10px; border: 1.5px solid var(--line); border-radius: 6px; background: var(--surface); }
+  .node .nm { font-family: var(--font-mono); font-size: 0.875rem; font-weight: 500; }
+  .node .tag { font-size: 0.75rem; color: var(--muted); }
+  .node.uses { border-color: var(--accent); }
+  .node.provider { border-style: dashed; border-color: var(--accent); }
+  .node.flash { animation: flash 0.9s ease-out; }
+  .treekey { font-size: 0.8125rem; color: var(--muted); margin: 0; max-width: 70ch; }
+  /* Tree diagram: dark rounded nodes laid out top-down, joined by elbow lines */
+  :root { --node-bg: #323945; --node-fg: #ffffff; --node-hot: #0f6b5c; --edge: #9aa3b2; --r-provide: #4cc9a4; --r-read: #6ea8ff; --r-write: #f0b24a; --r-dot: #b8e04a; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --node-bg: #343d4d; --node-hot: #1f8a77; --edge: #5b6575; }
+  }
+  :root[data-theme="dark"] { --node-bg: #343d4d; --node-hot: #1f8a77; --edge: #5b6575; }
+  .diagwrap { overflow-x: auto; background: var(--surface); border: 1.5px solid var(--line); border-radius: 8px; padding: 12px; }
+  .diagram { display: block; width: 100%; min-width: 760px; max-width: 900px; height: auto; margin: 0 auto; }
+  .diagram .edge { fill: none; stroke: var(--edge); stroke-width: 1.5; }
+  .dnode .bg { fill: var(--node-bg); }
+  .dnode.prov .bg { stroke: var(--r-provide); stroke-width: 2; }
+  .dnode.ctx .bg { stroke: var(--edge); stroke-width: 1.5; stroke-dasharray: 5 4; }
+  .dnode .nm { fill: var(--node-fg); font-family: var(--font-body); font-size: 15px; font-weight: 500; text-anchor: middle; }
+  .dnode .cap { fill: #c3cad6; font-family: var(--font-body); font-size: 11px; text-anchor: middle; }
+  .dnode .bar.read { fill: var(--r-read); }
+  .dnode .bar.write { fill: var(--r-write); }
+  .dnode .dot { fill: var(--r-dot); }
+  .diagram .edge.dashed { stroke-dasharray: 5 4; }
+  .diagram .lbl { fill: var(--muted); font-family: var(--font-body); font-size: 11px; text-anchor: middle; }
+  .dnode.flash .bg { animation: nodehot 0.9s ease-out; }
+  .lglist { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 0.8125rem; color: var(--muted); }
+  .lglist li { display: inline-flex; align-items: center; gap: 8px; }
+  .lg { width: 22px; height: 16px; border-radius: 4px; background: var(--node-bg); position: relative; flex: none; }
+  .lg.outline { box-shadow: inset 0 0 0 2px var(--r-provide); }
+  .lg.dashed { border: 1.5px dashed var(--edge); }
+  .lg.read::after, .lg.write::after { content: ""; position: absolute; left: 5px; top: 3px; bottom: 3px; width: 4px; border-radius: 2px; background: var(--r-read); }
+  .lg.write::after { background: var(--r-write); }
+  .lg.dot::after { content: ""; position: absolute; right: 5px; top: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--r-dot); }
+  .tablewrap { overflow-x: auto; border: 1.5px solid var(--line); border-radius: 8px; background: var(--surface); }
+  table.who { width: 100%; min-width: 680px; border-collapse: collapse; font-size: 0.875rem; }
+  .who th, .who td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .who th { font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .who tbody tr:last-child td { border-bottom: 0; }
+  .who td:first-child { font-family: var(--font-mono); font-size: 0.8125rem; white-space: nowrap; }
+  .who td:nth-child(2) { white-space: nowrap; }
+  @keyframes nodehot { 0% { fill: var(--node-hot); } 100% { fill: var(--node-bg); } }
+  @media (prefers-reduced-motion: reduce) { .box.flash, .node.flash, .dnode.flash .bg { animation: none; } }
+</style>
+
+<main class="wrap">
+  <header>
+    <h1>Cart Context Demo</h1>
+    <p class="intro">One piece of state, held by <code>CartProvider</code>, read by components in two separate branches. Click Add to cart and watch which boxes light up.</p>
+  </header>
+
+  <div class="legend">
+    <span><i class="swatch dashed"></i>Provider owns the state</span>
+    <span><i class="swatch flash"></i>Flashes when the component re-renders</span>
+    <span><code>renders n</code> counts how often each one has rendered</span>
+  </div>
+
+  <div id="root"></div>
+
+  <section class="treewrap" aria-labelledby="tree-h">
+    <h2 id="tree-h">Component tree</h2>
+    <div class="treebox">
+      <ul class="tree">
+        <li>
+          <div class="node" data-node="App"><span class="nm">App</span><span class="tag">root, renders once</span></div>
+          <ul>
+            <li>
+              <div class="node provider" data-node="CartProvider"><span class="nm">CartProvider</span><span class="tag">owns the state</span></div>
+              <ul>
+                <li>
+                  <div class="node" data-node="Header"><span class="nm">Header</span><span class="tag">no context</span></div>
+                  <ul>
+                    <li><div class="node uses" data-node="CartBadge"><span class="nm">CartBadge</span><span class="tag">reads count</span></div></li>
+                  </ul>
+                </li>
+                <li>
+                  <div class="node" data-node="Main"><span class="nm">Main</span><span class="tag">no context</span></div>
+                  <ul>
+                    <li>
+                      <div class="node" data-node="ProductList"><span class="nm">ProductList</span><span class="tag">no context</span></div>
+                      <ul>
+                        <li><div class="node uses" data-node="Product"><span class="nm">Product ×3</span><span class="tag">calls setCount</span></div></li>
+                      </ul>
+                    </li>
+                    <li><div class="node uses" data-node="CartSummary"><span class="nm">CartSummary</span><span class="tag">reads count, calls setCount</span></div></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <p class="treekey">Green outline: calls <code>useContext</code>. Grey outline: does not. Nodes flash here too when that component re-renders.</p>
+  </section>
+
+  <section class="treewrap" aria-labelledby="diagram-h">
+    <h2 id="diagram-h">Tree diagram</h2>
+    <div class="diagwrap">
+      <svg class="diagram" viewBox="0 0 900 540" role="img" aria-label="Component tree with context roles. CartContext is created at module level and used by CartProvider. App contains CartProvider, which provides the cart state. CartProvider contains Header and Main, which only pass through. Header contains CartBadge, which reads count. Main contains ProductList, which passes through, and CartSummary, which reads count and calls setCount. ProductList contains three Product components, which call setCount.">
+        <path class="edge" d="M398 78 V130"/>
+        <path class="edge" d="M398 188 V214 H150 V240"/>
+        <path class="edge" d="M398 188 V214 H645 V240"/>
+        <path class="edge" d="M150 298 V350"/>
+        <path class="edge" d="M645 298 V324 H500 V350"/>
+        <path class="edge" d="M645 298 V324 H790 V350"/>
+        <path class="edge" d="M500 408 V434 H360 V460"/>
+        <path class="edge" d="M500 408 V460"/>
+        <path class="edge" d="M500 408 V434 H640 V460"/>
+        <path class="edge dashed" d="M190 159 H303"/>
+        <text class="lbl" x="246" y="150">Provider</text>
+
+        <g class="dnode ctx">
+          <rect class="bg" x="20" y="130" width="170" height="58" rx="6"/>
+          <text class="nm" x="105" y="155">CartContext</text>
+          <text class="cap" x="105" y="174">createContext()</text>
+        </g>
+
+        <g class="dnode" data-node="App">
+          <rect class="bg" x="328" y="20" width="140" height="58" rx="6"/>
+          <text class="nm" x="398" y="45">App</text>
+          <text class="cap" x="398" y="64">mounts the provider</text>
+        </g>
+
+        <g class="dnode prov" data-node="CartProvider">
+          <rect class="bg" x="303" y="130" width="190" height="58" rx="6"/>
+          <circle class="dot" cx="481" cy="142" r="4"/>
+          <text class="nm" x="398" y="155">CartProvider</text>
+          <text class="cap" x="398" y="174">owns state, provides value</text>
+        </g>
+
+        <g class="dnode" data-node="Header">
+          <rect class="bg" x="85" y="240" width="130" height="58" rx="6"/>
+          <text class="nm" x="150" y="265">Header</text>
+          <text class="cap" x="150" y="284">passes through</text>
+        </g>
+
+        <g class="dnode" data-node="Main">
+          <rect class="bg" x="590" y="240" width="110" height="58" rx="6"/>
+          <text class="nm" x="645" y="265">Main</text>
+          <text class="cap" x="645" y="284">passes through</text>
+        </g>
+
+        <g class="dnode" data-node="CartBadge">
+          <rect class="bg" x="75" y="350" width="150" height="58" rx="6"/>
+          <rect class="bar read" x="85" y="362" width="4" height="34" rx="2"/>
+          <circle class="dot" cx="213" cy="362" r="4"/>
+          <text class="nm" x="150" y="375">CartBadge</text>
+          <text class="cap" x="150" y="394">reads count</text>
+        </g>
+
+        <g class="dnode" data-node="ProductList">
+          <rect class="bg" x="420" y="350" width="160" height="58" rx="6"/>
+          <text class="nm" x="500" y="375">ProductList</text>
+          <text class="cap" x="500" y="394">passes through</text>
+        </g>
+
+        <g class="dnode" data-node="CartSummary">
+          <rect class="bg" x="705" y="350" width="170" height="58" rx="6"/>
+          <rect class="bar read" x="715" y="362" width="4" height="15" rx="2"/>
+          <rect class="bar write" x="715" y="381" width="4" height="15" rx="2"/>
+          <circle class="dot" cx="863" cy="362" r="4"/>
+          <text class="nm" x="790" y="375">CartSummary</text>
+          <text class="cap" x="790" y="394">reads count, clears it</text>
+        </g>
+
+        <g class="dnode" data-node="Product">
+          <rect class="bg" x="300" y="460" width="120" height="58" rx="6"/>
+          <rect class="bar write" x="310" y="472" width="4" height="34" rx="2"/>
+          <circle class="dot" cx="408" cy="472" r="4"/>
+          <text class="nm" x="360" y="485">Product</text>
+          <text class="cap" x="360" y="504">adds one</text>
+        </g>
+        <g class="dnode" data-node="Product">
+          <rect class="bg" x="440" y="460" width="120" height="58" rx="6"/>
+          <rect class="bar write" x="450" y="472" width="4" height="34" rx="2"/>
+          <circle class="dot" cx="548" cy="472" r="4"/>
+          <text class="nm" x="500" y="485">Product</text>
+          <text class="cap" x="500" y="504">adds one</text>
+        </g>
+        <g class="dnode" data-node="Product">
+          <rect class="bg" x="580" y="460" width="120" height="58" rx="6"/>
+          <rect class="bar write" x="590" y="472" width="4" height="34" rx="2"/>
+          <circle class="dot" cx="688" cy="472" r="4"/>
+          <text class="nm" x="640" y="485">Product</text>
+          <text class="cap" x="640" y="504">adds one</text>
+        </g>
+      </svg>
+      <ul class="lglist">
+        <li><i class="lg outline"></i>Provides: owns the state and puts it in context</li>
+        <li><i class="lg read"></i>Consumes: reads <code>count</code></li>
+        <li><i class="lg write"></i>Consumes: calls <code>setCount</code></li>
+        <li><i class="lg dot"></i>Re-renders when the count changes</li>
+        <li><i class="lg dashed"></i>Created once at module level, not a component</li>
+      </ul>
+    </div>
+    <p class="treekey">Boxes turn green for a moment when that component re-renders.</p>
+  </section>
+
+  <section class="treewrap" aria-labelledby="who-h">
+    <h2 id="who-h">Who does what</h2>
+    <div class="tablewrap">
+      <table class="who">
+        <thead>
+          <tr><th scope="col">Component</th><th scope="col">Role</th><th scope="col">What it does with the context</th><th scope="col">Re-renders on click</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CartContext</td><td>Creates</td><td><code>createContext()</code> at module level. Holds nothing itself; it is the channel the other components use.</td><td>Not a component</td></tr>
+          <tr><td>App</td><td>Mounts</td><td>Renders <code>CartProvider</code> around the two branches. Does not touch the context.</td><td>No</td></tr>
+          <tr><td>CartProvider</td><td>Provides</td><td>Holds <code>count</code> in <code>useState(0)</code> and passes <code>{ count, setCount }</code> to <code>CartContext.Provider</code>.</td><td>Yes, its own state changed</td></tr>
+          <tr><td>Header</td><td>Passes through</td><td>Only lays out its child. No props about the cart.</td><td>No</td></tr>
+          <tr><td>CartBadge</td><td>Consumes</td><td><code>useContext</code>, then reads <code>count</code> to show the number.</td><td>Yes</td></tr>
+          <tr><td>Main</td><td>Passes through</td><td>Only lays out <code>ProductList</code> and <code>CartSummary</code>.</td><td>No</td></tr>
+          <tr><td>ProductList</td><td>Passes through</td><td>Only lays out the three products.</td><td>No</td></tr>
+          <tr><td>Product ×3</td><td>Consumes</td><td><code>useContext</code>, then calls <code>setCount(c =&gt; c + 1)</code>. It never reads <code>count</code>.</td><td>Yes, the context value is a new object each time</td></tr>
+          <tr><td>CartSummary</td><td>Consumes</td><td><code>useContext</code>, reads <code>count</code> to show it and calls <code>setCount(0)</code> on Clear.</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <ul class="takeaways">
+    <li><b>Siblings share state without props.</b> <code>Product</code> in one branch updates <code>CartBadge</code> in the other.</li>
+    <li><b>Header, Main and ProductList never re-render.</b> They don't call <code>useContext</code>, and their children are unchanged elements.</li>
+    <li><b>Every consumer re-renders on any change.</b> <code>Product</code> only uses <code>setCount</code>, yet its counter still goes up, because the context value is a new object each time.</li>
+  </ul>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script>
+(function () {
+  var h = React.createElement;
+  var createContext = React.createContext, useContext = React.useContext, useState = React.useState,
+      useRef = React.useRef, useEffect = React.useEffect;
+
+  // 1. Create the context
+  var CartContext = createContext();
+
+  // Box: draws a component as a labelled box, counts its renders, flashes on each one
+  function Box(props) {
+    var ref = useRef(null);
+    var renders = useRef(0);
+    renders.current += 1;
+    useEffect(function () {
+      var el = ref.current;
+      if (!el) return;
+      el.classList.remove("flash");
+      void el.offsetWidth;
+      el.classList.add("flash");
+      document.querySelectorAll('[data-node="' + props.name + '"]').forEach(function (node) {
+        node.classList.remove("flash");
+        void node.offsetWidth;
+        node.classList.add("flash");
+      });
+    });
+    return h("div", { className: "box " + (props.kind || ""), ref: ref },
+      h("div", { className: "boxhead" },
+        h("span", { className: "name" }, props.name),
+        props.note ? h("span", { className: "note" }, props.note) : null,
+        props.kind === "provider" ? null : h("span", { className: "count" }, "renders " + renders.current)
+      ),
+      props.children ? h("div", { className: "boxbody" }, props.children) : null
+    );
+  }
+
+  // 2. Provider owns the state and exposes it
+  function CartProvider(props) {
+    var s = useState(0);
+    var count = s[0], setCount = s[1];
+    return h(CartContext.Provider, { value: { count: count, setCount: setCount } },
+      h(Box, { name: "CartProvider", note: "owns count with useState", kind: "provider" }, props.children)
+    );
+  }
+
+  var useCart = function () { return useContext(CartContext); };
+
+  // ---------- Branch A: header ----------
+  function CartBadge() {
+    var cart = useCart();
+    return h(Box, { name: "CartBadge", note: "reads count" },
+      h("div", { className: "row" }, h("span", null, "Cart"), h("span", { className: "pill" }, cart.count))
+    );
+  }
+  function Header() {
+    return h(Box, { name: "Header", note: "no context" },
+      h("div", { className: "row" }, h("strong", null, "My Shop")),
+      h(CartBadge)
+    );
+  }
+
+  // ---------- Branch B: main content ----------
+  function Product(props) {
+    var cart = useCart();
+    return h(Box, { name: "Product", note: "calls setCount" },
+      h("div", { className: "row" },
+        h("span", null, props.name),
+        h("button", { type: "button", onClick: function () { cart.setCount(function (c) { return c + 1; }); } }, "Add to cart")
+      )
+    );
+  }
+  function ProductList() {
+    return h(Box, { name: "ProductList", note: "no context" },
+      h(Product, { name: "Keyboard" }),
+      h(Product, { name: "Mouse" }),
+      h(Product, { name: "Monitor" })
+    );
+  }
+  function CartSummary() {
+    var cart = useCart();
+    return h(Box, { name: "CartSummary", note: "reads count, calls setCount" },
+      h("div", { className: "row" },
+        h("span", null, "Items in cart: ", h("span", { className: "big" }, cart.count)),
+        h("button", { type: "button", className: "ghost", onClick: function () { cart.setCount(0); } }, "Clear")
+      )
+    );
+  }
+  function Main() {
+    return h(Box, { name: "Main", note: "no context" },
+      h(ProductList),
+      h(CartSummary)
+    );
+  }
+
+  // ---------- Root ----------
+  function App() {
+    return h(CartProvider, null,
+      h("div", { className: "branches" },
+        h("div", null, h("p", { className: "branchlabel" }, "Branch A"), h(Header)),
+        h("div", null, h("p", { className: "branchlabel" }, "Branch B"), h(Main))
+      )
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById("root")).render(h(App));
+})();
+</script>
+
+</body></html>
