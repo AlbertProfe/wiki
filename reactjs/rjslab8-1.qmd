@@ -34,11 +34,39 @@ By the end of this lab, you'll have a working shop where **Add to cart** in the 
 
 </br>
 
-![Tree diagram: App mounts CartProvider, which provides CartContext to two branches. Header contains CartBadge; Main contains ProductList and CartSummary.](/images/reactjs/cart-context-tree-diagram.png){.lightbox width=100% fig-align="center"}
+::: {.panel-tabset}
+
+### All components {.unnumbered .unlisted}
+
+![Tree diagram: App mounts CartProvider, which provides CartContext to two branches. Header contains CartBadge; Main contains ProductList and CartSummary.](/images/reactjs/cart-context-tree-all.png){.lightbox width=100% fig-align="center"}
+
+### Context only {.unnumbered .unlisted}
+
+![Tree diagram, context only: App, Header, Main and ProductList are greyed out because they never touch the context.](/images/reactjs/cart-context-tree-context-only.png){.lightbox width=100% fig-align="center"}
+
+:::
 
 [Open the interactive Cart Context Demo](/images/reactjs/docs/cart-context-visuals.html){.external target='_blank'}
 
-The still above is the component tree. The demo is the same diagram, live: boxes flash when that component re-renders.
+The diagrams above are the component tree. Use the tabs to see which components never touch the context. The demo is the same diagram, live: boxes flash when that component re-renders.
+
+::: {.column-margin}
+[*The Master and His Emissary*](https://yalebooks.yale.edu/book/9780300245929/the-master-and-his-emissary/){.external target='_blank'}, by Iain McGilchrist (Yale University Press, 2009). Two kinds of attention: the right for the whole, the left for the parts.
+:::
+
+::: {.callout-note}
+## The method
+
+Before we write a line of code, it helps to see the method this lab follows. Iain McGilchrist, in *The Master and His Emissary*, is not making a pop-psychology claim about "left brain versus right brain". He is describing two kinds of attention, and we keep passing the work between them.
+
+We start with the **right hemisphere's** kind of attention: broad, open, and a little ambiguous. The feature is still a rough draft of the whole app — a shop where "Add to cart" updates a badge in the header. We can feel the idea without pinning every part down.
+
+Then we switch to the **left hemisphere's** kind of attention: narrow and focused. We break the idea into a component tree, then into context and state. The tabs above are that move. **All components** is the full tree; **Context only** greys out the parts that never touch the cart, so you can see who owns or consumes the state.
+
+When the pieces fit, we come **back to the right**. The shop works as a whole again and waits for the next feature. Then the cycle repeats: another vague idea, another careful breakdown, another working whole.
+:::
+
+![One feature, one cycle: from a rough whole idea, to the component tree, context and state, and back to a working whole. After Iain McGilchrist, *The Master and His Emissary*.](/images/reactjs/cart-context-method-cycle.png){.lightbox width=100% fig-align="center"}
 
 # References
 
@@ -119,6 +147,36 @@ export function CartProvider({ children }) {
   );
 }
 ```
+
+::: {.column-margin}
+The official API is on [createContext](https://react.dev/reference/react/createContext){.external target='_blank'} at react.dev. Starting in React 19 you can render `<CartContext value={...}>` as the provider.
+:::
+
+::: {.callout-note collapse="false"}
+## What this code does
+
+- `createContext()` makes the shared "box": a context object that other components can provide or read. The box itself does not hold the count yet.
+- `CartProvider` is a wrapper component. You put it around a part of the tree (for example around `<App />`).
+- `useState(0)` is where the count actually lives. Only the provider *owns* that state.
+- `value={{ count, setCount }}` is what gets passed down through the context, to any depth.
+- `{children}` is whatever you wrap — the inner tree. Any component inside can call `useContext(CartContext)` (or our `useCart()` hook) and read or update the count, with no prop drilling through `Header` or `Main`.
+
+### Is this legacy? {.unnumbered .unlisted}
+
+Two different things get mixed up here.
+
+The `children` **prop** is not legacy. Passing JSX as `children` is still the normal way to compose components: `<CartProvider><App /></CartProvider>`. What *is* on the [legacy APIs](https://react.dev/reference/react/legacy){.external target='_blank'} list is `Children` (`React.Children.map` and friends) and `cloneElement`. Those inspect or clone the children you already received. We do not use them in this lab.
+
+`<CartContext.Provider>` is a slightly different story. On the [createContext](https://react.dev/reference/react/createContext){.external target='_blank'} page, React already calls `.Provider` the way to provide context *before React 19*. Starting in React 19 you can write this instead:
+
+```jsx
+<CartContext value={{ count, setCount }}>
+  {children}
+</CartContext>
+```
+
+`<CartContext.Provider>` still works. You will keep seeing it in React 18 codebases, in tutorials, in AI-generated code, and in libraries that must run on older React. It works everywhere, so this lab uses that form.
+:::
 
 ::: {.column-margin}
 The provider is the only place that *owns* the count. Everyone else either reads it, updates it, or just passes children through.

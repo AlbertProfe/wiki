@@ -22,11 +22,13 @@
     text-decoration: none;
 }
 
-.tab-content:not(:target) {
+/* Only hash-target tabs (they have an id). A bare .tab-content:not(:target)
+   would hide Quarto panel-tabsets, which also use .tab-content with no id. */
+.tab-content[id]:not(:target) {
     display: none;
 }
 
-.tab-content:target {
+.tab-content[id]:target {
     display: block;
 }
 
