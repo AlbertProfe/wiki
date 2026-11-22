@@ -197,6 +197,8 @@ export const useCart = () => useContext(CartContext);
 
 `Header` does not touch the context. It only lays out the title and the badge. `CartBadge` reads `count` and shows it.
 
+![Branch A: Header passes through, CartBadge reads count.](/images/reactjs/cart-context-branch-a.png){.lightbox width=100% fig-align="center"}
+
 ``` {.jsx .code-overflow-wrap filename="src/Header/Header.jsx"}
 import { CartBadge } from "../CartBadge/CartBadge";
 
@@ -222,6 +224,8 @@ export function CartBadge() {
 ## Branch B: main content
 
 `Main` and `ProductList` also pass through: no cart props. Each `Product` calls `setCount` when you click **Add to cart**. `CartSummary` reads the count and can clear it.
+
+![Branch B: Main and ProductList pass through, Product adds one, CartSummary reads and clears.](/images/reactjs/cart-context-branch-b.png){.lightbox width=100% fig-align="center"}
 
 ``` {.jsx .code-overflow-wrap filename="src/Main/Main.jsx"}
 import { ProductList } from "../ProductList/ProductList";
@@ -301,6 +305,14 @@ export default App;
 ```
 
 The entry file stays the Vite default: `createRoot` and `StrictMode` in `src/main.jsx`.
+
+::: {.callout-tip}
+## CartProvider execution flow
+
+This page walks step by step from `<App />` to the rendered children, then covers re-renders.
+
+[Open the CartProvider execution flow](../images/reactjs/docs/cartprovider-execution-flow.html){.external target='_blank'}
+:::
 
 # What to notice
 
