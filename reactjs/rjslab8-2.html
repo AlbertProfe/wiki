@@ -1,0 +1,3168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="albertprofe">
+<meta name="description" content="labs">
+
+<title>Lab#RE08-2: Cart Shopping Context with useReducer – albertprofe wiki</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../reactjs/rjslab8-1.html" rel="prev">
+<link href="..//images/home/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-a8afc39207a8495d61c828f3d0362729.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-d0b846a387a2e909230dcd0fc904df5f.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-20e596c92f945b484c3cc2865b49d12c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">albertprofe wiki</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-topics" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Topics</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-topics">    
+        <li>
+    <a class="dropdown-item" href="../linux/linux-what-basics.html"><i class="bi bi-terminal" role="img">
+</i> 
+ <span class="dropdown-text">Linux OS</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-what-intro.html"><i class="bi bi-gear-wide-connected" role="img">
+</i> 
+ <span class="dropdown-text">DevOps</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-lang-intro.html"><i class="bi bi-code-slash" role="img">
+</i> 
+ <span class="dropdown-text">MarkUp</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-what-basics.html"><i class="bi bi-cup-hot" role="img">
+</i> 
+ <span class="dropdown-text">Java SE</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-what-basics.html"><i class="bi bi-box-seam" role="img">
+</i> 
+ <span class="dropdown-text">Spring Boot</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-principles.html"><i class="bi bi-lightning" role="img">
+</i> 
+ <span class="dropdown-text">React</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-what-concepts.html"><i class="bi bi-kanban" role="img">
+</i> 
+ <span class="dropdown-text">SCRUM</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-general.html"><i class="bi bi-lightbulb" role="img">
+</i> 
+ <span class="dropdown-text">Learning</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-listing-card-books.html"><i class="bi bi-book" role="img">
+</i> 
+ <span class="dropdown-text">Books</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-linux-os" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Linux OS</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-linux-os">    
+        <li class="dropdown-header">Linux: concepts</li>
+        <li>
+    <a class="dropdown-item" href="../linux/linux-what-basics.html">
+ <span class="dropdown-text">Linux: basic concepts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-what-bash.html">
+ <span class="dropdown-text">Linux: Bash</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-what-sudo.html">
+ <span class="dropdown-text">Linux: su and sudo</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-what-pipes.html">
+ <span class="dropdown-text">Linux: pipes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-what-fsys.html">
+ <span class="dropdown-text">Linux: File System</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-what-vm.html">
+ <span class="dropdown-text">Linux: Virtual Machines</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Linux: distros</li>
+        <li>
+    <a class="dropdown-item" href="../linux/linux-distros-ubuntu.html">
+ <span class="dropdown-text">Linux Distros: Ubuntu</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-distros-mint.html">
+ <span class="dropdown-text">Linux Distros: Mint</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-distros-debian.html">
+ <span class="dropdown-text">Linux Distros: Debian</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-distros-opensuse.html">
+ <span class="dropdown-text">Linux Distros: openSuse</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-distros-manjaro.html">
+ <span class="dropdown-text">Linux Distros: Manjaro</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/linux-distros-redhat.html">
+ <span class="dropdown-text">Linux Distros: Red Hat Enterprise</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Linux: laboratories</li>
+        <li>
+    <a class="dropdown-item" href="../linux/lilab01-1.html">
+ <span class="dropdown-text">Linux Lab#LI01-1: Choose Linux</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab01-2.html">
+ <span class="dropdown-text">Linux Lab#LI01-2: Install at least three distributions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab01-3.html">
+ <span class="dropdown-text">Linux Lab#LI01-3: Adjust user permissions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab02-1.html">
+ <span class="dropdown-text">Linux Lab#LI02-1: Export env user with grep and pipe</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab03-1.html">
+ <span class="dropdown-text">Linux Lab#LI03-1: Manage users and groups</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab03-2.html">
+ <span class="dropdown-text">Linux Lab#LI03-2: Manage files</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab03-3.html">
+ <span class="dropdown-text">Linux Lab#LI03-3: Manage software</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab03-4.html">
+ <span class="dropdown-text">Linux Lab#LI03-4: Manage hardware</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab04-1.html">
+ <span class="dropdown-text">Linux Lab#LI04-1: Bash scripting, qtool</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab04-2.html">
+ <span class="dropdown-text">Linux Lab#LI04-2: Bash scripts as terminal tool</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../linux/lilab04-3.html">
+ <span class="dropdown-text">Linux Lab#LI04-3: Distribute the terminal app</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Linux readings</li>
+        <li>
+    <a class="dropdown-item" href="../linux/resources.html">
+ <span class="dropdown-text">Linux Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-devops" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">DevOps</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-devops">    
+        <li class="dropdown-header">What is DevOps</li>
+        <li>
+    <a class="dropdown-item" href="../devops/devops-what-intro.html">
+ <span class="dropdown-text">DevOps: Introduction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-what-agile-microservice.html">
+ <span class="dropdown-text">DevOps: Agile and Microservices</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-what-infraascode.html">
+ <span class="dropdown-text">Infrastructure as code (IaC)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-what-immutable.html">
+ <span class="dropdown-text">Immutable Infrastructure</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-what-lifecycle.html">
+ <span class="dropdown-text">Software Lifecycle</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Documentation</li>
+        <li>
+    <a class="dropdown-item" href="../devops/devops-doc-quarto.html">
+ <span class="dropdown-text">How to document: Quarto and Obsidian</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Network protocols</li>
+        <li>
+    <a class="dropdown-item" href="../devops/devops-network-basics.html">
+ <span class="dropdown-text">Network: Basics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-network-clientserver.html">
+ <span class="dropdown-text">Network: Client-server</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-network-protocols.html">
+ <span class="dropdown-text">Network Protocols</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-network-dns.html">
+ <span class="dropdown-text">Network: DNS</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-network-rest.html">
+ <span class="dropdown-text">Network: API Rest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-network-grpc.html">
+ <span class="dropdown-text">Network: gRPC</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-network-websocket.html">
+ <span class="dropdown-text">Network: Websocket</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-network-smtp.html">
+ <span class="dropdown-text">Network: SMTP</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-network-ping.html">
+ <span class="dropdown-text">Network: Ping</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-network-udp.html">
+ <span class="dropdown-text">Network: UDP</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-network-webhook.html">
+ <span class="dropdown-text">Network: webhook</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-network-soap.html">
+ <span class="dropdown-text">Network: SOAP</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-network-graphql.html">
+ <span class="dropdown-text">Network: graphQL</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Version Control</li>
+        <li>
+    <a class="dropdown-item" href="../devops/devops-vc-git.html">
+ <span class="dropdown-text">Git</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-vc-github.html">
+ <span class="dropdown-text">GitHub</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-vc-ideagithub.html">
+ <span class="dropdown-text">Idea and GitHub 2023</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-vc-gitgh.html">
+ <span class="dropdown-text">Git and GitHub 2023 CLI</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">IDEs</li>
+        <li>
+    <a class="dropdown-item" href="../devops/devops-ide-visualcode.html">
+ <span class="dropdown-text">IDE: Visual Code</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-ide-intelljidea.html">
+ <span class="dropdown-text">IDE: IntellJIdea</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">DevOps tools</li>
+        <li>
+    <a class="dropdown-item" href="../devops/devops-tools-aws.html">
+ <span class="dropdown-text">Amazon Web Services AWS</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-tools-docker.html">
+ <span class="dropdown-text">Docker</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-tools-jenkins.html">
+ <span class="dropdown-text">Jenkins pipelines</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-tools-k8s.html">
+ <span class="dropdown-text">Kubernetes k8s</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-tools-digitalocean.html">
+ <span class="dropdown-text">Digital Ocean</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-tools-nagios.html">
+ <span class="dropdown-text">Nagios</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-tools-ansible.html">
+ <span class="dropdown-text">Ansible</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">DevOps Laboratories</li>
+        <li>
+    <a class="dropdown-item" href="../devops/devops-lab-chatapp.html">
+ <span class="dropdown-text">Lab 1: chat App</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-lab-springbooksintro.html">
+ <span class="dropdown-text">Lab 2: Spring Boot AWS AEB manually</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-lab-springbookss3.html">
+ <span class="dropdown-text">Lab 3: Spring Boot and AWS S3 publisher</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-lab-springbooksdocker.html">
+ <span class="dropdown-text">Lab 4: Spring Boot Docker/Jenkins</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-lab-k8sdigitalocean.html">
+ <span class="dropdown-text">Lab 5: k8s on Digital Ocean</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../devops/devops-lab-springawsdeploy.html">
+ <span class="dropdown-text">Lab 6: Spring Boot AWS codecommit</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">DevOps readings</li>
+        <li>
+    <a class="dropdown-item" href="../devops/resources.html">
+ <span class="dropdown-text">DevOps Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-markup" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">MarkUp</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-markup">    
+        <li class="dropdown-header">MarkUp Languages</li>
+        <li>
+    <a class="dropdown-item" href="../markup/markup-lang-intro.html">
+ <span class="dropdown-text">Introduction Markup</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-lang-html.html">
+ <span class="dropdown-text">HTML Markup</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-lang-md.html">
+ <span class="dropdown-text">Markdown Markup</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-lang-html-md.html">
+ <span class="dropdown-text">Markdown and HTML working together, good idea?</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Quarto Markdown</li>
+        <li>
+    <a class="dropdown-item" href="../markup/markup-quarto-basics.html">
+ <span class="dropdown-text">Quarto Markdown: basics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-quarto-create.html">
+ <span class="dropdown-text">Quarto Markdown: creating</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-quarto-publish.html">
+ <span class="dropdown-text">Quarto Markdown: publishing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-quarto-code.html">
+ <span class="dropdown-text">Quarto Markdown: code &amp; data</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-quarto-api-rest.html">
+ <span class="dropdown-text">Quarto Markdown: api rest call</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-quarto-api-rest-v2.html">
+ <span class="dropdown-text">Quarto Markdown: OJS Cells</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-quarto-cheatsheet.html">
+ <span class="dropdown-text">Quarto Markdown: cheat-sheet</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Styling: CSS</li>
+        <li>
+    <a class="dropdown-item" href="../markup/markup-css-basics.html">
+ <span class="dropdown-text">Cascade Style Sheet</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../markup/markup-css-w3css.html">
+ <span class="dropdown-text">CSS: W3.css</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">MarkUp Languages Laboratories</li>
+        <li>
+    <a class="dropdown-item" href="../markup/mulab1.html">
+ <span class="dropdown-text">Lab#MD01-1: Create and publish by Quarto</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">MarkUp Languages readings</li>
+        <li>
+    <a class="dropdown-item" href="../markup/resources.html">
+ <span class="dropdown-text">MarkUp Languages Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-java-se" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Java SE</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-java-se">    
+        <li class="dropdown-header">What is Java SE</li>
+        <li>
+    <a class="dropdown-item" href="../javase/se-what-basics.html">
+ <span class="dropdown-text">Java Standard Edition: Basics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-what-principles.html">
+ <span class="dropdown-text">Java Standard Edition: Principles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-what-jvm.html">
+ <span class="dropdown-text">Java Standard Edition: JVM</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-what-moochelsinki.html">
+ <span class="dropdown-text">Java MOOC Helsinki</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-what-moocsyllabus.html">
+ <span class="dropdown-text">Java MOOC Helsinki Syllabus</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Java Create Project</li>
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-maven.html">
+ <span class="dropdown-text">Java SE: Maven</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-createproject.html">
+ <span class="dropdown-text">Java SE: Create Maven Project</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-projectgit.html">
+ <span class="dropdown-text">Java SE: Project push GitHub</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-tdd.html">
+ <span class="dropdown-text">Java SE: JUnit and TDD</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Java Concepts</li>
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-objects.html">
+ <span class="dropdown-text">Java SE: Class and Objects</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-scope.html">
+ <span class="dropdown-text">Java SE: Scope</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-static.html">
+ <span class="dropdown-text">Java SE: static modifier</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-coupling.html">
+ <span class="dropdown-text">Java SE: Coupling and DDD</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-package.html">
+ <span class="dropdown-text">Java SE: Packages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-interface.html">
+ <span class="dropdown-text">Java SE: Abstract/Interface</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-concepts-java8.html">
+ <span class="dropdown-text">Java SE: Java 8</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Java Principles</li>
+        <li>
+    <a class="dropdown-item" href="../javase/se-principles-encapsulation.html">
+ <span class="dropdown-text">Java SE: Encapsulation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-principles-abstraction.html">
+ <span class="dropdown-text">Java SE: Abstraction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-principles-inheritance.html">
+ <span class="dropdown-text">Java SE: Inherence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-principles-polymorphism.html">
+ <span class="dropdown-text">Java SE: Polymorphism</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Java Design Patterns</li>
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-uml.html">
+ <span class="dropdown-text">Java Patterns: UML</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-intro.html">
+ <span class="dropdown-text">Java Patterns: Types</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-singleton.html">
+ <span class="dropdown-text">Singleton</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-factory.html">
+ <span class="dropdown-text">Factory</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-abstractfactory.html">
+ <span class="dropdown-text">Abstract Factory</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-builder.html">
+ <span class="dropdown-text">Builder</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-facade.html">
+ <span class="dropdown-text">Facade</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-bridge.html">
+ <span class="dropdown-text">Bridge</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-decorator.html">
+ <span class="dropdown-text">Decorator</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-composite.html">
+ <span class="dropdown-text">Composite</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-observer.html">
+ <span class="dropdown-text">Observer</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-strategy.html">
+ <span class="dropdown-text">Strategy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-state.html">
+ <span class="dropdown-text">State</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/se-pattern-commander.html">
+ <span class="dropdown-text">Commander</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Java SE Laboratories</li>
+        <li>
+    <a class="dropdown-item" href="../javase/selab0-1.html">
+ <span class="dropdown-text">Lab#SE00-1: Maven Person</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab0-2.html">
+ <span class="dropdown-text">Lab#SE00-2: Maven Clinic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab0-3.html">
+ <span class="dropdown-text">Lab#SE00-3: Library Model</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab0-4.html">
+ <span class="dropdown-text">Lab#SE00-4: Abstract/Interface Human</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab1-1.html">
+ <span class="dropdown-text">Lab#SE01-1: Maven/Gradle Person and Account</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab1-2.html">
+ <span class="dropdown-text">Lab#SE01-2: Maven/Gradle Person and Account stored in JSON</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab2-1.html">
+ <span class="dropdown-text">Lab#SE02-1: Movie/Review, Model</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab2-2.html">
+ <span class="dropdown-text">Lab#SE02-2: Movie/Review, CRUD Operations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab2-3.html">
+ <span class="dropdown-text">Lab#SE02-3: Movie/Review, factory</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab2-4.html">
+ <span class="dropdown-text">Lab#SE02-4: Movie/Review, interactivity and coupling</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab2-5.html">
+ <span class="dropdown-text">Lab#SE02-5: Movie/Review, simulate interactivity by console</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab3-1.html">
+ <span class="dropdown-text">Lab#SE03-1: Library/Book, Core-Model</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab3-2.html">
+ <span class="dropdown-text">Lab#SE03-2: Library/Book, Sprint Zero</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab3-3.html">
+ <span class="dropdown-text">Lab#SE03-3: Library/Book, Expand Model</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../javase/selab4-1.html">
+ <span class="dropdown-text">Lab#SE04-1: healthyFood Restaurant, Core Model</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Java SE readings</li>
+        <li>
+    <a class="dropdown-item" href="../javase/resources.html">
+ <span class="dropdown-text">Java SE Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-spring" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Spring</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-spring">    
+        <li class="dropdown-header">Spring Legacy</li>
+        <li>
+    <a class="dropdown-item" href="../spring/spring-basics.html">
+ <span class="dropdown-text">Spring Framework</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../spring/spring-mvc.html">
+ <span class="dropdown-text">Spring MVC</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../spring/spring-servlets.html">
+ <span class="dropdown-text">Springs Servlets</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Spring Boot Basics</li>
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-what-basics.html">
+ <span class="dropdown-text">Spring Boot: fundamentals</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-what-create.html">
+ <span class="dropdown-text">Spring Boot: create a Project</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-what-create-th-h2.html">
+ <span class="dropdown-text">Spring Boot: H2 DB and Thymeleaf</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-what-cycle.html">
+ <span class="dropdown-text">Spring Boot: cycle</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Spring Boot Concepts</li>
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-injection.html">
+ <span class="dropdown-text">Spring Boot: Dependency Injection</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-annotations.html">
+ <span class="dropdown-text">Spring Boot: Annotations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-controller.html">
+ <span class="dropdown-text">Spring Boot: Controller</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-view.html">
+ <span class="dropdown-text">Spring Boot: View</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-th.html">
+ <span class="dropdown-text">Spring Boot: Thymeleaf</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-vaadin-flow.html">
+ <span class="dropdown-text">Spring Boot: Vaadin Flow</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-vaadin-hilla.html">
+ <span class="dropdown-text">Spring Boot: Vaadin Hilla</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-model.html">
+ <span class="dropdown-text">Spring Boot: Model</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-rest.html">
+ <span class="dropdown-text">Spring Boot: Rest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-data.html">
+ <span class="dropdown-text">Spring Boot: Data &amp; DB</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-jpa.html">
+ <span class="dropdown-text">Spring Boot: JPA &amp; DI</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-jpa-2.html">
+ <span class="dropdown-text">Spring Boot: JPA Mappings</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-jpa-3.html">
+ <span class="dropdown-text">Spring Boot: JPA Relationships</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-jpa-4.html">
+ <span class="dropdown-text">Spring Boot: JPA Queries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-jpa-5.html">
+ <span class="dropdown-text">Spring Boot: JPA Inherence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/boot-concepts-scaling.html">
+ <span class="dropdown-text">Spring Boot: Scaling</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Spring Boot Laboratories</li>
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-1.html">
+ <span class="dropdown-text">Lab#SB00-1: Library UML</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-2.html">
+ <span class="dropdown-text">Lab#SB00-2: CRUD User</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-3.html">
+ <span class="dropdown-text">Lab#SB00-3: LibraryManagement</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-4.html">
+ <span class="dropdown-text">Lab#SB00-4: API Rest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-5.html">
+ <span class="dropdown-text">Lab#SB00-5: Rest &amp; JPA-H2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-6.html">
+ <span class="dropdown-text">Lab#SB00-6: Rest &amp; MongoDB</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab0-7.html">
+ <span class="dropdown-text">Lab#SB00-7: Styling</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab1.html">
+ <span class="dropdown-text">Lab#SB01-1: DataBase</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab2.html">
+ <span class="dropdown-text">Lab#SB02-1: <code>JPA</code> Relationships</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab3.html">
+ <span class="dropdown-text">Lab#SB03-1: APIs &amp; cloud</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab4.html">
+ <span class="dropdown-text">Lab#SB04-1: <code>JPA</code> Inherence</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab5.html">
+ <span class="dropdown-text">Lab#SB05-1: API Rest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab6.html">
+ <span class="dropdown-text">Lab#SB06-1: <code>employeeCourse</code></span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab7.html">
+ <span class="dropdown-text">Lab#SB07-1: <code>monitor Book</code></span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab8-1.html">
+ <span class="dropdown-text">Lab#SB08-1: Restaurant UML</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab8-2.html">
+ <span class="dropdown-text">Lab#SB08-2: Vaadin</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab8-3.html">
+ <span class="dropdown-text">Lab#SB08-3: H2 and API Rest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab8-4.html">
+ <span class="dropdown-text">Lab#SB08-4: JPA</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab8-5.html">
+ <span class="dropdown-text">Lab#SB08-5: Test API Rest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../springboot/sblab9-1.html">
+ <span class="dropdown-text">Lab#SB09-1: SpringIO Conference</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Spring Boot readings</li>
+        <li>
+    <a class="dropdown-item" href="../springboot/resources.html">
+ <span class="dropdown-text">Spring Boot Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-reactjs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">ReactJS</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-reactjs">    
+        <li class="dropdown-header">ReactJS: Principles</li>
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-principles.html">
+ <span class="dropdown-text">React JS: Introduction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-render-dom.html">
+ <span class="dropdown-text">React JS: render virtual DOM</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-create.html">
+ <span class="dropdown-text">React JS: Create a React project</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-components.html">
+ <span class="dropdown-text">React JS: Components</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-jsx.html">
+ <span class="dropdown-text">React JS: JSX</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-props.html">
+ <span class="dropdown-text">React JS: properties</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-immutability.html">
+ <span class="dropdown-text">React JS: render cycle</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">HTML for React</li>
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-html.html">
+ <span class="dropdown-text">React JS: HTML basics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-html-forms.html">
+ <span class="dropdown-text">React JS: HTML forms</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-html-events.html">
+ <span class="dropdown-text">React JS: HTML events and the DOM</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-html-jsx.html">
+ <span class="dropdown-text">React JS: from HTML to JSX</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-what-html-css.html">
+ <span class="dropdown-text">React JS: CSS basics</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">JavaScript: web scripting</li>
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-js-basics.html">
+ <span class="dropdown-text">JavaScript: basics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-js-functions.html">
+ <span class="dropdown-text">JavaScript: functions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-js-objects.html">
+ <span class="dropdown-text">JavaScript: objects</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-js-variables.html">
+ <span class="dropdown-text">JavaScript: variables</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-js-flux.html">
+ <span class="dropdown-text">JavaScript: flux control</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">ES6: ECMAScript 6</li>
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-es6-arrow.html">
+ <span class="dropdown-text">React JS ES6: arrow functions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-es6-import.html">
+ <span class="dropdown-text">React JS ES6: import modules</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-es6-data.html">
+ <span class="dropdown-text">React JS ES6: array, data and key</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-es6-destructuring.html">
+ <span class="dropdown-text">React JS ES6: destructuring</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-es6-spread.html">
+ <span class="dropdown-text">React JS ES6: spread operator</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">ReacJS 18: Hooks</li>
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-rules.html">
+ <span class="dropdown-text">React JS: Rules of Hooks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-state.html">
+ <span class="dropdown-text">ReactJS: useState</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-reducer.html">
+ <span class="dropdown-text">React JS: useReducer</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-ref.html">
+ <span class="dropdown-text">React JS: useRef</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-effect.html">
+ <span class="dropdown-text">React JS: useEffect</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-context.html">
+ <span class="dropdown-text">React JS: useContext</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-memo.html">
+ <span class="dropdown-text">ReactJS: useMemo</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-hook-custom.html">
+ <span class="dropdown-text">ReactJS: custom hooks</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">ReactJS: Designing an App</li>
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-app-async.html">
+ <span class="dropdown-text">React JS App: async</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-app-events.html">
+ <span class="dropdown-text">React JS App: events</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-app-router.html">
+ <span class="dropdown-text">React JS App: router</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-app-conditional-render.html">
+ <span class="dropdown-text">React JS App: conditional render</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/reactjs-app-styling.html">
+ <span class="dropdown-text">React JS App: styling</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">React JS: Laboratories</li>
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab1.html">
+ <span class="dropdown-text">Lab#RE01-1: API Rest Axios</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab2.html">
+ <span class="dropdown-text">Lab#RE02-1: Router &amp; Hooks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab3.html">
+ <span class="dropdown-text">Lab#RE03-1: to-do app</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab3-2.html">
+ <span class="dropdown-text">Lab#RE03-2: HighCharts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab3-3.html">
+ <span class="dropdown-text">Lab#RE03-3: API Rest Mono</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab3-4.html">
+ <span class="dropdown-text">Lab#RE03-4: API Rest Domains</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab3-5.html">
+ <span class="dropdown-text">Lab#RE03-5: data management</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab4.html">
+ <span class="dropdown-text">Lab#RE04-1: todo &amp; server</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab4-2.html">
+ <span class="dropdown-text">Lab#RE04-2: Spring Boot &amp; ReactJS</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab5-1.html">
+ <span class="dropdown-text">Lab#RE05-1: chat &amp; websockets</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab5-2.html">
+ <span class="dropdown-text">Lab#RE05-2: chat: backend</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab5-3.html">
+ <span class="dropdown-text">Lab#RE05-3: chat &amp; AWS</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab5-4.html">
+ <span class="dropdown-text">Lab#RE05-4: chat: test ws AWS</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab5-5.html">
+ <span class="dropdown-text">Lab#RE05-5: chat &amp; front</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab5-6.html">
+ <span class="dropdown-text">Lab#RE05-6: chat &amp; ws: front</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab6-1.html">
+ <span class="dropdown-text">Lab#RE06-1: healthyFood Restaurant</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab6-1-PR.html">
+ <span class="dropdown-text">Lab#RE06-1-PR: create a pull request</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab7-1.html">
+ <span class="dropdown-text">Lab#RE07-1: traffic lights simulation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab8-1.html">
+ <span class="dropdown-text">Lab#RE08-1: Cart Shopping Context</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reactjs/rjslab8-2.html">
+ <span class="dropdown-text">Lab#RE08-2: Cart Shopping Context with useReducer</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">React JS readings</li>
+        <li>
+    <a class="dropdown-item" href="../reactjs/resources.html">
+ <span class="dropdown-text">ReactJS Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-scrum" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">SCRUM</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-scrum">    
+        <li class="dropdown-header">What is SCRUM</li>
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-what-concepts.html">
+ <span class="dropdown-text">SCRUM Agile Methodology</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-what-agile-manifesto.html">
+ <span class="dropdown-text">Agile Manifesto &amp; Values</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-what-guide.html">
+ <span class="dropdown-text">SCRUM Guide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-what-summary.html">
+ <span class="dropdown-text">SCRUM Agile Summary</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Weeks</li>
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week1.html">
+ <span class="dropdown-text">Week 1: Meetings, Impediments and Iterations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week2.html">
+ <span class="dropdown-text">Week 2: User stories, Tasks and Habits</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week3.html">
+ <span class="dropdown-text">Week 3: Delivering Value &amp; Communication</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week4.html">
+ <span class="dropdown-text">Week 4: ScrumMaster, how it works</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week5.html">
+ <span class="dropdown-text">Week 5: Mindset, the key to everything</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week6.html">
+ <span class="dropdown-text">Week 6: Product Owner, how it works</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week7.html">
+ <span class="dropdown-text">Week 7: Managing Time &amp; Mind</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week8.html">
+ <span class="dropdown-text">Week 8: Team &amp; the Specialist</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week9.html">
+ <span class="dropdown-text">Week 9: Albertus’ Dilemma</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week10.html">
+ <span class="dropdown-text">Week 10: Before SCRUM</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week11.html">
+ <span class="dropdown-text">Week 11: Team Dynamics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week12.html">
+ <span class="dropdown-text">Week 12: Emotions and Thoughts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week13.html">
+ <span class="dropdown-text">Week 13: Decision Making and Intuition</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week14.html">
+ <span class="dropdown-text">Week 14: Beyond SCRUM</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-week15.html">
+ <span class="dropdown-text">Week 15: Balances, atmosphere and tools</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">SCRUM: Articles</li>
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-articles-metacognition.html">
+ <span class="dropdown-text">Article: Intention – Salience – Attention – Metacognition</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-articles-dellusion.html">
+ <span class="dropdown-text">Article: Delusion and the Divided Mind</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrum-articles-rest.html">
+ <span class="dropdown-text">Article: Rest – The Mechanics of Mindful Repose</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">SCRUM: Laboratories</li>
+        <li>
+    <a class="dropdown-item" href="../scrum/scrumlab0.html">
+ <span class="dropdown-text">SCRUM Lab#SC00: Timetable</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrumlab1.html">
+ <span class="dropdown-text">SCRUM Lab#SC01: Paper Airplanes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrumlab2.html">
+ <span class="dropdown-text">SCRUM Lab#SC02: Spaguetti Challenge</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrumlab3.html">
+ <span class="dropdown-text">SCRUM Lab#SC03: Books Project</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrumlab4.html">
+ <span class="dropdown-text">SCRUM Lab#SC04: Final Project</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../scrum/scrumlab5.html">
+ <span class="dropdown-text">SCRUM Lab#SC05: SCRUM Tests</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Resources</li>
+        <li>
+    <a class="dropdown-item" href="../scrum/resources.html">
+ <span class="dropdown-text">SCRUM Resources</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-learning" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Learning</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-learning">    
+        <li class="dropdown-header">Vocabulary</li>
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-general.html">
+ <span class="dropdown-text">General Vocabulary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-scrum.html">
+ <span class="dropdown-text">SCRUM Vocabulary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-devops.html">
+ <span class="dropdown-text">DevOps Vocabulary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-java-se.html">
+ <span class="dropdown-text">Java SE Vocabulay</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-spring-boot.html">
+ <span class="dropdown-text">Spring Boot Vocabulary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-data-base.html">
+ <span class="dropdown-text">DataBase Vocabulary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-reactjs.html">
+ <span class="dropdown-text">ReactJS Vocabulary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-vocab-web.html">
+ <span class="dropdown-text">Web Vocabulary</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Learning</li>
+        <li>
+    <a class="dropdown-item" href="../learning/learning-how-questions.html">
+ <span class="dropdown-text">Useful Questions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-how-tips.html">
+ <span class="dropdown-text">Learning: tips</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-how-writing.html">
+ <span class="dropdown-text">Writing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-how-take-notes.html">
+ <span class="dropdown-text">Taking Notes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-how-write-comments.html">
+ <span class="dropdown-text">Comments</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-how-document.html">
+ <span class="dropdown-text">Document</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-how-auto-evaluate.html">
+ <span class="dropdown-text">Auto-Evaluate</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Books &amp; Articles</li>
+        <li>
+    <a class="dropdown-item" href="../learning/learning-listing-table-books.html">
+ <span class="dropdown-text">Books table</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-listing-card-books.html">
+ <span class="dropdown-text">Books cards</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-listing-table-articles.html">
+ <span class="dropdown-text">Articles table</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../learning/learning-listing-card-articles.html">
+ <span class="dropdown-text">Articles cards</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-training" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Training</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-training">    
+        <li class="dropdown-header">IFCD0021-26 Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifcd0021-26/ifcd0021-26.html">
+ <span class="dropdown-text">IFCD0021-26 Official Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0021-26/ifcd0021-backlog-sprint-26.html">
+ <span class="dropdown-text">IFCD0021-26 Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0021-26/ifcd0021-backlog-product-26.html">
+ <span class="dropdown-text">IFCD0021-26 Product Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0021-26/ifcd0021-deliveries-26.html">
+ <span class="dropdown-text">IFCD0021-26 Calendar &amp; Deliveries</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Archived</li>
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">IFCD044-26 Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifcd044-26/ifcd044-26.html">
+ <span class="dropdown-text">IFCD044 Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd044-26/ifcd044-backlog-sprint-26.html">
+ <span class="dropdown-text">IFCD044 Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd044-26/ifcd044-backlog-product-26.html">
+ <span class="dropdown-text">IFCD044 Product Backlog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">IFCD0210-26 Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifcd0210-26/ifcd0210-26.html">
+ <span class="dropdown-text">IFCD0210 Official Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210-26/ifcd0210-deliveries-26.html">
+ <span class="dropdown-text">IFCD0210 Calendar &amp; Deliveries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210-26/ifcd0210-backlog-sprint-26.html">
+ <span class="dropdown-text">IFCD0210 Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210-26/ifcd0210-backlog-product-26.html">
+ <span class="dropdown-text">IFCD0210 Product Backlog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">IFCD0021-1-25 Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifcd0021-1-25/ifcd0021-1-25.html">
+ <span class="dropdown-text">IFCD0021-1-25 Official Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0021-1-25/ifcd0021-deliveries-1-25.html">
+ <span class="dropdown-text">IFCD0021-1-25 Calendar &amp; Deliveries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0021-1-25/ifcd0021-backlog-sprint-1-25.html">
+ <span class="dropdown-text">IFCD0021-1-25 Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0021-1-25/ifcd0021-backlog-product-1-25.html">
+ <span class="dropdown-text">IFCD0021-1-25 Product Backlog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">IFCD0210-25 Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifcd0210-25/ifcd0210-25.html">
+ <span class="dropdown-text">IFCD0210 Official Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210-25/ifcd0210-deliveries-25.html">
+ <span class="dropdown-text">IFCD0210 Calendar &amp; Deliveries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210-25/ifcd0210-backlog-sprint-25.html">
+ <span class="dropdown-text">IFCD0210 Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210-25/ifcd0210-backlog-product-25.html">
+ <span class="dropdown-text">IFCD0210 Product Backlog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">IFCT116-24 Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-24.html">
+ <span class="dropdown-text">IFCT116 Official Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-deliveries-24.html">
+ <span class="dropdown-text">IFCT116 Calendar &amp; Deliveries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-backlog-sprint-24.html">
+ <span class="dropdown-text">IFCT116 Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct116-24/ifct116-backlog-product-24.html">
+ <span class="dropdown-text">IFCT116 Product Backlog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">IFCD0021-24 Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifcd0021-24/ifcd0021-24.html">
+ <span class="dropdown-text">IFCD0021 Official Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0021-24/ifcd0021deliveries-24.html">
+ <span class="dropdown-text">IFCD0021 Calendar &amp; Deliveries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0021-24/ifcd0021backlog-sprint-24.html">
+ <span class="dropdown-text">IFCD0021 Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0021-24/ifcd0021backlog-product-24.html">
+ <span class="dropdown-text">IFCD0021 Product Backlog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">IFCD0210-24 Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifcd0210-24/ifcd0210-24.html">
+ <span class="dropdown-text">IFCD0210 Official Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210-24/ifcd0210deliveries-24.html">
+ <span class="dropdown-text">IFCD0210 Calendar &amp; Deliveries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210-24/ifcd0210backlog-sprint-24.html">
+ <span class="dropdown-text">IFCD0210 Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210-24/ifcd0210backlog-product-24.html">
+ <span class="dropdown-text">IFCD0210 Product Backlog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">IFCD044 Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifcd044/ifcd044.html">
+ <span class="dropdown-text">IFCD044 Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd044/ifcd044backlog-sprint.html">
+ <span class="dropdown-text">IFCD044 Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd044/ifcd044backlog-product.html">
+ <span class="dropdown-text">IFCD044 Product Backlog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">IFCT034PO Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifct034po/ifct034po.html">
+ <span class="dropdown-text">IFCT034PO Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct034po/ifct034pobacklog-sprint.html">
+ <span class="dropdown-text">IFCT034PO Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifct034po/ifct034pobacklog-product.html">
+ <span class="dropdown-text">IFCT034PO Product Backlog</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">IFCD0210 Docs</li>
+        <li>
+    <a class="dropdown-item" href="../ifcd0210/ifcd0210.html">
+ <span class="dropdown-text">IFCD0210 Official Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210/ifcd0210initemail.html">
+ <span class="dropdown-text">IFCD0210 Init Mail</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210/ifcd0210deliveries.html">
+ <span class="dropdown-text">IFCD0210 Deliveries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210/ifcd0210calendar.html">
+ <span class="dropdown-text">IFCD0210 Calendar</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210/ifcd0210backlog-sprint.html">
+ <span class="dropdown-text">IFCD0210 Sprint Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210/ifcd0210backlog-product.html">
+ <span class="dropdown-text">IFCD0210 Product Backlog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../ifcd0210/ifcd0210backlog-projects.html">
+ <span class="dropdown-text">IFCD0210 Projects Backlog</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-about">    
+        <li class="dropdown-header">About me and this site</li>
+        <li>
+    <a class="dropdown-item" href="../about/about-this-me.html">
+ <span class="dropdown-text">About me</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../about/about-this-developer.html">
+ <span class="dropdown-text">About a developer</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../about/about-this-site.html">
+ <span class="dropdown-text">About this site</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../about/about-this-images-credit.html">
+ <span class="dropdown-text">About images credit</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/AlbertProfe/wiki/discussions" target="_blank"> <i class="bi bi-chat-dots" role="img">
+</i> 
+<span class="menu-text">Discussions</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reactjs/rjslab1.html">React JS: Laboratories</a></li><li class="breadcrumb-item"><a href="../reactjs/rjslab8-2.html">Lab#RE08-2: Cart Shopping Context with useReducer</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+ <span class="menu-text">ReactJS</span>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">ReactJS: Principles</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-render-dom.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: render virtual DOM</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-create.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: Create a React project</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-components.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: Components</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-jsx.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: JSX</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-props.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: properties</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-immutability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: render cycle</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">HTML for React</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-html.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: HTML basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-html-forms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: HTML forms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-html-events.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: HTML events and the DOM</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-html-jsx.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: from HTML to JSX</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-what-html-css.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: CSS basics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">JavaScript: web scripting</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-js-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JavaScript: basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-js-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JavaScript: functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-js-objects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JavaScript: objects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-js-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JavaScript: variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-js-flux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JavaScript: flux control</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">ES6: ECMAScript 6</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-es6-arrow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS ES6: arrow functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-es6-import.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS ES6: import modules</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-es6-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS ES6: array, data and key</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-es6-destructuring.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS ES6: destructuring</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-es6-spread.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS ES6: spread operator</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">ReacJS 18: Hooks</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-rules.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: Rules of Hooks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-state.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ReactJS: useState</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-reducer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: useReducer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-ref.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: useRef</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-effect.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: useEffect</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-context.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS: useContext</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-memo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ReactJS: useMemo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-hook-custom.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ReactJS: custom hooks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">ReactJS: Designing an App</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-app-async.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS App: async</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-app-events.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS App: events</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-app-router.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS App: router</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-app-conditional-render.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS App: conditional render</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/reactjs-app-styling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React JS App: styling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">React JS: Laboratories</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE01-1: API Rest Axios</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE02-1: Router &amp; Hooks</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE03-1: to-do app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab3-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE03-2: HighCharts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab3-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE03-3: API Rest Mono</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab3-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE03-4: API Rest Domains</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab3-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE03-5: data management</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE04-1: todo &amp; server</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab4-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE04-2: Spring Boot &amp; ReactJS</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab5-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE05-1: chat &amp; websockets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab5-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE05-2: chat: backend</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab5-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE05-3: chat &amp; AWS</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab5-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE05-4: chat: test ws AWS</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab5-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE05-5: chat &amp; front</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab5-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE05-6: chat &amp; ws: front</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab6-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE06-1: healthyFood Restaurant</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab6-1-PR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE06-1-PR: create a pull request</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab7-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE07-1: traffic lights simulation</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab8-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab#RE08-1: Cart Shopping Context</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/rjslab8-2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lab#RE08-2: Cart Shopping Context with useReducer</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">React JS readings</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reactjs/resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ReactJS Resources</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references"><span class="header-section-number">1</span> References</a></li>
+  <li><a href="#starting-point-v0.1" id="toc-starting-point-v0.1" class="nav-link" data-scroll-target="#starting-point-v0.1"><span class="header-section-number">2</span> Starting point: v0.1</a></li>
+  <li><a href="#the-reducer" id="toc-the-reducer" class="nav-link" data-scroll-target="#the-reducer"><span class="header-section-number">3</span> The reducer</a></li>
+  <li><a href="#the-provider-usereducer-and-dispatch" id="toc-the-provider-usereducer-and-dispatch" class="nav-link" data-scroll-target="#the-provider-usereducer-and-dispatch"><span class="header-section-number">4</span> The provider: <code>useReducer</code> and <code>dispatch</code></a></li>
+  <li><a href="#updated-consumers" id="toc-updated-consumers" class="nav-link" data-scroll-target="#updated-consumers"><span class="header-section-number">5</span> Updated consumers</a></li>
+  <li><a href="#what-to-notice" id="toc-what-to-notice" class="nav-link" data-scroll-target="#what-to-notice"><span class="header-section-number">6</span> What to notice</a></li>
+  <li><a href="#next-features" id="toc-next-features" class="nav-link" data-scroll-target="#next-features"><span class="header-section-number">7</span> Next features</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">8</span> Code</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/reactjs/rjslab8-2.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reactjs/rjslab1.html">React JS: Laboratories</a></li><li class="breadcrumb-item"><a href="../reactjs/rjslab8-2.html">Lab#RE08-2: Cart Shopping Context with useReducer</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Lab#RE08-2: Cart Shopping Context with useReducer</h1>
+<p class="subtitle lead">ReactJS labs</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">reactjs</div>
+    <div class="quarto-category">lab</div>
+    <div class="quarto-category">Lab#RE08</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    labs
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>albertprofe </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Sunday, November 22, 2026</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">Sunday, November 22, 2026</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="labs">
+<p>📘 <strong>React JS Lab#RE08-2: Cart Shopping Context with useReducer</strong></p>
+<p>This lab starts from <a href="../reactjs/rjslab8-1.html">Lab#RE08-1: Cart Shopping Context</a> (<strong>v0.1</strong>), where <code>CartProvider</code> owned a single <code>count</code> with <code>useState</code>.</p>
+<p>In <strong>v0.2</strong> we’ll replace that number with a real cart: an array of items <code>{id, name, qty, price}</code>, managed with <code>useReducer</code>.</p>
+<p>Here’s an overview of what we’ll cover:</p>
+<ol type="1">
+<li><strong>Why <code>useReducer</code></strong>: a count is easy with <code>useState</code>; an items array with add, decrement and clear is easier to follow in a reducer.</li>
+<li><strong>A pure reducer</strong>: one function, <code>cartReducer</code>, with three actions — <code>add</code>, <code>remove</code> and <code>clear</code> — in its own file.</li>
+<li><strong><code>dispatch</code></strong>: consumers no longer call <code>setCount</code>. They send an action. The provider is the only place that runs the reducer.</li>
+<li><strong>The same tree</strong>: <code>CartBadge</code>, <code>Product</code> and <code>CartSummary</code> still sit in two branches and still share state through <code>useCart</code>. What changes is <em>what</em> the context holds.</li>
+</ol>
+<p>By the end of this lab, <strong>Add to cart</strong> will add a line (or bump its <code>qty</code>), the badge will show the total quantity, and <code>CartSummary</code> will list the items with a total price.</p>
+</div>
+<p><br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/cart-context-tree-diagram.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="The component tree is the same as Lab#RE08-1. What changes in v0.2 is the state inside CartProvider: an items array and a reducer, not a count."><img src="../images/reactjs/cart-context-tree-diagram.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="The component tree is the same as Lab#RE08-1. What changes in v0.2 is the state inside CartProvider: an items array and a reducer, not a count."></a></p>
+</figure>
+</div>
+<figcaption>The component tree is the same as Lab#RE08-1. What changes in v0.2 is the state inside CartProvider: an items array and a reducer, not a count.</figcaption>
+</figure>
+</div>
+<p><a href="../images/reactjs/docs/cart-context-visuals.html" class="external" target="_blank">Open the interactive Cart Context Demo</a> (the demo still shows the <strong>v0.1</strong> <code>count</code>; use it as a reminder of the two branches). Previous lab: <a href="../reactjs/rjslab8-1.html">Lab#RE08-1: Cart Shopping Context</a>.</p>
+<section id="references" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> References</h1>
+<ul>
+<li><a href="../reactjs/rjslab8-1.html">Lab#RE08-1: Cart Shopping Context</a></li>
+<li><a href="../reactjs/reactjs-hook-reducer.html">React JS: useReducer</a></li>
+<li><a href="../reactjs/reactjs-hook-context.html">React JS: useContext</a></li>
+<li><a href="../reactjs/reactjs-what-immutability.html">React JS: render cycle</a> (purity and immutability)</li>
+<li><a href="https://react.dev/reference/react/useReducer" class="external" target="_blank"><code>useReducer</code></a></li>
+<li><a href="https://react.dev/learn/extracting-state-logic-into-a-reducer" class="external" target="_blank">Extracting State Logic into a Reducer</a></li>
+<li>GitHub repo: <a href="https://github.com/AlbertProfe/cartShoppingContext" class="external" target="_blank">AlbertProfe/cartShoppingContext</a></li>
+</ul>
+</section>
+<section id="starting-point-v0.1" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Starting point: v0.1</h1>
+<p>In v0.1 the provider looked like this:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/context/CartContext.jsx (v0.1)</strong></pre>
+</div>
+<div class="sourceCode" id="cb1" data-filename="src/context/CartContext.jsx (v0.1)"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">CartProvider</span>({ children }) {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="kw">const</span> [count<span class="op">,</span> setCount] <span class="op">=</span> <span class="fu">useState</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="cf">return</span> (</span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="fu">&lt;CartContext.Provider</span> <span class="ot">value</span><span class="op">=</span><span class="va">{</span>{ count<span class="op">,</span> setCount }<span class="va">}</span><span class="fu">&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>      <span class="va">{</span>children<span class="va">}</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>    <span class="fu">&lt;/CartContext.Provider&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>  )<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>That is enough when the cart is a single number. It gets messy once we want:</p>
+<ul>
+<li>a list of items, not just a count</li>
+<li>a <strong>price</strong> on each product, and a <strong>total</strong> in the summary</li>
+<li><strong>Add</strong> (new line or <code>qty + 1</code>), <strong>decrement</strong> (and drop the line at 0), and <strong>Clear</strong></li>
+</ul>
+<p>All of those updates belong together. A reducer keeps them in one pure function, instead of several <code>setCount</code> / <code>setItems</code> calls spread across the tree.</p>
+<p>The starting commit is <a href="https://github.com/AlbertProfe/cartShoppingContext/tree/471851d88da4cd173821dfe301237cc06d6ba956" class="external" target="_blank">cartShoppingContext v0.1</a>. This lab is <a href="https://github.com/AlbertProfe/cartShoppingContext/tree/ee6e008b4a05a6157edd73fd21e5b251dcfe7bb7" class="external" target="_blank">v0.2</a>.</p>
+</section>
+<section id="the-reducer" class="level1 page-columns page-full" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> The reducer</h1>
+<p>The reducer lives in its own file, next to the provider. The state is <code>{ items }</code>. Each item is <code>{id, name, qty, price}</code>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>A reducer is a <strong>pure function</strong>: <code>(state, action) =&gt; newState</code>. It does not mutate <code>state</code>, and it does not touch the DOM. See <a href="../reactjs/reactjs-what-immutability.html">React JS: render cycle</a>.</p>
+</div></div><div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/context/cartReducer.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb2" data-filename="src/context/cartReducer.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">export</span> <span class="kw">const</span> initialCart <span class="op">=</span> { <span class="dt">items</span><span class="op">:</span> [] }<span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">cartReducer</span>(state<span class="op">,</span> action) {</span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="cf">switch</span> (action<span class="op">.</span><span class="at">type</span>) {</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="cf">case</span> <span class="st">"add"</span><span class="op">:</span> {</span>
+<span id="cb2-6"><a href="#cb2-6"></a>      <span class="kw">const</span> { id<span class="op">,</span> name<span class="op">,</span> price } <span class="op">=</span> action<span class="op">.</span><span class="at">payload</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>      <span class="kw">const</span> existing <span class="op">=</span> state<span class="op">.</span><span class="at">items</span><span class="op">.</span><span class="fu">find</span>((item) <span class="kw">=&gt;</span> item<span class="op">.</span><span class="at">id</span> <span class="op">===</span> id)<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>      <span class="cf">if</span> (existing) {</span>
+<span id="cb2-9"><a href="#cb2-9"></a>        <span class="cf">return</span> {</span>
+<span id="cb2-10"><a href="#cb2-10"></a>          <span class="dt">items</span><span class="op">:</span> state<span class="op">.</span><span class="at">items</span><span class="op">.</span><span class="fu">map</span>((item) <span class="kw">=&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>            item<span class="op">.</span><span class="at">id</span> <span class="op">===</span> id <span class="op">?</span> { <span class="op">...</span>item<span class="op">,</span> <span class="dt">qty</span><span class="op">:</span> item<span class="op">.</span><span class="at">qty</span> <span class="op">+</span> <span class="dv">1</span> } <span class="op">:</span> item</span>
+<span id="cb2-12"><a href="#cb2-12"></a>          )<span class="op">,</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>        }<span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>      }</span>
+<span id="cb2-15"><a href="#cb2-15"></a>      <span class="cf">return</span> {</span>
+<span id="cb2-16"><a href="#cb2-16"></a>        <span class="dt">items</span><span class="op">:</span> [<span class="op">...</span>state<span class="op">.</span><span class="at">items</span><span class="op">,</span> { id<span class="op">,</span> name<span class="op">,</span> <span class="dt">qty</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> price }]<span class="op">,</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>      }<span class="op">;</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>    }</span>
+<span id="cb2-19"><a href="#cb2-19"></a>    <span class="cf">case</span> <span class="st">"remove"</span><span class="op">:</span> {</span>
+<span id="cb2-20"><a href="#cb2-20"></a>      <span class="kw">const</span> { id } <span class="op">=</span> action<span class="op">.</span><span class="at">payload</span><span class="op">;</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a>      <span class="cf">return</span> {</span>
+<span id="cb2-22"><a href="#cb2-22"></a>        <span class="dt">items</span><span class="op">:</span> state<span class="op">.</span><span class="at">items</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a>          <span class="op">.</span><span class="fu">map</span>((item) <span class="kw">=&gt;</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a>            item<span class="op">.</span><span class="at">id</span> <span class="op">===</span> id <span class="op">?</span> { <span class="op">...</span>item<span class="op">,</span> <span class="dt">qty</span><span class="op">:</span> item<span class="op">.</span><span class="at">qty</span> <span class="op">-</span> <span class="dv">1</span> } <span class="op">:</span> item</span>
+<span id="cb2-25"><a href="#cb2-25"></a>          )</span>
+<span id="cb2-26"><a href="#cb2-26"></a>          <span class="op">.</span><span class="fu">filter</span>((item) <span class="kw">=&gt;</span> item<span class="op">.</span><span class="at">qty</span> <span class="op">&gt;</span> <span class="dv">0</span>)<span class="op">,</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a>      }<span class="op">;</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a>    }</span>
+<span id="cb2-29"><a href="#cb2-29"></a>    <span class="cf">case</span> <span class="st">"clear"</span><span class="op">:</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a>      <span class="cf">return</span> { <span class="dt">items</span><span class="op">:</span> [] }<span class="op">;</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a>    <span class="cf">default</span><span class="op">:</span></span>
+<span id="cb2-32"><a href="#cb2-32"></a>      <span class="cf">return</span> state<span class="op">;</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a>  }</span>
+<span id="cb2-34"><a href="#cb2-34"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Three actions, kept small on purpose:</p>
+<ul>
+<li><strong><code>add</code></strong>: if the product is already in the cart, bump <code>qty</code>; otherwise append a new line with <code>qty: 1</code>.</li>
+<li><strong><code>remove</code></strong>: decrement <code>qty</code>. When it reaches 0, the line disappears.</li>
+<li><strong><code>clear</code></strong>: back to an empty array.</li>
+</ul>
+<p>Notice the copying: <code>map</code>, the spread <code>{ ...item, qty: item.qty + 1 }</code>, and <code>[...state.items, newItem]</code>. We never write <code>item.qty++</code> or <code>state.items.push(...)</code>.</p>
+<p>Two small helpers derive the numbers the UI needs. They are also pure:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/context/cartReducer.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb3" data-filename="src/context/cartReducer.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">cartQty</span>(items) {</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="cf">return</span> items<span class="op">.</span><span class="fu">reduce</span>((sum<span class="op">,</span> item) <span class="kw">=&gt;</span> sum <span class="op">+</span> item<span class="op">.</span><span class="at">qty</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>}</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">cartTotal</span>(items) {</span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="cf">return</span> items<span class="op">.</span><span class="fu">reduce</span>((sum<span class="op">,</span> item) <span class="kw">=&gt;</span> sum <span class="op">+</span> item<span class="op">.</span><span class="at">qty</span> <span class="op">*</span> item<span class="op">.</span><span class="at">price</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="the-provider-usereducer-and-dispatch" class="level1 page-columns page-full" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> The provider: <code>useReducer</code> and <code>dispatch</code></h1>
+<p><code>CartProvider</code> still owns the state and still wraps both branches. It now calls <code>useReducer</code> and puts <code>{ items, dispatch }</code> on the context. There is no <code>setCount</code> any more.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/context/CartContext.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-filename="src/context/CartContext.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> { createContext<span class="op">,</span> useReducer } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="im">import</span> { cartReducer<span class="op">,</span> initialCart } <span class="im">from</span> <span class="st">"./cartReducer"</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="im">export</span> <span class="kw">const</span> CartContext <span class="op">=</span> <span class="fu">createContext</span>()<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">CartProvider</span>({ children }) {</span>
+<span id="cb4-7"><a href="#cb4-7"></a>  <span class="kw">const</span> [state<span class="op">,</span> dispatch] <span class="op">=</span> <span class="fu">useReducer</span>(cartReducer<span class="op">,</span> initialCart)<span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>  <span class="cf">return</span> (</span>
+<span id="cb4-9"><a href="#cb4-9"></a>    <span class="fu">&lt;CartContext.Provider</span> <span class="ot">value</span><span class="op">=</span><span class="va">{</span>{ <span class="dt">items</span><span class="op">:</span> state<span class="op">.</span><span class="at">items</span><span class="op">,</span> dispatch }<span class="va">}</span><span class="fu">&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>      <span class="va">{</span>children<span class="va">}</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>    <span class="fu">&lt;/CartContext.Provider&gt;</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>  )<span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><code>dispatch</code> is stable. Consumers send <code>{ type, payload }</code>. Only the reducer decides how the next <code>items</code> array looks.</p>
+</div></div><p><code>useCart</code> does not change: it still returns whatever the provider put on the context.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/hooks/useCart.js</strong></pre>
+</div>
+<div class="sourceCode" id="cb5" data-filename="src/hooks/useCart.js"><pre class="sourceCode numberSource js code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">import</span> { useContext } <span class="im">from</span> <span class="st">"react"</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="im">import</span> { CartContext } <span class="im">from</span> <span class="st">"../context/CartContext"</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="im">export</span> <span class="kw">const</span> useCart <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="fu">useContext</span>(CartContext)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="updated-consumers" class="level1 page-columns page-full" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Updated consumers</h1>
+<p><code>Header</code>, <code>Main</code> and <code>App</code> stay as they were in v0.1. They still do not touch the context. The products now have a <strong>price</strong>. The shop still has only Keyboard and Mouse.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../images/reactjs/cart-context-branches-diagram.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Playground render of the two branches. Illustration only; the demo still uses a count, not an items array."><img src="../images/reactjs/cart-context-branches-diagram.png" class="img-fluid figure-img" alt="Playground render of the two branches. Illustration only; the demo still uses a count, not an items array."></a></p>
+<figcaption>Playground render of the two branches. Illustration only; the demo still uses a count, not an items array.</figcaption>
+</figure>
+</div>
+<p><a href="../images/reactjs/docs/cart-context-visuals.html" class="external" target="_blank">Open the interactive Cart Context Demo</a></p>
+</div></div><div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/ProductList/ProductList.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb6" data-filename="src/ProductList/ProductList.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb6-1"><a href="#cb6-1"></a><span class="im">import</span> { Product } <span class="im">from</span> <span class="st">"../Product/Product"</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">ProductList</span>() {</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="cf">return</span> (</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="kw">&lt;ul&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>      <span class="fu">&lt;Product</span> <span class="ot">id</span><span class="op">=</span><span class="st">"keyboard"</span> <span class="ot">name</span><span class="op">=</span><span class="st">"Keyboard"</span> <span class="ot">price</span><span class="op">=</span><span class="va">{</span><span class="dv">49</span><span class="va">}</span> <span class="fu">/&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>      <span class="fu">&lt;Product</span> <span class="ot">id</span><span class="op">=</span><span class="st">"mouse"</span> <span class="ot">name</span><span class="op">=</span><span class="st">"Mouse"</span> <span class="ot">price</span><span class="op">=</span><span class="va">{</span><span class="dv">25</span><span class="va">}</span> <span class="fu">/&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>    <span class="kw">&lt;/ul&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>  )<span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>Product</code> dispatches <code>add</code> with the product data. It does not read the cart.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/Product/Product.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb7" data-filename="src/Product/Product.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">import</span> { useCart } <span class="im">from</span> <span class="st">"../hooks/useCart"</span><span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">Product</span>({ id<span class="op">,</span> name<span class="op">,</span> price }) {</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="kw">const</span> { dispatch } <span class="op">=</span> <span class="fu">useCart</span>()<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="cf">return</span> (</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="kw">&lt;li&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>      <span class="va">{</span>name<span class="va">}</span> — <span class="va">{</span>price<span class="va">}</span> €<span class="va">{</span><span class="st">" "</span><span class="va">}</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>      <span class="kw">&lt;button</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>        <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>          <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"add"</span><span class="op">,</span> <span class="dt">payload</span><span class="op">:</span> { id<span class="op">,</span> name<span class="op">,</span> price } })</span>
+<span id="cb7-11"><a href="#cb7-11"></a>        <span class="va">}</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>      <span class="kw">&gt;</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>        Add to cart</span>
+<span id="cb7-14"><a href="#cb7-14"></a>      <span class="kw">&lt;/button&gt;</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>    <span class="kw">&lt;/li&gt;</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>  )<span class="op">;</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>CartBadge</code> shows the <strong>total quantity</strong> (Keyboard × 2 plus Mouse × 1 is 3), not the number of lines.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/CartBadge/CartBadge.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb8" data-filename="src/CartBadge/CartBadge.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> { useCart } <span class="im">from</span> <span class="st">"../hooks/useCart"</span><span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="im">import</span> { cartQty } <span class="im">from</span> <span class="st">"../context/cartReducer"</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">CartBadge</span>() {</span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="kw">const</span> { items } <span class="op">=</span> <span class="fu">useCart</span>()<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>  <span class="cf">return </span><span class="kw">&lt;span&gt;</span>🛒 <span class="va">{</span><span class="fu">cartQty</span>(items)<span class="va">}</span><span class="kw">&lt;/span&gt;</span><span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>CartSummary</code> lists each line with its <code>qty</code> and line price, shows the <strong>total</strong>, and can decrement a line or <strong>Clear</strong> the cart.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>src/CartSummary/CartSummary.jsx</strong></pre>
+</div>
+<div class="sourceCode" id="cb9" data-filename="src/CartSummary/CartSummary.jsx"><pre class="sourceCode numberSource jsx code-overflow-wrap number-lines code-with-copy"><code class="sourceCode javascriptreact"><span id="cb9-1"><a href="#cb9-1"></a><span class="im">import</span> { useCart } <span class="im">from</span> <span class="st">"../hooks/useCart"</span><span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="im">import</span> { cartTotal } <span class="im">from</span> <span class="st">"../context/cartReducer"</span><span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">CartSummary</span>() {</span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="kw">const</span> { items<span class="op">,</span> dispatch } <span class="op">=</span> <span class="fu">useCart</span>()<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="kw">const</span> total <span class="op">=</span> <span class="fu">cartTotal</span>(items)<span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a></span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="cf">return</span> (</span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="kw">&lt;div&gt;</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>      <span class="kw">&lt;h2&gt;</span>Cart<span class="kw">&lt;/h2&gt;</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>      <span class="va">{</span>items<span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span> <span class="op">?</span> (</span>
+<span id="cb9-12"><a href="#cb9-12"></a>        <span class="kw">&lt;p&gt;</span>The cart is empty.<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a>      ) <span class="op">:</span> (</span>
+<span id="cb9-14"><a href="#cb9-14"></a>        <span class="kw">&lt;&gt;</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>          <span class="kw">&lt;ul&gt;</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>            <span class="va">{</span>items<span class="op">.</span><span class="fu">map</span>((item) <span class="kw">=&gt;</span> (</span>
+<span id="cb9-17"><a href="#cb9-17"></a>              <span class="kw">&lt;li</span> <span class="ot">key</span><span class="op">=</span><span class="va">{</span>item<span class="op">.</span><span class="at">id</span><span class="va">}</span><span class="kw">&gt;</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a>                <span class="va">{</span>item<span class="op">.</span><span class="at">name</span><span class="va">}</span> × <span class="va">{</span>item<span class="op">.</span><span class="at">qty</span><span class="va">}</span> — <span class="va">{</span>item<span class="op">.</span><span class="at">qty</span> <span class="op">*</span> item<span class="op">.</span><span class="at">price</span><span class="va">}</span> €<span class="va">{</span><span class="st">" "</span><span class="va">}</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a>                <span class="kw">&lt;button</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a>                  <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a>                    <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"remove"</span><span class="op">,</span> <span class="dt">payload</span><span class="op">:</span> { <span class="dt">id</span><span class="op">:</span> item<span class="op">.</span><span class="at">id</span> } })</span>
+<span id="cb9-22"><a href="#cb9-22"></a>                  <span class="va">}</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a>                <span class="kw">&gt;</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a>                  −</span>
+<span id="cb9-25"><a href="#cb9-25"></a>                <span class="kw">&lt;/button&gt;</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a>              <span class="kw">&lt;/li&gt;</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a>            ))<span class="va">}</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a>          <span class="kw">&lt;/ul&gt;</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a>          <span class="kw">&lt;p&gt;</span>Total: <span class="va">{</span>total<span class="va">}</span> €<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb9-30"><a href="#cb9-30"></a>          <span class="kw">&lt;button</span> <span class="ot">onClick</span><span class="op">=</span><span class="va">{</span>() <span class="kw">=&gt;</span> <span class="fu">dispatch</span>({ <span class="dt">type</span><span class="op">:</span> <span class="st">"clear"</span> })<span class="va">}</span><span class="kw">&gt;</span>Clear<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a>        <span class="kw">&lt;/&gt;</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a>      )<span class="va">}</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a>  )<span class="op">;</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="what-to-notice" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> What to notice</h1>
+<ul>
+<li><strong>One <code>dispatch</code>.</strong> <code>Product</code> adds, <code>CartSummary</code> decrements or clears, and nobody else needs a custom setter. The next state always comes from <code>cartReducer</code>.</li>
+<li><strong>The same consumers still re-render.</strong> <code>CartBadge</code>, every <code>Product</code>, and <code>CartSummary</code> subscribe to the context. When <code>items</code> change, they all render again — even a <code>Product</code> that only uses <code>dispatch</code>. That is the same idea as in <a href="../reactjs/rjslab8-1.html">Lab#RE08-1</a>, and it is still why bigger apps split contexts.</li>
+<li><strong>The reducer is pure and immutable.</strong> It returns a <em>new</em> <code>{ items }</code> object. It never mutates the previous state. That is what React expects when it decides whether to re-render: see <a href="../reactjs/reactjs-what-immutability.html">React JS: render cycle</a>.</li>
+</ul>
+</section>
+<section id="next-features" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Next features</h1>
+<p>These later steps are <strong>not</strong> in this version of the repo:</p>
+<ul>
+<li>A <strong>theme</strong> toggle (dark / light) read by many components. That would be its own <code>ThemeContext</code>, not more fields on the cart.</li>
+<li>A <strong>logged-in user</strong> shown in the navbar and used by a profile page. Again, a separate <code>UserContext</code>.</li>
+</ul>
+</section>
+<section id="code" class="level1 page-columns page-full" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Code</h1>
+<div class="column-page-right">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Code Version</th>
+<th>Commit</th>
+<th>Folder-Tree</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/AlbertProfe/cartShoppingContext/tree/471851d88da4cd173821dfe301237cc06d6ba956" class="external" target="_blank">GitHub code v0.1</a></td>
+<td>cart context with <code>useState</code> and a <code>count</code> (Lab#RE08-1)</td>
+<td><a href="https://github.com/AlbertProfe/cartShoppingContext/tree/471851d88da4cd173821dfe301237cc06d6ba956" class="external" target="_blank">repo at v0.1</a></td>
+<td><a href="../images/reactjs/cart-context-tree-diagram.png" class="external" target="_blank">tree diagram</a>, <a href="../images/reactjs/cart-context-branches-diagram.png" class="external" target="_blank">playground render</a>, <a href="../images/reactjs/docs/cart-context-visuals.html" class="external" target="_blank">interactive demo</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/AlbertProfe/cartShoppingContext/tree/ee6e008b4a05a6157edd73fd21e5b251dcfe7bb7" class="external" target="_blank">GitHub code v0.2</a></td>
+<td>items array <code>{id, name, qty, price}</code> with <code>useReducer</code>: <code>add</code>, <code>remove</code>, <code>clear</code></td>
+<td><a href="https://github.com/AlbertProfe/cartShoppingContext/tree/ee6e008b4a05a6157edd73fd21e5b251dcfe7bb7" class="external" target="_blank">repo at v0.2</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../reactjs/rjslab8-1.html" class="pagination-link" aria-label="Lab#RE08-1: Cart Shopping Context">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab#RE08-1: Cart Shopping Context</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0 International (CC BY 4.0)</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>Topics: <a href="../linux/linux-what-basics.html">Linux</a> · <a href="../devops/devops-what-intro.html">DevOps</a> · <a href="../markup/markup-lang-intro.html">MarkUp</a> · <a href="../javase/se-what-basics.html">Java SE</a> · <a href="../springboot/boot-what-basics.html">Spring Boot</a> · <a href="../reactjs/reactjs-what-principles.html">React</a> · <a href="../scrum/scrum-what-concepts.html">SCRUM</a> · <a href="../learning/learning-vocab-general.html">Learning</a> · <a href="../learning/learning-listing-card-books.html">Books</a> · If you want to go far, walk slow / We love dukkha</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Albertprofe/wiki/edit/master/reactjs/rjslab8-2.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Albertprofe/wiki/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/AlbertProfe/">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/">
+      <i class="bi bi-twitter" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
