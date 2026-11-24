@@ -1,0 +1,227 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Prague Itinerary Component Tree</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Layout: dark-first top-down component tree with connector lines, then a data-flow strip. */
+:root {
+  --bg: #0d1020;
+  --surface: #161a30;
+  --fg: #e8eaf6;
+  --muted: #8f95b8;
+  --line: #3a4170;
+  --app: #8b7cff;
+  --add: #2dd4bf;
+  --list: #fbbf24;
+  --task: #fb7185;
+  --dom: #6b7299;
+  --display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f5f6fc; --surface: #ffffff; --fg: #1b1f3b; --muted: #5d6490; --line: #b6bbdc;
+    --app: #5b45e6; --add: #0f9488; --list: #b7791f; --task: #d6335a; --dom: #6b7299;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f5f6fc; --surface: #ffffff; --fg: #1b1f3b; --muted: #5d6490; --line: #b6bbdc;
+  --app: #5b45e6; --add: #0f9488; --list: #b7791f; --task: #d6335a; --dom: #6b7299;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #0d1020; --surface: #161a30; --fg: #e8eaf6; --muted: #8f95b8; --line: #3a4170;
+  --app: #8b7cff; --add: #2dd4bf; --list: #fbbf24; --task: #fb7185; --dom: #6b7299;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--body); font-size: 15px; line-height: 1.5;
+  padding-block: 40px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+h1, h2 { font-family: var(--display); margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(28px, 5vw, 40px); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: 20px; font-weight: 700; }
+.lede { color: var(--muted); margin: 8px 0 0; max-width: 62ch; }
+code, .mono { font-family: var(--mono); font-size: 0.9em; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.legend i { width: 14px; height: 14px; border-radius: 5px; border: 2px solid var(--c); background: color-mix(in srgb, var(--c) 25%, var(--surface)); }
+.legend i.dashed { border-style: dashed; }
+
+.scroll { overflow-x: auto; padding-bottom: 12px; }
+.tree { width: max-content; min-width: 100%; margin: 0 auto; }
+.tree ul { list-style: none; margin: 0; padding: 22px 0 0; display: flex; justify-content: center; position: relative; }
+.tree > ul { padding-top: 0; }
+.tree li { position: relative; padding: 22px 5px 0; display: flex; flex-direction: column; align-items: center; }
+.tree > ul > li { padding-top: 0; }
+.tree li::before, .tree li::after { content: ""; position: absolute; top: 0; width: 50%; height: 22px; border-top: 2px solid var(--line); }
+.tree li::before { right: 50%; }
+.tree li::after { left: 50%; border-left: 2px solid var(--line); }
+.tree li:first-child::before, .tree li:last-child::after { border-top: 0; }
+.tree li:last-child::before { border-right: 2px solid var(--line); border-radius: 0 10px 0 0; }
+.tree li:first-child::after { border-radius: 10px 0 0 0; }
+.tree li:only-child::before, .tree li:only-child::after { border-left: 0; border-right: 0; }
+.tree li:only-child::after { display: none; }
+.tree li:only-child::before { border-top: 0; height: 22px; border-right: 2px solid var(--line); border-radius: 0; width: 50%; }
+.tree > ul > li::before, .tree > ul > li::after { display: none; }
+
+.node {
+  --c: var(--dom);
+  width: 142px; padding: 10px 10px 12px; text-align: center;
+  border: 1.5px solid var(--c); border-radius: 14px;
+  background: color-mix(in srgb, var(--c) 14%, var(--surface));
+  display: flex; flex-direction: column; gap: 6px; align-items: center;
+}
+.node.comp { width: 204px; border-width: 2px; box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 12%, transparent); }
+.node.dashed { border-style: dashed; }
+.node .name { font-family: var(--display); font-weight: 700; font-size: 16px; color: var(--c); }
+.node.dom .name { font-family: var(--mono); font-weight: 500; font-size: 13px; color: var(--fg); }
+.node .file { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.node .note { font-size: 12px; color: var(--muted); line-height: 1.35; }
+.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; }
+.chip { font-family: var(--mono); font-size: 11px; padding: 2px 7px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--c) 55%, transparent); color: var(--fg); background: color-mix(in srgb, var(--c) 18%, transparent); }
+.chip.state { background: var(--c); border-color: var(--c); color: var(--bg); font-weight: 500; }
+.app { --c: var(--app); } .add { --c: var(--add); } .list { --c: var(--list); } .task { --c: var(--task); }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.card { background: var(--surface); border-radius: 16px; padding: 18px 20px; border: 1px solid color-mix(in srgb, var(--line) 60%, transparent); display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card h3 { margin: 0; font-family: var(--display); font-size: 15px; letter-spacing: 0.01em; }
+.card p { margin: 0; color: var(--muted); font-size: 14px; }
+.card .row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 10px; }
+.step { background: var(--surface); border: 1.5px solid var(--c); border-radius: 12px; padding: 10px 14px; min-width: 0; flex: 1 1 150px; display: flex; flex-direction: column; gap: 2px; }
+.step b { font-family: var(--display); color: var(--c); font-size: 14px; }
+.step span { font-family: var(--mono); font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
+.arrow { align-self: center; color: var(--muted); font-size: 18px; }
+@media (max-width: 700px) { .arrow { display: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Prague itinerary: component tree</h1>
+    <p class="lede">Four components, one reducer. All task state lives in <code>TaskApp</code>. Everything below it receives data as props and reports changes through callbacks.</p>
+  </header>
+
+  <div class="legend" aria-label="Legend">
+    <span style="--c:var(--app)"><i></i>Component</span>
+    <span style="--c:var(--dom)"><i></i>DOM element</span>
+    <span style="--c:var(--dom)"><i class="dashed"></i>Conditional branch</span>
+    <span><span class="chip state" style="--c:var(--app)">state</span> owns state</span>
+    <span><span class="chip" style="--c:var(--app)">prop</span> received prop</span>
+  </div>
+
+  <div class="scroll">
+    <div class="tree" role="img" aria-label="Component tree: TaskApp contains h1, AddTask and TaskList. TaskList renders a ul of li, each holding a Task with a checkbox, an edit or read view, and a Delete button.">
+      <ul>
+        <li>
+          <div class="node comp app">
+            <div class="name">TaskApp</div>
+            <div class="file">App.js · root</div>
+            <div class="chips">
+              <span class="chip state">useReducer(tasks)</span>
+            </div>
+            <div class="note">handleAddTask · handleChangeTask · handleDeleteTask</div>
+          </div>
+          <ul>
+            <li>
+              <div class="node dom"><div class="name">&lt;h1&gt;</div><div class="note">Prague itinerary</div></div>
+            </li>
+            <li>
+              <div class="node comp add">
+                <div class="name">AddTask</div>
+                <div class="file">AddTask.js</div>
+                <div class="chips"><span class="chip state">useState(text)</span><span class="chip">onAddTask</span></div>
+              </div>
+              <ul>
+                <li><div class="node dom"><div class="name">&lt;input&gt;</div><div class="note">value = text</div></div></li>
+                <li><div class="node dom"><div class="name">&lt;button&gt;</div><div class="note">Add → onAddTask(text)</div></div></li>
+              </ul>
+            </li>
+            <li>
+              <div class="node comp list">
+                <div class="name">TaskList</div>
+                <div class="file">TaskList.js</div>
+                <div class="chips"><span class="chip">tasks</span><span class="chip">onChangeTask</span><span class="chip">onDeleteTask</span></div>
+              </div>
+              <ul>
+                <li>
+                  <div class="node dom"><div class="name">&lt;ul&gt; → &lt;li&gt;</div><div class="note">tasks.map, key = task.id</div></div>
+                  <ul>
+                    <li>
+                      <div class="node comp task">
+                        <div class="name">Task <span class="mono" style="color:var(--muted);font-weight:400">× n</span></div>
+                        <div class="file">TaskList.js</div>
+                        <div class="chips"><span class="chip state">useState(isEditing)</span></div>
+                        <div class="chips"><span class="chip">task</span><span class="chip">onChange</span><span class="chip">onDelete</span></div>
+                      </div>
+                      <ul>
+                        <li><div class="node dom"><div class="name">&lt;input&gt;</div><div class="note">checkbox, done → onChange</div></div></li>
+                        <li><div class="node dom dashed"><div class="name">isEditing</div><div class="note">&lt;input&gt; text + Save</div></div></li>
+                        <li><div class="node dom dashed"><div class="name">else</div><div class="note">task text + Edit</div></div></li>
+                        <li><div class="node dom"><div class="name">&lt;button&gt;</div><div class="note">Delete → onDelete(id)</div></div></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <section style="display:flex;flex-direction:column;gap:16px">
+    <h2>What happens when you tick a task</h2>
+    <div class="flow">
+      <div class="step" style="--c:var(--task)"><b>Task</b><span>checkbox onChange</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="step" style="--c:var(--task)"><b>onChange</b><span>{ ...task, done: true }</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="step" style="--c:var(--app)"><b>TaskApp</b><span>handleChangeTask(task)</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="step" style="--c:var(--app)"><b>dispatch</b><span>{ type: "changed", task }</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="step" style="--c:var(--list)"><b>tasksReducer</b><span>returns a new tasks array</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="step" style="--c:var(--add)"><b>Re-render</b><span>TaskApp → TaskList → Task</span></div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px">
+    <h2>Where the logic lives</h2>
+    <div class="cards">
+      <div class="card" style="--c:var(--app)">
+        <h3 style="color:var(--app)">TaskReducer.js</h3>
+        <p>A pure function <code>(tasks, action) → tasks</code>. Called by React, never by a component directly.</p>
+        <div class="row">
+          <span class="chip" style="--c:var(--add)">"added" → append</span>
+          <span class="chip" style="--c:var(--list)">"changed" → map</span>
+          <span class="chip" style="--c:var(--task)">"deleted" → filter</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--task)">Local state stays local</h3>
+        <p><code>AddTask.text</code> and <code>Task.isEditing</code> only affect their own component, so they never go through the reducer.</p>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--list)">Seed data</h3>
+        <p>Kafka Museum (done), puppet show, Lennon Wall pic. New ids start at 3 through <code>nextId++</code>.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+</body></html>
